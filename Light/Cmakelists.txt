@@ -1,26 +1,23 @@
 cmake_minimum_required(VERSION 3.10)
 
-# set the project name
-project(Test)
-
 # find all source files
 file(GLOB SOURCES
 	src/*.cpp
 )
 
 # add the executable
-add_executable(Test ${SOURCES})
+add_library(Light STATIC ${SOURCES})
 
-target_include_directories(Test PUBLIC include)
+target_include_directories(Light PUBLIC include)
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(libs/glfw-3.3.3)
-target_link_libraries(Test glfw)
+target_link_libraries(Light glfw)
 
 add_subdirectory(libs/glad)
-target_link_libraries(Test glad)
+target_link_libraries(Light glad)
 
-target_include_directories(Test PUBLIC libs/glm)
+target_include_directories(Light PUBLIC libs/glm)
