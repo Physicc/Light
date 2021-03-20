@@ -28,7 +28,7 @@ namespace Light
 	public:
 		MouseScrolledEvent(double x, double y): x(x), y(y) {}
 
-		inline std::tuple<double, double> getPos() { return std::make_tuple(x,y); }
+		inline std::tuple<double, double> getOffset() { return std::make_tuple(x,y); }
 
 		std::string ToString() const override
 		{

@@ -20,4 +20,9 @@ target_link_libraries(Light glfw)
 add_subdirectory(libs/glad)
 target_link_libraries(Light glad)
 
+add_definitions(-DGLFW_INCLUDE_NONE)
+
+add_subdirectory(libs/imgui)
+target_link_libraries(Light glad glfw imgui)
+
 target_include_directories(Light PUBLIC libs/glm)

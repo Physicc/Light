@@ -1,4 +1,5 @@
 #include "platform/glfw/windowglfw.hpp"
+#include "glad/glad.h"
 #include "events/keyevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/applicationevent.hpp"
@@ -45,6 +46,10 @@ namespace Light
 
 		window = glfwCreateWindow(data.width, data.height, data.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window);
+
+		int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		if(!success)
+			exit(1);
 
 		glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
@@ -112,6 +117,9 @@ namespace Light
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
+			data->width = width;
+			data->height = height;
+
 			WindowResizeEvent event(width, height);
 			data->callback(event);
 		});
@@ -121,6 +129,14 @@ namespace Light
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
 			WindowCloseEvent event;
+			data->callback(event);
+		});
+
+		glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int codepoint)
+		{
+			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
+
+			KeyTypedEvent event(codepoint);
 			data->callback(event);
 		});
 

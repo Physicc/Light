@@ -47,5 +47,19 @@ namespace Light
 
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	class KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode): KeyEvent(keycode) {}
+
+		std::string ToString() const override
+		{
+			return "KeyTypedEvent: " + std::to_string(keycode);
+
+		}
+
+		EVENT_CLASS_TYPE(KeyTyped)
+	};
 }
 #endif // __KEYEVENT_H__

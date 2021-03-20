@@ -1,12 +1,22 @@
 #include "core/application.hpp"
 
+#include "glad/glad.h"
+
 namespace Light
 {
+	Application* Application::instance = nullptr;
 
 	Application::Application()
 	{
+		if(instance == nullptr)
+			instance = this;
+		else
+		{
+			std::cerr << "Application already created" << std::endl;
+			exit(1);
+		}
 		window = (std::unique_ptr<Window>)Window::create();
-		window->setEventCallback(BIND_EVENT_FN(onEvent));
+		window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 	}
 	
 	Application::~Application() {}
@@ -14,13 +24,13 @@ namespace Light
 	void Application::onEvent(Event& e)
 	{
 		EventDispatcher d(e);
-		d.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(onWindowClose));
+		d.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
 
 		std::clog << e << std::endl;
 
-		for(auto it = layerstack.end(); it != layerstack.begin(); it--)
+		for(auto it = layerstack.end(); it != layerstack.begin();)
 		{
-			(*it)->onEvent(e);
+			(*--it)->onEvent(e);
 			if(e.handled)
 				break;
 		}
@@ -30,7 +40,9 @@ namespace Light
 	{
 		while(running)
 		{
-
+			glClearColor(1,0,1,1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			
 			for(Layer* layer : layerstack)
 			{
 				layer->onUpdate();
@@ -49,10 +61,12 @@ namespace Light
 	void Application::pushLayer(Layer* layer)
 	{
 		layerstack.pushLayer(layer);
+		layer->onAttach();
 	}
 
 	void Application::pushOverlay(Layer* overlay)
 	{
 		layerstack.pushOverlay(overlay);
+		overlay->onAttach();
 	}
 }

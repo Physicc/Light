@@ -5,10 +5,11 @@
 #include <functional>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include <iostream>
 
 #define BIT(x) (1 << x)
-#define BIND_EVENT_FN(x) std::bind(x, this, std::placeholders::_1)
+#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 #endif // __BASE_H__

@@ -18,6 +18,10 @@ namespace Light
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* overlay);
 
+		inline Window& getWindow() { return *window; }
+
+		static inline Application& get() { return *instance; }
+
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
 
@@ -25,6 +29,8 @@ namespace Light
 
 		std::unique_ptr<Window> window;
 		LayerStack layerstack;
+
+		static Application* instance;
 	};
 
 	Application* createApplication();
