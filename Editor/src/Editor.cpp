@@ -23,7 +23,6 @@ public:
 	Editor()
 	{
 		pushLayer(new ExampleLayer());
-		pushOverlay(new Light::ImguiLayer("imgui"));
 	}
 	~Editor() {}
 	

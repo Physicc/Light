@@ -4,6 +4,7 @@
 #include "core/window.hpp"
 #include "events/applicationevent.hpp"
 #include "core/layerstack.hpp"
+#include "imgui/imguilayer.hpp"
 
 namespace Light
 {
@@ -28,6 +29,7 @@ namespace Light
 		bool running = true;
 
 		std::unique_ptr<Window> window;
+		ImguiLayer* imguilayer;
 		LayerStack layerstack;
 
 		static Application* instance;

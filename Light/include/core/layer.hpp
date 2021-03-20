@@ -12,10 +12,11 @@ namespace Light
 		Layer(std::string name): name(name) {};
 		virtual ~Layer() = default;
 
-		virtual void onAttach() {};
-		virtual void onDetach() {};
-		virtual void onEvent(Event& e) {};
-		virtual void onUpdate() {};
+		virtual void onAttach() {}
+		virtual void onDetach() {}
+		virtual void onEvent(Event& e) {}
+		virtual void onUpdate() {}
+		virtual void onImguiRender() {}
 
 		inline const std::string& getName() { return name; }
 	protected:

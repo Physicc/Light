@@ -2,7 +2,6 @@
 #define __IMGUILAYER_H__
 
 #include "core/layer.hpp"
-#include "platform/opengl/imgui_impl_opengl3.h"
 #include "events/applicationevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/keyevent.hpp"
@@ -15,20 +14,13 @@ namespace Light
 		ImguiLayer(std::string name) : Layer(name) {}
 		~ImguiLayer();
 
-		void onAttach();
-		void onDetach();
-		void onEvent(Event& e);
-		void onUpdate();
-	private:
-		bool onMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-		bool onMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-		bool onMouseMovedEvent(MouseMovedEvent& e);
-		bool onMouseScrolledEvent(MouseScrolledEvent& e);
-		bool onKeyPressedEvent(KeyPressedEvent& e);
-		bool onKeyReleasedEvent(KeyReleasedEvent& e);
-		bool onKeyTypedEvent(KeyTypedEvent& e);
-		bool onWindowResizeEvent(WindowResizeEvent& e);
+		void onAttach() override;
+		void onDetach() override;
+		void onImguiRender() override;
 
+		void begin();
+		void end();
+	private:
 		float time = 0.0;
 	};
 }

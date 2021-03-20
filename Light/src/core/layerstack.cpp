@@ -11,6 +11,7 @@ namespace Light
 	{
 		for(Layer* layer : layers)
 		{
+			layer->onDetach();
 			delete layer;
 		}
 	}
@@ -26,6 +27,7 @@ namespace Light
 		auto it = std::find(layers.begin(), layers.end(), layer);
 		if(it != layers.end())
 		{
+			(*it)->onDetach();
 			layers.erase(it);
 			layerTop--;
 		}
@@ -41,6 +43,9 @@ namespace Light
 	{
 		auto it = std::find(layers.begin(), layers.end(), overlay);
 		if(it != layers.end())
+		{
+			(*it)->onDetach();
 			layers.erase(it);
+		}
 	}
 }

@@ -17,6 +17,9 @@ namespace Light
 		}
 		window = (std::unique_ptr<Window>)Window::create();
 		window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+
+		imguilayer = new ImguiLayer("ImGui Layer");
+		pushOverlay(imguilayer);
 	}
 	
 	Application::~Application() {}
@@ -47,6 +50,13 @@ namespace Light
 			{
 				layer->onUpdate();
 			}
+
+			imguilayer->begin();
+			for(Layer* layer : layerstack)
+			{
+				layer->onImguiRender();
+			}
+			imguilayer->end();
 
 			window->onUpdate();
 		}
