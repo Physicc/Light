@@ -1,14 +1,14 @@
 #include "light.hpp"
 
-class Sandbox : public Light::Application
+class Editor : public Light::Application
 {
 public:
-	Sandbox() {}
-	~Sandbox() {}
+	Editor() {}
+	~Editor() {}
 	
 };
 
 Light::Application* Light::createApplication()
 {
-	return new Sandbox();
+	return new Editor();
 }

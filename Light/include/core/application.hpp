@@ -1,6 +1,10 @@
 #ifndef __APPLICATION_H__
 #define __APPLICATION_H__
 
+#include "core/window.hpp"
+#include "events/applicationevent.hpp"
+#include "core/layerstack.hpp"
+
 namespace Light
 {
 	class Application
@@ -9,7 +13,18 @@ namespace Light
 		Application();
 		virtual ~Application();
 
+		void onEvent(Event& e);
 		void run();
+		void pushLayer(Layer* layer);
+		void pushOverlay(Layer* overlay);
+
+	private:
+		bool onWindowClose(WindowCloseEvent& e);
+
+		bool running = true;
+
+		std::unique_ptr<Window> window;
+		LayerStack layerstack;
 	};
 
 	Application* createApplication();
