@@ -4,6 +4,7 @@
 
 #include "core/base.hpp"
 #include "core/window.hpp"
+#include "rendering/graphicscontext.hpp"
 
 #include "GLFW/glfw3.h"
 
@@ -34,6 +35,7 @@ namespace Light
 		void shutdown();
 
 		GLFWwindow* window;
+		GraphicsContext* context;
 		
 		struct WindowData
 		{

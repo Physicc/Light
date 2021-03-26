@@ -20,6 +20,7 @@ namespace Light
 
 		imguilayer = new ImguiLayer("ImGui Layer");
 		pushOverlay(imguilayer);
+
 	}
 	
 	Application::~Application() {}
@@ -43,7 +44,7 @@ namespace Light
 	{
 		while(running)
 		{
-			glClearColor(1,0,1,1);
+			glClearColor(0.2,0.2,0.2,1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			
 			for(Layer* layer : layerstack)

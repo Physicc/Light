@@ -6,6 +6,9 @@
 #include "core/layerstack.hpp"
 #include "imgui/imguilayer.hpp"
 
+//Temp
+#include "glad/glad.h"
+
 namespace Light
 {
 	class Application

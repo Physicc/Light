@@ -84,8 +84,8 @@ namespace Light
 
 	void ImguiLayer::onImguiRender()
 	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		// static bool show = true;
+		// ImGui::ShowDemoWindow(&show);
 	}
 
 }

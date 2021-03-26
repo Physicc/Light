@@ -1,5 +1,5 @@
 #include "platform/glfw/windowglfw.hpp"
-#include "glad/glad.h"
+#include "platform/opengl/openglcontext.hpp"
 #include "events/keyevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/applicationevent.hpp"
@@ -45,11 +45,8 @@ namespace Light
 		}
 
 		window = glfwCreateWindow(data.width, data.height, data.title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(window);
-
-		int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		if(!success)
-			exit(1);
+		context = new OpenGLContext(window);
+		context->init();
 
 		glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
@@ -153,7 +150,7 @@ namespace Light
 	void WindowGlfw::onUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(window);
+		context->swapBuffers();
 	}
 
 	void WindowGlfw::setVSync(bool enabled)
