@@ -5,7 +5,8 @@
 class ExampleLayer : public Light::Layer
 {
 public:
-	ExampleLayer(): Light::Layer("TestLayer"), camera(45.0f, 1.6f/0.9f, 1.0f, 100.0f)
+	ExampleLayer(): Light::Layer("TestLayer"), 
+			cameraController(45.0f, 1.6f/0.9f, 0.001f, 100.0f)
 	{
 		shader.reset(Light::Shader::create("../Light/shadersrc/test.vs", "../Light/shadersrc/test.fs"));
 
@@ -47,34 +48,15 @@ public:
 		squareVao->addVertexBuffer(squareVbo);
 		squareVao->setIndexBuffer(squareIbo);
 
-		position = camera.getPosition();
-
 	}
 	~ExampleLayer() {}
 
 	void onUpdate(Light::Timestep ts) override
 	{
 
-		if(Light::Input::isKeyPressed(LIGHT_KEY_W))
-		{
-			position.z += cameraPositionSpeed * ts.getSeconds();
-		}
-		else if(Light::Input::isKeyPressed(LIGHT_KEY_S))
-		{
-			position.z -= cameraPositionSpeed * ts.getSeconds();
-		}
-		else if(Light::Input::isKeyPressed(LIGHT_KEY_A))
-		{
-			position.x -= cameraPositionSpeed * ts.getSeconds();
-		}
-		else if(Light::Input::isKeyPressed(LIGHT_KEY_D))
-		{
-			position.x += cameraPositionSpeed * ts.getSeconds();
-		}
+		cameraController.onUpdate(ts);
 
-		camera.setPosition(position);
-
-		Light::Renderer::beginScene(camera);
+		Light::Renderer::beginScene(cameraController.getCamera());
 		
 		Light::Renderer::submit(shader, squareVao);
 		Light::Renderer::submit(shader, vao);
@@ -84,7 +66,7 @@ public:
 
 	void onEvent(Light::Event& e) override
 	{
-
+		cameraController.onEvent(e);
 	}
 
 	void onImguiRender() override
@@ -99,10 +81,7 @@ private:
 	std::shared_ptr<Light::VertexBuffer> squareVbo;
 	std::shared_ptr<Light::IndexBuffer> ibo;
 	std::shared_ptr<Light::IndexBuffer> squareIbo;
-	Light::PerspectiveCamera camera;
-
-	glm::vec3 position;
-	float cameraPositionSpeed = 0.01f;
+	Light::PerspectiveCameraController cameraController;
 };
 
 class Editor : public Light::Application

@@ -15,8 +15,7 @@ namespace Light
 	class PerspectiveCameraController
 	{
 	public:
-		PerspectiveCameraController(float aspectRatio, float near, float far,
-									glm::vec3 lookAtDirection, glm::vec3 upDirection);
+		PerspectiveCameraController(float fovy, float aspectRatio, float near, float far);
 
 		void onUpdate(Timestep ts);
 
@@ -29,6 +28,11 @@ namespace Light
 
 		bool onMouseScrolled(MouseScrolledEvent& e);
 		bool onWindowResized(WindowResizeEvent& e);
+		bool onMouseButtonPressed(MouseButtonPressedEvent& e);
+		bool onMouseButtonReleased(MouseButtonReleasedEvent& e);
+		bool onMouseMoved(MouseMovedEvent& e);
+		bool onKeyPressed(KeyPressedEvent& e);
+		bool onKeyReleased(KeyReleasedEvent& e);
 
 		float aspectRatio;
 		float fovy;
@@ -42,7 +46,12 @@ namespace Light
 		float cameraPositionSpeed;
 
 		PerspectiveCamera camera;
+
+		bool mousePressed;
+		bool ctrlPressed;
+		std::tuple<double, double> mousePos;
 	};
+	
 
 }
 
