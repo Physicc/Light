@@ -53,6 +53,9 @@ namespace Light
 	{
 	public:
 		PerspectiveCamera(float fovy, float aspectRatio, float near, float far);
+
+		void setProjection(float fovy, float aspectRatio, float near, float far);
+
 		~PerspectiveCamera();
 
 	};

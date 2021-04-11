@@ -49,6 +49,7 @@ namespace Light
 			float time = glfwGetTime();
 			Timestep ts(time - lastTime);
 			lastTime = time;
+
 			RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
 			RenderCommand::clear();
 			

@@ -6,6 +6,7 @@
 #include "rendering/rendercommand.hpp"
 #include "rendering/renderer.hpp"
 #include "rendering/camera.hpp"
+#include "rendering/cameracontroller.hpp"
 #include "core/input.hpp"
 #include "input/keycodes.h"
 #include "input/mousecodes.h"
