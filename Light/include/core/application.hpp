@@ -36,6 +36,8 @@ namespace Light
 		LayerStack layerstack;
 
 		static Application* instance;
+
+		float lastTime = 0.0f;
 	};
 
 	Application* createApplication();

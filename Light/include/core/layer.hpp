@@ -3,6 +3,7 @@
 
 #include "base.hpp"
 #include "events/event.hpp"
+#include "core/timestep.hpp"
 
 namespace Light
 {
@@ -15,7 +16,7 @@ namespace Light
 		virtual void onAttach() {}
 		virtual void onDetach() {}
 		virtual void onEvent(Event& e) {}
-		virtual void onUpdate() {}
+		virtual void onUpdate(Timestep ts) {}
 		virtual void onImguiRender() {}
 
 		inline const std::string& getName() { return name; }

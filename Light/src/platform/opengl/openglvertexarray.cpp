@@ -32,7 +32,7 @@ namespace Light
 
 	OpenGLVertexArray::OpenGLVertexArray() 
 	{
-		
+		glGenVertexArrays(1, &rendererId);
 	}
 	
 	OpenGLVertexArray::~OpenGLVertexArray() 
@@ -58,7 +58,7 @@ namespace Light
 			exit(1);
 		}
 
-		bind();
+		glBindVertexArray(rendererId);
 		vbo->bind();
 
 		const auto& layout = vbo->getLayout();
@@ -76,14 +76,14 @@ namespace Light
 			index++;
 		}
 		vertexBuffers.push_back(vbo);
-		unbind();
+		glBindVertexArray(0);
 	}
 	
 	void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& ibo) 
 	{
-		bind();
+		glBindVertexArray(rendererId);
 		ibo->bind();
 		indexBuffer = ibo;
-		unbind();
+		glBindVertexArray(0);
 	}
 }

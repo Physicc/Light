@@ -1,6 +1,10 @@
 #include "core/application.hpp"
 
-#include "glad/glad.h"
+#include "rendering/rendercommand.hpp"
+#include "core/timestep.hpp"
+
+//Temp for time
+#include "glfw/glfw3.h"
 
 namespace Light
 {
@@ -30,8 +34,6 @@ namespace Light
 		EventDispatcher d(e);
 		d.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
 
-		std::clog << e << std::endl;
-
 		for(auto it = layerstack.end(); it != layerstack.begin();)
 		{
 			(*--it)->onEvent(e);
@@ -44,12 +46,15 @@ namespace Light
 	{
 		while(running)
 		{
-			glClearColor(0.2,0.2,0.2,1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			float time = glfwGetTime();
+			Timestep ts(time - lastTime);
+			lastTime = time;
+			RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
+			RenderCommand::clear();
 			
 			for(Layer* layer : layerstack)
 			{
-				layer->onUpdate();
+				layer->onUpdate(ts);
 			}
 
 			imguilayer->begin();

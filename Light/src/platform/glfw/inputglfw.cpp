@@ -6,6 +6,8 @@
 
 namespace Light
 {
+	Input* Input::instance = new InputGlfw;
+
 	bool InputGlfw::isKeyPressedImpl(int keycode) 
 	{
 		auto window = (GLFWwindow*)Application::get().getWindow().getNativeWindow();
