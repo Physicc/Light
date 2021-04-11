@@ -10,6 +10,7 @@ namespace Light
 	class RenderCommand
 	{
 	public:
+		inline static void init() { rendererApi->init(); }
 		inline static void drawIndexed(const std::shared_ptr<VertexArray>& vao) { rendererApi->drawIndexed(vao); }
 		inline static void clear() { rendererApi->clear(); }
 		inline static void setClearColor(glm::vec4 color) { rendererApi->setClearColor(color); }

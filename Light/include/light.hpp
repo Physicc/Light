@@ -13,5 +13,5 @@
 #include "core/timestep.hpp"
 
 //--------ENTRY POINT-----------------
-#include "core/entrypoint.hpp"
+//#include "core/entrypoint.hpp"
 //------------------------------------

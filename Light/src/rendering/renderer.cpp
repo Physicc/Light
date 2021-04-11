@@ -7,6 +7,11 @@ namespace Light
 {
 	Renderer::SceneData* Renderer::sceneData = new Renderer::SceneData;
 
+	void Renderer::init() 
+	{
+		RenderCommand::init();
+	}
+
 	void Renderer::beginScene(Camera& camera)
 	{
 		sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
@@ -17,13 +22,15 @@ namespace Light
 		
 	}
 	
-	void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao) 
+	void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform) 
 	{
 		vao->bind();
 		
 		shader->bind();
 
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionMatrix);
+
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_transform", transform);
 
 		RenderCommand::drawIndexed(vao);
 

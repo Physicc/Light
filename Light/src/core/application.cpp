@@ -3,6 +3,8 @@
 #include "rendering/rendercommand.hpp"
 #include "core/timestep.hpp"
 
+#include "rendering/renderer.hpp"
+
 //Temp for time
 #include "glfw/glfw3.h"
 
@@ -21,6 +23,8 @@ namespace Light
 		}
 		window = (std::unique_ptr<Window>)Window::create();
 		window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+
+		Renderer::init();
 
 		imguilayer = new ImguiLayer("ImGui Layer");
 		pushOverlay(imguilayer);

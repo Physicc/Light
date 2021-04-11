@@ -8,6 +8,11 @@ namespace Light
 {
 	RendererAPI* RenderCommand::rendererApi = new OpenGLRendererAPI;
 
+	void OpenGLRendererAPI::init() 
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+
 	void OpenGLRendererAPI::setClearColor(glm::vec4& color) 
 	{
 		glClearColor(color.r, color.g, color.b, color.a);

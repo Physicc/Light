@@ -11,10 +11,12 @@ namespace Light
 	class Renderer
 	{
 	public:
+		static void init();
+
 		static void beginScene(Camera& camera);
 		static void endScene();
 
-		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
+		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
 	private:
 		struct SceneData
 		{
@@ -23,6 +25,7 @@ namespace Light
 
 		static SceneData* sceneData;
 	};
+	
 }
 
 #endif // __RENDERER_H__

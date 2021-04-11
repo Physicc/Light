@@ -8,6 +8,7 @@ namespace Light
 {
 	class OpenGLRendererAPI : public RendererAPI
 	{
+		void init() override;
 		void setClearColor(glm::vec4& color) override;
 		void clear() override;
 

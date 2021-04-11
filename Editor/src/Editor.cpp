@@ -1,6 +1,9 @@
 #include "light.hpp"
+#include "core/entrypoint.hpp"
 
 #include "imgui.h"
+
+#include "Objects.hpp"
 
 class ExampleLayer : public Light::Layer
 {
@@ -8,6 +11,7 @@ public:
 	ExampleLayer(): Light::Layer("TestLayer"), 
 			cameraController(45.0f, 1.6f/0.9f, 0.001f, 100.0f)
 	{
+		cube = std::make_shared<Cube>();
 		shader.reset(Light::Shader::create("../Light/shadersrc/test.vs", "../Light/shadersrc/test.fs"));
 
 		vao.reset(Light::VertexArray::create());
@@ -55,11 +59,13 @@ public:
 	{
 
 		cameraController.onUpdate(ts);
+		cube->onUpdate(ts);
 
 		Light::Renderer::beginScene(cameraController.getCamera());
 		
 		Light::Renderer::submit(shader, squareVao);
-		Light::Renderer::submit(shader, vao);
+		//Light::Renderer::submit(shader, vao);
+		cube->render();
 
 		Light::Renderer::endScene();
 	}
@@ -67,6 +73,7 @@ public:
 	void onEvent(Light::Event& e) override
 	{
 		cameraController.onEvent(e);
+		cube->onEvent(e);
 	}
 
 	void onImguiRender() override
@@ -82,6 +89,7 @@ private:
 	std::shared_ptr<Light::IndexBuffer> ibo;
 	std::shared_ptr<Light::IndexBuffer> squareIbo;
 	Light::PerspectiveCameraController cameraController;
+	std::shared_ptr<Cube> cube;
 };
 
 class Editor : public Light::Application
