@@ -17,9 +17,10 @@ namespace Light
 		RenderCommand::setViewPort(0, 0, width, height);
 	}
 
-	void Renderer::beginScene(Camera& camera)
+	void Renderer::beginScene(Camera& camera, glm::vec3 lightPos)
 	{
 		sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
+		sceneData->lightPos = lightPos;
 	}
 	
 	void Renderer::endScene() 
@@ -34,6 +35,7 @@ namespace Light
 		shader->bind();
 
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformVec3("u_lightPos", sceneData->lightPos);
 
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_transform", transform);
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));

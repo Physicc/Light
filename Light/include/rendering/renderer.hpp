@@ -14,7 +14,7 @@ namespace Light
 		static void init();
 		static void onWindowResize(uint32_t width, uint32_t height);
 
-		static void beginScene(Camera& camera);
+		static void beginScene(Camera& camera, glm::vec3 lightPos);
 		static void endScene();
 
 		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
@@ -22,6 +22,7 @@ namespace Light
 		struct SceneData
 		{
 			glm::mat4 viewProjectionMatrix;
+			glm::vec3 lightPos;
 		};
 
 		static SceneData* sceneData;
