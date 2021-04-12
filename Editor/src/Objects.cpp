@@ -10,7 +10,7 @@ Cube::Cube()
 		rotation(0,0,0),
 		scale(0.5)
 {
-	shader.reset(Light::Shader::create("../Light/shadersrc/test.vs", "../Light/shadersrc/test.fs"));
+	shader.reset(Light::Shader::create("../Light/shadersrc/phong.vs", "../Light/shadersrc/phong.fs"));
 	vao.reset(Light::VertexArray::create());
 
 	float vertices[] = {
@@ -84,11 +84,11 @@ void Cube::onUpdate(Light::Timestep ts)
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_1))
 	{
-		rotation.x += 5.0 * ts.getSeconds();
+		rotation.x += 20.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_2))
 	{
-		rotation.x -= 5.0 * ts.getSeconds();
+		rotation.x -= 20.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_3))
 	{

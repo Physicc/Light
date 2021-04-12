@@ -25,4 +25,7 @@ add_definitions(-DGLFW_INCLUDE_NONE)
 add_subdirectory(libs/imgui)
 target_link_libraries(Light glad glfw imgui)
 
+add_subdirectory(libs/stbimage)
+target_link_libraries(Light stbimage)
+
 target_include_directories(Light PUBLIC libs/glm)
