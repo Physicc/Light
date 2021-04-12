@@ -12,6 +12,11 @@ namespace Light
 		RenderCommand::init();
 	}
 
+	void Renderer::onWindowResize(uint32_t width, uint32_t height) 
+	{
+		RenderCommand::setViewPort(0, 0, width, height);
+	}
+
 	void Renderer::beginScene(Camera& camera)
 	{
 		sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();

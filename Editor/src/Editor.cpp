@@ -73,11 +73,21 @@ public:
 	void onEvent(Light::Event& e) override
 	{
 		cameraController.onEvent(e);
+
+		Light::EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(onWindowResize));
+
 		cube->onEvent(e);
 	}
 
 	void onImguiRender() override
 	{
+	}
+
+	bool onWindowResize(Light::WindowResizeEvent& e)
+	{
+		cameraController.setAspectRatio(std::get<0>(e.getSize())/std::get<1>(e.getSize()));
+		return false;
 	}
 
 private:

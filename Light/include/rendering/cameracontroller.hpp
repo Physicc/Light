@@ -21,6 +21,12 @@ namespace Light
 
 		void onEvent(Event& e);
 
+		inline void setAspectRatio(float aspectRatio)
+		{ 
+			this->aspectRatio = aspectRatio; 
+			camera.setProjection(fovy, aspectRatio, near, far); 
+		}
+
 		PerspectiveCamera& getCamera() { return camera; }
 		const PerspectiveCamera& getCamera() const { return camera; }
 

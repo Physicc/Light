@@ -37,6 +37,7 @@ namespace Light
 	{
 		EventDispatcher d(e);
 		d.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
+		d.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::onWindowResize));
 
 		for(auto it = layerstack.end(); it != layerstack.begin();)
 		{
@@ -56,11 +57,15 @@ namespace Light
 
 			RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
 			RenderCommand::clear();
-			
-			for(Layer* layer : layerstack)
+
+			if(!minimized)
 			{
-				layer->onUpdate(ts);
+				for(Layer* layer : layerstack)
+				{
+					layer->onUpdate(ts);
+				}
 			}
+			
 
 			imguilayer->begin();
 			for(Layer* layer : layerstack)
@@ -77,6 +82,19 @@ namespace Light
 	{
 		running = false;
 		return true;
+	}
+
+	bool Application::onWindowResize(WindowResizeEvent& e) 
+	{
+		if(std::get<0>(e.getSize()) == 0 || std::get<1>(e.getSize()) == 0)
+		{
+			minimized = true;
+			return false;
+		}
+
+		Renderer::onWindowResize(std::get<0>(e.getSize()), std::get<1>(e.getSize()));
+		minimized = false;
+		return false;
 	}
 
 	void Application::pushLayer(Layer* layer)

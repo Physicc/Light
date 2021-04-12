@@ -28,8 +28,10 @@ namespace Light
 
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
+		bool onWindowResize(WindowResizeEvent& e);
 
 		bool running = true;
+		bool minimized = false;
 
 		std::unique_ptr<Window> window;
 		ImguiLayer* imguilayer;
