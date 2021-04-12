@@ -1,5 +1,8 @@
 #include "Objects.hpp"
 
+//Temp
+#include "platform/opengl/openglshader.hpp"
+
 Cube::Cube()
 	:	layout({
 			{ Light::ShaderDataType::Float3, "a_Position" },
@@ -10,7 +13,7 @@ Cube::Cube()
 		rotation(0,0,0),
 		scale(0.5)
 {
-	shader.reset(Light::Shader::create("../Light/shadersrc/phong.vs", "../Light/shadersrc/phong.fs"));
+	shader.reset(Light::Shader::create("../Light/assets/shaders/phong.vs", "../Light/assets/shaders/phong.fs"));
 	vao.reset(Light::VertexArray::create());
 
 	float vertices[] = {
@@ -114,4 +117,75 @@ void Cube::onEvent(Light::Event& e)
 void Cube::render()
 {
 	Light::Renderer::submit(shader, vao, transform);
+}
+
+
+
+Skybox::Skybox()
+	: layout({
+			{ Light::ShaderDataType::Float3, "a_Position" }
+		})
+{
+	vao.reset(Light::VertexArray::create());
+
+	float vertices[] = {
+			//Front
+			-1.0, -1.0, 1.0,
+			1.0, -1.0, 1.0,
+			1.0, 1.0, 1.0,
+			-1.0, 1.0, 1.0,
+			//Left
+			-1.0, -1.0, 1.0,
+			-1.0, 1.0, 1.0,
+			-1.0, 1.0, -1.0,
+			-1.0, -1.0, -1.0,
+			//Right
+			1.0, -1.0, 1.0,
+			1.0, -1.0, -1.0,
+			1.0, 1.0, -1.0,
+			1.0, 1.0, 1.0,
+			//Top
+			-1.0, 1.0, 1.0,
+			1.0, 1.0, 1.0,
+			1.0, 1.0, -1.0,
+			-1.0, 1.0, -1.0,
+			//Bottom
+			-1.0, -1.0, 1.0,
+			-1.0, -1.0, -1.0,
+			1.0, -1.0, -1.0,
+			1.0, -1.0, 1.0,
+			//Back
+			-1.0, -1.0, -1.0,
+			-1.0, 1.0, -1.0,
+			1.0, 1.0, -1.0,
+			1.0, -1.0, -1.0,
+	};
+
+	vbo.reset(Light::VertexBuffer::create(vertices, sizeof(vertices)));
+	vbo->setLayout(layout);
+
+	unsigned int indices[] = { 
+		0, 1, 2, 2, 3, 0,
+		4, 5, 6, 6, 7, 4,
+		8, 9, 10, 10, 11, 8,
+		12, 13, 14, 14, 15, 12,
+		16, 17, 18, 18, 19, 16,
+		20, 21, 22, 22, 23, 20
+	};
+
+	ibo.reset(Light::IndexBuffer::create(indices, sizeof(indices)/sizeof(unsigned int)));
+
+	vao->addVertexBuffer(vbo);
+	vao->setIndexBuffer(ibo);
+
+	cubemap.reset(Light::Cubemap::create("../Light/assets/cubemap"));
+	shader.reset(Light::Shader::create("../Light/assets/shaders/skybox.vs", "../Light/assets/shaders/skybox.fs"));
+	std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->bind();
+	std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->setUniformInt("u_cubemap", 0);
+}
+
+void Skybox::render() 
+{
+	cubemap->bind();
+	Light::Renderer::submitSkybox(shader, vao);
 }

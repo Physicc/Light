@@ -16,6 +16,8 @@ namespace Light
 			rendererApi->setViewPort(x, y, width, height); 
 		}
 
+		inline static void depthMask(bool enable) { rendererApi->depthMask(enable); }
+
 		inline static void drawIndexed(const std::shared_ptr<VertexArray>& vao) { rendererApi->drawIndexed(vao); }
 		inline static void clear() { rendererApi->clear(); }
 		inline static void setClearColor(glm::vec4 color) { rendererApi->setClearColor(color); }

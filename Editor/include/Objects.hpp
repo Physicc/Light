@@ -28,6 +28,23 @@ private:
 	float scale;
 };
 
+class Skybox
+{
+public:
+	Skybox();
+
+	void render();
+
+private:
+	Light::BufferLayout layout;
+	std::shared_ptr<Light::VertexArray> vao;
+	std::shared_ptr<Light::VertexBuffer> vbo;
+	std::shared_ptr<Light::IndexBuffer> ibo;
+	std::shared_ptr<Light::Shader> shader;
+	std::shared_ptr<Light::Cubemap> cubemap;
+};
+
+
 
 
 #endif // __OBJECTS_H__

@@ -21,6 +21,9 @@ namespace Light
 	{
 		sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
 		sceneData->lightPos = lightPos;
+
+		glm::mat4 view = glm::mat4(glm::mat3(camera.getViewMatrix()));
+		sceneData->viewProjectionSkyboxMatrix = camera.getProjectionMatrix() * view;
 	}
 	
 	void Renderer::endScene() 
@@ -41,6 +44,25 @@ namespace Light
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));
 
 		RenderCommand::drawIndexed(vao);
+
+		shader->unbind();
+
+		vao->unbind();
+	}
+
+	void Renderer::submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao) 
+	{
+		vao->bind();
+		
+		shader->bind();
+
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionSkyboxMatrix);
+
+		RenderCommand::depthMask(false);
+
+		RenderCommand::drawIndexed(vao);
+
+		RenderCommand::depthMask(true);
 
 		shader->unbind();
 

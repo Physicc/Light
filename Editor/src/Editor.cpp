@@ -4,6 +4,8 @@
 #include "imgui.h"
 
 #include "Objects.hpp"
+//Temp
+#include "platform/opengl/openglshader.hpp"
 
 class ExampleLayer : public Light::Layer
 {
@@ -12,45 +14,36 @@ public:
 			cameraController(45.0f, 1.6f/0.9f, 0.001f, 100.0f)
 	{
 		cube = std::make_shared<Cube>();
-		shader.reset(Light::Shader::create("../Light/shadersrc/texture.vs", "../Light/shadersrc/texture.fs"));
+		shader.reset(Light::Shader::create("../Light/assets/shaders/texture.vs", "../Light/assets/shaders/texture.fs"));
 
-		vao.reset(Light::VertexArray::create());
 		squareVao.reset(Light::VertexArray::create());
 
-		float vertices[] = {
-			0, 0, 0, 1.0, 0.0, 0.0, 1.0,
-			0, 0.5, 0, 0.0, 1.0, 0.0, 1.0,
-			0.5, 0, 0, 0.0, 0.0, 1.0, 1.0
-		};
-
 		float squareVertices[] = {
-			-0.2, -0.2, 0, 0.3, 0.2, 0.8, 1.0,
-			-0.2, 0.7, 0, 0.3, 0.2, 0.8, 1.0,
-			0.7, -0.2, 0, 0.3, 0.2, 0.8, 1.0,
-			0.7, 0.7, 0, 0.3, 0.2, 0.8, 1.0
+			-0.2, -0.2, 0, 0, 0,
+			-0.2, 0.7, 0, 0, 1,
+			0.7, -0.2, 0, 1, 0,
+			0.7, 0.7, 0, 1, 1,
 		};
 
-		vbo.reset(Light::VertexBuffer::create(vertices, sizeof(vertices)));
 		squareVbo.reset(Light::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
 
 		Light::BufferLayout layout = {
 			{ Light::ShaderDataType::Float3, "a_Position" },
-			{ Light::ShaderDataType::Float4, "a_Color"}
+			{ Light::ShaderDataType::Float2, "a_TexCoord"}
 		};
 
-		vbo->setLayout(layout);
 		squareVbo->setLayout(layout);
 
-		unsigned int indices[3] = { 0, 1, 2};
 		unsigned int squareIndices[6] = {0, 1, 2, 2, 1, 3};
 		
-		ibo.reset(Light::IndexBuffer::create(indices, sizeof(indices)/sizeof(unsigned int)));
 		squareIbo.reset(Light::IndexBuffer::create(squareIndices, sizeof(squareIndices)/sizeof(unsigned int)));
 
-		vao->addVertexBuffer(vbo);
-		vao->setIndexBuffer(ibo);
 		squareVao->addVertexBuffer(squareVbo);
 		squareVao->setIndexBuffer(squareIbo);
+
+		texture.reset(Light::Texture2D::create("../Light/assets/textures/Checkerboard.png"));
+		std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->bind();
+		std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->setUniformInt("u_texture", 0);
 
 	}
 	~ExampleLayer() {}
@@ -63,8 +56,9 @@ public:
 
 		Light::Renderer::beginScene(cameraController.getCamera(), glm::vec3(-1, 2, 1.5));
 		
+		skybox.render();
+		texture->bind();
 		Light::Renderer::submit(shader, squareVao);
-		//Light::Renderer::submit(shader, vao);
 		cube->render();
 
 		Light::Renderer::endScene();
@@ -91,15 +85,15 @@ public:
 	}
 
 private:
-	std::shared_ptr<Light::VertexArray> vao;
 	std::shared_ptr<Light::VertexArray> squareVao;
 	std::shared_ptr<Light::Shader> shader;
-	std::shared_ptr<Light::VertexBuffer> vbo;
 	std::shared_ptr<Light::VertexBuffer> squareVbo;
-	std::shared_ptr<Light::IndexBuffer> ibo;
 	std::shared_ptr<Light::IndexBuffer> squareIbo;
 	Light::PerspectiveCameraController cameraController;
 	std::shared_ptr<Cube> cube;
+	std::shared_ptr<Light::Texture2D> texture; 
+	Skybox skybox;
+
 };
 
 class Editor : public Light::Application
