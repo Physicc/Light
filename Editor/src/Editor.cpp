@@ -34,7 +34,7 @@ public:
 
 		squareVbo->setLayout(layout);
 
-		unsigned int squareIndices[6] = {0, 1, 2, 2, 1, 3};
+		unsigned int squareIndices[6] = {0, 2, 1, 1, 2, 3};
 		
 		squareIbo.reset(Light::IndexBuffer::create(squareIndices, sizeof(squareIndices)/sizeof(unsigned int)));
 

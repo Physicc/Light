@@ -9,7 +9,7 @@ uniform vec3 u_lightPos;
 
 void main()
 {
-	vec3 lightCol = vec3(0.7255, 0.7333, 0.5922);
+	vec3 lightCol = vec3(1.0, 1.0, 1.0);
 
 	vec3 norm = normalize(v_normal);
 	vec3 lightDir = normalize(u_lightPos - v_worldPos);
@@ -17,7 +17,7 @@ void main()
 	float diff = max(dot(norm, lightDir), 0.0);
 	vec3 diffuse = diff*lightCol;
 
-	vec3 ambient = vec3(v_color) * 0.5;
+	vec3 ambient = vec3(v_color) * 0.3;
 
 	color = vec4(ambient + diffuse, 1.0) * v_color;
 }

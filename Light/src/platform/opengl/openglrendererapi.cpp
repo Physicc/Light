@@ -11,6 +11,7 @@ namespace Light
 	void OpenGLRendererAPI::init() 
 	{
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
 	}
 
 	void OpenGLRendererAPI::depthMask(bool enable)
