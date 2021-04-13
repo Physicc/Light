@@ -22,6 +22,8 @@ Platforms currently it compiles on:
 
 If you get library headers not found error while building, ```apt-get``` the dev version of all packages it requests you to install
 
+```sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev```
+
 ### Mac
 
 * XCode
