@@ -3,15 +3,15 @@
 //Temp
 #include "platform/opengl/openglshader.hpp"
 
-Cube::Cube()
+Cube::Cube(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 	:	layout({
 			{ Light::ShaderDataType::Float3, "a_Position" },
 			{ Light::ShaderDataType::Float4, "a_Color" },
 			{ Light::ShaderDataType::Float3, "a_Normal" }
 		}),
-		position(0,0,0),
-		rotation(0,0,0),
-		scale(0.5)
+		position(position),
+		rotation(rotation),
+		scale(scale)
 {
 	shader.reset(Light::Shader::create("../Light/assets/shaders/phong.vs", "../Light/assets/shaders/phong.fs"));
 	vao.reset(Light::VertexArray::create());
@@ -65,6 +65,8 @@ Cube::Cube()
 
 	vao->addVertexBuffer(vbo);
 	vao->setIndexBuffer(ibo);
+
+	updateTransform();
 }
 
 void Cube::onUpdate(Light::Timestep ts) 
@@ -102,11 +104,7 @@ void Cube::onUpdate(Light::Timestep ts)
 		scale -= 0.2 * ts.getSeconds();
 	}
 
-	transform = glm::translate(glm::mat4(1.0f), position);
-	transform = glm::scale(transform, glm::vec3(scale));
-	transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0, 0.0, 0.0));
-	transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0, 1.0, 0.0));
-	transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0, 0.0, 1.0));
+	updateTransform();
 }
 
 void Cube::onEvent(Light::Event& e) 
@@ -117,6 +115,15 @@ void Cube::onEvent(Light::Event& e)
 void Cube::render()
 {
 	Light::Renderer::submit(shader, vao, transform);
+}
+
+void Cube::updateTransform()
+{
+	transform = glm::translate(glm::mat4(1.0f), position);
+	transform = glm::scale(transform, scale);
+	transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0, 0.0, 0.0));
+	transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0, 1.0, 0.0));
+	transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0, 0.0, 1.0));
 }
 
 

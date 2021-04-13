@@ -6,7 +6,9 @@
 class Cube
 {
 public:
-	Cube();
+	Cube(glm::vec3 position = glm::vec3(0,0,0), 
+		glm::vec3 rotation = glm::vec3(0,0,0), 
+		glm::vec3 scale = glm::vec3(0.5));
 
 	void render();
 
@@ -25,7 +27,9 @@ private:
 	glm::mat4 transform;
 	glm::vec3 position;
 	glm::vec3 rotation;
-	float scale;
+	glm::vec3 scale;
+
+	void updateTransform();
 };
 
 class Skybox

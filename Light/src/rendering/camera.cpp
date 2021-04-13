@@ -28,6 +28,7 @@ namespace Light
 	void PerspectiveCamera::setProjection(float fovy, float aspectRatio, float near, float far) 
 	{
 		projectionMatrix = glm::perspective(glm::radians(fovy), aspectRatio, near, far);
+		recalculateViewMatrix();
 	}
 	
 	PerspectiveCamera::~PerspectiveCamera() 

@@ -27,6 +27,17 @@ namespace Light
 			camera.setProjection(fovy, aspectRatio, near, far); 
 		}
 
+		inline void setPosition(glm::vec3 position) { this->position = position; camera.setPosition(position); }
+		const glm::vec3& getPosition() const { return position; }
+
+		inline void setLookAtDirection(glm::vec3 lookAtDirection) 
+		{
+			this->lookAtDirection = lookAtDirection;
+			camera.setLookAtDirection(lookAtDirection);
+		}
+	
+		const glm::vec3& getLookAtDirection() const { return lookAtDirection; }
+
 		PerspectiveCamera& getCamera() { return camera; }
 		const PerspectiveCamera& getCamera() const { return camera; }
 

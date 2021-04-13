@@ -13,6 +13,8 @@
 #include "input/mousecodes.h"
 #include "core/timestep.hpp"
 
+#include "glm/gtc/type_ptr.hpp"
+
 //--------ENTRY POINT-----------------
 //#include "core/entrypoint.hpp"
 //------------------------------------

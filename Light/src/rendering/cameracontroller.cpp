@@ -128,7 +128,7 @@ namespace Light
 	
 	bool PerspectiveCameraController::onWindowResized(WindowResizeEvent& e) 
 	{
-		aspectRatio = std::get<0>(e.getSize())/std::get<1>(e.getSize());
+		aspectRatio = float(std::get<0>(e.getSize()))/std::get<1>(e.getSize());
 		camera.setProjection(fovy, aspectRatio, near, far);
 		return false;
 	}

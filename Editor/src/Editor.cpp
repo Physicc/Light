@@ -11,55 +11,28 @@ class ExampleLayer : public Light::Layer
 {
 public:
 	ExampleLayer(): Light::Layer("TestLayer"), 
-			cameraController(45.0f, 1.6f/0.9f, 0.001f, 100.0f)
+			cameraController(45.0f, 1.6f/0.9f, 0.001f, 100.0f),
+			lightPos(-1,2,1.5),
+			cameraPos(-0.754, 0.651, 1.758),
+			floor(glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2))
 	{
-		cube = std::make_shared<Cube>();
-		shader.reset(Light::Shader::create("../Light/assets/shaders/texture.vs", "../Light/assets/shaders/texture.fs"));
-
-		squareVao.reset(Light::VertexArray::create());
-
-		float squareVertices[] = {
-			-0.2, -0.2, 0, 0, 0,
-			-0.2, 0.7, 0, 0, 1,
-			0.7, -0.2, 0, 1, 0,
-			0.7, 0.7, 0, 1, 1,
-		};
-
-		squareVbo.reset(Light::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
-
-		Light::BufferLayout layout = {
-			{ Light::ShaderDataType::Float3, "a_Position" },
-			{ Light::ShaderDataType::Float2, "a_TexCoord"}
-		};
-
-		squareVbo->setLayout(layout);
-
-		unsigned int squareIndices[6] = {0, 2, 1, 1, 2, 3};
-		
-		squareIbo.reset(Light::IndexBuffer::create(squareIndices, sizeof(squareIndices)/sizeof(unsigned int)));
-
-		squareVao->addVertexBuffer(squareVbo);
-		squareVao->setIndexBuffer(squareIbo);
-
-		texture.reset(Light::Texture2D::create("../Light/assets/textures/Checkerboard.png"));
-		std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->bind();
-		std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->setUniformInt("u_texture", 0);
+		cameraController.setPosition(cameraPos);
+		cameraController.setLookAtDirection(glm::vec3(0.35, -0.3, -0.9));
 
 	}
 	~ExampleLayer() {}
 
 	void onUpdate(Light::Timestep ts) override
 	{
-
+		cameraController.setPosition(cameraPos);
 		cameraController.onUpdate(ts);
-		cube->onUpdate(ts);
+		cube.onUpdate(ts);
 
-		Light::Renderer::beginScene(cameraController.getCamera(), glm::vec3(-1, 2, 1.5));
+		Light::Renderer::beginScene(cameraController.getCamera(), lightPos);
 		
 		skybox.render();
-		texture->bind();
-		Light::Renderer::submit(shader, squareVao);
-		cube->render();
+		cube.render();
+		floor.render();
 
 		Light::Renderer::endScene();
 	}
@@ -67,32 +40,30 @@ public:
 	void onEvent(Light::Event& e) override
 	{
 		cameraController.onEvent(e);
+		cameraPos = cameraController.getPosition();
 
-		Light::EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(onWindowResize));
-
-		cube->onEvent(e);
+		cube.onEvent(e);
 	}
 
 	void onImguiRender() override
 	{
-	}
-
-	bool onWindowResize(Light::WindowResizeEvent& e)
-	{
-		cameraController.setAspectRatio(std::get<0>(e.getSize())/std::get<1>(e.getSize()));
-		return false;
+		cameraPos = cameraController.getPosition();
+		ImGui::SliderFloat3("Camera Position", &(cameraPos.x), -5.0f, 5.0f);
+		ImGui::SliderFloat3("Light Position", &(lightPos.x), -5.0f, 5.0f);
 	}
 
 private:
-	std::shared_ptr<Light::VertexArray> squareVao;
-	std::shared_ptr<Light::Shader> shader;
-	std::shared_ptr<Light::VertexBuffer> squareVbo;
-	std::shared_ptr<Light::IndexBuffer> squareIbo;
 	Light::PerspectiveCameraController cameraController;
-	std::shared_ptr<Cube> cube;
-	std::shared_ptr<Light::Texture2D> texture; 
+	Cube cube;
+	Cube floor;
 	Skybox skybox;
+	glm::vec3 cameraPos;
+	glm::vec3 lightPos;
+
+	std::shared_ptr<Light::VertexArray> vao;
+	std::shared_ptr<Light::VertexBuffer> vbo;
+	std::shared_ptr<Light::IndexBuffer> ibo;
+	std::shared_ptr<Light::Shader> shader;
 
 };
 
