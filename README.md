@@ -20,6 +20,8 @@ Platforms currently it compiles on:
 * gcc
 * X11
 
+If you get library headers not found error while building, ```apt-get``` the dev version of all packages it requests you to install
+
 ### Mac
 
 * XCode
