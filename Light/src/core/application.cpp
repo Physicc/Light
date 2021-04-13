@@ -6,7 +6,7 @@
 #include "rendering/renderer.hpp"
 
 //Temp for time
-#include "glfw/glfw3.h"
+#include "GLFW/glfw3.h"
 
 namespace Light
 {
