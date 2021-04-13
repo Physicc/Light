@@ -57,6 +57,10 @@ Hit Build
 
 * If you want to build using Visual Studio 2019, just open the solution file generated
 
+If you do not have a dedicated GPU (or drivers for the dedicated GPU eg. on Linux), you may need to run the following command on the terminal to setup the environment variables before running our program
+
+`export MESA_GL_VERSION_OVERRIDE=3.3`
+
 
 
 
