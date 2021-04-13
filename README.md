@@ -1,4 +1,4 @@
-# Light
+# Light [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 Lightweight Renderer, purposed to augment the development of Physicc
 
 ## Platforms
