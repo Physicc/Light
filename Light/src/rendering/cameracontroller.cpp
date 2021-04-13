@@ -47,13 +47,13 @@ namespace Light
 	void PerspectiveCameraController::onEvent(Event& e) 
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(onMouseScrolled));
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(onWindowResized));
-		dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN(onMouseButtonPressed));
-		dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN(onMouseButtonReleased));
-		dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN(onMouseMoved));
-		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(onKeyPressed));
-		dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN(onKeyReleased));
+		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(PerspectiveCameraController::onMouseScrolled));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(PerspectiveCameraController::onWindowResized));
+		dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN(PerspectiveCameraController::onMouseButtonPressed));
+		dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN(PerspectiveCameraController::onMouseButtonReleased));
+		dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN(PerspectiveCameraController::onMouseMoved));
+		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(PerspectiveCameraController::onKeyPressed));
+		dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN(PerspectiveCameraController::onKeyReleased));
 	}
 
 	bool PerspectiveCameraController::onMouseScrolled(MouseScrolledEvent& e) 
