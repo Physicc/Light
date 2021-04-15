@@ -26,6 +26,8 @@ namespace Light
 
 		static inline Application& get() { return *instance; }
 
+		inline void close() { running = false; }
+
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
 		bool onWindowResize(WindowResizeEvent& e);

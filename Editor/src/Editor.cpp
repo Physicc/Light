@@ -13,7 +13,7 @@ public:
 			lightPos(-1,2,1.5),
 			floor(glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2))
 	{
-
+		texture.reset(Light::Texture2D::create("../Light/assets/textures/check.png"));
 	}
 	~ExampleLayer() {}
 
@@ -63,8 +63,20 @@ public:
 	{
 		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
-		ImGui::BeginMainMenuBar();
-		ImGui::EndMainMenuBar();
+
+		if(ImGui::BeginMainMenuBar())
+		{
+			if(ImGui::BeginMenu("File"))
+			{
+				if(ImGui::MenuItem("Exit")) Light::Application::get().close();
+				ImGui::EndMenu();
+			}
+			ImGui::EndMainMenuBar();
+		}
+
+		ImGui::Begin("Viewport");
+		ImGui::Image((void*)texture->getRendererId(), ImVec2(texture->getWidth(), texture->getHeight()));
+		ImGui::End();
 
 		ImGui::Begin("Scene Settings");
 		ImGui::DragFloat3("Light Position", &(lightPos.x), 0.01f);
@@ -84,8 +96,6 @@ public:
 					int(lastFramecount*1000/lastTime));
 		ImGui::End();
 
-
-
 	}
 
 private:
@@ -99,6 +109,7 @@ private:
 	std::shared_ptr<Light::VertexBuffer> vbo;
 	std::shared_ptr<Light::IndexBuffer> ibo;
 	std::shared_ptr<Light::Shader> shader;
+	std::shared_ptr<Light::Texture2D> texture;
 
 	float time = 0.0f;
 	int framecount = 0;

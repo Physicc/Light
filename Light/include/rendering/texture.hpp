@@ -20,6 +20,8 @@ namespace Light
 		Texture2D() {}
 		virtual ~Texture2D() = default;
 		static Texture2D* create(const std::string& path);
+
+		virtual uint32_t getRendererId() const = 0;
 	};
 
 	class Cubemap

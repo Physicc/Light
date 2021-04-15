@@ -11,6 +11,8 @@ namespace Light
 		OpenGLTexture2D(const std::string& path);
 		~OpenGLTexture2D();
 
+		uint32_t getRendererId() const override { return rendererId; }
+
 		uint32_t getWidth() const override { return width; }
 		uint32_t getHeight() const override { return height; }
 
