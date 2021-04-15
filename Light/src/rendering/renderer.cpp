@@ -1,8 +1,6 @@
 #include "rendering/renderer.hpp"
 #include "rendering/rendercommand.hpp"
 
-#include "platform/opengl/openglshader.hpp"
-
 namespace Light
 {
 	Renderer::SceneData* Renderer::sceneData = new Renderer::SceneData;
@@ -37,11 +35,11 @@ namespace Light
 		
 		shader->bind();
 
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformVec3("u_lightPos", sceneData->lightPos);
+		shader->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionMatrix);
+		shader->setUniformVec3("u_lightPos", sceneData->lightPos);
 
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_transform", transform);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));
+		shader->setUniformMat4("u_transform", transform);
+		shader->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));
 
 		RenderCommand::drawIndexed(vao);
 
@@ -56,7 +54,7 @@ namespace Light
 		
 		shader->bind();
 
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionSkyboxMatrix);
+		shader->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionSkyboxMatrix);
 
 		RenderCommand::depthMask(false);
 

@@ -4,8 +4,6 @@
 #include "imgui.h"
 
 #include "Objects.hpp"
-//Temp
-#include "platform/opengl/openglshader.hpp"
 
 class ExampleLayer : public Light::Layer
 {

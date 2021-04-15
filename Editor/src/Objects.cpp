@@ -1,8 +1,5 @@
 #include "Objects.hpp"
 
-//Temp
-#include "platform/opengl/openglshader.hpp"
-
 Cube::Cube(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 	:	layout({
 			{ Light::ShaderDataType::Float3, "a_Position" },
@@ -187,8 +184,8 @@ Skybox::Skybox()
 
 	cubemap.reset(Light::Cubemap::create("../Light/assets/cubemap"));
 	shader = Light::Shader::create("../Light/assets/shaders/skybox.glsl");
-	std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->bind();
-	std::dynamic_pointer_cast<Light::OpenGLShader>(shader)->setUniformInt("u_cubemap", 0);
+	shader->bind();
+	shader->setUniformInt("u_cubemap", 0);
 }
 
 void Skybox::render() 
