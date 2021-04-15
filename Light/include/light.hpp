@@ -8,6 +8,7 @@
 #include "rendering/camera.hpp"
 #include "rendering/editorcamera.hpp"
 #include "rendering/texture.hpp"
+#include "rendering/framebuffer.hpp"
 #include "core/input.hpp"
 #include "input/keycodes.h"
 #include "input/mousecodes.h"

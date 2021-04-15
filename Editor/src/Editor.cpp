@@ -14,11 +14,24 @@ public:
 			floor(glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2))
 	{
 		texture.reset(Light::Texture2D::create("../Light/assets/textures/check.png"));
+
+		Light::FramebufferSpec fbspec;
+		fbspec.width = 1280;
+		fbspec.height = 720;
+
+		framebuffer = Light::Framebuffer::create(fbspec);
 	}
 	~ExampleLayer() {}
 
 	void onUpdate(Light::Timestep ts) override
 	{
+		if(resizeViewport)
+		{
+			camera.setViewportSize(viewportPanelSize.x, viewportPanelSize.y);
+			framebuffer->resize(viewportPanelSize.x, viewportPanelSize.y);
+			resizeViewport = false;
+		}
+
 		framecount++;
 		time += ts.getMilliSeconds();
 		if(time >= 500.0f)
@@ -28,8 +41,14 @@ public:
 			time = 0.0f;
 			framecount = 0;
 		}
+
 		camera.onUpdate(ts);
 		cube.onUpdate(ts);
+
+		framebuffer->bind();
+
+		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
+		Light::RenderCommand::clear();
 
 		Light::Renderer::beginScene(camera, lightPos);
 		
@@ -38,6 +57,8 @@ public:
 		floor.render();
 
 		Light::Renderer::endScene();
+
+		framebuffer->unbind();
 	}
 
 	bool onWindowResize(Light::WindowResizeEvent& e)
@@ -74,9 +95,17 @@ public:
 			ImGui::EndMainMenuBar();
 		}
 
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0,0));
 		ImGui::Begin("Viewport");
-		ImGui::Image((void*)texture->getRendererId(), ImVec2(texture->getWidth(), texture->getHeight()));
+		ImVec2 panelSize = ImGui::GetContentRegionAvail();
+		if(viewportPanelSize != *(glm::vec2*)&panelSize)
+		{
+			resizeViewport = true;
+			viewportPanelSize = glm::vec2(panelSize.x, panelSize.y);
+		}
+		ImGui::Image((void*)framebuffer->getColorAttachmentRendererId(), panelSize, ImVec2(0, 1), ImVec2(1,0));
 		ImGui::End();
+		ImGui::PopStyleVar();
 
 		ImGui::Begin("Scene Settings");
 		ImGui::DragFloat3("Light Position", &(lightPos.x), 0.01f);
@@ -105,11 +134,11 @@ private:
 	Skybox skybox;
 	glm::vec3 lightPos;
 
-	std::shared_ptr<Light::VertexArray> vao;
-	std::shared_ptr<Light::VertexBuffer> vbo;
-	std::shared_ptr<Light::IndexBuffer> ibo;
-	std::shared_ptr<Light::Shader> shader;
+	std::shared_ptr<Light::Framebuffer> framebuffer;
 	std::shared_ptr<Light::Texture2D> texture;
+
+	glm::vec2 viewportPanelSize;
+	bool resizeViewport = false;
 
 	float time = 0.0f;
 	int framecount = 0;
