@@ -21,6 +21,15 @@ public:
 
 	void onUpdate(Light::Timestep ts) override
 	{
+		framecount++;
+		time += ts.getMilliSeconds();
+		if(time >= 500.0f)
+		{
+			lastTime = time;
+			lastFramecount = framecount;
+			time = 0.0f;
+			framecount = 0;
+		}
 		camera.onUpdate(ts);
 		cube.onUpdate(ts);
 
@@ -64,6 +73,13 @@ public:
 		ImGui::Text("Left Alt + RMB to Zoom");
 		ImGui::Text("Scroll to Zoom");
 		ImGui::End();
+
+		ImGui::Begin("Performance Statistics");
+		ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d", 
+					lastTime/lastFramecount,
+					lastTime*0.001f/lastFramecount,
+					int(lastFramecount*1000/lastTime));
+		ImGui::End();
 	}
 
 private:
@@ -77,6 +93,11 @@ private:
 	std::shared_ptr<Light::VertexBuffer> vbo;
 	std::shared_ptr<Light::IndexBuffer> ibo;
 	std::shared_ptr<Light::Shader> shader;
+
+	float time = 0.0f;
+	int framecount = 0;
+	float lastTime = 0.0f;
+	int lastFramecount = 0;
 
 };
 

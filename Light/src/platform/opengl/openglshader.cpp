@@ -1,69 +1,89 @@
 #include "platform/opengl/openglshader.hpp"
 
-#include "glad/glad.h"
-
 namespace Light
 {
-	Shader* Shader::create(const char* vertexPath, const char* fragmentPath)
+	static GLenum findShaderType(std::string typeStr)
 	{
-		return new OpenGLShader(vertexPath, fragmentPath);
+		if(typeStr == " fragment")
+		{
+			return GL_FRAGMENT_SHADER;
+		}
+		else if(typeStr == " vertex")
+		{
+			return GL_VERTEX_SHADER;
+		}
+
+		std::cerr << "Shader type not supported!" << std::endl;
+		exit(1);
 	}
 
-	// constructor generates the shader on the fly
-	// ------------------------------------------------------------------------
-	OpenGLShader::OpenGLShader(const char* vertexPath, const char* fragmentPath) 
+	std::shared_ptr<Shader> Shader::create(const char* shaderPath)
 	{
-		// 1. retrieve the vertex/fragment source code from filePath
-		std::string vertexCode;
-		std::string fragmentCode;
-		std::ifstream vShaderFile;
-		std::ifstream fShaderFile;
-		// ensure ifstream objects can throw exceptions:
-		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-		fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		return std::make_shared<OpenGLShader>(shaderPath);
+	}
+
+	OpenGLShader::OpenGLShader(const char* shaderPath)
+	{
+		std::string pathStr(shaderPath);
+		auto lastSlash = pathStr.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = pathStr.find_last_of(".");
+		lastDot = lastDot == std::string::npos ? pathStr.length() - 1 : lastDot;
+		name = pathStr.substr(lastSlash, lastDot - lastSlash);
+
+		std::string code;
+		std::ifstream shaderFile;
+		shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		try
 		{
-			// open files
-			vShaderFile.open(vertexPath);
-			fShaderFile.open(fragmentPath);
-			std::stringstream vShaderStream, fShaderStream;
-			// read file's buffer contents into streams
-			vShaderStream << vShaderFile.rdbuf();
-			fShaderStream << fShaderFile.rdbuf();
-			// close file handlers
-			vShaderFile.close();
-			fShaderFile.close();
-			// convert stream into string
-			vertexCode = vShaderStream.str();
-			fragmentCode = fShaderStream.str();
+			shaderFile.open(shaderPath);
+			std::stringstream sstream;
+			sstream << shaderFile.rdbuf();
+			shaderFile.close();
+			code = sstream.str();
 		}
 		catch (std::ifstream::failure& e)
 		{
-			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+			std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
 		}
-		const char* vShaderCode = vertexCode.c_str();
-		const char* fShaderCode = fragmentCode.c_str();
-		// 2. compile shaders
-		unsigned int vertex, fragment;
-		// vertex shader
-		vertex = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertex, 1, &vShaderCode, NULL);
-		glCompileShader(vertex);
-		checkCompileErrors(vertex, "VERTEX");
-		// fragment Shader
-		fragment = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragment, 1, &fShaderCode, NULL);
-		glCompileShader(fragment);
-		checkCompileErrors(fragment, "FRAGMENT");
-		// shader Program
+
 		rendererId = glCreateProgram();
-		glAttachShader(rendererId, vertex);
-		glAttachShader(rendererId, fragment);
+
+		std::vector<uint32_t> shaderIds;
+
+		std::string typeToken = "#type";
+		size_t i = code.find(typeToken, 0);
+		std::string eolToken = "\r\n";
+		if (i == std::string::npos)
+		{
+			std::cerr << "ERROR::SHADER::Cannot find any shaders" << std::endl;
+		}
+		while(true)
+		{
+			size_t eol = code.find_first_of(eolToken, i);
+			GLenum shaderType = findShaderType(code.substr(i + typeToken.length(), eol - i - typeToken.length()));
+			auto j = code.find(typeToken, eol);
+			std::string shaderCode = code.substr(eol + 1,j - eol - 1);
+			const char* shaderCodeCstr = shaderCode.c_str();
+			i = j;
+			uint32_t shaderId;
+			shaderId = glCreateShader(shaderType);
+			shaderIds.push_back(shaderId);
+			glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
+			glCompileShader(shaderId);
+			checkCompileErrors(shaderId, shaderType);
+			glAttachShader(rendererId, shaderId);
+			if(j == std::string::npos)
+				break;
+		}
+
 		glLinkProgram(rendererId);
-		checkCompileErrors(rendererId, "PROGRAM");
-		// delete the shaders as they're linked into our program now and no longer necessary
-		glDeleteShader(vertex);
-		glDeleteShader(fragment);
+		checkCompileErrors(rendererId, GL_NONE);
+
+		for(auto id : shaderIds)
+		{
+			glDeleteShader(id);
+		}
 	}
 
 	OpenGLShader::~OpenGLShader()
@@ -84,16 +104,18 @@ namespace Light
 
 	// utility function for checking shader compilation/linking errors.
 	// ------------------------------------------------------------------------
-	void OpenGLShader::checkCompileErrors(unsigned int shader, std::string type) 
+	void OpenGLShader::checkCompileErrors(unsigned int shader, GLenum shaderType) 
 	{
 		int success;
 		char infoLog[1024];
-		if (type != "PROGRAM")
+		if (shaderType == GL_VERTEX_SHADER || shaderType == GL_FRAGMENT_SHADER)
 		{
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+				std::string type = "";
+				type += shaderType == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT";
 				std::cerr << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
 				exit(1);
 			}
@@ -104,7 +126,7 @@ namespace Light
 			if (!success)
 			{
 				glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-				std::cerr << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+				std::cerr << "ERROR::PROGRAM_LINKING_ERROR of type: " << "PROGRAM" << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
 				exit(1);
 			}
 		}

@@ -4,16 +4,20 @@
 #include "core/base.hpp"
 #include "rendering/shader.hpp"
 
+#include "glad/glad.h"
+
 namespace Light
 {
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const char* vertexPath, const char* fragmentPath);
+		OpenGLShader(const char* shaderPath);
 		~OpenGLShader();
 
 		void bind() override;
 		void unbind() override;
+
+		inline const std::string& getName() const override { return name; }
 
 		void setUniformBool(const std::string& name, bool value) const;
 		void setUniformInt(const std::string& name, int value) const;
@@ -26,8 +30,9 @@ namespace Light
 		void setUniformMat4(const std::string& name, const glm::mat4& mat) const;
 
 	private:
-		void checkCompileErrors(unsigned int shader, std::string type);
+		void checkCompileErrors(unsigned int shader, GLenum shaderType);
 
+		std::string name;
 		uint32_t rendererId;
 	};
 
