@@ -24,7 +24,7 @@ namespace Light
 		inline void setAspectRatio(float aspectRatio)
 		{ 
 			this->aspectRatio = aspectRatio; 
-			setProjectionMatrix(glm::perspective(fovy, aspectRatio, near, far));
+			setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
 		}
 
 		inline void setPosition(glm::vec3 position) { this->position = position; }

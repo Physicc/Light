@@ -18,7 +18,7 @@ namespace Light
 			upDirection(glm::vec3(0.0,1.0,0.0))
 	{
 		updateViewMatrix();
-		setProjectionMatrix(glm::perspective(fovy, aspectRatio, near, far));
+		setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
 	}
 
 	void EditorCamera::updateViewMatrix() 
@@ -64,8 +64,8 @@ namespace Light
 
 	bool EditorCamera::onMouseScrolled(MouseScrolledEvent& e) 
 	{
-		fovy = std::max(fovy - std::get<1>(e.getOffset()), 20.0);
-		setProjectionMatrix(glm::perspective(fovy, aspectRatio, near, far));
+		fovy = std::min(std::max(fovy - std::get<1>(e.getOffset()), 20.0), 90.0);
+		setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
 		return false;
 	}
 
@@ -134,7 +134,7 @@ namespace Light
 	bool EditorCamera::onWindowResized(WindowResizeEvent& e) 
 	{
 		aspectRatio = float(std::get<0>(e.getSize()))/std::get<1>(e.getSize());
-		setProjectionMatrix(glm::perspective(fovy, aspectRatio, near, far));
+		setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
 		return false;
 	}
 }
