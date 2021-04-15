@@ -1,5 +1,5 @@
-#ifndef __CAMERACONTROLLER_H__
-#define __CAMERACONTROLLER_H__
+#ifndef __EDITORCAMERA_H__
+#define __EDITORCAMERA_H__
 
 #include "core/base.hpp"
 
@@ -12,10 +12,10 @@
 
 namespace Light
 {
-	class PerspectiveCameraController
+	class EditorCamera : public Camera
 	{
 	public:
-		PerspectiveCameraController(float fovy, float aspectRatio, float near, float far);
+		EditorCamera(float fovy, float aspectRatio, float near, float far);
 
 		void onUpdate(Timestep ts);
 
@@ -24,22 +24,23 @@ namespace Light
 		inline void setAspectRatio(float aspectRatio)
 		{ 
 			this->aspectRatio = aspectRatio; 
-			camera.setProjection(fovy, aspectRatio, near, far); 
+			setProjectionMatrix(glm::perspective(fovy, aspectRatio, near, far));
 		}
 
-		inline void setPosition(glm::vec3 position) { this->position = position; camera.setPosition(position); }
-		const glm::vec3& getPosition() const { return position; }
+		inline void setPosition(glm::vec3 position) { this->position = position; }
+		inline const glm::vec3& getPosition() const { return position; }
 
 		inline void setLookAtDirection(glm::vec3 lookAtDirection) 
 		{
 			this->lookAtDirection = lookAtDirection;
-			camera.setLookAtDirection(lookAtDirection);
 		}
 	
-		const glm::vec3& getLookAtDirection() const { return lookAtDirection; }
+		inline const glm::vec3& getLookAtDirection() const { return lookAtDirection; }
 
-		PerspectiveCamera& getCamera() { return camera; }
-		const PerspectiveCamera& getCamera() const { return camera; }
+		inline const glm::mat4& getViewMatrix() const { return viewMatrix; }
+		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * viewMatrix; }
+
+		void updateViewMatrix();
 
 	private:
 
@@ -60,16 +61,16 @@ namespace Light
 		glm::vec3 lookAtDirection;
 		glm::vec3 upDirection;
 
-		float cameraPositionSpeed;
+		glm::mat4 viewMatrix;
 
-		PerspectiveCamera camera;
+		float cameraPositionSpeed;
 
 		bool mousePressed;
 		bool ctrlPressed;
 		std::tuple<double, double> mousePos;
 	};
 	
+	
 
 }
-
-#endif // __CAMERACONTROLLER_H__
+#endif // __EDITORCAMERA_H__

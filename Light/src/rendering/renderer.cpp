@@ -17,7 +17,7 @@ namespace Light
 		RenderCommand::setViewPort(0, 0, width, height);
 	}
 
-	void Renderer::beginScene(Camera& camera, glm::vec3 lightPos)
+	void Renderer::beginScene(EditorCamera& camera, glm::vec3 lightPos)
 	{
 		sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
 		sceneData->lightPos = lightPos;

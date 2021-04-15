@@ -3,7 +3,7 @@
 
 #include "core/base.hpp"
 #include "rendering/vertexarray.hpp"
-#include "rendering/camera.hpp"
+#include "rendering/editorcamera.hpp"
 #include "rendering/shader.hpp"
 
 namespace Light
@@ -14,7 +14,7 @@ namespace Light
 		static void init();
 		static void onWindowResize(uint32_t width, uint32_t height);
 
-		static void beginScene(Camera& camera, glm::vec3 lightPos);
+		static void beginScene(EditorCamera& camera, glm::vec3 lightPos);
 		static void endScene();
 
 		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
