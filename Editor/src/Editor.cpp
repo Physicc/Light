@@ -33,8 +33,20 @@ public:
 		Light::Renderer::endScene();
 	}
 
+	bool onWindowResize(Light::WindowResizeEvent& e)
+	{
+		auto[width, height] = e.getSize();
+		camera.setViewportSize(width, height);
+
+		return false;
+	}
+
+
 	void onEvent(Light::Event& e) override
 	{
+		Light::EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(ExampleLayer::onWindowResize));
+
 		camera.onEvent(e);
 
 		cube.onEvent(e);

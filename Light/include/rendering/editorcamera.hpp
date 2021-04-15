@@ -21,11 +21,7 @@ namespace Light
 
 		void onEvent(Event& e);
 
-		inline void setAspectRatio(float aspectRatio)
-		{ 
-			this->aspectRatio = aspectRatio; 
-			setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
-		}
+		void setViewportSize(int width, int height);
 
 		inline const glm::mat4& getViewMatrix() const { return viewMatrix; }
 		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * viewMatrix; }
@@ -38,12 +34,6 @@ namespace Light
 	private:
 
 		bool onMouseScrolled(MouseScrolledEvent& e);
-		bool onWindowResized(WindowResizeEvent& e);
-		bool onMouseButtonPressed(MouseButtonPressedEvent& e);
-		bool onMouseButtonReleased(MouseButtonReleasedEvent& e);
-		bool onMouseMoved(MouseMovedEvent& e);
-		bool onKeyPressed(KeyPressedEvent& e);
-		bool onKeyReleased(KeyReleasedEvent& e);
 
 		void updateView();
 		void updateProjection();

@@ -19,6 +19,14 @@ namespace Light
 		updateProjection();
 	}
 
+	void EditorCamera::setViewportSize(int width, int height)
+	{
+		viewportWidth = width;
+		viewportHeight = height;
+		aspectRatio = float(width)/height;
+		updateProjection();
+	}
+
 	void EditorCamera::updateView() 
 	{
 		position = calculatePosition();
@@ -82,7 +90,6 @@ namespace Light
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(EditorCamera::onMouseScrolled));
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(EditorCamera::onWindowResized));
 	}
 
 	bool EditorCamera::onMouseScrolled(MouseScrolledEvent& e)
@@ -91,16 +98,6 @@ namespace Light
 		float delta = float(yOffset) * 0.1f;
 		mouseZoom(delta);
 		updateView();
-		return false;
-	}
-	
-	bool EditorCamera::onWindowResized(WindowResizeEvent& e) 
-	{
-		auto[width, height] = e.getSize();
-		viewportWidth = width;
-		viewportHeight = height;
-		aspectRatio = float(width)/height;
-		updateProjection();
 		return false;
 	}
 
