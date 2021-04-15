@@ -61,6 +61,11 @@ public:
 
 	void onImguiRender() override
 	{
+		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+
+		ImGui::BeginMainMenuBar();
+		ImGui::EndMainMenuBar();
+
 		ImGui::Begin("Scene Settings");
 		ImGui::DragFloat3("Light Position", &(lightPos.x), 0.01f);
 		ImGui::End();
@@ -78,6 +83,9 @@ public:
 					lastTime*0.001f/lastFramecount,
 					int(lastFramecount*1000/lastTime));
 		ImGui::End();
+
+
+
 	}
 
 private:
