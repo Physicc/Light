@@ -42,7 +42,16 @@ public:
 
 	void onImguiRender() override
 	{
+		ImGui::Begin("Scene Settings");
 		ImGui::DragFloat3("Light Position", &(lightPos.x), 0.01f);
+		ImGui::End();
+
+		ImGui::Begin("Camera Controls");
+		ImGui::Text("Left Alt + LMB to Orbit");
+		ImGui::Text("Left Alt + MMB to Pan");
+		ImGui::Text("Left Alt + RMB to Zoom");
+		ImGui::Text("Scroll to Zoom");
+		ImGui::End();
 	}
 
 private:
