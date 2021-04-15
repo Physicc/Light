@@ -2,6 +2,10 @@
 
 #include "core/input.hpp"
 #include "input/keycodes.h"
+#include "input/mousecodes.h"
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include "glm/gtx/quaternion.hpp"
 
 namespace Light
 {
@@ -9,45 +13,69 @@ namespace Light
 		:	fovy(fovy),
 			aspectRatio(aspectRatio), 
 			near(near),
-			far(far),
-			cameraPositionSpeed(0.5f),
-			mousePressed(false),
-			ctrlPressed(false),
-			position(glm::vec3(-0.754, 0.651, 1.758)),
-			lookAtDirection(glm::vec3(0.35, -0.3, -0.9)),
-			upDirection(glm::vec3(0.0,1.0,0.0))
+			far(far)
 	{
-		updateViewMatrix();
+		updateView();
+		updateProjection();
+	}
+
+	void EditorCamera::updateView() 
+	{
+		position = calculatePosition();
+
+		glm::quat orientation = getOrientation();
+		viewMatrix = glm::translate(glm::mat4(1.0f), position) * glm::toMat4(orientation);
+		viewMatrix = glm::inverse(viewMatrix);
+	}
+
+	void EditorCamera::updateProjection()
+	{
 		setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
 	}
 
-	void EditorCamera::updateViewMatrix() 
+	std::pair<float, float> EditorCamera::panSpeed() const
 	{
-		viewMatrix = glm::lookAt(position, position + lookAtDirection, upDirection);
+		float x = std::min(viewportWidth / 1000.0f, 2.4f); // max = 2.4f
+		float xFactor = 0.0366f * (x * x) - 0.1778f * x + 0.3021f;
+
+		float y = std::min(viewportHeight / 1000.0f, 2.4f); // max = 2.4f
+		float yFactor = 0.0366f * (y * y) - 0.1778f * y + 0.3021f;
+
+		return { xFactor, yFactor };
+	}
+
+	float EditorCamera::rotationSpeed() const
+	{
+		return 0.8f;
+	}
+
+	float EditorCamera::zoomSpeed() const
+	{
+		float distance_ = distance * 0.2f;
+		distance_ = std::max(distance_, 0.0f);
+		float speed = distance_ * distance_;
+		speed = std::min(speed, 100.0f); // max speed = 100
+		return speed;
 	}
 	
 	void EditorCamera::onUpdate(Timestep ts) 
 	{
-		if(Input::isKeyPressed(LIGHT_KEY_LEFT))
+		if (Input::isKeyPressed(LIGHT_KEY_LEFT_ALT))
 		{
-			auto left = glm::cross(upDirection, lookAtDirection);
-			position += glm::normalize(left) * cameraPositionSpeed * ts.getSeconds();
-		}
-		else if(Input::isKeyPressed(LIGHT_KEY_RIGHT))
-		{
-			auto left = glm::cross(upDirection, lookAtDirection);
-			position -= glm::normalize(left) * cameraPositionSpeed * ts.getSeconds();
-		}
-		else if(Input::isKeyPressed(LIGHT_KEY_UP))
-		{
-			position += glm::normalize(lookAtDirection) * cameraPositionSpeed * ts.getSeconds();
-		}
-		else if(Input::isKeyPressed(LIGHT_KEY_DOWN))
-		{
-			position -= glm::normalize(lookAtDirection) * cameraPositionSpeed * ts.getSeconds();
+			auto[mouseX, mouseY] = Input::getMousePos();
+			const glm::vec2& mouse{ mouseX, mouseY };
+			glm::vec2 delta = (mouse - initialMousePos) * 0.003f;
+			initialMousePos = mouse;
+
+			if (Input::isMouseButtonPressed(LIGHT_MOUSE_BUTTON_MIDDLE))
+				mousePan(delta);
+			else if (Input::isMouseButtonPressed(LIGHT_MOUSE_BUTTON_LEFT))
+				mouseRotate(delta);
+			else if (Input::isMouseButtonPressed(LIGHT_MOUSE_BUTTON_RIGHT))
+				mouseZoom(delta.y);
 		}
 
-		updateViewMatrix();
+		updateView();
 	}
 
 	void EditorCamera::onEvent(Event& e) 
@@ -55,86 +83,73 @@ namespace Light
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(EditorCamera::onMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(EditorCamera::onWindowResized));
-		dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN(EditorCamera::onMouseButtonPressed));
-		dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN(EditorCamera::onMouseButtonReleased));
-		dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN(EditorCamera::onMouseMoved));
-		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(EditorCamera::onKeyPressed));
-		dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN(EditorCamera::onKeyReleased));
 	}
 
-	bool EditorCamera::onMouseScrolled(MouseScrolledEvent& e) 
+	bool EditorCamera::onMouseScrolled(MouseScrolledEvent& e)
 	{
-		fovy = std::min(std::max(fovy - std::get<1>(e.getOffset()), 20.0), 90.0);
-		setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
-		return false;
-	}
-
-	bool EditorCamera::onMouseButtonPressed(MouseButtonPressedEvent& e) 
-	{
-		mousePressed = true;
-		return false;
-	}
-
-	bool EditorCamera::onMouseButtonReleased(MouseButtonReleasedEvent& e) 
-	{
-		mousePressed = false;
-		return false;
-	}
-
-	bool EditorCamera::onKeyPressed(KeyPressedEvent& e) 
-	{
-		if(e.getKeycode() == LIGHT_KEY_LEFT_CONTROL)
-		{
-			ctrlPressed = true;
-		}
-		return false;
-	}
-
-	bool EditorCamera::onKeyReleased(KeyReleasedEvent& e) 
-	{
-		if(e.getKeycode() == LIGHT_KEY_LEFT_CONTROL)
-		{
-			ctrlPressed = false;
-		}
-		return false;
-	}
-
-	bool EditorCamera::onMouseMoved(MouseMovedEvent& e)
-	{
-		if(mousePressed)
-		{
-			if(!ctrlPressed) // Only LMB + Mouse move: Camera rotate
-			{
-				double diffx = std::get<0>(e.getPos()) - std::get<0>(mousePos);
-				double diffy = std::get<1>(e.getPos()) - std::get<1>(mousePos);
-				
-				glm::vec3 target = position + glm::normalize(lookAtDirection);
-				glm::vec3 left = glm::normalize(glm::cross(upDirection, lookAtDirection));
-				target += 0.001f * float(diffy) * glm::normalize(upDirection);
-				target += 0.001f * float(diffx) * left;
-
-				lookAtDirection = target - position;
-			}
-			else // LMB + L.Ctrl + Mouse move: Camera pan 
-			{
-				double diffx = std::get<0>(e.getPos()) - std::get<0>(mousePos);
-				double diffy = std::get<1>(e.getPos()) - std::get<1>(mousePos);
-
-				glm::vec3 left = glm::normalize(glm::cross(upDirection, lookAtDirection));
-				position += 0.001f * float(diffx) * left;
-				position += 0.001f * float(diffy) * glm::normalize(upDirection);
-			}
-		}
-		mousePos = e.getPos();
-
-		updateViewMatrix();
+		auto[xOffset, yOffset] = e.getOffset();
+		float delta = float(yOffset) * 0.1f;
+		mouseZoom(delta);
+		updateView();
 		return false;
 	}
 	
 	bool EditorCamera::onWindowResized(WindowResizeEvent& e) 
 	{
-		aspectRatio = float(std::get<0>(e.getSize()))/std::get<1>(e.getSize());
-		setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
+		auto[width, height] = e.getSize();
+		viewportWidth = width;
+		viewportHeight = height;
+		aspectRatio = float(width)/height;
+		updateProjection();
 		return false;
+	}
+
+	void EditorCamera::mousePan(const glm::vec2& delta)
+	{
+		auto [xSpeed, ySpeed] = panSpeed();
+		focalPoint += -getRightDirection() * delta.x * xSpeed * distance;
+		focalPoint += getUpDirection() * delta.y * ySpeed * distance;
+	}
+
+	void EditorCamera::mouseRotate(const glm::vec2& delta)
+	{
+		float yawSign = getUpDirection().y < 0 ? -1.0f : 1.0f;
+		yaw += yawSign * delta.x * rotationSpeed();
+		pitch += delta.y * rotationSpeed();
+	}
+
+	void EditorCamera::mouseZoom(float delta)
+	{
+		distance -= delta * zoomSpeed();
+		if (distance < 1.0f)
+		{
+			focalPoint += getForwardDirection();
+			distance = 1.0f;
+		}
+	}
+
+	glm::vec3 EditorCamera::getUpDirection() const
+	{
+		return glm::rotate(getOrientation(), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+
+	glm::vec3 EditorCamera::getRightDirection() const
+	{
+		return glm::rotate(getOrientation(), glm::vec3(1.0f, 0.0f, 0.0f));
+	}
+
+	glm::vec3 EditorCamera::getForwardDirection() const
+	{
+		return glm::rotate(getOrientation(), glm::vec3(0.0f, 0.0f, -1.0f));
+	}
+
+	glm::vec3 EditorCamera::calculatePosition() const
+	{
+		return focalPoint - getForwardDirection() * distance;
+	}
+
+	glm::quat EditorCamera::getOrientation() const
+	{
+		return glm::quat(glm::vec3(-pitch, -yaw, 0.0f));
 	}
 }

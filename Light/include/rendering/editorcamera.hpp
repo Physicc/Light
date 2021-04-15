@@ -27,20 +27,13 @@ namespace Light
 			setProjectionMatrix(glm::perspective(glm::radians(fovy), aspectRatio, near, far));
 		}
 
-		inline void setPosition(glm::vec3 position) { this->position = position; }
-		inline const glm::vec3& getPosition() const { return position; }
-
-		inline void setLookAtDirection(glm::vec3 lookAtDirection) 
-		{
-			this->lookAtDirection = lookAtDirection;
-		}
-	
-		inline const glm::vec3& getLookAtDirection() const { return lookAtDirection; }
-
 		inline const glm::mat4& getViewMatrix() const { return viewMatrix; }
 		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * viewMatrix; }
 
-		void updateViewMatrix();
+		glm::vec3 getUpDirection() const;
+		glm::vec3 getRightDirection() const;
+		glm::vec3 getForwardDirection() const;
+		glm::quat getOrientation() const;
 
 	private:
 
@@ -52,22 +45,34 @@ namespace Light
 		bool onKeyPressed(KeyPressedEvent& e);
 		bool onKeyReleased(KeyReleasedEvent& e);
 
+		void updateView();
+		void updateProjection();
+
+		glm::vec3 calculatePosition() const;
+
+		void mousePan(const glm::vec2& delta);
+		void mouseRotate(const glm::vec2& delta);
+		void mouseZoom(float delta);
+
+		std::pair<float, float> panSpeed() const;
+		float rotationSpeed() const;
+		float zoomSpeed() const;
+
 		float aspectRatio;
 		float fovy;
 		float near;
 		float far;
 
-		glm::vec3 position;
-		glm::vec3 lookAtDirection;
-		glm::vec3 upDirection;
-
 		glm::mat4 viewMatrix;
+		glm::vec3 position = {-0.754f, 0.651f, 1.758f};
+		glm::vec3 focalPoint = {0.0f, 0.0f, 0.0f};
 
-		float cameraPositionSpeed;
+		float distance = 10.0f;
+		float pitch = 0.0f, yaw = 0.0f;
 
-		bool mousePressed;
-		bool ctrlPressed;
-		std::tuple<double, double> mousePos;
+		glm::vec2 initialMousePos = {0.0, 0.0};
+
+		float viewportWidth = 1280, viewportHeight = 720;
 	};
 	
 	
