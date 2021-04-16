@@ -20,8 +20,13 @@ namespace Light
 		virtual void onImguiRender() {}
 
 		inline const std::string& getName() { return name; }
+		inline void blockHoverEvents(bool block) { hoverEventsBlocking = block; }
+		inline void blockFocusEvents(bool block) { focusEventsBlocking = block; }
 	protected:
 		std::string name;
+
+		bool hoverEventsBlocking = true;
+		bool focusEventsBlocking = true;
 	};
 }
 

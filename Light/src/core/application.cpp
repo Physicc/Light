@@ -41,9 +41,9 @@ namespace Light
 
 		for(auto it = layerstack.end(); it != layerstack.begin();)
 		{
-			(*--it)->onEvent(e);
 			if(e.handled)
 				break;
+			(*--it)->onEvent(e);
 		}
 	}
 

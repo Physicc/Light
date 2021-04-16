@@ -16,6 +16,7 @@ namespace Light
 
 		void onAttach() override;
 		void onDetach() override;
+		void onEvent(Event& e) override;
 		void onImguiRender() override;
 
 		void begin();

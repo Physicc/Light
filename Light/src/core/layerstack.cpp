@@ -18,8 +18,9 @@ namespace Light
 	
 	void LayerStack::pushLayer(Layer* layer) 
 	{
-		layers.push_back(layer);
+		layers.insert(layers.begin() + layerTop, layer);
 		layerTop++;
+		
 	}
 	
 	void LayerStack::popLayer(Layer* layer) 
@@ -32,11 +33,10 @@ namespace Light
 			layerTop--;
 		}
 	}
-	
+
 	void LayerStack::pushOverlay(Layer* overlay) 
 	{
-		layers.insert(layers.begin() + layerTop, overlay);
-		
+		layers.push_back(overlay);
 	}
 	
 	void LayerStack::popOverlay(Layer* overlay) 
@@ -48,4 +48,5 @@ namespace Light
 			layers.erase(it);
 		}
 	}
+	
 }

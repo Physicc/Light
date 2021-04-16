@@ -26,6 +26,8 @@ namespace Light
 
 		static inline Application& get() { return *instance; }
 
+		ImguiLayer* getImguiLayer() { return imguilayer; }
+
 		inline void close() { running = false; }
 
 	private:

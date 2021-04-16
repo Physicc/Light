@@ -44,6 +44,19 @@ namespace Light
 		ImGui_ImplOpenGL3_Init("#version 330");
 	}
 
+	void ImguiLayer::onEvent(Event& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		if(hoverEventsBlocking)
+		{
+			e.handled |= e.IsInCategory(EventCategoryMouse) && io.WantCaptureMouse;
+		}
+		if(focusEventsBlocking)
+		{
+			e.handled |= e.IsInCategory(EventCategoryKeyboard) && io.WantCaptureKeyboard;
+		}
+	}
+
 	void ImguiLayer::onDetach()
 	{
 		 // Cleanup

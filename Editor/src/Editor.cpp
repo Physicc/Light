@@ -97,6 +97,10 @@ public:
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0,0));
 		ImGui::Begin("Viewport");
+
+		Light::Application::get().getImguiLayer()->blockFocusEvents(!ImGui::IsWindowFocused());
+		Light::Application::get().getImguiLayer()->blockHoverEvents(!ImGui::IsWindowHovered());
+
 		ImVec2 panelSize = ImGui::GetContentRegionAvail();
 		if(viewportPanelSize != *(glm::vec2*)&panelSize)
 		{
