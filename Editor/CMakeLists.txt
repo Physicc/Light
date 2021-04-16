@@ -21,3 +21,6 @@ target_link_libraries(Editor Light)
 add_subdirectory(../bullet3 bullet3)
 target_link_libraries(Editor BulletDynamics BulletCollision LinearMath)
 target_include_directories(Editor PUBLIC ../bullet3/src)
+
+add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/../imgui.ini ${CMAKE_BINARY_DIR}/imgui.ini)
+
