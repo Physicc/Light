@@ -16,6 +16,7 @@ public:
 	void onEvent(Light::Event& e);
 
 	inline glm::mat4 getTransform() { return transform; }
+	inline void setTransform(glm::mat4 transform) { this->transform = transform; }
 
 private:
 	Light::BufferLayout layout;

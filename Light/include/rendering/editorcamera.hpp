@@ -57,8 +57,8 @@ namespace Light
 		glm::vec3 position = {-0.754f, 0.651f, 1.758f};
 		glm::vec3 focalPoint = {0.0f, 0.0f, 0.0f};
 
-		float distance = 10.0f;
-		float pitch = 0.0f, yaw = 0.0f;
+		float distance = 5.0f;
+		float pitch = 10.0f * 3.14159f/180.0f, yaw = 55.0f * 3.14159f/180.0f;
 
 		glm::vec2 initialMousePos = {0.0, 0.0};
 

@@ -17,3 +17,7 @@ target_include_directories(Editor PUBLIC include)
 
 add_subdirectory(../Light Light)
 target_link_libraries(Editor Light)
+
+add_subdirectory(../bullet3 bullet3)
+target_link_libraries(Editor BulletDynamics BulletCollision LinearMath)
+target_include_directories(Editor PUBLIC ../bullet3/src)
