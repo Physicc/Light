@@ -1,4 +1,0 @@
-
-[submodule "Light/libs/imgui"]
-	path = Light/libs/imgui
-	url = https://github.com/ocornut/imgui
