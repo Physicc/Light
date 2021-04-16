@@ -27,7 +27,7 @@ namespace Light
 	class Cubemap
 	{
 	public:
-		Cubemap() {}
+		Cubemap() = default;
 		virtual ~Cubemap() = default;
 
 		virtual void bind(uint32_t slot = 0) const = 0;

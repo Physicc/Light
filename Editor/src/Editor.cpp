@@ -13,7 +13,6 @@ public:
 			lightPos(-1,2,1.5),
 			floor(glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2))
 	{
-		texture.reset(Light::Texture2D::create("../Light/assets/textures/check.png"));
 
 		Light::FramebufferSpec fbspec;
 		fbspec.width = 1280;
@@ -139,7 +138,6 @@ private:
 	glm::vec3 lightPos;
 
 	std::shared_ptr<Light::Framebuffer> framebuffer;
-	std::shared_ptr<Light::Texture2D> texture;
 
 	glm::vec2 viewportPanelSize;
 	bool resizeViewport = false;
