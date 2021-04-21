@@ -51,7 +51,7 @@ namespace Light
 	{
 		while(running)
 		{
-			float time = glfwGetTime();
+			float time = (float) glfwGetTime();
 			Timestep ts(time - lastTime);
 			lastTime = time;
 
