@@ -1,8 +1,5 @@
 #include "core/application.hpp"
 
-#include "rendering/rendercommand.hpp"
-#include "core/timestep.hpp"
-
 #include "rendering/renderer.hpp"
 
 //Temp for time
