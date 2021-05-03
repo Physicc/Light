@@ -9,7 +9,7 @@ Platforms currently it compiles on:
 
 ## Prerequisites
 
-* cmake
+* CMake
 
 ### Windows
 
@@ -17,7 +17,7 @@ Platforms currently it compiles on:
 
 ### Ubuntu
 
-* gcc
+* GCC
 * X11
 
 If you get library headers not found error while building, ```apt-get``` the dev version of all packages it requests you to install
@@ -33,7 +33,7 @@ If you get library headers not found error while building, ```apt-get``` the dev
 
 ## Build Instructions
 
-Recursive clone the git module
+Recursively clone the git module:
 
 ```git clone --recursive https://github.com/dropTableUsers42/Light```
 
@@ -53,15 +53,16 @@ Hit Build
 
 	`cmake --no-warn-unused-cli -HEditor -Bbuild -G"[Generator]"`
 
-	Replace `[Generator]` with the compiler name you want to compile with, `MinGW Makefiles`/`Unix Makefiles`/`Visual Studio 16 2019`. The corresponding makefile/solution file is generated into `Light/build`
+	Replace `[Generator]` with the compiler name you want to compile with, 
+  `MinGW Makefiles`/`Unix Makefiles`/`Visual Studio 16 2019`. The corresponding Makefile/solution file is generated in `Light/build`
 
 * If you want to build on terminal, execute
 
 	`cmake --build build`
 
-* If you want to build using Visual Studio 2019, just open the solution file generated
+* If you want to build using Visual Studio 2019, just open the Solution File generated
 
-If you do not have a dedicated GPU (or drivers for the dedicated GPU eg. on Linux), you may need to run the following command on the terminal to setup the environment variables before running our program
+If you do not have a dedicated GPU (or drivers for the dedicated GPU e.g. on Linux), you may need to run the following command on the terminal to set up the environment variables before running our program
 
 `export MESA_GL_VERSION_OVERRIDE=3.3`
 
