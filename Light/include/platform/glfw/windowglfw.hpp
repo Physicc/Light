@@ -40,7 +40,7 @@ namespace Light
 		struct WindowData
 		{
 			std::string title;
-			unsigned int width, height;
+			int width, height;
 			bool vSync;
 
 			EventCallbackFn callback;
