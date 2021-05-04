@@ -18,7 +18,7 @@ namespace Light
 			std::cerr << "Application already created" << std::endl;
 			exit(1);
 		}
-		window = static_cast<std::unique_ptr<Window>>(Window::create());
+		window = Window::create();
 		window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 		Renderer::init();
