@@ -95,7 +95,7 @@ namespace Light
 	bool EditorCamera::onMouseScrolled(MouseScrolledEvent& e)
 	{
 		auto[xOffset, yOffset] = e.getOffset();
-		float delta = float(yOffset) * 0.1f;
+		float delta = static_cast<float>(yOffset) * 0.1f;
 		mouseZoom(delta);
 		updateView();
 		return false;
