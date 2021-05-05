@@ -36,8 +36,8 @@ namespace Light
 	void Application::onEvent(Event& e)
 	{
 		EventDispatcher d(e);
-		d.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
-		d.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::onWindowResize));
+		d.dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
+		d.dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::onWindowResize));
 
 		for(auto it = layerstack.end(); it != layerstack.begin();)
 		{

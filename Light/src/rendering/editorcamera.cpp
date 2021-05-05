@@ -89,7 +89,7 @@ namespace Light
 	void EditorCamera::onEvent(Event& e) 
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(EditorCamera::onMouseScrolled));
+		dispatcher.dispatch<MouseScrolledEvent>(BIND_EVENT_FN(EditorCamera::onMouseScrolled));
 	}
 
 	bool EditorCamera::onMouseScrolled(MouseScrolledEvent& e)
