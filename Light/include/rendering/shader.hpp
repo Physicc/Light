@@ -1,6 +1,7 @@
 #ifndef __SHADER_H__
 #define __SHADER_H__
 
+#include <unordered_map>
 #include "core/base.hpp"
 
 namespace Light
