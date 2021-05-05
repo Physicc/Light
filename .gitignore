@@ -34,5 +34,6 @@
 # build files
 build
 
-# vscode files
+# IDE files
 .vscode
+.idea
