@@ -1,8 +1,8 @@
 #include "rendering/editorcamera.hpp"
 
 #include "core/input.hpp"
-#include "input/keycodes.h"
-#include "input/mousecodes.h"
+#include "input/keycodes.hpp"
+#include "input/mousecodes.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtx/quaternion.hpp"
