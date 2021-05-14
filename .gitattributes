@@ -1,4 +1,1 @@
-Light/libs/glad/* linguist-vendored
-Light/libs/gldw-3.3.3/* linguist-vendored
-Light/libs/glm/* linguist-vendored
-Light/libs/stbimage/* linguist-vendored
+./Light/libs/** linguist-vendored
