@@ -1,1 +1,27 @@
+language: cpp
 
+os:
+  - linux
+  - windows
+
+compiler:
+  - gcc
+  - msvc
+
+addons:
+  apt:
+    packages:
+    - libxrandr-dev
+    - libxinerama-dev
+    - libxcursor-dev
+    - libxi-dev
+
+jobs:
+  include:
+    - os: linux
+      dist: bionic
+      env: MESA_GL_OVERRIDE=3.3
+    - os: linux
+      dist: focal
+      env: MESA_GL_OVERRIDE=3.3
+    - os: windows
