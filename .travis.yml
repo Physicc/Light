@@ -1,13 +1,5 @@
 language: cpp
 
-os:
-  - linux
-  - windows
-
-compiler:
-  - gcc
-  - msvc
-
 addons:
   apt:
     packages:
@@ -21,7 +13,10 @@ jobs:
     - os: linux
       dist: bionic
       env: MESA_GL_OVERRIDE=3.3
+      compiler: gcc
     - os: linux
       dist: focal
       env: MESA_GL_OVERRIDE=3.3
+      compiler: gcc
     - os: windows
+      compiler: msvc
