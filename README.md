@@ -14,7 +14,7 @@ Platforms currently it compiles on:
 
 ### Windows
 
-* MinGW / VS 2019
+* mingw-w64 / VS 2019
 
 ### Ubuntu
 
