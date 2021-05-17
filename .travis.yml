@@ -3,6 +3,7 @@ language: cpp
 addons:
   apt:
     packages:
+    - cmake
     - libxrandr-dev
     - libxinerama-dev
     - libxcursor-dev
@@ -10,13 +11,27 @@ addons:
 
 jobs:
   include:
+      #Ubuntu 18.04
     - os: linux
       dist: bionic
       env: MESA_GL_OVERRIDE=3.3
       compiler: gcc
+      script:
+        - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
+        - cmake --build build
+      
+      #Ubuntu 20.04
     - os: linux
       dist: focal
       env: MESA_GL_OVERRIDE=3.3
       compiler: gcc
+      script:
+        - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
+        - cmake --build build
+      
+      #Windows 1803
     - os: windows
-      compiler: msvc
+      compiler: cl
+      script:
+        - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Visual Studio 16 2019"
+        - cmake --build build
