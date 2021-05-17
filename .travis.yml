@@ -4,11 +4,8 @@ os: linux
 arch: amd64
 
 compiler:
- - gcc-8
- - gcc-9
- - gcc-10
- - gcc-11
- - clang-10
+ - gcc
+ - clang
 
 addons:
   sources:
@@ -22,6 +19,9 @@ addons:
     - libxcursor-dev
     - libxi-dev
 
+before_install:
+ - sudo apt install -y gcc-8 g++-8
+ - sudo apt install -y clang-12
 jobs:
   include:
       #Ubuntu 18.04
