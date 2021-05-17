@@ -1,6 +1,4 @@
 language: cpp
-
-os: linux
 arch: amd64
 
 compiler:
@@ -19,11 +17,13 @@ addons:
 jobs:
   include:
       #Ubuntu 18.04
-    - dist: bionic
+    - os: linux
+      dist: bionic
       env: MESA_GL_OVERRIDE=3.3
       
       #Ubuntu 20.04
-    - dist: focal
+    - os: linux
+      dist: focal
       env: MESA_GL_OVERRIDE=3.3
     
 script:
