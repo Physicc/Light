@@ -3,7 +3,9 @@ language: cpp
 addons:
   apt:
     #update: true
-    packages:
+  sources:
+    - ubuntu-toolchain-r-test
+  packages:
     - cmake
     #OpenGL related dependencies
     - libglfw3-dev
