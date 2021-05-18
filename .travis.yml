@@ -3,19 +3,19 @@ language: cpp
 addons:
   apt:
     #update: true
-  sources:
-    - ubuntu-toolchain-r-test
-  packages:
-    - cmake
-    #OpenGL related dependencies
-    - libglfw3-dev
-    - libxrandr-dev
-    - libxinerama-dev
-    - libxcursor-dev
-    - libxi-dev
-    #Different compilers to test the builds on
-    - gcc-8
-    - clang-10
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - cmake
+      #OpenGL related dependencies
+      - libglfw3-dev
+      - libxrandr-dev
+      - libxinerama-dev
+      - libxcursor-dev
+      - libxi-dev
+      #Different compilers to test the builds on
+      - gcc-8
+      - clang-10
 
 env: MESA_GL_OVERRIDE=3.3     
 
