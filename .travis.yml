@@ -21,9 +21,15 @@ jobs:
       - dist: bionic
         compiler:
           - gcc-8
+        env:
+         - CC=gcc-8
+         - CXX=g++-8
       - dist: focal
         compiler:
           - gcc-8
+        env:
+         - CC=gcc-8
+         - CXX=g++-8
 
 script:
   - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
