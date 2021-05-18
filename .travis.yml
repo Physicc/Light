@@ -2,6 +2,7 @@ language: cpp
 
 addons:
   apt:
+    update: true
     packages:
     - cmake
     #OpenGL related dependencies
