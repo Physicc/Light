@@ -12,7 +12,17 @@ addons:
       - libxinerama-dev
       - libxcursor-dev
       - libxi-dev
+      #Testing the different compilers that we wish to support
+      #=============
       - gcc-8
+      - g++-8
+      #=============
+      - gcc-9
+      - g++-9
+      #=============
+      - gcc-10
+      - g++10
+      #=============
       
 
 before_install:
@@ -23,16 +33,42 @@ before_install:
 
 jobs:
   - include:
+      #====================GCC 8====================
       - dist: bionic
         compiler:
           - gcc
         env:
          - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+      #---------------------------------------------
       - dist: focal
         compiler:
           - gcc
         env:
           - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+      #====================GCC 9====================
+      - dist: bionic
+        compiler:
+          - gcc
+        env:
+         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+      #---------------------------------------------
+      - dist: focal
+        compiler:
+          - gcc
+        env:
+          - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+      '#===================GCC 10===================='
+      - dist: bionic
+        compiler:
+          - gcc
+        env:
+         - MATRIX_EVAL="CC=gcc-10 && CXX=g++-10"
+      #---------------------------------------------
+      - dist: focal
+        compiler:
+          - gcc
+        env:
+          - MATRIX_EVAL="CC=gcc-10 && CXX=g++-10"
 
 script:
   - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
