@@ -1,16 +1,5 @@
 language: cpp
 
-os: linux
-
-matrix:
-  - include:
-    - dist: bionic
-    - dist: focal
-
-compiler:
-        - gcc-8
-        - clang-12
-
 addons:
   apt:
     packages:
@@ -22,7 +11,18 @@ addons:
     - libxi-dev
 
 env: MESA_GL_OVERRIDE=3.3     
-    
+
+jobs:
+  - include:
+      - dist: bionic
+        compiler:
+          - gcc-8
+          - clang-12
+      - dist: focal
+        compiler:
+          - gcc-8
+          - clang-12
+
 script:
   - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
   - cmake --build build
