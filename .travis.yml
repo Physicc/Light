@@ -1,5 +1,16 @@
 language: cpp
 
+os: linux
+
+matrix:
+  - include:
+    - dist: bionic
+    - dist: focal
+
+compiler:
+        - gcc-8
+        - clang-12
+
 addons:
   apt:
     packages:
@@ -10,20 +21,7 @@ addons:
     - libxcursor-dev
     - libxi-dev
 
-matrix:
-  - include:
-    - os: linux
-      dist: bionic
-      compiler:
-        - gcc
-        - clang
-      env: MESA_GL_OVERRIDE=3.3
-    - os: linux
-      dist: focal
-      compiler:
-        - gcc
-        - clang
-      env: MESA_GL_OVERRIDE=3.3
+env: MESA_GL_OVERRIDE=3.3     
     
 script:
   - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
