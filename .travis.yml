@@ -2,7 +2,7 @@ language: cpp
 
 addons:
   apt:
-    update: true
+    #update: true
     packages:
     - cmake
     #OpenGL related dependencies
@@ -13,7 +13,7 @@ addons:
     - libxi-dev
     #Different compilers to test the builds on
     - gcc-8
-    - clang-11
+    - clang-10
 
 env: MESA_GL_OVERRIDE=3.3     
 
@@ -24,13 +24,13 @@ jobs:
           - gcc-8
       - dist: bionic
         compiler:
-          - clang-11
+          - clang-10
       - dist: focal
         compiler:
           - gcc-8
       - dist: focal
         compiler:
-          - clang-11
+          - clang-10
 
 script:
   - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
