@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <stdint.h>
 
 #include <iostream>
 #include <fstream>
@@ -17,5 +18,6 @@
 
 #define BIT(x) (1 << x)
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+#define INT2VOIDP(i) (void*)(uintptr_t)(i)
 
 #endif // __BASE_H__

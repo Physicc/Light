@@ -17,3 +17,5 @@ target_include_directories(Editor PUBLIC include)
 
 add_subdirectory(../Light Light)
 target_link_libraries(Editor Light)
+
+add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/../imgui.ini ${CMAKE_BINARY_DIR}/imgui.ini)

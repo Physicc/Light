@@ -72,7 +72,7 @@ namespace Light
 				Shader2OpenGLType(element.getType()),
 				element.isNormalized() ? GL_TRUE : GL_FALSE,
 				layout.getStride(),
-				(const void*)element.getOffset());
+				INT2VOIDP(element.getOffset()));
 			index++;
 		}
 		vertexBuffers.push_back(vbo);
