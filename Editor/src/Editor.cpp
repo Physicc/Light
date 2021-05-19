@@ -73,7 +73,7 @@ public:
 	void onEvent(Light::Event& e) override
 	{
 		Light::EventDispatcher dispatcher(e);
-		dispatcher.dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(ExampleLayer::onWindowResize));
+		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(ExampleLayer::onWindowResize));
 
 		camera.onEvent(e);
 
