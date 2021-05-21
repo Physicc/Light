@@ -3,6 +3,8 @@
 
 #include "core/base.hpp"
 
+#include <unordered_map>
+
 namespace Light
 {
 	class Shader
