@@ -106,7 +106,7 @@ public:
 			resizeViewport = true;
 			viewportPanelSize = glm::vec2(panelSize.x, panelSize.y);
 		}
-		ImGui::Image((void*)framebuffer->getColorAttachmentRendererId(), panelSize, ImVec2(0, 1), ImVec2(1,0));
+		ImGui::Image(INT2VOIDP(framebuffer->getColorAttachmentRendererId()), panelSize, ImVec2(0, 1), ImVec2(1,0));
 		ImGui::End();
 		ImGui::PopStyleVar();
 
