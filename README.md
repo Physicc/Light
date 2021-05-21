@@ -6,6 +6,7 @@ Lightweight Renderer, purposed to augment the development of Physicc
 Platforms currently it compiles on:
 * Windows 10
 * Ubuntu 18
+* Ubuntu 20
 
 ## Prerequisites
 
@@ -59,6 +60,7 @@ Hit Build
 * If you want to build on terminal, execute
 
 	`cmake --build build`
+
 
 * If you want to build using Visual Studio 2019, just open the Solution File generated
 

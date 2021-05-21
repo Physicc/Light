@@ -2,10 +2,7 @@
 
 namespace Light
 {
-	LayerStack::LayerStack() 
-	{
-		
-	}
+	LayerStack::LayerStack() = default;
 	
 	LayerStack::~LayerStack() 
 	{

@@ -31,14 +31,14 @@ public:
 			resizeViewport = false;
 		}
 
-		framecount++;
+		frameCount++;
 		time += ts.getMilliSeconds();
 		if(time >= 500.0f)
 		{
 			lastTime = time;
-			lastFramecount = framecount;
+			lastFrameCount = frameCount;
 			time = 0.0f;
-			framecount = 0;
+			frameCount = 0;
 		}
 
 		camera.onUpdate(ts);
@@ -123,9 +123,9 @@ public:
 
 		ImGui::Begin("Performance Statistics");
 		ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d", 
-					lastTime/lastFramecount,
-					lastTime*0.001f/lastFramecount,
-					int(lastFramecount*1000/lastTime));
+					lastTime/lastFrameCount,
+					lastTime*0.001f/lastFrameCount,
+					int(lastFrameCount*1000/lastTime));
 		ImGui::End();
 
 	}
@@ -143,9 +143,9 @@ private:
 	bool resizeViewport = false;
 
 	float time = 0.0f;
-	int framecount = 0;
+	int frameCount = 0;
 	float lastTime = 0.0f;
-	int lastFramecount = 0;
+	int lastFrameCount = 0;
 
 };
 
