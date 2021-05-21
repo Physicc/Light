@@ -20,7 +20,7 @@ public:
 
 		framebuffer = Light::Framebuffer::create(fbspec);
 	}
-	~ExampleLayer() {}
+	~ExampleLayer() = default;
 
 	void onUpdate(Light::Timestep ts) override
 	{
@@ -156,7 +156,7 @@ public:
 	{
 		pushLayer(new ExampleLayer());
 	}
-	~Editor() {}
+	~Editor() = default;
 	
 };
 
