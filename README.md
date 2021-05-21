@@ -61,9 +61,10 @@ Hit Build
 
 	`cmake --build build`
 
-* If you want to build using Visual Studio 2019, just open the Solution File generated.
 
-If you do not have a dedicated GPU (or drivers for the dedicated GPU on Linux), you may need to run the following command on the terminal to set up the environment variables before running our program:
+* If you want to build using Visual Studio 2019, just open the Solution File generated
+
+If you do not have a dedicated GPU (or drivers for the dedicated GPU e.g. on Linux), you may need to run the following command on the terminal to set up the environment variables before running our program
 
 `export MESA_GL_VERSION_OVERRIDE=3.3`
 
