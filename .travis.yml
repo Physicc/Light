@@ -3,6 +3,7 @@ language: cpp
 jobs:
   include:
     - dist: bionic
+      compiler: gcc
       addons:
         apt:
           sources:
@@ -22,6 +23,7 @@ jobs:
         - BUILD_NAME="BIONIC_GCC-8"
 
     - dist: focal
+      compiler: gcc
       addons:
         apt:
           sources:
@@ -41,6 +43,7 @@ jobs:
         - BUILD_NAME="FOCAL_GCC-8"
 
     - dist: bionic
+      compiler: gcc
       addons:
         apt:
           sources:
@@ -60,6 +63,7 @@ jobs:
         - BUILD_NAME="BIONIC_GCC-9"
 
     - dist: focal
+      compiler: gcc
       addons:
         apt:
           sources:
