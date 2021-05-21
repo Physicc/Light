@@ -35,8 +35,7 @@ namespace Light
 		glGenVertexArrays(1, &rendererId);
 	}
 	
-	OpenGLVertexArray::~OpenGLVertexArray() 
-	= default;
+	OpenGLVertexArray::~OpenGLVertexArray() = default;
 	
 	void OpenGLVertexArray::bind() const
 	{
