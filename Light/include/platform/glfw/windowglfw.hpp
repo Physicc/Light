@@ -20,8 +20,8 @@ namespace Light
 
 		void onUpdate() override;
 
-		virtual int getWidth() const override { return data.width;};
-		virtual int getHeight() const override { return data.height; };
+		virtual uint32_t getWidth() const override { return data.width;};
+		virtual uint32_t getHeight() const override { return data.height; };
 
 		// Window attributes
 		virtual void setEventCallback(const EventCallbackFn& callback) override { data.callback = callback; };

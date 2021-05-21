@@ -9,10 +9,10 @@ namespace Light
 	struct WindowProps
 	{
 		std::string title;
-		int width;
-		int height;
+		uint32_t width;
+		uint32_t height;
 
-		WindowProps(const std::string title = "Light Engine", int width = 1600, int height = 900) : width(width), height(height), title(title) {}
+		WindowProps(const std::string title = "Light Engine", uint32_t width = 1600, uint32_t height = 900) : width(width), height(height), title(title) {}
 	};
 
 	class Window
@@ -24,8 +24,8 @@ namespace Light
 
 		virtual void onUpdate() = 0;
 
-		virtual int getWidth() const = 0;
-		virtual int getHeight() const = 0;
+		virtual uint32_t getWidth() const = 0;
+		virtual uint32_t getHeight() const = 0;
 
 		// Window attributes
 		virtual void setEventCallback(const EventCallbackFn& callback) = 0;
