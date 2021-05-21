@@ -21,7 +21,7 @@ namespace Light
 	public:
 		KeyPressedEvent(int keycode, int repeatcount): KeyEvent(keycode), repeatcount(repeatcount) {}
 
-		inline int getRepeatcount() { return repeatcount; }
+		inline int getRepeatCount() { return repeatcount; }
 
 		std::string ToString() const override
 		{

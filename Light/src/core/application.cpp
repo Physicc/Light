@@ -1,8 +1,5 @@
 #include "core/application.hpp"
 
-#include "rendering/rendercommand.hpp"
-#include "core/timestep.hpp"
-
 #include "rendering/renderer.hpp"
 
 //Temp for time
@@ -21,7 +18,7 @@ namespace Light
 			std::cerr << "Application already created" << std::endl;
 			exit(1);
 		}
-		window = (std::unique_ptr<Window>)Window::create();
+		window = static_cast<std::unique_ptr<Window>>(Window::create());
 		window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 		Renderer::init();

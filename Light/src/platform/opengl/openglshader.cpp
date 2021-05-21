@@ -44,7 +44,7 @@ namespace Light
 		}
 		catch (std::ifstream::failure& e)
 		{
-			std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+			std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ" << std::endl;
 		}
 
 		rendererId = glCreateProgram();
