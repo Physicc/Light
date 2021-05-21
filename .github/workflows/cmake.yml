@@ -11,7 +11,8 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  Windows (VS 2019):
+  windows_vs2019:
+    name: Windows (VS 2019)
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
@@ -32,7 +33,8 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
   
-  Windows (mingw-w64-gcc):
+  windows_mingw-w64:
+    name: Windows (mingw-w64-gcc)
     runs-on: windows-latest
     
     steps:
