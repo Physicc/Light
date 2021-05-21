@@ -8,7 +8,7 @@
 
 namespace Light
 {
-	ImguiLayer::~ImguiLayer() {}
+	ImguiLayer::~ImguiLayer() = default;
 
 	void ImguiLayer::onAttach()
 	{

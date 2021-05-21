@@ -28,7 +28,7 @@ namespace Light
 
 	}
 	
-	Application::~Application() {}
+	Application::~Application() = default;
 
 	void Application::onEvent(Event& e)
 	{

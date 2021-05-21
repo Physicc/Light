@@ -17,7 +17,7 @@ namespace Light
 	class Texture2D : public Texture
 	{
 	public:
-		Texture2D() {}
+		Texture2D() = default;
 		virtual ~Texture2D() = default;
 		static Texture2D* create(const std::string& path);
 
