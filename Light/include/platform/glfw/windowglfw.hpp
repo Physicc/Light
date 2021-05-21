@@ -7,6 +7,7 @@
 #include "rendering/graphicscontext.hpp"
 
 #include "GLFW/glfw3.h"
+#include "glad/glad.h"
 
 namespace Light
 {
@@ -40,7 +41,7 @@ namespace Light
 		struct WindowData
 		{
 			std::string title;
-			unsigned int width, height;
+			int width, height;
 			bool vSync;
 
 			EventCallbackFn callback;

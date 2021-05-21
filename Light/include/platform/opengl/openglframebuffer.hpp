@@ -20,7 +20,7 @@ namespace Light
 		void invalidate();
 		void resize(uint32_t width, uint32_t height) override;
 
-		inline uint32_t getColorAttachmentRendererId() const { return colorAttachment; }
+		inline uint32_t getColorAttachmentRendererId() const override { return colorAttachment; }
 
 	private:
 		FramebufferSpec spec;

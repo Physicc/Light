@@ -10,7 +10,7 @@ namespace Light
 	public:
 		WindowResizeEvent(int x, int y): x(x), y(y) {}
 
-		std::tuple<int, int> getSize() { return std::make_tuple(x, y); }
+		std::tuple<int, int> getSize() { return {x, y}; }
 
 		std::string ToString() const override
 		{

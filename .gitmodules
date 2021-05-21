@@ -1,3 +1,6 @@
 [submodule "Light/libs/imgui"]
 	path = Light/libs/imgui
 	url = https://github.com/dropTableUsers42/imgui.git
+[submodule "bullet3"]
+	path = bullet3
+	url = https://github.com/dropTableUsers42/bullet3.git
