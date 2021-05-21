@@ -21,6 +21,7 @@ jobs:
             - g++-8
       env:
         - BUILD_NAME="BIONIC_GCC-8"
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
     - dist: focal
       compiler: gcc
@@ -41,6 +42,7 @@ jobs:
             - g++-8
       env:
         - BUILD_NAME="FOCAL_GCC-8"
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
     - dist: bionic
       compiler: gcc
@@ -61,6 +63,7 @@ jobs:
             - g++-9
       env:
         - BUILD_NAME="BIONIC_GCC-9"
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
 
     - dist: focal
       compiler: gcc
@@ -81,6 +84,7 @@ jobs:
             - g++-9
       env:
         - BUILD_NAME="FOCAL_GCC-9"
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
 
     - os: osx
       compiler: clang
