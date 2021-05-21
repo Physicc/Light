@@ -44,7 +44,7 @@ jobs:
       
       - uses: msys2/setup-msys2@v2
         with:
-          install: mingw-w64-gcc mingw-w64-make
+          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-make
           
       - name: Configure CMake
         run: cmake -HEditor -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G"MinGW Makefiles"
