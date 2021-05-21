@@ -21,7 +21,7 @@ namespace Light
 	private:
 		uint32_t rendererId;
 
-		int width, height;
+		uint32_t width, height;
 		std::string path;
 	};
 
