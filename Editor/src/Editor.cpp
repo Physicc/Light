@@ -17,7 +17,79 @@ public:
 			lightPos(-1,2,1.5),
 			floor(glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2)),
 			cube(glm::vec3(-1,2,0), glm::vec3(0,-30.0f,10.0f))
+
 	{
+	  // bullet code
+	  btDefaultCollisionConfiguration * collisionConfiguration = new btDefaultCollisionConfiguration () ;
+	  btCollisionDispatcher * dispatcher = new btCollisionDispatcher ( collisionConfiguration ) ;
+	  btBroadphaseInterface * overlappingPairCache = new btDbvtBroadphase () ;
+	  btSequentialImpulseConstraintSolver * solver = new btSequentialImpulseConstraintSolver ;
+	  btDiscreteDynamicsWorld * dynamicsWorld = new btDiscreteDynamicsWorld ( dispatcher ,
+                                                                              overlappingPairCache ,
+																			  solver ,
+																			  collisionConfiguration ) ;
+	 dynamicsWorld -> setGravity ( btVector3 (0 , -10 ,0) ) ;
+	 btAlignedObjectArray<btCollisionShape*> collisionShapes;	
+	 {
+		 btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1), btScalar(.05), btScalar(.05)));
+
+		collisionShapes.push_back(groundShape);
+
+		btTransform groundTransform;
+		groundTransform.setIdentity();
+		groundTransform.setOrigin(btVector3(0, -1, 0));
+
+		btScalar mass(0.);
+
+		
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0, 0, 0);
+		if (isDynamic)
+			groundShape->calculateLocalInertia(mass, localInertia);
+
+		
+		btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
+		btRigidBody* body = new btRigidBody(rbInfo);
+
+		
+		dynamicsWorld->addRigidBody(body);
+
+	 }
+	 {
+		 //create a dynamic rigidbody
+
+		//btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
+		btCollisionShape* colShape = new btBoxShape(btVector3(btScalar(1), btScalar(.05), btScalar(1)));
+		collisionShapes.push_back(colShape);
+
+		
+		btTransform startTransform;
+		startTransform.setIdentity();
+		startTransform.setFromOpenGLMatrix(glm::value_ptr(cube.getTransform()));
+
+		btScalar mass(1.f);
+
+		
+		bool isDynamic = (mass != 0.f);
+
+		btVector3 localInertia(0, 0, 0);
+		if (isDynamic)
+			colShape->calculateLocalInertia(mass, localInertia);
+
+		
+
+		
+		btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
+		btRigidBody* body = new btRigidBody(rbInfo);
+
+		dynamicsWorld->addRigidBody(body);
+	 }																	  
+	
+	
+	
 		// Rest of initialization
 		texture.reset(Light::Texture2D::create("../Light/assets/textures/check.png"));
 
@@ -30,10 +102,64 @@ public:
 
 	~ExampleLayer()
 	{
+		for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
+	{
+		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
+		btRigidBody* body = btRigidBody::upcast(obj);
+		if (body && body->getMotionState())
+		{
+			delete body->getMotionState();
+		}
+		dynamicsWorld->removeCollisionObject(obj);
+		delete obj;
+	}
+
+	
+	for (int j = 0; j < collisionShapes.size(); j++)
+	{
+		btCollisionShape* shape = collisionShapes[j];
+		collisionShapes[j] = 0;
+		delete shape;
+	}
+
+	
+	delete dynamicsWorld;
+
+	
+	delete solver;
+
+	
+	delete overlappingPairCache;
+
+	
+	delete dispatcher;
+
+	delete collisionConfiguration;
+
+	
+	collisionShapes.clear();
 	}
 
 	void onUpdate(Light::Timestep ts) override
 	{
+		 dynamicsWorld->stepSimulation(ts.getSeconds(), 10);
+		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[1];
+		btRigidBody* body = btRigidBody::upcast(obj);
+		btTransform trans;
+		if (body && body->getMotionState())
+			{
+				body->getMotionState()->getWorldTransform(trans);
+			}
+		else
+			{
+				trans = obj->getWorldTransform();
+			}
+		glm::mat4 Tcube=glm::mat4(1.0f);
+		trans.getOpenGLMatrix(glm::value_ptr(Tcube));
+		cube.setTransform(Tcube);
+		
+
+
 		if(resizeViewport)
 		{
 			camera.setViewportSize(viewportPanelSize.x, viewportPanelSize.y);
@@ -146,6 +272,12 @@ private:
 	Cube floor;
 	Skybox skybox;
 	glm::vec3 lightPos;
+	btDefaultCollisionConfiguration * collisionConfiguration  ;
+	btCollisionDispatcher * dispatcher  ;
+	btBroadphaseInterface * overlappingPairCache  ;
+	btSequentialImpulseConstraintSolver * solver  ;
+	 btDiscreteDynamicsWorld * dynamicsWorld  ;
+	btAlignedObjectArray<btCollisionShape*> collisionShapes;
 
 	std::shared_ptr<Light::Framebuffer> framebuffer;
 	std::shared_ptr<Light::Texture2D> texture;
