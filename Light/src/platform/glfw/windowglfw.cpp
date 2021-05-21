@@ -110,8 +110,7 @@ namespace Light
 			data->callback(event);
 		});
 
-		glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int
-		width, int height)
+		glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
