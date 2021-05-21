@@ -104,7 +104,7 @@ namespace Light
 	void EditorCamera::mousePan(const glm::vec2& delta)
 	{
 		auto [xSpeed, ySpeed] = panSpeed();
-		focalPoint += -1 * getRightDirection() * delta.x * xSpeed * distance;
+		focalPoint += -getRightDirection() * delta.x * xSpeed * distance;
 		focalPoint += getUpDirection() * delta.y * ySpeed * distance;
 	}
 

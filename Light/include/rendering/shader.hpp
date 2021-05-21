@@ -10,7 +10,7 @@ namespace Light
 	class Shader
 	{
 	public:
-		Shader() {}
+		Shader() = default;
 		virtual ~Shader() = default;
 
 		virtual const std::string& getName() const = 0;

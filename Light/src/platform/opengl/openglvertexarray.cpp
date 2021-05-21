@@ -36,9 +36,7 @@ namespace Light
 	}
 	
 	OpenGLVertexArray::~OpenGLVertexArray() 
-	{
-		
-	}
+	= default;
 	
 	void OpenGLVertexArray::bind() const
 	{
