@@ -29,15 +29,15 @@ public:
 																			  solver ,
 																			  collisionConfiguration ) ;
 	 dynamicsWorld -> setGravity ( btVector3 (0 , -10 ,0) ) ;
-	 btAlignedObjectArray<btCollisionShape*> collisionShapes;	
+	 	
 	 {
-		 btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1), btScalar(.05), btScalar(.05)));
+		 btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1), btScalar(.05), btScalar(1)));
 
 		collisionShapes.push_back(groundShape);
 
 		btTransform groundTransform;
 		groundTransform.setIdentity();
-		groundTransform.setOrigin(btVector3(0, -1, 0));
+		groundTransform.setOrigin(btVector3(0, -56, 0));
 
 		btScalar mass(0.);
 
@@ -60,8 +60,8 @@ public:
 	 {
 		 //create a dynamic rigidbody
 
-		//btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
-		btCollisionShape* colShape = new btBoxShape(btVector3(btScalar(1), btScalar(.05), btScalar(1)));
+		btCollisionShape* colShape = new btBoxShape(btVector3(btScalar(.5), btScalar(.5), btScalar(0.5)));
+		
 		collisionShapes.push_back(colShape);
 
 		
