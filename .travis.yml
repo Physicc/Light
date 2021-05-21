@@ -1,103 +1,82 @@
 language: cpp
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - cmake
-      #OpenGL related dependencies
-      - libglfw3-dev
-      - libxrandr-dev
-      - libxinerama-dev
-      - libxcursor-dev
-      - libxi-dev
-      #Testing the different compilers that we wish to support
-      #=============
-      - gcc-8
-      - g++-8
-      #=============
-      - gcc-9
-      - g++-9
-      #=============
-
 matrix:
   include:
-    -dist: bionic
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - cmake
-          #OpenGL related dependencies
-          - libglfw3-dev
-          - libxrandr-dev
-          - libxinerama-dev
-          - libxcursor-dev
-          - libxi-dev
-          #Compiler
-          - gcc-8
-          - g++-8
+    - dist: bionic
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            #OpenGL related dependencies
+            - libglfw3-dev
+            - libxrandr-dev
+            - libxinerama-dev
+            - libxcursor-dev
+            - libxi-dev
+            #Compiler
+            - gcc-8
+            - g++-8
     env:
       - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
-    -dist: focal
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - cmake
-          #OpenGL related dependencies
-          - libglfw3-dev
-          - libxrandr-dev
-          - libxinerama-dev
-          - libxcursor-dev
-          - libxi-dev
-          #Compiler
-          - gcc-8
-          - g++-8
-    env:
-      - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+    - dist: focal
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            #OpenGL related dependencies
+            - libglfw3-dev
+            - libxrandr-dev
+            - libxinerama-dev
+            - libxcursor-dev
+            - libxi-dev
+            #Compiler
+            - gcc-8
+            - g++-8
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
-    -dist: bionic
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - cmake
-          #OpenGL related dependencies
-          - libglfw3-dev
-          - libxrandr-dev
-          - libxinerama-dev
-          - libxcursor-dev
-          - libxi-dev
-          #Compiler
-          - gcc-9
-          - g++-9
-    env:
-      - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+    - dist: bionic
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            #OpenGL related dependencies
+            - libglfw3-dev
+            - libxrandr-dev
+            - libxinerama-dev
+            - libxcursor-dev
+            - libxi-dev
+            #Compiler
+            - gcc-9
+            - g++-9
+      env:
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
 
-    -dist: focal
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - cmake
-          #OpenGL related dependencies
-          - libglfw3-dev
-          - libxrandr-dev
-          - libxinerama-dev
-          - libxcursor-dev
-          - libxi-dev
-          #Compiler
-          - gcc-9
-          - g++-9
-    env:
-      - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+    - dist: focal
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            #OpenGL related dependencies
+            - libglfw3-dev
+            - libxrandr-dev
+            - libxinerama-dev
+            - libxcursor-dev
+            - libxi-dev
+            #Compiler
+            - gcc-9
+            - g++-9
+      env:
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
 
 
 before_install:
