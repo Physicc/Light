@@ -1,4 +1,4 @@
-# Light [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Light [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.com/dropTableUsers42/Light.svg?branch=main)](https://travis-ci.com/dropTableUsers42/Light)
 Lightweight Renderer, purposed to augment the development of Physicc
 
 ## Platforms
