@@ -1,6 +1,6 @@
 language: cpp
 
-matrix:
+jobs:
   include:
     - dist: bionic
       addons:
@@ -78,10 +78,20 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
 
+    - os: osx
+      addons:
+        homebrew:
+          packages:
+          - cmake
+
 
 before_install:
   - eval "${MATRIX_EVAL}"
 
-script:
+before_script:
   - cmake --no-warn-unused-cli -HEditor -Bbuild -G"Unix Makefiles"
   - cmake --build build
+
+script:
+  - cd build
+  - ./Editor
