@@ -1,4 +1,4 @@
-name: CMake
+name: Windows
 
 on:
   push:
@@ -11,7 +11,7 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  build:
+  Windows (VS 2019):
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
@@ -30,4 +30,22 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}   
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+  
+  Windows (mingw-w64-gcc):
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      
+      - uses: msys2/setup-msys2@v2
+        with:
+          install: mingw-w64-gcc mingw-w64-make
+          
+      - name: Configure CMake
+        run: cmake -HEditor -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G"MinGW Makefiles"
+      
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
