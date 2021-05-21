@@ -18,8 +18,8 @@ matrix:
             #Compiler
             - gcc-8
             - g++-8
-    env:
-      - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
     - dist: focal
       addons:
