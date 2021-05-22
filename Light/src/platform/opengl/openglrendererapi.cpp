@@ -6,7 +6,7 @@
 
 namespace Light
 {
-	RendererAPI* RenderCommand::rendererApi = new OpenGLRendererAPI;
+	RendererAPI* RenderCommand::s_rendererApi = new OpenGLRendererAPI;
 
 	void OpenGLRendererAPI::init() 
 	{
