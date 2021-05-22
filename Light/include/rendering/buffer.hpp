@@ -107,7 +107,7 @@ namespace Light
 	class BufferLayout
 	{
 	public:
-		BufferLayout() {}
+		BufferLayout() = default;
 
 		BufferLayout(std::initializer_list<BufferElement> elements) : elements(elements)
 		{
@@ -139,7 +139,7 @@ namespace Light
 	class VertexBuffer
 	{
 	public:
-		VertexBuffer() {}
+		VertexBuffer() = default;
 		virtual ~VertexBuffer() = default;
 
 		virtual void bind() const = 0;
@@ -165,7 +165,7 @@ namespace Light
 	class IndexBuffer
 	{
 	public:
-		IndexBuffer() {}
+		IndexBuffer() = default;
 		virtual ~IndexBuffer() = default;
 
 		virtual void bind() const = 0;

@@ -9,7 +9,7 @@ namespace Light
 	class VertexArray
 	{
 		public:
-		VertexArray() {}
+		VertexArray() = default;
 		virtual ~VertexArray() = default;
 
 		virtual void bind() const = 0;

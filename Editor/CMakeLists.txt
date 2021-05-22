@@ -13,6 +13,20 @@ file(GLOB SOURCES
 # add the executable
 add_executable(Editor ${SOURCES})
 
+if(WIN32)
+	if(MSVC)
+		set_target_properties(
+			Editor
+			PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE"
+					LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
+		)
+	elseif(MINGW)
+		if(CMAKE_BUILD_TYPE STREQUAL "Release")
+			target_link_options(Editor PRIVATE -mwindows)
+		endif()
+	endif()
+endif()
+
 target_include_directories(Editor PUBLIC include)
 
 add_subdirectory(../Light Light)

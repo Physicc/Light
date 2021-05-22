@@ -12,7 +12,7 @@ namespace Light
 
 		std::tuple<int, int> getSize() { return {x, y}; }
 
-		std::string ToString() const override
+		[[nodiscard]] std::string ToString() const override
 		{
 			return "WindowResizeEvent: " + std::to_string(x) + ", " + std::to_string(y) + ")";
 		}
@@ -28,7 +28,7 @@ namespace Light
 	public:
 		WindowCloseEvent() = default;
 
-		std::string ToString() const override
+		[[nodiscard]] std::string ToString() const override
 		{
 			return "WindowCloseEvent";
 		}

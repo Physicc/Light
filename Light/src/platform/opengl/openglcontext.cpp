@@ -14,10 +14,7 @@ namespace Light
 		}
 	}
 	
-	OpenGLContext::~OpenGLContext() 
-	{
-		
-	}
+	OpenGLContext::~OpenGLContext() = default;
 	
 	void OpenGLContext::init() 
 	{

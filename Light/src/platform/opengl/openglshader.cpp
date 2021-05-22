@@ -114,8 +114,7 @@ namespace Light
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-				std::string type = "";
-				type += shaderType == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT";
+				std::string type = shaderType == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT";
 				std::cerr << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
 				exit(1);
 			}
