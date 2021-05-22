@@ -11,13 +11,13 @@ namespace Light
 
 	void ShaderLibrary::add(const std::string& name, const std::shared_ptr<Shader>& shader) 
 	{
-		if(shaders.find(name) != shaders.end())
+		if(m_shaders.find(name) != m_shaders.end())
 		{
 			std::cerr << "Shader already exists!" << std::endl;
 			exit(1);
 		}
 
-		shaders[name] = shader;
+        m_shaders[name] = shader;
 	}
 	
 	std::shared_ptr<Shader> ShaderLibrary::load(const std::string& filepath) 
@@ -36,12 +36,12 @@ namespace Light
 	
 	std::shared_ptr<Shader> ShaderLibrary::get(const std::string& name) 
 	{
-		if(shaders.find(name) == shaders.end())
+		if(m_shaders.find(name) == m_shaders.end())
 		{
 			std::cerr << "Shader does not exist!" << std::endl;
 			exit(1);
 		}
 
-		return shaders[name];
+		return m_shaders[name];
 	}
 }

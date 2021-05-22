@@ -3,7 +3,7 @@
 
 namespace Light
 {
-	Renderer::SceneData* Renderer::sceneData = new Renderer::SceneData;
+	Renderer::SceneData* Renderer::s_sceneData = new Renderer::SceneData;
 
 	void Renderer::init() 
 	{
@@ -17,11 +17,11 @@ namespace Light
 
 	void Renderer::beginScene(EditorCamera& camera, glm::vec3 lightPos)
 	{
-		sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
-		sceneData->lightPos = lightPos;
+        s_sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
+        s_sceneData->lightPos = lightPos;
 
 		glm::mat4 view = glm::mat4(glm::mat3(camera.getViewMatrix()));
-		sceneData->viewProjectionSkyboxMatrix = camera.getProjectionMatrix() * view;
+        s_sceneData->viewProjectionSkyboxMatrix = camera.getProjectionMatrix() * view;
 	}
 	
 	void Renderer::endScene() 
@@ -35,8 +35,8 @@ namespace Light
 		
 		shader->bind();
 
-		shader->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionMatrix);
-		shader->setUniformVec3("u_lightPos", sceneData->lightPos);
+		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
+		shader->setUniformVec3("u_lightPos", s_sceneData->lightPos);
 
 		shader->setUniformMat4("u_transform", transform);
 		shader->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));
@@ -54,7 +54,7 @@ namespace Light
 		
 		shader->bind();
 
-		shader->setUniformMat4("u_viewProjectionMatrix", sceneData->viewProjectionSkyboxMatrix);
+		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionSkyboxMatrix);
 
 		RenderCommand::depthMask(false);
 

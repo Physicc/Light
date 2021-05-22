@@ -6,7 +6,7 @@ namespace Light
 	
 	LayerStack::~LayerStack() 
 	{
-		for(Layer* layer : layers)
+		for(Layer* layer : m_layers)
 		{
 			layer->onDetach();
 			delete layer;
@@ -15,34 +15,34 @@ namespace Light
 	
 	void LayerStack::pushLayer(Layer* layer) 
 	{
-		layers.insert(layers.begin() + layerTop, layer);
-		layerTop++;
+		m_layers.insert(m_layers.begin() + m_layerTop, layer);
+		m_layerTop++;
 		
 	}
 	
 	void LayerStack::popLayer(Layer* layer) 
 	{
-		auto it = std::find(layers.begin(), layers.end(), layer);
-		if(it != layers.end())
+		auto it = std::find(m_layers.begin(), m_layers.end(), layer);
+		if(it != m_layers.end())
 		{
 			(*it)->onDetach();
-			layers.erase(it);
-			layerTop--;
+			m_layers.erase(it);
+			m_layerTop--;
 		}
 	}
 
 	void LayerStack::pushOverlay(Layer* overlay) 
 	{
-		layers.push_back(overlay);
+		m_layers.push_back(overlay);
 	}
 	
 	void LayerStack::popOverlay(Layer* overlay) 
 	{
-		auto it = std::find(layers.begin(), layers.end(), overlay);
-		if(it != layers.end())
+		auto it = std::find(m_layers.begin(), m_layers.end(), overlay);
+		if(it != m_layers.end())
 		{
 			(*it)->onDetach();
-			layers.erase(it);
+			m_layers.erase(it);
 		}
 	}
 	

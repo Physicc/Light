@@ -22,7 +22,7 @@ namespace Light
 		void begin();
 		void end();
 	private:
-		float time = 0.0;
+		float m_time = 0.0;
 	};
 }
 

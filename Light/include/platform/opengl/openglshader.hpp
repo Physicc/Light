@@ -17,7 +17,7 @@ namespace Light
 		void bind() override;
 		void unbind() override;
 
-		inline const std::string& getName() const override { return name; }
+		inline const std::string& getName() const override { return m_name; }
 
 		void setUniformBool(const std::string& name, bool value) const override;
 		void setUniformInt(const std::string& name, int value) const override;
@@ -32,8 +32,8 @@ namespace Light
 	private:
 		void checkCompileErrors(unsigned int shader, GLenum shaderType);
 
-		std::string name;
-		uint32_t rendererId;
+		std::string m_name;
+		uint32_t m_rendererId;
 	};
 
 }
