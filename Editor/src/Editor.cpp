@@ -20,24 +20,24 @@ public:
 
 	{
 	  // bullet code
-	  btDefaultCollisionConfiguration * collisionConfiguration = new btDefaultCollisionConfiguration () ;
-	  btCollisionDispatcher * dispatcher = new btCollisionDispatcher ( collisionConfiguration ) ;
-	  btBroadphaseInterface * overlappingPairCache = new btDbvtBroadphase () ;
-	  btSequentialImpulseConstraintSolver * solver = new btSequentialImpulseConstraintSolver ;
-	  btDiscreteDynamicsWorld * dynamicsWorld = new btDiscreteDynamicsWorld ( dispatcher ,
-                                                                              overlappingPairCache ,
-																			  solver ,
-																			  collisionConfiguration ) ;
+	   collisionConfiguration = new btDefaultCollisionConfiguration () ;
+	   dispatcher = new btCollisionDispatcher ( collisionConfiguration ) ;
+	   overlappingPairCache = new btDbvtBroadphase () ;
+	   solver = new btSequentialImpulseConstraintSolver ;
+	   dynamicsWorld = new btDiscreteDynamicsWorld ( dispatcher ,
+                                                    overlappingPairCache ,
+													solver ,
+													collisionConfiguration ) ;
 	 dynamicsWorld -> setGravity ( btVector3 (0 , -10 ,0) ) ;
 	 	
 	 {
-		 btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1), btScalar(.05), btScalar(1)));
+		 btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(2), btScalar(.1), btScalar(2)));
 
 		collisionShapes.push_back(groundShape);
 
 		btTransform groundTransform;
 		groundTransform.setIdentity();
-		groundTransform.setOrigin(btVector3(0, -56, 0));
+		groundTransform.setOrigin(btVector3(0, -1, 0));
 
 		btScalar mass(0.);
 
@@ -78,6 +78,8 @@ public:
 		if (isDynamic)
 			colShape->calculateLocalInertia(mass, localInertia);
 
+			startTransform.setOrigin(btVector3(-1, 2, 0));
+
 		
 
 		
@@ -86,7 +88,11 @@ public:
 		btRigidBody* body = new btRigidBody(rbInfo);
 
 		dynamicsWorld->addRigidBody(body);
-	 }																	  
+	 }	
+
+
+
+	  
 	
 	
 	
@@ -138,11 +144,12 @@ public:
 
 	
 	collisionShapes.clear();
+		
 	}
 
 	void onUpdate(Light::Timestep ts) override
 	{
-		 dynamicsWorld->stepSimulation(ts.getSeconds(), 10);
+		dynamicsWorld->stepSimulation(ts.getSeconds(), 10);
 		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[1];
 		btRigidBody* body = btRigidBody::upcast(obj);
 		btTransform trans;
@@ -154,9 +161,13 @@ public:
 			{
 				trans = obj->getWorldTransform();
 			}
-		glm::mat4 Tcube=glm::mat4(1.0f);
-		trans.getOpenGLMatrix(glm::value_ptr(Tcube));
-		cube.setTransform(Tcube);
+        glm::mat4 cubeTrans=glm::mat4(1.0f);
+		trans.getOpenGLMatrix(glm::value_ptr(cubeTrans));
+		cube.setTransform(cubeTrans);	
+		
+				
+
+		
 		
 
 
