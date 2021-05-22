@@ -5,7 +5,7 @@
 
 namespace Light
 {
-	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : windowHandle(windowHandle)
+	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_windowHandle(windowHandle)
 	{
 		if(!windowHandle)
 		{
@@ -18,7 +18,7 @@ namespace Light
 	
 	void OpenGLContext::init() 
 	{
-		glfwMakeContextCurrent(windowHandle);
+		glfwMakeContextCurrent(m_windowHandle);
 		int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		if(!success)
 			exit(1);
@@ -26,6 +26,6 @@ namespace Light
 	
 	void OpenGLContext::swapBuffers() 
 	{
-		glfwSwapBuffers(windowHandle);
+		glfwSwapBuffers(m_windowHandle);
 	}
 }
