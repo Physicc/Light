@@ -31,7 +31,7 @@ public:
 	 dynamicsWorld -> setGravity ( btVector3 (0 , -10 ,0) ) ;
 	 	
 	 {
-		 btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(2), btScalar(.1), btScalar(2)));
+		 btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1), btScalar(.05), btScalar(1)));
 
 		collisionShapes.push_back(groundShape);
 
@@ -60,7 +60,7 @@ public:
 	 {
 		 //create a dynamic rigidbody
 
-		btCollisionShape* colShape = new btBoxShape(btVector3(btScalar(.5), btScalar(.5), btScalar(0.5)));
+		btCollisionShape* colShape = new btBoxShape(btVector3(btScalar(.25), btScalar(.25), btScalar(.25)));
 		
 		collisionShapes.push_back(colShape);
 
@@ -78,7 +78,7 @@ public:
 		if (isDynamic)
 			colShape->calculateLocalInertia(mass, localInertia);
 
-			startTransform.setOrigin(btVector3(-1, 2, 0));
+		
 
 		
 
@@ -143,7 +143,7 @@ public:
 	delete collisionConfiguration;
 
 	
-	collisionShapes.clear();
+	
 		
 	}
 
@@ -161,9 +161,11 @@ public:
 			{
 				trans = obj->getWorldTransform();
 			}
-        glm::mat4 cubeTrans=glm::mat4(1.0f);
-		trans.getOpenGLMatrix(glm::value_ptr(cubeTrans));
-		cube.setTransform(cubeTrans);	
+        glm::mat4 matrix=glm::mat4(1.0f);
+		trans.getOpenGLMatrix(glm::value_ptr(matrix));
+		
+		cube.setTransform(matrix);	
+		
 		
 				
 
@@ -289,6 +291,7 @@ private:
 	btSequentialImpulseConstraintSolver * solver  ;
 	 btDiscreteDynamicsWorld * dynamicsWorld  ;
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
+	glm::mat4 cubeTrans;
 
 	std::shared_ptr<Light::Framebuffer> framebuffer;
 	std::shared_ptr<Light::Texture2D> texture;
