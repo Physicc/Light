@@ -10,7 +10,7 @@ namespace Light
 	class Shader
 	{
 	public:
-		Shader() {}
+		Shader() = default;
 		virtual ~Shader() = default;
 
 		virtual const std::string& getName() const = 0;
@@ -43,7 +43,7 @@ namespace Light
 		std::shared_ptr<Shader> get(const std::string& name);
 
 	private:
-		std::unordered_map<std::string, std::shared_ptr<Shader>> shaders;
+		std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
 	};
 
 }

@@ -11,18 +11,18 @@ namespace Light
 		OpenGLTexture2D(const std::string& path);
 		~OpenGLTexture2D();
 
-		uint32_t getRendererId() const override { return rendererId; }
+		uint32_t getRendererId() const override { return m_rendererId; }
 
-		uint32_t getWidth() const override { return width; }
-		uint32_t getHeight() const override { return height; }
+		uint32_t getWidth() const override { return m_width; }
+		uint32_t getHeight() const override { return m_height; }
 
 		void bind(uint32_t slot = 0) const override;
 
 	private:
-		uint32_t rendererId;
+		uint32_t m_rendererId;
 
-		uint32_t width, height;
-		std::string path;
+		uint32_t m_width, m_height;
+		std::string m_path;
 	};
 
 	class OpenGLCubemap : public Cubemap
@@ -33,8 +33,8 @@ namespace Light
 
 		void bind(uint32_t slot = 0) const override;
 	private:
-		uint32_t rendererId;
-		std::string path;
+		uint32_t m_rendererId;
+		std::string m_path;
 	};
 
 }

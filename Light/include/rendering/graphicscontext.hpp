@@ -8,7 +8,7 @@ namespace Light
 	class GraphicsContext
 	{
 	public:
-		GraphicsContext() {}
+		GraphicsContext() = default;
 		virtual ~GraphicsContext() = default;
 
 		virtual void init() = 0;

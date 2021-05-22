@@ -9,16 +9,16 @@ namespace Light
 	{
 	public:
 		Camera(glm::mat4 projectionMatrix = glm::mat4(1.0f))
-			:	projectionMatrix(projectionMatrix)
+			: m_projectionMatrix(projectionMatrix)
 		{}
 
 		virtual ~Camera() = default;
 
-		inline const glm::mat4& getProjectionMatrix() { return projectionMatrix; }
-		inline void setProjectionMatrix(glm::mat4 projectionMatrix) { this->projectionMatrix = projectionMatrix; }
+		inline const glm::mat4& getProjectionMatrix() { return m_projectionMatrix; }
+		inline void setProjectionMatrix(glm::mat4 projectionMatrix) { this->m_projectionMatrix = projectionMatrix; }
 
 	protected:
-		glm::mat4 projectionMatrix;
+		glm::mat4 m_projectionMatrix;
 	};
 
 }

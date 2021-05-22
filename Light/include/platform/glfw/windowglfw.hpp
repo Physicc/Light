@@ -21,22 +21,22 @@ namespace Light
 
 		void onUpdate() override;
 
-		virtual uint32_t getWidth() const override { return data.width;};
-		virtual uint32_t getHeight() const override { return data.height; };
+		virtual uint32_t getWidth() const override { return m_data.width;};
+		virtual uint32_t getHeight() const override { return m_data.height; };
 
 		// Window attributes
-		virtual void setEventCallback(const EventCallbackFn& callback) override { data.callback = callback; };
+		virtual void setEventCallback(const EventCallbackFn& callback) override { m_data.callback = callback; };
 		virtual void setVSync(bool enabled) override;
 		virtual bool isVSync() const override;
 
-		virtual void* getNativeWindow() const override { return window; };
+		virtual void* getNativeWindow() const override { return m_window; };
 	
 	private:
 		void init(const WindowProps& props);
 		void shutdown();
 
-		GLFWwindow* window;
-		GraphicsContext* context;
+		GLFWwindow* m_window;
+		GraphicsContext* m_context;
 		
 		struct WindowData
 		{
@@ -47,7 +47,7 @@ namespace Light
 			EventCallbackFn callback;
 		};
 
-		WindowData data;
+		WindowData m_data;
 	};
 }
 

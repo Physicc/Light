@@ -19,14 +19,14 @@ namespace Light
 		void addVertexBuffer(const std::shared_ptr<VertexBuffer>& vbo) override;
 		void setIndexBuffer(const std::shared_ptr<IndexBuffer>& ibo) override;
 
-		const std::vector<std::shared_ptr<VertexBuffer>>& getVertexBuffers() const override { return vertexBuffers; }
-		const std::shared_ptr<IndexBuffer>& getIndexBuffer() const override { return indexBuffer; }
+		const std::vector<std::shared_ptr<VertexBuffer>>& getVertexBuffers() const override { return m_vertexBuffers; }
+		const std::shared_ptr<IndexBuffer>& getIndexBuffer() const override { return m_indexBuffer; }
 
 	private:
-		uint32_t rendererId;
+		uint32_t m_rendererId;
 
-		std::vector<std::shared_ptr<VertexBuffer>> vertexBuffers;
-		std::shared_ptr<IndexBuffer> indexBuffer;
+		std::vector<std::shared_ptr<VertexBuffer>> m_vertexBuffers;
+		std::shared_ptr<IndexBuffer> m_indexBuffer;
 	};	
 
 }

@@ -8,12 +8,12 @@ namespace Light
 	class Timestep
 	{
 	public:
-		Timestep(float time) : time(time) {}
+		Timestep(float time) : m_time(time) {}
 
-		float getSeconds() { return time; }
-		float getMilliSeconds() { return time * 1000.0f; }
+		float getSeconds() { return m_time; }
+		float getMilliSeconds() { return m_time * 1000.0f; }
 	private:
-		float time;
+		float m_time;
 	};
 
 }
