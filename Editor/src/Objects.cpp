@@ -101,7 +101,7 @@ void Cube::onUpdate(Light::Timestep ts)
 		scale -= 0.2 * ts.getSeconds();
 	}
 
-	updateTransform();
+	//updateTransform();
 }
 
 void Cube::onEvent(Light::Event& e) 
