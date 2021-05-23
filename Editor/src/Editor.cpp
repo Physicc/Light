@@ -4,6 +4,7 @@
 #include "imgui.h"
 
 #include "Objects.hpp"
+#include "Scene.hpp"
 
 class ExampleLayer : public Light::Layer
 {
@@ -43,9 +44,7 @@ public:
 
 		m_framebuffer->bind();
 
-		// Scene.render()
-		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
-		Light::RenderCommand::clear();
+		scene.render();
 
 		Light::Renderer::beginScene(m_camera, m_lightPos);
 		
