@@ -15,7 +15,7 @@ namespace Light
 		virtual void bind() const override;
 		virtual void unbind() const override;
 	private:
-		uint32_t rendererId;
+		uint32_t m_rendererId;
 	};
 
 	class OpenGLIndexBuffer : public IndexBuffer
@@ -29,8 +29,8 @@ namespace Light
 
 		uint32_t getCount() const override;
 	private:
-		uint32_t rendererId;
-		uint32_t count;
+		uint32_t m_rendererId;
+		uint32_t m_count;
 	};
 	
 }

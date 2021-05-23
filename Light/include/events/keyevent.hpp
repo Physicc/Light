@@ -8,30 +8,30 @@ namespace Light
 	class KeyEvent : public Event
 	{
 	public:
-		inline int getKeycode() const { return keycode; }
+		inline int getKeycode() const { return m_keycode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
-		KeyEvent(int keycode): keycode(keycode) {}
-		int keycode;
+		KeyEvent(int keycode): m_keycode(keycode) {}
+		int m_keycode;
 	};
 
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(int keycode, int repeatcount): KeyEvent(keycode), repeatcount(repeatcount) {}
+		KeyPressedEvent(int keycode, int repeatcount): KeyEvent(keycode), m_repeatCount(repeatcount) {}
 
-		inline int getRepeatCount() { return repeatcount; }
+		inline int getRepeatCount() { return m_repeatCount; }
 
 		std::string ToString() const override
 		{
-			return "KeyPressedEvent: " + std::to_string(KeyEvent::keycode) + "(" + std::to_string(repeatcount) + " repeats)";
+			return "KeyPressedEvent: " + std::to_string(KeyEvent::m_keycode) + "(" + std::to_string(m_repeatCount) + " repeats)";
 
 		}
 
 		EVENT_CLASS_TYPE(KeyPressed)
 	private:
-		int repeatcount;
+		int m_repeatCount;
 	};
 
 	class KeyReleasedEvent : public KeyEvent
@@ -41,7 +41,7 @@ namespace Light
 
 		std::string ToString() const override
 		{
-			return "KeyReleasedEvent: " + std::to_string(keycode);
+			return "KeyReleasedEvent: " + std::to_string(m_keycode);
 
 		}
 
@@ -55,7 +55,7 @@ namespace Light
 
 		std::string ToString() const override
 		{
-			return "KeyTypedEvent: " + std::to_string(keycode);
+			return "KeyTypedEvent: " + std::to_string(m_keycode);
 
 		}
 

@@ -6,7 +6,7 @@
 
 namespace Light
 {
-	Input* Input::instance = new InputGlfw;
+	Input* Input::s_instance = new InputGlfw;
 
 	bool InputGlfw::isKeyPressedImpl(int keycode) 
 	{

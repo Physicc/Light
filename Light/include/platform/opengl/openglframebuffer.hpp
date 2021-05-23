@@ -12,7 +12,7 @@ namespace Light
 		OpenGLFramebuffer(const FramebufferSpec& spec);
 		~OpenGLFramebuffer();
 
-		inline const FramebufferSpec& getSpec() const override { return spec; }
+		inline const FramebufferSpec& getSpec() const override { return m_spec; }
 
 		void bind() override;
 		void unbind() override;
@@ -20,14 +20,14 @@ namespace Light
 		void invalidate();
 		void resize(uint32_t width, uint32_t height) override;
 
-		inline uint32_t getColorAttachmentRendererId() const override { return colorAttachment; }
+		inline uint32_t getColorAttachmentRendererId() const override { return m_colorAttachment; }
 
 	private:
-		FramebufferSpec spec;
+		FramebufferSpec m_spec;
 
-		uint32_t rendererId = 0;
-		uint32_t colorAttachment;
-		uint32_t depthAttachment;
+		uint32_t m_rendererId = 0;
+		uint32_t m_colorAttachment;
+		uint32_t m_depthAttachment;
 	};
 
 }

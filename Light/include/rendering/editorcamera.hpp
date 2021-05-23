@@ -23,8 +23,8 @@ namespace Light
 
 		void setViewportSize(int width, int height);
 
-		inline const glm::mat4& getViewMatrix() const { return viewMatrix; }
-		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * viewMatrix; }
+		inline const glm::mat4& getViewMatrix() const { return m_viewMatrix; }
+		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * m_viewMatrix; }
 
 		glm::vec3 getUpDirection() const;
 		glm::vec3 getRightDirection() const;
@@ -48,21 +48,21 @@ namespace Light
 		float rotationSpeed() const;
 		float zoomSpeed() const;
 
-		float aspectRatio;
-		float fovy;
-		float near;
-		float far;
+		float m_aspectRatio;
+		float m_fovy;
+		float m_near;
+		float m_far;
 
-		glm::mat4 viewMatrix;
-		glm::vec3 position = {-0.754f, 0.651f, 1.758f};
-		glm::vec3 focalPoint = {0.0f, 0.0f, 0.0f};
+		glm::mat4 m_viewMatrix;
+		glm::vec3 m_position = {-0.754f, 0.651f, 1.758f};
+		glm::vec3 m_focalPoint = {0.0f, 0.0f, 0.0f};
 
-		float distance = 10.0f;
-		float pitch = 0.0f, yaw = 0.0f;
+		float m_distance = 10.0f;
+		float m_pitch = 0.0f, m_yaw = 0.0f;
 
-		glm::vec2 initialMousePos = {0.0, 0.0};
+		glm::vec2 m_initialMousePos = {0.0, 0.0};
 
-		float viewportWidth = 1280, viewportHeight = 720;
+		float m_viewportWidth = 1280, m_viewportHeight = 720;
 	};
 	
 	
