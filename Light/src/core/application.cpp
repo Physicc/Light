@@ -15,13 +15,15 @@ namespace Light
 			instance = this;
 		else
 		{
-			std::cerr << "Application already created" << std::endl;
+			LIGHT_CORE_CRITICAL("Application already created");
 			exit(1);
 		}
+		LIGHT_CORE_INFO("Created Application");
 		window = static_cast<std::unique_ptr<Window>>(Window::create());
 		window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 		Renderer::init();
+		LIGHT_CORE_INFO("Initialized Renderer");
 
 		imguilayer = new ImguiLayer("ImGui Layer");
 		pushOverlay(imguilayer);

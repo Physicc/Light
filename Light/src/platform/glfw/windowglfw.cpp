@@ -25,7 +25,7 @@ namespace Light
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
-		std::cerr << "GLFW Error(" << error << "): " << description << std::endl;
+		LIGHT_CORE_ERROR("GLFW Error({}): {}", error, description);
 	}
 
 	void WindowGlfw::init(const WindowProps& props)
@@ -38,20 +38,28 @@ namespace Light
 		{
 			int success = glfwInit();
 			if(!success)
+			{
+				LIGHT_CORE_CRITICAL("Could not initialize GLFW");
 				exit(1);
+			}
 
 			glfwSetErrorCallback(GLFWErrorCallback);
 			glfwInitialized = true;
 		}
 
 		#if __APPLE__
-			    glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
-			    glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 1 );
-			    glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
-			    glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE );
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		#endif
 
 		window = glfwCreateWindow(data.width, data.height, data.title.c_str(), nullptr, nullptr);
+		if(!window)
+		{
+			LIGHT_CORE_CRITICAL("Could not create window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
+		}
+		LIGHT_CORE_INFO("Created window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
 		context = new OpenGLContext(window);
 		context->init();
 

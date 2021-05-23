@@ -59,8 +59,7 @@ namespace Light
 
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			std::cerr << " Framebuffer is incomplete!" << std::endl;
-			exit(1);
+			LIGHT_CORE_ERROR("Framebuffer is incomplete!");
 		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);

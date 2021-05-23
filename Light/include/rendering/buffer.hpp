@@ -61,7 +61,7 @@ namespace Light
 		bool normalized;
 
 	private:
-		uint32_t getSize(ShaderDataType type)
+		inline uint32_t getSize(ShaderDataType type)
 		{
 			switch (type)
 			{
@@ -77,12 +77,12 @@ namespace Light
 			case ShaderDataType::Mat4: 		return 4 * 4 * 4;
 			case ShaderDataType::Bool: 		return 1;
 			default:
-				std::cerr << "Unsupported Shader data type" << std::endl;
-				exit(1);
+				LIGHT_CORE_WARN("Unsupported Shader data type");
+				return -1;
 			}
 		}
 
-		uint32_t getComponentCount(ShaderDataType type)
+		inline uint32_t getComponentCount(ShaderDataType type)
 		{
 			switch (type)
 			{
@@ -98,8 +98,8 @@ namespace Light
 			case ShaderDataType::Mat4: 		return 4 * 4;
 			case ShaderDataType::Bool: 		return 1;
 			default:
-				std::cerr << "Unsupported Shader data type" << std::endl;
-				exit(1);
+				LIGHT_CORE_WARN("Unsupported Shader data type");
+				return -1;
 			}
 		}
 	};
@@ -119,7 +119,7 @@ namespace Light
 			}
 		}
 
-		uint32_t getStride() const
+		inline uint32_t getStride() const
 		{
 			return stride;
 		}
@@ -145,12 +145,12 @@ namespace Light
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 
-		void setLayout(BufferLayout layout)
+		inline void setLayout(BufferLayout layout)
 		{
 			this->layout = layout;
 		}
 
-		const BufferLayout& getLayout()
+		inline const BufferLayout& getLayout()
 		{
 			return layout;
 		}
