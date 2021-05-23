@@ -4,16 +4,19 @@
 #include "imgui.h"
 
 #include "Objects.hpp"
+#include "Scene.hpp"
 
 class ExampleLayer : public Light::Layer
 {
 public:
 	ExampleLayer(): Light::Layer("TestLayer"), 
-			camera(45.0f, 1.6f/0.9f, 0.001f, 100.0f),
-			lightPos(-1,2,1.5),
-			floor(glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2))
+					scene(
+						{45.0f, 1.6f/0.9f, 0.001f, 100.0f},
+						{-1,2,1.5},
+						{glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2)}
+					)
 	{
-
+		scene.object_init();
 		Light::FramebufferSpec fbspec;
 		fbspec.width = 1280;
 		fbspec.height = 720;
@@ -26,9 +29,7 @@ public:
 	{
 		if(resizeViewport)
 		{
-			//Scene.camResize(viewportPanelSize.x, viewportPanelSize.y)
-			camera.setViewportSize(viewportPanelSize.x, viewportPanelSize.y);
-			/******************/
+			scene.camResize(viewportPanelSize.x, viewportPanelSize.y);
 			framebuffer->resize(viewportPanelSize.x, viewportPanelSize.y);
 			resizeViewport = false;
 		}
@@ -43,25 +44,11 @@ public:
 			frameCount = 0;
 		}
 
-		//Scene.onUpdate()
-		camera.onUpdate(ts);
-		cube.onUpdate(ts);
-		/**********************/
+		scene.onUpdate(ts);
 
 		framebuffer->bind();
 
-		// Scene.render()
-		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
-		Light::RenderCommand::clear();
-
-		Light::Renderer::beginScene(camera, lightPos);
-		
-		skybox.render();
-		cube.render();
-		floor.render();
-
-		Light::Renderer::endScene();
-		/***********************/
+		scene.render();
 
 		framebuffer->unbind();
 	}
@@ -70,9 +57,7 @@ public:
 	{
 		auto[width, height] = e.getSize();
 		
-		//Scene.camResize(width,height)
-		camera.setViewportSize(width, height);
-		/***************/
+		scene.camResize(width,height);
 
 		return false;
 	}
@@ -83,10 +68,7 @@ public:
 		Light::EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(ExampleLayer::onWindowResize));
 
-		//Scene.onEvent(e)
-		camera.onEvent(e);
-
-		cube.onEvent(e);
+		scene.onEvent(e);
 	}
 
 	void onImguiRender() override
@@ -121,7 +103,8 @@ public:
 		ImGui::PopStyleVar();
 
 		ImGui::Begin("Scene Settings");
-		ImGui::DragFloat3("Light Position", &(lightPos.x), 0.01f);
+
+		ImGui::DragFloat3("Light Position", &(scene.getLightPos()[0]), 0.01f);
 		ImGui::End();
 
 		ImGui::Begin("Camera Controls");
@@ -141,11 +124,7 @@ public:
 	}
 
 private:
-	Light::EditorCamera camera;
-	Cube cube;
-	Cube floor;
-	Skybox skybox;
-	glm::vec3 lightPos;
+	Scene scene;
 
 	std::shared_ptr<Light::Framebuffer> framebuffer;
 
