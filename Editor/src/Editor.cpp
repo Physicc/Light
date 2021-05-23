@@ -26,7 +26,9 @@ public:
 	{
 		if(resizeViewport)
 		{
+			//Scene.camResize(viewportPanelSize.x, viewportPanelSize.y)
 			camera.setViewportSize(viewportPanelSize.x, viewportPanelSize.y);
+			/******************/
 			framebuffer->resize(viewportPanelSize.x, viewportPanelSize.y);
 			resizeViewport = false;
 		}
@@ -41,11 +43,14 @@ public:
 			frameCount = 0;
 		}
 
+		//Scene.onUpdate()
 		camera.onUpdate(ts);
 		cube.onUpdate(ts);
+		/**********************/
 
 		framebuffer->bind();
 
+		// Scene.render()
 		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
 		Light::RenderCommand::clear();
 
@@ -56,6 +61,7 @@ public:
 		floor.render();
 
 		Light::Renderer::endScene();
+		/***********************/
 
 		framebuffer->unbind();
 	}
@@ -63,7 +69,10 @@ public:
 	bool onWindowResize(Light::WindowResizeEvent& e)
 	{
 		auto[width, height] = e.getSize();
+		
+		//Scene.camResize(width,height)
 		camera.setViewportSize(width, height);
+		/***************/
 
 		return false;
 	}
@@ -74,6 +83,7 @@ public:
 		Light::EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(ExampleLayer::onWindowResize));
 
+		//Scene.onEvent(e)
 		camera.onEvent(e);
 
 		cube.onEvent(e);
