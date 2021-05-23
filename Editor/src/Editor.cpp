@@ -43,6 +43,7 @@ public:
 
 		m_framebuffer->bind();
 
+		// Scene.render()
 		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
 		Light::RenderCommand::clear();
 
@@ -53,6 +54,7 @@ public:
 		m_floor.render();
 
 		Light::Renderer::endScene();
+		/***********************/
 
 		m_framebuffer->unbind();
 	}
