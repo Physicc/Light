@@ -4,3 +4,6 @@
 [submodule "bullet3"]
 	path = bullet3
 	url = https://github.com/dropTableUsers42/bullet3.git
+[submodule "Light/libs/spdlog"]
+	path = Light/libs/spdlog
+	url = https://github.com/dropTableUsers42/spdlog.git

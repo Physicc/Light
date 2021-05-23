@@ -7,7 +7,6 @@
 #include "rendering/graphicscontext.hpp"
 
 #include "GLFW/glfw3.h"
-#include "glad/glad.h"
 
 namespace Light
 {
