@@ -46,11 +46,11 @@ namespace Light
 	void ImguiLayer::onEvent(Event& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		if(hoverEventsBlocking)
+		if(m_hoverEventsBlocking)
 		{
 			e.handled |= e.IsInCategory(EventCategoryMouse) && io.WantCaptureMouse;
 		}
-		if(focusEventsBlocking)
+		if(m_focusEventsBlocking)
 		{
 			e.handled |= e.IsInCategory(EventCategoryKeyboard) && io.WantCaptureKeyboard;
 		}

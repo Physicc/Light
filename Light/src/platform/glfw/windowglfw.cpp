@@ -30,9 +30,9 @@ namespace Light
 
 	void WindowGlfw::init(const WindowProps& props)
 	{
-		data.title = props.title;
-		data.width = props.width;
-		data.height = props.height;
+        m_data.title = props.title;
+        m_data.width = props.width;
+        m_data.height = props.height;
 
 		if(!glfwInitialized)
 		{
@@ -54,16 +54,16 @@ namespace Light
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		#endif
 
-		window = glfwCreateWindow(data.width, data.height, data.title.c_str(), nullptr, nullptr);
-		if(!window)
+		m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
+		if(!m_window)
 		{
 			LIGHT_CORE_CRITICAL("Could not create window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
 		}
 		LIGHT_CORE_INFO("Created window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
-		context = new OpenGLContext(window);
-		context->init();
+		m_context = new OpenGLContext(m_window);
+		m_context->init();
 
-		glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -93,7 +93,7 @@ namespace Light
 
 		});
 
-		glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods)
+		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -109,7 +109,7 @@ namespace Light
 			}
 		});
 
-		glfwSetScrollCallback(window, [](GLFWwindow* window, double xoffset, double yoffset)
+		glfwSetScrollCallback(m_window, [](GLFWwindow* window, double xoffset, double yoffset)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -117,7 +117,7 @@ namespace Light
 			data->callback(event);
 		});
 
-		glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos)
+		glfwSetCursorPosCallback(m_window, [](GLFWwindow* window, double xpos, double ypos)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -125,7 +125,7 @@ namespace Light
 			data->callback(event);
 		});
 
-		glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height)
+		glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -136,7 +136,7 @@ namespace Light
 			data->callback(event);
 		});
 
-		glfwSetWindowCloseCallback(window, [](GLFWwindow* window)
+		glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -144,7 +144,7 @@ namespace Light
 			data->callback(event);
 		});
 
-		glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int codepoint)
+		glfwSetCharCallback(m_window, [](GLFWwindow* window, unsigned int codepoint)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -152,20 +152,20 @@ namespace Light
 			data->callback(event);
 		});
 
-		glfwSetWindowUserPointer(window, &data);
+		glfwSetWindowUserPointer(m_window, &m_data);
 
 		setVSync(true);
 	}
 
 	void WindowGlfw::shutdown()
 	{
-		glfwDestroyWindow(window);
+		glfwDestroyWindow(m_window);
 	}
 
 	void WindowGlfw::onUpdate()
 	{
 		glfwPollEvents();
-		context->swapBuffers();
+		m_context->swapBuffers();
 	}
 
 	void WindowGlfw::setVSync(bool enabled)
@@ -174,12 +174,12 @@ namespace Light
 			glfwSwapInterval(1);
 		else
 			glfwSwapInterval(0);
-		
-		data.vSync = enabled;
+
+        m_data.vSync = enabled;
 	}
 
 	bool WindowGlfw::isVSync() const
 	{
-		return data.vSync;
+		return m_data.vSync;
 	}
 }

@@ -7,26 +7,25 @@
 
 namespace Light
 {
-	Application* Application::instance = nullptr;
+	Application* Application::m_instance = nullptr;
 
 	Application::Application()
 	{
-		if(instance == nullptr)
-			instance = this;
+		if(m_instance == nullptr)
+            m_instance = this;
 		else
 		{
 			LIGHT_CORE_CRITICAL("Application already created");
 			exit(1);
 		}
-		LIGHT_CORE_INFO("Created Application");
-		window = static_cast<std::unique_ptr<Window>>(Window::create());
-		window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+        m_window = static_cast<std::unique_ptr<Window>>(Window::create());
+		m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 		Renderer::init();
 		LIGHT_CORE_INFO("Initialized Renderer");
 
-		imguilayer = new ImguiLayer("ImGui Layer");
-		pushOverlay(imguilayer);
+        m_imguiLayer = new ImguiLayer("ImGui Layer");
+		pushOverlay(m_imguiLayer);
 
 	}
 	
@@ -38,7 +37,7 @@ namespace Light
 		d.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
 		d.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::onWindowResize));
 
-		for(auto it = layerstack.end(); it != layerstack.begin();)
+		for(auto it = m_layerStack.end(); it != m_layerStack.begin();)
 		{
 			if(e.handled)
 				break;
@@ -48,35 +47,35 @@ namespace Light
 
 	void Application::run() 
 	{
-		while(running)
+		while(m_running)
 		{
 			float time = static_cast<float>(glfwGetTime());
-			Timestep ts(time - lastTime);
-			lastTime = time;
+			Timestep ts(time - m_lastTime);
+            m_lastTime = time;
 
-			if(!minimized)
+			if(!m_minimized)
 			{
-				for(Layer* layer : layerstack)
+				for(Layer* layer : m_layerStack)
 				{
 					layer->onUpdate(ts);
 				}
 			}
 			
 
-			imguilayer->begin();
-			for(Layer* layer : layerstack)
+			m_imguiLayer->begin();
+			for(Layer* layer : m_layerStack)
 			{
 				layer->onImguiRender();
 			}
-			imguilayer->end();
+			m_imguiLayer->end();
 
-			window->onUpdate();
+			m_window->onUpdate();
 		}
 	}
 
 	bool Application::onWindowClose(WindowCloseEvent& e)
 	{
-		running = false;
+        m_running = false;
 		return true;
 	}
 
@@ -84,24 +83,24 @@ namespace Light
 	{
 		if(std::get<0>(e.getSize()) == 0 || std::get<1>(e.getSize()) == 0)
 		{
-			minimized = true;
+            m_minimized = true;
 			return false;
 		}
 
 		Renderer::onWindowResize(std::get<0>(e.getSize()), std::get<1>(e.getSize()));
-		minimized = false;
+        m_minimized = false;
 		return false;
 	}
 
 	void Application::pushLayer(Layer* layer)
 	{
-		layerstack.pushLayer(layer);
+		m_layerStack.pushLayer(layer);
 		layer->onAttach();
 	}
 
 	void Application::pushOverlay(Layer* overlay)
 	{
-		layerstack.pushOverlay(overlay);
+		m_layerStack.pushOverlay(overlay);
 		overlay->onAttach();
 	}
 }

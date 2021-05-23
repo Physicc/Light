@@ -52,7 +52,7 @@ namespace Light
 	{
 	public:
 		EventDispatcher(Event& event)
-			: m_Event(event)
+			: m_event(event)
 		{
 		}
 		
@@ -60,15 +60,15 @@ namespace Light
 		template<typename T, typename F>
 		bool Dispatch(const F& func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticType())
+			if (m_event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.handled |= func(static_cast<T&>(m_Event));
+                m_event.handled |= func(static_cast<T&>(m_event));
 				return true;
 			}
 			return false;
 		}
 	private:
-		Event& m_Event;
+		Event& m_event;
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)

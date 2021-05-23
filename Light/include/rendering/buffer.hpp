@@ -18,47 +18,47 @@ namespace Light
 	struct BufferElement
 	{
 		BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-			: type(type), name(name), normalized(normalized), offset(0),
-				size(getSize(type)), componentCount(getComponentCount(type))
+			: m_type(type), m_name(name), m_normalized(normalized), m_offset(0),
+              m_size(getSize(type)), m_componentCount(getComponentCount(type))
 		{}
 
 		void setOffset(uint32_t offset)
 		{
-			this->offset = offset;
+			this->m_offset = offset;
 		}
 
 		uint32_t getSize() const
 		{
-			return size;
+			return m_size;
 		}
 
 		uint32_t getComponentCount() const
 		{
-			return componentCount;
+			return m_componentCount;
 		}
 		
 		uint32_t getOffset() const
 		{
-			return offset;
+			return m_offset;
 		}
 
 		ShaderDataType getType() const
 		{
-			return type;
+			return m_type;
 		}
 
 		bool isNormalized() const
 		{
-			return normalized;
+			return m_normalized;
 		}
 
 	private:
-		ShaderDataType type;
-		std::string name;
-		uint32_t offset;
-		uint32_t size;
-		uint32_t componentCount;
-		bool normalized;
+		ShaderDataType m_type;
+		std::string m_name;
+		uint32_t m_offset;
+		uint32_t m_size;
+		uint32_t m_componentCount;
+		bool m_normalized;
 
 	private:
 		inline uint32_t getSize(ShaderDataType type)
@@ -109,31 +109,31 @@ namespace Light
 	public:
 		BufferLayout() = default;
 
-		BufferLayout(std::initializer_list<BufferElement> elements) : elements(elements)
+		BufferLayout(std::initializer_list<BufferElement> elements) : m_elements(elements)
 		{
-			stride = 0;
-			for(auto &element : this->elements)
+            m_stride = 0;
+			for(auto &element : this->m_elements)
 			{
-				element.setOffset(stride);
-				stride += element.getSize();
+				element.setOffset(m_stride);
+                m_stride += element.getSize();
 			}
 		}
 
 		inline uint32_t getStride() const
 		{
-			return stride;
+			return m_stride;
 		}
 
-		inline const std::vector<BufferElement>& getElements() const { return elements; }
+		inline const std::vector<BufferElement>& getElements() const { return m_elements; }
 
-		std::vector<BufferElement>::iterator begin() { return elements.begin(); }
-		std::vector<BufferElement>::iterator end() { return elements.end(); }
-		std::vector<BufferElement>::const_iterator begin() const { return elements.begin(); }
-		std::vector<BufferElement>::const_iterator end() const { return elements.end(); }
+		std::vector<BufferElement>::iterator begin() { return m_elements.begin(); }
+		std::vector<BufferElement>::iterator end() { return m_elements.end(); }
+		std::vector<BufferElement>::const_iterator begin() const { return m_elements.begin(); }
+		std::vector<BufferElement>::const_iterator end() const { return m_elements.end(); }
 
 	private:
-		std::vector<BufferElement> elements;
-		uint32_t stride;
+		std::vector<BufferElement> m_elements;
+		uint32_t m_stride;
 	};
 
 	class VertexBuffer
@@ -147,18 +147,18 @@ namespace Light
 
 		inline void setLayout(BufferLayout layout)
 		{
-			this->layout = layout;
+			this->m_layout = layout;
 		}
 
 		inline const BufferLayout& getLayout()
 		{
-			return layout;
+			return m_layout;
 		}
 
 		static VertexBuffer* create(float* vertices, uint32_t size);
 
 	protected:
-		BufferLayout layout;
+		BufferLayout m_layout;
 	};
 
 
