@@ -17,7 +17,10 @@ void Scene::object_init(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 void Scene::onUpdate(Light::Timestep ts)
 {
     camera.onUpdate(ts);
-    for(auto object : objects) {object.onUpdate(ts);}
+    for(Cube& object : objects) 
+    {
+        object.onUpdate(ts);
+    }
 }
 
 void Scene::render()
@@ -28,7 +31,7 @@ void Scene::render()
     Light::Renderer::beginScene(camera, lightPos);
     
     skybox.render();
-    for(auto object : objects) 
+    for(Cube& object : objects) 
     {
         object.render();
     }
@@ -45,7 +48,7 @@ void Scene::camResize(float x, float y)
 void Scene::onEvent(Light::Event& e)
 {
     camera.onEvent(e);
-    for(auto object : objects) 
+    for(Cube& object : objects) 
     {
         object.onEvent(e);
     }
