@@ -1,17 +1,17 @@
 #include "Objects.hpp"
 
 Cube::Cube(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-	:	layout({
+	: m_layout({
 			{ Light::ShaderDataType::Float3, "a_Position" },
 			{ Light::ShaderDataType::Float4, "a_Color" },
 			{ Light::ShaderDataType::Float3, "a_Normal" }
 		}),
-		position(position),
-		rotation(rotation),
-		scale(scale)
+      m_position(position),
+      m_rotation(rotation),
+      m_scale(scale)
 {
-	shader = Light::Shader::create("../Light/assets/shaders/phong.glsl");
-	vao.reset(Light::VertexArray::create());
+    m_shader = Light::Shader::create("../Light/assets/shaders/phong.glsl");
+	m_vao.reset(Light::VertexArray::create());
 
 	float vertices[] = {
 			//Front
@@ -46,8 +46,8 @@ Cube::Cube(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 			0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
 	};
 
-	vbo.reset(Light::VertexBuffer::create(vertices, sizeof(vertices)));
-	vbo->setLayout(layout);
+	m_vbo.reset(Light::VertexBuffer::create(vertices, sizeof(vertices)));
+	m_vbo->setLayout(m_layout);
 
 	unsigned int indices[] = { 
 		0, 1, 2, 2, 3, 0,
@@ -58,10 +58,10 @@ Cube::Cube(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 		20, 21, 22, 22, 23, 20
 	};
 
-	ibo.reset(Light::IndexBuffer::create(indices, sizeof(indices)/sizeof(unsigned int)));
+	m_ibo.reset(Light::IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
 
-	vao->addVertexBuffer(vbo);
-	vao->setIndexBuffer(ibo);
+	m_vao->addVertexBuffer(m_vbo);
+	m_vao->setIndexBuffer(m_ibo);
 
 	updateTransform();
 }
@@ -70,11 +70,11 @@ void Cube::onUpdate(Light::Timestep ts)
 {
 	if(Light::Input::isKeyPressed(LIGHT_KEY_A))
 	{
-		position.x -= 1.0 * ts.getSeconds();
+        m_position.x -= 1.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_D))
 	{
-		position.x += 1.0 * ts.getSeconds();
+        m_position.x += 1.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_W))
 	{
@@ -86,19 +86,19 @@ void Cube::onUpdate(Light::Timestep ts)
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_1))
 	{
-		rotation.x += 20.0 * ts.getSeconds();
+        m_rotation.x += 20.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_2))
 	{
-		rotation.x -= 20.0 * ts.getSeconds();
+        m_rotation.x -= 20.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_3))
 	{
-		scale += 0.2 * ts.getSeconds();
+        m_scale += 0.2 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_4))
 	{
-		scale -= 0.2 * ts.getSeconds();
+        m_scale -= 0.2 * ts.getSeconds();
 	}
 
 	updateTransform();
@@ -111,26 +111,26 @@ void Cube::onEvent(Light::Event& e)
 
 void Cube::render()
 {
-	Light::Renderer::submit(shader, vao, transform);
+	Light::Renderer::submit(m_shader, m_vao, m_transform);
 }
 
 void Cube::updateTransform()
 {
-	transform = glm::translate(glm::mat4(1.0f), position);
-	transform = glm::scale(transform, scale);
-	transform = glm::rotate(transform, glm::radians(rotation.x), glm::vec3(1.0, 0.0, 0.0));
-	transform = glm::rotate(transform, glm::radians(rotation.y), glm::vec3(0.0, 1.0, 0.0));
-	transform = glm::rotate(transform, glm::radians(rotation.z), glm::vec3(0.0, 0.0, 1.0));
+    m_transform = glm::translate(glm::mat4(1.0f), m_position);
+    m_transform = glm::scale(m_transform, m_scale);
+    m_transform = glm::rotate(m_transform, glm::radians(m_rotation.x), glm::vec3(1.0, 0.0, 0.0));
+    m_transform = glm::rotate(m_transform, glm::radians(m_rotation.y), glm::vec3(0.0, 1.0, 0.0));
+    m_transform = glm::rotate(m_transform, glm::radians(m_rotation.z), glm::vec3(0.0, 0.0, 1.0));
 }
 
 
 
 Skybox::Skybox()
-	: layout({
+	: m_layout({
 			{ Light::ShaderDataType::Float3, "a_Position" }
 		})
 {
-	vao.reset(Light::VertexArray::create());
+	m_vao.reset(Light::VertexArray::create());
 
 	float vertices[] = {
 			//Front
@@ -165,8 +165,8 @@ Skybox::Skybox()
 			1.0, -1.0, -1.0,
 	};
 
-	vbo.reset(Light::VertexBuffer::create(vertices, sizeof(vertices)));
-	vbo->setLayout(layout);
+	m_vbo.reset(Light::VertexBuffer::create(vertices, sizeof(vertices)));
+	m_vbo->setLayout(m_layout);
 
 	unsigned int indices[] = { 
 		0, 2, 1, 3, 2, 0,
@@ -177,19 +177,19 @@ Skybox::Skybox()
 		20, 22, 21, 23, 22, 20
 	};
 
-	ibo.reset(Light::IndexBuffer::create(indices, sizeof(indices)/sizeof(unsigned int)));
+	m_ibo.reset(Light::IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
 
-	vao->addVertexBuffer(vbo);
-	vao->setIndexBuffer(ibo);
+	m_vao->addVertexBuffer(m_vbo);
+	m_vao->setIndexBuffer(m_ibo);
 
-	cubemap.reset(Light::Cubemap::create("../Light/assets/cubemap"));
-	shader = Light::Shader::create("../Light/assets/shaders/skybox.glsl");
-	shader->bind();
-	shader->setUniformInt("u_cubemap", 0);
+	m_cubemap.reset(Light::Cubemap::create("../Light/assets/cubemap"));
+    m_shader = Light::Shader::create("../Light/assets/shaders/skybox.glsl");
+	m_shader->bind();
+	m_shader->setUniformInt("u_cubemap", 0);
 }
 
 void Skybox::render() 
 {
-	cubemap->bind();
-	Light::Renderer::submitSkybox(shader, vao);
+	m_cubemap->bind();
+	Light::Renderer::submitSkybox(m_shader, m_vao);
 }

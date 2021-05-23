@@ -8,19 +8,19 @@ namespace Light
 	class MouseMovedEvent : public Event
 	{
 	public:
-		MouseMovedEvent(double x, double y): x(x), y(y) {}
+		MouseMovedEvent(double x, double y): m_x(x), m_y(y) {}
 
-		inline std::tuple<double, double> getPos() { return {x, y}; }
+		inline std::tuple<double, double> getPos() { return {m_x, m_y}; }
 
 		std::string ToString() const override
 		{
-			return "MouseMovedEvent: (" + std::to_string(x) + "," + std::to_string(y) + ")";
+			return "MouseMovedEvent: (" + std::to_string(m_x) + "," + std::to_string(m_y) + ")";
 		}
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 		EVENT_CLASS_TYPE(MouseMoved)
 	private:
-		double x,y;
+		double m_x, m_y;
 	};
 
 	class MouseScrolledEvent : public Event

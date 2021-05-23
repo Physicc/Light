@@ -20,37 +20,35 @@ public:
 		Light::FramebufferSpec fbspec;
 		fbspec.width = 1280;
 		fbspec.height = 720;
-
-		framebuffer = Light::Framebuffer::create(fbspec);
+        m_framebuffer = Light::Framebuffer::create(fbspec);
 	}
 	~ExampleLayer() = default;
 
 	void onUpdate(Light::Timestep ts) override
 	{
-		if(resizeViewport)
+		if(m_resizeViewport)
 		{
 			scene.camResize(viewportPanelSize.x, viewportPanelSize.y);
 			framebuffer->resize(viewportPanelSize.x, viewportPanelSize.y);
 			resizeViewport = false;
 		}
-
-		frameCount++;
-		time += ts.getMilliSeconds();
-		if(time >= 500.0f)
+		m_frameCount++;
+        m_time += ts.getMilliSeconds();
+		if(m_time >= 500.0f)
 		{
-			lastTime = time;
-			lastFrameCount = frameCount;
-			time = 0.0f;
-			frameCount = 0;
+            m_lastTime = m_time;
+            m_lastFrameCount = m_frameCount;
+            m_time = 0.0f;
+            m_frameCount = 0;
 		}
 
 		scene.onUpdate(ts);
 
-		framebuffer->bind();
+		m_framebuffer->bind();
 
 		scene.render();
 
-		framebuffer->unbind();
+		m_framebuffer->unbind();
 	}
 
 	bool onWindowResize(Light::WindowResizeEvent& e)
@@ -93,17 +91,16 @@ public:
 		Light::Application::get().getImguiLayer()->blockHoverEvents(!ImGui::IsWindowHovered());
 
 		ImVec2 panelSize = ImGui::GetContentRegionAvail();
-		if(viewportPanelSize != *(glm::vec2*)&panelSize)
+		if(m_viewportPanelSize != *(glm::vec2*)&panelSize)
 		{
-			resizeViewport = true;
-			viewportPanelSize = glm::vec2(panelSize.x, panelSize.y);
+            m_resizeViewport = true;
+            m_viewportPanelSize = glm::vec2(panelSize.x, panelSize.y);
 		}
-		ImGui::Image(INT2VOIDP(framebuffer->getColorAttachmentRendererId()), panelSize, ImVec2(0, 1), ImVec2(1,0));
+		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId()), panelSize, ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::End();
 		ImGui::PopStyleVar();
 
 		ImGui::Begin("Scene Settings");
-
 		ImGui::DragFloat3("Light Position", scene.getLightPos(), 0.01f);
 		ImGui::End();
 
@@ -115,10 +112,10 @@ public:
 		ImGui::End();
 
 		ImGui::Begin("Performance Statistics");
-		ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d", 
-					lastTime/lastFrameCount,
-					lastTime*0.001f/lastFrameCount,
-					int(lastFrameCount*1000/lastTime));
+		ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d",
+                    m_lastTime / m_lastFrameCount,
+                    m_lastTime * 0.001f / m_lastFrameCount,
+                    int(m_lastFrameCount * 1000 / m_lastTime));
 		ImGui::End();
 
 	}
@@ -135,7 +132,6 @@ private:
 	int frameCount = 0;
 	float lastTime = 0.0f;
 	int lastFrameCount = 0;
-
 };
 
 class Editor : public Light::Application
@@ -146,7 +142,6 @@ public:
 		pushLayer(new ExampleLayer());
 	}
 	~Editor() = default;
-	
 };
 
 Light::Application* Light::createApplication()
