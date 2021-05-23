@@ -20,8 +20,8 @@ namespace Light
 		case ShaderDataType::Mat4: 		return GL_FLOAT;
 		case ShaderDataType::Bool: 		return GL_BOOL;
 		default:
-			std::cerr << "Unsupported Shader data type" << std::endl;
-			exit(1);
+			LIGHT_CORE_ERROR("Unsupported Shader data type");
+			return -1;
 		}
 	}
 
@@ -51,8 +51,8 @@ namespace Light
 	{
 		if(vbo->getLayout().getElements().size() == 0)
 		{
-			std::cerr << "Buffer Layout not set!" << std::endl;
-			exit(1);
+			LIGHT_CORE_ERROR("Buffer Layout not set!");
+			return;
 		}
 
 		glBindVertexArray(m_rendererId);
