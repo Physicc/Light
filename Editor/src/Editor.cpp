@@ -4,16 +4,20 @@
 #include "imgui.h"
 
 #include "Objects.hpp"
+#include "Scene.hpp"
 
 class ExampleLayer : public Light::Layer
 {
 public:
-	ExampleLayer(): Light::Layer("TestLayer"),
-                    m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f),
-                    m_lightPos(-1, 2, 1.5),
-                    m_floor(glm::vec3(0, -1, 0), glm::vec3(0), glm::vec3(2, 0.1, 2))
+	ExampleLayer(): Light::Layer("TestLayer"), 
+					scene(
+						{45.0f, 1.6f/0.9f, 0.001f, 100.0f},
+						{-1,2,1.5},
+						{glm::vec3(0,-1,0), glm::vec3(0), glm::vec3(2,0.1,2)}
+					)
 	{
-	    Light::FramebufferSpec fbspec;
+		scene.object_init();
+		Light::FramebufferSpec fbspec;
 		fbspec.width = 1280;
 		fbspec.height = 720;
         m_framebuffer = Light::Framebuffer::create(fbspec);
@@ -24,9 +28,9 @@ public:
 	{
 		if(m_resizeViewport)
 		{
-			m_camera.setViewportSize(m_viewportPanelSize.x, m_viewportPanelSize.y);
-			m_framebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
-            m_resizeViewport = false;
+			scene.camResize(viewportPanelSize.x, viewportPanelSize.y);
+			framebuffer->resize(viewportPanelSize.x, viewportPanelSize.y);
+			resizeViewport = false;
 		}
 		m_frameCount++;
         m_time += ts.getMilliSeconds();
@@ -38,21 +42,11 @@ public:
             m_frameCount = 0;
 		}
 
-		m_camera.onUpdate(ts);
-		m_cube.onUpdate(ts);
+		scene.onUpdate(ts);
 
 		m_framebuffer->bind();
 
-		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
-		Light::RenderCommand::clear();
-
-		Light::Renderer::beginScene(m_camera, m_lightPos);
-		
-		m_skybox.render();
-		m_cube.render();
-		m_floor.render();
-
-		Light::Renderer::endScene();
+		scene.render();
 
 		m_framebuffer->unbind();
 	}
@@ -60,7 +54,9 @@ public:
 	bool onWindowResize(Light::WindowResizeEvent& e)
 	{
 		auto[width, height] = e.getSize();
-		m_camera.setViewportSize(width, height);
+		
+		scene.camResize(width,height);
+
 		return false;
 	}
 
@@ -69,8 +65,8 @@ public:
 	{
 		Light::EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(ExampleLayer::onWindowResize));
-		m_camera.onEvent(e);
-		m_cube.onEvent(e);
+
+		scene.onEvent(e);
 	}
 
 	void onImguiRender() override
@@ -105,7 +101,8 @@ public:
 		ImGui::PopStyleVar();
 
 		ImGui::Begin("Scene Settings");
-		ImGui::DragFloat3("Light Position", &(m_lightPos.x), 0.01f);
+
+		ImGui::DragFloat3("Light Position", scene.getLightPos(), 0.01f);
 		ImGui::End();
 
 		ImGui::Begin("Camera Controls");
@@ -125,18 +122,18 @@ public:
 	}
 
 private:
-	Light::EditorCamera m_camera;
-	Cube m_cube;
-	Cube m_floor;
-	Skybox m_skybox;
-	glm::vec3 m_lightPos;
-	std::shared_ptr<Light::Framebuffer> m_framebuffer;
-	glm::vec2 m_viewportPanelSize;
-	bool m_resizeViewport = false;
-	float m_time = 0.0f;
-	int m_frameCount = 0;
-	float m_lastTime = 0.0f;
-	int m_lastFrameCount = 0;
+	Scene scene;
+
+	std::shared_ptr<Light::Framebuffer> framebuffer;
+
+	glm::vec2 viewportPanelSize;
+	bool resizeViewport = false;
+
+	float time = 0.0f;
+	int frameCount = 0;
+	float lastTime = 0.0f;
+	int lastFrameCount = 0;
+
 };
 
 class Editor : public Light::Application
