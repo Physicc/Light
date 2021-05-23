@@ -25,7 +25,7 @@ public:
 	{
 		if(m_resizeViewport)
 		{
-			m_scene.setViewportSize(m_viewportPanelSize.x, m_viewportPanelSize.y);
+			m_scene.setViewportSize(m_viewportPanelSize);
             m_framebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
             m_resizeViewport = false;
 		}
@@ -98,8 +98,8 @@ public:
 		ImGui::PopStyleVar();
 
 		ImGui::Begin("Scene Settings");
-		float x=m_scene.getlightPosx();
-		ImGui::DragFloat3("Light Position", &(x), 0.01f);
+		glm::vec3 v=m_scene.getlightPos();
+		ImGui::DragFloat3("Light Position", &(v.x), 0.01f);
 		ImGui::End();
 
 		ImGui::Begin("Camera Controls");

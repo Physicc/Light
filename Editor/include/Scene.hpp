@@ -12,9 +12,9 @@ class Scene
 	void onUpdate(Light::Timestep ts);
 	void render();
 	void onEvent(Light::Event& e);
-	void setViewportSize(int &&,int &&);
+	void setViewportSize(glm::vec2);
 	void onWindowResize(Light::WindowResizeEvent& );
-    float getlightPosx();
+    glm::vec3 getlightPos();
 	void addgameObject(glm::vec3,glm::vec3,glm::vec3);
 
 	private:

@@ -11,9 +11,9 @@ Scene::Scene()
 	     
 
 }
-void Scene::setViewportSize(int && width,int && height){
+void Scene::setViewportSize(glm::vec2 viewportPanelSize){
     
-    m_camera.setViewportSize(width, height);
+    m_camera.setViewportSize(viewportPanelSize.x, viewportPanelSize.y);
 
 }
 void Scene::onUpdate(Light::Timestep ts)
@@ -55,8 +55,8 @@ void Scene:: onWindowResize(Light::WindowResizeEvent& e){
 
 		
 }
-float Scene::getlightPosx(){
-    return {m_lightPos.x};
+glm::vec3 Scene::getlightPos(){
+    return m_lightPos;
 }
 void Scene::addgameObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale){
    Cube obj=Cube(position,rotation,scale);
