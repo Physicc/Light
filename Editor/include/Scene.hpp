@@ -18,7 +18,7 @@ public:
     void render();
     void camResize(float x, float y);
     
-    std::vector<float> getLightPos();       //{x,y,z}
+    float* getLightPos();       
 
 private:
     Light::EditorCamera camera;

@@ -104,7 +104,7 @@ public:
 
 		ImGui::Begin("Scene Settings");
 
-		ImGui::DragFloat3("Light Position", &(scene.getLightPos()[0]), 0.01f);
+		ImGui::DragFloat3("Light Position", scene.getLightPos(), 0.01f);
 		ImGui::End();
 
 		ImGui::Begin("Camera Controls");

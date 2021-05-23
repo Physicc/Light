@@ -54,7 +54,7 @@ void Scene::onEvent(Light::Event& e)
     }
 }
 
-std::vector<float> Scene::getLightPos()
+float* Scene::getLightPos()
 {
-    return {lightPos.x, lightPos.y, lightPos.z};
+    return {&lightPos.x};
 }
