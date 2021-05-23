@@ -28,7 +28,10 @@ void Scene::render()
     Light::Renderer::beginScene(camera, lightPos);
     
     skybox.render();
-    for(auto object : objects) {object.render();}
+    for(auto object : objects) 
+    {
+        object.render();
+    }
     floor.render();
 
     Light::Renderer::endScene();
@@ -42,7 +45,10 @@ void Scene::camResize(float x, float y)
 void Scene::onEvent(Light::Event& e)
 {
     camera.onEvent(e);
-    for(auto object : objects) {object.onEvent(e);}
+    for(auto object : objects) 
+    {
+        object.onEvent(e);
+    }
 }
 
 std::vector<float> Scene::getLightPos()
