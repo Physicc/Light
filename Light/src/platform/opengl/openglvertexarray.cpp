@@ -1,5 +1,7 @@
 #include "platform/opengl/openglvertexarray.hpp"
 
+#include "core/logging.hpp"
+
 #include "glad/glad.h"
 
 namespace Light
