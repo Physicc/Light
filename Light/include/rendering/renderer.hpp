@@ -27,7 +27,7 @@ namespace Light
 			glm::mat4 viewProjectionSkyboxMatrix;
 		};
 
-		static SceneData* sceneData;
+		static SceneData* s_sceneData;
 	};
 	
 }

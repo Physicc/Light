@@ -10,57 +10,56 @@ namespace Light
 	}
 
 	OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpec& spec)
-		: spec(spec)
+		: m_spec(spec)
 	{
 		invalidate();
 	}
 
 	OpenGLFramebuffer::~OpenGLFramebuffer() 
 	{
-		glDeleteFramebuffers(1, &rendererId);
-		glDeleteTextures(1, &colorAttachment);
-		glDeleteRenderbuffers(1, &depthAttachment);
+		glDeleteFramebuffers(1, &m_rendererId);
+		glDeleteTextures(1, &m_colorAttachment);
+		glDeleteRenderbuffers(1, &m_depthAttachment);
 	}
 
 	void OpenGLFramebuffer::resize(uint32_t width, uint32_t height) 
 	{
-		spec.width = width;
-		spec.height = height;
+        m_spec.width = width;
+        m_spec.height = height;
 
 		invalidate();
 	}
 
 	void OpenGLFramebuffer::invalidate() 
 	{
-		if(rendererId == 0)
+		if(m_rendererId == 0)
 		{
-			glDeleteTextures(1, &colorAttachment);
-			glDeleteRenderbuffers(1, &depthAttachment);
+			glDeleteTextures(1, &m_colorAttachment);
+			glDeleteRenderbuffers(1, &m_depthAttachment);
 		}
 
-		glGenFramebuffers(1, &rendererId);
-		glBindFramebuffer(GL_FRAMEBUFFER, rendererId);
+		glGenFramebuffers(1, &m_rendererId);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_rendererId);
 
-		glGenTextures(1, &colorAttachment);
-		glBindTexture(GL_TEXTURE_2D, colorAttachment);
+		glGenTextures(1, &m_colorAttachment);
+		glBindTexture(GL_TEXTURE_2D, m_colorAttachment);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, spec.width, spec.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_spec.width, m_spec.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorAttachment, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_colorAttachment, 0);
 
-		glGenRenderbuffers(1, &depthAttachment);
-		glBindRenderbuffer(GL_RENDERBUFFER, depthAttachment);
+		glGenRenderbuffers(1, &m_depthAttachment);
+		glBindRenderbuffer(GL_RENDERBUFFER, m_depthAttachment);
 
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, spec.width, spec.height);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_spec.width, m_spec.height);
 
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, depthAttachment);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthAttachment);
 
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			std::cerr << " Framebuffer is incomplete!" << std::endl;
-			exit(1);
+			LIGHT_CORE_ERROR("Framebuffer is incomplete!");
 		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -68,8 +67,8 @@ namespace Light
 
 	void OpenGLFramebuffer::bind() 
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, rendererId);
-		glViewport(0, 0, spec.width, spec.height);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_rendererId);
+		glViewport(0, 0, m_spec.width, m_spec.height);
 	}
 	
 	void OpenGLFramebuffer::unbind() 

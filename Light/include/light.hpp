@@ -13,6 +13,7 @@
 #include "input/keycodes.hpp"
 #include "input/mousecodes.hpp"
 #include "core/timestep.hpp"
+#include "core/logging.hpp"
 
 #include "glm/gtc/type_ptr.hpp"
 

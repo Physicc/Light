@@ -17,12 +17,12 @@ namespace Light
 		void pushOverlay(Layer* overlay);
 		void popOverlay(Layer* overlay);
 
-		std::vector<Layer*>::iterator begin() { return layers.begin(); }
-		std::vector<Layer*>::iterator end() { return layers.end(); }
+		std::vector<Layer*>::iterator begin() { return m_layers.begin(); }
+		std::vector<Layer*>::iterator end() { return m_layers.end(); }
 
 	private:
-		std::vector<Layer*> layers;
-		int layerTop = 0;
+		std::vector<Layer*> m_layers;
+		int m_layerTop = 0;
 	};
 	
 }

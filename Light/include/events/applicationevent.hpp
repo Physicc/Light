@@ -8,19 +8,19 @@ namespace Light
 	class WindowResizeEvent : public Event
 	{
 	public:
-		WindowResizeEvent(int x, int y): x(x), y(y) {}
+		WindowResizeEvent(int x, int y): m_x(x), m_y(y) {}
 
-		std::tuple<int, int> getSize() { return {x, y}; }
+		std::tuple<int, int> getSize() { return {m_x, m_y}; }
 
 		[[nodiscard]] std::string ToString() const override
 		{
-			return "WindowResizeEvent: " + std::to_string(x) + ", " + std::to_string(y) + ")";
+			return "WindowResizeEvent: " + std::to_string(m_x) + ", " + std::to_string(m_y) + ")";
 		}
 
 		EVENT_CLASS_TYPE(WindowResize)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	private:
-		int x,y;
+		int m_x,m_y;
 	};
 
 	class WindowCloseEvent : public Event
