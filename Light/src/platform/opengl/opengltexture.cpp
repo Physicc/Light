@@ -1,5 +1,7 @@
 #include "platform/opengl/opengltexture.hpp"
 
+#include "core/logging.hpp"
+
 #include "glad/glad.h"
 #include "stb_image.h"
 
