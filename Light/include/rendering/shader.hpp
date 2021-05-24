@@ -43,7 +43,7 @@ namespace Light
 		std::shared_ptr<Shader> get(const std::string& name);
 
 	private:
-		std::unordered_map<std::string, std::shared_ptr<Shader>> shaders;
+		std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
 	};
 
 }

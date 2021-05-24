@@ -16,7 +16,7 @@ namespace Light
 		void init() override;
 		void swapBuffers() override;
 	private:
-		GLFWwindow* windowHandle;
+		GLFWwindow* m_windowHandle;
 	};	
 }
 

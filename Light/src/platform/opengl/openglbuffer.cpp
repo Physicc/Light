@@ -16,15 +16,15 @@ namespace Light
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size) 
 	{
-		glGenBuffers(1, &rendererId);
+		glGenBuffers(1, &m_rendererId);
 		bind();
 
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 	}
 	
-	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count) : count(count)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count) : m_count(count)
 	{
-		glGenBuffers(1, &rendererId);
+		glGenBuffers(1, &m_rendererId);
 		bind();
 
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
@@ -32,17 +32,17 @@ namespace Light
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
 	{
-		glDeleteBuffers(1, &rendererId);
+		glDeleteBuffers(1, &m_rendererId);
 	}
 
 	OpenGLIndexBuffer::~OpenGLIndexBuffer()
 	{
-		glDeleteBuffers(1, &rendererId);
+		glDeleteBuffers(1, &m_rendererId);
 	}
 
 	void OpenGLVertexBuffer::bind() const
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, rendererId);
+		glBindBuffer(GL_ARRAY_BUFFER, m_rendererId);
 	}
 	
 	void OpenGLVertexBuffer::unbind() const
@@ -52,7 +52,7 @@ namespace Light
 
 	void OpenGLIndexBuffer::bind() const
 	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererId);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererId);
 	}
 	
 	void OpenGLIndexBuffer::unbind() const
@@ -62,6 +62,6 @@ namespace Light
 
 	uint32_t OpenGLIndexBuffer::getCount() const
 	{
-		return count;
+		return m_count;
 	}
 }

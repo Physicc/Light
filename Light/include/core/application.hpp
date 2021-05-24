@@ -22,28 +22,28 @@ namespace Light
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* overlay);
 
-		inline Window& getWindow() { return *window; }
+		inline Window& getWindow() { return *m_window; }
 
-		static inline Application& get() { return *instance; }
+		static inline Application& get() { return *m_instance; }
 
-		ImguiLayer* getImguiLayer() { return imguilayer; }
+		ImguiLayer* getImguiLayer() { return m_imguiLayer; }
 
-		inline void close() { running = false; }
+		inline void close() { m_running = false; }
 
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
 		bool onWindowResize(WindowResizeEvent& e);
 
-		bool running = true;
-		bool minimized = false;
+		bool m_running = true;
+		bool m_minimized = false;
 
-		std::unique_ptr<Window> window;
-		ImguiLayer* imguilayer;
-		LayerStack layerstack;
+		std::unique_ptr<Window> m_window;
+		ImguiLayer* m_imguiLayer;
+		LayerStack m_layerStack;
 
-		static Application* instance;
+		static Application* m_instance;
 
-		float lastTime = 0.0f;
+		float m_lastTime = 0.0f;
 	};
 
 	Application* createApplication();

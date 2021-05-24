@@ -10,7 +10,7 @@ namespace Light
 	class Layer
 	{
 	public:
-		Layer(std::string name): name(name) {};
+		Layer(std::string name): m_name(name) {};
 		virtual ~Layer() = default;
 
 		virtual void onAttach() {}
@@ -19,14 +19,14 @@ namespace Light
 		virtual void onUpdate(Timestep ts) {}
 		virtual void onImguiRender() {}
 
-		inline const std::string& getName() { return name; }
-		inline void blockHoverEvents(bool block) { hoverEventsBlocking = block; }
-		inline void blockFocusEvents(bool block) { focusEventsBlocking = block; }
+		inline const std::string& getName() { return m_name; }
+		inline void blockHoverEvents(bool block) { m_hoverEventsBlocking = block; }
+		inline void blockFocusEvents(bool block) { m_focusEventsBlocking = block; }
 	protected:
-		std::string name;
+		std::string m_name;
 
-		bool hoverEventsBlocking = true;
-		bool focusEventsBlocking = true;
+		bool m_hoverEventsBlocking = true;
+		bool m_focusEventsBlocking = true;
 	};
 }
 

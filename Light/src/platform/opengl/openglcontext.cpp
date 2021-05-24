@@ -5,11 +5,11 @@
 
 namespace Light
 {
-	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : windowHandle(windowHandle)
+	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_windowHandle(windowHandle)
 	{
 		if(!windowHandle)
 		{
-			std::cerr << "Handle is NULL!" << std::endl;
+			LIGHT_CORE_CRITICAL("Could not create OpenGL Context: Handle is NULL");
 			exit(1);
 		}
 	}
@@ -18,14 +18,17 @@ namespace Light
 	
 	void OpenGLContext::init() 
 	{
-		glfwMakeContextCurrent(windowHandle);
+		glfwMakeContextCurrent(m_windowHandle);
 		int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		if(!success)
+		{
+			LIGHT_CORE_CRITICAL("Could not initialize GLAD");
 			exit(1);
+		}
 	}
 	
 	void OpenGLContext::swapBuffers() 
 	{
-		glfwSwapBuffers(windowHandle);
+		glfwSwapBuffers(m_windowHandle);
 	}
 }

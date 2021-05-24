@@ -20,8 +20,8 @@ namespace Light
 		case ShaderDataType::Mat4: 		return GL_FLOAT;
 		case ShaderDataType::Bool: 		return GL_BOOL;
 		default:
-			std::cerr << "Unsupported Shader data type" << std::endl;
-			exit(1);
+			LIGHT_CORE_ERROR("Unsupported Shader data type");
+			return -1;
 		}
 	}
 
@@ -32,14 +32,14 @@ namespace Light
 
 	OpenGLVertexArray::OpenGLVertexArray() 
 	{
-		glGenVertexArrays(1, &rendererId);
+		glGenVertexArrays(1, &m_rendererId);
 	}
 	
 	OpenGLVertexArray::~OpenGLVertexArray() = default;
 	
 	void OpenGLVertexArray::bind() const
 	{
-		glBindVertexArray(rendererId);
+		glBindVertexArray(m_rendererId);
 	}
 	
 	void OpenGLVertexArray::unbind() const
@@ -51,11 +51,11 @@ namespace Light
 	{
 		if(vbo->getLayout().getElements().size() == 0)
 		{
-			std::cerr << "Buffer Layout not set!" << std::endl;
-			exit(1);
+			LIGHT_CORE_ERROR("Buffer Layout not set!");
+			return;
 		}
 
-		glBindVertexArray(rendererId);
+		glBindVertexArray(m_rendererId);
 		vbo->bind();
 
 		const auto& layout = vbo->getLayout();
@@ -72,15 +72,15 @@ namespace Light
 				INT2VOIDP(element.getOffset()));
 			index++;
 		}
-		vertexBuffers.push_back(vbo);
+		m_vertexBuffers.push_back(vbo);
 		glBindVertexArray(0);
 	}
 	
 	void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& ibo) 
 	{
-		glBindVertexArray(rendererId);
+		glBindVertexArray(m_rendererId);
 		ibo->bind();
-		indexBuffer = ibo;
+        m_indexBuffer = ibo;
 		glBindVertexArray(0);
 	}
 }

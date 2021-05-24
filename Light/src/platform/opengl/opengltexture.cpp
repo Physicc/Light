@@ -10,7 +10,7 @@ namespace Light
 		return new OpenGLTexture2D(path);
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : path(path)
+	OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_path(path)
 	{
 		int width, height, channels;
 
@@ -19,11 +19,11 @@ namespace Light
 
 		if(data == NULL)
 		{
-			std::cerr << "Failed to create texture:" << path << std::endl;
+			LIGHT_CORE_ERROR("Failed to create texture: {}", path);
 		}
 
-		this->width = width;
-		this->height = height;
+		this->m_width = width;
+		this->m_height = height;
 
 		GLenum internalformat;
 		GLenum type;
@@ -39,8 +39,8 @@ namespace Light
 			type = GL_RGBA;
 		}
 
-		glGenTextures(1, &rendererId);
-		glBindTexture(GL_TEXTURE_2D, rendererId);
+		glGenTextures(1, &m_rendererId);
+		glBindTexture(GL_TEXTURE_2D, m_rendererId);
 		glTexImage2D(GL_TEXTURE_2D, 0, internalformat, width, height, 0, type, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
@@ -54,13 +54,13 @@ namespace Light
 
 	OpenGLTexture2D::~OpenGLTexture2D() 
 	{
-		glDeleteTextures(1, &rendererId);
+		glDeleteTextures(1, &m_rendererId);
 	}
 	
 	void OpenGLTexture2D::bind(uint32_t slot) const 
 	{
 		glActiveTexture(GL_TEXTURE0 + slot);
-		glBindTexture(GL_TEXTURE_2D, rendererId);
+		glBindTexture(GL_TEXTURE_2D, m_rendererId);
 	}
 
 	Cubemap* Cubemap::create(const std::string& path) 
@@ -68,7 +68,7 @@ namespace Light
 		return new OpenGLCubemap(path);
 	}
 
-	OpenGLCubemap::OpenGLCubemap(const std::string& path) : path(path)
+	OpenGLCubemap::OpenGLCubemap(const std::string& path) : m_path(path)
 	{
 		std::vector<std::string> facePaths = {
 			"/right.jpg",
@@ -79,8 +79,8 @@ namespace Light
 			"/back.jpg"
 		};
 
-		glGenTextures(1, &rendererId);
-    	glBindTexture(GL_TEXTURE_CUBE_MAP, rendererId);
+		glGenTextures(1, &m_rendererId);
+    	glBindTexture(GL_TEXTURE_CUBE_MAP, m_rendererId);
 
 		stbi_set_flip_vertically_on_load(false);
 
@@ -91,7 +91,7 @@ namespace Light
 
 			if(data == NULL)
 			{
-				std::cerr << "Failed to create cubemap texture:" << path + facePaths[i] << std::endl;
+				LIGHT_CORE_ERROR("Failed to create cubemap texture: {}", path + facePaths[i]);
 			}
 
 			GLenum internalformat;
@@ -122,12 +122,12 @@ namespace Light
 	
 	OpenGLCubemap::~OpenGLCubemap() 
 	{
-		glDeleteTextures(1, &rendererId);
+		glDeleteTextures(1, &m_rendererId);
 	}
 	
 	void OpenGLCubemap::bind(uint32_t slot) const 
 	{
 		glActiveTexture(GL_TEXTURE0 + slot);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, rendererId);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, m_rendererId);
 	}
 }
