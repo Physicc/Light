@@ -101,7 +101,6 @@ public:
 		ImGui::PopStyleVar();
 
 		ImGui::Begin("Scene Settings");
-
 		ImGui::DragFloat3("Light Position", scene.getLightPos(), 0.01f);
 		ImGui::End();
 
@@ -133,7 +132,6 @@ private:
 	int frameCount = 0;
 	float lastTime = 0.0f;
 	int lastFrameCount = 0;
-
 };
 
 class Editor : public Light::Application

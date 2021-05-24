@@ -78,11 +78,11 @@ void Cube::onUpdate(Light::Timestep ts)
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_W))
 	{
-        m_position.z += 1.0 * ts.getSeconds();
+		position.z -= 1.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_S))
 	{
-        m_position.z -= 1.0 * ts.getSeconds();
+		position.z += 1.0 * ts.getSeconds();
 	}
 	else if(Light::Input::isKeyPressed(LIGHT_KEY_1))
 	{

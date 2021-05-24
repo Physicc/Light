@@ -54,8 +54,13 @@ namespace Light
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		#endif
 
-        m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
-        m_context = new OpenGLContext(m_window);
+		m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
+		if(!m_window)
+		{
+			LIGHT_CORE_CRITICAL("Could not create window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
+		}
+		LIGHT_CORE_INFO("Created window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
+		m_context = new OpenGLContext(m_window);
 		m_context->init();
 
 		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
