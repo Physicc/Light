@@ -13,8 +13,8 @@ namespace Light
 			return GL_VERTEX_SHADER;
 		}
 
-		std::cerr << "Shader type not supported!" << std::endl;
-		exit(1);
+		LIGHT_CORE_ERROR("Shader type not supported!");
+		return -1;
 	}
 
 	std::shared_ptr<Shader> Shader::create(const char* shaderPath)
@@ -44,7 +44,7 @@ namespace Light
 		}
 		catch (std::ifstream::failure& e)
 		{
-			std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ" << std::endl;
+			LIGHT_CORE_ERROR("Shader file read failure");
 		}
 
         m_rendererId = glCreateProgram();
@@ -56,7 +56,7 @@ namespace Light
 		std::string eolToken = "\r\n";
 		if (i == std::string::npos)
 		{
-			std::cerr << "ERROR::SHADER::Cannot find any shaders" << std::endl;
+			LIGHT_CORE_ERROR("Cannot find any shaders");
 		}
 		while(true)
 		{
@@ -115,8 +115,8 @@ namespace Light
 			{
 				glGetShaderInfoLog(shader, 1024, NULL, infoLog);
 				std::string type = shaderType == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT";
-				std::cerr << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-				exit(1);
+				LIGHT_CORE_ERROR("Shader compilation error of type {}: \n{}", type, infoLog);
+				return;
 			}
 		}
 		else
@@ -125,8 +125,8 @@ namespace Light
 			if (!success)
 			{
 				glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-				std::cerr << "ERROR::PROGRAM_LINKING_ERROR of type: " << "PROGRAM" << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-				exit(1);
+				LIGHT_CORE_ERROR("Program linking error: \n{}", infoLog);
+				return;
 			}
 		}
 	}

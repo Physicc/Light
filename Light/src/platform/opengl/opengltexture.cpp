@@ -19,7 +19,7 @@ namespace Light
 
 		if(data == NULL)
 		{
-			std::cerr << "Failed to create texture:" << path << std::endl;
+			LIGHT_CORE_ERROR("Failed to create texture: {}", path);
 		}
 
 		this->m_width = width;
@@ -91,7 +91,7 @@ namespace Light
 
 			if(data == NULL)
 			{
-				std::cerr << "Failed to create cubemap texture:" << path + facePaths[i] << std::endl;
+				LIGHT_CORE_ERROR("Failed to create cubemap texture: {}", path + facePaths[i]);
 			}
 
 			GLenum internalformat;
