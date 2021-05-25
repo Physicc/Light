@@ -3,6 +3,8 @@
 
 #include "core/base.hpp"
 
+#include "core/logging.hpp"
+
 namespace Light
 {
 

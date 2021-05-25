@@ -7,7 +7,7 @@ namespace Light
 
 	void Logger::init()
 	{
-		spdlog::set_pattern("***%n*** [%H:%M:%S %z] [%P:%t] %v");
+		spdlog::set_pattern("%^***%n*** [%H:%M:%S %z] [%P:%t] %v%$");
 
 		s_coreLogger = spdlog::stderr_color_mt("Light");
 		s_coreLogger->set_level(spdlog::level::trace);

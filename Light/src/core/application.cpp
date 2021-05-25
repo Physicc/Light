@@ -2,6 +2,8 @@
 
 #include "rendering/renderer.hpp"
 
+#include "core/logging.hpp"
+
 //Temp for time
 #include "GLFW/glfw3.h"
 
