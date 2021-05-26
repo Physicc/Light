@@ -4,6 +4,8 @@
 #include "imgui.h"
 
 #include "Objects.hpp"
+#include "scene.hpp"
+#include "entity.hpp"
 
 class ExampleLayer : public Light::Layer
 {
