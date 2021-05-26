@@ -41,7 +41,6 @@ class Scene
         //Holds pointers to every object that needs to have onEvent run
         //in the Scene
         Light::EditorCamera m_camera;
-//        Skybox m_skybox;
         glm::vec3 m_lightPos;
 
 };

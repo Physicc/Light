@@ -93,7 +93,7 @@ void Cube::onUpdate(Light::Timestep ts)
         m_scale += 0.2f * ts.getSeconds();
     } else if (Light::Input::isKeyPressed(LIGHT_KEY_4))
     {
-        m_scale -= 0.2 * ts.getSeconds();
+        m_scale -= 0.2f * ts.getSeconds();
     }
 
     updateTransform();
