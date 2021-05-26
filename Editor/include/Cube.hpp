@@ -3,7 +3,7 @@
 
 #include "SceneObject.hpp"
 
-class Cube : SceneObject
+class Cube : public SceneObject
 {
     public:
         Cube(glm::vec3 position = glm::vec3(0, 0, 0),
@@ -11,8 +11,8 @@ class Cube : SceneObject
              glm::vec3 scale = glm::vec3(0.5));
 
         void render() override;
-        void onUpdate(Light::Timestep ts);
-        void onEvent(Light::Event &e);
+        void onUpdate(Light::Timestep ts) override;
+        void onEvent(Light::Event &e) override;
         inline glm::mat4 getTransform() { return m_transform; }
 
     private:

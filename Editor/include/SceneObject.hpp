@@ -9,6 +9,7 @@ class SceneObject
     public:
         virtual void render() = 0;
         virtual void onUpdate(Light::Timestep ts) {};
+        virtual void onEvent(Light::Event &e) {};
 
     protected:
         SceneObject(Light::BufferLayout layout) : m_layout(std::move(layout)) {};
