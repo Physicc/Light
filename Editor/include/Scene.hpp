@@ -32,12 +32,12 @@ class Scene
         }
 
     private:
-        std::vector<SceneObject *> m_sceneObjects;
+        std::vector<std::shared_ptr<SceneObject>> m_sceneObjects;
         //Holds pointers to every object in the Scene
-        std::vector<SceneObject *> m_updateSceneObjects;
+        std::vector<std::shared_ptr<SceneObject>> m_updateSceneObjects;
         //Holds pointers to every object that needs to have onUpdate run
         //in the Scene
-        std::vector<SceneObject *> m_eventSceneObjects;
+        std::vector<std::shared_ptr<SceneObject>> m_eventSceneObjects;
         //Holds pointers to every object that needs to have onEvent run
         //in the Scene
         Light::EditorCamera m_camera;

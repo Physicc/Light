@@ -3,12 +3,12 @@
 void Scene::addObject(SceneObject* obj, bool update, bool event)
 {
     if (update) {
-        m_updateSceneObjects.push_back(obj);
+        m_updateSceneObjects.push_back(std::shared_ptr<SceneObject>(obj));
     }
     if (event) {
-        m_eventSceneObjects.push_back(obj);
+        m_eventSceneObjects.push_back(std::shared_ptr<SceneObject>(obj));
     }
-    m_sceneObjects.push_back(obj);
+    m_sceneObjects.push_back(std::shared_ptr<SceneObject>(obj));
 }
 
 void Scene::onUpdate(Light::Timestep ts)
