@@ -17,13 +17,13 @@ public:
 		fbspec.height = 720;
         m_framebuffer = Light::Framebuffer::create(fbspec);
 
+        scene.addObject(static_cast<SceneObject *>(new Skybox()),false, false);
+        //The skybox
         scene.addObject(static_cast<SceneObject *>(new Cube(glm::vec3(0, -1, 0), glm::vec3(0), glm::vec3(2, 0.1, 2))),
                         false, true);
         //The floor
         scene.addObject(static_cast<SceneObject *>(new Cube()),true, true);
         //The cube
-        scene.addObject(static_cast<SceneObject *>(new Skybox()),false, false);
-        //The skybox
 	}
 	~ExampleLayer() = default;
 
