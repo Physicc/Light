@@ -7,9 +7,9 @@
 
 class Entity {
     Entity(entt::entity entity, Scene* scene);
-    template<typename T, typename... Args>
+    template<class T, typename... Args>
     inline T& addComponent(Args... args) {
-        if (m_scene.m_registry.has<T>(m_entity))
+        if (m_scene->m_registry.has<T>(m_entity))
             LIGHT_CORE_ERROR("Entity already has the component!");
         return m_scene->m_registry.emplace<T>(std::forward(args)...);
     }
