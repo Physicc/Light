@@ -1,9 +1,9 @@
 #include "Skybox.hpp"
 
 Skybox::Skybox()
-    : m_layout({
-                   {Light::ShaderDataType::Float3, "a_Position"}
-               })
+    : SceneObject({
+                      {Light::ShaderDataType::Float3, "a_Position"}
+                  })
 {
     m_vao.reset(Light::VertexArray::create());
 

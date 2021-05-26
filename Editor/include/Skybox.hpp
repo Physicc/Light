@@ -1,8 +1,9 @@
 #ifndef __SKYBOX_H__
 #define __SKYBOX_H__
 
-//The Skybox is actually not an actual object inside the scene
-class Skybox
+#include "SceneObject.hpp"
+
+class Skybox : SceneObject
 {
     public:
         Skybox();
