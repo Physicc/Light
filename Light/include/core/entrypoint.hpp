@@ -11,8 +11,6 @@ int main(int argc, char** argv)
 {
 	Light::Logger::init();
 
-	LIGHT_CORE_ERROR("Artificial Error");
-
 	auto app = Light::createApplication();
 
 	app->run();
