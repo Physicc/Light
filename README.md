@@ -1,9 +1,8 @@
 # Light [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.com/dropTableUsers42/Light.svg?branch=main)](https://travis-ci.com/dropTableUsers42/Light) [![Windows](https://github.com/dropTableUsers42/Light/actions/workflows/cmake.yml/badge.svg)](https://github.com/dropTableUsers42/Light/actions/workflows/cmake.yml)
 Lightweight Renderer, purposed to augment the development of Physicc
 
-## Platforms
+## Supported Platforms
 
-Platforms currently it compiles on:
 * Windows 10
 * Ubuntu 18
 * Ubuntu 20
