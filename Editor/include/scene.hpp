@@ -1,7 +1,7 @@
 #ifndef __SCENE_HPP__
 #define __SCENE_HPP__
 
-#include "entt.hpp"
+#include "../libs/entt.hpp"
 #include "light.hpp"
 
 class Entity;

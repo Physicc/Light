@@ -22,7 +22,7 @@ public:
         auto cube = m_scene.addEntity();
         cube.addComponent<TransformComponent>(glm::vec3(0,0,0), glm::vec3(0,0,0), glm::vec3(0.5));
         cube.addComponent<ShaderComponent>("../Light/assets/shaders/phong.glsl");
-        float vertices1[] = {
+        float cubeVertices[] = {
                 //Front
                 -0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
                 0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
@@ -54,11 +54,11 @@ public:
                 0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
                 0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
         };
-        std::shared_ptr<Light::VertexBuffer> vertexBuffer(Light::VertexBuffer::create(vertices1, sizeof(vertices1)));
+        std::shared_ptr<Light::VertexBuffer> vertexBuffer(Light::VertexBuffer::create(cubeVertices, sizeof(cubeVertices)));
         vertexBuffer->setLayout({{ Light::ShaderDataType::Float3, "a_Position" },
                                  { Light::ShaderDataType::Float4, "a_Color" },
                                  { Light::ShaderDataType::Float3, "a_Normal" }});
-        unsigned int indices[] = {
+        unsigned int cubeIndices[] = {
                 0, 1, 2, 2, 3, 0,
                 4, 5, 6, 6, 7, 4,
                 8, 9, 10, 10, 11, 8,
@@ -66,7 +66,7 @@ public:
                 16, 17, 18, 18, 19, 16,
                 20, 21, 22, 22, 23, 20
         };
-        std::shared_ptr<Light::IndexBuffer> indexBuffer(Light::IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
+        std::shared_ptr<Light::IndexBuffer> indexBuffer(Light::IndexBuffer::create(cubeIndices, sizeof(cubeIndices) / sizeof(unsigned int)));
         cube.addComponent<VertexArrayComponent>(vertexBuffer, indexBuffer);
         cube.addComponent<Interactive>();
         // ==================
@@ -84,7 +84,7 @@ public:
         auto& shader = skybox.addComponent<ShaderComponent>("../Light/assets/shaders/skybox.glsl");
         shader.bind();
         shader.setUniformInt("u_cubemap", 0);
-        float vertices[] = {
+        float skyboxVertices[] = {
                 //Front
                 -1.0, -1.0, 1.0,
                 1.0, -1.0, 1.0,
@@ -116,9 +116,9 @@ public:
                 1.0, 1.0, -1.0,
                 1.0, -1.0, -1.0,
         };
-        vertexBuffer.reset(Light::VertexBuffer::create(vertices, sizeof(vertices)));
+        vertexBuffer.reset(Light::VertexBuffer::create(skyboxVertices, sizeof(skyboxVertices)));
         vertexBuffer->setLayout({{ Light::ShaderDataType::Float3, "a_Position" }});
-        unsigned int indices1[] = {
+        unsigned int skyboxIndices[] = {
                 0, 2, 1, 3, 2, 0,
                 4, 6, 5, 7, 6, 4,
                 8, 10, 9, 11, 10, 8,
@@ -126,7 +126,7 @@ public:
                 16, 18, 17, 19, 18, 16,
                 20, 22, 21, 23, 22, 20
         };
-        indexBuffer.reset(Light::IndexBuffer::create(indices, sizeof(indices1) / sizeof(unsigned int)));
+        indexBuffer.reset(Light::IndexBuffer::create(skyboxIndices, sizeof(skyboxIndices) / sizeof(unsigned int)));
         skybox.addComponent<VertexArrayComponent>(vertexBuffer, indexBuffer);
 	}
 	~ExampleLayer() = default;
