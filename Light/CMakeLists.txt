@@ -12,6 +12,7 @@ add_library(Light STATIC ${SOURCES})
 target_include_directories(Light PUBLIC include)
 
 # add OpenGL library
+cmake_policy(SET CMP0072 NEW)
 find_package(OpenGL REQUIRED)
 target_link_libraries(Light ${OPENGL_gl_LIBRARY})
 

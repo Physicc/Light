@@ -1,5 +1,7 @@
 #include "platform/opengl/openglshader.hpp"
 
+#include "core/logging.hpp"
+
 namespace Light
 {
 	static GLenum findShaderType(std::string typeStr)
