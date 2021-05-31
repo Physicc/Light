@@ -3,6 +3,7 @@
 #include "events/keyevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/applicationevent.hpp"
+#include "core/logging.hpp"
 
 namespace Light
 {

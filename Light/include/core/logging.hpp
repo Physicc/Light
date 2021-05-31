@@ -22,27 +22,24 @@ namespace Light
 	};
 }
 
-#define STRINGIFY2(x) #x
-#define STRINGIFY(x) STRINGIFY2(x)
-
 #ifndef NDEBUG
 	#define LIGHT_CORE_TRACE(...)		Light::Logger::getCoreLogger()->trace(__VA_ARGS__)
 	#define LIGHT_CORE_DEBUG(...)		Light::Logger::getCoreLogger()->debug(__VA_ARGS__)
 	#define LIGHT_CORE_INFO(...)		Light::Logger::getCoreLogger()->info(__VA_ARGS__)
 	#define LIGHT_CORE_WARN(...)		Light::Logger::getCoreLogger()->warn(__VA_ARGS__)
-	#define LIGHT_CORE_ERROR(...)		Light::Logger::getCoreLogger()->error(__FILE__ ":" STRINGIFY(__LINE__)\
-											"::" __VA_ARGS__)
-	#define LIGHT_CORE_CRITICAL(...)	Light::Logger::getCoreLogger()->critical(__FILE__ ":" STRINGIFY(__LINE__)\
-											"::" __VA_ARGS__)
+	#define LIGHT_CORE_ERROR(...)		Light::Logger::getCoreLogger()->error(_LIGHT_FILE() + ":"\
+											_LIGHT_STRINGIFY_MACRO(__LINE__) "::" __VA_ARGS__)
+	#define LIGHT_CORE_CRITICAL(...)	Light::Logger::getCoreLogger()->critical(_LIGHT_FILE() + ":"\
+											_LIGHT_STRINGIFY_MACRO(__LINE__) "::" __VA_ARGS__)
 
 	#define LIGHT_TRACE(...)			Light::Logger::getClientLogger()->trace(__VA_ARGS__)
 	#define LIGHT_DEBUG(...)			Light::Logger::getClientLogger()->debug(__VA_ARGS__)
 	#define LIGHT_INFO(...)				Light::Logger::getClientLogger()->info(__VA_ARGS__)
 	#define LIGHT_WARN(...)				Light::Logger::getClientLogger()->warn(__VA_ARGS__)
-	#define LIGHT_ERROR(...)			Light::Logger::getClientLogger()->error(__FILE__ ":" STRINGIFY(__LINE__)\
-											"::" __VA_ARGS__)
-	#define LIGHT_CRITICAL(...)			Light::Logger::getClientLogger()->critical(__FILE__ ":" STRINGIFY(__LINE__)\
-											"::" __VA_ARGS__)
+	#define LIGHT_ERROR(...)			Light::Logger::getClientLogger()->error(_LIGHT_FILE() + ":"\
+											_LIGHT_STRINGIFY_MACRO(__LINE__) "::" __VA_ARGS__)
+	#define LIGHT_CRITICAL(...)			Light::Logger::getClientLogger()->critical(_LIGHT_FILE() + ":"\
+											_LIGHT_STRINGIFY_MACRO(__LINE__) "::" __VA_ARGS__)
 #else
 	#define LIGHT_CORE_TRACE(...)
 	#define LIGHT_CORE_DEBUG(...)
