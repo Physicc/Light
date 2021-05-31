@@ -3,6 +3,8 @@
 
 #include "core/logging.hpp"
 
+#include "core/assert.hpp"
+
 extern Light::Application* Light::createApplication();
 
 int main(int argc, char** argv)
