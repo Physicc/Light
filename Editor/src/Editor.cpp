@@ -164,6 +164,10 @@ public:
 	bool onWindowResize(Light::WindowResizeEvent& e)
 	{
 		auto [width, height] = e.getSize();
+        if(width == 0 || height == 0)
+        {
+            return false;
+        }
 		m_camera.setViewportSize(width, height);
 		return false;
 	}
