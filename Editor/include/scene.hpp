@@ -2,12 +2,16 @@
 #define __SCENE_HPP__
 
 #include "entt.hpp"
+#include "light.hpp"
 
 class Entity;
 
 class Scene {
+public:
     Scene() = default;
     Entity addEntity();
+    void update(Light::Timestep dt);
+    void render();
 private:
     entt::registry m_registry;
 
