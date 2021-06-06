@@ -25,7 +25,7 @@ Lightweight Renderer, purposed to augment the development of Physicc
 
 ### Ubuntu
 
-* GCC (>=8)
+* GCC (>= 8)
 * X11
 
 If you get library headers not found error while building, ```apt-get``` the dev version of all packages it requests you to install
@@ -34,7 +34,7 @@ If you get library headers not found error while building, ```apt-get``` the dev
 
 ### OSX
 
-* XCode (>=9)
+* XCode (>= 12)
 
 ## Build Instructions
 
