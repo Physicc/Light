@@ -48,6 +48,7 @@ jobs:
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
 
     - os: osx
+      osx_image: xcode12
       compiler: clang
       env:
         - BUILD_NAME="OSX_CLANG"
