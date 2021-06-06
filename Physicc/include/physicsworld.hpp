@@ -1,7 +1,10 @@
 #ifndef __PHYSICC_H__
 #define __PHYSICC_H__
 
+class Physicsworld
+{
 
+};
 
 
 
