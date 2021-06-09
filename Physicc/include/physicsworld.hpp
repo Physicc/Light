@@ -7,7 +7,7 @@ class PhysicsWorld
     public:
     PhysicsWorld(glm::vec3 gravity = glm::vec3(0,0,0));
     void setgravity(glm::vec3);
-    glm::vec3 getgravity();
+    glm::vec3 getgravity() const;
     
     
     
