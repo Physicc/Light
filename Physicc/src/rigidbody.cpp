@@ -1,14 +1,13 @@
 #include "rigidbody.hpp"
 
-RigidBody::RigidBody(glm::vec3 linearposition,glm::vec3 linearvelocity)
+RigidBody::RigidBody(glm::vec3 linearPosition,glm::vec3 linearVelocity)
+    :m_linearPosition (linearPosition),
+     m_linearVelocity (linearVelocity)
+    {}
 
-    :m_linearPosition(linearposition),
-     m_linearVelocity(linearvelocity)
-    
-    { 
-    }
-void RigidBody::updatePosition(float time){
-    m_linearPosition+=m_linearVelocity*time;
+void RigidBody::updatePosition(float time)
+{
+    m_linearPosition += m_linearVelocity * time;
 }
 
 

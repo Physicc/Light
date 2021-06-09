@@ -1,18 +1,22 @@
 #ifndef __PHYSICC_H__
 #define __PHYSICC_H__
+
 #include "../../Light/libs/glm/glm/glm.hpp"
-#include"rigidbody.hpp"
-#include<vector>
+#include "rigidbody.hpp"
+#include <vector>
 
 class PhysicsWorld
 {
     public:
-    PhysicsWorld(glm::vec3 gravity );
+    PhysicsWorld(glm::vec3 gravity);
     
-    inline void setGravity(glm::vec3 gravity){
+    inline void setGravity(glm::vec3 gravity)
+    {
         m_gravity=gravity;
     }
-    inline const glm::vec3 getGravity() const{
+
+    inline const glm::vec3 getGravity() const
+    {
         return m_gravity;
     }
 
