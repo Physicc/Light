@@ -5,9 +5,11 @@
 class PhysicsWorld
 {
     public:
-    PhysicsWorld(glm::vec3 gravity = glm::vec3(0,0,0));
+    PhysicsWorld(glm::vec3 gravity );
     void setgravity(glm::vec3);
-    glm::vec3 getgravity() const;
+    inline const glm::vec3 getgravity() const{
+        return m_gravity;
+    }
     
     
     
