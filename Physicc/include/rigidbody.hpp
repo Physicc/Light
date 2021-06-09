@@ -6,20 +6,24 @@ class RigidBody
     public:
     RigidBody(glm::vec3 linearposition,glm::vec3 linearvelocity);
 
-    inline const glm::vec3 getlinearposition() const{
-        return m_linearposition;
+    inline const glm::vec3 getLinearPosition() const{
+        return m_linearPosition;
     }
-    inline const glm::vec3 getlinearvelocity() const{
-        return m_linearvelocity;
+    inline const glm::vec3 getLinearVelocity() const{
+        return m_linearVelocity;
     }
-    void setlinearposition(glm::vec3);
-    void setlinearvelocity(glm::vec3);
+    inline void setLinearPosition(glm::vec3 position){
+        m_linearPosition=position;
+    }
+    inline void setLinearVelocity(glm::vec3 velocity){
+        m_linearVelocity=velocity;
+    }
 
-    void updateposition(float time);
+    void updatePosition(float time);
 
     private:
-    glm::vec3 m_linearposition;
-    glm::vec3 m_linearvelocity;
+    glm::vec3 m_linearPosition;
+    glm::vec3 m_linearVelocity;
 
 };
 

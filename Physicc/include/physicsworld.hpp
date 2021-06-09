@@ -8,13 +8,16 @@ class PhysicsWorld
 {
     public:
     PhysicsWorld(glm::vec3 gravity );
-    void setgravity(glm::vec3);
-    inline const glm::vec3 getgravity() const{
+    
+    inline void setGravity(glm::vec3 gravity){
+        m_gravity=gravity;
+    }
+    inline const glm::vec3 getGravity() const{
         return m_gravity;
     }
 
-    void addrigidbody(RigidBody object);
-    void stepsimulation(float time);
+    void addRigidBody(RigidBody object);
+    void stepSimulation(float time);
     
     
     
