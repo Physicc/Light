@@ -14,5 +14,8 @@ void RigidBody::setlinearposition(glm::vec3 position){
 void RigidBody::setlinearvelocity(glm::vec3 velocity){
     m_linearvelocity=velocity;
 }
+void RigidBody::updateposition(float time){
+    m_linearposition+=m_linearvelocity*time;
+}
 
 

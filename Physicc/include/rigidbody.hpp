@@ -15,6 +15,8 @@ class RigidBody
     void setlinearposition(glm::vec3);
     void setlinearvelocity(glm::vec3);
 
+    void updateposition(float time);
+
     private:
     glm::vec3 m_linearposition;
     glm::vec3 m_linearvelocity;
