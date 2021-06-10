@@ -29,3 +29,4 @@ To ensure uniformity throughout our codebase, we have a few rules:
 4. Put spaces around binary operators. For example, write `a += b` and not `a+=b`. The former looks less cluttered.
 5. Use blank lines to logically separate portions of code.
 6. Function definitions should have at least one blank line after them (an exception being if it is the last function in a class definition).
+7. Documentation in source code should be done in Doxygen style.
