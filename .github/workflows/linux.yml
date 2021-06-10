@@ -24,10 +24,11 @@ jobs:
       - name: Install OpenGL Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+          sudo apt-get install -y libglfw3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
           
       - name: Install GCC Compiler
         run: |
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
           sudo apt-get update
           sudo apt-get install -y gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
         env:
