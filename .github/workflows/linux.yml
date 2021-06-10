@@ -21,28 +21,22 @@ jobs:
         with:
           submodules: recursive
           
-      - name: Install OpenGL Dependencies
+      - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libglfw3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
-          
-      - name: Install GCC Compiler
-        run: |
-          sudo apt-get --reinstall install libc-bin
-          sudo apt-get install -y gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
+          sudo apt-get install -y libglfw3-dev \
+                                  libxrandr-dev \
+                                  libxinerama-dev \
+                                  libxcursor-dev \
+                                  libxi-dev \
+                                  gcc-${{ matrix.gcc-version }} \
+                                  g++-${{ matrix.gcc-version }}
         env:
           CC: gcc-${{ matrix.gcc-version }}
           CXX: g++-${{ matrix.gcc-version }}
-      
-      - name: Display Configuration
-        run: |
-          echo "C Compiler:"
-          ${CC} --version
-          echo "CXX Compiler:"
-          ${CXX} --version
             
       - name: Configure CMake
-        run: cmake -HEditor -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G"Unix Makefiles"
+        run: cmake -HEditor -B${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G"Unix Makefiles"
           
       - name: Build
         run: cmake --build ${{ github.workspace }}/build --config ${{ env.BUILD_TYPE }}
