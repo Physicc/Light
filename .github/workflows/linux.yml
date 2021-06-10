@@ -1,0 +1,22 @@
+ubuntu_20_04_gcc_8:
+    name: Ubuntu 20.04
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          
+      - name: Install Dependencies
+        run: |
+          sudo apt update && sudo apt install -y libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+          sudo apt install -y gcc-8 g++-8
+          
+      - name: Configure CMake
+        run: cmake -HEditor -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G"Unix Makefiles"
+        
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+  ubuntu_18_04:
+    name: Ubuntu 18.04
+    runs-on: ubuntu-18.04
