@@ -1,0 +1,6 @@
+ mac_os_catalina:
+    name: Mac OS Catalina
+    runs-on: macos-10.15
+  mac_os_big_sur:
+    name: Mac OS Big Sur
+    runs-on: macos-11
