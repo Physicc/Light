@@ -16,6 +16,11 @@ jobs:
       matrix:
         os: [ ubuntu-18.04, ubuntu-20.04 ]
         clang-version: [9, 10, 11]
+        exclude:
+          # excludes clang-11 on Ubuntu 18.04 because it doesn't exist in the
+          #standard repositories.
+        - os: ubuntu-18.04
+          clang-version: 11
     steps:
       - uses: actions/checkout@v2
         with:
