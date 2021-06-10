@@ -1,4 +1,4 @@
-name: Linux GCC
+name: Linux Clang
 on:
   push:
     branches: [ main, development ]
