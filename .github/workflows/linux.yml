@@ -31,12 +31,17 @@ jobs:
                                   libxi-dev \
                                   gcc-${{ matrix.gcc-version }} \
                                   g++-${{ matrix.gcc-version }}
-        env:
-          CC: gcc-${{ matrix.gcc-version }}
-          CXX: g++-${{ matrix.gcc-version }}
             
       - name: Configure CMake
-        run: cmake -HEditor -B${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G"Unix Makefiles"
+        run: |
+          cmake -HEditor \
+                -B${{ github.workspace }}/build \
+                -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+                -DCC=gcc-${{ matrix.gcc-version }} \
+                -DCXX=g++-${{ matrix.gcc-version }} \
+                -G"Unix Makefiles"
           
       - name: Build
-        run: cmake --build ${{ github.workspace }}/build --config ${{ env.BUILD_TYPE }}
+        run: |
+          cmake --build ${{ github.workspace }}/build \
+                --config ${{ env.BUILD_TYPE }}
