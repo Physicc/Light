@@ -34,8 +34,6 @@ jobs:
             
       - name: Configure CMake
         run: |
-          echo "$(CC)"
-          echo "$(CXX)"
           cmake -HEditor \
                 -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
