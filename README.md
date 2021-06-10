@@ -7,6 +7,7 @@ Lightweight Renderer, purposed to augment the development of Physicc
 * Ubuntu 18
 * Ubuntu 20
 * OSX 10
+* OSX 11
 
 ## Prerequisites
 
