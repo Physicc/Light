@@ -23,16 +23,23 @@ jobs:
           
       - name: Install OpenGL Dependencies
         run: |
-          sudo apt update
-          sudo apt install -y libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+          sudo apt-get update
+          sudo apt-get install -y libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
           
       - name: Install GCC Compiler
         run: |
-          sudo apt update
-          sudo apt install -y gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
+          sudo apt-get update
+          sudo apt-get install -y gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
         env:
           CC: gcc-${{ matrix.gcc-version }}
           CXX: g++-${{ matrix.gcc-version }}
+      
+      - name: Display Configuration
+        run: |
+          echo "C Compiler:"
+          ${CC} --version
+          echo "CXX Compiler:"
+          ${CXX} --version
             
       - name: Configure CMake
         run: cmake -HEditor -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G"Unix Makefiles"
