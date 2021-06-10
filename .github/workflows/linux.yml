@@ -34,12 +34,15 @@ jobs:
             
       - name: Configure CMake
         run: |
+          echo "$(CC)"
+          echo "$(CXX)"
           cmake -HEditor \
                 -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
-                -DCC=gcc-${{ matrix.gcc-version }} \
-                -DCXX=g++-${{ matrix.gcc-version }} \
                 -G"Unix Makefiles"
+        env:
+          CC: gcc-${{ matrix.gcc-version }}
+          CXX: g++-${{ matrix.gcc-version }}
           
       - name: Build
         run: |
