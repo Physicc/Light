@@ -29,7 +29,6 @@ jobs:
                                   libxinerama-dev \
                                   libxcursor-dev \
                                   libxi-dev \
-                                  clang-${{ matrix.gcc-version }} \
                                   clang-${{ matrix.gcc-version }}
             
       - name: Configure CMake
