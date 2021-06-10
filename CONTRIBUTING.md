@@ -6,8 +6,11 @@ To ensure uniformity throughout our codebase, we have a few rules:
 1. Any new features must be in their own branch, which will branch from the `development` branch.
 2. The branch should be named `feature/<feature-name>`. For example, if we are adding collision detection, then the branch where the work is being done should be called `feature/collision-detection`.
 3. One feature per branch.
-4. After a feature is done, a pull request must be submitted on the `development` branch for review.
-5. Before merging a pull request, make sure that it passes the CI tests.
+4. Changes to documentation (adding stuff, rewording sentences, adding/fixing links, etc.) can be commited directly on the development branch. There is no need to create a separate branch for this.
+5. After a feature is done, a pull request must be submitted on the `development` branch for review.
+6. Before merging a pull request, make sure that it passes the CI tests.
+7. Changes/additions to the documentation should skip the CI tests (as they don't add any value to the commit).
+8. To skip the CI testing, simply prepend `[skip ci]` in the commit message.
 
 ### Code Style
 
