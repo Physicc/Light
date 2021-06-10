@@ -28,8 +28,7 @@ jobs:
           
       - name: Install GCC Compiler
         run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-          sudo apt-get update
+          sudo apt-get --reinstall install libc-bin
           sudo apt-get install -y gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
         env:
           CC: gcc-${{ matrix.gcc-version }}
