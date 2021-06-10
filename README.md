@@ -40,7 +40,7 @@ If you get library headers not found error while building, ```apt-get``` the dev
 
 * Recursively clone the git module:
 
-	```git clone --recursive https://github.com/dropTableUsers42/Light```
+	```git clone --recursive https://github.com/Physicc/Light```
 
 ### VSCode
 
