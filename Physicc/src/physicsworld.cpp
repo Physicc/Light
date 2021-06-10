@@ -1,11 +1,11 @@
 #include "physicsworld.hpp"
 
 
-PhysicsWorld::PhysicsWorld(glm::vec3 gravity)
+PhysicsWorld::PhysicsWorld(const glm::vec3& gravity)
     : m_gravity(gravity)    
     {}
 
-void PhysicsWorld::addRigidBody(RigidBody object)
+void PhysicsWorld::addRigidBody(const RigidBody& object)
 {
     m_objects.push_back(object);
 }
