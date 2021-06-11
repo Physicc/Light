@@ -18,8 +18,8 @@ RigidBody::RigidBody(const glm::vec3& linearPosition, const glm::vec3& linearVel
     {}
 
 /** @fn void RigidBody::updatePosition(float timestep)
- *  @brief updates the position  
- *  @param timestep: input, float type,time interval
+ *  @brief updates the position
+ *  @param timestep: input, float type, time interval
  */
 void RigidBody::updatePosition(float timestep)
 {

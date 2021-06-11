@@ -1,10 +1,8 @@
 /** @file physicsworld.cpp
  *  @brief The Physics World.
  *
- *  The Physics World file class conatins the 
- *  Physics Model for the Physics Engine. This 
- *  includes the Gravity Model, Rigid Body 
- *  objects.
+ *  The Physics World file class conatins the Physics Model for the Physics
+ *  Engine. This includes the Gravity Model, Rigid Body objects.
  *
  *  @author Divyansh Tiwari (divyanshtiwari237)
  *  @author Neilabh Banzal (Neilabh21)
@@ -16,18 +14,16 @@
 
 #include "physicsworld.hpp"
 
-/** @brief Physics World initialisation with Gravity.
+/** @brief Physics World initialisation with gravity.
  *
- *  This intialises the Physics World with Gravity, 
- *  input from the ---?---. 
- *
+ *  This intialises the Physics World with gravity, input from the ---?---.
  */
 PhysicsWorld::PhysicsWorld(const glm::vec3& gravity)
     : m_gravity(gravity)    
     {}
 
 /** @fn void PhysicsWorld::addRigidBody(const RigidBody& object)
- *  @brief Add a new Rigid Body to m_objects
+ *  @brief Add a new RigidBody to m_objects
  *  @param object: input, const RigidBody& type
  */
 void PhysicsWorld::addRigidBody(const RigidBody& object)
@@ -37,7 +33,7 @@ void PhysicsWorld::addRigidBody(const RigidBody& object)
 
 /** @fn void PhysicsWorld::stepSimulation(float time)
  *  @brief steps the simulation by time timestep 
- *  @param timestep: input, float type,time interval
+ *  @param timestep: input, float type, time interval
  */
 void PhysicsWorld::stepSimulation(float timestep)
 {

@@ -5,8 +5,7 @@
 
 /** @brief Rigid Body Class
  *
- *  This class describes and propagates the
- *  properties of each Rigid Body. 
+ *  This class describes and propagates the properties of each Rigid Body.
  */
 class RigidBody
 {
