@@ -5,6 +5,12 @@
 #include "rigidbody.hpp"
 #include <vector>
 
+/** @brief World's Physics Class
+ *
+ *  This class describes and propagates the
+ *  properties of each object using the 
+ *  Physics Model. 
+ */
 class PhysicsWorld
 {
 public:
@@ -21,7 +27,7 @@ public:
     }
 
     void addRigidBody(const RigidBody& object);
-    void stepSimulation(float time);
+    void stepSimulation(float timestep);
     
 private:
     glm::vec3 m_gravity;

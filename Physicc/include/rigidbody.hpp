@@ -3,6 +3,11 @@
 
 #include "../../Light/libs/glm/glm/glm.hpp"
 
+/** @brief Rigid Body Class
+ *
+ *  This class describes and propagates the
+ *  properties of each Rigid Body. 
+ */
 class RigidBody
 {
 public:
@@ -28,7 +33,7 @@ public:
         m_linearVelocity = velocity;
     }
 
-    void updatePosition(float time);
+    void updatePosition(float timestep);
 
 private:
     glm::vec3 m_linearPosition;
