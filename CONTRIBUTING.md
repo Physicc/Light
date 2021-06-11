@@ -16,7 +16,7 @@ To ensure uniformity throughout our codebase, we have a few rules:
 
 #### Header Files and Classes 
 1. Header files go in the `include` directory, and source files go in the `src` directory.
-2. Don't use `using namespace std` in header files. If it is necessary (because of very long type names), try to restrict it to the smallest scope possible.
+2. Don't use `using namespace std` in the global scope in header files. If it is necessary (because of very long type names), try to restrict it to the smallest scope possible.
 3. In classes, prefix all member variables with the `m_` prefix. For example, if the class has a member variable for position, it should be called `m_position`.
 4. Member variables and member functions should use camelCase. That is, if the variable name consists of multiple words, the first letter of the word should be lowercase and the first letter of all subsequent words should be uppercase. Examples: `m_angularVelocity`, `getAngularVelocity()`, `m_gravity`, `getGravity()`, `m_transformComponent`.
 5. Class names should use PascalCase. That is, if the class name consists of multiple words, the first letter of every word should be in uppercase. Examples: `PhysicsWorld`, `RigidBody`. 
@@ -30,3 +30,4 @@ To ensure uniformity throughout our codebase, we have a few rules:
 5. Use blank lines to logically separate portions of code.
 6. Function definitions should have at least one blank line after them (an exception being if it is the last function in a class definition).
 7. Documentation in source code should be done in Doxygen style.
+8. There should be a maximum of 80 characters per line. Break up longer lines of code into smaller pieces and indent them properly to make them easier to read.
