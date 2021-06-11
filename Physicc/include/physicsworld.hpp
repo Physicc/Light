@@ -12,25 +12,25 @@
  */
 class PhysicsWorld
 {
-public:
-    PhysicsWorld(const glm::vec3& gravity);
-    
-    inline void setGravity(const glm::vec3& gravity)
-    {
-        m_gravity = gravity;
-    }
+    public:
+        PhysicsWorld(const glm::vec3& gravity);
 
-    inline glm::vec3 getGravity() const
-    {
-        return m_gravity;
-    }
+        inline void setGravity(const glm::vec3& gravity)
+        {
+            m_gravity = gravity;
+        }
 
-    void addRigidBody(const RigidBody& object);
-    void stepSimulation(float timestep);
-    
-private:
-    glm::vec3 m_gravity;
-    std:: vector<RigidBody> m_objects;
+        inline glm::vec3 getGravity() const
+        {
+            return m_gravity;
+        }
+
+        void addRigidBody(const RigidBody& object);
+        void stepSimulation(float timestep);
+
+    private:
+        glm::vec3 m_gravity;
+        std::vector<RigidBody> m_objects;
 };
 
 #endif // __PHYSICC_H__
