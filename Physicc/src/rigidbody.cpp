@@ -12,18 +12,6 @@
 
 /** @brief RigidBody initialized with linear Position and Velocity.
  */
-RigidBody::RigidBody(const glm::vec3& linearPosition, const glm::vec3& linearVelocity)
-    : m_linearPosition(linearPosition),
-      m_linearVelocity(linearVelocity)
+RigidBody::RigidBody(const glm::vec3& velocity)
+    : m_velocity(velocity)
     {}
-
-/** @fn void RigidBody::updatePosition(float timestep)
- *  @brief updates the position
- *  @param timestep: input, float type, time interval
- */
-void RigidBody::updatePosition(float timestep)
-{
-    m_linearPosition += m_linearVelocity * timestep;
-}
-
-
