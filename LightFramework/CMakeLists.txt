@@ -7,14 +7,14 @@ file(GLOB_RECURSE SOURCES
 )
 
 # add the executable
-add_library(Light STATIC ${SOURCES})
+add_library(LightFramework STATIC ${SOURCES})
 
-target_include_directories(Light PUBLIC include)
+target_include_directories(LightFramework PUBLIC include)
 
 # add OpenGL library
 cmake_policy(SET CMP0072 NEW)
 find_package(OpenGL REQUIRED)
-target_link_libraries(Light ${OPENGL_gl_LIBRARY})
+target_link_libraries(LightFramework ${OPENGL_gl_LIBRARY})
 
 if (UNIX)
 	if (NOT APPLE)
@@ -30,33 +30,33 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 # GLFW
 add_subdirectory(libs/glfw-3.3.3)
-target_link_libraries(Light glfw)
+target_link_libraries(LightFramework glfw)
 
 # GLAD
 add_subdirectory(libs/glad)
-target_link_libraries(Light glad)
+target_link_libraries(LightFramework glad)
 
 add_definitions(-DGLFW_INCLUDE_NONE)
 
 # ImGUI
 add_subdirectory(libs/imgui)
-target_link_libraries(Light glad glfw imgui)
+target_link_libraries(LightFramework glad glfw imgui)
 
 # StbImage
 add_subdirectory(libs/stbimage)
-target_link_libraries(Light stbimage)
+target_link_libraries(LightFramework stbimage)
 
 # GLM
-target_include_directories(Light PUBLIC libs/glm)
+target_include_directories(LightFramework PUBLIC libs/glm)
 
 # spdlog
 add_subdirectory(libs/spdlog)
-target_link_libraries(Light spdlog)
+target_link_libraries(LightFramework spdlog)
 
 if (UNIX)
 	if (APPLE)
-		target_link_libraries(Light "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
+		target_link_libraries(LightFramework "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
 	else()
-		target_link_libraries(Light ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
+		target_link_libraries(LightFramework ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
 	endif()
 endif()
