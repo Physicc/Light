@@ -1,5 +1,5 @@
 #include "platform/glfw/windowglfw.hpp"
-#include "platform/opengl/openglcontext.hpp"
+#include "light/platform/opengl/openglcontext.hpp"
 #include "events/keyevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/applicationevent.hpp"

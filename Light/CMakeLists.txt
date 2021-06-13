@@ -21,7 +21,11 @@ target_include_directories(Light PUBLIC ../shared/include)
 # GLM
 target_include_directories(Light PUBLIC ../shared/libs/glm)
 
-# add shared
+# StbImage
+add_subdirectory(libs/stbimage)
+target_link_libraries(Light PUBLIC stbimage)
+
+# spdlog
 if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
 	add_subdirectory(../shared/libs/spdlog spdlog)
 else()
@@ -35,21 +39,10 @@ cmake_policy(SET CMP0072 NEW)
 find_package(OpenGL REQUIRED)
 target_link_libraries(Light PUBLIC ${OPENGL_gl_LIBRARY})
 
-if (UNIX)
-	if (NOT APPLE)
-		find_package(Threads REQUIRED)
-		find_package(X11 REQUIRED)
-	endif()
-endif()
-
 # GLAD
 add_subdirectory(libs/glad)
 target_link_libraries(Light PRIVATE glad)
 
-if (UNIX)
-	if (APPLE)
-		target_link_libraries(Light PUBLIC "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
-	else()
-		target_link_libraries(Light PUBLIC ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
-	endif()
-endif()
+# GLFW Include
+target_include_directories(Light PRIVATE ../LightFramework/libs/glfw-3.3.3/include)
+add_definitions(-DGLFW_INCLUDE_NONE)

@@ -1,4 +1,4 @@
-#include "platform/opengl/openglrendererapi.hpp"
+#include "light/platform/opengl/openglrendererapi.hpp"
 
 #include "light/rendering/rendercommand.hpp"
 

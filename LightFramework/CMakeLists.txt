@@ -30,13 +30,10 @@ target_link_libraries(LightFramework glfw)
 
 add_definitions(-DGLFW_INCLUDE_NONE)
 
+
 # ImGUI
 add_subdirectory(libs/imgui)
 target_link_libraries(LightFramework glad glfw imgui)
-
-# StbImage
-add_subdirectory(libs/stbimage)
-target_link_libraries(LightFramework stbimage)
 
 # GLM
 target_include_directories(Light PUBLIC ../shared/libs/glm)
@@ -44,3 +41,18 @@ target_include_directories(Light PUBLIC ../shared/libs/glm)
 # spdlog
 add_subdirectory(../shared/libs/spdlog spdlog)
 # target_link_libraries(LightCommon spdlog)
+
+if (UNIX)
+	if (NOT APPLE)
+		find_package(Threads REQUIRED)
+		find_package(X11 REQUIRED)
+	endif()
+endif()
+
+if (UNIX)
+	if (APPLE)
+		target_link_libraries(Light PUBLIC "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
+	else()
+		target_link_libraries(Light PUBLIC ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
+	endif()
+endif()
