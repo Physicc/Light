@@ -1,7 +1,7 @@
 #ifndef __LAYER_H__
 #define __LAYER_H__
 
-#include "base.hpp"
+#include "core/base.hpp"
 #include "events/event.hpp"
 #include "core/timestep.hpp"
 

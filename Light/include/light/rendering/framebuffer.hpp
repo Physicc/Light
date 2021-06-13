@@ -1,7 +1,7 @@
 #ifndef __FRAMEBUFFER_H__
 #define __FRAMEBUFFER_H__
 
-#include <memory>
+#include "core/base.hpp"
 
 namespace Light
 {

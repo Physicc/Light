@@ -1,11 +1,7 @@
 #ifndef __SHADER_H__
 #define __SHADER_H__
 
-#include <memory>
-#include <unordered_map>
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtx/string_cast.hpp"
+#include "core/base.hpp"
 
 namespace Light
 {

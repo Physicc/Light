@@ -1,8 +1,7 @@
 #ifndef __TEXTURE_H__
 #define __TEXTURE_H__
 
-#include <cstdint>
-#include <string>
+#include "core/base.hpp"
 
 namespace Light
 {

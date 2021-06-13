@@ -1,14 +1,11 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include <memory>
+#include "core/base.hpp"
+
 #include "light/rendering/vertexarray.hpp"
 #include "light/rendering/camera.hpp"
 #include "light/rendering/shader.hpp"
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtx/string_cast.hpp"
-
 namespace Light
 {
 	class Renderer

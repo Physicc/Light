@@ -1,7 +1,7 @@
 #ifndef __RENDERCOMMAND_H__
 #define __RENDERCOMMAND_H__
 
-#include <memory>
+#include "core/base.hpp"
 
 #include "light/rendering/rendererapi.hpp"
 #include "light/rendering/vertexarray.hpp"

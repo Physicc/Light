@@ -1,7 +1,8 @@
 #ifndef __VERTEXARRAY_H__
 #define __VERTEXARRAY_H__
 
-#include <memory>
+#include "core/base.hpp"
+
 #include "light/rendering/buffer.hpp"
 
 namespace Light

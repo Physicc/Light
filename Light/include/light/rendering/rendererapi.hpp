@@ -1,9 +1,8 @@
 #ifndef __RENDERERAPI_H__
 #define __RENDERERAPI_H__
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtx/string_cast.hpp"
+#include "core/base.hpp"
+
 #include "light/rendering/vertexarray.hpp"
 
 namespace Light

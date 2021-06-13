@@ -6,10 +6,15 @@ file(GLOB_RECURSE SOURCES
 	src/*.cpp
 )
 
+# Add logging source
+list(APPEND SOURCES ../shared/src/core/logging.cpp)
+
 # add the executable
 add_library(LightFramework STATIC ${SOURCES})
 
+# add includes
 target_include_directories(LightFramework PUBLIC include)
+target_include_directories(LightFramework PUBLIC ../shared/include)
 
 # Light
 add_subdirectory(../Light Light)
@@ -34,8 +39,8 @@ add_subdirectory(libs/stbimage)
 target_link_libraries(LightFramework stbimage)
 
 # GLM
-target_include_directories(LightFramework PUBLIC libs/glm)
+target_include_directories(Light PUBLIC ../shared/libs/glm)
 
 # spdlog
-add_subdirectory(libs/spdlog)
-target_link_libraries(LightFramework spdlog)
+add_subdirectory(../shared/libs/spdlog spdlog)
+# target_link_libraries(LightCommon spdlog)
