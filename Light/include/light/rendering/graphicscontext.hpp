@@ -1,8 +1,6 @@
 #ifndef __GRAPHICSCONTEXT_H__
 #define __GRAPHICSCONTEXT_H__
 
-#include "core/base.hpp"
-
 namespace Light
 {
 	class GraphicsContext

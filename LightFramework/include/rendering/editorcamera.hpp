@@ -3,7 +3,7 @@
 
 #include "core/base.hpp"
 
-#include "rendering/camera.hpp"
+#include "light/rendering/camera.hpp"
 #include "core/timestep.hpp"
 #include "events/event.hpp"
 #include "events/keyevent.hpp"
@@ -23,7 +23,7 @@ namespace Light
 
 		void setViewportSize(int width, int height);
 
-		inline const glm::mat4& getViewMatrix() const { return m_viewMatrix; }
+		const glm::mat4& getViewMatrix() const { return m_viewMatrix; }
 		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * m_viewMatrix; }
 
 		glm::vec3 getUpDirection() const;

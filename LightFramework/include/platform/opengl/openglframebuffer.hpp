@@ -2,7 +2,7 @@
 #define __OPENGLFRAMEBUFFER_H__
 
 #include "core/base.hpp"
-#include "rendering/framebuffer.hpp"
+#include "light/rendering/framebuffer.hpp"
 
 namespace Light
 {

@@ -1,6 +1,6 @@
 #include "core/application.hpp"
 
-#include "rendering/renderer.hpp"
+#include "light/rendering/renderer.hpp"
 
 #include "core/logging.hpp"
 

@@ -1,7 +1,7 @@
 #ifndef __OPENGLTEXTURE_H__
 #define __OPENGLTEXTURE_H__
 
-#include "rendering/texture.hpp"
+#include "light/rendering/texture.hpp"
 
 namespace Light
 {

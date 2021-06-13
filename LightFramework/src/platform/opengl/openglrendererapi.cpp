@@ -1,6 +1,6 @@
 #include "platform/opengl/openglrendererapi.hpp"
 
-#include "rendering/rendercommand.hpp"
+#include "light/rendering/rendercommand.hpp"
 
 #include "glad/glad.h"
 

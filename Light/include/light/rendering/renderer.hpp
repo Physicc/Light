@@ -1,10 +1,13 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include "core/base.hpp"
-#include "rendering/vertexarray.hpp"
-#include "rendering/editorcamera.hpp"
-#include "rendering/shader.hpp"
+#include <memory>
+#include "light/rendering/vertexarray.hpp"
+#include "light/rendering/camera.hpp"
+#include "light/rendering/shader.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 namespace Light
 {
@@ -14,7 +17,7 @@ namespace Light
 		static void init();
 		static void onWindowResize(uint32_t width, uint32_t height);
 
-		static void beginScene(EditorCamera& camera, glm::vec3 lightPos);
+		static void beginScene(Camera& camera, glm::vec3 lightPos);
 		static void endScene();
 
 		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));

@@ -1,9 +1,10 @@
 #ifndef __RENDERCOMMAND_H__
 #define __RENDERCOMMAND_H__
 
-#include "core/base.hpp"
-#include "rendering/rendererapi.hpp"
-#include "rendering/vertexarray.hpp"
+#include <memory>
+
+#include "light/rendering/rendererapi.hpp"
+#include "light/rendering/vertexarray.hpp"
 
 namespace Light
 {

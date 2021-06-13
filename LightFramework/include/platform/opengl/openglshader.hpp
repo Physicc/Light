@@ -2,7 +2,7 @@
 #define __OPENGLSHADER_H__
 
 #include "core/base.hpp"
-#include "rendering/shader.hpp"
+#include "light/rendering/shader.hpp"
 
 #include "glad/glad.h"
 

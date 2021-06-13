@@ -2,7 +2,7 @@
 #define __OPENGLBUFFER_H__
 
 #include "core/base.hpp"
-#include "rendering/buffer.hpp"
+#include "light/rendering/buffer.hpp"
 
 namespace Light
 {

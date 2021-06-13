@@ -4,7 +4,7 @@
 
 #include "core/base.hpp"
 #include "core/window.hpp"
-#include "rendering/graphicscontext.hpp"
+#include "light/rendering/graphicscontext.hpp"
 
 #include "GLFW/glfw3.h"
 

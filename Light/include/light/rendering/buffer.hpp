@@ -1,9 +1,7 @@
 #ifndef __BUFFER_H__
 #define __BUFFER_H__
 
-#include "core/base.hpp"
-
-#include "core/logging.hpp"
+#include <vector>
 
 namespace Light
 {
@@ -79,7 +77,7 @@ namespace Light
 			case ShaderDataType::Mat4: 		return 4 * 4 * 4;
 			case ShaderDataType::Bool: 		return 1;
 			default:
-				LIGHT_CORE_WARN("Unsupported Shader data type");
+				// LIGHT_CORE_WARN("Unsupported Shader data type");
 				return -1;
 			}
 		}
@@ -100,7 +98,7 @@ namespace Light
 			case ShaderDataType::Mat4: 		return 4 * 4;
 			case ShaderDataType::Bool: 		return 1;
 			default:
-				LIGHT_CORE_WARN("Unsupported Shader data type");
+				// LIGHT_CORE_WARN("Unsupported Shader data type");
 				return -1;
 			}
 		}

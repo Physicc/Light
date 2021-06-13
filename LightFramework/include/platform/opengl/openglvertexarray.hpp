@@ -2,8 +2,8 @@
 #define __OPENGLVERTEXARRAY_H__
 
 #include "core/base.hpp"
-#include "rendering/vertexarray.hpp"
-#include "rendering/buffer.hpp"
+#include "light/rendering/vertexarray.hpp"
+#include "light/rendering/buffer.hpp"
 
 namespace Light
 {

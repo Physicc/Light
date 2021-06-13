@@ -2,7 +2,7 @@
 #define __OPENGLRENDERERAPI_H__
 
 #include "core/base.hpp"
-#include "rendering/rendererapi.hpp"
+#include "light/rendering/rendererapi.hpp"
 
 namespace Light
 {
