@@ -14,6 +14,9 @@
 #include "input/mousecodes.hpp"
 #include "core/timestep.hpp"
 #include "core/logging.hpp"
+#include "ecs/components.hpp"
+#include "ecs/entity.hpp"
+#include "ecs/scene.hpp"
 
 #include "glm/gtc/type_ptr.hpp"
 
