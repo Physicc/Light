@@ -36,7 +36,7 @@ add_subdirectory(libs/imgui)
 target_link_libraries(LightFramework glad glfw imgui)
 
 # GLM
-target_include_directories(Light PUBLIC ../shared/libs/glm)
+target_include_directories(LightFramework PUBLIC ../shared/libs/glm)
 
 # spdlog
 add_subdirectory(../shared/libs/spdlog spdlog)
@@ -51,8 +51,8 @@ endif()
 
 if (UNIX)
 	if (APPLE)
-		target_link_libraries(Light PUBLIC "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
+		target_link_libraries(LightFramework PUBLIC "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
 	else()
-		target_link_libraries(Light PUBLIC ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
+		target_link_libraries(LightFramework PUBLIC ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
 	endif()
 endif()
