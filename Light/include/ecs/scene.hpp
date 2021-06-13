@@ -1,8 +1,20 @@
-//
-// Created by shashank on 13/06/21.
-//
+#ifndef __SCENE_HPP__
+#define __SCENE_HPP__
 
-#ifndef LIGHT_SCENE_HPP
-#define LIGHT_SCENE_HPP
+#include "entt.hpp"
 
-#endif //LIGHT_SCENE_HPP
+class Entity;
+
+class Scene {
+public:
+    Scene() = default;
+    Entity addEntity();
+    void update(Light::Timestep dt);
+    void render();
+private:
+    entt::registry m_registry;
+
+    friend class Entity;
+};
+
+#endif // __SCENE_HPP__

@@ -1,8 +1,4 @@
-//
-// Created by shashank on 13/06/21.
-//
+#ifndef __COMPONENTS_HPP__
+#define __COMPONENTS_HPP__
 
-#ifndef LIGHT_COMPONENTS_HPP
-#define LIGHT_COMPONENTS_HPP
-
-#endif //LIGHT_COMPONENTS_HPP
+#endif // __COMPONENTS_HPP__
