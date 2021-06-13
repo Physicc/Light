@@ -53,6 +53,9 @@ target_include_directories(Light PUBLIC libs/glm)
 add_subdirectory(libs/spdlog)
 target_link_libraries(Light spdlog)
 
+#EnTT
+target_include_directories(Light PUBLIC libs/entt)
+
 if (UNIX)
 	if (APPLE)
 		target_link_libraries(Light "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
