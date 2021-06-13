@@ -1,5 +1,5 @@
-#include "rendering/renderer.hpp"
-#include "rendering/rendercommand.hpp"
+#include "light/rendering/renderer.hpp"
+#include "light/rendering/rendercommand.hpp"
 
 namespace Light
 {
@@ -15,7 +15,7 @@ namespace Light
 		RenderCommand::setViewPort(0, 0, width, height);
 	}
 
-	void Renderer::beginScene(EditorCamera& camera, glm::vec3 lightPos)
+	void Renderer::beginScene(Camera& camera, glm::vec3 lightPos)
 	{
         s_sceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
         s_sceneData->lightPos = lightPos;

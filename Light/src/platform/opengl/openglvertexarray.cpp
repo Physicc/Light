@@ -1,4 +1,4 @@
-#include "platform/opengl/openglvertexarray.hpp"
+#include "light/platform/opengl/openglvertexarray.hpp"
 
 #include "core/logging.hpp"
 
