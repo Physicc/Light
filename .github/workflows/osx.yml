@@ -18,6 +18,7 @@ jobs:
         #From 12.1 to 12.4 (inclusive), all XCode versions use the same
         #compiler version.
     
+    name: ${{ runner.os }} - XCode ${{ matrix.xcode-version }}
     steps:
       - uses: actions/checkout@v2
         with:
