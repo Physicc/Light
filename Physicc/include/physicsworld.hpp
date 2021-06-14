@@ -20,7 +20,7 @@ class PhysicsWorld
             m_gravity = gravity;
         }
 
-        inline glm::vec3 getGravity() const
+        [[nodiscard]] inline glm::vec3 getGravity() const
         {
             return m_gravity;
         }

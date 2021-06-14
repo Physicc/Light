@@ -13,6 +13,10 @@
 
 /** @brief RigidBody initialized with velocity.
  */
-RigidBody::RigidBody(const glm::vec3& velocity)
-    : m_velocity(velocity)
-    {}
+RigidBody::RigidBody(const float mass, const glm::vec3& velocity,
+                     const bool isGravity)
+	: m_mass(mass),
+	  m_velocity(velocity),
+	  m_isGravity(isGravity),
+	  m_force(glm::vec3(0, 0, 0))
+{}
