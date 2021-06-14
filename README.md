@@ -7,7 +7,6 @@ Lightweight Renderer, purposed to augment the development of Physicc
 * Ubuntu 18
 * Ubuntu 20
 * OSX 10
-* OSX 11
 
 ## Prerequisites
 
@@ -26,7 +25,7 @@ Lightweight Renderer, purposed to augment the development of Physicc
 
 ### Ubuntu
 
-* GCC (>= 8)
+* GCC (>= 8) or Clang (>= 9)
 * X11
 
 If you get library headers not found error while building, ```apt-get``` the dev version of all packages it requests you to install
