@@ -28,6 +28,7 @@ if (WIN32)
 elseif (UNIX)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         set(CMAKE_EXE_LINKER_FLAGS "-lstdc++")
+    endif ()
 endif ()
 
 target_include_directories(Editor PUBLIC include)
