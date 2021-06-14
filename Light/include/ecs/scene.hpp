@@ -2,6 +2,7 @@
 #define __SCENE_HPP__
 
 #include "entt.hpp"
+#include "core/timestep.hpp"
 
 class Entity;
 

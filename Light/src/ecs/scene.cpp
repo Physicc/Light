@@ -1,12 +1,18 @@
-#include "scene.hpp"
-#include "entity.hpp"
-#include "components.hpp"
+#include "ecs/scene.hpp"
+#include "ecs/entity.hpp"
+#include "ecs/components.hpp"
+#include "core/timestep.hpp"
+#include "core/input.hpp"
+#include "input/keycodes.hpp"
+#include "rendering/renderer.hpp"
 
-Entity Scene::addEntity() {
+Entity Scene::addEntity()
+{
     return {m_registry.create(), this};
 }
 
-void Scene::update(Light::Timestep dt) {
+void Scene::update(Light::Timestep dt)
+{
     auto view = m_registry.view<TransformComponent, Interactive>();
     for (auto entity : view) {
         auto& transform = view.get<TransformComponent>(entity);
@@ -45,16 +51,17 @@ void Scene::update(Light::Timestep dt) {
     }
 }
 
-void Scene::render() {
-    auto view1 = m_registry.view<ShaderComponent, VertexArrayComponent, CubemapComponent>();
+void Scene::render()
+{
+    auto view1 = m_registry.view<ShaderComponent, MeshComponent, CubemapComponent>();
     for (auto& entity : view1) {
-        auto [shader, vertex, cubemap] = view1.get(entity);
+        auto [shader, mesh, cubemap] = view1.get(entity);
         cubemap.bind();
-        Light::Renderer::submitSkybox(shader.shader, vertex.vertexArray);
+        Light::Renderer::submitSkybox(shader.shader, mesh.mesh);
     }
-    auto view2 = m_registry.view<ShaderComponent, VertexArrayComponent, TransformComponent>();
+    auto view2 = m_registry.view<ShaderComponent, MeshComponent, TransformComponent>();
     for (auto& entity : view2) {
-        auto [shader, vertex, transform] = view2.get(entity);
-        Light::Renderer::submit(shader.shader, vertex.vertexArray, transform.getTransform());
+        auto [shader, mesh, transform] = view2.get(entity);
+        Light::Renderer::submit(shader.shader, mesh.mesh, transform.getTransform());
     }
 }
