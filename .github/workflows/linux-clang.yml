@@ -45,7 +45,6 @@ jobs:
         env:
           CC: clang-${{ matrix.clang-version }}
           CXX: clang-${{ matrix.clang-version }}
-          CXXFLAGS: -lstdc++
           
       - name: Build
         run: |
