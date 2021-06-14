@@ -7,25 +7,28 @@ project(Physics)
 
 # find all source files
 file(GLOB SOURCES
-	src/*.cpp
-)
+        src/*.cpp
+        )
 
 # add the executable
 add_executable(Editor ${SOURCES})
 
-if(WIN32)
-	if(MSVC)
-		set_target_properties(
-			Editor
-			PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE"
-					LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
-		)
-	elseif(MINGW)
-		if(CMAKE_BUILD_TYPE STREQUAL "Release")
-			target_link_options(Editor PRIVATE -mwindows)
-		endif()
-	endif()
-endif()
+if (WIN32)
+    if (MSVC)
+        set_target_properties(
+                Editor
+                PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE"
+                LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
+        )
+    elseif (MINGW)
+        if (CMAKE_BUILD_TYPE STREQUAL "Release")
+            target_link_options(Editor PRIVATE -mwindows)
+        endif ()
+    endif ()
+elseif (UNIX)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        set(CMAKE_EXE_LINKER_FLAGS "-lstdc++")
+endif ()
 
 target_include_directories(Editor PUBLIC include)
 
