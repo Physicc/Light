@@ -6,6 +6,7 @@
  *
  *  @author Divyansh Tiwari (divyanshtiwari237)
  *  @author Neilabh Banzal (Neilabh21)
+ *  @author Tirthankar Mazumder (wermos)
  *  @bug No known bugs.
  */
 
@@ -39,6 +40,6 @@ void PhysicsWorld::stepSimulation(float timestep)
 {
     for(int i = 0; i < m_objects.size(); i++)
     {
-        m_objects[i].updatePosition(timestep);
+        
     }
 }

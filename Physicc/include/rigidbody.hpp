@@ -9,21 +9,38 @@
  */
 class RigidBody
 {
-    public:
-        RigidBody(const glm::vec3& velocity);
+	public:
+		RigidBody(float mass, const glm::vec3& velocity,
+		          bool isGravity);
 
-        inline glm::vec3 getLinearVelocity() const
-        {
-            return m_velocity;
-        }
+		[[nodiscard]] inline glm::vec3 getVelocity() const
+		{
+			return m_velocity;
+		}
 
-        inline void setLinearVelocity(const glm::vec3& velocity)
-        {
-            m_velocity = velocity;
-        }
+		inline void setVelocity(const glm::vec3& velocity)
+		{
+			m_velocity = velocity;
+		}
 
-    private:
-        glm::vec3 m_velocity;
+		[[nodiscard]] inline bool isGravity() const
+		{
+			//Is gravity acting on this object?
+			return m_isGravity;
+		}
+
+		void setForce();
+
+	private:
+		glm::vec3 m_force{};
+		//TODO: Insert Collider here
+		float m_mass;
+		glm::vec3 m_velocity;
+		bool m_isGravity;
+
+		friend class PhysicsWorld;
+		//PhysicsWorld needs to have access to all of RigidBody's private
+		//members for functions like stepSimulation, etc.
 };
 
 #endif // __RIGIDBODY_H__
