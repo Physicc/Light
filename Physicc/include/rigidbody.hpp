@@ -2,6 +2,7 @@
 #define __RIGIDBODY_H__
 
 #include "../../Light/libs/glm/glm/glm.hpp"
+#include "collider.hpp"
 
 /** @brief Rigid Body Class
  *
@@ -33,7 +34,7 @@ class RigidBody
 
 	private:
 		glm::vec3 m_force{};
-		//TODO: Insert Collider here
+		BoxCollider m_collider{};
 		float m_mass;
 		glm::vec3 m_velocity;
 		bool m_isGravity;

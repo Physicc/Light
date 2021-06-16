@@ -1,81 +1,134 @@
+/** @file collider.cpp
+ *  @brief Contains the collider classes
+ *
+ *  The Collider file contains the collider classes which hold the shape and
+ *  transform of the objects 
+ *
+ *  @author Prakhar Mittal (prak74)
+ *  @bug No known bugs.
+ */
+
+/* -- Includes -- */
+/* collider header */
+
 #include "collider.hpp"
 
-/**********************/
-/*      Collider      */
-/**********************/
+/**
+ * @brief Construct a new Collider:: Collider object
+ * 
+ * @param position Position of the object. Default = (0,0,0)
+ * @param rotation Rotations about the axes. Default = (0,0,0)
+ * @param scale Length along each of the axes. Default = (1,1,1)
+ */
 Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
         : m_position(position)
-        , m_rotation(rotation)
+        , m_rotate(rotation)
         , m_scale(scale)
 {
 }
 
-
-/*Getters*/
+/**
+ * @brief Get Position of object's center
+ * 
+ * @return glm::vec3 
+ */
 inline glm::vec3 Collider::getPos()
 {
     return m_position;
 }
 
+/** @brief get Angle of rotation of the object about it's center
+ * 
+ *  @return glm::vec3
+ */
 inline glm::vec3 Collider::getRotate()
 {
     return m_rotate;
 }
 
+/** @brief get Scale of object
+ * 
+ * @return glm::vec3
+ */
 inline glm::vec3 Collider::getScale()
 {
     return m_scale;
 }
 
-inline glm::mat4 getTransform()
+/** @brief get Transform matrix of object
+ * 
+ * @return glm::mat4
+ */
+inline glm::mat4 Collider::getTransform()
 {
     return m_transform;
 }
 
-/*Setters*/
-inline glm::vec3 Collider::setPos(glm::vec3 newpos)
+/** @brief set Position of object's center
+ * 
+ *  @param newpos Takes the (x,y,z) coordinates to place the object at
+ */
+inline void Collider::setPos(glm::vec3 newpos)
 {
     m_position = newpos;
 }
 
-
-inline glm::vec3 Collider::setPos(glm::vec3 newrotate)
+/**
+ * @brief Set rotation of object about it's center
+ * 
+ * @param newrotate vec3 containing rotation values about x,y,z axes
+ */
+inline void Collider::setRotate(glm::vec3 newrotate)
 {
     m_rotate = newrotate;
 }
 
-
-inline glm::vec3 Collider::setPos(glm::vec3 newscale)
+/** @brief get Position of object's center
+ * 
+ * @param newscale New scale of the object
+ */
+inline void Collider::setScale(glm::vec3 newscale)
 {
     m_scale = newscale;
 }
 
-/*Update Transform*/
+/**
+ * @brief Update Transform for rendering
+ * 
+ */
 void Collider::updateTransform()
 {
-    m_transform = glm::translate(glm::mat4(1.0f), position);
-	m_transform = glm::scale(m_transform, scale);
-	m_transform = glm::rotate(m_transform, glm::radians(rotation.x), glm::vec3(1.0, 0.0, 0.0));
-	m_transform = glm::rotate(m_transform, glm::radians(rotation.y), glm::vec3(0.0, 1.0, 0.0));
-	m_transform = glm::rotate(m_transform, glm::radians(rotation.z), glm::vec3(0.0, 0.0, 1.0));
+    m_transform = glm::translate(glm::mat4(1.0f), m_position);
+	m_transform = glm::scale(m_transform, m_scale);
+	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.x), glm::vec3(1.0, 0.0, 0.0));
+	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.y), glm::vec3(0.0, 1.0, 0.0));
+	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.z), glm::vec3(0.0, 0.0, 1.0));
 }
 
-
-/**********************/
-/*     BoxCollider    */
-/**********************/
-
+/**
+ * @brief Creates a BoxCollider object
+ * 
+ * @param size Size of the object along each axes
+ * @param position Position of object in global space
+ * @param rotation Rotation about each of the axis in local space
+ * @param scale Scale of the object along each axis 
+ * 
+ */
 BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale )
-                    )
                     : m_size(size), Collider(position,rotation,scale)
 {
 }
 
-/**********************/
-/*   SphereCollider   */
-/**********************/
-SphereCollider::SphereCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale )
-                    )
-                    : m_size(size), Collider(position,rotation,scale)
+/**
+ * @brief Creates a SphereCollider object
+ * 
+ * @param radius Radius of the sphere
+ * @param position Position of object in global space
+ * @param rotation Rotation about each of the axis in local space
+ * @param scale Scale of the object along each axis 
+ * 
+ */
+SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+                    : m_radius(radius), Collider(position,rotation,scale)
 {
 }
