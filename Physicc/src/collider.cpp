@@ -117,6 +117,25 @@ void Collider::updateTransform()
 BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale )
                     : m_size(size), Collider(position,rotation,scale)
 {
+    m_objectType = e_box;
+}
+
+/**
+ * @brief Computes and returns Axis Aligned Bounding Box of Box shaped object
+ * 
+ * @return AABB 
+ */
+AABB BoxCollider::getAABB()
+{
+    glm::vec3 lowerBound;
+    glm::vec3 upperBound;
+    lowerBound.x = position.x - size.x/2;
+    upperBound.x = position.x + size.x/2;
+    lowerBound.y = position.y - size.y/2;
+    upperBound.y = position.y + size.y/2;
+    lowerBound.z = position.z - size.z/2;
+    upperBound.z = position.z + size.z/2;
+    return AABB{lowerBound,upperBound};
 }
 
 /**
@@ -131,4 +150,23 @@ BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation,
 SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
                     : m_radius(radius), Collider(position,rotation,scale)
 {
+    m_objectType = e_sphere;
+}
+
+/**
+ * @brief Computes and returns Axis Aligned Bounding Box of Sphere shaped object
+ * 
+ * @return AABB 
+ */
+AABB SphereCollider::getAABB()
+{
+    glm::vec3 lowerBound;
+    glm::vec3 upperBound;
+    lowerBound.x = position.x - m_radius;
+    upperBound.x = position.x + m_radius;
+    lowerBound.y = position.y - m_radius;
+    upperBound.y = position.y + m_radius;
+    lowerBound.z = position.z - m_radius;
+    upperBound.z = position.z + m_radius;
+    return AABB{lowerBound,upperBound};
 }
