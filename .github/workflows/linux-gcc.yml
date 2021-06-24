@@ -17,7 +17,7 @@ jobs:
         os: [ ubuntu-18.04, ubuntu-20.04 ]
         gcc-version: [ 8, 9, 10 ]
     
-    name: ${{ matrix.os }} (GCC ${{gcc-version}})
+    name: ${{ matrix.os }} (GCC ${{ matrix.gcc-version }})
     steps:
       - uses: actions/checkout@v2
         with:
