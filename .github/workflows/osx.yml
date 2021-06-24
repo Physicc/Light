@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ macos-10.15 ]
-        xcode-version: ['12.0', latest-stable]
+        xcode-version: [ '12.0', latest-stable ]
         #From 12.1 to 12.4 (inclusive), all XCode versions use the same
         #compiler version.
     
