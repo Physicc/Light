@@ -44,7 +44,7 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1
         with:
           key: ${{ matrix.os }}-clang-${{ matrix.clang-version }}
-          max-size: 1G
+          max-size: 100M
      
       - name: Configure CMake
         run: |
