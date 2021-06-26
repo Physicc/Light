@@ -37,7 +37,7 @@ jobs:
       run: |
         cmake --build ${{github.workspace}}/build `
               --config ${{env.BUILD_TYPE}} `
-              -- -j2
+              -- /m:12
   
   windows_mingw-w64:
     name: Windows (mingw-w64-gcc)
