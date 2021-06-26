@@ -24,14 +24,26 @@ jobs:
       with:
         submodules: recursive
 
+    - uses: mikehardy/buildcache-action@v1
+      with:
+        cache_key: windows-msvc
+        upload_buildcache_log: 'true'
+        zero_buildcache_stats: 'false' # optional: lifetime vs per-run stats?
+        
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -HEditor -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: |
+        cmake -HEditor \
+              -B${{github.workspace}}/build \
+              -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: |
+        cmake --build ${{github.workspace}}/build \
+              --config ${{env.BUILD_TYPE}} \
+              -- -j2
   
   windows_mingw-w64:
     name: Windows (mingw-w64-gcc)
@@ -46,8 +58,21 @@ jobs:
         with:
           install: mingw-w64-x86_64-gcc mingw-w64-x86_64-make
           
+      - uses: mikehardy/buildcache-action@v1
+        with:
+          cache_key: windows-mingw
+          upload_buildcache_log: 'true'
+          zero_buildcache_stats: 'false' # optional: lifetime vs per-run stats?
+          
       - name: Configure CMake
-        run: cmake -HEditor -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G"MinGW Makefiles"
+        run: |
+          cmake -HEditor \
+                -B${{github.workspace}}/build \
+                -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+                -G"MinGW Makefiles"
       
       - name: Build
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -- -j2
+        run: |
+          cmake --build ${{github.workspace}}/build \
+                --config ${{env.BUILD_TYPE}} \
+                -- -j2
