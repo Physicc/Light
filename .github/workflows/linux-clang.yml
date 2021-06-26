@@ -31,13 +31,15 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -yq libglfw3-dev \
-                                   libxrandr-dev \
-                                   libxinerama-dev \
-                                   libxcursor-dev \
-                                   libxi-dev \
-                                   clang-${{ matrix.clang-version }}
-            
+          sudo apt-get install -yq --no-install-recommends \
+                               libglfw3-dev \
+                               libxrandr-dev \
+                               libxinerama-dev \
+                               libxcursor-dev \
+                               libxi-dev \
+                               gcc-${{ matrix.gcc-version }} \
+                               g++-${{ matrix.gcc-version }}
+     
       - name: Configure CMake
         run: |
           cmake -HEditor \
