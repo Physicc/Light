@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-          
+        
       - name: Install Dependencies
         run: |
           sudo apt-get update
@@ -34,12 +34,20 @@ jobs:
                                libxi-dev \
                                gcc-${{ matrix.gcc-version }} \
                                g++-${{ matrix.gcc-version }}
+     
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ matrix.os }}-gcc-${{ matrix.gcc-version }}
+          max-size: 1G
             
       - name: Configure CMake
         run: |
           cmake -HEditor \
                 -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+                -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
                 -G"Unix Makefiles"
         env:
           CC: gcc-${{ matrix.gcc-version }}
