@@ -27,14 +27,22 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: ${{ matrix.xcode-version }}
+          
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ matrix.os }}-clang-${{ matrix.clang-version }}
+          max-size: 100M
             
       - name: Configure CMake
         run: |
           cmake -HEditor \
                 -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+                -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
                 -G"Unix Makefiles"
-          
+                
       - name: Build
         run: |
           cmake --build ${{ github.workspace }}/build \
