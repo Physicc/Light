@@ -25,7 +25,7 @@ jobs:
         
       - name: Install Dependencies
         run: |
-          sudo apt-get update
+          sudo apt-get update -q
           sudo apt-get install -yq --no-install-recommends \
                                libglfw3-dev \
                                libxrandr-dev \
@@ -39,7 +39,7 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1
         with:
           key: ${{ matrix.os }}-gcc-${{ matrix.gcc-version }}
-          max-size: 1G
+          max-size: 100M
             
       - name: Configure CMake
         run: |
