@@ -37,8 +37,8 @@ jobs:
                                libxinerama-dev \
                                libxcursor-dev \
                                libxi-dev \
-                               gcc-${{ matrix.gcc-version }} \
-                               g++-${{ matrix.gcc-version }}
+                               clang-${{ matrix.gcc-version }} \
+                               clang-${{ matrix.gcc-version }}
      
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
