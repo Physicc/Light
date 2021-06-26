@@ -23,12 +23,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
-
-    - uses: mikehardy/buildcache-action@v1
-      with:
-        cache_key: windows-msvc
-        upload_buildcache_log: 'true'
-        zero_buildcache_stats: 'false' # optional: lifetime vs per-run stats?
         
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -58,17 +52,19 @@ jobs:
         with:
           install: mingw-w64-x86_64-gcc mingw-w64-x86_64-make
           
-      - uses: mikehardy/buildcache-action@v1
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
         with:
-          cache_key: windows-mingw
-          upload_buildcache_log: 'true'
-          zero_buildcache_stats: 'false' # optional: lifetime vs per-run stats?
+          key: windows-mingw
+          max-size: 100M
           
       - name: Configure CMake
         run: |
           cmake -HEditor \
                 -B${{github.workspace}}/build \
                 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+                -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
                 -G"MinGW Makefiles"
       
       - name: Build
