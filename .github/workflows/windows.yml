@@ -29,7 +29,7 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
         cmake -HEditor \
-              -B${{github.workspace}}/build \
+              -B ${{github.workspace}}/build \
               -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
@@ -52,19 +52,17 @@ jobs:
         with:
           install: mingw-w64-x86_64-gcc mingw-w64-x86_64-make
           
-      - name: ccache
-        uses: hendrikmuhs/ccache-action@v1
-        with:
-          key: windows-mingw
-          max-size: 100M
+#       - name: ccache
+#         uses: hendrikmuhs/ccache-action@v1
+#         with:
+#           key: windows-mingw
+#           max-size: 100M
           
       - name: Configure CMake
         run: |
           cmake -HEditor \
-                -B${{github.workspace}}/build \
+                -B ${{github.workspace}}/build \
                 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
-                -DCMAKE_C_COMPILER_LAUNCHER=ccache \
-                -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
                 -G"MinGW Makefiles"
       
       - name: Build
