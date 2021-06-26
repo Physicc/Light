@@ -31,7 +31,7 @@ jobs:
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
         with:
-          key: ${{ matrix.os }}-clang-${{ matrix.clang-version }}
+          key: ${{ matrix.os }}-xcode-${{ matrix.xcode-version }}
           max-size: 100M
             
       - name: Configure CMake
