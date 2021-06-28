@@ -1,7 +1,7 @@
 #ifndef __RIGIDBODY_H__
 #define __RIGIDBODY_H__
 
-#include "../../Light/libs/glm/glm/glm.hpp"
+#include "glm/glm.hpp"
 #include "collider.hpp"
 
 /** @brief Rigid Body Class

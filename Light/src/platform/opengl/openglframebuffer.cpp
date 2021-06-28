@@ -1,4 +1,4 @@
-#include "platform/opengl/openglframebuffer.hpp"
+#include "light/platform/opengl/openglframebuffer.hpp"
 
 #include "core/logging.hpp"
 

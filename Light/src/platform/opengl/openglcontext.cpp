@@ -1,4 +1,4 @@
-#include "platform/opengl/openglcontext.hpp"
+#include "light/platform/opengl/openglcontext.hpp"
 
 #include "core/logging.hpp"
 

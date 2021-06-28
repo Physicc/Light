@@ -1,4 +1,4 @@
-# Light [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.com/dropTableUsers42/Light.svg?branch=main)](https://travis-ci.com/dropTableUsers42/Light) [![Windows](https://github.com/dropTableUsers42/Light/actions/workflows/cmake.yml/badge.svg)](https://github.com/dropTableUsers42/Light/actions/workflows/cmake.yml)
+# Light [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Windows](https://github.com/Physicc/Light/actions/workflows/windows.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/windows.yml) [![OSX](https://github.com/Physicc/Light/actions/workflows/osx.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/osx.yml) [![Linux GCC](https://github.com/Physicc/Light/actions/workflows/linux-gcc.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/linux-gcc.yml) [![Linux Clang](https://github.com/Physicc/Light/actions/workflows/linux-clang.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/linux-clang.yml)
 Lightweight Renderer, purposed to augment the development of Physicc
 
 ## Supported Platforms
@@ -25,7 +25,7 @@ Lightweight Renderer, purposed to augment the development of Physicc
 
 ### Ubuntu
 
-* GCC (>= 8)
+* GCC (>= 8) or Clang (>= 9)
 * X11
 
 If you get library headers not found error while building, ```apt-get``` the dev version of all packages it requests you to install
@@ -40,7 +40,7 @@ If you get library headers not found error while building, ```apt-get``` the dev
 
 * Recursively clone the git module:
 
-	```git clone --recursive https://github.com/dropTableUsers42/Light```
+	```git clone --recursive https://github.com/Physicc/Light```
 
 ### VSCode
 

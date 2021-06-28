@@ -11,7 +11,7 @@ add_library(Physicc STATIC ${SOURCES})
 
 target_include_directories(Physicc PUBLIC include)
 
-add_subdirectory(../Light/libs/glm glm)
+add_subdirectory(../shared/libs/glm glm)
 target_link_libraries(Physicc glm)
 
 

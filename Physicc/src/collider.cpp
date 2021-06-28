@@ -21,9 +21,9 @@
  * @param scale Length along each of the axes. Default = (1,1,1)
  */
 Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-        : m_position(position)
-        , m_rotate(rotation)
-        , m_scale(scale)
+		: m_position(position)
+		, m_rotate(rotation)
+		, m_scale(scale)
 {
 }
 
@@ -34,7 +34,7 @@ Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
  */
 inline glm::vec3 Collider::getPos()
 {
-    return m_position;
+	return m_position;
 }
 
 /** @brief get Angle of rotation of the object about it's center
@@ -43,7 +43,7 @@ inline glm::vec3 Collider::getPos()
  */
 inline glm::vec3 Collider::getRotate()
 {
-    return m_rotate;
+	return m_rotate;
 }
 
 /** @brief get Scale of object
@@ -52,7 +52,7 @@ inline glm::vec3 Collider::getRotate()
  */
 inline glm::vec3 Collider::getScale()
 {
-    return m_scale;
+	return m_scale;
 }
 
 /** @brief get Transform matrix of object
@@ -61,7 +61,7 @@ inline glm::vec3 Collider::getScale()
  */
 inline glm::mat4 Collider::getTransform()
 {
-    return m_transform;
+	return m_transform;
 }
 
 /** @brief set Position of object's center
@@ -70,7 +70,7 @@ inline glm::mat4 Collider::getTransform()
  */
 inline void Collider::setPos(glm::vec3 newpos)
 {
-    m_position = newpos;
+	m_position = newpos;
 }
 
 /**
@@ -80,7 +80,7 @@ inline void Collider::setPos(glm::vec3 newpos)
  */
 inline void Collider::setRotate(glm::vec3 newrotate)
 {
-    m_rotate = newrotate;
+	m_rotate = newrotate;
 }
 
 /** @brief get Position of object's center
@@ -89,7 +89,7 @@ inline void Collider::setRotate(glm::vec3 newrotate)
  */
 inline void Collider::setScale(glm::vec3 newscale)
 {
-    m_scale = newscale;
+	m_scale = newscale;
 }
 
 /**
@@ -98,7 +98,7 @@ inline void Collider::setScale(glm::vec3 newscale)
  */
 void Collider::updateTransform()
 {
-    m_transform = glm::translate(glm::mat4(1.0f), m_position);
+	m_transform = glm::translate(glm::mat4(1.0f), m_position);
 	m_transform = glm::scale(m_transform, m_scale);
 	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.x), glm::vec3(1.0, 0.0, 0.0));
 	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.y), glm::vec3(0.0, 1.0, 0.0));
@@ -115,9 +115,9 @@ void Collider::updateTransform()
  * 
  */
 BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale )
-                    : m_size(size), Collider(position,rotation,scale)
+					: m_size(size), Collider(position,rotation,scale)
 {
-    m_objectType = e_box;
+	m_objectType = e_box;
 }
 
 /**
@@ -125,17 +125,17 @@ BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation,
  * 
  * @return AABB 
  */
-AABB BoxCollider::getAABB()
+AABB BoxCollider::getAABB() const
 {
-    glm::vec3 lowerBound;
-    glm::vec3 upperBound;
-    lowerBound.x = position.x - size.x/2;
-    upperBound.x = position.x + size.x/2;
-    lowerBound.y = position.y - size.y/2;
-    upperBound.y = position.y + size.y/2;
-    lowerBound.z = position.z - size.z/2;
-    upperBound.z = position.z + size.z/2;
-    return AABB{lowerBound,upperBound};
+	glm::vec3 lowerBound;
+	glm::vec3 upperBound;
+	lowerBound.x = m_position.x - m_size.x/2;
+	upperBound.x = m_position.x + m_size.x/2;
+	lowerBound.y = m_position.y - m_size.y/2;
+	upperBound.y = m_position.y + m_size.y/2;
+	lowerBound.z = m_position.z - m_size.z/2;
+	upperBound.z = m_position.z + m_size.z/2;
+	return AABB{lowerBound,upperBound};
 }
 
 /**
@@ -148,9 +148,9 @@ AABB BoxCollider::getAABB()
  * 
  */
 SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-                    : m_radius(radius), Collider(position,rotation,scale)
+					: m_radius(radius), Collider(position,rotation,scale)
 {
-    m_objectType = e_sphere;
+	m_objectType = e_sphere;
 }
 
 /**
@@ -158,15 +158,15 @@ SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotat
  * 
  * @return AABB 
  */
-AABB SphereCollider::getAABB()
+AABB SphereCollider::getAABB() const
 {
-    glm::vec3 lowerBound;
-    glm::vec3 upperBound;
-    lowerBound.x = position.x - m_radius;
-    upperBound.x = position.x + m_radius;
-    lowerBound.y = position.y - m_radius;
-    upperBound.y = position.y + m_radius;
-    lowerBound.z = position.z - m_radius;
-    upperBound.z = position.z + m_radius;
-    return AABB{lowerBound,upperBound};
+	glm::vec3 lowerBound;
+	glm::vec3 upperBound;
+	lowerBound.x = m_position.x - m_radius;
+	upperBound.x = m_position.x + m_radius;
+	lowerBound.y = m_position.y - m_radius;
+	upperBound.y = m_position.y + m_radius;
+	lowerBound.z = m_position.z - m_radius;
+	upperBound.z = m_position.z + m_radius;
+	return AABB{lowerBound,upperBound};
 }

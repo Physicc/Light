@@ -10,14 +10,14 @@ class ExampleLayer : public Light::Layer
 {
 public:
 	ExampleLayer(): Light::Layer("TestLayer"),
-                    m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f),
-                    m_lightPos(-1, 2, 1.5),
-                    m_floor(glm::vec3(0, -1, 0), glm::vec3(0), glm::vec3(2, 0.1, 2))
+					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f),
+					m_lightPos(-1, 2, 1.5),
+					m_floor(glm::vec3(0, -1, 0), glm::vec3(0), glm::vec3(2, 0.1, 2))
 	{
-	    Light::FramebufferSpec fbspec;
+		Light::FramebufferSpec fbspec;
 		fbspec.width = 1280;
 		fbspec.height = 720;
-        m_framebuffer = Light::Framebuffer::create(fbspec);
+		m_framebuffer = Light::Framebuffer::create(fbspec);
 	}
 	~ExampleLayer() = default;
 
@@ -27,16 +27,16 @@ public:
 		{
 			m_camera.setViewportSize(m_viewportPanelSize.x, m_viewportPanelSize.y);
 			m_framebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
-            m_resizeViewport = false;
+			m_resizeViewport = false;
 		}
 		m_frameCount++;
-        m_time += ts.getMilliSeconds();
+		m_time += ts.getMilliSeconds();
 		if(m_time >= 500.0f)
 		{
-            m_lastTime = m_time;
-            m_lastFrameCount = m_frameCount;
-            m_time = 0.0f;
-            m_frameCount = 0;
+			m_lastTime = m_time;
+			m_lastFrameCount = m_frameCount;
+			m_time = 0.0f;
+			m_frameCount = 0;
 		}
 
 		m_camera.onUpdate(ts);
@@ -102,8 +102,8 @@ public:
 		ImVec2 panelSize = ImGui::GetContentRegionAvail();
 		if(m_viewportPanelSize != *(glm::vec2*)&panelSize)
 		{
-            m_resizeViewport = true;
-            m_viewportPanelSize = glm::vec2(panelSize.x, panelSize.y);
+			m_resizeViewport = true;
+			m_viewportPanelSize = glm::vec2(panelSize.x, panelSize.y);
 		}
 		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId()), panelSize, ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::End();
@@ -122,9 +122,9 @@ public:
 
 		ImGui::Begin("Performance Statistics");
 		ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d",
-                    m_lastTime / m_lastFrameCount,
-                    m_lastTime * 0.001f / m_lastFrameCount,
-                    int(m_lastFrameCount * 1000 / m_lastTime));
+					m_lastTime / m_lastFrameCount,
+					m_lastTime * 0.001f / m_lastFrameCount,
+					int(m_lastFrameCount * 1000 / m_lastTime));
 		ImGui::End();
 
 	}
