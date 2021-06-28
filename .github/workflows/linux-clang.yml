@@ -15,12 +15,14 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-18.04, ubuntu-20.04 ]
-        clang-version: [9, 10, 11]
+        clang-version: [ 9, 10, 11 ]
         exclude:
           # excludes clang-11 on Ubuntu 18.04 because it doesn't exist in the
           #standard repositories.
         - os: ubuntu-18.04
           clang-version: 11
+    
+    name: ${{ matrix.os }} (Clang ${{matrix.clang-version }})
     steps:
       - uses: actions/checkout@v2
         with:
@@ -28,24 +30,33 @@ jobs:
           
       - name: Install Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libglfw3-dev \
-                                  libxrandr-dev \
-                                  libxinerama-dev \
-                                  libxcursor-dev \
-                                  libxi-dev \
-                                  clang-${{ matrix.clang-version }}
-            
+          sudo apt-get update -q
+          sudo apt-get install -yq --no-install-recommends \
+                               libglfw3-dev \
+                               libxrandr-dev \
+                               libxinerama-dev \
+                               libxcursor-dev \
+                               libxi-dev \
+                               clang-${{ matrix.clang-version }} \
+                               clang-${{ matrix.clang-version }}
+     
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ matrix.os }}-clang-${{ matrix.clang-version }}
+          max-size: 100M
+     
       - name: Configure CMake
         run: |
           cmake -HEditor \
                 -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+                -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
                 -G"Unix Makefiles"
         env:
           CC: clang-${{ matrix.clang-version }}
           CXX: clang-${{ matrix.clang-version }}
-          CXXFLAGS: -lstdc++
           
       - name: Build
         run: |

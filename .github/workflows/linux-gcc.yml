@@ -15,28 +15,39 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-18.04, ubuntu-20.04 ]
-        gcc-version: [8, 9, 10]
+        gcc-version: [ 8, 9, 10 ]
+    
+    name: ${{ matrix.os }} (GCC ${{ matrix.gcc-version }})
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-          
+        
       - name: Install Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libglfw3-dev \
-                                  libxrandr-dev \
-                                  libxinerama-dev \
-                                  libxcursor-dev \
-                                  libxi-dev \
-                                  gcc-${{ matrix.gcc-version }} \
-                                  g++-${{ matrix.gcc-version }}
+          sudo apt-get update -q
+          sudo apt-get install -yq --no-install-recommends \
+                               libglfw3-dev \
+                               libxrandr-dev \
+                               libxinerama-dev \
+                               libxcursor-dev \
+                               libxi-dev \
+                               gcc-${{ matrix.gcc-version }} \
+                               g++-${{ matrix.gcc-version }}
+     
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ matrix.os }}-gcc-${{ matrix.gcc-version }}
+          max-size: 100M
             
       - name: Configure CMake
         run: |
           cmake -HEditor \
                 -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+                -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
                 -G"Unix Makefiles"
         env:
           CC: gcc-${{ matrix.gcc-version }}
