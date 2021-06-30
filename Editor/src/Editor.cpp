@@ -3,8 +3,6 @@
 
 #include "imgui.h"
 
-#include "Objects.hpp"
-
 class MainLayer : public Light::Layer
 {
 public:
