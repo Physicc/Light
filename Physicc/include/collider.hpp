@@ -4,9 +4,10 @@
 #include "../../Light/libs/glm/glm/glm.hpp"
 #include "../../Light/libs/glm/glm/gtc/matrix_transform.hpp"
 
-/** @brief Collider class
+/** 
+ * @brief Collider class
  *  
- *  This is a virtual class which acts as the base for all the shape specific classes
+ * This is a virtual class which acts as the base for all the shape specific classes
  */
 
 struct AABB
@@ -16,12 +17,8 @@ struct AABB
 };
 class Collider
 {
-    enum Type
-    {
-        e_box = 0,
-        e_sphere = 1,
-        e_typecount = 2
-    };
+    
+    
     public:
         Collider(glm::vec3 position = glm::vec3(0)
                 , glm::vec3 rotation = glm::vec3(0)
@@ -41,7 +38,13 @@ class Collider
 
         virtual AABB getAABB() const;    //Each child will calculate AABB according to it's own shape
     
-    private:
+    protected:
+        enum Type
+        {
+            e_box = 0,
+            e_sphere = 1,
+            e_typecount = 2
+        };
         glm::vec3 m_position;
         glm::vec3 m_rotate;
         glm::vec3 m_scale;
@@ -50,9 +53,10 @@ class Collider
 
 };
 
-/** @brief BoxCollider class
+/** 
+ * @brief BoxCollider class
  *  
- *  Box shaped collider, holds the shape and transform of the body.
+ * Box shaped collider, holds the shape and transform of the body.
  */
 class BoxCollider : public Collider
 {
@@ -70,9 +74,10 @@ class BoxCollider : public Collider
         glm::vec3 m_size;
 };
 
-/** @brief SphereCollider class
+/** 
+ * @brief SphereCollider class
  *  
- *  Sphere shaped collider, holds the radius and transform of the body
+ * Sphere shaped collider, holds the radius and transform of the body
  */
 class SphereCollider : public Collider
 {
