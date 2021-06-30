@@ -3,19 +3,32 @@
 
 #include "entt.hpp"
 #include "core/timestep.hpp"
+#include "light/rendering/texture.hpp"
+#include "light/rendering/shader.hpp"
+#include "light/rendering/vertexarray.hpp"
 
-class Entity;
+namespace Light
+{
+	class Entity;
 
-class Scene {
-public:
-    Scene() = default;
-    Entity addEntity();
-    void update(Light::Timestep dt);
-    void render();
-private:
-    entt::registry m_registry;
+	class Scene
+	{
+	public:
+		Scene();
+		~Scene() = default;
+		Entity addEntity();
+		void update(Light::Timestep dt);
+		void render();
+	private:
+		entt::registry m_registry;
 
-    friend class Entity;
-};
+		std::shared_ptr<Light::Cubemap> m_skybox;
+		std::shared_ptr<Light::Shader> m_skybox_shader;
+		std::shared_ptr<Light::VertexArray> m_skybox_mesh;
+
+		friend class Entity;
+	};
+	
+}
 
 #endif // __SCENE_HPP__

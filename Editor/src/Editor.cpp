@@ -5,20 +5,87 @@
 
 #include "Objects.hpp"
 
-class ExampleLayer : public Light::Layer
+class MainLayer : public Light::Layer
 {
 public:
-	ExampleLayer(): Light::Layer("TestLayer"),
-					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f),
-					m_lightPos(-1, 2, 1.5),
-					m_floor(glm::vec3(0, -1, 0), glm::vec3(0), glm::vec3(2, 0.1, 2))
+	MainLayer(): Light::Layer("MainLayer"),
+					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f)
+					// m_lightPos(-1, 2, 1.5)
 	{
 		Light::FramebufferSpec fbspec;
 		fbspec.width = 1280;
 		fbspec.height = 720;
 		m_framebuffer = Light::Framebuffer::create(fbspec);
+
+		auto cube = m_scene.addEntity();
+		cube.addComponent<Light::TransformComponent>();
+		cube.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+
+		auto floor = m_scene.addEntity();
+		floor.addComponent<Light::TransformComponent>(glm::vec3(0, -1, 0), glm::vec3(0), glm::vec3(2, 0.1, 2));
+		floor.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+
+		m_light = m_scene.addEntity();
+		m_light.addComponent<Light::TransformComponent>(glm::vec3(-1,2,1.5));
+		m_light.addComponent<Light::LightComponent>();
+
+		Light::BufferLayout layout({
+				{ Light::ShaderDataType::Float3, "a_Position" },
+				{ Light::ShaderDataType::Float4, "a_Color" },
+				{ Light::ShaderDataType::Float3, "a_Normal" }
+			});
+
+		float vertices[] = {
+			//Front
+			-0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
+			0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
+			0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
+			-0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
+			//Left
+			-0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
+			-0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
+			-0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
+			-0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
+			//Right
+			0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
+			0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
+			0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
+			0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
+			//Top
+			-0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
+			0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
+			0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
+			-0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
+			//Bottom
+			-0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
+			-0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
+			0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
+			0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
+			//Back
+			-0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
+			-0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
+			0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
+			0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
+		};
+
+		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertices, sizeof(vertices)));
+		vbo->setLayout(layout);
+
+		unsigned int indices[] = { 
+			0, 1, 2, 2, 3, 0,
+			4, 5, 6, 6, 7, 4,
+			8, 9, 10, 10, 11, 8,
+			12, 13, 14, 14, 15, 12,
+			16, 17, 18, 18, 19, 16,
+			20, 21, 22, 22, 23, 20
+		};
+
+		std::shared_ptr<Light::IndexBuffer> ibo(Light::IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
+
+		cube.addComponent<Light::MeshComponent>(vbo, ibo);
+		floor.addComponent<Light::MeshComponent>(vbo, ibo);
 	}
-	~ExampleLayer() = default;
+	~MainLayer() = default;
 
 	void onUpdate(Light::Timestep ts) override
 	{
@@ -39,18 +106,15 @@ public:
 		}
 
 		m_camera.onUpdate(ts);
-		m_cube.onUpdate(ts);
 
 		m_framebuffer->bind();
 
 		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
 		Light::RenderCommand::clear();
 
-		Light::Renderer::beginScene(m_camera, m_lightPos);
-		
-		m_skybox.render();
-		m_cube.render();
-		m_floor.render();
+		Light::Renderer::beginScene(m_camera, m_camera.getViewMatrix());
+
+		m_scene.render();
 
 		Light::Renderer::endScene();
 
@@ -72,9 +136,8 @@ public:
 	void onEvent(Light::Event& e) override
 	{
 		Light::EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(ExampleLayer::onWindowResize));
+		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(MainLayer::onWindowResize));
 		m_camera.onEvent(e);
-		m_cube.onEvent(e);
 	}
 
 	void onImguiRender() override
@@ -109,7 +172,8 @@ public:
 		ImGui::PopStyleVar();
 
 		ImGui::Begin("Scene Settings");
-		ImGui::DragFloat3("Light Position", &(m_lightPos.x), 0.01f);
+		auto &light_pos = m_light.getComponent<Light::TransformComponent>().position;
+		ImGui::DragFloat3("Light Position", &(light_pos.x), 0.01f);
 		ImGui::End();
 
 		ImGui::Begin("Camera Controls");
@@ -130,10 +194,10 @@ public:
 
 private:
 	Light::EditorCamera m_camera;
-	Cube m_cube;
-	Cube m_floor;
-	Skybox m_skybox;
-	glm::vec3 m_lightPos;
+
+	Light::Scene m_scene;
+	Light::Entity m_light;
+
 	std::shared_ptr<Light::Framebuffer> m_framebuffer;
 	glm::vec2 m_viewportPanelSize;
 	bool m_resizeViewport = false;
@@ -148,7 +212,7 @@ class Editor : public Light::Application
 public:
 	Editor()
 	{
-		pushLayer(new ExampleLayer());
+		pushLayer(new MainLayer());
 	}
 	~Editor() = default;
 };

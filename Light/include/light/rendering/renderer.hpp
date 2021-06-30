@@ -14,9 +14,10 @@ namespace Light
 		static void init();
 		static void onWindowResize(uint32_t width, uint32_t height);
 
-		static void beginScene(Camera& camera, glm::vec3 lightPos);
+		static void beginScene(Camera& camera, glm::mat4 camera_view);
 		static void endScene();
 
+		static void submitLight(glm::vec3 lightPos);
 		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
 		static void submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
 	private:
@@ -29,7 +30,7 @@ namespace Light
 
 		static SceneData* s_sceneData;
 	};
-	
+
 }
 
 #endif // __RENDERER_H__

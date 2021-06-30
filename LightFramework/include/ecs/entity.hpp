@@ -3,21 +3,53 @@
 
 #include "entt.hpp"
 #include "ecs/scene.hpp"
+#include "core/assert.hpp"
 
-class Entity {
-public:
-    Entity(entt::entity entity, Scene* scene);
-    template<typename T, typename... Args>
-    inline T& addComponent(Args... args)
-    {
-        // TODO: Check if entity already has the component
-        // if (m_scene->m_registry.has<T>(m_entity))
-        //     LIGHT_CORE_ERROR("Entity already has the component!");
-        return m_scene->m_registry.emplace<T>(m_entity, std::forward<Args>(args)...);
-    }
-private:
-    entt::entity m_entity;
-    Scene* m_scene;
-};
+namespace Light
+{
+	class Entity
+	{
+	public:
+		Entity() = default;
+		Entity(entt::entity entity, Scene* scene);
+		Entity(const Entity& other) = default;
+		
+		template<typename T, typename... Args>
+		inline T& addComponent(Args... args)
+		{
+			LIGHT_CORE_ASSERT(!hasComponent<T>(), "Entity already has component!");
+			return m_scene->m_registry.emplace<T>(m_entity, std::forward<Args>(args)...);
+		}
+
+		template<typename T>
+		inline bool hasComponent()
+		{
+			return m_scene->m_registry.any_of<T>(m_entity);
+		}
+
+		template<typename T>
+		inline T& getComponent()
+		{
+			LIGHT_CORE_ASSERT(hasComponent<T>(), "Entity does not have component!");
+			return m_scene->m_registry.get<T>(m_entity);
+		}
+
+		template<typename T>
+		void removeComponent()
+		{
+			LIGHT_CORE_ASSERT(hasComponent<T>(), "Entity does not have component!");
+			m_scene->m_registry.remove<T>(m_entity);
+		}
+
+		operator bool()
+		{
+			return m_scene->m_registry.valid(m_entity);
+		}
+
+	private:
+		entt::entity m_entity;
+		Scene* m_scene;
+	};
+}
 
 #endif // __ENTITY_HPP__

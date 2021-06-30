@@ -1,16 +1,16 @@
 #include "Objects.hpp"
 
 Cube::Cube(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-	: m_layout({
-			{ Light::ShaderDataType::Float3, "a_Position" },
-			{ Light::ShaderDataType::Float4, "a_Color" },
-			{ Light::ShaderDataType::Float3, "a_Normal" }
-		}),
-      m_position(position),
-      m_rotation(rotation),
-      m_scale(scale)
+	:	m_layout({
+				{ Light::ShaderDataType::Float3, "a_Position" },
+				{ Light::ShaderDataType::Float4, "a_Color" },
+				{ Light::ShaderDataType::Float3, "a_Normal" }
+			}),
+		m_position(position),
+		m_rotation(rotation),
+		m_scale(scale)
 {
-    m_shader = Light::Shader::create("../LightFramework/assets/shaders/phong.glsl");
+    m_shader = Light::Shader::create("../Editor/assets/shaders/phong.glsl");
 	m_vao.reset(Light::VertexArray::create());
 
 	float vertices[] = {
@@ -182,8 +182,8 @@ Skybox::Skybox()
 	m_vao->addVertexBuffer(m_vbo);
 	m_vao->setIndexBuffer(m_ibo);
 
-	m_cubemap.reset(Light::Cubemap::create("../LightFramework/assets/cubemap"));
-    m_shader = Light::Shader::create("../LightFramework/assets/shaders/skybox.glsl");
+	m_cubemap.reset(Light::Cubemap::create("../Editor/assets/cubemap"));
+    m_shader = Light::Shader::create("../Editor/assets/shaders/skybox.glsl");
 	m_shader->bind();
 	m_shader->setUniformInt("u_cubemap", 0);
 }
