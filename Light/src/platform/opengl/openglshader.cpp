@@ -1,4 +1,4 @@
-#include "platform/opengl/openglshader.hpp"
+#include "light/platform/opengl/openglshader.hpp"
 
 #include "core/logging.hpp"
 

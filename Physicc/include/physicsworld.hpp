@@ -1,7 +1,7 @@
 #ifndef __PHYSICC_H__
 #define __PHYSICC_H__
 
-#include "../../Light/libs/glm/glm/glm.hpp"
+#include "glm/glm.hpp"
 #include "rigidbody.hpp"
 #include <vector>
 

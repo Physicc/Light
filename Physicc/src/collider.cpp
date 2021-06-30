@@ -22,9 +22,9 @@
  * @param scale Length along each of the axes. Default = (1,1,1)
  */
 Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-        : m_position(position)
-        , m_rotate(rotation)
-        , m_scale(scale)
+		: m_position(position)
+		, m_rotate(rotation)
+		, m_scale(scale)
 {
 }
 
@@ -35,7 +35,7 @@ Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
  */
 inline glm::vec3 Collider::getPos()
 {
-    return m_position;
+	return m_position;
 }
 
 /** 
@@ -45,7 +45,7 @@ inline glm::vec3 Collider::getPos()
  */
 inline glm::vec3 Collider::getRotate()
 {
-    return m_rotate;
+	return m_rotate;
 }
 
 /** 
@@ -55,7 +55,7 @@ inline glm::vec3 Collider::getRotate()
  */
 inline glm::vec3 Collider::getScale()
 {
-    return m_scale;
+	return m_scale;
 }
 
 /** 
@@ -65,7 +65,7 @@ inline glm::vec3 Collider::getScale()
  */
 inline glm::mat4 Collider::getTransform()
 {
-    return m_transform;
+	return m_transform;
 }
 
 /** 
@@ -75,7 +75,7 @@ inline glm::mat4 Collider::getTransform()
  */
 inline void Collider::setPos(glm::vec3 newpos)
 {
-    m_position = newpos;
+	m_position = newpos;
 }
 
 /**
@@ -85,7 +85,7 @@ inline void Collider::setPos(glm::vec3 newpos)
  */
 inline void Collider::setRotate(glm::vec3 newrotate)
 {
-    m_rotate = newrotate;
+	m_rotate = newrotate;
 }
 
 /** 
@@ -95,7 +95,7 @@ inline void Collider::setRotate(glm::vec3 newrotate)
  */
 inline void Collider::setScale(glm::vec3 newscale)
 {
-    m_scale = newscale;
+	m_scale = newscale;
 }
 
 /**
@@ -104,7 +104,7 @@ inline void Collider::setScale(glm::vec3 newscale)
  */
 void Collider::updateTransform()
 {
-    m_transform = glm::translate(glm::mat4(1.0f), m_position);
+	m_transform = glm::translate(glm::mat4(1.0f), m_position);
 	m_transform = glm::scale(m_transform, m_scale);
 	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.x), glm::vec3(1.0, 0.0, 0.0));
 	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.y), glm::vec3(0.0, 1.0, 0.0));
@@ -121,9 +121,9 @@ void Collider::updateTransform()
  * 
  */
 BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale )
-                    : m_size(size), Collider(position,rotation,scale)
+					: m_size(size), Collider(position,rotation,scale)
 {
-    m_objectType = e_box;
+	m_objectType = e_box;
 }
 
 /**
@@ -150,9 +150,9 @@ AABB BoxCollider::getAABB() const
  * 
  */
 SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-                    : m_radius(radius), Collider(position,rotation,scale)
+					: m_radius(radius), Collider(position,rotation,scale)
 {
-    m_objectType = e_sphere;
+	m_objectType = e_sphere;
 }
 
 /**

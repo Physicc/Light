@@ -1,0 +1,60 @@
+name: Linux GCC
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main, development ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  ubuntu_build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-18.04, ubuntu-20.04 ]
+        gcc-version: [ 8, 9, 10 ]
+    
+    name: ${{ matrix.os }} (GCC ${{ matrix.gcc-version }})
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+        
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq --no-install-recommends \
+                               libglfw3-dev \
+                               libxrandr-dev \
+                               libxinerama-dev \
+                               libxcursor-dev \
+                               libxi-dev \
+                               gcc-${{ matrix.gcc-version }} \
+                               g++-${{ matrix.gcc-version }}
+     
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: ${{ matrix.os }}-gcc-${{ matrix.gcc-version }}
+          max-size: 100M
+            
+      - name: Configure CMake
+        run: |
+          cmake -HEditor \
+                -B${{ github.workspace }}/build \
+                -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+                -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+                -G"Unix Makefiles"
+        env:
+          CC: gcc-${{ matrix.gcc-version }}
+          CXX: g++-${{ matrix.gcc-version }}
+          
+      - name: Build
+        run: |
+          cmake --build ${{ github.workspace }}/build \
+                --config ${{ env.BUILD_TYPE }} \
+                -- -j2

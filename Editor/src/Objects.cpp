@@ -10,7 +10,7 @@ Cube::Cube(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
       m_rotation(rotation),
       m_scale(scale)
 {
-    m_shader = Light::Shader::create("../Light/assets/shaders/phong.glsl");
+    m_shader = Light::Shader::create("../LightFramework/assets/shaders/phong.glsl");
 	m_vao.reset(Light::VertexArray::create());
 
 	float vertices[] = {
@@ -182,8 +182,8 @@ Skybox::Skybox()
 	m_vao->addVertexBuffer(m_vbo);
 	m_vao->setIndexBuffer(m_ibo);
 
-	m_cubemap.reset(Light::Cubemap::create("../Light/assets/cubemap"));
-    m_shader = Light::Shader::create("../Light/assets/shaders/skybox.glsl");
+	m_cubemap.reset(Light::Cubemap::create("../LightFramework/assets/cubemap"));
+    m_shader = Light::Shader::create("../LightFramework/assets/shaders/skybox.glsl");
 	m_shader->bind();
 	m_shader->setUniformInt("u_cubemap", 0);
 }
