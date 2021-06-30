@@ -4,9 +4,10 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-/** @brief Collider class
+/** 
+ * @brief Collider class
  *  
- *  This is a virtual class which acts as the base for all the shape specific classes
+ * This is a virtual class which acts as the base for all the shape specific classes
  */
 
 struct AABB
@@ -16,44 +17,43 @@ struct AABB
 };
 class Collider
 {
-public:
-	Collider(glm::vec3 position = glm::vec3(0)
-			, glm::vec3 rotation = glm::vec3(0)
-			, glm::vec3 scale = glm::vec3(1));
-	virtual ~Collider() = 0;        //Make pure virtual class so no instantiation possible
+    public:
+        Collider(glm::vec3 position = glm::vec3(0)
+                , glm::vec3 rotation = glm::vec3(0)
+                , glm::vec3 scale = glm::vec3(1));
+        virtual ~Collider() = 0;        //Make pure virtual class so no instantiation possible
 
-	inline glm::vec3 getPos();
-	inline glm::vec3 getRotate();
-	inline glm::vec3 getScale();
-	inline glm::mat4 getTransform(); 
+        inline glm::vec3 getPos();
+        inline glm::vec3 getRotate();
+        inline glm::vec3 getScale();
+        inline glm::mat4 getTransform(); 
 
-	inline void setPos(glm::vec3 newpos);
-	inline void setRotate(glm::vec3 newrotate);
-	inline void setScale(glm::vec3 newscale);
+        inline void setPos(glm::vec3 newpos);
+        inline void setRotate(glm::vec3 newrotate);
+        inline void setScale(glm::vec3 newscale);
 
-	void updateTransform();
+        void updateTransform();
 
-	virtual AABB getAABB() const;    //Each child will calculate AABB according to it's own shape
-	
-protected:
-	enum Type
-	{
-		e_box = 0,
-		e_sphere = 1,
-		e_typecount = 2
-	};
-
-	glm::vec3 m_position;
-	glm::vec3 m_rotate;
-	glm::vec3 m_scale;
-	glm::mat4 m_transform;
-	Type m_objectType;
-
+        virtual AABB getAABB() const;    //Each child will calculate AABB according to it's own shape
+    
+    protected:
+        enum Type
+        {
+            e_box = 0,
+            e_sphere = 1,
+            e_typecount = 2
+        };
+        glm::vec3 m_position;
+        glm::vec3 m_rotate;
+        glm::vec3 m_scale;
+        glm::mat4 m_transform;
+        Type m_objectType;
 };
 
-/** @brief BoxCollider class
+/** 
+ * @brief BoxCollider class
  *  
- *  Box shaped collider, holds the shape and transform of the body.
+ * Box shaped collider, holds the shape and transform of the body.
  */
 class BoxCollider : public Collider
 {
@@ -71,9 +71,10 @@ private:
 	glm::vec3 m_size;
 };
 
-/** @brief SphereCollider class
+/** 
+ * @brief SphereCollider class
  *  
- *  Sphere shaped collider, holds the radius and transform of the body
+ * Sphere shaped collider, holds the radius and transform of the body
  */
 class SphereCollider : public Collider
 {

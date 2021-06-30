@@ -1,11 +1,12 @@
-/** @file collider.cpp
- *  @brief Contains the collider classes
+/** 
+ * @file collider.cpp
+ * @brief Contains the collider classes
  *
- *  The Collider file contains the collider classes which hold the shape and
- *  transform of the objects 
+ * The Collider file contains the collider classes which hold the shape and
+ * transform of the objects 
  *
- *  @author Prakhar Mittal (prak74)
- *  @bug No known bugs.
+ * @author Prakhar Mittal (prak74)
+ * @bug No known bugs.
  */
 
 /* -- Includes -- */
@@ -37,16 +38,18 @@ inline glm::vec3 Collider::getPos()
 	return m_position;
 }
 
-/** @brief get Angle of rotation of the object about it's center
+/** 
+ * @brief get Angle of rotation of the object about it's center
  * 
- *  @return glm::vec3
+ * @return glm::vec3
  */
 inline glm::vec3 Collider::getRotate()
 {
 	return m_rotate;
 }
 
-/** @brief get Scale of object
+/** 
+ * @brief get Scale of object
  * 
  * @return glm::vec3
  */
@@ -55,7 +58,8 @@ inline glm::vec3 Collider::getScale()
 	return m_scale;
 }
 
-/** @brief get Transform matrix of object
+/** 
+ * @brief get Transform matrix of object
  * 
  * @return glm::mat4
  */
@@ -64,9 +68,10 @@ inline glm::mat4 Collider::getTransform()
 	return m_transform;
 }
 
-/** @brief set Position of object's center
+/** 
+ * @brief set Position of object's center
  * 
- *  @param newpos Takes the (x,y,z) coordinates to place the object at
+ * @param newpos Takes the (x,y,z) coordinates to place the object at
  */
 inline void Collider::setPos(glm::vec3 newpos)
 {
@@ -83,7 +88,8 @@ inline void Collider::setRotate(glm::vec3 newrotate)
 	m_rotate = newrotate;
 }
 
-/** @brief get Position of object's center
+/** 
+ * @brief get Position of object's center
  * 
  * @param newscale New scale of the object
  */
@@ -127,15 +133,11 @@ BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation,
  */
 AABB BoxCollider::getAABB() const
 {
-	glm::vec3 lowerBound;
-	glm::vec3 upperBound;
-	lowerBound.x = m_position.x - m_size.x/2;
-	upperBound.x = m_position.x + m_size.x/2;
-	lowerBound.y = m_position.y - m_size.y/2;
-	upperBound.y = m_position.y + m_size.y/2;
-	lowerBound.z = m_position.z - m_size.z/2;
-	upperBound.z = m_position.z + m_size.z/2;
-	return AABB{lowerBound,upperBound};
+    glm::vec3 lowerBound;
+    glm::vec3 upperBound;
+    lowerBound = m_position - m_size*0.5f;
+    upperBound = m_position + m_size*0.5f;
+    return AABB{lowerBound,upperBound};
 }
 
 /**
@@ -160,13 +162,9 @@ SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotat
  */
 AABB SphereCollider::getAABB() const
 {
-	glm::vec3 lowerBound;
-	glm::vec3 upperBound;
-	lowerBound.x = m_position.x - m_radius;
-	upperBound.x = m_position.x + m_radius;
-	lowerBound.y = m_position.y - m_radius;
-	upperBound.y = m_position.y + m_radius;
-	lowerBound.z = m_position.z - m_radius;
-	upperBound.z = m_position.z + m_radius;
-	return AABB{lowerBound,upperBound};
+    glm::vec3 lowerBound;
+    glm::vec3 upperBound;
+    lowerBound = m_position - m_radius;
+    upperBound = m_position + m_radius;
+    return AABB{lowerBound,upperBound};
 }
