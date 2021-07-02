@@ -5,10 +5,11 @@
 #include "rigidbody.hpp"
 #include <vector>
 
-/** @brief World's Physics Class
+/**
+ * @brief World's Physics Class
  *
- *  This class describes and propagates the properties of each object using the
- *  Physics Model.
+ * This class describes and propagates the properties of each object using the
+ * Physics Model.
  */
 class PhysicsWorld
 {

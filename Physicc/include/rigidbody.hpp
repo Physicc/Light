@@ -4,15 +4,15 @@
 #include "glm/glm.hpp"
 #include "collider.hpp"
 
-/** @brief Rigid Body Class
+/**
+ * @brief Rigid Body Class
  *
- *  This class describes and propagates the properties of each Rigid Body.
+ * This class describes and propagates the properties of each Rigid Body.
  */
 class RigidBody
 {
 	public:
-		RigidBody(float mass, const glm::vec3& velocity,
-		          bool isGravity);
+		RigidBody(float mass, const glm::vec3& velocity, bool isGravity);
 
 		[[nodiscard]] inline glm::vec3 getVelocity() const
 		{

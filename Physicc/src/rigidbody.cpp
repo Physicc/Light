@@ -1,9 +1,10 @@
-/** @file rigidbody.cpp
- *  @brief Defines a Rigid Body.
- *  @author Divyansh Tiwari (divyanshtiwari237)
- *  @author Neilabh Banzal (Neilabh21)
- *  @author Tirthankar mazumder (wermos)
- *  @bug No known bugs.
+/**
+ * @file rigidbody.cpp
+ * @brief Defines a Rigid Body.
+ * @author Divyansh Tiwari (divyanshtiwari237)
+ * @author Neilabh Banzal (Neilabh21)
+ * @author Tirthankar mazumder (wermos)
+ * @bug No known bugs.
  */
 
 /* -- Includes -- */
@@ -11,7 +12,9 @@
 
 #include "rigidbody.hpp"
 
-/** @brief RigidBody initialized with velocity.
+/**
+ * @brief RigidBody initialized with a mass velocity, and a bool storing whether
+ * gravity is acting on the object or not.
  */
 RigidBody::RigidBody(const float mass, const glm::vec3& velocity,
                      const bool isGravity)
