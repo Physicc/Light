@@ -35,7 +35,22 @@ To ensure uniformity throughout our codebase, we have a few rules:
 1. Documentation in source code should be done in Doxygen style.
 2. Don't document self-explanatory functions like `getPosition()`, `getVelocity()`, etc.
     - In general, getters and setters shouldn't be documented.
-
+3. When writing a comment, make sure that there is nothing after `/**`. Everything that forms the body of the comment should go to the lines after the `/**`. Example:
+    ```
+    /**
+     * @brief An example of how comments should be written.
+     *
+     * Notice how there is nothing after the /** on the first line.
+     * Some random comment text to fill up more space.
+     */
+     ```
+     - Here is a **non**-example, with the same text as before:
+     ```
+    /** @brief An example of how comments should be written.
+     *
+     *  Notice how there is nothing after the /** on the first line.
+     */
+     ```
 
 #### General Programming Conventions
 1. Curly braces should be on new lines.
@@ -45,3 +60,9 @@ To ensure uniformity throughout our codebase, we have a few rules:
 5. Use blank lines to logically separate portions of code.
 6. Function definitions should have at least one blank line after them (an exception being if it is the last function in a class definition).
 8. There should be a maximum of 80 characters per line. Break up longer lines of code into smaller pieces and indent them properly to make them easier to read.
+9. For functions with empty bodies (for example, certain constructors), put the `{` and `}` on separate lines. Example:
+    ```
+    Foo:Foo(int a, int b) : m_a(a), m_b(b)
+    {
+    }
+    ```
