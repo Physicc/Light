@@ -22,11 +22,8 @@
  * @param scale Length along each of the axes. Default = (1,1,1)
  */
 Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-		: m_position(position)
-		, m_rotate(rotation)
-		, m_scale(scale)
-{
-}
+	: m_position(position), m_rotate(rotation), m_scale(scale)
+{}
 
 /**
  * @brief Get Position of object's center
@@ -106,9 +103,15 @@ void Collider::updateTransform()
 {
 	m_transform = glm::translate(glm::mat4(1.0f), m_position);
 	m_transform = glm::scale(m_transform, m_scale);
-	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.x), glm::vec3(1.0, 0.0, 0.0));
-	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.y), glm::vec3(0.0, 1.0, 0.0));
-	m_transform = glm::rotate(m_transform, glm::radians(m_rotate.z), glm::vec3(0.0, 0.0, 1.0));
+	m_transform = glm::rotate(m_transform,
+	                          glm::radians(m_rotate.x),
+	                          glm::vec3(1.0, 0.0, 0.0));
+	m_transform = glm::rotate(m_transform,
+	                          glm::radians(m_rotate.y),
+	                          glm::vec3(0.0, 1.0, 0.0));
+	m_transform = glm::rotate(m_transform,
+	                          glm::radians(m_rotate.z),
+	                          glm::vec3(0.0, 0.0, 1.0));
 }
 
 /**
@@ -120,8 +123,11 @@ void Collider::updateTransform()
  * @param scale Scale of the object along each axis 
  * 
  */
-BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale )
-					: m_size(size), Collider(position,rotation,scale)
+BoxCollider::BoxCollider(glm::vec3 size,
+                         glm::vec3 position,
+                         glm::vec3 rotation,
+                         glm::vec3 scale)
+	: m_size(size), Collider(position, rotation, scale)
 {
 	m_objectType = e_box;
 }
@@ -133,11 +139,11 @@ BoxCollider::BoxCollider(glm::vec3 size, glm::vec3 position, glm::vec3 rotation,
  */
 AABB BoxCollider::getAABB() const
 {
-    glm::vec3 lowerBound;
-    glm::vec3 upperBound;
-    lowerBound = m_position - m_size*0.5f;
-    upperBound = m_position + m_size*0.5f;
-    return AABB{lowerBound,upperBound};
+	glm::vec3 lowerBound;
+	glm::vec3 upperBound;
+	lowerBound = m_position - m_size * 0.5f;
+	upperBound = m_position + m_size * 0.5f;
+	return AABB{lowerBound, upperBound};
 }
 
 /**
@@ -149,8 +155,11 @@ AABB BoxCollider::getAABB() const
  * @param scale Scale of the object along each axis 
  * 
  */
-SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-					: m_radius(radius), Collider(position,rotation,scale)
+SphereCollider::SphereCollider(float radius,
+                               glm::vec3 position,
+                               glm::vec3 rotation,
+                               glm::vec3 scale)
+	: m_radius(radius), Collider(position, rotation, scale)
 {
 	m_objectType = e_sphere;
 }
@@ -162,9 +171,9 @@ SphereCollider::SphereCollider(float radius, glm::vec3 position, glm::vec3 rotat
  */
 AABB SphereCollider::getAABB() const
 {
-    glm::vec3 lowerBound;
-    glm::vec3 upperBound;
-    lowerBound = m_position - m_radius;
-    upperBound = m_position + m_radius;
-    return AABB{lowerBound,upperBound};
+	glm::vec3 lowerBound;
+	glm::vec3 upperBound;
+	lowerBound = m_position - m_radius;
+	upperBound = m_position + m_radius;
+	return AABB{lowerBound, upperBound};
 }
