@@ -171,9 +171,7 @@ SphereCollider::SphereCollider(float radius,
  */
 AABB SphereCollider::getAABB() const
 {
-	glm::vec3 lowerBound;
-	glm::vec3 upperBound;
-	lowerBound = m_position - m_radius;
-	upperBound = m_position + m_radius;
+	glm::vec3 lowerBound = m_position - m_radius;;
+	glm::vec3 upperBound = m_position + m_radius;
 	return AABB{lowerBound, upperBound};
 }
