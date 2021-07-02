@@ -49,6 +49,7 @@ To ensure uniformity throughout our codebase, we have a few rules:
     /** @brief An example of how comments should be written.
      *
      *  Notice how there is nothing after the /** on the first line.
+     *  Some random comment text to fill up more space.
      */
     ```
 
