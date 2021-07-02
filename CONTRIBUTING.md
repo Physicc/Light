@@ -43,14 +43,14 @@ To ensure uniformity throughout our codebase, we have a few rules:
      * Notice how there is nothing after the /** on the first line.
      * Some random comment text to fill up more space.
      */
-     ```
-     - Here is a **non**-example, with the same text as before:
-     ```
+    ```
+    - Here is a **non**-example, with the same text as before:
+    ```
     /** @brief An example of how comments should be written.
      *
      *  Notice how there is nothing after the /** on the first line.
      */
-     ```
+    ```
 
 #### General Programming Conventions
 1. Curly braces should be on new lines.
