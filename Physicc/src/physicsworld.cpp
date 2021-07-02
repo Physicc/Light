@@ -19,7 +19,7 @@
 /**
  * @brief Physics World initialisation with gravity.
  *
- * This intialises the Physics World with gravity, input from the ---?---.
+ * This initialises the Physics World with gravity, input from the ---?---.
  */
 PhysicsWorld::PhysicsWorld(const glm::vec3& gravity)
     : m_gravity(gravity)    
