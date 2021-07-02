@@ -18,7 +18,8 @@ To ensure uniformity throughout our codebase, we have a few rules:
 1. Header files go in the `include` directory, and source files go in the `src` directory.
 2. Don't use `using namespace std` in the global scope in header files. If it is necessary (because of very long type names), try to restrict it to the smallest scope possible.
 3. Make sure to indent with a tab before using an access control specifier, and then indent with another tab before defining member variables and functions. Example:
-    ```class Foo
+    ```
+    class Foo
     {
     	Foo() = default;
     	private:
