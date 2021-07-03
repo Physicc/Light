@@ -4,6 +4,7 @@
 #include "entt.hpp"
 #include "ecs/scene.hpp"
 #include "core/assert.hpp"
+#include "ecs/components.hpp"
 
 namespace Light
 {
@@ -35,20 +36,35 @@ namespace Light
 		}
 
 		template<typename T>
-		void removeComponent()
+		inline void removeComponent()
 		{
 			LIGHT_CORE_ASSERT(hasComponent<T>(), "Entity does not have component!");
 			m_scene->m_registry.remove<T>(m_entity);
 		}
 
-		operator bool()
+		inline operator bool()
 		{
 			return m_scene->m_registry.valid(m_entity);
 		}
 
+		inline operator uint32_t()
+		{
+			return (uint32_t)m_entity;
+		}
+
+		inline bool operator==(const Entity& other)
+		{
+			return m_entity == other.m_entity && m_scene == other.m_scene;
+		}
+
+		inline std::string getUUID()
+		{
+			return getComponent<TagComponent>().uuid;
+		}
+
 	private:
-		entt::entity m_entity;
-		Scene* m_scene;
+		entt::entity m_entity{entt::null};
+		Scene* m_scene = nullptr;
 	};
 }
 

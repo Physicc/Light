@@ -17,7 +17,7 @@ namespace Light
 		static void beginScene(Camera& camera, glm::mat4 camera_view);
 		static void endScene();
 
-		static void submitLight(glm::vec3 lightPos);
+		static void submitLight(glm::vec3 lightPos, glm::vec3 lightCol);
 		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
 		static void submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
 	private:
@@ -25,6 +25,7 @@ namespace Light
 		{
 			glm::mat4 viewProjectionMatrix;
 			glm::vec3 lightPos;
+			glm::vec3 lightCol;
 			glm::mat4 viewProjectionSkyboxMatrix;
 		};
 

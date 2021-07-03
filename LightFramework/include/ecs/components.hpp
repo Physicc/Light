@@ -10,10 +10,27 @@
 #include "light/rendering/texture.hpp"
 #include "light/rendering/vertexarray.hpp"
 #include "light/rendering/camera.hpp"
+#include "core/uuid.hpp"
 
 namespace Light
-{	
-	struct TransformComponent
+{
+
+	struct Component
+	{
+		std::string uuid;
+
+		Component() : uuid(newUUID()) {}
+	};
+
+	struct TagComponent : public Component
+	{
+		std::string tag;
+
+		TagComponent() = default;
+		TagComponent(const TagComponent&) = default;
+		TagComponent(const std::string& tag) : tag(tag) {}
+	};
+	struct TransformComponent : public Component
 	{
 		TransformComponent(glm::vec3 position = glm::vec3(0,0,0), 
 			glm::vec3 rotation = glm::vec3(0,0,0), 
@@ -30,7 +47,7 @@ namespace Light
 		glm::vec3 scale;
 	};
 
-	struct MeshRendererComponent
+	struct MeshRendererComponent : public Component
 	{
 		MeshRendererComponent(const char* path);
 		inline void bind()
@@ -44,21 +61,21 @@ namespace Light
 		std::shared_ptr<Light::Shader> shader;
 	};
 
-	struct MeshComponent
+	struct MeshComponent : public Component
 	{
 		MeshComponent(std::shared_ptr<Light::VertexBuffer> vertexBuffer,
 			std::shared_ptr<Light::IndexBuffer> indexBuffer);
 		std::shared_ptr<Light::VertexArray> mesh;
 	};
 
-	struct LightComponent
+	struct LightComponent : public Component
 	{
-		LightComponent() : m_light_color({1.0, 1.0, 1.0}) {}
-		LightComponent(glm::vec3 light_color) : m_light_color(light_color) {}
-		glm::vec3 m_light_color;
+		LightComponent() : m_lightColor({1.0, 1.0, 1.0}) {}
+		LightComponent(glm::vec3 lightColor) : m_lightColor(lightColor) {}
+		glm::vec3 m_lightColor;
 	};
 
-	struct CameraComponent
+	struct CameraComponent : public Component
 	{
 		CameraComponent() = default;
 		CameraComponent(glm::mat4 projectionMatrix) : m_camera(projectionMatrix) {}

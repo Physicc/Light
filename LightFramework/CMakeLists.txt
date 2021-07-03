@@ -16,6 +16,13 @@ add_library(LightFramework STATIC ${SOURCES})
 target_include_directories(LightFramework PUBLIC include)
 target_include_directories(LightFramework PUBLIC ../shared/include)
 
+# UUID
+if(UNIX)
+	target_link_libraries(LightFramework "uuid")
+elseif(WIN32)
+	target_link_libraries(LightFramework "rpcrt4")
+endif()
+
 # Light
 add_subdirectory(../Light Light)
 target_link_libraries(LightFramework Light)

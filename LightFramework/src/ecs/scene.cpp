@@ -72,9 +72,13 @@ namespace Light
 		m_skybox_shader->setUniformInt("u_cubemap", 0);
 	}
 
-	Entity Scene::addEntity()
+	Entity Scene::addEntity(const std::string& name)
 	{
-		return {m_registry.create(), this};
+		Entity entity = {m_registry.create(), this};
+		auto& tag = entity.addComponent<TagComponent>();
+		tag.tag = name.empty() ? "New Entity" : name;
+		entity.addComponent<TransformComponent>();
+		return entity;
 	}
 
 	void Scene::update(Timestep dt)
@@ -89,7 +93,7 @@ namespace Light
 			for(auto& entity: view)
 			{
 				auto[light, transform] = view.get(entity);
-				Renderer::submitLight(transform.position);
+				Renderer::submitLight(transform.position, light.m_lightColor);
 			}
 		}
 

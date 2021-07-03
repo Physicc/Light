@@ -28,9 +28,10 @@ namespace Light
 		
 	}
 
-	void Renderer::submitLight(glm::vec3 lightPos) 
+	void Renderer::submitLight(glm::vec3 lightPos, glm::vec3 lightCol) 
 	{
 		s_sceneData->lightPos = lightPos;
+		s_sceneData->lightCol = lightCol;
 	}
 	
 	void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform) 
@@ -41,6 +42,7 @@ namespace Light
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
 		shader->setUniformVec3("u_lightPos", s_sceneData->lightPos);
+		shader->setUniformVec3("u_lightCol", s_sceneData->lightCol);
 
 		shader->setUniformMat4("u_transform", transform);
 		shader->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));

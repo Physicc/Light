@@ -16,7 +16,7 @@ namespace Light
 	public:
 		Scene();
 		~Scene() = default;
-		Entity addEntity();
+		Entity addEntity(const std::string& name="");
 		void update(Light::Timestep dt);
 		void render();
 	private:
@@ -27,6 +27,7 @@ namespace Light
 		std::shared_ptr<Light::VertexArray> m_skybox_mesh;
 
 		friend class Entity;
+		friend class ScenePanel;
 	};
 	
 }

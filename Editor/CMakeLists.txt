@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 project(Physics)
 
 # find all source files
-file(GLOB SOURCES
+file(GLOB_RECURSE SOURCES
         src/*.cpp
         )
 

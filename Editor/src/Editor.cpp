@@ -1,6 +1,8 @@
 #include "light.hpp"
 #include "core/entrypoint.hpp"
 
+#include "gui/scenepanel.hpp"
+
 #include "imgui.h"
 
 class MainLayer : public Light::Layer
@@ -15,16 +17,20 @@ public:
 		fbspec.height = 720;
 		m_framebuffer = Light::Framebuffer::create(fbspec);
 
-		auto cube = m_scene.addEntity();
-		cube.addComponent<Light::TransformComponent>();
+		m_scene = std::make_shared<Light::Scene>();
+
+		auto cube = m_scene->addEntity("Cube");
 		cube.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
 
-		auto floor = m_scene.addEntity();
-		floor.addComponent<Light::TransformComponent>(glm::vec3(0, -1, 0), glm::vec3(0), glm::vec3(2, 0.1, 2));
+		auto floor = m_scene->addEntity("Floor");
+		auto& floor_transform = floor.getComponent<Light::TransformComponent>();
+		floor_transform.position = glm::vec3(0, -1, 0);
+		floor_transform.scale = glm::vec3(2, 0.1, 2);
 		floor.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
 
-		m_light = m_scene.addEntity();
-		m_light.addComponent<Light::TransformComponent>(glm::vec3(-1,2,1.5));
+		m_light = m_scene->addEntity("Light");
+		auto& light_transform = m_light.getComponent<Light::TransformComponent>();
+		light_transform.position = glm::vec3(-1,2,1.5);
 		m_light.addComponent<Light::LightComponent>();
 
 		Light::BufferLayout layout({
@@ -82,6 +88,8 @@ public:
 
 		cube.addComponent<Light::MeshComponent>(vbo, ibo);
 		floor.addComponent<Light::MeshComponent>(vbo, ibo);
+
+		m_scenePanel.setContext(m_scene);
 	}
 	~MainLayer() = default;
 
@@ -112,7 +120,7 @@ public:
 
 		Light::Renderer::beginScene(m_camera, m_camera.getViewMatrix());
 
-		m_scene.render();
+		m_scene->render();
 
 		Light::Renderer::endScene();
 
@@ -143,6 +151,7 @@ public:
 		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
 
+		// Main Menu Bar
 		if(ImGui::BeginMainMenuBar())
 		{
 			if(ImGui::BeginMenu("File"))
@@ -153,6 +162,7 @@ public:
 			ImGui::EndMainMenuBar();
 		}
 
+		// Viewport
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0,0));
 		ImGui::Begin("Viewport");
 
@@ -169,11 +179,10 @@ public:
 		ImGui::End();
 		ImGui::PopStyleVar();
 
-		ImGui::Begin("Scene Settings");
-		auto &light_pos = m_light.getComponent<Light::TransformComponent>().position;
-		ImGui::DragFloat3("Light Position", &(light_pos.x), 0.01f);
-		ImGui::End();
+		// Scene Hierarchy Panel
+		m_scenePanel.onImguiRender();
 
+		// Camera controls panel
 		ImGui::Begin("Camera Controls");
 		ImGui::Text("Left Alt + LMB to Orbit");
 		ImGui::Text("Left Alt + MMB to Pan");
@@ -181,6 +190,7 @@ public:
 		ImGui::Text("Scroll to Zoom");
 		ImGui::End();
 
+		// Perf stats
 		ImGui::Begin("Performance Statistics");
 		ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d",
 					m_lastTime / m_lastFrameCount,
@@ -193,8 +203,10 @@ public:
 private:
 	Light::EditorCamera m_camera;
 
-	Light::Scene m_scene;
+	std::shared_ptr<Light::Scene> m_scene;
 	Light::Entity m_light;
+
+	Light::ScenePanel m_scenePanel;
 
 	std::shared_ptr<Light::Framebuffer> m_framebuffer;
 	glm::vec2 m_viewportPanelSize;
