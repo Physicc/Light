@@ -80,7 +80,7 @@ namespace Light
 		}
 
 		drawComponent<TransformComponent>("Transform", entity, [](auto& component){
-			ImGui::DragFloat3("Position", &(component.position.x), 0.5f);
+			ImGui::DragFloat3("Position", &(component.position.x), 0.1f);
 		});
 	}
 }
