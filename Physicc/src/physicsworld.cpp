@@ -16,34 +16,38 @@
 
 #include "physicsworld.hpp"
 
-/**
- * @brief Physics World initialisation with gravity.
- *
- * This initialises the Physics World with gravity, input from the ---?---.
- */
-PhysicsWorld::PhysicsWorld(const glm::vec3& gravity)
-    : m_gravity(gravity)    
-    {}
-
-/**
- * @fn void PhysicsWorld::addRigidBody(const RigidBody& object)
- * @brief Add a new RigidBody to m_objects
- * @param object: input, const RigidBody& type
- */
-void PhysicsWorld::addRigidBody(const RigidBody& object)
+namespace Physicc
 {
-    m_objects.push_back(object);
-}
+	/**
+	 * @brief Physics World initialisation with gravity.
+	 *
+	 * This initialises the Physics World with gravity, input from the ---?---.
+	 */
+	PhysicsWorld::PhysicsWorld(const glm::vec3& gravity)
+		: m_gravity(gravity)    
+	{
+	}
 
-/**
- * @fn void PhysicsWorld::stepSimulation(float time)
- * @brief steps the simulation by time timestep
- * @param timestep: input, float type, time interval
- */
-void PhysicsWorld::stepSimulation(float timestep)
-{
-    for(int i = 0; i < m_objects.size(); i++)
-    {
-        
-    }
+	/**
+	 * @fn void PhysicsWorld::addRigidBody(const RigidBody& object)
+	 * @brief Add a new RigidBody to m_objects
+	 * @param object: input, const RigidBody& type
+	 */
+	void PhysicsWorld::addRigidBody(const RigidBody& object)
+	{
+		m_objects.push_back(object);
+	}
+
+	/**
+	 * @fn void PhysicsWorld::stepSimulation(float time)
+	 * @brief steps the simulation by time timestep
+	 * @param timestep: input, float type, time interval
+	 */
+	void PhysicsWorld::stepSimulation(float timestep)
+	{
+		for(int i = 0; i < m_objects.size(); i++)
+		{
+			
+		}
+	}
 }
