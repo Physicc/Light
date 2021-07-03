@@ -129,25 +129,27 @@ namespace Physicc
 	BoxCollider::BoxCollider(glm::vec3 position,
                              glm::vec3 rotation,
                              glm::vec3 scale)
-		: Collider(position, rotation, scale)
+		: Collider(position, rotation, scale),
+		  m_vertices(std::vector<glm::vec4>(8,glm::vec4(0,0,0,1.0f)))
 	{
 		//Top-face vertices
-		m_vertices[0].xyz = scale * 0.5f
-		m_vertices[1].xyz = m_vertices[0] - glm::vec3(scale.x, 0f, 0f)
-		m_vertices[2].xyz = m_vertices[0] - glm::vec3(0f, scale.y, 0f)
-		m_vertices[3].xyz = m_vertices[0] - glm::vec3(scale.x, scale.y, 0f)
+		m_vertices[0] = glm::vec4(scale * 0.5f, 0 );
+		m_vertices[1] = m_vertices[0] - glm::vec4(scale.x, 0, 0, 0);
+		m_vertices[2] = m_vertices[0] - glm::vec4(0, scale.y, 0, 0);
+		m_vertices[3] = m_vertices[0] - glm::vec4(scale.x, scale.y, 0, 0);
 		
 		//Bottom-face vertices
-		m_vertices[4].xyz = scale * -0.5f
-		m_vertices[5].xyz = m_vertices[0] + glm::vec3(scale.x, 0f, 0f)
-		m_vertices[6].xyz = m_vertices[0] + glm::vec3(0f, scale.y, 0f)
-		m_vertices[7].xyz = m_vertices[0] + glm::vec3(scale.x, scale.y, 0f)
+		m_vertices[4] = glm::vec4(scale * -0.5f, 0);
+		m_vertices[5] = m_vertices[0] + glm::vec4(scale.x, 0, 0, 0);
+		m_vertices[6] = m_vertices[0] + glm::vec4(0, scale.y, 0, 0);
+		m_vertices[7] = m_vertices[0] + glm::vec4(scale.x, scale.y, 0, 0);
 	}
 
 	/**
 	 * @brief Computes and returns Axis Aligned Bounding Box of Box shaped object
 	 * 
-	 * Computes location of vertices and finds the extreme points of AABB
+	 * Computes location of vertices in global space and finds the 
+	 * extreme points of AABB by comparing each component of every vertex
 	 * 
 	 * @return AABB 
 	 */
@@ -157,14 +159,9 @@ namespace Physicc
 		glm::vec3 upperBound(-0.5f);
 		for (int i = 0; i < 8; i++)
 		{
-			glm::vec4 temp = m_transform * m_vertices[i];
-			lowerBound.x = min(lowerBound.x,temp.x);
-			lowerBound.y = min(lowerBound.y,temp.y);
-			lowerBound.z = min(lowerBound.z,temp.z);
-
-			upperBound.x = max(upperBound.x,temp.x);
-			upperBound.y = max(upperBound.y,temp.y);
-			upperBound.z = max(upperBound.z,temp.z);
+			glm::vec3 temp = m_transform * m_vertices[i];	
+			lowerBound = glm::min(lowerBound,temp);			//Takes component-wise min
+			upperBound = glm::max(upperBound,temp);
 		}
 		return AABB{lowerBound,upperBound};
 	}

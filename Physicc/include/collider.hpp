@@ -3,6 +3,7 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include <vector>
 
 namespace Physicc
 {
@@ -67,8 +68,7 @@ namespace Physicc
 	class BoxCollider : public Collider
 	{
 		public:
-			BoxCollider(glm::vec3 size = glm::vec3(1),
-			            glm::vec3 position = glm::vec3(0),
+			BoxCollider(glm::vec3 position = glm::vec3(0),
 			            glm::vec3 rotation = glm::vec3(0),
 			            glm::vec3 scale = glm::vec3(1));
 
@@ -77,9 +77,8 @@ namespace Physicc
 			AABB getAABB() const override;
 
 		private:
-			std::vector<glm::vec4> m_vertices(glm::vec4(0,0,0,1.0f),8);
+			std::vector<glm::vec4> m_vertices;
 	};
-
 	/** 
 	 * @brief SphereCollider class
 	 *  
