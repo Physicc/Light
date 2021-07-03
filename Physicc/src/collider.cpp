@@ -121,33 +121,52 @@ namespace Physicc
 	/**
 	 * @brief Creates a BoxCollider object
 	 * 
-	 * @param size Size of the object along each axes
 	 * @param position Position of object in global space
 	 * @param rotation Rotation about each of the axis in local space
 	 * @param scale Scale of the object along each axis 
 	 * 
 	 */
-	BoxCollider::BoxCollider(glm::vec3 size,
-                             glm::vec3 position,
+	BoxCollider::BoxCollider(glm::vec3 position,
                              glm::vec3 rotation,
                              glm::vec3 scale)
-		: m_size(size), Collider(position, rotation, scale)
+		: Collider(position, rotation, scale)
 	{
-		m_objectType = e_box;
+		//Top-face vertices
+		m_vertices[0].xyz = scale * 0.5f
+		m_vertices[1].xyz = m_vertices[0] - glm::vec3(scale.x, 0f, 0f)
+		m_vertices[2].xyz = m_vertices[0] - glm::vec3(0f, scale.y, 0f)
+		m_vertices[3].xyz = m_vertices[0] - glm::vec3(scale.x, scale.y, 0f)
+		
+		//Bottom-face vertices
+		m_vertices[4].xyz = scale * -0.5f
+		m_vertices[5].xyz = m_vertices[0] + glm::vec3(scale.x, 0f, 0f)
+		m_vertices[6].xyz = m_vertices[0] + glm::vec3(0f, scale.y, 0f)
+		m_vertices[7].xyz = m_vertices[0] + glm::vec3(scale.x, scale.y, 0f)
 	}
 
 	/**
 	 * @brief Computes and returns Axis Aligned Bounding Box of Box shaped object
 	 * 
+	 * Computes location of vertices and finds the extreme points of AABB
+	 * 
 	 * @return AABB 
 	 */
 	AABB BoxCollider::getAABB() const
 	{
-		glm::vec3 lowerBound;
-		glm::vec3 upperBound;
-		lowerBound = m_position - m_size * 0.5f;
-		upperBound = m_position + m_size * 0.5f;
-		return AABB{lowerBound, upperBound};
+		glm::vec3 lowerBound(0.5f);
+		glm::vec3 upperBound(-0.5f);
+		for (int i = 0; i < 8; i++)
+		{
+			glm::vec4 temp = m_transform * m_vertices[i];
+			lowerBound.x = min(lowerBound.x,temp.x);
+			lowerBound.y = min(lowerBound.y,temp.y);
+			lowerBound.z = min(lowerBound.z,temp.z);
+
+			upperBound.x = max(upperBound.x,temp.x);
+			upperBound.y = max(upperBound.y,temp.y);
+			upperBound.z = max(upperBound.z,temp.z);
+		}
+		return AABB{lowerBound,upperBound};
 	}
 
 	/**

@@ -23,7 +23,7 @@ namespace Physicc
 		: m_mass(mass),
           m_velocity(velocity),
           m_isGravity(isGravity),
-          m_force(glm::vec3(0, 0, 0))
+          m_force(glm::vec3(0))
 	{
 	}
 }

@@ -77,7 +77,7 @@ namespace Physicc
 			AABB getAABB() const override;
 
 		private:
-			glm::vec3 m_size;
+			std::vector<glm::vec4> m_vertices(glm::vec4(0,0,0,1.0f),8);
 	};
 
 	/** 
