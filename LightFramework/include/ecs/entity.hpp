@@ -44,7 +44,7 @@ namespace Light
 
 		inline operator bool()
 		{
-			return m_scene->m_registry.valid(m_entity);
+			return m_scene != nullptr && m_scene->m_registry.valid(m_entity);
 		}
 
 		inline operator uint32_t()
