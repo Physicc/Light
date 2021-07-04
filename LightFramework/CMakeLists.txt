@@ -16,6 +16,15 @@ add_library(LightFramework STATIC ${SOURCES})
 target_include_directories(LightFramework PUBLIC include)
 target_include_directories(LightFramework PUBLIC ../shared/include)
 
+# UUID
+if(UNIX)
+	if (NOT APPLE)
+		target_link_libraries(LightFramework "uuid")
+	endif()
+elseif(WIN32)
+	target_link_libraries(LightFramework "rpcrt4")
+endif()
+
 # Light
 add_subdirectory(../Light Light)
 target_link_libraries(LightFramework Light)
@@ -41,6 +50,9 @@ target_include_directories(LightFramework PUBLIC ../shared/libs/glm)
 # spdlog
 add_subdirectory(../shared/libs/spdlog spdlog)
 # target_link_libraries(LightCommon spdlog)
+
+#EnTT
+target_include_directories(LightFramework PUBLIC libs/entt)
 
 if (UNIX)
 	if (NOT APPLE)

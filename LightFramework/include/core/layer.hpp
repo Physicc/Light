@@ -22,6 +22,9 @@ namespace Light
 		inline const std::string& getName() { return m_name; }
 		inline void blockHoverEvents(bool block) { m_hoverEventsBlocking = block; }
 		inline void blockFocusEvents(bool block) { m_focusEventsBlocking = block; }
+
+		inline bool getHoverEventsBlocking() { return m_hoverEventsBlocking; }
+		inline bool getFocusEventsBlocking() { return m_focusEventsBlocking; }
 	protected:
 		std::string m_name;
 

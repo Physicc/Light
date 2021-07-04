@@ -32,6 +32,7 @@ jobs:
                                libxinerama-dev \
                                libxcursor-dev \
                                libxi-dev \
+                               uuid-dev \
                                gcc-${{ matrix.gcc-version }} \
                                g++-${{ matrix.gcc-version }}
      

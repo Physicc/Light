@@ -17,10 +17,6 @@ namespace Light
 		inline const glm::mat4& getProjectionMatrix() { return m_projectionMatrix; }
 		inline void setProjectionMatrix(glm::mat4 projectionMatrix) { this->m_projectionMatrix = projectionMatrix; }
 
-		/// TODO: Temporary
-		virtual const glm::mat4& getViewMatrix() const = 0;
-		virtual glm::mat4 getViewProjectionMatrix() = 0;
-
 	protected:
 		glm::mat4 m_projectionMatrix;
 	};

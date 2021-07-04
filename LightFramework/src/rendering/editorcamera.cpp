@@ -68,22 +68,23 @@ namespace Light
 	
 	void EditorCamera::onUpdate(Timestep ts) 
 	{
+		auto[mouseX, mouseY] = Input::getMousePos();
+		const glm::vec2& mouse{ mouseX, mouseY };
+		glm::vec2 delta = (mouse - m_initialMousePos) * 0.003f;
+		m_initialMousePos = mouse;
+
 		if (Input::isKeyPressed(LIGHT_KEY_LEFT_ALT))
 		{
-			auto[mouseX, mouseY] = Input::getMousePos();
-			const glm::vec2& mouse{ mouseX, mouseY };
-			glm::vec2 delta = (mouse - m_initialMousePos) * 0.003f;
-            m_initialMousePos = mouse;
-
 			if (Input::isMouseButtonPressed(LIGHT_MOUSE_BUTTON_MIDDLE))
 				mousePan(delta);
 			else if (Input::isMouseButtonPressed(LIGHT_MOUSE_BUTTON_LEFT))
 				mouseRotate(delta);
 			else if (Input::isMouseButtonPressed(LIGHT_MOUSE_BUTTON_RIGHT))
 				mouseZoom(delta.y);
+			
+			updateView();
 		}
 
-		updateView();
 	}
 
 	void EditorCamera::onEvent(Event& e) 

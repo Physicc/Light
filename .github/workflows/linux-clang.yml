@@ -37,6 +37,7 @@ jobs:
                                libxinerama-dev \
                                libxcursor-dev \
                                libxi-dev \
+                               uuid-dev \
                                clang-${{ matrix.clang-version }} \
                                clang-${{ matrix.clang-version }}
      
