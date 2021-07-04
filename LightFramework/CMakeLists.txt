@@ -18,7 +18,10 @@ target_include_directories(LightFramework PUBLIC ../shared/include)
 
 # UUID
 if(UNIX)
-	target_link_libraries(LightFramework "uuid")
+	if not (APPLE)
+		find_library("uuid")
+		target_link_libraries(LightFramework "uuid")
+	endif()
 elseif(WIN32)
 	target_link_libraries(LightFramework "rpcrt4")
 endif()

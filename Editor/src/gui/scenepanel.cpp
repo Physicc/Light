@@ -3,6 +3,10 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
+#ifdef _MSVC_VER
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 namespace Light
 {
 	void ScenePanel::onImguiRender() 
@@ -149,7 +153,7 @@ namespace Light
 			auto& tag = entity.getComponent<TagComponent>().tag;
 			char buffer[256];
 			memset(buffer, 0, sizeof(buffer));
-			strncpy_s(buffer, tag.c_str(), sizeof(buffer)-1);
+			std::strncpy(buffer, tag.c_str(), sizeof(buffer)-1);
 			if(ImGui::InputText("##Tag", buffer, sizeof(buffer)-1))
 			{
 				tag = std::string(buffer);
