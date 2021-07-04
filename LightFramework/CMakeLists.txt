@@ -19,7 +19,7 @@ target_include_directories(LightFramework PUBLIC ../shared/include)
 # UUID
 if(UNIX)
 	if (NOT APPLE)
-		find_library("uuid")
+		find_package("uuid" REQUIRED)
 		target_link_libraries(LightFramework "uuid")
 	endif()
 elseif(WIN32)
