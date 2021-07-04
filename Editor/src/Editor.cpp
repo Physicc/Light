@@ -3,7 +3,6 @@
 
 #include "gui/scenepanel.hpp"
 
-#include "Objects.hpp"
 #include "physicsworld.hpp"
 #include "imgui.h"
 
