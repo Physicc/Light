@@ -3,6 +3,7 @@
 
 #include "gui/scenepanel.hpp"
 
+#include "physicsworld.hpp"
 #include "imgui.h"
 
 class MainLayer : public Light::Layer

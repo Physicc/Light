@@ -36,4 +36,7 @@ target_include_directories(Editor PUBLIC include)
 add_subdirectory(../LightFramework LightFramework)
 target_link_libraries(Editor LightFramework)
 
+add_subdirectory(../Physicc Physicc)
+target_link_libraries(Editor Physicc)
+
 add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/../imgui.ini ${CMAKE_BINARY_DIR}/imgui.ini)
