@@ -30,7 +30,8 @@ Lightweight Renderer, purposed to augment the development of Physicc
 
 If you get library headers not found error while building, ```apt-get``` the dev version of all packages it requests you to install
 
-```sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev uuid-dev```
+```sudo apt install libglfw3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev uuid-dev```
+
 
 ### OSX
 
