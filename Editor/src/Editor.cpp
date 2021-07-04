@@ -111,7 +111,8 @@ public:
 			m_frameCount = 0;
 		}
 
-		m_camera.onUpdate(ts);
+		if(m_viewportFocused)
+			m_camera.onUpdate(ts);
 
 		m_framebuffer->bind();
 
@@ -148,8 +149,11 @@ public:
 
 	void onImguiRender() override
 	{
+		static int s_stats_corner = 0;
 		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
+		// Demo
+		// ImGui::ShowDemoWindow();
 
 		// Main Menu Bar
 		if(ImGui::BeginMainMenuBar())
@@ -159,6 +163,12 @@ public:
 				if(ImGui::MenuItem("Exit")) Light::Application::get().close();
 				ImGui::EndMenu();
 			}
+			if(ImGui::BeginMenu("Settings"))
+			{
+				if(ImGui::MenuItem("Show stats", NULL, s_stats_corner != -1))
+					s_stats_corner = (s_stats_corner == -1) ? 0 : -1;
+				ImGui::EndMenu();
+			}
 			ImGui::EndMainMenuBar();
 		}
 
@@ -166,37 +176,76 @@ public:
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0,0));
 		ImGui::Begin("Viewport");
 
+		ImVec2 viewportPos = ImGui::GetCursorScreenPos();
+
+		bool viewportDocked = ImGui::IsWindowDocked();
+
 		Light::Application::get().getImguiLayer()->blockFocusEvents(!ImGui::IsWindowFocused());
 		Light::Application::get().getImguiLayer()->blockHoverEvents(!ImGui::IsWindowHovered());
 
-		ImVec2 panelSize = ImGui::GetContentRegionAvail();
-		if(m_viewportPanelSize != *(glm::vec2*)&panelSize)
+		m_viewportFocused = ImGui::IsWindowFocused();
+
+		ImVec2 viewPortPanelSize = ImGui::GetContentRegionAvail();
+		if(m_viewportPanelSize != *(glm::vec2*)&viewPortPanelSize)
 		{
 			m_resizeViewport = true;
-			m_viewportPanelSize = glm::vec2(panelSize.x, panelSize.y);
+			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);
 		}
-		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId()), panelSize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId()), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
+		
 		ImGui::End();
 		ImGui::PopStyleVar();
 
+		// Perf Stats
+		{
+			ImGuiIO& io = ImGui::GetIO();
+			ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+			if (s_stats_corner != -1)
+			{
+				const float PAD = 10.0f;
+				ImVec2 work_pos = viewportPos;
+				ImVec2 work_size = viewPortPanelSize;
+				ImVec2 window_pos, window_pos_pivot;
+				window_pos.x = (s_stats_corner & 1) ? (work_pos.x + work_size.x - PAD) : (work_pos.x + PAD);
+				window_pos.y = (s_stats_corner & 2) ? (work_pos.y + work_size.y - PAD) : (work_pos.y + PAD);
+				window_pos_pivot.x = (s_stats_corner & 1) ? 1.0f : 0.0f;
+				window_pos_pivot.y = (s_stats_corner & 2) ? 1.0f : 0.0f;
+				ImGui::SetNextWindowViewport(ImGui::GetMainViewport()->ID);
+
+				ImGui::SetNextWindowBgAlpha(0.35f); // Transparent background
+				if(viewportDocked)
+				{
+					ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+					window_flags |= ImGuiWindowFlags_NoMove;
+				}
+				if (ImGui::Begin("Performance Statistics", NULL, window_flags))
+				{
+					ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d",
+						m_lastTime / m_lastFrameCount,
+						m_lastTime * 0.001f / m_lastFrameCount,
+						int(m_lastFrameCount * 1000 / m_lastTime));
+					ImGui::Separator();
+					ImGui::Text("(Right-Click to change position)");
+					if (ImGui::BeginPopupContextWindow())
+					{
+						if (ImGui::MenuItem("Hide", NULL, s_stats_corner == -1)) s_stats_corner = -1;
+						if(viewportDocked)
+						{
+							if (ImGui::MenuItem("Top-left",     NULL, s_stats_corner == 0)) s_stats_corner = 0;
+							if (ImGui::MenuItem("Top-right",    NULL, s_stats_corner == 1)) s_stats_corner = 1;
+							if (ImGui::MenuItem("Bottom-left",  NULL, s_stats_corner == 2)) s_stats_corner = 2;
+							if (ImGui::MenuItem("Bottom-right", NULL, s_stats_corner == 3)) s_stats_corner = 3;
+						}
+						ImGui::EndPopup();
+					}
+				}
+				ImGui::End();
+			}
+		}
+
+
 		// Scene Hierarchy Panel
 		m_scenePanel.onImguiRender();
-
-		// Camera controls panel
-		ImGui::Begin("Camera Controls");
-		ImGui::Text("Left Alt + LMB to Orbit");
-		ImGui::Text("Left Alt + MMB to Pan");
-		ImGui::Text("Left Alt + RMB to Zoom");
-		ImGui::Text("Scroll to Zoom");
-		ImGui::End();
-
-		// Perf stats
-		ImGui::Begin("Performance Statistics");
-		ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d",
-					m_lastTime / m_lastFrameCount,
-					m_lastTime * 0.001f / m_lastFrameCount,
-					int(m_lastFrameCount * 1000 / m_lastTime));
-		ImGui::End();
 
 	}
 
@@ -211,6 +260,7 @@ private:
 	std::shared_ptr<Light::Framebuffer> m_framebuffer;
 	glm::vec2 m_viewportPanelSize;
 	bool m_resizeViewport = false;
+	bool m_viewportFocused = false;
 	float m_time = 0.0f;
 	int m_frameCount = 0;
 	float m_lastTime = 0.0f;
