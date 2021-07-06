@@ -107,7 +107,7 @@ namespace Light
 			for (auto& entity : view)
 			{
 				auto [shader, mesh, transform] = view.get(entity);
-				Renderer::submit(shader.shader, mesh.mesh, transform.getTransform());
+				Renderer::submitID(shader.shader, mesh.mesh, transform.getTransform(), (uint32_t)entity);
 			}
 		}
 	}
