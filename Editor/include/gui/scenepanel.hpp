@@ -14,6 +14,9 @@ namespace Light
 		inline void setContext(std::shared_ptr<Light::Scene> context) { m_context = context; m_selectionContext = {}; }
 
 		void onImguiRender();
+
+		void setSelectionContext(Entity context) { m_selectionContext = context; }
+		Entity getSelectionContext() { return m_selectionContext; }
 	private:
 
 		void drawSceneNode(Entity entity);

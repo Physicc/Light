@@ -26,10 +26,12 @@ void main()
 in vec3 v_normal;
 in vec4 v_color;
 in vec3 v_worldPos;
-out vec4 color;
+layout(location = 0) out vec4 color;
+layout(location = 1) out int entity;
 
 uniform vec3 u_lightPos;
 uniform vec3 u_lightCol;
+uniform int u_id;
 
 void main()
 {
@@ -42,4 +44,5 @@ void main()
 	vec3 ambient = vec3(v_color) * 0.3;
 
 	color = vec4(ambient + diffuse, 1.0) * v_color;
+	entity = u_id;
 }
