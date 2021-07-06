@@ -30,7 +30,6 @@ namespace Physicc
 			Collider(glm::vec3 position = glm::vec3(0),
 			         glm::vec3 rotation = glm::vec3(0),
 			         glm::vec3 scale = glm::vec3(1));
-			virtual ~Collider() = 0;        //Make pure virtual class so no instantiation possible
 
 			inline glm::vec3 getPos();
 			inline glm::vec3 getRotate();
@@ -72,8 +71,6 @@ namespace Physicc
 			            glm::vec3 rotation = glm::vec3(0),
 			            glm::vec3 scale = glm::vec3(1));
 
-			~BoxCollider() = default;
-
 			AABB getAABB() const override;
 
 		private:
@@ -91,8 +88,6 @@ namespace Physicc
 			               glm::vec3 position = glm::vec3(0),
 			               glm::vec3 rotation = glm::vec3(0),
 			               glm::vec3 scale = glm::vec3(1));
-
-			~SphereCollider() = default;
 
 			AABB getAABB() const override;
 
