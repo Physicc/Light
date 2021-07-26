@@ -29,7 +29,8 @@ To ensure uniformity throughout our codebase, we have a few rules:
 4. In classes, prefix all member variables with the `m_` prefix. For example, if the class has a member variable for position, it should be called `m_position`.
 5. Member variables and member functions should use camelCase. That is, if the variable name consists of multiple words, the first letter of the word should be lowercase, and the first letter of all subsequent words should be uppercase. Examples: `m_angularVelocity`, `getAngularVelocity()`, `m_gravity`, `getGravity()`, `m_transformComponent`.
 6. Class names should use PascalCase. That is, if the class name consists of multiple words, the first letter of every word should be in uppercase. Examples: `PhysicsWorld`, `RigidBody`. 
-7. Getters and setters for classes should be marked as `inline`, and should use the `[[nodiscard]]` attribute.
+7. Getters and setters for classes should be marked as `inline` and be placed in the header file.
+8. Getters should also use the `[[nodiscard]]` attribute.
 
 #### Documentation
 1. Documentation in source code should be done in Doxygen style.
