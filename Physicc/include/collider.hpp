@@ -37,7 +37,7 @@ namespace Physicc
 	 		 *
 	 		 * @return glm::vec3
 	 		 */
-			inline glm::vec3 getPosition()
+			[[nodiscard]] inline glm::vec3 getPosition()
 			{
 				return m_position;
 			}
@@ -47,7 +47,7 @@ namespace Physicc
 			 *
 			 * @return glm::vec3
 			 */
-			inline glm::vec3 getRotate()
+			[[nodiscard]] inline glm::vec3 getRotate()
 			{
 				return m_rotate;
 			}
@@ -57,7 +57,7 @@ namespace Physicc
 			 *
 			 * @return glm::vec3
 			 */
-			inline glm::vec3 getScale()
+			[[nodiscard]] inline glm::vec3 getScale()
 			{
 				return m_scale;
 			}
@@ -67,7 +67,7 @@ namespace Physicc
 			 *
 			 * @return glm::mat4
 			 */
-			inline glm::mat4 getTransform()
+			[[nodiscard]] inline glm::mat4 getTransform()
 			{
 				return m_transform;
 			}
