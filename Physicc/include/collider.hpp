@@ -8,18 +8,6 @@
 namespace Physicc
 {
 	/**
-	 * @brief Axis Aligned Bounding Box 
-	 * 
-	 * Helper class to store diagonally opposite points of the AABB
-	 * 
-	 */
-	struct AABB
-	{
-		glm::vec3 lowerBound;
-		glm::vec3 upperBound;
-	};
-
-	/** 
 	 * @brief Collider class
 	 *  
 	 * This is a virtual class which acts as the base for all the shape specific classes
