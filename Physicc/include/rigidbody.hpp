@@ -21,15 +21,15 @@ namespace Physicc
 				return m_velocity;
 			}
 
-			inline void setVelocity(const glm::vec3& velocity)
-			{
-				m_velocity = velocity;
-			}
-
 			[[nodiscard]] inline bool isGravity() const
 			{
 				//Is gravity acting on this object?
 				return m_isGravity;
+			}
+
+			inline void setVelocity(const glm::vec3& velocity)
+			{
+				m_velocity = velocity;
 			}
 
 			void setForce();
