@@ -9,8 +9,10 @@ namespace Physicc
 			BVH();
 
 			void buildTree();
+			//build a tree of the bounding volumes
 
 			std::vector<rididbody>& convert();
+			//convert the tree into a linear data structure
 
 		private:
 
