@@ -42,6 +42,7 @@ namespace Physicc
 			bool m_isGravity;			//Probably change this from bool isGravity to float Gravity. 
 										//Reference: http://www.r-5.org/files/books/computers/algo-list/realtime-3d/Ian_Millington-Game_Physics_Engine_Development-EN.pdf 
 										//Pg. 50, The value of g
+										//TODO: Figure out if we'll have a gravityScale variable, or allow users to set the value of g on a per-object basis.
 			friend class PhysicsWorld;
 			//PhysicsWorld needs to have access to all of RigidBody's private
 			//members for functions like stepSimulation, etc.
