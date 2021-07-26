@@ -1,9 +1,20 @@
 #ifndef __BVH_H__
 #define __BVH_H__
 
-class BVH
+namespace Physicc
 {
+	class BVH
+	{
+		public:
+			BVH();
 
-};
+			void buildTree();
+
+			std::vector<rididbody>& convert();
+
+		private:
+
+	};
+}
 
 #endif //__BVH_H__
