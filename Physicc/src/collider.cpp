@@ -16,7 +16,7 @@
 #include "collider.hpp"
 
 namespace Physicc
-{	
+{
 	/**
 	 * @brief Construct a new Collider:: Collider object
 	 * 
@@ -25,78 +25,8 @@ namespace Physicc
 	 * @param scale Length along each of the axes. Default = (1,1,1)
 	 */
 	Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-			: m_position(position), m_rotate(rotation), m_scale(scale)
+		: m_position(position), m_rotate(rotation), m_scale(scale)
 	{
-	}
-
-	/**
-	 * @brief Get Position of object's center
-	 * 
-	 * @return glm::vec3 
-	 */
-	inline glm::vec3 Collider::getPos()
-	{
-		return m_position;
-	}
-
-	/** 
-	 * @brief get Angle of rotation of the object about it's center
-	 * 
-	 * @return glm::vec3
-	 */
-	inline glm::vec3 Collider::getRotate()
-	{
-		return m_rotate;
-	}
-
-	/** 
-	 * @brief get Scale of object
-	 * 
-	 * @return glm::vec3
-	 */
-	inline glm::vec3 Collider::getScale()
-	{
-		return m_scale;
-	}
-
-	/** 
-	 * @brief get Transform matrix of object
-	 * 
-	 * @return glm::mat4
-	 */
-	inline glm::mat4 Collider::getTransform()
-	{
-		return m_transform;
-	}
-
-	/** 
-	 * @brief set Position of object's center
-	 * 
-	 * @param newpos Takes the (x,y,z) coordinates to place the object at
-	 */
-	inline void Collider::setPos(glm::vec3 newpos)
-	{
-		m_position = newpos;
-	}
-
-	/**
-	 * @brief Set rotation of object about it's center
-	 * 
-	 * @param newrotate vec3 containing rotation values about x,y,z axes
-	 */
-	inline void Collider::setRotate(glm::vec3 newrotate)
-	{
-		m_rotate = newrotate;
-	}
-
-	/** 
-	 * @brief get Position of object's center
-	 * 
-	 * @param newscale New scale of the object
-	 */
-	inline void Collider::setScale(glm::vec3 newscale)
-	{
-		m_scale = newscale;
 	}
 
 	/**
@@ -108,14 +38,14 @@ namespace Physicc
 		m_transform = glm::translate(glm::mat4(1.0f), m_position);
 		m_transform = glm::scale(m_transform, m_scale);
 		m_transform = glm::rotate(m_transform,
-                                  glm::radians(m_rotate.x),
-                                  glm::vec3(1.0, 0.0, 0.0));
+		                          glm::radians(m_rotate.x),
+		                          glm::vec3(1.0, 0.0, 0.0));
 		m_transform = glm::rotate(m_transform,
-                                  glm::radians(m_rotate.y),
-                                  glm::vec3(0.0, 1.0, 0.0));
+		                          glm::radians(m_rotate.y),
+		                          glm::vec3(0.0, 1.0, 0.0));
 		m_transform = glm::rotate(m_transform,
-                                  glm::radians(m_rotate.z),
-                                  glm::vec3(0.0, 0.0, 1.0));
+		                          glm::radians(m_rotate.z),
+		                          glm::vec3(0.0, 0.0, 1.0));
 	}
 
 	/**
@@ -127,17 +57,17 @@ namespace Physicc
 	 * 
 	 */
 	BoxCollider::BoxCollider(glm::vec3 position,
-                             glm::vec3 rotation,
-                             glm::vec3 scale)
+	                         glm::vec3 rotation,
+	                         glm::vec3 scale)
 		: Collider(position, rotation, scale),
-		  m_vertices(std::vector<glm::vec4>(8,glm::vec4(0,0,0,1.0f)))
+		  m_vertices(std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)))
 	{
 		//Top-face vertices
-		m_vertices[0] = glm::vec4(scale * 0.5f, 0 );
+		m_vertices[0] = glm::vec4(scale * 0.5f, 0);
 		m_vertices[1] = m_vertices[0] - glm::vec4(scale.x, 0, 0, 0);
 		m_vertices[2] = m_vertices[0] - glm::vec4(0, scale.y, 0, 0);
 		m_vertices[3] = m_vertices[0] - glm::vec4(scale.x, scale.y, 0, 0);
-		
+
 		//Bottom-face vertices
 		m_vertices[4] = glm::vec4(scale * -0.5f, 0);
 		m_vertices[5] = m_vertices[0] + glm::vec4(scale.x, 0, 0, 0);
@@ -159,11 +89,12 @@ namespace Physicc
 		glm::vec3 upperBound(-0.5f);
 		for (int i = 0; i < 8; i++)
 		{
-			glm::vec3 temp = m_transform * m_vertices[i];	
-			lowerBound = glm::min(lowerBound,temp);			//Takes component-wise min
-			upperBound = glm::max(upperBound,temp);
+			glm::vec3 temp = m_transform * m_vertices[i];
+			lowerBound = glm::min(lowerBound,
+			                      temp);            //Takes component-wise min
+			upperBound = glm::max(upperBound, temp);
 		}
-		return AABB{lowerBound,upperBound};
+		return AABB{lowerBound, upperBound};
 	}
 
 	/**
@@ -176,9 +107,9 @@ namespace Physicc
 	 * 
 	 */
 	SphereCollider::SphereCollider(float radius,
-                                   glm::vec3 position,
-                                   glm::vec3 rotation,
-                                   glm::vec3 scale)
+	                               glm::vec3 position,
+	                               glm::vec3 rotation,
+	                               glm::vec3 scale)
 		: m_radius(radius), Collider(position, rotation, scale)
 	{
 		m_objectType = e_sphere;

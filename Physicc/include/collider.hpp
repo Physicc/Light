@@ -32,14 +32,75 @@ namespace Physicc
 			         glm::vec3 scale = glm::vec3(1));
 			virtual ~Collider() = 0;        //Make pure virtual class so no instantiation possible
 
-			inline glm::vec3 getPos();
-			inline glm::vec3 getRotate();
-			inline glm::vec3 getScale();
-			inline glm::mat4 getTransform();
+			/**
+	 		 * @brief Get Position of object's center
+	 		 *
+	 		 * @return glm::vec3
+	 		 */
+			inline glm::vec3 getPosition()
+			{
+				return m_position;
+			}
 
-			inline void setPos(glm::vec3 newpos);
-			inline void setRotate(glm::vec3 newrotate);
-			inline void setScale(glm::vec3 newscale);
+			/**
+			 * @brief get Angle of rotation of the object about it's center
+			 *
+			 * @return glm::vec3
+			 */
+			inline glm::vec3 getRotate()
+			{
+				return m_rotate;
+			}
+
+			/**
+			 * @brief get Scale of object
+			 *
+			 * @return glm::vec3
+			 */
+			inline glm::vec3 getScale()
+			{
+				return m_scale;
+			}
+
+			/**
+			 * @brief get Transform matrix of object
+			 *
+			 * @return glm::mat4
+			 */
+			inline glm::mat4 getTransform()
+			{
+				return m_transform;
+			}
+
+			/**
+			 * @brief set Position of object's center
+			 *
+			 * @param newpos Takes the (x,y,z) coordinates to place the object at
+			 */
+			inline void setPosition(glm::vec3 position)
+			{
+				m_position = position;
+			}
+
+			/**
+			 * @brief Set rotation of object about it's center
+			 *
+			 * @param newrotate vec3 containing rotation values about x,y,z axes
+			 */
+			inline void setRotate(glm::vec3 rotate)
+			{
+				m_rotate = rotate;
+			}
+
+			/**
+			 * @brief get Position of object's center
+			 *
+			 * @param newscale New scale of the object
+			 */
+			inline void setScale(glm::vec3 scale)
+			{
+				m_scale = scale;
+			}
 
 			void updateTransform();
 
@@ -79,6 +140,7 @@ namespace Physicc
 		private:
 			std::vector<glm::vec4> m_vertices;
 	};
+
 	/** 
 	 * @brief SphereCollider class
 	 *  
