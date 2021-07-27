@@ -81,9 +81,9 @@ namespace Physicc
 	 * Computes location of vertices in global space and finds the 
 	 * extreme points of AABB by comparing each component of every vertex
 	 * 
-	 * @return AABB 
+	 * @return BoundingVolume<AABB>
 	 */
-	AABB BoxCollider::getAABB() const
+	BoundingVolume<AABB> BoxCollider::getAABB() const
 	{
 		glm::vec3 lowerBound(0.5f);
 		glm::vec3 upperBound(-0.5f);
@@ -94,6 +94,7 @@ namespace Physicc
 			                      temp);            //Takes component-wise min
 			upperBound = glm::max(upperBound, temp);
 		}
+		//TODO: Fix the return type of this function
 		return AABB{lowerBound, upperBound};
 	}
 
@@ -118,12 +119,13 @@ namespace Physicc
 	/**
 	 * @brief Computes and returns Axis Aligned Bounding Box of Sphere shaped object
 	 * 
-	 * @return AABB 
+	 * @return BoundingVolume<AABB>
 	 */
-	AABB SphereCollider::getAABB() const
+	BoundingVolume<AABB> SphereCollider::getAABB() const
 	{
 		glm::vec3 lowerBound = m_position - m_radius;;
 		glm::vec3 upperBound = m_position + m_radius;
+		//TODO: Fix the return type of this function
 		return AABB{lowerBound, upperBound};
 	}
 }
