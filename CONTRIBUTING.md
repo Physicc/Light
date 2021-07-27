@@ -61,8 +61,8 @@ To ensure uniformity throughout our codebase, we have a few rules:
 4. Put spaces around binary operators. For example, write `a += b` and not `a+=b`. The former looks less cluttered.
 5. Use blank lines to logically separate portions of code.
 6. Function definitions should have at least one blank line after them (an exception being if it is the last function in a class definition).
-8. There should be a maximum of 80 characters per line. Break up longer lines of code into smaller pieces and indent them properly to make them easier to read.
-9. For functions with empty bodies (for example, certain constructors), put the `{` and `}` on separate lines. Example:
+7. There should be a maximum of 80 characters per line. Break up longer lines of code into smaller pieces and indent them properly to make them easier to read.
+8. For functions with empty bodies (for example, certain constructors), put the `{` and `}` on separate lines. Example:
     ```
     Foo:Foo(int a, int b) : m_a(a), m_b(b)
     {

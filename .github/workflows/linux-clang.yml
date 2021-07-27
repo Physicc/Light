@@ -15,6 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-18.04, ubuntu-20.04 ]
+
         clang-version: [ 9, 10, 11 ]
         exclude:
           # excludes clang-11 on Ubuntu 18.04 because it doesn't exist in the
@@ -46,7 +47,7 @@ jobs:
         with:
           key: ${{ matrix.os }}-clang-${{ matrix.clang-version }}
           max-size: 100M
-     
+
       - name: Configure CMake
         run: |
           cmake -HEditor \
@@ -58,6 +59,7 @@ jobs:
         env:
           CC: clang-${{ matrix.clang-version }}
           CXX: clang-${{ matrix.clang-version }}
+          CXXFLAGS: -lstdc++
           
       - name: Build
         run: |
