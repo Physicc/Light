@@ -90,8 +90,7 @@ namespace Physicc
 		for (int i = 0; i < 8; i++)
 		{
 			glm::vec3 temp = m_transform * m_vertices[i];
-			lowerBound = glm::min(lowerBound,
-			                      temp);            //Takes component-wise min
+			lowerBound = glm::min(lowerBound, temp); //Takes component-wise min
 			upperBound = glm::max(upperBound, temp);
 		}
 		//TODO: Fix the return type of this function
