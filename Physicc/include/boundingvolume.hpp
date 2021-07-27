@@ -8,7 +8,7 @@ namespace Physicc
 	/**
 	 * @brief Axis Aligned Bounding Box
 	 *
-	 * Helper class to store diagonally opposite points of the AABB
+	 * Helper struct to store diagonally opposite points of the AABB
 	 *
 	 */
 	struct AABB
