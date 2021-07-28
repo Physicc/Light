@@ -7,3 +7,6 @@
 [submodule "Light/libs/spdlog"]
 	path = shared/libs/spdlog
 	url = https://github.com/dropTableUsers42/spdlog.git
+[submodule "Testing/googletest"]
+	path = Testing/googletest
+	url = https://github.com/google/googletest.git
