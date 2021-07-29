@@ -26,6 +26,10 @@ namespace Physicc
 		private:
 			T m_volume;
 	};
+
+	template <>
+	bool BoundingVolume<AABB>::overlapsWith(BoundingVolume<AABB> v);
+	//Class method specialization of the overlapsWith function
 }
 
 #endif //__BOUNDINGVOLUME_H__
