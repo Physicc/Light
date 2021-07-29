@@ -31,7 +31,7 @@ namespace Physicc
 			}
 
 			/**
-			 * @brief get Angle of rotation of the object about it's center
+			 * @brief get Angle of rotation of the object about its center
 			 *
 			 * @return glm::vec3
 			 */
@@ -63,7 +63,7 @@ namespace Physicc
 			/**
 			 * @brief set Position of object's center
 			 *
-			 * @param newpos Takes the (x,y,z) coordinates to place the object at
+			 * @param position Takes the (x,y,z) coordinates to place the object's center at
 			 */
 			inline void setPosition(glm::vec3 position)
 			{
@@ -73,7 +73,7 @@ namespace Physicc
 			/**
 			 * @brief Set rotation of object about it's center
 			 *
-			 * @param newrotate vec3 containing rotation values about x,y,z axes
+			 * @param rotate vec3 containing rotation values about x, y, z axes
 			 */
 			inline void setRotate(glm::vec3 rotate)
 			{
@@ -83,7 +83,7 @@ namespace Physicc
 			/**
 			 * @brief get Position of object's center
 			 *
-			 * @param newscale New scale of the object
+			 * @param scale New scale of the object
 			 */
 			inline void setScale(glm::vec3 scale)
 			{
