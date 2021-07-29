@@ -87,14 +87,15 @@ namespace Physicc
 	{
 		glm::vec3 lowerBound(0.5f);
 		glm::vec3 upperBound(-0.5f);
+
 		for (int i = 0; i < 8; i++)
 		{
 			glm::vec3 temp = m_transform * m_vertices[i];
 			lowerBound = glm::min(lowerBound, temp); //Takes component-wise min
 			upperBound = glm::max(upperBound, temp);
 		}
-		//TODO: Fix the return type of this function
-		return AABB{lowerBound, upperBound};
+
+		return BoundingVolume(AABB{lowerBound, upperBound});
 	}
 
 	/**
@@ -124,7 +125,7 @@ namespace Physicc
 	{
 		glm::vec3 lowerBound = m_position - m_radius;;
 		glm::vec3 upperBound = m_position + m_radius;
-		//TODO: Fix the return type of this function
-		return AABB{lowerBound, upperBound};
+
+		return BoundingVolume(AABB{lowerBound, upperBound});
 	}
 }
