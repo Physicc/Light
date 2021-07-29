@@ -2,6 +2,18 @@
 
 namespace Physicc
 {
+	template <class T>
+	BoundingVolume<T>::BoundingVolume(const BoundingVolume<T>& v)
+	{
+		m_volume = v.m_volume;
+	}
+
+	template <class T>
+	BoundingVolume<T>::BoundingVolume(const T& volume)
+	{
+		m_volume = volume;
+	}
+
 	template <>
 	bool BoundingVolume<AABB>::overlapsWith(BoundingVolume<AABB> v)
 	{
