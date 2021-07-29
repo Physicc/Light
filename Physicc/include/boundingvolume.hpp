@@ -21,6 +21,9 @@ namespace Physicc
 	class BoundingVolume
 	{
 		public:
+			BoundingVolume(const BoundingVolume<T>& v);
+			BoundingVolume(const T& volume);
+
 			bool overlapsWith(BoundingVolume<T> v);
 
 		private:
