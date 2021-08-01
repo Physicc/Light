@@ -20,6 +20,7 @@ if (WIN32)
                 PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE"
                 LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
         )
+        target_compile_options(Editor PRIVATE "/MP")
     elseif (MINGW)
         if (CMAKE_BUILD_TYPE STREQUAL "Release")
             target_link_options(Editor PRIVATE -mwindows)
