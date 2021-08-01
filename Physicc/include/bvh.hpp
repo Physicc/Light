@@ -3,6 +3,11 @@
 
 namespace Physicc
 {
+	struct BVHNode
+	{
+
+	};
+
 	class BVH
 	{
 		public:
@@ -15,7 +20,7 @@ namespace Physicc
 			//convert the tree into a linear data structure
 
 		private:
-
+			BVHNode* m_head;
 	};
 }
 
