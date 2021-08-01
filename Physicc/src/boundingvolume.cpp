@@ -23,7 +23,6 @@ namespace Physicc
 			   (m_volume.lowerBound.z <= v.m_volume.upperBound.z && m_volume.upperBound.z >= v.m_volume.lowerBound.z);
 	}
 
-	template
-	class BoundingVolume<AABB>;
+	template class BoundingVolume<AABB>;
 	//Explicitly instantiating the AABB-based BoundingVolume class
 }
