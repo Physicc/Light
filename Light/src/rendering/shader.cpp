@@ -1,4 +1,6 @@
-#include "rendering/shader.hpp"
+#include "light/rendering/shader.hpp"
+
+#include <iostream>
 
 namespace Light
 {
