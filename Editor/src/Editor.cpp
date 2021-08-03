@@ -20,11 +20,29 @@ public:
 		fbspec.attachments = { 
 			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
 		};
 		fbspec.width = 1280;
 		fbspec.height = 720;
 		m_framebuffer = Light::Framebuffer::create(fbspec);
+
+		Light::FramebufferSpec fbspecOutline;
+		fbspecOutline.attachments = {
+			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecOutline.width = 1280;
+		fbspecOutline.height = 720;
+		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
+
+		Light::FramebufferSpec fbspec2;
+		fbspec2.width = 1280;
+		fbspec2.height = 720;
+		fbspec2.attachments = {
+			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		m_framebuffer2 = Light::Framebuffer::create(fbspec2);
 
 		m_scene = std::make_shared<Light::Scene>();
 
@@ -108,6 +126,8 @@ public:
 		{
 			m_camera.setViewportSize(m_viewportPanelSize.x, m_viewportPanelSize.y);
 			m_framebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
+			m_framebuffer2->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
+			m_outlineFramebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
 			m_resizeViewport = false;
 		}
 		m_frameCount++;
@@ -127,6 +147,9 @@ public:
 		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1});
 		Light::RenderCommand::clear();
 
+		m_framebuffer->clearAttachment(2, 0);
+
+
 		Light::Renderer::beginScene(m_camera, m_camera.getViewMatrix());
 
 		m_scene->render();
@@ -145,8 +168,22 @@ public:
 			m_hoveredEntity = pixelData == -1 ? Light::Entity() : Light::Entity((entt::entity)pixelData, m_scene.get());
 		}
 
-
 		m_framebuffer->unbind();
+
+		auto entity = m_scenePanel.getSelectionContext();
+		m_outlineFramebuffer->bind();
+		Light::RenderCommand::setClearColor({0, 0, 0, 0});
+		Light::RenderCommand::clear();
+		m_scene->renderSelection(entity);
+		m_outlineFramebuffer->unbind();
+
+		m_framebuffer2->bind();
+		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1});
+		Light::RenderCommand::clear();	
+		m_framebuffer->bindAttachmentTexture(0,0);
+		m_outlineFramebuffer->bindAttachmentTexture(0,1);
+		m_scene->renderOutline(m_hoveredEntity);
+		m_framebuffer2->unbind();
 	}
 
 	bool onWindowResize(Light::WindowResizeEvent& e)
@@ -162,7 +199,7 @@ public:
 
 	bool onMouseButtonPressed(Light::MouseButtonPressedEvent& e)
 	{
-		if(e.getButton() == LIGHT_MOUSE_BUTTON_LEFT && m_hoveredEntity)
+		if(e.getButton() == LIGHT_MOUSE_BUTTON_LEFT)
 		{
 			m_scenePanel.setSelectionContext(m_hoveredEntity);
 		}
@@ -224,7 +261,7 @@ public:
 			m_resizeViewport = true;
 			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);
 		}
-		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image(INT2VOIDP(m_framebuffer2->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
 		
 		ImGui::End();
 		ImGui::PopStyleVar();
@@ -293,6 +330,8 @@ private:
 	Light::Entity m_hoveredEntity;
 
 	std::shared_ptr<Light::Framebuffer> m_framebuffer;
+	std::shared_ptr<Light::Framebuffer> m_framebuffer2;
+	std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 	glm::vec2 m_viewportPanelSize;
 	glm::vec2 m_viewportPos;
 	bool m_resizeViewport = false;

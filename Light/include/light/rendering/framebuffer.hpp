@@ -93,6 +93,8 @@ namespace Light
 		virtual void bind() = 0;
 		virtual void unbind() = 0;
 
+		virtual void bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) = 0;
+
 		static std::shared_ptr<Framebuffer> create(const FramebufferSpec& spec);
 	};	
 	
