@@ -32,6 +32,7 @@ layout(location = 1) out int entity;
 uniform vec3 u_lightPos;
 uniform vec3 u_lightCol;
 uniform int u_id;
+uniform int u_selectionId;
 
 void main()
 {

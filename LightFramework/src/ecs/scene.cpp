@@ -70,6 +70,37 @@ namespace Light
 		m_skybox_shader = Light::Shader::create("../Editor/assets/shaders/skybox.glsl");
 		m_skybox_shader->bind();
 		m_skybox_shader->setUniformInt("u_cubemap", 0);
+
+		m_outline_mesh.reset(Light::VertexArray::create());
+
+		float screen_vertices[] = {
+			-1.0, -1.0,
+			-1.0, 1.0,
+			1.0, 1.0,
+			1.0, -1.0
+		};
+
+		vbo.reset(VertexBuffer::create(screen_vertices, sizeof(screen_vertices)));
+
+		vbo->setLayout({
+			{ ShaderDataType::Float2, "a_Position" }
+		});
+
+		unsigned int screen_indices[] = {
+			0, 2, 1, 3, 2, 0 
+		};
+
+		ibo.reset(IndexBuffer::create(screen_indices, sizeof(screen_indices) / sizeof(unsigned int)));
+
+		m_outline_mesh->addVertexBuffer(vbo);
+		m_outline_mesh->setIndexBuffer(ibo);
+
+		m_outline_shader = Light::Shader::create("../Editor/assets/shaders/outline.glsl");
+		m_outline_shader->bind();
+		m_outline_shader->setUniformInt("ColorTexture", 0);
+		m_outline_shader->setUniformInt("IDTexture", 1);
+
+		m_outline_temp_shader = Light::Shader::create("../Editor/assets/shaders/outline-temp.glsl");
 	}
 
 	Entity Scene::addEntity(const std::string& name)
@@ -108,7 +139,28 @@ namespace Light
 			{
 				auto [shader, mesh, transform] = view.get(entity);
 				Renderer::submitID(shader.shader, mesh.mesh, transform.getTransform(), (uint32_t)entity);
+
 			}
 		}
+	}
+
+	void Scene::renderSelection(Entity entity)
+	{
+		if(entity && entity.hasComponent<TransformComponent>() && entity.hasComponent<MeshComponent>())
+		{
+			auto [transform, mesh]= m_registry.get<TransformComponent, MeshComponent>((entt::entity)(uint32_t)entity);
+			Renderer::submit(m_outline_temp_shader, mesh.mesh, transform.getTransform());
+		}
+	}
+
+	void Scene::renderOutline(Entity entity)
+	{
+		m_outline_shader->bind();
+		m_outline_shader->setUniformInt("ColorTexture", 0);
+		if(entity)
+			m_outline_shader->setUniformInt("selectionID", uint32_t(entity));
+		else
+			m_outline_shader->setUniformInt("selectionID", -1);
+		Renderer::submit(m_outline_shader, m_outline_mesh);
 	}
 }

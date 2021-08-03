@@ -19,12 +19,17 @@ namespace Light
 		Entity addEntity(const std::string& name="");
 		void update(Light::Timestep dt);
 		void render();
+		void renderSelection(Entity entity);
+		void renderOutline(Entity entity);
 	private:
 		entt::registry m_registry;
 
 		std::shared_ptr<Light::Cubemap> m_skybox;
 		std::shared_ptr<Light::Shader> m_skybox_shader;
+		std::shared_ptr<Light::Shader> m_outline_shader;
+		std::shared_ptr<Light::Shader> m_outline_temp_shader;
 		std::shared_ptr<Light::VertexArray> m_skybox_mesh;
+		std::shared_ptr<Light::VertexArray> m_outline_mesh;
 
 		friend class Entity;
 		friend class ScenePanel;

@@ -31,6 +31,8 @@ namespace Light
 			return m_colorAttachmentIds[attachmentIndex];
 		}
 
+		virtual void bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) override;
+
 	private:
 		FramebufferSpec m_spec;
 		std::vector<FramebufferTextureSpec> m_colorAttachmentSpecs;
@@ -40,7 +42,7 @@ namespace Light
 
 		std::vector<uint32_t> m_colorAttachmentIds;
 		uint32_t m_depthAttachmentId = 0;
-	};	
+	};
 
 }
 

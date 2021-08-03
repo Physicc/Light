@@ -5,6 +5,8 @@
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
 
+#include "string"
+
 namespace Light
 {
 	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_windowHandle(windowHandle)
@@ -27,6 +29,13 @@ namespace Light
 			LIGHT_CORE_CRITICAL("Could not initialize GLAD");
 			exit(1);
 		}
+
+
+		const GLubyte* vendor = glGetString(GL_VENDOR);
+		const GLubyte* renderer= glGetString(GL_RENDERER);
+		LIGHT_CORE_INFO("OpenGL Vendor: {0}", vendor);
+		LIGHT_CORE_INFO("OpenGL Device: {0}", renderer);
+
 	}
 	
 	void OpenGLContext::swapBuffers() 

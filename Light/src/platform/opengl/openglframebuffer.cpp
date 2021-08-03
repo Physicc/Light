@@ -152,6 +152,7 @@ namespace Light
 
 					glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 					glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+					glTexParameterfv(textureTarget, GL_TEXTURE_BORDER_COLOR, &(glm::vec4(0,0,0,0)[0]));
 
 					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
 						TexWrap2OpenGLType(m_colorAttachmentSpecs[i].wrapFormat));
@@ -286,5 +287,20 @@ namespace Light
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
-	
+
+	void OpenGLFramebuffer::bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) 
+	{
+		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
+
+		glActiveTexture(GL_TEXTURE0 + slot);
+
+		if(m_spec.samples > 1)
+		{
+			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_colorAttachmentIds[attachmentIndex]);
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_2D, m_colorAttachmentIds[attachmentIndex]);
+		}
+	}
 }
