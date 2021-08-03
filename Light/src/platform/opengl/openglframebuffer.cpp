@@ -100,15 +100,16 @@ namespace Light
 
 	void OpenGLFramebuffer::invalidate() 
 	{
-		// if(m_rendererId != 0)
-		// {
-		// 	glDeleteFramebuffers(1, &m_rendererId);
-		// 	glDeleteTextures(m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
-		// 	glDeleteTextures(1, &m_depthAttachmentId);
+		if(m_rendererId != 0)
+		{
+			glDeleteFramebuffers(1, &m_rendererId);
+			glDeleteTextures(m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
+			if(m_depthAttachmentId != 0)
+				glDeleteRenderbuffers(1, &m_depthAttachmentId);
 
-		// 	m_colorAttachmentIds.clear();
-		// 	m_depthAttachmentId = 0;
-		// }
+			m_colorAttachmentIds.clear();
+			m_depthAttachmentId = 0;
+		}
 
 		glGenFramebuffers(1, &m_rendererId);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_rendererId);
