@@ -1,13 +1,10 @@
-#include "light.hpp"
-#include "core/entrypoint.hpp"
 
 #include "gui/scenepanel.hpp"
 
 #include "physicsworld.hpp"
 #include "imgui.h"
-
-// Debugging
-#include "glad/glad.h"
+#include "light.hpp"
+#include "core/entrypoint.hpp"
 
 class MainLayer : public Light::Layer
 {
@@ -124,10 +121,10 @@ public:
 	{
 		if(m_resizeViewport)
 		{
-			m_camera.setViewportSize(m_viewportPanelSize.x, m_viewportPanelSize.y);
-			m_framebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
-			m_framebuffer2->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
-			m_outlineFramebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
+			m_camera.setViewportSize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_framebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_framebuffer2->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_outlineFramebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_resizeViewport = false;
 		}
 		m_frameCount++;
@@ -163,7 +160,7 @@ public:
 		if(posRelativeToViewport.x >= 0 && posRelativeToViewport.y >= 0
 			&& posRelativeToViewport.x < m_viewportPanelSize.x && posRelativeToViewport.y < m_viewportPanelSize.y)
 		{
-			int pixelData = m_framebuffer->readPixelInt(1, posRelativeToViewport.x, m_viewportPanelSize.y - posRelativeToViewport.y);
+			int pixelData = m_framebuffer->readPixelInt(1, int(posRelativeToViewport.x), int(m_viewportPanelSize.y - posRelativeToViewport.y));
 
 			m_hoveredEntity = pixelData == -1 ? Light::Entity() : Light::Entity((entt::entity)pixelData, m_scene.get());
 		}
