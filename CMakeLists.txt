@@ -12,4 +12,4 @@ endif ()
 
 add_subdirectory(Editor Editor)
 
-# add_subdirectory(Testing Test)
+add_subdirectory(Testing Test)
