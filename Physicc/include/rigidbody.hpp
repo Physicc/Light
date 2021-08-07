@@ -35,8 +35,8 @@ namespace Physicc
 			void setForce();
 
 		private:
-			glm::vec3 m_force{};
-			BoxCollider m_collider{};
+			glm::vec3 m_force;
+			BoxCollider m_collider;
 			float m_mass;
 			glm::vec3 m_velocity;
 			bool m_isGravity;			//Probably change this from bool isGravity to float Gravity. 
