@@ -17,6 +17,10 @@ namespace Physicc
 		glm::vec3 upperBound;
 	};
 
+	/**
+	 *
+	 * @tparam T
+	 */
 	template <class T>
 	class BoundingVolume
 	{
