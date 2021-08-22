@@ -9,6 +9,7 @@
 #include "rendering/editorcamera.hpp"
 #include "light/rendering/texture.hpp"
 #include "light/rendering/framebuffer.hpp"
+#include "resources/resource.hpp"
 #include "core/input.hpp"
 #include "input/keycodes.hpp"
 #include "input/mousecodes.hpp"
