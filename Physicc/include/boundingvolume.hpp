@@ -15,6 +15,18 @@ namespace Physicc
 	{
 		glm::vec3 lowerBound;
 		glm::vec3 upperBound;
+
+		/**
+		 * @brief returns the volume of the AABB
+		 *
+		 * @return float
+		 */
+		[[nodiscard]] inline float getVolume() const
+		{
+			return (upperBound.x - lowerBound.x) *
+				   (upperBound.y - lowerBound.y) *
+				   (upperBound.z - lowerBound.z);
+		}
 	};
 
 	/**
