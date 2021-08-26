@@ -34,6 +34,9 @@ namespace Physicc
 
 			void setForce();
 
+			[[nodiscard]] BoundingVolume<AABB>  getAABB() {
+				return m_collider.getAABB();
+			}
 		private:
 			glm::vec3 m_force{};
 			BoxCollider m_collider{};
