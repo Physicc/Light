@@ -43,6 +43,7 @@ namespace Physicc
 	bool BoundingVolume<AABB>::overlapsWith(BoundingVolume<AABB> v);
 	//Class method specialization of the overlapsWith function
 
+	//TODO: Discuss this design decision
 	namespace AABBUtilities
 	{
 		/**
