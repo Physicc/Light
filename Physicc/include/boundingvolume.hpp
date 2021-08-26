@@ -15,18 +15,6 @@ namespace Physicc
 	{
 		glm::vec3 lowerBound;
 		glm::vec3 upperBound;
-
-		/**
-		 * @brief returns the volume of the AABB
-		 *
-		 * @return float
-		 */
-		[[nodiscard]] inline float getVolume() const
-		{
-			return (upperBound.x - lowerBound.x) *
-				   (upperBound.y - lowerBound.y) *
-				   (upperBound.z - lowerBound.z);
-		}
 	};
 
 	/**
@@ -54,6 +42,21 @@ namespace Physicc
 	template <>
 	bool BoundingVolume<AABB>::overlapsWith(BoundingVolume<AABB> v);
 	//Class method specialization of the overlapsWith function
+
+	namespace AABBUtilities
+	{
+		/**
+		 * @brief returns the volume of the AABB
+		 *
+		 * @return float
+		 */
+		[[nodiscard]] inline float getVolume(BoundingVolume<AABB>& bv)
+		{
+			return (bv.upperBound.x - bv.lowerBound.x) *
+				   (bv.upperBound.y - bv.lowerBound.y) *
+				   (bv.upperBound.z - bv.lowerBound.z);
+		}
+	}
 }
 
 #endif //__BOUNDINGVOLUME_H__
