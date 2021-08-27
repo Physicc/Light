@@ -29,6 +29,13 @@ namespace Physicc
 		private:
 			BVHNode* m_head;
 			std::vector<RigidBody> m_rigidBodyList;
+
+			BoundingVolume<AABB> computeBoundingVolume(std::vector<RigidBody>::iterator begin,
+													   std::vector<RigidBody>::iterator end);
+
+			void buildTree(BVHNode* node,
+			               std::vector<RigidBody>::iterator begin,
+			               std::vector<RigidBody>::iterator end);
 	};
 }
 
