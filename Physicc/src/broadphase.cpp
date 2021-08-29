@@ -16,6 +16,7 @@ namespace Physicc
 			RigidBody bodies[2]; //TODO : Figure out a name for this array
 		};
 
+		//inlined function to improve readability
 		[[nodiscard]] inline bool isLeaf(BVHNode* node)
 		{
 			return (node->left == nullptr) && (node->right == nullptr);
