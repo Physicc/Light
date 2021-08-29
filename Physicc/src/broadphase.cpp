@@ -8,6 +8,12 @@ namespace Physicc
 	{
 		struct PotentialContact
 		{
+			PotentialContact(RigidBody& body1, RigidBody& body2) //TODO: Add a copy constructor to RigidBody in Development 
+			{
+				bodies[0] = body1;
+				bodies[1] = body2;
+			}
+
 			RigidBody bodies[2]; //TODO : Figure out a name for this array
 		};
 
@@ -34,7 +40,25 @@ namespace Physicc
 
 		void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray) //TODO: Figure out a name for the nodes here
 		{
-			
+			if (isLeaf(node1) && isLeaf(node2))
+			{
+				//If both nodes are leaves then we have a PotentialContact and we add the collision pair to the collisionArray
+				collisionArray.push_back(PotentialContact(*(node1->body), *(node2->body)));
+			}
+			//If only of the nodes is a leaf, then make 
+			else if (isLeaf(node1) && !isLeaf(node2))
+			{
+				//recurse
+				getPotentialContactsWith(node2->left, node1, collisionArray); //
+				
+
+			}
+			else if (!isLeaf(node1) && isLeaf(node2))
+			{
+				
+
+			}
+
 
 
 		}
