@@ -88,7 +88,7 @@ namespace Light
 
 		if (width == 0 || height == 0)
 		{
-			LIGHT_CORE_WARN("Attempted to rezize framebuffer to {0}, {1}", width, height);
+			LIGHT_CORE_WARN("Attempted to resize framebuffer to {0}, {1}", width, height);
 			return;
 		}
 
