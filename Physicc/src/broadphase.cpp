@@ -64,6 +64,7 @@ namespace Physicc
 
 			void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray) //TODO: Figure out a name for the nodes here
 			{ //TODO: Discuss if there is any advantage to inlining this (i.e. using the `inline` keyword.)
+				//TODO: Check for the nullity of leaf nodes, and make sure that the function acts accordingly.
 				if (isLeaf(node1) && isLeaf(node2))
 				{
 					//If both nodes are leaves, then we have a PotentialContact, and we add the collision pair to the collisionArray
