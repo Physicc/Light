@@ -92,7 +92,7 @@ namespace Physicc
 				//errors.
 
 			private:
-				[[nodiscard]] inline Derived* typeCast()
+				[[nodiscard]] inline Derived* typeCast() const
 				{
 					return static_cast<Derived*>(this);
 				}
