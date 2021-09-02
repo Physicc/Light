@@ -118,9 +118,9 @@ namespace Physicc
 					//never called by the end user. It is simply called by BV
 					//itself, which doesn't actually discard the return type, so
 					//we're good.
-					return (bv.upperBound.x - bv.lowerBound.x) *
-						(bv.upperBound.y - bv.lowerBound.y) *
-						(bv.upperBound.z - bv.lowerBound.z);
+					return (bv.upperBound.x - bv.lowerBound.x)
+						* (bv.upperBound.y - bv.lowerBound.y)
+						* (bv.upperBound.z - bv.lowerBound.z);
 				}
 
 				inline bool overlapsWith(BoxBV& bv) {
@@ -128,6 +128,7 @@ namespace Physicc
 						&& (m_volume.lowerBound.y <= bv.m_volume.upperBound.y && m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
 						&& (m_volume.lowerBound.z <= bv.m_volume.upperBound.z && m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
+
 			private:
 				T m_volume;
 		};
