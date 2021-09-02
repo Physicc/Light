@@ -135,13 +135,11 @@ namespace Physicc
 				inline bool overlapsWith(BoxBV& bv)
 				{
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
-						&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
+							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
 						&& (m_volume.lowerBound.y <= bv.m_volume.upperBound.y
-							&& m_volume.upperBound.y
-								>= bv.m_volume.lowerBound.y)
+							&& m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
 						&& (m_volume.lowerBound.z <= bv.m_volume.upperBound.z
-							&& m_volume.upperBound.z
-								>= bv.m_volume.lowerBound.z);
+							&& m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
 
 			private:
