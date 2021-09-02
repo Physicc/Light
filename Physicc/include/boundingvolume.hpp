@@ -2,7 +2,6 @@
 #define __BOUNDINGVOLUME_H__
 
 #include "glm/glm.hpp"
-#include <functional>
 
 namespace Physicc
 {
