@@ -6,9 +6,9 @@
 
 namespace Physicc
 {
-	//Anonymous namespace magic, to keep the implementation hidden from the rest
-	//of the Physicc namespace
-	namespace
+	//Named namespace, to keep the implementation hidden from users (or at least
+	//make it harder to find)
+	namespace BVImplementation
 	{
 		/**
 		 * @brief Axis Aligned Bounding Box
@@ -135,7 +135,7 @@ namespace Physicc
 
 	namespace BoundingVolume
 	{
-		typedef BV<BoxBV<AABB>, AABB> AABB;
+		typedef BVImplementation::BV<BoxBV<BVImplementation::AABB>, BVImplementation::AABB> AABB;
 	}
 }
 
