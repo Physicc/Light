@@ -34,7 +34,7 @@ namespace Physicc
 
 			void setForce();
 
-			[[nodiscard]] BoundingVolume<AABB>  getAABB() {
+			[[nodiscard]] inline BoundingVolume::AABB getAABB() {
 				return m_collider.getAABB();
 			}
 		private:
