@@ -7,7 +7,7 @@ namespace Physicc
 {
 	//Named namespace, to keep the implementation hidden from users (or at least
 	//make it harder to find)
-	namespace BVImplementation
+	namespace BVImpl
 	{
 		/**
 		 * @brief Axis Aligned Bounding Box
@@ -43,10 +43,10 @@ namespace Physicc
 	 			 * @tparam BV The object to be copied
 	 			 * @param bv A BV object
 	 			 */
-				BV(const BV<Derived, BoundingObject>& bv)
-				{
-					typeCast()->setVolume(bv.typeCast()->m_volume);
-				}
+				BV(const BV<Derived, BoundingObject>& bv) = default;
+//				{
+//					static_cast<Derived*>(this)->setVolume(bv.static_cast<Derived*>(this));
+//				}
 
 				/**
 				 * @brief A constructor for BV which takes a BoundingObject
@@ -81,7 +81,7 @@ namespace Physicc
 				//implicit contract: all child classes of BV must have this
 				//function implemented
 
-				[[nodiscard]] inline float getVolume()
+				[[nodiscard]] inline float getVolume() const
 				{
 					return typeCast()->getVolume();
 				}
@@ -91,12 +91,27 @@ namespace Physicc
 				//to use this function will likely result in 5 pages of opaque
 				//errors.
 
+//				[[nodiscard]] inline BoundingObject getBoundingVolume() const
+//				{
+//					return constTypeCast()->getBoundingVolume();
+//				}
+				[[nodiscard]] BV minimumBoundingVolume(const BV& bv)
+				{
+					return typeCast()->minimumBoundingVolume(bv.typeCast());
+				}
+
 			private:
-				[[nodiscard]] inline Derived* typeCast() const
+				[[nodiscard]] inline Derived* typeCast()
 				{
 					return static_cast<Derived*>(this);
 				}
 				//A helper function just to make reading the code easier
+
+//				[[nodiscard]] inline const Derived* constTypeCast() const
+//				{
+//					return static_cast<const Derived*>(this);
+//				}
+				//Another helper function just to make reading the code easier
 		};
 
 		template <typename T>
@@ -117,11 +132,11 @@ namespace Physicc
 				                      const glm::vec3& upperBound)
 				{
 					m_volume = T({lowerBound, upperBound});
-					//implicit contract: any BoxBV will have a struct that has a
+					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
 
-				inline float getVolume(BoxBV<T>& bv)
+				inline float getVolume(BoxBV<T>& bv) const
 				{
 					//[[nodiscard]] is not needed here because this function is
 					//never called by the end user. It is simply called by BV
@@ -132,25 +147,48 @@ namespace Physicc
 						* (bv.upperBound.z - bv.lowerBound.z);
 				}
 
-				inline bool overlapsWith(BoxBV& bv)
+				inline bool overlapsWith(BoxBV<T>& bv)
 				{
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
-							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
+						&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
 						&& (m_volume.lowerBound.y <= bv.m_volume.upperBound.y
-							&& m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
+							&& m_volume.upperBound.y
+								>= bv.m_volume.lowerBound.y)
 						&& (m_volume.lowerBound.z <= bv.m_volume.upperBound.z
-							&& m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
+							&& m_volume.upperBound.z
+								>= bv.m_volume.lowerBound.z);
 				}
+
+//				inline T getBoundingVolume() const
+//				{
+//					return m_volume;
+//				}
+
+				inline BoxBV minimumBoundingVolume(const BoxBV<T>& bv)
+				{
+					return {
+						glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
+						glm::max(m_volume.upperBound, bv.m_volume.upperBound))};
+				}
+				//As per our previous implicit contract, these `glm::vec3`s are
+				//guaranteed to exist, so this is legal.
 
 			private:
 				T m_volume;
-		};
+		}
 	}
 
 	namespace BoundingVolume
 	{
-		typedef BVImplementation::BV<BVImplementation::BoxBV<BVImplementation::AABB>,
-		                             BVImplementation::AABB> AABB;
+		typedef BVImpl::BV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
+
+		template <typename Derived, typename BoundingObject>
+		BVImpl::BV<Derived, BoundingObject> minimumBoundingVolume(BVImpl::BV<Derived, BoundingObject> volume1,
+																  BVImpl::BV<Derived, BoundingObject> volume2)
+		{
+			return volume1.minimumBoundingVolume(volume2);
+		}
+		//returns the minimal bounding volume that encompasses both of them
 	}
 }
 
