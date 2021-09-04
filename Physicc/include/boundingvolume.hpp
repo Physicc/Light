@@ -100,7 +100,7 @@ namespace Physicc
 //				}
 				[[nodiscard]] BV enclosingBV(const BV& bv)
 				{
-					return typeCast()->minimumBoundingVolume(static_cast<Derived&>(bv));
+					return typeCast()->enclosingBV(static_cast<Derived&>(bv));
 				}
 
 			private:
