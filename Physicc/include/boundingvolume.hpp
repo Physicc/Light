@@ -8,6 +8,8 @@ namespace Physicc
 	//TODO: Discuss commented functions (keep or discard?) and whether there should be 2 typeCast() functions, one for Derived* and the other for Derived&
 	//TODO: Check const-correctness
 
+	//Warning: Return types may need the template specified.
+
 	//Named namespace, to keep the implementation hidden from users (or at least
 	//make it harder to find)
 	namespace BVImpl
@@ -36,7 +38,7 @@ namespace Physicc
 		 * TODO: Update this Doxygen comment
 		 */
 		template <typename Derived, typename BoundingObject>
-		class BV
+		class BaseBV
 		{
 				//CRTP (Curiously Recurring Template Pattern)
 			public:
@@ -46,11 +48,7 @@ namespace Physicc
 	 			 * @tparam BV The object to be copied
 	 			 * @param bv A BV object
 	 			 */
-	 			 //TODO: Verify correctness of this function
-				BV(const BV<Derived, BoundingObject>& bv) = default;
-//				{
-//					static_cast<Derived*>(this)->setVolume(bv.static_cast<Derived*>(this));
-//				}
+				BaseBV(const BaseBV<Derived, BoundingObject>& bv) = default;
 
 				/**
 				 * @brief A constructor for BV which takes a BoundingObject
@@ -60,12 +58,12 @@ namespace Physicc
 				 * (AABB, OBB, etc.)
 				 * @param volume
 				 */
-				BV(const BoundingObject& volume)
+				BaseBV(const BoundingObject& volume)
 				{
 					typeCast()->setVolume(volume);
 				}
 
-				BV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
+				BaseBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
 					typeCast()->setVolume(lowerBound, upperBound);
 				}
@@ -73,15 +71,15 @@ namespace Physicc
 				/**
  				 * @brief Returns whether two BVs are overlapping or not
  				 *
- 				 * @param bv A BV object
+ 				 * @param bv A BaseBV object
  				 * @return true if the BoundingVolumes are intersecting, and false otherwise
  				 * TODO: Is this, as a return type description, fine?
  				 */
-				[[nodiscard]] inline bool overlapsWith(const BV<Derived, BoundingObject>& bv)
+				[[nodiscard]] inline bool overlapsWith(const BaseBV<Derived, BoundingObject>& bv)
 				{
 					return typeCast()->overlapsWith(static_cast<const Derived&>(bv));
 				}
-				//implicit contract: all child classes of BV must have this
+				//implicit contract: all child classes of BaseBV must have this
 				//function implemented
 
 				[[nodiscard]] inline float getVolume() const
@@ -98,7 +96,7 @@ namespace Physicc
 //				{
 //					return constTypeCast()->getBoundingVolume();
 //				}
-				[[nodiscard]] BV enclosingBV(const BV& bv)
+				[[nodiscard]] BaseBV enclosingBV(const BaseBV& bv)
 				{
 					return typeCast()->enclosingBV(static_cast<Derived&>(bv));
 				}
@@ -118,13 +116,15 @@ namespace Physicc
 		};
 
 		template <typename T>
-		class BoxBV : public BV<BoxBV<T>, T>
+		class BoxBV : public BaseBV<BoxBV<T>, T>
 		{
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
 				//functions, to make the use of BVs easier.
 			public:
 				BoxBV() = default;
+
+				BoxBV(const BoxBV<T>& bv) = default;
 
 				inline void setVolume(const T& volume)
 				{
@@ -180,11 +180,11 @@ namespace Physicc
 
 	namespace BoundingVolume
 	{
-		typedef BVImpl::BV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
+		typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
 
 		template <typename Derived, typename BoundingObject>
-		BVImpl::BV<Derived, BoundingObject> enclosingBV(BVImpl::BV<Derived, BoundingObject> volume1,
-																  BVImpl::BV<Derived, BoundingObject> volume2)
+		BVImpl::BaseBV<Derived, BoundingObject> enclosingBV(BVImpl::BaseBV<Derived, BoundingObject> volume1,
+																  BVImpl::BaseBV<Derived, BoundingObject> volume2)
 		{
 			return volume1.enclosingBV(volume2);
 		}
