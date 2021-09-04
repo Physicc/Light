@@ -5,6 +5,8 @@
 
 namespace Physicc
 {
+	//TODO: Discuss commented functions (keep or discard?) and whether there should be 2 typeCast() functions, one for Derived* and the other for Derived&
+
 	//Named namespace, to keep the implementation hidden from users (or at least
 	//make it harder to find)
 	namespace BVImpl
@@ -43,6 +45,7 @@ namespace Physicc
 	 			 * @tparam BV The object to be copied
 	 			 * @param bv A BV object
 	 			 */
+	 			 //TODO: Verify correctness of this function
 				BV(const BV<Derived, BoundingObject>& bv) = default;
 //				{
 //					static_cast<Derived*>(this)->setVolume(bv.static_cast<Derived*>(this));
@@ -73,8 +76,7 @@ namespace Physicc
  				 * @return true if the BoundingVolumes are intersecting, and false otherwise
  				 * TODO: Is this, as a return type description, fine?
  				 */
-				[[nodiscard]] inline bool overlapsWith(const BV<Derived,
-				                                                BoundingObject>& bv)
+				[[nodiscard]] inline bool overlapsWith(const BV<Derived, BoundingObject>& bv)
 				{
 					return typeCast()->overlapsWith(static_cast<Derived&>(bv));
 				}
@@ -150,13 +152,11 @@ namespace Physicc
 				inline bool overlapsWith(BoxBV<T>& bv)
 				{
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
-						&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
+							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
 						&& (m_volume.lowerBound.y <= bv.m_volume.upperBound.y
-							&& m_volume.upperBound.y
-								>= bv.m_volume.lowerBound.y)
+							&& m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
 						&& (m_volume.lowerBound.z <= bv.m_volume.upperBound.z
-							&& m_volume.upperBound.z
-								>= bv.m_volume.lowerBound.z);
+							&& m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
 
 //				inline T getBoundingVolume() const
