@@ -97,7 +97,7 @@ namespace Physicc
 //				}
 				[[nodiscard]] BV minimumBoundingVolume(const BV& bv)
 				{
-					return typeCast()->minimumBoundingVolume(bv.typeCast());
+					return typeCast()->minimumBoundingVolume(static_cast<Derived&>(bv));
 				}
 
 			private:
@@ -166,16 +166,15 @@ namespace Physicc
 
 				inline BoxBV minimumBoundingVolume(const BoxBV<T>& bv)
 				{
-					return {
-						glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
-						glm::max(m_volume.upperBound, bv.m_volume.upperBound))};
+					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
+						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
 
 			private:
 				T m_volume;
-		}
+		};
 	}
 
 	namespace BoundingVolume
