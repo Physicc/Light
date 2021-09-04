@@ -10,6 +10,7 @@ namespace Physicc
 	{
 		BoundingVolume::AABB volume;
 		RigidBody* body = nullptr;
+
 		BVHNode* parent = nullptr;
 		BVHNode* left = nullptr;
 		BVHNode* right = nullptr;
