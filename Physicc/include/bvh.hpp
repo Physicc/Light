@@ -8,7 +8,7 @@ namespace Physicc
 {
 	struct BVHNode
 	{
-		BoundingVolume<AABB> volume;
+		BoundingVolume::AABB volume;
 		RigidBody* body = nullptr;
 		BVHNode* parent = nullptr;
 		BVHNode* left = nullptr;
@@ -20,7 +20,7 @@ namespace Physicc
 		public:
 			BVH(std::vector<RigidBody> rigidBodyList);
 
-			void buildTree();
+			inline void buildTree();
 			//build a tree of the bounding volumes
 
 			std::vector<RigidBody>& convert();
@@ -30,12 +30,10 @@ namespace Physicc
 			BVHNode* m_head;
 			std::vector<RigidBody> m_rigidBodyList;
 
-			BoundingVolume<AABB> computeBoundingVolume(std::vector<RigidBody>::iterator begin,
-													   std::vector<RigidBody>::iterator end);
+			using Iterator = std::vector<RigidBody>::iterator;
 
-			void buildTree(BVHNode* node,
-			               std::vector<RigidBody>::iterator begin,
-			               std::vector<RigidBody>::iterator end);
+			BoundingVolume::AABB computeBV(Iterator begin, Iterator end);
+			void buildTree(BVHNode* node, Iterator begin, Iterator end);
 	};
 }
 
