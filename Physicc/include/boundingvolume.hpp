@@ -5,8 +5,7 @@
 
 namespace Physicc
 {
-	//TODO: Discuss commented functions (keep or discard?) and whether there should be 2 typeCast() functions, one for Derived* and the other for Derived&
-	//TODO: Check const-correctness
+	//Verdict: Discuss commented functions (keep or discard? KEEP)
 
 	//Warning: Return types may need the template specified.
 
@@ -75,7 +74,7 @@ namespace Physicc
  				 * @return true if the BoundingVolumes are intersecting, and false otherwise
  				 * TODO: Is this, as a return type description, fine?
  				 */
-				[[nodiscard]] inline bool overlapsWith(const BaseBV<Derived, BoundingObject>& bv)
+				[[nodiscard]] inline bool overlapsWith(const BaseBV<Derived, BoundingObject>& bv) const
 				{
 					return typeCast()->overlapsWith(static_cast<const Derived&>(bv));
 				}
@@ -96,13 +95,13 @@ namespace Physicc
 //				{
 //					return constTypeCast()->getBoundingVolume();
 //				}
-				[[nodiscard]] BaseBV enclosingBV(const BaseBV& bv)
+				[[nodiscard]] BaseBV enclosingBV(const BaseBV& bv) const
 				{
-					return typeCast()->enclosingBV(static_cast<Derived&>(bv));
+					return typeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
 			private:
-				[[nodiscard]] inline Derived* typeCast()
+				[[nodiscard]] inline Derived* typeCast() const
 				{
 					return static_cast<Derived*>(this);
 				}
@@ -150,7 +149,7 @@ namespace Physicc
 						* (bv.upperBound.z - bv.lowerBound.z);
 				}
 
-				inline bool overlapsWith(const BoxBV<T>& bv)
+				inline bool overlapsWith(const BoxBV<T>& bv) const
 				{
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
 							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
@@ -165,7 +164,7 @@ namespace Physicc
 //					return m_volume;
 //				}
 
-				inline BoxBV enclosingBV(const BoxBV<T>& bv)
+				inline BoxBV enclosingBV(const BoxBV<T>& bv) const
 				{
 					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
@@ -184,13 +183,12 @@ namespace Physicc
 
 		template <typename Derived, typename BoundingObject>
 		BVImpl::BaseBV<Derived, BoundingObject> enclosingBV(BVImpl::BaseBV<Derived, BoundingObject> volume1,
-																  BVImpl::BaseBV<Derived, BoundingObject> volume2)
+															BVImpl::BaseBV<Derived, BoundingObject> volume2)
 		{
 			return volume1.enclosingBV(volume2);
 		}
 		//returns the minimal bounding volume that encompasses both of them
 	}
-
 }
 
 #endif //__BOUNDINGVOLUME_H__
