@@ -98,7 +98,7 @@ namespace Physicc
 //				{
 //					return constTypeCast()->getBoundingVolume();
 //				}
-				[[nodiscard]] BV minimumBoundingVolume(const BV& bv)
+				[[nodiscard]] BV enclosingBV(const BV& bv)
 				{
 					return typeCast()->minimumBoundingVolume(static_cast<Derived&>(bv));
 				}
@@ -165,7 +165,7 @@ namespace Physicc
 //					return m_volume;
 //				}
 
-				inline BoxBV minimumBoundingVolume(const BoxBV<T>& bv)
+				inline BoxBV enclosingBV(const BoxBV<T>& bv)
 				{
 					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
@@ -183,13 +183,14 @@ namespace Physicc
 		typedef BVImpl::BV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
 
 		template <typename Derived, typename BoundingObject>
-		BVImpl::BV<Derived, BoundingObject> minimumBoundingVolume(BVImpl::BV<Derived, BoundingObject> volume1,
+		BVImpl::BV<Derived, BoundingObject> enclosingBV(BVImpl::BV<Derived, BoundingObject> volume1,
 																  BVImpl::BV<Derived, BoundingObject> volume2)
 		{
-			return volume1.minimumBoundingVolume(volume2);
+			return volume1.enclosingBV(volume2);
 		}
 		//returns the minimal bounding volume that encompasses both of them
 	}
+
 }
 
 #endif //__BOUNDINGVOLUME_H__
