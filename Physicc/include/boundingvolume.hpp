@@ -6,6 +6,7 @@
 namespace Physicc
 {
 	//TODO: Discuss commented functions (keep or discard?) and whether there should be 2 typeCast() functions, one for Derived* and the other for Derived&
+	//TODO: Check const-correctness
 
 	//Named namespace, to keep the implementation hidden from users (or at least
 	//make it harder to find)
@@ -78,14 +79,14 @@ namespace Physicc
  				 */
 				[[nodiscard]] inline bool overlapsWith(const BV<Derived, BoundingObject>& bv)
 				{
-					return typeCast()->overlapsWith(static_cast<Derived&>(bv));
+					return typeCast()->overlapsWith(static_cast<const Derived&>(bv));
 				}
 				//implicit contract: all child classes of BV must have this
 				//function implemented
 
 				[[nodiscard]] inline float getVolume() const
 				{
-					return typeCast()->getVolume();
+					return constTypeCast()->getVolume();
 				}
 				//Since template instantiations are lazy, a (child) class that
 				//doesn't have getVolume() defined simply won't generate any
@@ -109,10 +110,10 @@ namespace Physicc
 				}
 				//A helper function just to make reading the code easier
 
-//				[[nodiscard]] inline const Derived* constTypeCast() const
-//				{
-//					return static_cast<const Derived*>(this);
-//				}
+				[[nodiscard]] inline const Derived* constTypeCast() const
+				{
+					return static_cast<const Derived*>(this);
+				}
 				//Another helper function just to make reading the code easier
 		};
 
@@ -138,7 +139,7 @@ namespace Physicc
 					//lowerBound and upperBound `glm::vec3`s.
 				}
 
-				inline float getVolume(BoxBV<T>& bv) const
+				inline float getVolume(const BoxBV<T>& bv) const
 				{
 					//[[nodiscard]] is not needed here because this function is
 					//never called by the end user. It is simply called by BV
@@ -149,7 +150,7 @@ namespace Physicc
 						* (bv.upperBound.z - bv.lowerBound.z);
 				}
 
-				inline bool overlapsWith(BoxBV<T>& bv)
+				inline bool overlapsWith(const BoxBV<T>& bv)
 				{
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
 							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
