@@ -1,37 +1,34 @@
 #include "bvh.hpp"
+#include <utility>
 
 namespace Physicc
 {
-	BVH::BVH(std::vector<RigidBody> rigidBodyList) : m_rigidBodyList(
-		rigidBodyList), m_head(nullptr)
+	using Iterator = std::vector<RigidBody>::iterator;
+
+	//TODO: Discuss the use of std::move
+	BVH::BVH(std::vector<RigidBody> rigidBodyList) : m_rigidBodyList(std::move(
+		rigidBodyList)), m_head(nullptr)
 	{
 	}
 
-	void BVH::buildTree()
+	inline void BVH::buildTree()
 	{
-		buildTree();
+		buildTree(m_head, m_rigidBodyList.begin(), m_rigidBodyList.end());
 	}
 
-	BoundingVolume<AABB> computeBoundingVolume(std::vector<RigidBody>::iterator begin,
-											   std::vector<RigidBody>::iterator end) {
+	BoundingVolume::AABB computeBV(Iterator begin, Iterator end)
+	{
+		BoundingVolume::AABB bv(begin->getAABB());
 
-		glm::vec3 lowerBound, upperBound;
-
-		for (std::vector<RigidBody>::iterator it = begin; it != end; ++it) {
-			BoundingVolume<AABB> bv = it->getAABB();
-
-			lowerBound.x = std::min(lowerBound.x, bv.m_volume.lowerBound.x);
-			lowerBound.y = std::min(lowerBound.y, bv.m_volume.lowerBound.y);
-			lowerBound.z = std::min(lowerBound.z, bv.m_volume.lowerBound.z);
-
-			lowerBound.x = std::min(lowerBound.x, bv.m_volume.lowerBound.x);
-			lowerBound.y = std::min(lowerBound.y, bv.m_volume.lowerBound.y);
-			lowerBound.z = std::min(lowerBound.z, bv.m_volume.lowerBound.z);
+		for (auto it = ++begin; it != end; ++it)
+		{
+			bv = BoundingVolume::minimumBoundingVolume(bv, it->getAABB());
 		}
+
+		return bv;
 	}
-	void BVH::buildTree(BVHNode* node,
-						std::vector<RigidBody>::iterator begin,
-						std::vector<RigidBody>::iterator end)
+
+	void BVH::buildTree(BVHNode* node, Iterator begin, Iterator end)
 	{
 		//implicit convention:
 		//no children = leaf node
