@@ -1,5 +1,6 @@
 #include "rigidbody.hpp"
 #include "bvh.hpp"
+#include "core/assert.hpp"
 
 namespace Physicc
 {
@@ -8,12 +9,13 @@ namespace Physicc
 		struct PotentialContact
 		{
 			PotentialContact(RigidBody& body1, RigidBody& body2) //TODO: Add a copy constructor to RigidBody in Development
+			: rb1(body1), rb2(body2)
 			{
-				bodies[0] = body1;
-				bodies[1] = body2;
-			}
 
-			RigidBody bodies[2]; //TODO : Figure out a name for this array
+			}
+            RigidBody rb1;
+			RigidBody rb2;  
+			 //TODO : Figure out a name for this array
 		};
 
 		//inlined function to improve readability
@@ -39,7 +41,7 @@ namespace Physicc
 		std::vector<PotentialContact> getPotentialContactsWith(BVHNode* node1, BVHNode* node2)
 		{
 			std::vector<PotentialContact> v;
-			getPotentialContacts(node1, node2, v);
+			getPotentialContactsWith(node1, node2, v);
 			return v;
 		}
 
@@ -49,6 +51,7 @@ namespace Physicc
 		{
 			void getPotentialContacts(BVHNode* node, std::vector<PotentialContact>& collisionArray) //TODO:Figure out a name for this array
 			{ //TODO: Discuss if there is any advantage to inlining this (i.e. using the `inline` keyword.)
+				LIGHT_
 
 				if (isLeaf(node))
 					return;
