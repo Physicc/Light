@@ -92,7 +92,7 @@ namespace Physicc
 
 			void updateTransform();
 
-			virtual BoundingVolume<AABB> getAABB() const;
+			virtual BoundingVolume::AABB getAABB() const;
 			//Each child will calculate its AABB according to its own shape
 
 		protected:
@@ -122,7 +122,7 @@ namespace Physicc
 			            glm::vec3 rotation = glm::vec3(0),
 			            glm::vec3 scale = glm::vec3(1));
 
-			BoundingVolume<AABB> getAABB() const override;
+			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
 		private:
 			std::vector<glm::vec4> m_vertices;
@@ -141,7 +141,7 @@ namespace Physicc
 			               glm::vec3 rotation = glm::vec3(0),
 			               glm::vec3 scale = glm::vec3(1));
 
-			BoundingVolume<AABB> getAABB() const override;
+			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
 		private:
 			float m_radius;
