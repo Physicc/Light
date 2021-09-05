@@ -39,7 +39,6 @@ jobs:
                                libxcursor-dev \
                                libxi-dev \
                                uuid-dev \
-                               clang-${{ matrix.clang-version }} \
                                clang-${{ matrix.clang-version }}
      
       - name: ccache
@@ -58,7 +57,6 @@ jobs:
         env:
           CC: clang-${{ matrix.clang-version }}
           CXX: clang++-${{ matrix.clang-version }}
-          CXXFLAGS: -lstdc++
           
       - name: Build
         run: |
