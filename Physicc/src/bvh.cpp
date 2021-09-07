@@ -22,6 +22,7 @@ namespace Physicc
 		for (auto it = ++begin; it != end; ++it)
 		{
 			bv = BoundingVolume::enclosingBV(bv, it->getAABB());
+			//TODO: Object slicing is might be happening here. Investigate.
 		}
 
 		return bv;
