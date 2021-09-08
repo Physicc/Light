@@ -21,6 +21,14 @@ namespace Physicc
 		 */
 		struct AABB
 		{
+			AABB() = default;
+			//lb = lowerBound, ub = upperBound
+			AABB(const glm::vec3& lb, const glm::vec3& ub) : lowerBound(lb), upperBound(ub)
+			{
+			}
+			//the existence of this constructor does not promote this struct from a
+			//POD to a non-POD type. (at least, it shouldn't.)
+
 			glm::vec3 lowerBound;
 			glm::vec3 upperBound;
 		};
@@ -41,13 +49,17 @@ namespace Physicc
 		{
 				//CRTP (Curiously Recurring Template Pattern)
 			public:
+				BaseBV() = default;
+
 				/**
 	 			 * @brief Copy constructor for BoundingVolume
 	 			 *
 	 			 * @tparam BV The object to be copied
 	 			 * @param bv A BV object
 	 			 */
-				BaseBV(const BaseBV<Derived, BoundingObject>& bv) = default;
+				BaseBV(const BaseBV& bv) = default;
+				//the constructors for the base and child classes are kept
+				//simple on purpose, to allow for easy type conversions.
 
 				/**
 				 * @brief A constructor for BV which takes a BoundingObject
@@ -74,9 +86,9 @@ namespace Physicc
  				 * @return true if the BoundingVolumes are intersecting, and false otherwise
  				 * TODO: Is this, as a return type description, fine?
  				 */
-				[[nodiscard]] inline bool overlapsWith(const BaseBV<Derived, BoundingObject>& bv) const
+				[[nodiscard]] inline bool overlapsWith(const BaseBV& bv) const
 				{
-					return typeCast()->overlapsWith(static_cast<const Derived&>(bv));
+					return constTypeCast()->overlapsWith(static_cast<const Derived&>(bv));
 				}
 				//implicit contract: all child classes of BaseBV must have this
 				//function implemented
@@ -95,19 +107,25 @@ namespace Physicc
 //				{
 //					return constTypeCast()->getBoundingVolume();
 //				}
-				[[nodiscard]] BaseBV enclosingBV(const BaseBV& bv) const
+				[[nodiscard]] Derived enclosingBV(const BaseBV& bv) const
 				{
-					return typeCast()->enclosingBV(static_cast<const Derived&>(bv));
+					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
 			private:
-				[[nodiscard]] inline Derived* typeCast() const
+				[[nodiscard]] inline Derived* typeCast()
 				{
 					return static_cast<Derived*>(this);
 				}
 				//A helper function just to make reading the code easier
 
-				[[nodiscard]] inline const Derived* constTypeCast() const
+//				[[nodiscard]] inline const Derived* constTypeCast() const
+//				{
+//					return static_cast<const Derived*>(this);
+//				}
+//				//A helper function just to make reading the code easier
+
+				[[nodiscard]] inline const Derived* constTypeCast() const//constTypeCastToConst() const
 				{
 					return static_cast<const Derived*>(this);
 				}
@@ -123,7 +141,12 @@ namespace Physicc
 			public:
 				BoxBV() = default;
 
-				BoxBV(const BoxBV<T>& bv) = default;
+				BoxBV(const BoxBV& bv) = default;
+
+				BoxBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
+				{
+					m_volume = {lowerBound, upperBound};
+				}
 
 				inline void setVolume(const T& volume)
 				{
@@ -133,23 +156,25 @@ namespace Physicc
 				inline void setVolume(const glm::vec3& lowerBound,
 				                      const glm::vec3& upperBound)
 				{
-					m_volume = T({lowerBound, upperBound});
+					m_volume = {lowerBound, upperBound};
+//					m_volume.lowerBound = lowerBound;
+//					m_volume.upperBound = upperBound;
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
 
-				inline float getVolume(const BoxBV<T>& bv) const
+				inline float getVolume() const
 				{
 					//[[nodiscard]] is not needed here because this function is
 					//never called by the end user. It is simply called by BV
 					//itself, which doesn't actually discard the return type, so
 					//we're good.
-					return (bv.upperBound.x - bv.lowerBound.x)
-						* (bv.upperBound.y - bv.lowerBound.y)
-						* (bv.upperBound.z - bv.lowerBound.z);
+					return (m_volume.upperBound.x - m_volume.lowerBound.x)
+						* (m_volume.upperBound.y - m_volume.lowerBound.y)
+						* (m_volume.upperBound.z - m_volume.lowerBound.z);
 				}
 
-				inline bool overlapsWith(const BoxBV<T>& bv) const
+				inline bool overlapsWith(const BoxBV& bv) const
 				{
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
 							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
@@ -164,7 +189,7 @@ namespace Physicc
 //					return m_volume;
 //				}
 
-				inline BoxBV enclosingBV(const BoxBV<T>& bv) const
+				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
 					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
@@ -182,8 +207,8 @@ namespace Physicc
 		typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
 
 		template <typename Derived, typename BoundingObject>
-		BVImpl::BaseBV<Derived, BoundingObject> enclosingBV(BVImpl::BaseBV<Derived, BoundingObject> volume1,
-															BVImpl::BaseBV<Derived, BoundingObject> volume2)
+		auto inline enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
+								const BVImpl::BaseBV<Derived, BoundingObject>& volume2)
 		{
 			return volume1.enclosingBV(volume2);
 		}
