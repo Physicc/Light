@@ -15,7 +15,8 @@ To ensure uniformity throughout our codebase, we have a few rules:
 #### Header Files and Classes 
 1. Header files go in the `include` directory, and source files go in the `src` directory.
 2. Don't use `using namespace std` in the global scope in header files. If it is necessary (because of very long type names), try to restrict it to the smallest scope possible.
-3. Make sure to indent with a tab before using an access control specifier, and then indent with another tab before defining member variables and functions. Example:
+3. [Type aliasing](https://en.cppreference.com/w/cpp/language/type_alias), on the other hand, is encouraged, especially if it improves readability of the code.
+4. Make sure to indent with a tab before using an access control specifier, and then indent with another tab before defining member variables and functions. Example:
     ```
     class Foo
     {
@@ -24,11 +25,11 @@ To ensure uniformity throughout our codebase, we have a few rules:
     		int bar;
     };
     ```
-4. In classes, prefix all member variables with the `m_` prefix. For example, if the class has a member variable for position, it should be called `m_position`.
-5. Member variables and member functions should use camelCase. That is, if the variable name consists of multiple words, the first letter of the word should be lowercase, and the first letter of all subsequent words should be uppercase. Examples: `m_angularVelocity`, `getAngularVelocity()`, `m_gravity`, `getGravity()`, `m_transformComponent`.
-6. Class names should use PascalCase. That is, if the class name consists of multiple words, the first letter of every word should be in uppercase. Examples: `PhysicsWorld`, `RigidBody`. 
-7. Getters and setters for classes should be marked as `inline` and be placed in the header file.
-8. Getters should also use the `[[nodiscard]]` attribute.
+5. In classes, prefix all member variables with the `m_` prefix. For example, if the class has a member variable for position, it should be called `m_position`.
+6. Member variables and member functions should use camelCase. That is, if the variable name consists of multiple words, the first letter of the word should be lowercase, and the first letter of all subsequent words should be uppercase. Examples: `m_angularVelocity`, `getAngularVelocity()`, `m_gravity`, `getGravity()`, `m_transformComponent`.
+7. Class names should use PascalCase. That is, if the class name consists of multiple words, the first letter of every word should be in uppercase. Examples: `PhysicsWorld`, `RigidBody`. 
+8. Getters and setters for classes should be marked as `inline` and be placed in the header file.
+9. Getters should also use the `[[nodiscard]]` attribute.
 
 ### Unit Tests
 1. Branches that add tests to new code should be named `testing/<test-name>`. For example, if we are adding some tests to test the collision detection features, then we might call the branch `testing/collision-tests`.
