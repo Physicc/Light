@@ -92,7 +92,7 @@ namespace Physicc
 
 			void updateTransform();
 
-			virtual BoundingVolume::AABB getAABB() const;
+			virtual BoundingVolume::AABB getAABB() const = 0;
 			//Each child will calculate its AABB according to its own shape
 
 		protected:
