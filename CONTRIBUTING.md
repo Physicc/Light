@@ -34,6 +34,7 @@ To ensure uniformity throughout our codebase, we have a few rules:
 ### Unit Tests
 1. Branches that add tests to new code should be named `tests/<test-name>`. For example, if we are adding some tests to test the collision detection features, then we might call the branch `tests/collision-tests`.
 2. Test names should be in PascalCase.
+3. All source files in their respective`tests/` directories should have `_tests` appended to the file name, to avoid name clashes. Example: If we write tests for `rigidbody.cpp`, then the test file should be called `rigidbody_tests.cpp`.
 
 ### Code Style
 #### Documentation
