@@ -4,15 +4,13 @@ To ensure uniformity throughout our codebase, we have a few rules:
 
 ### Branches
 1. Any new features must be in their own branch, which will branch from the `development` branch.
-2. The branch should be named `feature/<feature-name>`. For example, if we are adding some collision detection features, then the branch should be called `feature/collision-detection`.
+2. Feature branches should be named as `feature/<feature-name>`. For example, if we are adding some collision detection features, then the branch should be called `feature/collision-detection`.
 3. There should only be one feature per branch.
 4. Changes to documentation (adding stuff, rewording sentences, adding/fixing links, etc.) can be committed directly on the development branch. There is no need to create a separate branch for this.
 5. After a feature is done, a pull request must be submitted on the `development` branch for review.
 6. Before merging a pull request, make sure that it passes every single CI test.
 7. Commits that consist solely of changes/additions to the documentation should skip the CI tests (as the tests don't add any value to the commit).
 8. To skip the CI testing, simply prepend `[skip ci]` in the commit message.
-
-### Code Style
 
 #### Header Files and Classes 
 1. Header files go in the `include` directory, and source files go in the `src` directory.
@@ -32,6 +30,11 @@ To ensure uniformity throughout our codebase, we have a few rules:
 7. Getters and setters for classes should be marked as `inline` and be placed in the header file.
 8. Getters should also use the `[[nodiscard]]` attribute.
 
+### Unit Tests
+1. Branches that add tests to new code should be named `testing/<test-name>`. For example, if we are adding some tests to test the collision detection features, then we might call the branch `testing/collision-tests`.
+2. Test names should be in PascalCase.
+
+### Code Style
 #### Documentation
 1. Documentation in source code should be done in Doxygen style.
 2. Don't document self-explanatory functions like `getPosition()`, `getVelocity()`, etc.
@@ -64,7 +67,7 @@ To ensure uniformity throughout our codebase, we have a few rules:
 7. There should be a maximum of 80 characters per line. Break up longer lines of code into smaller pieces and indent them properly to make them easier to read.
 8. For functions with empty bodies (for example, certain constructors), put the `{` and `}` on separate lines. Example:
     ```
-    Foo:Foo(int a, int b) : m_a(a), m_b(b)
+    Foo::Foo(int a, int b) : m_a(a), m_b(b)
     {
     }
     ```
