@@ -35,6 +35,8 @@ namespace Physicc
 
 			BoundingVolume::AABB computeBV(Iterator begin, Iterator end);
 			void buildTree(BVHNode* node, Iterator begin, Iterator end);
+
+			Iterator partitionRigidBodies(Iterator begin,  Iterator end);
 	};
 }
 

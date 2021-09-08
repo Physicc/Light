@@ -3,8 +3,6 @@
 
 namespace Physicc
 {
-	using Iterator = std::vector<RigidBody>::iterator;
-
 	BVH::BVH(std::vector<RigidBody> rigidBodyList) : m_rigidBodyList(std::move(
 		rigidBodyList)), m_head(nullptr)
 	{
@@ -15,7 +13,7 @@ namespace Physicc
 		buildTree(m_head, m_rigidBodyList.begin(), m_rigidBodyList.end());
 	}
 
-	BoundingVolume::AABB computeBV(Iterator begin, Iterator end)
+	BoundingVolume::AABB BVH::computeBV(Iterator begin, Iterator end)
 	{
 		BoundingVolume::AABB bv(begin->getAABB());
 
@@ -47,7 +45,25 @@ namespace Physicc
 		{
 			node->volume = BoundingVolume::AABB(computeBV(begin, end));
 
-			//next, we split
+			//next, we split the vector of objects based on our heuristic
+			Iterator partitionIndex = partitionRigidBodies(begin, end);
+
+			if (partitionIndex != begin)
+			{
+				BVHNode* newNode = new BVHNode;
+				buildTree(newNode, begin, partitionIndex);
+			}
+			if (partitionIndex != end)
+			{
+				BVHNode* newNode = new BVHNode;
+				buildTree(newNode, partitionIndex, end);
+			}
 		}
+	}
+
+	using Iterator = std::vector<RigidBody>::iterator;
+	Iterator BVH::partitionRigidBodies(Iterator begin, Iterator end)
+	{
+
 	}
 }
