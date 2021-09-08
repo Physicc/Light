@@ -12,6 +12,11 @@ set(SOURCES ${SOURCES} "main.cpp")
 
 # add the executable
 add_executable(Test ${SOURCES})
+if (WIN32)
+    if (MSVC)
+        set_property(TARGET Test PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+	endif()
+endif()
 
 # include gtest headers
 target_include_directories(Test PUBLIC googletest/googletest/include/)
@@ -20,3 +25,6 @@ target_include_directories(Test PUBLIC googletest/googletest/include/)
 add_subdirectory(googletest)
 target_link_libraries(Test gtest_main)
 
+# Set Gtest options
+SET(BUILD_GMOCK OFF)
+set(INSTALL_GTEST OFF)

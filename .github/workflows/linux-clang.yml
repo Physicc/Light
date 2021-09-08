@@ -39,7 +39,6 @@ jobs:
                                libxcursor-dev \
                                libxi-dev \
                                uuid-dev \
-                               clang-${{ matrix.clang-version }} \
                                clang-${{ matrix.clang-version }}
      
       - name: ccache
@@ -50,16 +49,14 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -HEditor \
-                -B${{ github.workspace }}/build \
+          cmake -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
                 -DCMAKE_C_COMPILER_LAUNCHER=ccache \
                 -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
                 -G"Unix Makefiles"
         env:
           CC: clang-${{ matrix.clang-version }}
-          CXX: clang-${{ matrix.clang-version }}
-          CXXFLAGS: -lstdc++
+          CXX: clang++-${{ matrix.clang-version }}
           
       - name: Build
         run: |

@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
-#ifdef _MSVC_VER
+#ifdef _MSC_VER
 	#define _CRT_SECURE_NO_WARNINGS
 #endif
 
