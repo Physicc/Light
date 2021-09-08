@@ -39,6 +39,12 @@ namespace Physicc
 			{
 				return m_collider.getAABB();
 			}
+
+			[[nodiscard]] inline glm::vec3 getCentroid() const
+			{
+				return m_collider.getCentroid();
+			}
+
 		private:
 			glm::vec3 m_force;
 			BoxCollider m_collider;
