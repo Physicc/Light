@@ -32,7 +32,7 @@ To ensure uniformity throughout our codebase, we have a few rules:
 9. Getters should also use the `[[nodiscard]]` attribute.
 
 ### Unit Tests
-1. Branches that add tests to new code should be named `testing/<test-name>`. For example, if we are adding some tests to test the collision detection features, then we might call the branch `testing/collision-tests`.
+1. Branches that add tests to new code should be named `tests/<test-name>`. For example, if we are adding some tests to test the collision detection features, then we might call the branch `tests/collision-tests`.
 2. Test names should be in PascalCase.
 
 ### Code Style
