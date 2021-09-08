@@ -58,14 +58,16 @@ If you get library headers not found error while building, ```apt-get``` the dev
 
 * Execute the following command
 
-	`cmake --no-warn-unused-cli -HEditor -Bbuild -G"[Generator]"`
+	`cmake -Bbuild -G"[Generator]"`
 
 	Replace `[Generator]` with the compiler name you want to compile with, 
-  `MinGW Makefiles`/`Unix Makefiles`/`Visual Studio 16 2019`. The corresponding Makefile/solution file is generated in `Light/build`
+  `MinGW Makefiles`/`Unix Makefiles`/`Visual Studio 16 2019`. (Note that `Unix Makefiles` is the default option chosen.) The corresponding Makefile/solution file is generated in `Light/build`.
 
 * If you want to build on terminal, execute
 
 	`cmake --build build`
+
+On Linux, you can also append `-- -j<num>` to the end of the above command, to run the build with `<num>` cores.
 
 
 * If you want to build using Visual Studio 2019, open the Solution File generated
