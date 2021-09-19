@@ -2,6 +2,7 @@
 #define __BOUNDINGVOLUME_H__
 
 #include "glm/glm.hpp"
+#include <concepts>
 
 namespace Physicc
 {
@@ -33,6 +34,21 @@ namespace Physicc
 			glm::vec3 upperBound;
 		};
 
+#if __cplusplus > 201703L
+		template <typename Derived, typename BoundingObject>
+		concept SpecializedBV = std::derives_from<BaseBV<Derived>>
+			&& requires (BaseBV<Derived, BoundingObject> bv, BoundingObject volume)
+			{
+				std::copy_constructible<BaseBV<Derived, BoundingObject>>;
+				std::is_constructible_from(volume);
+			}
+			&& requires (BaseBV<Derived, BoundingObject> bv1, BaseBV<Derived, BoundingObject bv2)
+			{
+				bv1.overlapsWith(bv2);
+				bv1.enclosingBV(bv2);
+			};
+#endif
+
 		/**
 		 * A templated class that defines the Bounding Volume (BV) of an object, but
 		 * in a way that allows others to hot swap actual bounding volumes (like
@@ -44,7 +60,11 @@ namespace Physicc
 		 * @tparam Derived
 		 * TODO: Update this Doxygen comment
 		 */
+#if __cplusplus > 201703L
+		template <typename Derived, typename BoundingObject> requires SpecializedBV<Derived, BoundingObject>
+#else
 		template <typename Derived, typename BoundingObject>
+#endif
 		class BaseBV
 		{
 				//CRTP (Curiously Recurring Template Pattern)
