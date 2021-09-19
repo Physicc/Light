@@ -60,7 +60,11 @@ namespace Physicc
 		 * @tparam Derived
 		 * TODO: Update this Doxygen comment
 		 */
+#if __cplusplus > 201703L
+		template <typename Derived, typename BoundingObject> requires SpecializedBV<Derived, BoundingObject>
+#else
 		template <typename Derived, typename BoundingObject>
+#endif
 		class BaseBV
 		{
 				//CRTP (Curiously Recurring Template Pattern)
