@@ -2,7 +2,10 @@
 #define __BOUNDINGVOLUME_H__
 
 #include "glm/glm.hpp"
+
+#if __cplusplus > 201703L
 #include <concepts>
+#endif
 
 namespace Physicc
 {
