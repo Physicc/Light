@@ -11,13 +11,13 @@ namespace Physicc
 	{
 	}
 
-	BoundingVolume::AABB BVH::computeBV(int begin, int end)
+	BoundingVolume::AABB BVH::computeBV(int start, int end)
 	{
-		BoundingVolume::AABB bv(begin->getAABB());
+		BoundingVolume::AABB bv(m_rigidBodyList[start].getAABB());
 
-		for (auto it = ++begin; it != end; ++it)
+		for (int i = start + 1; i != end; i++)
 		{
-			bv = BoundingVolume::enclosingBV(bv, it->getAABB());
+			bv = BoundingVolume::enclosingBV(bv, m_rigidBodyList[i].getAABB());
 			//TODO: Object slicing is might be happening here. Investigate.
 		}
 
@@ -89,7 +89,7 @@ namespace Physicc
 
 	inline void BVH::buildTree()
 	{
-		buildTree(m_head, m_rigidBodyList.begin(), m_rigidBodyList.end());
+		buildTree(m_head, 0, m_rigidBodyList.size() - 1);
 	}
 
 //	auto BVH::partitionRigidBodies(Iterator begin,
@@ -124,32 +124,47 @@ namespace Physicc
 		//All nodes are equal to nullptr until they are explicitly assigned
 		//non-null values
 
-		if (std::next(begin, 1) == end)
+		if (start == end)
 		{
 			//then the only element left in this sliced vector is the one at
-			//`begin`
-			node->volume = begin->getAABB();
-			node->body = std::addressof(*begin);
+			//`start`
+			node->volume = m_rigidBodyList[start].getAABB();
+			node->body = &m_rigidBodyList[start];
 		} else
 		{
-			node->volume = BoundingVolume::AABB(computeBV(begin, end));
+			node->volume = BoundingVolume::AABB(computeBV(start, end));
 
-			//next, we split the vector of objects based on our heuristic
-			auto[partitionIndex, axis] = partitionRigidBodies(begin,
-			                                                  end,
-			                                                  node->volume);
-			//TODO: How to implement stop criteria? Should we implement them?
+			sort(getMedianCuttingAxis(start, end), start, end);
 
-			if (partitionIndex != begin)
-			{
-				BVHNode* newNode = new BVHNode;
-				buildTree(newNode, begin, partitionIndex);
-			}
-			if (partitionIndex != end)
-			{
-				BVHNode* newNode = new BVHNode;
-				buildTree(newNode, partitionIndex, end);
-			}
+			auto leftNode = new BVHNode;
+			auto rightNode = new BVHNode;
+
+			node->left = leftNode;
+			node->right = rightNode;
+
+			leftNode->parent = node;
+			rightNode->parent = node;
+
+			buildTree(leftNode, start, start + (end - start) / 2);
+			buildTree(rightNode, start + 1 + (end - start) / 2, end);
 		}
 	}
 }
+
+
+////next, we split the vector of objects based on our heuristic
+//auto[partitionIndex, axis] = partitionRigidBodies(begin,
+//                                                  end,
+//                                                  node->volume);
+////TODO: How to implement stop criteria? Should we implement them?
+//
+//if (partitionIndex != begin)
+//{
+//BVHNode* newNode = new BVHNode;
+//buildTree(newNode, begin, partitionIndex);
+//}
+//if (partitionIndex != end)
+//{
+//BVHNode* newNode = new BVHNode;
+//buildTree(newNode, partitionIndex, end);
+//}
