@@ -6,6 +6,7 @@ namespace Physicc
 {
 	namespace Broadphase
 	{
+
 		struct PotentialContact
 		{
 			PotentialContact(RigidBody& body1, RigidBody& body2) //TODO: Add a copy constructor to RigidBody in Development
@@ -15,54 +16,18 @@ namespace Physicc
 			}
             RigidBody rb1;
 			RigidBody rb2;  
-			 //TODO : Figure out a name for this array
 		};
 
-		//inlined function to improve readability
-		[[nodiscard]] inline bool isLeaf(BVHNode* node)
-		{
-			return (node->left == nullptr) && (node->right == nullptr);
-		}
-
-		//Hook into the getPotentialContacts function for the outside world.
-		//The implementation is kept hidden (i.e. local to this source file) by
-		//using an anonymous namespace.
-		//TODO: Good idea? Java bren coming back to bite me in the ass? ¯\_(ツ)_/¯
-		std::vector<PotentialContact> getPotentialContacts(BVHNode* node)
-		{
-			std::vector<PotentialContact> v;
-			getPotentialContacts(node, v);
-			return v;
-		}
-
-		//Hook into the getPotentialContacts function for the outside world.
-		//The implementation is kept hidden (i.e. local to this source file) by
-		//using an anonymous namespace.
-		std::vector<PotentialContact> getPotentialContactsWith(BVHNode* node1, BVHNode* node2)
-		{
-			std::vector<PotentialContact> v;
-			getPotentialContactsWith(node1, node2, v);
-			return v;
-		}
-
+		
 		//Anonymous namespace to make the implementation of the function invisible
 		//outside this source file
 		namespace
 		{
-			void getPotentialContacts(BVHNode* node, std::vector<PotentialContact>& collisionArray) //TODO:Figure out a name for this array
-			{ //TODO: Discuss if there is any advantage to inlining this (i.e. using the `inline` keyword.)
-				LIGHT_
 
-				if (isLeaf(node))
-					return;
-
-				getPotentialContacts(node->left, collisionArray);
-				getPotentialContacts(node->right, collisionArray);
-
-				if ((node->left)->volume.overlapsWith((node->right)->volume))
-				{
-					getPotentialContactsWith(node->left, node->right, collisionArray);
-				}
+			//inlined function to improve readability
+			[[nodiscard]] inline bool isLeaf(BVHNode* node)
+			{
+				return (node->left == nullptr) && (node->right == nullptr);
 			}
 
 			void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray) //TODO: Figure out a name for the nodes here
@@ -100,6 +65,23 @@ namespace Physicc
 
 				}
 			}
+
+			void getPotentialContacts(BVHNode* node, std::vector<PotentialContact>& collisionArray) //TODO:Figure out a name for this array
+			{ //TODO: Discuss if there is any advantage to inlining this (i.e. using the `inline` keyword.)
+				// LIGHT_
+
+				if (isLeaf(node))
+					return;
+
+				getPotentialContacts(node->left, collisionArray);
+				getPotentialContacts(node->right, collisionArray);
+
+				if ((node->left)->volume.overlapsWith((node->right)->volume))
+				{
+					getPotentialContactsWith(node->left, node->right, collisionArray);
+				}
+			}
 		}
+		
 	}
 }
