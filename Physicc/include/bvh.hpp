@@ -24,8 +24,8 @@ namespace Physicc
 			inline void buildTree();
 			//build a tree of the bounding volumes
 
-			std::vector<RigidBody>& convert();
 			//convert the tree into a linear data structure
+			std::vector<RigidBody>& convert();
 
 		private:
 			BVHNode* m_head;
