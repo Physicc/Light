@@ -45,9 +45,10 @@ namespace Physicc
 	 */
 	void PhysicsWorld::stepSimulation(float timestep)
 	{
-		for(int i = 0; i < m_objects.size(); i++)
+		for(std::size_t i = 0; i < m_objects.size(); i++)
 		{
 			
 		}
 	}
 }
+

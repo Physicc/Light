@@ -14,35 +14,44 @@ namespace Physicc
 	class RigidBody
 	{
 		public:
-			RigidBody(float mass, const glm::vec3& velocity, bool isGravity);
+			RigidBody(float mass, const glm::vec3& velocity, float gravityScale);
 
 			[[nodiscard]] inline glm::vec3 getVelocity() const
 			{
 				return m_velocity;
 			}
 
-			[[nodiscard]] inline bool isGravity() const
-			{
-				//Is gravity acting on this object?
-				return m_isGravity;
-			}
-
-			inline void setVelocity(const glm::vec3& velocity)
+			
+            inline void setVelocity(const glm::vec3& velocity)
 			{
 				m_velocity = velocity;
 			}
 
+			inline void setGravityScale(const float gravityScale)
+			{
+				m_gravityScale = gravityScale;
+
+			}
+
 			void setForce();
+
+			[[nodiscard]] inline BoundingVolume::AABB getAABB() const
+			{
+				return m_collider.getAABB();
+			}
+
+			[[nodiscard]] inline glm::vec3 getCentroid() const
+			{
+				return m_collider.getCentroid();
+			}
 
 		private:
 			glm::vec3 m_force;
 			BoxCollider m_collider;
 			float m_mass;
 			glm::vec3 m_velocity;
-			bool m_isGravity;			//Probably change this from bool isGravity to float Gravity. 
-										//Reference: http://www.r-5.org/files/books/computers/algo-list/realtime-3d/Ian_Millington-Game_Physics_Engine_Development-EN.pdf 
-										//Pg. 50, The value of g
-										//TODO: Figure out if we'll have a gravityScale variable, or allow users to set the value of g on a per-object basis.
+			float m_gravityScale;
+
 			friend class PhysicsWorld;
 			//PhysicsWorld needs to have access to all of RigidBody's private
 			//members for functions like stepSimulation, etc.

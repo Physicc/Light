@@ -36,6 +36,11 @@ namespace Light
 	
 	void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform) 
 	{
+		submitID(shader, vao, transform);
+	}
+
+	void Renderer::submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform, int id) 
+	{
 		vao->bind();
 		
 		shader->bind();
@@ -43,6 +48,7 @@ namespace Light
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
 		shader->setUniformVec3("u_lightPos", s_sceneData->lightPos);
 		shader->setUniformVec3("u_lightCol", s_sceneData->lightCol);
+		shader->setUniformInt("u_id", id);
 
 		shader->setUniformMat4("u_transform", transform);
 		shader->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));
@@ -61,6 +67,7 @@ namespace Light
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionSkyboxMatrix);
+		shader->setUniformInt("u_cubemap", 0);
 
 		RenderCommand::depthMask(false);
 

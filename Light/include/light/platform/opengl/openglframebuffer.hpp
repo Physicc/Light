@@ -20,14 +20,28 @@ namespace Light
 		void invalidate();
 		void resize(uint32_t width, uint32_t height) override;
 
-		inline uint32_t getColorAttachmentRendererId() const override { return m_colorAttachment; }
+		int readPixelInt(uint32_t attachmentIndex, uint32_t x, uint32_t y) override;
+		glm::vec4 readPixelVec4(uint32_t attachmentIndex, uint32_t x, uint32_t y) override;
+
+		void clearAttachment(uint32_t attachmentIndex, int clearValue) override;
+		void clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) override;
+
+		inline uint32_t getColorAttachmentRendererId(uint32_t attachmentIndex = 0) const override
+		{
+			return m_colorAttachmentIds[attachmentIndex];
+		}
+
+		virtual void bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) override;
 
 	private:
 		FramebufferSpec m_spec;
+		std::vector<FramebufferTextureSpec> m_colorAttachmentSpecs;
+		FramebufferTextureSpec m_depthAttachmentSpec;
 
 		uint32_t m_rendererId = 0;
-		uint32_t m_colorAttachment;
-		uint32_t m_depthAttachment;
+
+		std::vector<uint32_t> m_colorAttachmentIds;
+		uint32_t m_depthAttachmentId = 0;
 	};
 
 }

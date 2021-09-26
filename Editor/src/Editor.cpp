@@ -1,10 +1,10 @@
-#include "light.hpp"
-#include "core/entrypoint.hpp"
 
 #include "gui/scenepanel.hpp"
 
 #include "physicsworld.hpp"
 #include "imgui.h"
+#include "light.hpp"
+#include "core/entrypoint.hpp"
 
 class MainLayer : public Light::Layer
 {
@@ -14,9 +14,32 @@ public:
 					// m_lightPos(-1, 2, 1.5)
 	{
 		Light::FramebufferSpec fbspec;
+		fbspec.attachments = { 
+			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
 		fbspec.width = 1280;
 		fbspec.height = 720;
 		m_framebuffer = Light::Framebuffer::create(fbspec);
+
+		Light::FramebufferSpec fbspecOutline;
+		fbspecOutline.attachments = {
+			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecOutline.width = 1280;
+		fbspecOutline.height = 720;
+		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
+
+		Light::FramebufferSpec fbspec2;
+		fbspec2.width = 1280;
+		fbspec2.height = 720;
+		fbspec2.attachments = {
+			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		m_framebuffer2 = Light::Framebuffer::create(fbspec2);
 
 		m_scene = std::make_shared<Light::Scene>();
 
@@ -42,35 +65,35 @@ public:
 
 		float vertices[] = {
 			//Front
-			-0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
-			0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
-			0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
-			-0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, 1.0,
+			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
+			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
+			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
+			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
 			//Left
-			-0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
-			-0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
-			-0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
-			-0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, -1.0, 0, 0,
+			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
+			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
+			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
+			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
 			//Right
-			0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
-			0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
-			0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
-			0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 1.0, 0, 0,
+			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
+			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
+			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
+			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
 			//Top
-			-0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
-			0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
-			0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
-			-0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 1.0, 0,
+			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
+			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
+			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
+			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
 			//Bottom
-			-0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
-			-0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
-			0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
-			0.5, -0.5, 0.5, 0.8, 0.8, 0.8, 1.0, 0, -1.0, 0,
+			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
+			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
+			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
+			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
 			//Back
-			-0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
-			-0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
-			0.5, 0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
-			0.5, -0.5, -0.5, 0.8, 0.8, 0.8, 1.0, 0, 0, -1.0,
+			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
+			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
+			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
+			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
 		};
 
 		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertices, sizeof(vertices)));
@@ -98,8 +121,10 @@ public:
 	{
 		if(m_resizeViewport)
 		{
-			m_camera.setViewportSize(m_viewportPanelSize.x, m_viewportPanelSize.y);
-			m_framebuffer->resize(m_viewportPanelSize.x, m_viewportPanelSize.y);
+			m_camera.setViewportSize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_framebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_framebuffer2->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_outlineFramebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_resizeViewport = false;
 		}
 		m_frameCount++;
@@ -116,9 +141,11 @@ public:
 			m_camera.onUpdate(ts);
 
 		m_framebuffer->bind();
-
-		Light::RenderCommand::setClearColor({0.2f,0.2f,0.2f,1.0f});
+		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
 		Light::RenderCommand::clear();
+
+		m_framebuffer->clearAttachment(2, 0);
+
 
 		Light::Renderer::beginScene(m_camera, m_camera.getViewMatrix());
 
@@ -126,7 +153,34 @@ public:
 
 		Light::Renderer::endScene();
 
+		auto[x, y] = ImGui::GetMousePos();
+
+		glm::vec2 posRelativeToViewport = glm::vec2(x,y) - m_viewportPos;
+
+		if(posRelativeToViewport.x >= 0 && posRelativeToViewport.y >= 0
+			&& posRelativeToViewport.x < m_viewportPanelSize.x && posRelativeToViewport.y < m_viewportPanelSize.y)
+		{
+			int pixelData = m_framebuffer->readPixelInt(1, int(posRelativeToViewport.x), int(m_viewportPanelSize.y - posRelativeToViewport.y));
+
+			m_hoveredEntity = pixelData == -1 ? Light::Entity() : Light::Entity((entt::entity)pixelData, m_scene.get());
+		}
+
 		m_framebuffer->unbind();
+
+		auto entity = m_scenePanel.getSelectionContext();
+		m_outlineFramebuffer->bind();
+		Light::RenderCommand::setClearColor({0, 0, 0, 0});
+		Light::RenderCommand::clear();
+		m_scene->renderSelection(entity);
+		m_outlineFramebuffer->unbind();
+
+		m_framebuffer2->bind();
+		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
+		Light::RenderCommand::clear();	
+		m_framebuffer->bindAttachmentTexture(0,0);
+		m_outlineFramebuffer->bindAttachmentTexture(0,1);
+		m_scene->renderOutline(m_hoveredEntity);
+		m_framebuffer2->unbind();
 	}
 
 	bool onWindowResize(Light::WindowResizeEvent& e)
@@ -140,11 +194,22 @@ public:
 		return false;
 	}
 
+	bool onMouseButtonPressed(Light::MouseButtonPressedEvent& e)
+	{
+		if(e.getButton() == LIGHT_MOUSE_BUTTON_LEFT)
+		{
+			m_scenePanel.setSelectionContext(m_hoveredEntity);
+		}
+
+		return false;
+	}
+
 
 	void onEvent(Light::Event& e) override
 	{
 		Light::EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(MainLayer::onWindowResize));
+		dispatcher.Dispatch<Light::MouseButtonPressedEvent>(BIND_EVENT_FN(MainLayer::onMouseButtonPressed));
 		m_camera.onEvent(e);
 	}
 
@@ -178,6 +243,7 @@ public:
 		ImGui::Begin("Viewport");
 
 		ImVec2 viewportPos = ImGui::GetCursorScreenPos();
+		m_viewportPos = { viewportPos.x, viewportPos.y };
 
 		bool viewportDocked = ImGui::IsWindowDocked();
 
@@ -192,7 +258,7 @@ public:
 			m_resizeViewport = true;
 			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);
 		}
-		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId()), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image(INT2VOIDP(m_framebuffer2->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
 		
 		ImGui::End();
 		ImGui::PopStyleVar();
@@ -258,8 +324,13 @@ private:
 
 	Light::ScenePanel m_scenePanel;
 
+	Light::Entity m_hoveredEntity;
+
 	std::shared_ptr<Light::Framebuffer> m_framebuffer;
+	std::shared_ptr<Light::Framebuffer> m_framebuffer2;
+	std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 	glm::vec2 m_viewportPanelSize;
+	glm::vec2 m_viewportPos;
 	bool m_resizeViewport = false;
 	bool m_viewportFocused = false;
 	float m_time = 0.0f;
