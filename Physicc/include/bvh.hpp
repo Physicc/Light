@@ -31,10 +31,18 @@ namespace Physicc
 			BVHNode* m_head;
 			std::vector<RigidBody> m_rigidBodyList;
 
-			using Iterator = std::vector<RigidBody>::iterator;
+			BoundingVolume::AABB computeBV(int start, int end);
 
-			BoundingVolume::AABB computeBV(Iterator begin, Iterator end);
-			void buildTree(BVHNode* node, Iterator begin, Iterator end);
+			void buildTree(BVHNode* node, int start, int end);
+
+			enum Axis {
+				X,
+				Y,
+				Z,
+			};
+
+			void sort(Axis axis, int start, int end);
+			Axis getMedianCuttingAxis(int start, int end);
 	};
 }
 
