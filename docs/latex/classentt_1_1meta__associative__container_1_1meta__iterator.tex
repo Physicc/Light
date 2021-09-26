@@ -1,0 +1,174 @@
+\hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator}{}\doxysection{entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator Class Reference}
+\label{classentt_1_1meta__associative__container_1_1meta__iterator}\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+
+
+Opaque iterator for associative containers.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a901506acc5d79943261e81b3782825ea}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a901506acc5d79943261e81b3782825ea}} 
+using \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a901506acc5d79943261e81b3782825ea}{difference\+\_\+type}} = std\+::ptrdiff\+\_\+t
+\begin{DoxyCompactList}\small\item\em Signed integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_aedcf370f9d9d6666bbdebb0cb9883069}\label{classentt_1_1meta__associative__container_1_1meta__iterator_aedcf370f9d9d6666bbdebb0cb9883069}} 
+using \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_aedcf370f9d9d6666bbdebb0cb9883069}{value\+\_\+type}} = std\+::pair$<$ \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}, \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $>$
+\begin{DoxyCompactList}\small\item\em Type of elements returned by the iterator. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a6e07c05c8778bc8c9f45f1dea44b4c40}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a6e07c05c8778bc8c9f45f1dea44b4c40}} 
+using \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a6e07c05c8778bc8c9f45f1dea44b4c40}{pointer}} = void
+\begin{DoxyCompactList}\small\item\em Pointer type, {\ttfamily void} on purpose. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a48908a48014b9b889a0f610b469d03ef}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a48908a48014b9b889a0f610b469d03ef}} 
+using \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a48908a48014b9b889a0f610b469d03ef}{reference}} = \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_aedcf370f9d9d6666bbdebb0cb9883069}{value\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Reference type, it is {\bfseries{not}} an actual reference. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a8243592766417eadc3118ce9d251350e}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a8243592766417eadc3118ce9d251350e}} 
+using \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a8243592766417eadc3118ce9d251350e}{iterator\+\_\+category}} = std\+::input\+\_\+iterator\+\_\+tag
+\begin{DoxyCompactList}\small\item\em Iterator category. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a5d5d3804851ca61fc922772792b2bcad}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a5d5d3804851ca61fc922772792b2bcad}} 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a5d5d3804851ca61fc922772792b2bcad}{meta\+\_\+iterator}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$bool Key\+Only, typename It $>$ }\\\mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_aed07ae38ce5daef3641909a93dd5895b}{meta\+\_\+iterator}} (std\+::integral\+\_\+constant$<$ bool, Key\+Only $>$, It iter)
+\begin{DoxyCompactList}\small\item\em Constructs an meta iterator from a given iterator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}} \& \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_ab0885ae7cf40f91865a9af4c03c8fd02}{operator++}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Pre-\/increment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a11be86997d1f154f95908c99bf06a49e}{operator++}} (int) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Post-\/increment operator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a69a94f1ec4b4db5f689bdb880b07af7c}{operator==}} (const \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}} \&other) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if two iterators refer to the same element. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_ae3ebae095a310ce5426eafb3fcf35a0b}{operator!=}} (const \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}} \&other) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if two iterators refer to the same element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a48908a48014b9b889a0f610b469d03ef}{reference}} \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a9417a9f49bfdb6ad4edda6a17bfe6650}{operator$\ast$}} () const
+\begin{DoxyCompactList}\small\item\em Indirection operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_ac4b953ff0987daf15368cd4d29f46525}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns false if an iterator is invalid, true otherwise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Opaque iterator for associative containers. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_aed07ae38ce5daef3641909a93dd5895b}\label{classentt_1_1meta__associative__container_1_1meta__iterator_aed07ae38ce5daef3641909a93dd5895b}} 
+\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}!meta\_iterator@{meta\_iterator}}
+\index{meta\_iterator@{meta\_iterator}!entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+\doxysubsubsection{\texorpdfstring{meta\_iterator()}{meta\_iterator()}}
+{\footnotesize\ttfamily template$<$bool Key\+Only, typename It $>$ \\
+entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator\+::meta\+\_\+iterator (\begin{DoxyParamCaption}\item[{std\+::integral\+\_\+constant$<$ bool, Key\+Only $>$}]{,  }\item[{It}]{iter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an meta iterator from a given iterator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Key\+Only} & True if the container is also key-\/only, false otherwise. \\
+\hline
+{\em It} & Type of actual iterator with which to build the meta iterator. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em iter} & The actual iterator with which to build the meta iterator. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_ac4b953ff0987daf15368cd4d29f46525}\label{classentt_1_1meta__associative__container_1_1meta__iterator_ac4b953ff0987daf15368cd4d29f46525}} 
+\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns false if an iterator is invalid, true otherwise. 
+
+\begin{DoxyReturn}{Returns}
+False if the iterator is invalid, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_ae3ebae095a310ce5426eafb3fcf35a0b}\label{classentt_1_1meta__associative__container_1_1meta__iterator_ae3ebae095a310ce5426eafb3fcf35a0b}} 
+\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if two iterators refer to the same element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The iterator with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the iterators refer to the same element, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a9417a9f49bfdb6ad4edda6a17bfe6650}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a9417a9f49bfdb6ad4edda6a17bfe6650}} 
+\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator_a48908a48014b9b889a0f610b469d03ef}{reference}} entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Indirection operator. 
+
+\begin{DoxyReturn}{Returns}
+The element to which the iterator points. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_ab0885ae7cf40f91865a9af4c03c8fd02}\label{classentt_1_1meta__associative__container_1_1meta__iterator_ab0885ae7cf40f91865a9af4c03c8fd02}} 
+\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}}\& entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pre-\/increment operator. 
+
+\begin{DoxyReturn}{Returns}
+This iterator. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a11be86997d1f154f95908c99bf06a49e}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a11be86997d1f154f95908c99bf06a49e}} 
+\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}} entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator\+::operator++ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Post-\/increment operator. 
+
+\begin{DoxyReturn}{Returns}
+This iterator. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_1_1meta__iterator_a69a94f1ec4b4db5f689bdb880b07af7c}\label{classentt_1_1meta__associative__container_1_1meta__iterator_a69a94f1ec4b4db5f689bdb880b07af7c}} 
+\index{entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}!operator==@{operator==}}
+\index{operator==@{operator==}!entt::meta\_associative\_container::meta\_iterator@{entt::meta\_associative\_container::meta\_iterator}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+iterator\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if two iterators refer to the same element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The iterator with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the iterators refer to the same element, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

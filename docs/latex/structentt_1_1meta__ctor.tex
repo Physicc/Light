@@ -1,0 +1,207 @@
+\hypertarget{structentt_1_1meta__ctor}{}\doxysection{entt\+::meta\+\_\+ctor Struct Reference}
+\label{structentt_1_1meta__ctor}\index{entt::meta\_ctor@{entt::meta\_ctor}}
+
+
+Opaque wrapper for constructors.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a6a3c2ed04bac33a7f937812dbe6f7663}\label{structentt_1_1meta__ctor_a6a3c2ed04bac33a7f937812dbe6f7663}} 
+using \mbox{\hyperlink{structentt_1_1meta__ctor_a6a3c2ed04bac33a7f937812dbe6f7663}{node\+\_\+type}} = internal\+::meta\+\_\+ctor\+\_\+node
+\begin{DoxyCompactList}\small\item\em Node type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}\label{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}} 
+using \mbox{\hyperlink{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}{size\+\_\+type}} = typename node\+\_\+type\+::size\+\_\+type
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structentt_1_1meta__ctor_a8602aa85d8d6a6efefef451d12a6bb83}{meta\+\_\+ctor}} (const \mbox{\hyperlink{structentt_1_1meta__ctor_a6a3c2ed04bac33a7f937812dbe6f7663}{node\+\_\+type}} $\ast$curr=nullptr) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs an instance from a given node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{structentt_1_1meta__ctor_a776c2812dd8724523fc881defb1116f2}{parent}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the type to which an object belongs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}{size\+\_\+type}} \mbox{\hyperlink{structentt_1_1meta__ctor_af1f5b92b4964b2573928b315e689e688}{arity}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the number of arguments accepted by a constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{structentt_1_1meta__ctor_a3faab3b8c49ee1b803f337435c8d54ce}{arg}} (\mbox{\hyperlink{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}{size\+\_\+type}} index) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the type of the i-\/th argument of a constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{structentt_1_1meta__ctor_a3c4681db0a9be60a5e3526a70e5efaa6}{invoke}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$const args, const \mbox{\hyperlink{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}{size\+\_\+type}} sz) const
+\begin{DoxyCompactList}\small\item\em Creates an instance of the underlying type, if possible. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{structentt_1_1meta__ctor_a50f0c00cb8eb1166d5a5ee727e95f6fa}{invoke}} (\mbox{[}\mbox{[}maybe\+\_\+unused\mbox{]}\mbox{]} Args \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Creates an instance of the underlying type, if possible. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$ \mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}} $>$ \mbox{\hyperlink{structentt_1_1meta__ctor_a8cb8e057e3fc4c669c3e2c2561906882}{prop}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a range to use to visit all properties. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}} \mbox{\hyperlink{structentt_1_1meta__ctor_ae2866b2417b5edd00a5a5eb1c2722de2}{prop}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} key) const
+\begin{DoxyCompactList}\small\item\em Returns the property associated with a given key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__ctor_ac34d2ccb2c3ff0549775ed5c4c617ba2}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns true if an object is valid, false otherwise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Opaque wrapper for constructors. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a8602aa85d8d6a6efefef451d12a6bb83}\label{structentt_1_1meta__ctor_a8602aa85d8d6a6efefef451d12a6bb83}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!meta\_ctor@{meta\_ctor}}
+\index{meta\_ctor@{meta\_ctor}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{meta\_ctor()}{meta\_ctor()}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+ctor\+::meta\+\_\+ctor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structentt_1_1meta__ctor_a6a3c2ed04bac33a7f937812dbe6f7663}{node\+\_\+type}} $\ast$}]{curr = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an instance from a given node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr} & The underlying node with which to construct the instance. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a3faab3b8c49ee1b803f337435c8d54ce}\label{structentt_1_1meta__ctor_a3faab3b8c49ee1b803f337435c8d54ce}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!arg@{arg}}
+\index{arg@{arg}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{arg()}{arg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+ctor\+::arg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}{size\+\_\+type}}}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the type of the i-\/th argument of a constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the argument of which to return the type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The type of the i-\/th argument of a constructor. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_af1f5b92b4964b2573928b315e689e688}\label{structentt_1_1meta__ctor_af1f5b92b4964b2573928b315e689e688}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!arity@{arity}}
+\index{arity@{arity}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{arity()}{arity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}{size\+\_\+type}} entt\+::meta\+\_\+ctor\+::arity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of arguments accepted by a constructor. 
+
+\begin{DoxyReturn}{Returns}
+The number of arguments accepted by the constructor. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a50f0c00cb8eb1166d5a5ee727e95f6fa}\label{structentt_1_1meta__ctor_a50f0c00cb8eb1166d5a5ee727e95f6fa}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!invoke@{invoke}}
+\index{invoke@{invoke}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{invoke()}{invoke()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+ctor\+::invoke (\begin{DoxyParamCaption}\item[{\mbox{[}\mbox{[}maybe\+\_\+unused\mbox{]} \mbox{]} Args \&\&...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an instance of the underlying type, if possible. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structentt_1_1meta__ctor_a3c4681db0a9be60a5e3526a70e5efaa6}{invoke}}
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to construct the instance. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the new instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a3c4681db0a9be60a5e3526a70e5efaa6}\label{structentt_1_1meta__ctor_a3c4681db0a9be60a5e3526a70e5efaa6}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!invoke@{invoke}}
+\index{invoke@{invoke}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{invoke()}{invoke()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+ctor\+::invoke (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$const}]{args,  }\item[{const \mbox{\hyperlink{structentt_1_1meta__ctor_a528fb5d47f52feb9917fac849b24026d}{size\+\_\+type}}}]{sz }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an instance of the underlying type, if possible. 
+
+Parameters must be such that a cast or conversion to the required types is possible. Otherwise, an empty and thus invalid wrapper is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+{\em sz} & Number of parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the new instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_ac34d2ccb2c3ff0549775ed5c4c617ba2}\label{structentt_1_1meta__ctor_ac34d2ccb2c3ff0549775ed5c4c617ba2}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+ctor\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns true if an object is valid, false otherwise. 
+
+\begin{DoxyReturn}{Returns}
+True if the object is valid, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a776c2812dd8724523fc881defb1116f2}\label{structentt_1_1meta__ctor_a776c2812dd8724523fc881defb1116f2}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!parent@{parent}}
+\index{parent@{parent}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{parent()}{parent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+ctor\+::parent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the type to which an object belongs. 
+
+\begin{DoxyReturn}{Returns}
+The type to which the object belongs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_a8cb8e057e3fc4c669c3e2c2561906882}\label{structentt_1_1meta__ctor_a8cb8e057e3fc4c669c3e2c2561906882}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!prop@{prop}}
+\index{prop@{prop}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{prop()}{prop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$\mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}}$>$ entt\+::meta\+\_\+ctor\+::prop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a range to use to visit all properties. 
+
+\begin{DoxyReturn}{Returns}
+An iterable range to use to visit all properties. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__ctor_ae2866b2417b5edd00a5a5eb1c2722de2}\label{structentt_1_1meta__ctor_ae2866b2417b5edd00a5a5eb1c2722de2}} 
+\index{entt::meta\_ctor@{entt::meta\_ctor}!prop@{prop}}
+\index{prop@{prop}!entt::meta\_ctor@{entt::meta\_ctor}}
+\doxysubsubsection{\texorpdfstring{prop()}{prop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}} entt\+::meta\+\_\+ctor\+::prop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the property associated with a given key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to use to search for a property. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The property associated with the given key, if any. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

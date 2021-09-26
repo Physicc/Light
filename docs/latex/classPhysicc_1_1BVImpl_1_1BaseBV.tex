@@ -1,0 +1,111 @@
+\hypertarget{classPhysicc_1_1BVImpl_1_1BaseBV}{}\doxysection{Physicc\+::B\+V\+Impl\+::Base\+BV$<$ Derived, Bounding\+Object $>$ Class Template Reference}
+\label{classPhysicc_1_1BVImpl_1_1BaseBV}\index{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$@{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$}}
+
+
+{\ttfamily \#include $<$boundingvolume.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV_a092f896ca96c5612b160c277749378e0}{Base\+BV}} (const \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}} \&bv)=default
+\begin{DoxyCompactList}\small\item\em Copy constructor for Bounding\+Volume. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV_a8cfe9979d80b9e44ff87ca3b82c80af5}{Base\+BV}} (const Bounding\+Object \&volume)
+\begin{DoxyCompactList}\small\item\em A constructor for BV which takes a Bounding\+Object (like the \mbox{\hyperlink{structPhysicc_1_1BVImpl_1_1AABB}{A\+A\+BB}} struct) as a parameter. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPhysicc_1_1BVImpl_1_1BaseBV_a09a975a76e2aafb9b6bc95dd048462f9}\label{classPhysicc_1_1BVImpl_1_1BaseBV_a09a975a76e2aafb9b6bc95dd048462f9}} 
+{\bfseries Base\+BV} (const glm\+::vec3 \&lower\+Bound, const glm\+::vec3 \&upper\+Bound)
+\item 
+bool \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV_af72f2c452f5da962581296a6064f13ae}{overlaps\+With}} (const \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}} \&bv) const
+\begin{DoxyCompactList}\small\item\em Returns whether two B\+Vs are overlapping or not. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPhysicc_1_1BVImpl_1_1BaseBV_ad15f667ee4b09b5073d8b21924d5dde3}\label{classPhysicc_1_1BVImpl_1_1BaseBV_ad15f667ee4b09b5073d8b21924d5dde3}} 
+float {\bfseries get\+Volume} () const
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1BVImpl_1_1BaseBV_ae693b79e24fcb0e4b09e72b70615d820}\label{classPhysicc_1_1BVImpl_1_1BaseBV_ae693b79e24fcb0e4b09e72b70615d820}} 
+Derived {\bfseries enclosing\+BV} (const \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}} \&bv) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Derived, typename Bounding\+Object$>$\newline
+class Physicc\+::\+B\+V\+Impl\+::\+Base\+B\+V$<$ Derived, Bounding\+Object $>$}
+
+A templated class that defines the Bounding Volume (BV) of an object, but in a way that allows others to hot swap actual bounding volumes (like A\+A\+B\+Bs, O\+B\+Bs, 8-\/D\+O\+Ps, etc.).
+
+T\+O\+DO\+: Figure out if this is good enough as a description of the BV class.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Derived} & T\+O\+DO\+: Update this Doxygen comment \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1BVImpl_1_1BaseBV_a092f896ca96c5612b160c277749378e0}\label{classPhysicc_1_1BVImpl_1_1BaseBV_a092f896ca96c5612b160c277749378e0}} 
+\index{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$@{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$}!BaseBV@{BaseBV}}
+\index{BaseBV@{BaseBV}!Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$@{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$}}
+\doxysubsubsection{\texorpdfstring{BaseBV()}{BaseBV()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Derived , typename Bounding\+Object $>$ \\
+\mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Physicc\+::\+B\+V\+Impl\+::\+Base\+BV}}$<$ Derived, Bounding\+Object $>$\+::\mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}}$<$ Derived, Bounding\+Object $>$ \&}]{bv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Copy constructor for Bounding\+Volume. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em BV} & The object to be copied \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em bv} & A BV object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPhysicc_1_1BVImpl_1_1BaseBV_a8cfe9979d80b9e44ff87ca3b82c80af5}\label{classPhysicc_1_1BVImpl_1_1BaseBV_a8cfe9979d80b9e44ff87ca3b82c80af5}} 
+\index{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$@{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$}!BaseBV@{BaseBV}}
+\index{BaseBV@{BaseBV}!Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$@{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$}}
+\doxysubsubsection{\texorpdfstring{BaseBV()}{BaseBV()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Derived , typename Bounding\+Object $>$ \\
+\mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Physicc\+::\+B\+V\+Impl\+::\+Base\+BV}}$<$ Derived, Bounding\+Object $>$\+::\mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}} (\begin{DoxyParamCaption}\item[{const Bounding\+Object \&}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A constructor for BV which takes a Bounding\+Object (like the \mbox{\hyperlink{structPhysicc_1_1BVImpl_1_1AABB}{A\+A\+BB}} struct) as a parameter. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Bounding\+Object} & The bounding volume struct to be used (\mbox{\hyperlink{structPhysicc_1_1BVImpl_1_1AABB}{A\+A\+BB}}, O\+BB, etc.) \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em volume} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1BVImpl_1_1BaseBV_af72f2c452f5da962581296a6064f13ae}\label{classPhysicc_1_1BVImpl_1_1BaseBV_af72f2c452f5da962581296a6064f13ae}} 
+\index{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$@{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$}!overlapsWith@{overlapsWith}}
+\index{overlapsWith@{overlapsWith}!Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$@{Physicc::BVImpl::BaseBV$<$ Derived, BoundingObject $>$}}
+\doxysubsubsection{\texorpdfstring{overlapsWith()}{overlapsWith()}}
+{\footnotesize\ttfamily template$<$typename Derived , typename Bounding\+Object $>$ \\
+bool \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Physicc\+::\+B\+V\+Impl\+::\+Base\+BV}}$<$ Derived, Bounding\+Object $>$\+::overlaps\+With (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}}$<$ Derived, Bounding\+Object $>$ \&}]{bv }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether two B\+Vs are overlapping or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bv} & A \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Base\+BV}} object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the Bounding\+Volumes are intersecting, and false otherwise T\+O\+DO\+: Is this, as a return type description, fine? 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Physicc/include/boundingvolume.\+hpp\end{DoxyCompactItemize}

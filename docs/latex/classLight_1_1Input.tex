@@ -1,0 +1,41 @@
+\hypertarget{classLight_1_1Input}{}\doxysection{Light\+::Input Class Reference}
+\label{classLight_1_1Input}\index{Light::Input@{Light::Input}}
+
+
+Inheritance diagram for Light\+::Input\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{classLight_1_1Input__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLight_1_1Input_ab6269e2ad7d94d4964083e4acf8311ab}\label{classLight_1_1Input_ab6269e2ad7d94d4964083e4acf8311ab}} 
+static bool {\bfseries is\+Key\+Pressed} (int keycode)
+\item 
+\mbox{\Hypertarget{classLight_1_1Input_a8d6233b0977b200b0f0e7fd23d6ffb03}\label{classLight_1_1Input_a8d6233b0977b200b0f0e7fd23d6ffb03}} 
+static bool {\bfseries is\+Mouse\+Button\+Pressed} (int button)
+\item 
+\mbox{\Hypertarget{classLight_1_1Input_a245ed79f0164dc6c858f5d14b01a4c63}\label{classLight_1_1Input_a245ed79f0164dc6c858f5d14b01a4c63}} 
+static std\+::tuple$<$ float, float $>$ {\bfseries get\+Mouse\+Pos} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLight_1_1Input_ac1ba6ac81ea236032d22f46d6c0103ac}\label{classLight_1_1Input_ac1ba6ac81ea236032d22f46d6c0103ac}} 
+virtual bool {\bfseries is\+Key\+Pressed\+Impl} (int keycode)=0
+\item 
+\mbox{\Hypertarget{classLight_1_1Input_a2127a48b8130e4bd064217ac85f03113}\label{classLight_1_1Input_a2127a48b8130e4bd064217ac85f03113}} 
+virtual bool {\bfseries is\+Mouse\+Button\+Pressed\+Impl} (int button)=0
+\item 
+\mbox{\Hypertarget{classLight_1_1Input_af6cac60c77a02b4c54e3180ac2deee82}\label{classLight_1_1Input_af6cac60c77a02b4c54e3180ac2deee82}} 
+virtual std\+::tuple$<$ float, float $>$ {\bfseries get\+Mouse\+Pos\+Impl} ()=0
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/include/core/input.\+hpp\item 
+Light\+Framework/src/platform/glfw/inputglfw.\+cpp\end{DoxyCompactItemize}

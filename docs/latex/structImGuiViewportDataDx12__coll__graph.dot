@@ -1,0 +1,11 @@
+digraph "ImGuiViewportDataDx12"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="ImGuiViewportDataDx12",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" FrameRenderBuffers" ];
+  Node2 [label="ImGui_ImplDX12_RenderBuffers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImGui__ImplDX12__RenderBuffers.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" FrameCtx" ];
+  Node3 [label="ImGui_ImplDX12_FrameContext",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImGui__ImplDX12__FrameContext.html",tooltip=" "];
+}

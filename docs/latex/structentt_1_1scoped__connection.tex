@@ -1,0 +1,110 @@
+\hypertarget{structentt_1_1scoped__connection}{}\doxysection{entt\+::scoped\+\_\+connection Struct Reference}
+\label{structentt_1_1scoped__connection}\index{entt::scoped\_connection@{entt::scoped\_connection}}
+
+
+Scoped connection class.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1scoped__connection_a5675cd808dd54a6d9546037d282d3c6c}\label{structentt_1_1scoped__connection_a5675cd808dd54a6d9546037d282d3c6c}} 
+\mbox{\hyperlink{structentt_1_1scoped__connection_a5675cd808dd54a6d9546037d282d3c6c}{scoped\+\_\+connection}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1scoped__connection_ab3c50842fea4014f8bf2e51ce4cfbc8a}{scoped\+\_\+connection}} (const \mbox{\hyperlink{classentt_1_1connection}{connection}} \&other)
+\begin{DoxyCompactList}\small\item\em Constructs a scoped connection from a basic connection. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1scoped__connection_ad52da49cdabbfe1a4aada361f48fb9be}\label{structentt_1_1scoped__connection_ad52da49cdabbfe1a4aada361f48fb9be}} 
+\mbox{\hyperlink{structentt_1_1scoped__connection_ad52da49cdabbfe1a4aada361f48fb9be}{scoped\+\_\+connection}} (const \mbox{\hyperlink{structentt_1_1scoped__connection}{scoped\+\_\+connection}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Default copy constructor, deleted on purpose. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1scoped__connection_a8bc8b8630e2ad076216b6aca416ce32c}\label{structentt_1_1scoped__connection_a8bc8b8630e2ad076216b6aca416ce32c}} 
+\mbox{\hyperlink{structentt_1_1scoped__connection_a8bc8b8630e2ad076216b6aca416ce32c}{$\sim$scoped\+\_\+connection}} ()
+\begin{DoxyCompactList}\small\item\em Automatically breaks the link on destruction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1scoped__connection}{scoped\+\_\+connection}} \& \mbox{\hyperlink{structentt_1_1scoped__connection_ae079c45e0eb97f31ec1d5a4be76163fc}{operator=}} (const \mbox{\hyperlink{structentt_1_1scoped__connection}{scoped\+\_\+connection}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Default copy assignment operator, deleted on purpose. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1scoped__connection}{scoped\+\_\+connection}} \& \mbox{\hyperlink{structentt_1_1scoped__connection_a900d499bf30a8f33beb19f41af9b93b3}{operator=}} (\mbox{\hyperlink{classentt_1_1connection}{connection}} other)
+\begin{DoxyCompactList}\small\item\em Acquires a connection. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1scoped__connection_a774d4219436bed53503af01c1bc43235}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a scoped connection is properly initialized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1scoped__connection_a7bd2be785ba586664d8e8d039dc73ead}\label{structentt_1_1scoped__connection_a7bd2be785ba586664d8e8d039dc73ead}} 
+void \mbox{\hyperlink{structentt_1_1scoped__connection_a7bd2be785ba586664d8e8d039dc73ead}{release}} ()
+\begin{DoxyCompactList}\small\item\em Breaks the connection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Scoped connection class. 
+
+Opaque object the aim of which is to allow users to release an already estabilished connection without having to keep a reference to the signal or the sink that generated it.~\newline
+ A scoped connection automatically breaks the link between the two objects when it goes out of scope. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1scoped__connection_ab3c50842fea4014f8bf2e51ce4cfbc8a}\label{structentt_1_1scoped__connection_ab3c50842fea4014f8bf2e51ce4cfbc8a}} 
+\index{entt::scoped\_connection@{entt::scoped\_connection}!scoped\_connection@{scoped\_connection}}
+\index{scoped\_connection@{scoped\_connection}!entt::scoped\_connection@{entt::scoped\_connection}}
+\doxysubsubsection{\texorpdfstring{scoped\_connection()}{scoped\_connection()}}
+{\footnotesize\ttfamily entt\+::scoped\+\_\+connection\+::scoped\+\_\+connection (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1connection}{connection}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a scoped connection from a basic connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & A valid connection object. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1scoped__connection_a774d4219436bed53503af01c1bc43235}\label{structentt_1_1scoped__connection_a774d4219436bed53503af01c1bc43235}} 
+\index{entt::scoped\_connection@{entt::scoped\_connection}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::scoped\_connection@{entt::scoped\_connection}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::scoped\+\_\+connection\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Checks whether a scoped connection is properly initialized. 
+
+\begin{DoxyReturn}{Returns}
+True if the connection is properly initialized, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1scoped__connection_a900d499bf30a8f33beb19f41af9b93b3}\label{structentt_1_1scoped__connection_a900d499bf30a8f33beb19f41af9b93b3}} 
+\index{entt::scoped\_connection@{entt::scoped\_connection}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::scoped\_connection@{entt::scoped\_connection}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1scoped__connection}{scoped\+\_\+connection}}\& entt\+::scoped\+\_\+connection\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1connection}{connection}}}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Acquires a connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The connection object to acquire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This scoped connection. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1scoped__connection_ae079c45e0eb97f31ec1d5a4be76163fc}\label{structentt_1_1scoped__connection_ae079c45e0eb97f31ec1d5a4be76163fc}} 
+\index{entt::scoped\_connection@{entt::scoped\_connection}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::scoped\_connection@{entt::scoped\_connection}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1scoped__connection}{scoped\+\_\+connection}}\& entt\+::scoped\+\_\+connection\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structentt_1_1scoped__connection}{scoped\+\_\+connection}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Default copy assignment operator, deleted on purpose. 
+
+\begin{DoxyReturn}{Returns}
+This scoped connection. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

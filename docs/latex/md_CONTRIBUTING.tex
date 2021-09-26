@@ -1,0 +1,74 @@
+An example of how comments should be written.
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}
+
+To ensure uniformity throughout our codebase, we have a few rules\+:\hypertarget{md_CONTRIBUTING_autotoc_md1}{}\doxysubsection{Branches}\label{md_CONTRIBUTING_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item Any new features must be in their own branch, which will branch from the {\ttfamily development} branch.
+\item Feature branches should be named as {\ttfamily feature/$<$feature-\/name$>$}. For example, if we are adding some collision detection features, then the branch should be called {\ttfamily feature/collision-\/detection}.
+\item There should only be one feature per branch.
+\item Changes to documentation (adding stuff, rewording sentences, adding/fixing links, etc.) can be committed directly on the development branch. There is no need to create a separate branch for this.
+\item After a feature is done, a pull request must be submitted on the {\ttfamily development} branch for review.
+\item Before merging a pull request, make sure that it passes every single CI test.
+\item Commits that consist solely of changes/additions to the documentation should skip the CI tests (as the tests don\textquotesingle{}t add any value to the commit).
+\item To skip the CI testing, simply prepend {\ttfamily \mbox{[}skip ci\mbox{]}} in the commit message.
+\end{DoxyEnumerate}\hypertarget{md_CONTRIBUTING_autotoc_md2}{}\doxysubsubsection{Header Files and Classes}\label{md_CONTRIBUTING_autotoc_md2}
+
+\begin{DoxyEnumerate}
+\item Header files go in the {\ttfamily include} directory, and source files go in the {\ttfamily src} directory.
+\item Don\textquotesingle{}t use {\ttfamily using namespace std} in the global scope in header files. If it is necessary (because of very long type names), try to restrict it to the smallest scope possible.
+\item \href{https://en.cppreference.com/w/cpp/language/type_alias}{\texttt{ Type aliasing}}, on the other hand, is encouraged, especially if it improves readability of the code.
+\item Make sure to indent with a tab before using an access control specifier, and then indent with another tab before defining member variables and functions. Example\+: \`{}\`{}\`{} class Foo \{ Foo() = default; private\+: int bar; \}; \`{}\`{}{\ttfamily }
+\item {\ttfamily In classes, prefix all member variables with the}m\+\_\+{\ttfamily prefix. For example, if the class has a member variable for position, it should be called}m\+\_\+position{\ttfamily .}
+\item {\ttfamily Member variables and member functions should use camel\+Case. That is, if the variable name consists of multiple words, the first letter of the word should be lowercase, and the first letter of all subsequent words should be uppercase. Examples\+:}m\+\_\+angular\+Velocity{\ttfamily ,}get\+Angular\+Velocity(){\ttfamily ,}m\+\_\+gravity{\ttfamily ,}get\+Gravity(){\ttfamily ,}m\+\_\+transform\+Component{\ttfamily .}
+\item {\ttfamily Class names should use Pascal\+Case. That is, if the class name consists of multiple words, the first letter of every word should be in uppercase. Examples\+:}Physics\+World{\ttfamily ,}Rigid\+Body{\ttfamily .}
+\item {\ttfamily Getters and setters for classes should be marked as}inline{\ttfamily and be placed in the header file.}
+\item {\ttfamily Getters should also use the}\mbox{[}\mbox{[}nodiscard\mbox{]}\mbox{]}\`{} attribute.
+\end{DoxyEnumerate}\hypertarget{md_CONTRIBUTING_autotoc_md3}{}\doxysubsection{Unit Tests}\label{md_CONTRIBUTING_autotoc_md3}
+
+\begin{DoxyEnumerate}
+\item Branches that add tests to new code should be named {\ttfamily tests/$<$test-\/name$>$}. For example, if we are adding some tests to test the collision detection features, then we might call the branch {\ttfamily tests/collision-\/tests}.
+\item Test names should be in Pascal\+Case.
+\item All source files in their respective{\ttfamily tests/} directories should have {\ttfamily \+\_\+tests} appended to the file name, to avoid name clashes. Example\+: If we write tests for {\ttfamily rigidbody.\+cpp}, then the test file should be called {\ttfamily rigidbody\+\_\+tests.\+cpp}.
+\end{DoxyEnumerate}\hypertarget{md_CONTRIBUTING_autotoc_md4}{}\doxysubsection{Code Style}\label{md_CONTRIBUTING_autotoc_md4}
+\hypertarget{md_CONTRIBUTING_autotoc_md5}{}\doxysubsubsection{Documentation}\label{md_CONTRIBUTING_autotoc_md5}
+
+\begin{DoxyEnumerate}
+\item Documentation in source code should be done in Doxygen style.
+\item Don\textquotesingle{}t document self-\/explanatory functions like {\ttfamily get\+Position()}, {\ttfamily get\+Velocity()}, etc.
+\begin{DoxyItemize}
+\item In general, getters and setters shouldn\textquotesingle{}t be documented.
+\end{DoxyItemize}
+\item When writing a comment, make sure that there is nothing after {\ttfamily /$\ast$$\ast$}. Everything that forms the body of the comment should go to the lines after the {\ttfamily /$\ast$$\ast$}. Example\+: \`{}\`{}\`{} /$\ast$$\ast$
+\begin{DoxyItemize}
+\item $\ast$ Notice how there is nothing after the /$\ast$$\ast$ on the first line.
+\item Some random comment text to fill up more space. $\ast$/ \`{}\`{}\`{}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+Here is a {\bfseries{non}}-\/example, with the same text as before\+: \`{}\`{}\`{} /$\ast$$\ast$ An example of how comments should be written.
+\begin{DoxyItemize}
+\item 
+\item Notice how there is nothing after the /$\ast$$\ast$ on the first line.
+\item Some random comment text to fill up more space. $\ast$/ \`{}\`{}\`{}
+\end{DoxyItemize}
+
+And another one\+: \`{}\`{}\`{} /$\ast$$\ast$ An example of how comments should be written.
+\begin{DoxyItemize}
+\item 
+\item Notice how there is nothing after the /$\ast$$\ast$ on the first line.
+\item Some random comment text to fill up more space. $\ast$/ \`{}\`{}\`{}
+\end{DoxyItemize}\hypertarget{md_CONTRIBUTING_autotoc_md6}{}\doxysubsubsection{General Programming Conventions}\label{md_CONTRIBUTING_autotoc_md6}
+
+\begin{DoxyEnumerate}
+\item Curly braces should be on new lines.
+\item Source file names should be in all lowercase. They should typically be one word (things like {\ttfamily physicsworld.$\ast$} and {\ttfamily rigidbody.$\ast$} are fine). If you find that your source file name consists of multiple names, that might be indicative of bad design.
+\item Use tabs instead of spaces. Make sure that all tabs are equal to 4 spaces.
+\item Put spaces around binary operators. For example, write {\ttfamily a += b} and not {\ttfamily a+=b}. The former looks less cluttered.
+\item Use blank lines to logically separate portions of code.
+\item Function definitions should have at least one blank line after them (an exception being if it is the last function in a class definition).
+\item There should be a maximum of 80 characters per line. Break up longer lines of code into smaller pieces and indent them properly to make them easier to read.
+\item For functions with empty bodies (for example, certain constructors), put the {\ttfamily \{} and {\ttfamily \}} on separate lines. Example\+: \`{}\`{}\`{} Foo\+::\+Foo(int a, int b) \+: m\+\_\+a(a), m\+\_\+b(b) \{ \} \`{}\`{}\`{} 
+\end{DoxyEnumerate}

@@ -1,0 +1,9 @@
+digraph "Initialization, version and error reference"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=box];
+  rankdir=LR;
+  Node2 [label="Error codes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__errors.html",tooltip="Error codes."];
+  Node1 [label="Initialization, version\l and error reference",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Functions and types related to initialization and error handling."];
+  Node1->Node2 [shape=plaintext, dir="back", style="solid"];
+}

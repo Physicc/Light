@@ -1,0 +1,231 @@
+\hypertarget{classentt_1_1basic__continuous__loader}{}\doxysection{entt\+::basic\+\_\+continuous\+\_\+loader$<$ Entity $>$ Class Template Reference}
+\label{classentt_1_1basic__continuous__loader}\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+
+
+Utility class for {\itshape continuous loading}.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}\label{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}} 
+using \mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}} = Entity
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a18d87fd5fc80f062ae27b90ef3232bd8}{basic\+\_\+continuous\+\_\+loader}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}} $>$ \&source) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs an instance that is bound to a given registry. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_a619f3aa278b405481fd1e26c46a96a5c}\label{classentt_1_1basic__continuous__loader_a619f3aa278b405481fd1e26c46a96a5c}} 
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a619f3aa278b405481fd1e26c46a96a5c}{basic\+\_\+continuous\+\_\+loader}} (\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} \& \mbox{\hyperlink{classentt_1_1basic__continuous__loader_afd396d84cb27e070a6a812bd28140c75}{operator=}} (\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Archive $>$ }\\\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} \& \mbox{\hyperlink{classentt_1_1basic__continuous__loader_ae6655c1c6868b11f2781cec2aee77abb}{entities}} (Archive \&archive)
+\begin{DoxyCompactList}\small\item\em Restores entities that were in use during serialization. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Component, typename Archive , typename... Type, typename... Member$>$ }\\\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} \& \mbox{\hyperlink{classentt_1_1basic__continuous__loader_a315b55f7576992d9261ee812f202d5ad}{component}} (Archive \&archive, Member Type\+::$\ast$... member)
+\begin{DoxyCompactList}\small\item\em Restores components and assigns them to the right entities. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} \& \mbox{\hyperlink{classentt_1_1basic__continuous__loader_a01b949f4a5829bd5bf3738a7e0f776d2}{shrink}} ()
+\begin{DoxyCompactList}\small\item\em Helps to purge entities that no longer have a conterpart. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} \& \mbox{\hyperlink{classentt_1_1basic__continuous__loader_ac8b328bb8c6c4acde51ab5b943f0ea86}{orphans}} ()
+\begin{DoxyCompactList}\small\item\em Destroys those entities that have no components. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1basic__continuous__loader_aba518c41a75b783761bda28efcd985e4}{contains}} (\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}} entt) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Tests if a loader knows about a given entity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__continuous__loader_ab077b1e21a817130db7401524ffc41a0}{map}} (\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}} entt) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the identifier to which an entity refers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity$>$\newline
+class entt\+::basic\+\_\+continuous\+\_\+loader$<$ Entity $>$}
+
+Utility class for {\itshape continuous loading}. 
+
+A {\itshape continuous loader} is designed to load data from a source registry to a (possibly) non-\/empty destination. The loader can accommodate in a registry more than one snapshot in a sort of {\itshape continuous loading} that updates the destination one step at a time.~\newline
+ Identifiers that entities originally had are not transferred to the target. Instead, the loader maps remote identifiers to local ones while restoring a snapshot.~\newline
+ An example of use is the implementation of a client-\/server applications with the requirement of transferring somehow parts of the representation side to side.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_a18d87fd5fc80f062ae27b90ef3232bd8}\label{classentt_1_1basic__continuous__loader_a18d87fd5fc80f062ae27b90ef3232bd8}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!basic\_continuous\_loader@{basic\_continuous\_loader}}
+\index{basic\_continuous\_loader@{basic\_continuous\_loader}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_continuous\_loader()}{basic\_continuous\_loader()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}} $>$ \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an instance that is bound to a given registry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & A valid reference to a registry. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_a315b55f7576992d9261ee812f202d5ad}\label{classentt_1_1basic__continuous__loader_a315b55f7576992d9261ee812f202d5ad}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!component@{component}}
+\index{component@{component}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{component()}{component()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+template$<$typename... Component, typename Archive , typename... Type, typename... Member$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}}\& \mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::component (\begin{DoxyParamCaption}\item[{Archive \&}]{archive,  }\item[{Member Type\+::$\ast$...}]{member }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Restores components and assigns them to the right entities. 
+
+The template parameter list must be exactly the same used during serialization. In the event that the entity to which the component is assigned doesn\textquotesingle{}t exist yet, the loader will take care to create a local counterpart for it.~\newline
+ Members can be either data members of type entity\+\_\+type or containers of entities. In both cases, the loader will visit them and update the entities by replacing each one with its local counterpart.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & Type of component to restore. \\
+\hline
+{\em Archive} & Type of input archive. \\
+\hline
+{\em Type} & Types of components to update with local counterparts. \\
+\hline
+{\em Member} & Types of members to update with their local counterparts. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em archive} & A valid reference to an input archive. \\
+\hline
+{\em member} & Members to update with their local counterparts. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A non-\/const reference to this loader. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_aba518c41a75b783761bda28efcd985e4}\label{classentt_1_1basic__continuous__loader_aba518c41a75b783761bda28efcd985e4}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!contains@{contains}}
+\index{contains@{contains}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::contains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tests if a loader knows about a given entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & An entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if {\ttfamily entity} is managed by the loader, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_ae6655c1c6868b11f2781cec2aee77abb}\label{classentt_1_1basic__continuous__loader_ae6655c1c6868b11f2781cec2aee77abb}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!entities@{entities}}
+\index{entities@{entities}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{entities()}{entities()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+template$<$typename Archive $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}}\& \mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::entities (\begin{DoxyParamCaption}\item[{Archive \&}]{archive }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Restores entities that were in use during serialization. 
+
+This function restores the entities that were in use during serialization and creates local counterparts for them if required.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Archive} & Type of input archive. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em archive} & A valid reference to an input archive. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A non-\/const reference to this loader. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_ab077b1e21a817130db7401524ffc41a0}\label{classentt_1_1basic__continuous__loader_ab077b1e21a817130db7401524ffc41a0}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!map@{map}}
+\index{map@{map}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{map()}{map()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__continuous__loader_a90a0d33147978cb3c142408487428277}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the identifier to which an entity refers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & An entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The local identifier if any, the null entity otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_afd396d84cb27e070a6a812bd28140c75}\label{classentt_1_1basic__continuous__loader_afd396d84cb27e070a6a812bd28140c75}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}}\& \mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default move assignment operator. 
+
+\begin{DoxyReturn}{Returns}
+This loader. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_ac8b328bb8c6c4acde51ab5b943f0ea86}\label{classentt_1_1basic__continuous__loader_ac8b328bb8c6c4acde51ab5b943f0ea86}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!orphans@{orphans}}
+\index{orphans@{orphans}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{orphans()}{orphans()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}}\& \mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::orphans (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destroys those entities that have no components. 
+
+In case all the entities were serialized but only part of the components was saved, it could happen that some of the entities have no components once restored.~\newline
+ This functions helps to identify and destroy those entities.
+
+\begin{DoxyReturn}{Returns}
+A non-\/const reference to this loader. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__continuous__loader_a01b949f4a5829bd5bf3738a7e0f776d2}\label{classentt_1_1basic__continuous__loader_a01b949f4a5829bd5bf3738a7e0f776d2}} 
+\index{entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}!shrink@{shrink}}
+\index{shrink@{shrink}!entt::basic\_continuous\_loader$<$ Entity $>$@{entt::basic\_continuous\_loader$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{shrink()}{shrink()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__continuous__loader}{basic\+\_\+continuous\+\_\+loader}}\& \mbox{\hyperlink{classentt_1_1basic__continuous__loader}{entt\+::basic\+\_\+continuous\+\_\+loader}}$<$ Entity $>$\+::shrink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helps to purge entities that no longer have a conterpart. 
+
+Users should invoke this member function after restoring each snapshot, unless they know exactly what they are doing.
+
+\begin{DoxyReturn}{Returns}
+A non-\/const reference to this loader. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

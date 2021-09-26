@@ -1,0 +1,230 @@
+\hypertarget{structentt_1_1resource__handle}{}\doxysection{entt\+::resource\+\_\+handle$<$ Resource $>$ Struct Template Reference}
+\label{structentt_1_1resource__handle}\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+
+
+Shared resource handle.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1resource__handle_ac0346238aa57dbf5df3ce775ceba856f}\label{structentt_1_1resource__handle_ac0346238aa57dbf5df3ce775ceba856f}} 
+\mbox{\hyperlink{structentt_1_1resource__handle_ac0346238aa57dbf5df3ce775ceba856f}{resource\+\_\+handle}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1resource__handle_a91646c2d2450f6843375bc47f060b918}{resource\+\_\+handle}} (std\+::shared\+\_\+ptr$<$ Resource $>$ res) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Creates a handle from a shared pointer, namely a resource. \end{DoxyCompactList}\item 
+const Resource \& \mbox{\hyperlink{structentt_1_1resource__handle_a694112d96f6c6f4e1c803aa2824996c7}{get}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a reference to the managed resource. \end{DoxyCompactList}\item 
+Resource \& \mbox{\hyperlink{structentt_1_1resource__handle_acc5633b4cd5282afe2f7783a515fb131}{get}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a reference to the managed resource. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1resource__handle_ab22a293cb18602690309a561b97d28cb}{operator const Resource \&}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a reference to the managed resource. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1resource__handle_a018fc3493748b50c4c523737203a2720}{operator Resource \&}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a reference to the managed resource. \end{DoxyCompactList}\item 
+const Resource \& \mbox{\hyperlink{structentt_1_1resource__handle_a2b014e1f6f871f25329c6bed1048f0ef}{operator$\ast$}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a reference to the managed resource. \end{DoxyCompactList}\item 
+Resource \& \mbox{\hyperlink{structentt_1_1resource__handle_ad0ea25378f929f0d34db78d09e7b79c7}{operator$\ast$}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a reference to the managed resource. \end{DoxyCompactList}\item 
+const Resource $\ast$ \mbox{\hyperlink{structentt_1_1resource__handle_ab2b2301a2f2f81f14979a9278c565e78}{operator-\/$>$}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a pointer to the managed resource. \end{DoxyCompactList}\item 
+Resource $\ast$ \mbox{\hyperlink{structentt_1_1resource__handle_ab8ef3d0c613cd42a30407b04537ea0f5}{operator-\/$>$}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a pointer to the managed resource. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1resource__handle_ad85312922064bb2edb81a95f3d6d75f2}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns true if a handle contains a resource, false otherwise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Resource$>$\newline
+struct entt\+::resource\+\_\+handle$<$ Resource $>$}
+
+Shared resource handle. 
+
+A shared resource handle is a small class that wraps a resource and keeps it alive even if it\textquotesingle{}s deleted from the cache. It can be either copied or moved. A handle shares a reference to the same resource with all the other handles constructed for the same identifier.~\newline
+ As a rule of thumb, resources should never be copied nor moved. Handles are the way to go to keep references to them.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Resource} & Type of resource managed by a handle. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1resource__handle_a91646c2d2450f6843375bc47f060b918}\label{structentt_1_1resource__handle_a91646c2d2450f6843375bc47f060b918}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!resource\_handle@{resource\_handle}}
+\index{resource\_handle@{resource\_handle}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{resource\_handle()}{resource\_handle()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Resource $>$}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a handle from a shared pointer, namely a resource. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em res} & A pointer to a properly initialized resource. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1resource__handle_a694112d96f6c6f4e1c803aa2824996c7}\label{structentt_1_1resource__handle_a694112d96f6c6f4e1c803aa2824996c7}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!get@{get}}
+\index{get@{get}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+const Resource\& \mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a reference to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A reference to the managed resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_acc5633b4cd5282afe2f7783a515fb131}\label{structentt_1_1resource__handle_acc5633b4cd5282afe2f7783a515fb131}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!get@{get}}
+\index{get@{get}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+Resource\& \mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a reference to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A reference to the managed resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_ad85312922064bb2edb81a95f3d6d75f2}\label{structentt_1_1resource__handle_ad85312922064bb2edb81a95f3d6d75f2}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns true if a handle contains a resource, false otherwise. 
+
+\begin{DoxyReturn}{Returns}
+True if the handle contains a resource, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_ab22a293cb18602690309a561b97d28cb}\label{structentt_1_1resource__handle_ab22a293cb18602690309a561b97d28cb}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!operator const Resource \&@{operator const Resource \&}}
+\index{operator const Resource \&@{operator const Resource \&}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator const Resource \&()}{operator const Resource \&()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::operator const Resource \& (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a reference to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A reference to the managed resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_a018fc3493748b50c4c523737203a2720}\label{structentt_1_1resource__handle_a018fc3493748b50c4c523737203a2720}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!operator Resource \&@{operator Resource \&}}
+\index{operator Resource \&@{operator Resource \&}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator Resource \&()}{operator Resource \&()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::operator Resource \& (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a reference to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A reference to the managed resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_a2b014e1f6f871f25329c6bed1048f0ef}\label{structentt_1_1resource__handle_a2b014e1f6f871f25329c6bed1048f0ef}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+const Resource\& \mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a reference to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A reference to the managed resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_ad0ea25378f929f0d34db78d09e7b79c7}\label{structentt_1_1resource__handle_ad0ea25378f929f0d34db78d09e7b79c7}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+Resource\& \mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a reference to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A reference to the managed resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_ab2b2301a2f2f81f14979a9278c565e78}\label{structentt_1_1resource__handle_ab2b2301a2f2f81f14979a9278c565e78}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+const Resource$\ast$ \mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a pointer to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A pointer to the managed resource or {\ttfamily nullptr} if the handle contains no resource at all. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__handle_ab8ef3d0c613cd42a30407b04537ea0f5}\label{structentt_1_1resource__handle_ab8ef3d0c613cd42a30407b04537ea0f5}} 
+\index{entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!entt::resource\_handle$<$ Resource $>$@{entt::resource\_handle$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+Resource$\ast$ \mbox{\hyperlink{structentt_1_1resource__handle}{entt\+::resource\+\_\+handle}}$<$ Resource $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a pointer to the managed resource. 
+
+\begin{DoxyWarning}{Warning}
+The behavior is undefined if the handle doesn\textquotesingle{}t contain a resource.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A pointer to the managed resource or {\ttfamily nullptr} if the handle contains no resource at all. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

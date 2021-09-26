@@ -1,0 +1,9 @@
+<map id="ImGui_ImplVulkanH_Window" name="ImGui_ImplVulkanH_Window">
+<area shape="rect" id="node1" title=" " alt="" coords="788,81,999,108"/>
+<area shape="rect" id="node2" href="$structImGui__ImplVulkanH__FrameSemaphores.html" title=" " alt="" coords="332,5,613,32"/>
+<area shape="rect" id="node3" href="$structImGui__ImplVulkanH__Frame.html" title=" " alt="" coords="373,56,573,83"/>
+<area shape="rect" id="node4" href="$structVkSurfaceFormatKHR.html" title=" " alt="" coords="391,107,554,133"/>
+<area shape="rect" id="node5" href="$unionVkClearValue.html" title=" " alt="" coords="417,157,528,184"/>
+<area shape="rect" id="node6" href="$unionVkClearColorValue.html" title=" " alt="" coords="30,132,174,159"/>
+<area shape="rect" id="node7" href="$structVkClearDepthStencilValue.html" title=" " alt="" coords="5,183,199,209"/>
+</map>

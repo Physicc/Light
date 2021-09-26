@@ -1,0 +1,11 @@
+digraph "entt::process_adaptor&lt; Func, Delta &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="entt::process_adaptor\l\< Func, Delta \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Adaptor for lambdas and functors to turn them into processes."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="entt::process\< process\l_adaptor\< Func, Delta\l \>, Delta \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classentt_1_1process.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="firebrick4",fontsize="10",style="solid"];
+  Node3 [label="Func",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+}

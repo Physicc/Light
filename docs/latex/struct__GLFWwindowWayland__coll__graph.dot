@@ -1,0 +1,27 @@
+digraph "_GLFWwindowWayland"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="_GLFWwindowWayland",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" monitors" ];
+  Node2 [label="_GLFWmonitor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWmonitor.html",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" modes\ncurrentMode" ];
+  Node3 [label="GLFWvidmode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGLFWvidmode.html",tooltip="Video mode type."];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" originalRamp\ncurrentRamp" ];
+  Node4 [label="GLFWgammaramp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGLFWgammaramp.html",tooltip="Gamma ramp."];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" window" ];
+  Node5 [label="_GLFWwindow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWwindow.html",tooltip=" "];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" context" ];
+  Node6 [label="_GLFWcontext",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWcontext.html",tooltip=" "];
+  Node5 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" makeCurrent\nswapBuffers\ndestroy" ];
+  Node3 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" videoMode" ];
+  Node2 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" monitor" ];
+  Node7 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" cursor" ];
+  Node7 [label="_GLFWcursor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWcursor.html",tooltip=" "];
+  Node7 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ];
+  Node5 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" right\nleft\nbottom\ntop" ];
+  Node8 [label="_GLFWdecorationWayland",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWdecorationWayland.html",tooltip=" "];
+  Node7 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" currentCursor" ];
+}

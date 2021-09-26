@@ -1,0 +1,19 @@
+digraph "LightFramework/libs/glfw-3.3.3" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_08ae183517679c3e3c3da29a0fc0b468 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="libs" fontname="Helvetica", fontsize="10", URL="dir_08ae183517679c3e3c3da29a0fc0b468.html"]
+  subgraph clusterdir_310b4c1b1eb1721520d1cae99e111eee {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_310b4c1b1eb1721520d1cae99e111eee.html"];
+    dir_310b4c1b1eb1721520d1cae99e111eee [shape=plaintext label="glfw-3.3.3"];
+    dir_53b97f0cf6132e054bc084ee9fd65d35 [shape=box label="deps" color="red" fillcolor="white" style="filled" URL="dir_53b97f0cf6132e054bc084ee9fd65d35.html"];
+    dir_b8b35197aedc0382c7559b11a6dae846 [shape=box label="docs" color="black" fillcolor="white" style="filled" URL="dir_b8b35197aedc0382c7559b11a6dae846.html"];
+    dir_c40e0157036f37e61e8bd7d427a83c12 [shape=box label="examples" color="black" fillcolor="white" style="filled" URL="dir_c40e0157036f37e61e8bd7d427a83c12.html"];
+    dir_2f300f7365c4338a846377abf04bc2d8 [shape=box label="include" color="red" fillcolor="white" style="filled" URL="dir_2f300f7365c4338a846377abf04bc2d8.html"];
+    dir_bd506e83e5acf10ddce350f293c4672e [shape=box label="src" color="black" fillcolor="white" style="filled" URL="dir_bd506e83e5acf10ddce350f293c4672e.html"];
+    dir_dba686ad5d125127d3b2389ddaff751a [shape=box label="tests" color="black" fillcolor="white" style="filled" URL="dir_dba686ad5d125127d3b2389ddaff751a.html"];
+  }
+  }
+  dir_bd506e83e5acf10ddce350f293c4672e->dir_2f300f7365c4338a846377abf04bc2d8 [headlabel="1", labeldistance=1.5 headhref="dir_000010_000043.html"];
+}

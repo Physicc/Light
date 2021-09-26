@@ -1,0 +1,316 @@
+\hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4}{}\doxysection{entt\+::delegate$<$ Ret(Args...)$>$ Class Template Reference}
+\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4}\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+
+
+Utility class to use to send around functions and members.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a1a5ceebde7cebde69a1b2022f539a656}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a1a5ceebde7cebde69a1b2022f539a656}} 
+using \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a1a5ceebde7cebde69a1b2022f539a656}{function\+\_\+type}} = Ret(const void $\ast$, Args...)
+\begin{DoxyCompactList}\small\item\em Function type of the contained target. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_ada5b094a0d859325dbe1241f3d956c02}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_ada5b094a0d859325dbe1241f3d956c02}} 
+using \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_ada5b094a0d859325dbe1241f3d956c02}{type}} = Ret(Args...)
+\begin{DoxyCompactList}\small\item\em Function type of the delegate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a9bca9876e6671a34c6503b7de65402b6}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a9bca9876e6671a34c6503b7de65402b6}} 
+using \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a9bca9876e6671a34c6503b7de65402b6}{result\+\_\+type}} = Ret
+\begin{DoxyCompactList}\small\item\em Return type of the delegate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a5c4828a5df5ed1e8fd18465ff63eb73c}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a5c4828a5df5ed1e8fd18465ff63eb73c}} 
+\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a5c4828a5df5ed1e8fd18465ff63eb73c}{delegate}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$auto Candidate$>$ }\\\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_af4f480038e4c18d1ad106af3b26574da}{delegate}} (\mbox{\hyperlink{structentt_1_1connect__arg__t}{connect\+\_\+arg\+\_\+t}}$<$ Candidate $>$) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs a delegate and connects a free function or an unbound member. \end{DoxyCompactList}\item 
+{\footnotesize template$<$auto Candidate, typename Type $>$ }\\\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a3f4b93ddb413740d3a06b223202dc7f5}{delegate}} (\mbox{\hyperlink{structentt_1_1connect__arg__t}{connect\+\_\+arg\+\_\+t}}$<$ Candidate $>$, Type \&\&value\+\_\+or\+\_\+instance) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs a delegate and connects a free function with payload or a bound member. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_ad80158d176ce826c89655d4b523b7034}{delegate}} (\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a1a5ceebde7cebde69a1b2022f539a656}{function\+\_\+type}} $\ast$function, const void $\ast$payload=nullptr) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs a delegate and connects an user defined function with optional payload. \end{DoxyCompactList}\item 
+{\footnotesize template$<$auto Candidate$>$ }\\void \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a6e732abcbc4aa9b8899c92d8f21e55a6}{connect}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Connects a free function or an unbound member to a delegate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$auto Candidate, typename Type $>$ }\\void \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_aae828d209ffe33590c2bb8e4b37f47ef}{connect}} (Type \&value\+\_\+or\+\_\+instance) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Connects a free function with payload or a bound member to a delegate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$auto Candidate, typename Type $>$ }\\void \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_afcdce5ab5ae55520cce86f3f79b38e9c}{connect}} (Type $\ast$value\+\_\+or\+\_\+instance) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Connects a free function with payload or a bound member to a delegate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a5770241374af8b0e8e6860a6c017c848}{connect}} (\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a1a5ceebde7cebde69a1b2022f539a656}{function\+\_\+type}} $\ast$function, const void $\ast$payload=nullptr) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Connects an user defined function with optional payload to a delegate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a0d81bb1bde6abd78914cd0a07084bcd7}{reset}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Resets a delegate. \end{DoxyCompactList}\item 
+const void $\ast$ \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a3e0495b7612d458cbc59dc4b657d586f}{instance}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the instance or the payload linked to a delegate, if any. \end{DoxyCompactList}\item 
+Ret \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a0e53caedb53810bc96aa71bce199c990}{operator()}} (Args... args) const
+\begin{DoxyCompactList}\small\item\em Triggers a delegate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a73e1029cbb6359d803a6cc06b82f80d7}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a delegate actually stores a listener. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a54ca30c9a3f7a9662363c48db4e86aae}{operator==}} (const \mbox{\hyperlink{classentt_1_1delegate}{delegate}}$<$ Ret(Args...)$>$ \&other) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Compares the contents of two delegates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Ret, typename... Args$>$\newline
+class entt\+::delegate$<$ Ret(\+Args...)$>$}
+
+Utility class to use to send around functions and members. 
+
+Unmanaged delegate for function pointers and members. Users of this class are in charge of disconnecting instances before deleting them.
+
+A delegate can be used as a general purpose invoker without memory overhead for free functions possibly with payloads and bound or unbound members.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Ret} & Return type of a function type. \\
+\hline
+{\em Args} & Types of arguments of a function type. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_af4f480038e4c18d1ad106af3b26574da}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_af4f480038e4c18d1ad106af3b26574da}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!delegate@{delegate}}
+\index{delegate@{delegate}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{delegate()}{delegate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+template$<$auto Candidate$>$ \\
+\mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::\mbox{\hyperlink{classentt_1_1delegate}{delegate}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structentt_1_1connect__arg__t}{connect\+\_\+arg\+\_\+t}}$<$ Candidate $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a delegate and connects a free function or an unbound member. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Candidate} & Function or member to connect to the delegate. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a3f4b93ddb413740d3a06b223202dc7f5}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a3f4b93ddb413740d3a06b223202dc7f5}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!delegate@{delegate}}
+\index{delegate@{delegate}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{delegate()}{delegate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+template$<$auto Candidate, typename Type $>$ \\
+\mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::\mbox{\hyperlink{classentt_1_1delegate}{delegate}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structentt_1_1connect__arg__t}{connect\+\_\+arg\+\_\+t}}$<$ Candidate $>$}]{,  }\item[{Type \&\&}]{value\+\_\+or\+\_\+instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a delegate and connects a free function with payload or a bound member. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Candidate} & Function or member to connect to the delegate. \\
+\hline
+{\em Type} & Type of class or type of payload. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value\+\_\+or\+\_\+instance} & A valid object that fits the purpose. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_ad80158d176ce826c89655d4b523b7034}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_ad80158d176ce826c89655d4b523b7034}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!delegate@{delegate}}
+\index{delegate@{delegate}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{delegate()}{delegate()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::\mbox{\hyperlink{classentt_1_1delegate}{delegate}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a1a5ceebde7cebde69a1b2022f539a656}{function\+\_\+type}} $\ast$}]{function,  }\item[{const void $\ast$}]{payload = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a delegate and connects an user defined function with optional payload. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & Function to connect to the delegate. \\
+\hline
+{\em payload} & User defined arbitrary data. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a6e732abcbc4aa9b8899c92d8f21e55a6}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a6e732abcbc4aa9b8899c92d8f21e55a6}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!connect@{connect}}
+\index{connect@{connect}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+template$<$auto Candidate$>$ \\
+void \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Connects a free function or an unbound member to a delegate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Candidate} & Function or member to connect to the delegate. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a5770241374af8b0e8e6860a6c017c848}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a5770241374af8b0e8e6860a6c017c848}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!connect@{connect}}
+\index{connect@{connect}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+void \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::connect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a1a5ceebde7cebde69a1b2022f539a656}{function\+\_\+type}} $\ast$}]{function,  }\item[{const void $\ast$}]{payload = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Connects an user defined function with optional payload to a delegate. 
+
+The delegate isn\textquotesingle{}t responsible for the connected object or the payload. Users must always guarantee that the lifetime of an instance overcomes the one of the delegate.~\newline
+ The payload is returned as the first argument to the target function in all cases.
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & Function to connect to the delegate. \\
+\hline
+{\em payload} & User defined arbitrary data. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_aae828d209ffe33590c2bb8e4b37f47ef}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_aae828d209ffe33590c2bb8e4b37f47ef}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!connect@{connect}}
+\index{connect@{connect}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+template$<$auto Candidate, typename Type $>$ \\
+void \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::connect (\begin{DoxyParamCaption}\item[{Type \&}]{value\+\_\+or\+\_\+instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Connects a free function with payload or a bound member to a delegate. 
+
+The delegate isn\textquotesingle{}t responsible for the connected object or the payload. Users must always guarantee that the lifetime of the instance overcomes the one of the delegate.~\newline
+ When used to connect a free function with payload, its signature must be such that the instance is the first argument before the ones used to define the delegate itself.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Candidate} & Function or member to connect to the delegate. \\
+\hline
+{\em Type} & Type of class or type of payload. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value\+\_\+or\+\_\+instance} & A valid reference that fits the purpose. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_afcdce5ab5ae55520cce86f3f79b38e9c}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_afcdce5ab5ae55520cce86f3f79b38e9c}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!connect@{connect}}
+\index{connect@{connect}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+template$<$auto Candidate, typename Type $>$ \\
+void \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::connect (\begin{DoxyParamCaption}\item[{Type $\ast$}]{value\+\_\+or\+\_\+instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Connects a free function with payload or a bound member to a delegate. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_aae828d209ffe33590c2bb8e4b37f47ef}{connect(\+Type \&)}}
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Candidate} & Function or member to connect to the delegate. \\
+\hline
+{\em Type} & Type of class or type of payload. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value\+\_\+or\+\_\+instance} & A valid pointer that fits the purpose. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a3e0495b7612d458cbc59dc4b657d586f}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a3e0495b7612d458cbc59dc4b657d586f}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!instance@{instance}}
+\index{instance@{instance}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+const void$\ast$ \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the instance or the payload linked to a delegate, if any. 
+
+\begin{DoxyReturn}{Returns}
+An opaque pointer to the underlying data. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a73e1029cbb6359d803a6cc06b82f80d7}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a73e1029cbb6359d803a6cc06b82f80d7}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Checks whether a delegate actually stores a listener. 
+
+\begin{DoxyReturn}{Returns}
+False if the delegate is empty, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a0e53caedb53810bc96aa71bce199c990}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a0e53caedb53810bc96aa71bce199c990}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!operator()@{operator()}}
+\index{operator()@{operator()}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+Ret \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::operator() (\begin{DoxyParamCaption}\item[{Args...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Triggers a delegate. 
+
+The delegate invokes the underlying function and returns the result.
+
+\begin{DoxyWarning}{Warning}
+Attempting to trigger an invalid delegate results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Arguments to use to invoke the underlying function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value returned by the underlying function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a54ca30c9a3f7a9662363c48db4e86aae}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a54ca30c9a3f7a9662363c48db4e86aae}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!operator==@{operator==}}
+\index{operator==@{operator==}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+bool \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1delegate}{delegate}}$<$ Ret(Args...)$>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compares the contents of two delegates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Delegate with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the two contents differ, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a0d81bb1bde6abd78914cd0a07084bcd7}\label{classentt_1_1delegate_3_01Ret_07Args_8_8_8_08_4_a0d81bb1bde6abd78914cd0a07084bcd7}} 
+\index{entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}!reset@{reset}}
+\index{reset@{reset}!entt::delegate$<$ Ret(Args...)$>$@{entt::delegate$<$ Ret(Args...)$>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily template$<$typename Ret , typename... Args$>$ \\
+void \mbox{\hyperlink{classentt_1_1delegate}{entt\+::delegate}}$<$ Ret(Args...)$>$\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resets a delegate. 
+
+After a reset, a delegate cannot be invoked anymore. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

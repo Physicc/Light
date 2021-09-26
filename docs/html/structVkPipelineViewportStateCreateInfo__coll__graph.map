@@ -1,0 +1,7 @@
+<map id="VkPipelineViewportStateCreateInfo" name="VkPipelineViewportStateCreateInfo">
+<area shape="rect" id="node1" title=" " alt="" coords="49,184,299,211"/>
+<area shape="rect" id="node2" href="$structVkRect2D.html" title=" " alt="" coords="72,95,159,121"/>
+<area shape="rect" id="node3" href="$structVkOffset2D.html" title=" " alt="" coords="5,5,103,32"/>
+<area shape="rect" id="node4" href="$structVkExtent2D.html" title=" " alt="" coords="127,5,226,32"/>
+<area shape="rect" id="node5" href="$structVkViewport.html" title=" " alt="" coords="183,95,280,121"/>
+</map>

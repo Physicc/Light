@@ -1,0 +1,58 @@
+\hypertarget{group__native}{}\doxysection{Native access}
+\label{group__native}\index{Native access@{Native access}}
+
+
+Functions related to accessing native handles.  
+
+
+Functions related to accessing native handles. 
+
+{\bfseries{By using the native access functions you assert that you know what you\textquotesingle{}re doing and how to fix problems caused by using them. If you don\textquotesingle{}t, you shouldn\textquotesingle{}t be using them.}}
+
+{\bfseries{By using the native access functions you assert that you know what you\textquotesingle{}re doing and how to fix problems caused by using them. If you don\textquotesingle{}t, you shouldn\textquotesingle{}t be using them.}}
+
+Before the inclusion of \mbox{\hyperlink{imgui_2examples_2libs_2glfw_2include_2GLFW_2glfw3native_8h}{glfw3native.\+h}}, you may define zero or more window system A\+PI macro and zero or more context creation A\+PI macros.
+
+The chosen backends must match those the library was compiled for. Failure to do this will cause a link-\/time error.
+
+The available window A\+PI macros are\+:
+\begin{DoxyItemize}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+W\+I\+N32}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+C\+O\+C\+OA}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+X11}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+W\+A\+Y\+L\+A\+ND}
+\end{DoxyItemize}
+
+The available context A\+PI macros are\+:
+\begin{DoxyItemize}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+W\+GL}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+N\+S\+GL}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+G\+LX}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+E\+GL}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+O\+S\+M\+E\+SA}
+\end{DoxyItemize}
+
+These macros select which of the native access functions that are declared and which platform-\/specific headers to include. It is then up your (by definition platform-\/specific) code to handle which of these should be defined.
+
+Before the inclusion of \mbox{\hyperlink{imgui_2examples_2libs_2glfw_2include_2GLFW_2glfw3native_8h}{glfw3native.\+h}}, you may define exactly one window system A\+PI macro and zero or more context creation A\+PI macros.
+
+The chosen backends must match those the library was compiled for. Failure to do this will cause a link-\/time error.
+
+The available window A\+PI macros are\+:
+\begin{DoxyItemize}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+W\+I\+N32}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+C\+O\+C\+OA}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+X11}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+W\+A\+Y\+L\+A\+ND}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+M\+IR}
+\end{DoxyItemize}
+
+The available context A\+PI macros are\+:
+\begin{DoxyItemize}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+W\+GL}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+N\+S\+GL}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+G\+LX}
+\item {\ttfamily G\+L\+F\+W\+\_\+\+E\+X\+P\+O\+S\+E\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+E\+GL}
+\end{DoxyItemize}
+
+These macros select which of the native access functions that are declared and which platform-\/specific headers to include. It is then up your (by definition platform-\/specific) code to handle which of these should be defined. 

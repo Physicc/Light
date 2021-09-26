@@ -1,0 +1,214 @@
+\hypertarget{classPhysicc_1_1Collider}{}\doxysection{Physicc\+::Collider Class Reference}
+\label{classPhysicc_1_1Collider}\index{Physicc::Collider@{Physicc::Collider}}
+
+
+\mbox{\hyperlink{classPhysicc_1_1Collider}{Collider}} class.  
+
+
+
+
+{\ttfamily \#include $<$collider.\+hpp$>$}
+
+
+
+Inheritance diagram for Physicc\+::Collider\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{classPhysicc_1_1Collider__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPhysicc_1_1Collider_a437775b6ca47ed3d0432130ea2ddda65}{Collider}} (glm\+::vec3 position=glm\+::vec3(0), glm\+::vec3 rotation=glm\+::vec3(0), glm\+::vec3 scale=glm\+::vec3(1))
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classPhysicc_1_1Collider}{Collider}}\+:\+: \mbox{\hyperlink{classPhysicc_1_1Collider}{Collider}} object. \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{classPhysicc_1_1Collider_af9e91414202f8ff9e9bead919f1b986a}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Get Position of object\textquotesingle{}s center. \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{classPhysicc_1_1Collider_a1795c34b503dbdbeb95b9ff564b3d92c}{get\+Rotate}} ()
+\begin{DoxyCompactList}\small\item\em get Angle of rotation of the object about its center \end{DoxyCompactList}\item 
+glm\+::vec3 \mbox{\hyperlink{classPhysicc_1_1Collider_ae55705ca824993d11b95b8fc22f8c605}{get\+Scale}} ()
+\begin{DoxyCompactList}\small\item\em get Scale of object \end{DoxyCompactList}\item 
+glm\+::mat4 \mbox{\hyperlink{classPhysicc_1_1Collider_a36e659a9ab363b24265e3a0779cd4f61}{get\+Transform}} ()
+\begin{DoxyCompactList}\small\item\em get Transform matrix of object \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPhysicc_1_1Collider_a320d7db06a20b36cf1f606f92909536a}{set\+Position}} (glm\+::vec3 position)
+\begin{DoxyCompactList}\small\item\em set Position of object\textquotesingle{}s center \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPhysicc_1_1Collider_acc63388d3ff6d1f877361fe9ba9399e9}{set\+Rotate}} (glm\+::vec3 rotate)
+\begin{DoxyCompactList}\small\item\em Set rotation of object about it\textquotesingle{}s center. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPhysicc_1_1Collider_a077f93e7ac06bec3256c5ba4dc753074}{set\+Scale}} (glm\+::vec3 scale)
+\begin{DoxyCompactList}\small\item\em get Position of object\textquotesingle{}s center \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPhysicc_1_1Collider_a408c09f827affab3d149464058a4d5b1}{update\+Transform}} ()
+\begin{DoxyCompactList}\small\item\em Update Transform for rendering. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a56fd3b9fbea38c190d968f472c90dadc}\label{classPhysicc_1_1Collider_a56fd3b9fbea38c190d968f472c90dadc}} 
+virtual \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Bounding\+Volume\+::\+A\+A\+BB}} {\bfseries get\+A\+A\+BB} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1Collider_ae3da288f59a08ff43b4eedc28ddc14af}\label{classPhysicc_1_1Collider_ae3da288f59a08ff43b4eedc28ddc14af}} 
+enum {\bfseries Type} \{ {\bfseries e\+\_\+box} = 0, 
+{\bfseries e\+\_\+sphere} = 1, 
+{\bfseries e\+\_\+typecount} = 2
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a67420337dff5d35f6130093084d6b6d6}\label{classPhysicc_1_1Collider_a67420337dff5d35f6130093084d6b6d6}} 
+glm\+::vec3 {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1Collider_ac5cf4454e1e796f0d068e8c83b1f684e}\label{classPhysicc_1_1Collider_ac5cf4454e1e796f0d068e8c83b1f684e}} 
+glm\+::vec3 {\bfseries m\+\_\+rotate}
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1Collider_abe9aa2493d7924e5183b16a07bbb566b}\label{classPhysicc_1_1Collider_abe9aa2493d7924e5183b16a07bbb566b}} 
+glm\+::vec3 {\bfseries m\+\_\+scale}
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1Collider_aa89f79dd0931196bae1476a743400b93}\label{classPhysicc_1_1Collider_aa89f79dd0931196bae1476a743400b93}} 
+glm\+::mat4 {\bfseries m\+\_\+transform}
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a2ce80f9362c58d31607cd93d6ca8e217}\label{classPhysicc_1_1Collider_a2ce80f9362c58d31607cd93d6ca8e217}} 
+Type {\bfseries m\+\_\+object\+Type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classPhysicc_1_1Collider}{Collider}} class. 
+
+This is a virtual class which acts as the base for all the shape specific classes 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a437775b6ca47ed3d0432130ea2ddda65}\label{classPhysicc_1_1Collider_a437775b6ca47ed3d0432130ea2ddda65}} 
+\index{Physicc::Collider@{Physicc::Collider}!Collider@{Collider}}
+\index{Collider@{Collider}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{Collider()}{Collider()}}
+{\footnotesize\ttfamily Physicc\+::\+Collider\+::\+Collider (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0)},  }\item[{glm\+::vec3}]{rotation = {\ttfamily glm\+:\+:vec3(0)},  }\item[{glm\+::vec3}]{scale = {\ttfamily glm\+:\+:vec3(1)} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classPhysicc_1_1Collider}{Collider}}\+:\+: \mbox{\hyperlink{classPhysicc_1_1Collider}{Collider}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position of the object. Default = (0,0,0) \\
+\hline
+{\em rotation} & Rotations about the axes. Default = (0,0,0) \\
+\hline
+{\em scale} & Length along each of the axes. Default = (1,1,1) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_af9e91414202f8ff9e9bead919f1b986a}\label{classPhysicc_1_1Collider_af9e91414202f8ff9e9bead919f1b986a}} 
+\index{Physicc::Collider@{Physicc::Collider}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily glm\+::vec3 Physicc\+::\+Collider\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get Position of object\textquotesingle{}s center. 
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec3 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a1795c34b503dbdbeb95b9ff564b3d92c}\label{classPhysicc_1_1Collider_a1795c34b503dbdbeb95b9ff564b3d92c}} 
+\index{Physicc::Collider@{Physicc::Collider}!getRotate@{getRotate}}
+\index{getRotate@{getRotate}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{getRotate()}{getRotate()}}
+{\footnotesize\ttfamily glm\+::vec3 Physicc\+::\+Collider\+::get\+Rotate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get Angle of rotation of the object about its center 
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec3 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_ae55705ca824993d11b95b8fc22f8c605}\label{classPhysicc_1_1Collider_ae55705ca824993d11b95b8fc22f8c605}} 
+\index{Physicc::Collider@{Physicc::Collider}!getScale@{getScale}}
+\index{getScale@{getScale}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{getScale()}{getScale()}}
+{\footnotesize\ttfamily glm\+::vec3 Physicc\+::\+Collider\+::get\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get Scale of object 
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec3 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a36e659a9ab363b24265e3a0779cd4f61}\label{classPhysicc_1_1Collider_a36e659a9ab363b24265e3a0779cd4f61}} 
+\index{Physicc::Collider@{Physicc::Collider}!getTransform@{getTransform}}
+\index{getTransform@{getTransform}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{getTransform()}{getTransform()}}
+{\footnotesize\ttfamily glm\+::mat4 Physicc\+::\+Collider\+::get\+Transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get Transform matrix of object 
+
+\begin{DoxyReturn}{Returns}
+glm\+::mat4 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a320d7db06a20b36cf1f606f92909536a}\label{classPhysicc_1_1Collider_a320d7db06a20b36cf1f606f92909536a}} 
+\index{Physicc::Collider@{Physicc::Collider}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily void Physicc\+::\+Collider\+::set\+Position (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set Position of object\textquotesingle{}s center 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Takes the (x,y,z) coordinates to place the object\textquotesingle{}s center at \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_acc63388d3ff6d1f877361fe9ba9399e9}\label{classPhysicc_1_1Collider_acc63388d3ff6d1f877361fe9ba9399e9}} 
+\index{Physicc::Collider@{Physicc::Collider}!setRotate@{setRotate}}
+\index{setRotate@{setRotate}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{setRotate()}{setRotate()}}
+{\footnotesize\ttfamily void Physicc\+::\+Collider\+::set\+Rotate (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{rotate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set rotation of object about it\textquotesingle{}s center. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rotate} & vec3 containing rotation values about x, y, z axes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a077f93e7ac06bec3256c5ba4dc753074}\label{classPhysicc_1_1Collider_a077f93e7ac06bec3256c5ba4dc753074}} 
+\index{Physicc::Collider@{Physicc::Collider}!setScale@{setScale}}
+\index{setScale@{setScale}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{setScale()}{setScale()}}
+{\footnotesize\ttfamily void Physicc\+::\+Collider\+::set\+Scale (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get Position of object\textquotesingle{}s center 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale} & New scale of the object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPhysicc_1_1Collider_a408c09f827affab3d149464058a4d5b1}\label{classPhysicc_1_1Collider_a408c09f827affab3d149464058a4d5b1}} 
+\index{Physicc::Collider@{Physicc::Collider}!updateTransform@{updateTransform}}
+\index{updateTransform@{updateTransform}!Physicc::Collider@{Physicc::Collider}}
+\doxysubsubsection{\texorpdfstring{updateTransform()}{updateTransform()}}
+{\footnotesize\ttfamily void Physicc\+::\+Collider\+::update\+Transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update Transform for rendering. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physicc/include/collider.\+hpp\item 
+Physicc/src/\mbox{\hyperlink{collider_8cpp}{collider.\+cpp}}\end{DoxyCompactItemize}

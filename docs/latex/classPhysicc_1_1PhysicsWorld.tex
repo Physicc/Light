@@ -1,0 +1,83 @@
+\hypertarget{classPhysicc_1_1PhysicsWorld}{}\doxysection{Physicc\+::Physics\+World Class Reference}
+\label{classPhysicc_1_1PhysicsWorld}\index{Physicc::PhysicsWorld@{Physicc::PhysicsWorld}}
+
+
+World\textquotesingle{}s Physics Class.  
+
+
+
+
+{\ttfamily \#include $<$physicsworld.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPhysicc_1_1PhysicsWorld_af66a80af9880b8ad7861ec6ed02bb2a8}{Physics\+World}} (const glm\+::vec3 \&gravity)
+\begin{DoxyCompactList}\small\item\em Physics World initialisation with gravity. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPhysicc_1_1PhysicsWorld_a48c15867a7acb749210f027a2739ae3d}\label{classPhysicc_1_1PhysicsWorld_a48c15867a7acb749210f027a2739ae3d}} 
+void {\bfseries set\+Gravity} (const glm\+::vec3 \&gravity)
+\item 
+\mbox{\Hypertarget{classPhysicc_1_1PhysicsWorld_aaf41d6c825fdcb32e9cc877615d885f4}\label{classPhysicc_1_1PhysicsWorld_aaf41d6c825fdcb32e9cc877615d885f4}} 
+glm\+::vec3 {\bfseries get\+Gravity} () const
+\item 
+void \mbox{\hyperlink{classPhysicc_1_1PhysicsWorld_a3fcac04df8ab106b114a7c3e711d47b6}{add\+Rigid\+Body}} (const \mbox{\hyperlink{classPhysicc_1_1RigidBody}{Rigid\+Body}} \&object)
+\begin{DoxyCompactList}\small\item\em Add a new \mbox{\hyperlink{classPhysicc_1_1RigidBody}{Rigid\+Body}} to m\+\_\+objects. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPhysicc_1_1PhysicsWorld_ae9e40610278c1e5a5651eca7ca27e12c}{step\+Simulation}} (float timestep)
+\begin{DoxyCompactList}\small\item\em steps the simulation by time timestep \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+World\textquotesingle{}s Physics Class. 
+
+This class describes and propagates the properties of each object using the Physics Model. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1PhysicsWorld_af66a80af9880b8ad7861ec6ed02bb2a8}\label{classPhysicc_1_1PhysicsWorld_af66a80af9880b8ad7861ec6ed02bb2a8}} 
+\index{Physicc::PhysicsWorld@{Physicc::PhysicsWorld}!PhysicsWorld@{PhysicsWorld}}
+\index{PhysicsWorld@{PhysicsWorld}!Physicc::PhysicsWorld@{Physicc::PhysicsWorld}}
+\doxysubsubsection{\texorpdfstring{PhysicsWorld()}{PhysicsWorld()}}
+{\footnotesize\ttfamily Physicc\+::\+Physics\+World\+::\+Physics\+World (\begin{DoxyParamCaption}\item[{const glm\+::vec3 \&}]{gravity }\end{DoxyParamCaption})}
+
+
+
+Physics World initialisation with gravity. 
+
+This initialises the Physics World with gravity, input from the ---?---. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1PhysicsWorld_a3fcac04df8ab106b114a7c3e711d47b6}\label{classPhysicc_1_1PhysicsWorld_a3fcac04df8ab106b114a7c3e711d47b6}} 
+\index{Physicc::PhysicsWorld@{Physicc::PhysicsWorld}!addRigidBody@{addRigidBody}}
+\index{addRigidBody@{addRigidBody}!Physicc::PhysicsWorld@{Physicc::PhysicsWorld}}
+\doxysubsubsection{\texorpdfstring{addRigidBody()}{addRigidBody()}}
+{\footnotesize\ttfamily void Physicc\+::\+Physics\+World\+::add\+Rigid\+Body (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classPhysicc_1_1RigidBody}{Rigid\+Body}} \&}]{object }\end{DoxyParamCaption})}
+
+
+
+Add a new \mbox{\hyperlink{classPhysicc_1_1RigidBody}{Rigid\+Body}} to m\+\_\+objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & input, const \mbox{\hyperlink{classPhysicc_1_1RigidBody}{Rigid\+Body}}\& type \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPhysicc_1_1PhysicsWorld_ae9e40610278c1e5a5651eca7ca27e12c}\label{classPhysicc_1_1PhysicsWorld_ae9e40610278c1e5a5651eca7ca27e12c}} 
+\index{Physicc::PhysicsWorld@{Physicc::PhysicsWorld}!stepSimulation@{stepSimulation}}
+\index{stepSimulation@{stepSimulation}!Physicc::PhysicsWorld@{Physicc::PhysicsWorld}}
+\doxysubsubsection{\texorpdfstring{stepSimulation()}{stepSimulation()}}
+{\footnotesize\ttfamily void Physicc\+::\+Physics\+World\+::step\+Simulation (\begin{DoxyParamCaption}\item[{float}]{time }\end{DoxyParamCaption})}
+
+
+
+steps the simulation by time timestep 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestep} & input, float type, time interval \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physicc/include/physicsworld.\+hpp\item 
+Physicc/src/\mbox{\hyperlink{physicsworld_8cpp}{physicsworld.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,280 @@
+\hypertarget{classentt_1_1emitter}{}\doxysection{entt\+::emitter$<$ Derived $>$ Class Template Reference}
+\label{classentt_1_1emitter}\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+
+
+General purpose event emitter.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}
+\begin{DoxyCompactList}\small\item\em Generic connection type for events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1emitter_a1200216d9abb1adb18db6035d99b60da}\label{classentt_1_1emitter_a1200216d9abb1adb18db6035d99b60da}} 
+{\footnotesize template$<$typename Event $>$ }\\using \mbox{\hyperlink{classentt_1_1emitter_a1200216d9abb1adb18db6035d99b60da}{listener}} = typename pool\+\_\+handler$<$ Event $>$\+::listener\+\_\+type
+\begin{DoxyCompactList}\small\item\em Type of listeners accepted for the given event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1emitter_af36907a2dc7cc0a6607533c67e072f92}\label{classentt_1_1emitter_af36907a2dc7cc0a6607533c67e072f92}} 
+\mbox{\hyperlink{classentt_1_1emitter_af36907a2dc7cc0a6607533c67e072f92}{emitter}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1emitter_af3d352c547768be34f03f0fbfdd30b43}\label{classentt_1_1emitter_af3d352c547768be34f03f0fbfdd30b43}} 
+virtual \mbox{\hyperlink{classentt_1_1emitter_af3d352c547768be34f03f0fbfdd30b43}{$\sim$emitter}} ()
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1emitter_a842fef69b914a160b0bcc211bb77b27b}\label{classentt_1_1emitter_a842fef69b914a160b0bcc211bb77b27b}} 
+\mbox{\hyperlink{classentt_1_1emitter_a842fef69b914a160b0bcc211bb77b27b}{emitter}} (\mbox{\hyperlink{classentt_1_1emitter}{emitter}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1emitter}{emitter}} \& \mbox{\hyperlink{classentt_1_1emitter_ab270d2c6d986621a781467e29e64629c}{operator=}} (\mbox{\hyperlink{classentt_1_1emitter}{emitter}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Event , typename... Args$>$ }\\void \mbox{\hyperlink{classentt_1_1emitter_a4ece275ff8736bcdcfb4103087801ea2}{publish}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Emits the given event. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Event $>$ }\\\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}$<$ Event $>$ \mbox{\hyperlink{classentt_1_1emitter_a0b580005200bb810a4a3e94320efcd8a}{on}} (\mbox{\hyperlink{classentt_1_1emitter_a1200216d9abb1adb18db6035d99b60da}{listener}}$<$ Event $>$ instance)
+\begin{DoxyCompactList}\small\item\em Registers a long-\/lived listener with the event emitter. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Event $>$ }\\\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}$<$ Event $>$ \mbox{\hyperlink{classentt_1_1emitter_a79834d452b0600ebe0e70c54f4a21fd6}{once}} (\mbox{\hyperlink{classentt_1_1emitter_a1200216d9abb1adb18db6035d99b60da}{listener}}$<$ Event $>$ instance)
+\begin{DoxyCompactList}\small\item\em Registers a short-\/lived listener with the event emitter. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Event $>$ }\\void \mbox{\hyperlink{classentt_1_1emitter_a9525364769b8daf55dd942599aa0a09c}{erase}} (\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}$<$ Event $>$ conn)
+\begin{DoxyCompactList}\small\item\em Disconnects a listener from the event emitter. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Event $>$ }\\void \mbox{\hyperlink{classentt_1_1emitter_a4e4324c59afee760ca13772eb6d2d522}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Disconnects all the listeners for the given event type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classentt_1_1emitter_acedafaefe2c9c91282c84e79aef26a35}{clear}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Disconnects all the listeners. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Event $>$ }\\bool \mbox{\hyperlink{classentt_1_1emitter_a08c6111af231c9a82277069a3bf21b75}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Checks if there are listeners registered for the specific event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1emitter_afbac9d6fb49c28f06cb382715ed92ab9}{empty}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if there are listeners registered with the event emitter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Derived$>$\newline
+class entt\+::emitter$<$ Derived $>$}
+
+General purpose event emitter. 
+
+The emitter class template follows the C\+R\+TP idiom. To create a custom emitter type, derived classes must inherit directly from the base class as\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct }my\_emitter: \mbox{\hyperlink{classentt_1_1emitter_af36907a2dc7cc0a6607533c67e072f92}{emitter}}<my\_emitter> \{}
+\DoxyCodeLine{    \textcolor{comment}{// ...}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Pools for the type of events are created internally on the fly. It\textquotesingle{}s not required to specify in advance the full list of accepted types.~\newline
+ Moreover, whenever an event is published, an emitter provides the listeners with a reference to itself along with a reference to the event. Therefore listeners have an handy way to work with it without incurring in the need of capturing a reference to the emitter.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Derived} & Actual type of emitter that extends the class template. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1emitter_a4e4324c59afee760ca13772eb6d2d522}\label{classentt_1_1emitter_a4e4324c59afee760ca13772eb6d2d522}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!clear@{clear}}
+\index{clear@{clear}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+template$<$typename Event $>$ \\
+void \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disconnects all the listeners for the given event type. 
+
+All the connections previously returned for the given event are invalidated. Using them results in undefined behavior.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Event} & Type of event to reset. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{classentt_1_1emitter_acedafaefe2c9c91282c84e79aef26a35}\label{classentt_1_1emitter_acedafaefe2c9c91282c84e79aef26a35}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!clear@{clear}}
+\index{clear@{clear}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+void \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disconnects all the listeners. 
+
+All the connections previously returned are invalidated. Using them results in undefined behavior. \mbox{\Hypertarget{classentt_1_1emitter_a08c6111af231c9a82277069a3bf21b75}\label{classentt_1_1emitter_a08c6111af231c9a82277069a3bf21b75}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!empty@{empty}}
+\index{empty@{empty}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+template$<$typename Event $>$ \\
+bool \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if there are listeners registered for the specific event. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Event} & Type of event to test. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+True if there are no listeners registered, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1emitter_afbac9d6fb49c28f06cb382715ed92ab9}\label{classentt_1_1emitter_afbac9d6fb49c28f06cb382715ed92ab9}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!empty@{empty}}
+\index{empty@{empty}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+bool \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if there are listeners registered with the event emitter. 
+
+\begin{DoxyReturn}{Returns}
+True if there are no listeners registered, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1emitter_a9525364769b8daf55dd942599aa0a09c}\label{classentt_1_1emitter_a9525364769b8daf55dd942599aa0a09c}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!erase@{erase}}
+\index{erase@{erase}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+template$<$typename Event $>$ \\
+void \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::erase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}$<$ Event $>$}]{conn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disconnects a listener from the event emitter. 
+
+Do not use twice the same connection to disconnect a listener, it results in undefined behavior. Once used, discard the connection object.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Event} & Type of event of the connection. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em conn} & A valid connection. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1emitter_a0b580005200bb810a4a3e94320efcd8a}\label{classentt_1_1emitter_a0b580005200bb810a4a3e94320efcd8a}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!on@{on}}
+\index{on@{on}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{on()}{on()}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+template$<$typename Event $>$ \\
+\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}$<$Event$>$ \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::on (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1emitter_a1200216d9abb1adb18db6035d99b60da}{listener}}$<$ Event $>$}]{instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Registers a long-\/lived listener with the event emitter. 
+
+This method can be used to register a listener designed to be invoked more than once for the given event type.~\newline
+ The connection returned by the method can be freely discarded. It\textquotesingle{}s meant to be used later to disconnect the listener if required.
+
+The listener is as a callable object that can be moved and the type of which is {\itshape compatible} with {\ttfamily void(\+Event \&, Derived \&)}.
+
+\begin{DoxyNote}{Note}
+Whenever an event is emitted, the emitter provides the listener with a reference to the derived class. Listeners don\textquotesingle{}t have to capture those instances for later uses.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Event} & Type of event to which to connect the listener. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & The listener to register. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Connection object that can be used to disconnect the listener. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1emitter_a79834d452b0600ebe0e70c54f4a21fd6}\label{classentt_1_1emitter_a79834d452b0600ebe0e70c54f4a21fd6}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!once@{once}}
+\index{once@{once}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{once()}{once()}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+template$<$typename Event $>$ \\
+\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}$<$Event$>$ \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::once (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1emitter_a1200216d9abb1adb18db6035d99b60da}{listener}}$<$ Event $>$}]{instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Registers a short-\/lived listener with the event emitter. 
+
+This method can be used to register a listener designed to be invoked only once for the given event type.~\newline
+ The connection returned by the method can be freely discarded. It\textquotesingle{}s meant to be used later to disconnect the listener if required.
+
+The listener is as a callable object that can be moved and the type of which is {\itshape compatible} with {\ttfamily void(\+Event \&, Derived \&)}.
+
+\begin{DoxyNote}{Note}
+Whenever an event is emitted, the emitter provides the listener with a reference to the derived class. Listeners don\textquotesingle{}t have to capture those instances for later uses.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Event} & Type of event to which to connect the listener. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & The listener to register. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Connection object that can be used to disconnect the listener. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1emitter_ab270d2c6d986621a781467e29e64629c}\label{classentt_1_1emitter_ab270d2c6d986621a781467e29e64629c}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+\mbox{\hyperlink{classentt_1_1emitter}{emitter}}\& \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1emitter}{emitter}}$<$ Derived $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default move assignment operator. 
+
+\begin{DoxyReturn}{Returns}
+This emitter. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1emitter_a4ece275ff8736bcdcfb4103087801ea2}\label{classentt_1_1emitter_a4ece275ff8736bcdcfb4103087801ea2}} 
+\index{entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}!publish@{publish}}
+\index{publish@{publish}!entt::emitter$<$ Derived $>$@{entt::emitter$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+template$<$typename Event , typename... Args$>$ \\
+void \mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::publish (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Emits the given event. 
+
+All the listeners registered for the specific event type are invoked with the given event. The event type must either have a proper constructor for the arguments provided or be an aggregate type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Event} & Type of event to publish. \\
+\hline
+{\em Args} & Types of arguments to use to construct the event. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to initialize the event. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

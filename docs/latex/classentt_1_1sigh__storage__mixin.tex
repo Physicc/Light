@@ -1,0 +1,236 @@
+\hypertarget{classentt_1_1sigh__storage__mixin}{}\doxysection{entt\+::sigh\+\_\+storage\+\_\+mixin$<$ Type $>$ Class Template Reference}
+\label{classentt_1_1sigh__storage__mixin}\index{entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}}
+
+
+Mixin type to use to add signal support to storage types.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+
+
+Inheritance diagram for entt\+::sigh\+\_\+storage\+\_\+mixin$<$ Type $>$\+:
+% FIG 0
+
+
+Collaboration diagram for entt\+::sigh\+\_\+storage\+\_\+mixin$<$ Type $>$\+:
+% FIG 1
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_a0e2d25bd7c3072ffacab6fbed19e05bf}\label{classentt_1_1sigh__storage__mixin_a0e2d25bd7c3072ffacab6fbed19e05bf}} 
+using \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a0e2d25bd7c3072ffacab6fbed19e05bf}{value\+\_\+type}} = typename Type\+::value\+\_\+type
+\begin{DoxyCompactList}\small\item\em Underlying value type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}\label{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}} 
+using \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} = typename Type\+::entity\+\_\+type
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a88f40c7a5909c1d9fd7b88942159bb13}{on\+\_\+construct}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a sink object. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a28ee655d44d7bc8c077306e887b84b3c}{on\+\_\+update}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a sink object. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_aa1b4e1397a108fd5fcc427aac40397d4}{on\+\_\+destroy}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a sink object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\decltype(auto) \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a562525b1b03f7329d967e884fe2fe68c}{emplace}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} $>$ \&owner, const \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} entity, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Assigns entities to a storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename It , typename... Args$>$ }\\void \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_ab6741609011f1aafada37783ae7417a2}{insert}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} $>$ \&owner, It first, It last, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Assigns entities to a storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Func$>$ }\\decltype(auto) \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_abd92bd14b7c3da171a480ad622df3a5b}{patch}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} $>$ \&owner, const \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} entity, Func \&\&... func)
+\begin{DoxyCompactList}\small\item\em Patches the given instance for an entity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Type$>$\newline
+class entt\+::sigh\+\_\+storage\+\_\+mixin$<$ Type $>$}
+
+Mixin type to use to add signal support to storage types. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & The type of the underlying storage. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_a562525b1b03f7329d967e884fe2fe68c}\label{classentt_1_1sigh__storage__mixin_a562525b1b03f7329d967e884fe2fe68c}} 
+\index{entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}!emplace@{emplace}}
+\index{emplace@{emplace}!entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+template$<$typename... Args$>$ \\
+decltype(auto) \mbox{\hyperlink{classentt_1_1sigh__storage__mixin}{entt\+::sigh\+\_\+storage\+\_\+mixin}}$<$ Type $>$\+::emplace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} $>$ \&}]{owner,  }\item[{const \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}}}]{entity,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns entities to a storage. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to construct the object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em owner} & The registry that issued the request. \\
+\hline
+{\em entity} & A valid entity identifier. \\
+\hline
+{\em args} & Parameters to use to initialize the object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the newly created object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_ab6741609011f1aafada37783ae7417a2}\label{classentt_1_1sigh__storage__mixin_ab6741609011f1aafada37783ae7417a2}} 
+\index{entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}!insert@{insert}}
+\index{insert@{insert}!entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+template$<$typename It , typename... Args$>$ \\
+void \mbox{\hyperlink{classentt_1_1sigh__storage__mixin}{entt\+::sigh\+\_\+storage\+\_\+mixin}}$<$ Type $>$\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} $>$ \&}]{owner,  }\item[{It}]{first,  }\item[{It}]{last,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns entities to a storage. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em It} & Type of input iterator. \\
+\hline
+{\em Args} & Types of arguments to use to construct the objects assigned to the entities. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em owner} & The registry that issued the request. \\
+\hline
+{\em first} & An iterator to the first element of the range of entities. \\
+\hline
+{\em last} & An iterator past the last element of the range of entities. \\
+\hline
+{\em args} & Parameters to use to initialize the objects assigned to the entities. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_a88f40c7a5909c1d9fd7b88942159bb13}\label{classentt_1_1sigh__storage__mixin_a88f40c7a5909c1d9fd7b88942159bb13}} 
+\index{entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}!on\_construct@{on\_construct}}
+\index{on\_construct@{on\_construct}!entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{on\_construct()}{on\_construct()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+auto \mbox{\hyperlink{classentt_1_1sigh__storage__mixin}{entt\+::sigh\+\_\+storage\+\_\+mixin}}$<$ Type $>$\+::on\+\_\+construct (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a sink object. 
+
+The sink returned by this function can be used to receive notifications whenever a new instance is created and assigned to an entity.~\newline
+ The function type for a listener is equivalent to\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void(basic\_registry<entity\_type> \&, \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\_type}});}
+\end{DoxyCode}
+
+
+Listeners are invoked {\bfseries{after}} the object has been assigned to the entity.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classentt_1_1sink}{sink}}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+A temporary sink object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_aa1b4e1397a108fd5fcc427aac40397d4}\label{classentt_1_1sigh__storage__mixin_aa1b4e1397a108fd5fcc427aac40397d4}} 
+\index{entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}!on\_destroy@{on\_destroy}}
+\index{on\_destroy@{on\_destroy}!entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{on\_destroy()}{on\_destroy()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+auto \mbox{\hyperlink{classentt_1_1sigh__storage__mixin}{entt\+::sigh\+\_\+storage\+\_\+mixin}}$<$ Type $>$\+::on\+\_\+destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a sink object. 
+
+The sink returned by this function can be used to receive notifications whenever an instance is removed from an entity and thus destroyed.~\newline
+ The function type for a listener is equivalent to\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void(basic\_registry<entity\_type> \&, \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\_type}});}
+\end{DoxyCode}
+
+
+Listeners are invoked {\bfseries{before}} the object has been removed from the entity.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classentt_1_1sink}{sink}}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+A temporary sink object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_a28ee655d44d7bc8c077306e887b84b3c}\label{classentt_1_1sigh__storage__mixin_a28ee655d44d7bc8c077306e887b84b3c}} 
+\index{entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}!on\_update@{on\_update}}
+\index{on\_update@{on\_update}!entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{on\_update()}{on\_update()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+auto \mbox{\hyperlink{classentt_1_1sigh__storage__mixin}{entt\+::sigh\+\_\+storage\+\_\+mixin}}$<$ Type $>$\+::on\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a sink object. 
+
+The sink returned by this function can be used to receive notifications whenever an instance is explicitly updated.~\newline
+ The function type for a listener is equivalent to\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void(basic\_registry<entity\_type> \&, \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\_type}});}
+\end{DoxyCode}
+
+
+Listeners are invoked {\bfseries{after}} the object has been updated.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classentt_1_1sink}{sink}}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+A temporary sink object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1sigh__storage__mixin_abd92bd14b7c3da171a480ad622df3a5b}\label{classentt_1_1sigh__storage__mixin_abd92bd14b7c3da171a480ad622df3a5b}} 
+\index{entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}!patch@{patch}}
+\index{patch@{patch}!entt::sigh\_storage\_mixin$<$ Type $>$@{entt::sigh\_storage\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{patch()}{patch()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+template$<$typename... Func$>$ \\
+decltype(auto) \mbox{\hyperlink{classentt_1_1sigh__storage__mixin}{entt\+::sigh\+\_\+storage\+\_\+mixin}}$<$ Type $>$\+::patch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}} $>$ \&}]{owner,  }\item[{const \mbox{\hyperlink{classentt_1_1sigh__storage__mixin_a031de2e34d8e3b4f99e6677e57a71fc7}{entity\+\_\+type}}}]{entity,  }\item[{Func \&\&...}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Patches the given instance for an entity. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Types of the function objects to invoke. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em owner} & The registry that issued the request. \\
+\hline
+{\em entity} & A valid entity identifier. \\
+\hline
+{\em func} & Valid function objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the patched instance. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

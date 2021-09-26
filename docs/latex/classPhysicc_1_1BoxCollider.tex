@@ -1,0 +1,94 @@
+\hypertarget{classPhysicc_1_1BoxCollider}{}\doxysection{Physicc\+::Box\+Collider Class Reference}
+\label{classPhysicc_1_1BoxCollider}\index{Physicc::BoxCollider@{Physicc::BoxCollider}}
+
+
+\mbox{\hyperlink{classPhysicc_1_1BoxCollider}{Box\+Collider}} class.  
+
+
+
+
+{\ttfamily \#include $<$collider.\+hpp$>$}
+
+
+
+Inheritance diagram for Physicc\+::Box\+Collider\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classPhysicc_1_1BoxCollider__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Physicc\+::Box\+Collider\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classPhysicc_1_1BoxCollider__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPhysicc_1_1BoxCollider_a34f9b13ae3ab97041465266717ab2ef9}{Box\+Collider}} (glm\+::vec3 position=glm\+::vec3(0), glm\+::vec3 rotation=glm\+::vec3(0), glm\+::vec3 scale=glm\+::vec3(1))
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classPhysicc_1_1BoxCollider}{Box\+Collider}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Bounding\+Volume\+::\+A\+A\+BB}} \mbox{\hyperlink{classPhysicc_1_1BoxCollider_a0299ebde972b829538c182104fa8f0fc}{get\+A\+A\+BB}} () const override
+\begin{DoxyCompactList}\small\item\em Computes and returns Axis Aligned Bounding Box of Box shaped object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classPhysicc_1_1BoxCollider}{Box\+Collider}} class. 
+
+Box shaped collider, holds the shape and transform of the body. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1BoxCollider_a34f9b13ae3ab97041465266717ab2ef9}\label{classPhysicc_1_1BoxCollider_a34f9b13ae3ab97041465266717ab2ef9}} 
+\index{Physicc::BoxCollider@{Physicc::BoxCollider}!BoxCollider@{BoxCollider}}
+\index{BoxCollider@{BoxCollider}!Physicc::BoxCollider@{Physicc::BoxCollider}}
+\doxysubsubsection{\texorpdfstring{BoxCollider()}{BoxCollider()}}
+{\footnotesize\ttfamily Physicc\+::\+Box\+Collider\+::\+Box\+Collider (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{position = {\ttfamily glm\+:\+:vec3(0)},  }\item[{glm\+::vec3}]{rotation = {\ttfamily glm\+:\+:vec3(0)},  }\item[{glm\+::vec3}]{scale = {\ttfamily glm\+:\+:vec3(1)} }\end{DoxyParamCaption})}
+
+
+
+Creates a \mbox{\hyperlink{classPhysicc_1_1BoxCollider}{Box\+Collider}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position of object in global space \\
+\hline
+{\em rotation} & Rotation about each of the axis in local space \\
+\hline
+{\em scale} & Scale of the object along each axis \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPhysicc_1_1BoxCollider_a0299ebde972b829538c182104fa8f0fc}\label{classPhysicc_1_1BoxCollider_a0299ebde972b829538c182104fa8f0fc}} 
+\index{Physicc::BoxCollider@{Physicc::BoxCollider}!getAABB@{getAABB}}
+\index{getAABB@{getAABB}!Physicc::BoxCollider@{Physicc::BoxCollider}}
+\doxysubsubsection{\texorpdfstring{getAABB()}{getAABB()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPhysicc_1_1BVImpl_1_1BaseBV}{Bounding\+Volume\+::\+A\+A\+BB}} Physicc\+::\+Box\+Collider\+::get\+A\+A\+BB (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Computes and returns Axis Aligned Bounding Box of Box shaped object. 
+
+Computes location of vertices in global space and finds the extreme points of A\+A\+BB by comparing each component of every vertex
+
+\begin{DoxyReturn}{Returns}
+Bounding\+Volume\+::\+A\+A\+BB 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classPhysicc_1_1Collider}{Physicc\+::\+Collider}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physicc/include/collider.\+hpp\item 
+Physicc/src/\mbox{\hyperlink{collider_8cpp}{collider.\+cpp}}\end{DoxyCompactItemize}

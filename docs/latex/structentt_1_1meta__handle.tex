@@ -1,0 +1,138 @@
+\hypertarget{structentt_1_1meta__handle}{}\doxysection{entt\+::meta\+\_\+handle Struct Reference}
+\label{structentt_1_1meta__handle}\index{entt::meta\_handle@{entt::meta\_handle}}
+
+
+Opaque pointers to instances of any type.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1meta__handle_a8d02bbf3a8088aa698db4491374dbf4c}\label{structentt_1_1meta__handle_a8d02bbf3a8088aa698db4491374dbf4c}} 
+\mbox{\hyperlink{structentt_1_1meta__handle_a8d02bbf3a8088aa698db4491374dbf4c}{meta\+\_\+handle}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1meta__handle_acaaa33d743703cf1af62691de0b86f50}\label{structentt_1_1meta__handle_acaaa33d743703cf1af62691de0b86f50}} 
+\mbox{\hyperlink{structentt_1_1meta__handle_acaaa33d743703cf1af62691de0b86f50}{meta\+\_\+handle}} (const \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Default copy constructor, deleted on purpose. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1meta__handle_aa988b1809a9687be4d25f21722075da5}\label{structentt_1_1meta__handle_aa988b1809a9687be4d25f21722075da5}} 
+\mbox{\hyperlink{structentt_1_1meta__handle_aa988b1809a9687be4d25f21722075da5}{meta\+\_\+handle}} (\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \& \mbox{\hyperlink{structentt_1_1meta__handle_a750eb55693845b28da117db4d342b8e6}{operator=}} (const \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Default copy assignment operator, deleted on purpose. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \& \mbox{\hyperlink{structentt_1_1meta__handle_aacfd03669af75ce2684917e8e9f90132}{operator=}} (\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$\+Type$>$, meta\+\_\+handle$>$$>$$>$ }\\\mbox{\hyperlink{structentt_1_1meta__handle_adc154ecd4c341378dafc2c4d96c24c09}{meta\+\_\+handle}} (Type \&value) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Creates a handle that points to an unmanaged object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__handle_a759d3375fd8e5811ca898cb8d6740eda}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns false if a handle is invalid, true otherwise. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$ \mbox{\hyperlink{structentt_1_1meta__handle_ad1309701800c7727eb519ee14b655e30}{operator-\/$>$}} ()
+\begin{DoxyCompactList}\small\item\em Access operator for accessing the contained opaque object. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$ \mbox{\hyperlink{structentt_1_1meta__handle_aeaeac6808357732eeb2ce615c7ccb0eb}{operator-\/$>$}} () const
+\begin{DoxyCompactList}\small\item\em Access operator for accessing the contained opaque object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Opaque pointers to instances of any type. 
+
+A handle doesn\textquotesingle{}t perform copies and isn\textquotesingle{}t responsible for the contained object. It doesn\textquotesingle{}t prolong the lifetime of the pointed instance.~\newline
+ Handles are used to generate references to actual objects when needed. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1meta__handle_adc154ecd4c341378dafc2c4d96c24c09}\label{structentt_1_1meta__handle_adc154ecd4c341378dafc2c4d96c24c09}} 
+\index{entt::meta\_handle@{entt::meta\_handle}!meta\_handle@{meta\_handle}}
+\index{meta\_handle@{meta\_handle}!entt::meta\_handle@{entt::meta\_handle}}
+\doxysubsubsection{\texorpdfstring{meta\_handle()}{meta\_handle()}}
+{\footnotesize\ttfamily template$<$typename Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$\+Type$>$, meta\+\_\+handle$>$$>$$>$ \\
+entt\+::meta\+\_\+handle\+::meta\+\_\+handle (\begin{DoxyParamCaption}\item[{Type \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a handle that points to an unmanaged object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the handle. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the handle. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1meta__handle_a759d3375fd8e5811ca898cb8d6740eda}\label{structentt_1_1meta__handle_a759d3375fd8e5811ca898cb8d6740eda}} 
+\index{entt::meta\_handle@{entt::meta\_handle}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::meta\_handle@{entt::meta\_handle}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+handle\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns false if a handle is invalid, true otherwise. 
+
+\begin{DoxyReturn}{Returns}
+False if the handle is invalid, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__handle_ad1309701800c7727eb519ee14b655e30}\label{structentt_1_1meta__handle_ad1309701800c7727eb519ee14b655e30}} 
+\index{entt::meta\_handle@{entt::meta\_handle}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!entt::meta\_handle@{entt::meta\_handle}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}$\ast$ entt\+::meta\+\_\+handle\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access operator for accessing the contained opaque object. 
+
+\begin{DoxyReturn}{Returns}
+A meta any that shares a reference to an unmanaged object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__handle_aeaeac6808357732eeb2ce615c7ccb0eb}\label{structentt_1_1meta__handle_aeaeac6808357732eeb2ce615c7ccb0eb}} 
+\index{entt::meta\_handle@{entt::meta\_handle}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!entt::meta\_handle@{entt::meta\_handle}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}$\ast$ entt\+::meta\+\_\+handle\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access operator for accessing the contained opaque object. 
+
+\begin{DoxyReturn}{Returns}
+A meta any that shares a reference to an unmanaged object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__handle_a750eb55693845b28da117db4d342b8e6}\label{structentt_1_1meta__handle_a750eb55693845b28da117db4d342b8e6}} 
+\index{entt::meta\_handle@{entt::meta\_handle}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::meta\_handle@{entt::meta\_handle}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}}\& entt\+::meta\+\_\+handle\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Default copy assignment operator, deleted on purpose. 
+
+\begin{DoxyReturn}{Returns}
+This meta handle. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__handle_aacfd03669af75ce2684917e8e9f90132}\label{structentt_1_1meta__handle_aacfd03669af75ce2684917e8e9f90132}} 
+\index{entt::meta\_handle@{entt::meta\_handle}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::meta\_handle@{entt::meta\_handle}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}}\& entt\+::meta\+\_\+handle\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default move assignment operator. 
+
+\begin{DoxyReturn}{Returns}
+This meta handle. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

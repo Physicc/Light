@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="entt::type_list_contains\l\< List, Type \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structentt_1_1type__list__contains.html",tooltip="Provides the member constant value to true if a type list contains a given type, false otherwise."];
+}

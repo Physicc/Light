@@ -1,0 +1,245 @@
+\hypertarget{structentt_1_1basic__organizer_1_1vertex}{}\doxysection{entt\+::basic\+\_\+organizer$<$ Entity $>$\+::vertex Struct Reference}
+\label{structentt_1_1basic__organizer_1_1vertex}\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+
+
+\mbox{\hyperlink{structVertex}{Vertex}} type of a task graph defined as an adjacency list.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_aa0c8053ba7636d0dd6d6f211b922eba9}{vertex}} (const bool vtype, vertex\+\_\+data \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a6b02829b506330465c71a60cee7a6485}{data}}, std\+::vector$<$ std\+::size\+\_\+t $>$ edges)
+\begin{DoxyCompactList}\small\item\em Constructs a vertex of the task graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a7f4b548d37ab0d1fe9acb386592a46cc}{ro\+\_\+dependency}} (\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} $\ast$buffer, const std\+::size\+\_\+t length) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Fills a buffer with the type info objects for the writable resources of a vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a1d6fc48e720ec4322a7d91a0afc207bb}{rw\+\_\+dependency}} (\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} $\ast$buffer, const std\+::size\+\_\+t length) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Fills a buffer with the type info objects for the read-\/only resources of a vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_aa92c8d27812a6fbe2d2efb54044ec788}{ro\+\_\+count}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the number of read-\/only resources of a vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a9b219104a104b5cc77dd02ada605f3e8}{rw\+\_\+count}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the number of writable resources of a vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a1dca2c50f73b8a7c278e02087c6d284e}{top\+\_\+level}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if a vertex is also a top-\/level one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_ac30b7ce97db3f4ee6960501f6b1a3730}{info}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a type info object associated with a vertex. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_aff73dc0f271495331552c6b640627250}{name}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a user defined name associated with a vertex, if any. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__organizer_a8eb83a2af62a10e9515776b8f26b1edc}{function\+\_\+type}} $\ast$ \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a66e8ee0adfdf3f7be4ee10e3b03a2db3}{callback}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the function associated with a vertex. \end{DoxyCompactList}\item 
+const void $\ast$ \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a6b02829b506330465c71a60cee7a6485}{data}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the payload associated with a vertex, if any. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::size\+\_\+t $>$ \& \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a33d9fb683cb3449f583d907c43251cd7}{children}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the list of nodes reachable from a given vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex_a9208ce46f18ba46229bacbc070fd8eec}{prepare}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1basic__organizer_a36b865f5d3802e48a0fa027c43e3a39c}{entity\+\_\+type}} $>$ \&reg) const
+\begin{DoxyCompactList}\small\item\em Prepares a registry and assures that all required resources are properly instantiated before using them. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity$>$\newline
+struct entt\+::basic\+\_\+organizer$<$ Entity $>$\+::vertex}
+
+\mbox{\hyperlink{structVertex}{Vertex}} type of a task graph defined as an adjacency list. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_aa0c8053ba7636d0dd6d6f211b922eba9}\label{structentt_1_1basic__organizer_1_1vertex_aa0c8053ba7636d0dd6d6f211b922eba9}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!vertex@{vertex}}
+\index{vertex@{vertex}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{vertex()}{vertex()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::vertex (\begin{DoxyParamCaption}\item[{const bool}]{vtype,  }\item[{vertex\+\_\+data}]{data,  }\item[{std\+::vector$<$ std\+::size\+\_\+t $>$}]{edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a vertex of the task graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vtype} & True if the vertex is a top-\/level one, false otherwise. \\
+\hline
+{\em data} & The data associated with the vertex. \\
+\hline
+{\em edges} & The indices of the children in the adjacency list. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a66e8ee0adfdf3f7be4ee10e3b03a2db3}\label{structentt_1_1basic__organizer_1_1vertex_a66e8ee0adfdf3f7be4ee10e3b03a2db3}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!callback@{callback}}
+\index{callback@{callback}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__organizer_a8eb83a2af62a10e9515776b8f26b1edc}{function\+\_\+type}}$\ast$ \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::callback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the function associated with a vertex. 
+
+\begin{DoxyReturn}{Returns}
+The function associated with the vertex. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a33d9fb683cb3449f583d907c43251cd7}\label{structentt_1_1basic__organizer_1_1vertex_a33d9fb683cb3449f583d907c43251cd7}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!children@{children}}
+\index{children@{children}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{children()}{children()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+const std\+::vector$<$std\+::size\+\_\+t$>$\& \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::children (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the list of nodes reachable from a given vertex. 
+
+\begin{DoxyReturn}{Returns}
+The list of nodes reachable from the vertex. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a6b02829b506330465c71a60cee7a6485}\label{structentt_1_1basic__organizer_1_1vertex_a6b02829b506330465c71a60cee7a6485}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!data@{data}}
+\index{data@{data}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+const void$\ast$ \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the payload associated with a vertex, if any. 
+
+\begin{DoxyReturn}{Returns}
+The payload associated with the vertex, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_ac30b7ce97db3f4ee6960501f6b1a3730}\label{structentt_1_1basic__organizer_1_1vertex_ac30b7ce97db3f4ee6960501f6b1a3730}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!info@{info}}
+\index{info@{info}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{info()}{info()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a type info object associated with a vertex. 
+
+\begin{DoxyReturn}{Returns}
+A properly initialized type info object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_aff73dc0f271495331552c6b640627250}\label{structentt_1_1basic__organizer_1_1vertex_aff73dc0f271495331552c6b640627250}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!name@{name}}
+\index{name@{name}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+const char$\ast$ \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a user defined name associated with a vertex, if any. 
+
+\begin{DoxyReturn}{Returns}
+The user defined name associated with the vertex, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a9208ce46f18ba46229bacbc070fd8eec}\label{structentt_1_1basic__organizer_1_1vertex_a9208ce46f18ba46229bacbc070fd8eec}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!prepare@{prepare}}
+\index{prepare@{prepare}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::prepare (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{classentt_1_1basic__organizer_a36b865f5d3802e48a0fa027c43e3a39c}{entity\+\_\+type}} $>$ \&}]{reg }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prepares a registry and assures that all required resources are properly instantiated before using them. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & A valid registry. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_aa92c8d27812a6fbe2d2efb54044ec788}\label{structentt_1_1basic__organizer_1_1vertex_aa92c8d27812a6fbe2d2efb54044ec788}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!ro\_count@{ro\_count}}
+\index{ro\_count@{ro\_count}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{ro\_count()}{ro\_count()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::ro\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of read-\/only resources of a vertex. 
+
+\begin{DoxyReturn}{Returns}
+The number of read-\/only resources of the vertex. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a7f4b548d37ab0d1fe9acb386592a46cc}\label{structentt_1_1basic__organizer_1_1vertex_a7f4b548d37ab0d1fe9acb386592a46cc}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!ro\_dependency@{ro\_dependency}}
+\index{ro\_dependency@{ro\_dependency}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{ro\_dependency()}{ro\_dependency()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::ro\+\_\+dependency (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} $\ast$}]{buffer,  }\item[{const std\+::size\+\_\+t}]{length }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fills a buffer with the type info objects for the writable resources of a vertex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & A buffer pre-\/allocated by the user. \\
+\hline
+{\em length} & The length of the user-\/supplied buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of type info objects written to the buffer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a9b219104a104b5cc77dd02ada605f3e8}\label{structentt_1_1basic__organizer_1_1vertex_a9b219104a104b5cc77dd02ada605f3e8}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!rw\_count@{rw\_count}}
+\index{rw\_count@{rw\_count}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{rw\_count()}{rw\_count()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::rw\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of writable resources of a vertex. 
+
+\begin{DoxyReturn}{Returns}
+The number of writable resources of the vertex. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a1d6fc48e720ec4322a7d91a0afc207bb}\label{structentt_1_1basic__organizer_1_1vertex_a1d6fc48e720ec4322a7d91a0afc207bb}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!rw\_dependency@{rw\_dependency}}
+\index{rw\_dependency@{rw\_dependency}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{rw\_dependency()}{rw\_dependency()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::rw\+\_\+dependency (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} $\ast$}]{buffer,  }\item[{const std\+::size\+\_\+t}]{length }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fills a buffer with the type info objects for the read-\/only resources of a vertex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & A buffer pre-\/allocated by the user. \\
+\hline
+{\em length} & The length of the user-\/supplied buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of type info objects written to the buffer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1basic__organizer_1_1vertex_a1dca2c50f73b8a7c278e02087c6d284e}\label{structentt_1_1basic__organizer_1_1vertex_a1dca2c50f73b8a7c278e02087c6d284e}} 
+\index{entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}!top\_level@{top\_level}}
+\index{top\_level@{top\_level}!entt::basic\_organizer$<$ Entity $>$::vertex@{entt::basic\_organizer$<$ Entity $>$::vertex}}
+\doxysubsubsection{\texorpdfstring{top\_level()}{top\_level()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::vertex\+::top\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a vertex is also a top-\/level one. 
+
+\begin{DoxyReturn}{Returns}
+True if the vertex is a top-\/level one, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

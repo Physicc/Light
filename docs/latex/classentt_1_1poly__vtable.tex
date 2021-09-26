@@ -1,0 +1,67 @@
+\hypertarget{classentt_1_1poly__vtable}{}\doxysection{entt\+::poly\+\_\+vtable$<$ Concept, Len, Align $>$ Class Template Reference}
+\label{classentt_1_1poly__vtable}\index{entt::poly\_vtable$<$ Concept, Len, Align $>$@{entt::poly\_vtable$<$ Concept, Len, Align $>$}}
+
+
+Static virtual table factory.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1poly__vtable_ad0c73c2e1f47b41454d922951b800c86}\label{classentt_1_1poly__vtable_ad0c73c2e1f47b41454d922951b800c86}} 
+using \mbox{\hyperlink{classentt_1_1poly__vtable_ad0c73c2e1f47b41454d922951b800c86}{type}} = decltype(make\+\_\+vtable(Concept\{\}))
+\begin{DoxyCompactList}\small\item\em Virtual table type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Type $>$ }\\static const auto $\ast$ \mbox{\hyperlink{classentt_1_1poly__vtable_a1cf1b279c051f86db9412af890c97267}{instance}} ()
+\begin{DoxyCompactList}\small\item\em Returns a static virtual table for a specific concept and type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Concept, std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$\newline
+class entt\+::poly\+\_\+vtable$<$ Concept, Len, Align $>$}
+
+Static virtual table factory. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Concept} & Concept descriptor. \\
+\hline
+{\em Len} & Size of the storage reserved for the small buffer optimization. \\
+\hline
+{\em Align} & Alignment requirement. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1poly__vtable_a1cf1b279c051f86db9412af890c97267}\label{classentt_1_1poly__vtable_a1cf1b279c051f86db9412af890c97267}} 
+\index{entt::poly\_vtable$<$ Concept, Len, Align $>$@{entt::poly\_vtable$<$ Concept, Len, Align $>$}!instance@{instance}}
+\index{instance@{instance}!entt::poly\_vtable$<$ Concept, Len, Align $>$@{entt::poly\_vtable$<$ Concept, Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily template$<$typename Concept , std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+template$<$typename Type $>$ \\
+static const auto$\ast$ \mbox{\hyperlink{classentt_1_1poly__vtable}{entt\+::poly\+\_\+vtable}}$<$ Concept, Len, Align $>$\+::instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Returns a static virtual table for a specific concept and type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & The type for which to generate the virtual table. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A static virtual table for the given concept and type. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

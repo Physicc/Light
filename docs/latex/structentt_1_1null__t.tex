@@ -1,0 +1,130 @@
+\hypertarget{structentt_1_1null__t}{}\doxysection{entt\+::null\+\_\+t Struct Reference}
+\label{structentt_1_1null__t}\index{entt::null\_t@{entt::null\_t}}
+
+
+Null object for all entity identifiers. ~\newline
+  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Entity $>$ }\\constexpr \mbox{\hyperlink{structentt_1_1null__t_a69f41fe0c144c6a578f6652edc0723d0}{operator Entity}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Converts the null object to identifiers of any type. \end{DoxyCompactList}\item 
+constexpr bool \mbox{\hyperlink{structentt_1_1null__t_a43fcb2407d33fb653ecf10c299d089b0}{operator==}} (const \mbox{\hyperlink{structentt_1_1null__t}{null\+\_\+t}} \&) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Compares two null objects. \end{DoxyCompactList}\item 
+constexpr bool \mbox{\hyperlink{structentt_1_1null__t_aed2550ac8672b21209b6b28c1672799f}{operator!=}} (const \mbox{\hyperlink{structentt_1_1null__t}{null\+\_\+t}} \&) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Compares two null objects. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Entity $>$ }\\constexpr bool \mbox{\hyperlink{structentt_1_1null__t_a35bc0cfd10aba424757bd9e8775c0cb2}{operator==}} (const Entity \&entity) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Compares a null object and an entity identifier of any type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Entity $>$ }\\constexpr bool \mbox{\hyperlink{structentt_1_1null__t_a90f0caf491a1ea3369f38b258fdd02c5}{operator!=}} (const Entity \&entity) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Compares a null object and an entity identifier of any type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Null object for all entity identifiers. ~\newline
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1null__t_a69f41fe0c144c6a578f6652edc0723d0}\label{structentt_1_1null__t_a69f41fe0c144c6a578f6652edc0723d0}} 
+\index{entt::null\_t@{entt::null\_t}!operator Entity@{operator Entity}}
+\index{operator Entity@{operator Entity}!entt::null\_t@{entt::null\_t}}
+\doxysubsubsection{\texorpdfstring{operator Entity()}{operator Entity()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+constexpr entt\+::null\+\_\+t\+::operator Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Converts the null object to identifiers of any type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & Type of entity identifier. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The null representation for the given identifier. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1null__t_a90f0caf491a1ea3369f38b258fdd02c5}\label{structentt_1_1null__t_a90f0caf491a1ea3369f38b258fdd02c5}} 
+\index{entt::null\_t@{entt::null\_t}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!entt::null\_t@{entt::null\_t}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+constexpr bool entt\+::null\+\_\+t\+::operator!= (\begin{DoxyParamCaption}\item[{const Entity \&}]{entity }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Compares a null object and an entity identifier of any type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & Type of entity identifier. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Entity identifier with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the two elements differ, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1null__t_aed2550ac8672b21209b6b28c1672799f}\label{structentt_1_1null__t_aed2550ac8672b21209b6b28c1672799f}} 
+\index{entt::null\_t@{entt::null\_t}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!entt::null\_t@{entt::null\_t}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily constexpr bool entt\+::null\+\_\+t\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structentt_1_1null__t}{null\+\_\+t}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Compares two null objects. 
+
+\begin{DoxyReturn}{Returns}
+False in all cases. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1null__t_a35bc0cfd10aba424757bd9e8775c0cb2}\label{structentt_1_1null__t_a35bc0cfd10aba424757bd9e8775c0cb2}} 
+\index{entt::null\_t@{entt::null\_t}!operator==@{operator==}}
+\index{operator==@{operator==}!entt::null\_t@{entt::null\_t}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+constexpr bool entt\+::null\+\_\+t\+::operator== (\begin{DoxyParamCaption}\item[{const Entity \&}]{entity }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Compares a null object and an entity identifier of any type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & Type of entity identifier. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Entity identifier with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the two elements differ, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1null__t_a43fcb2407d33fb653ecf10c299d089b0}\label{structentt_1_1null__t_a43fcb2407d33fb653ecf10c299d089b0}} 
+\index{entt::null\_t@{entt::null\_t}!operator==@{operator==}}
+\index{operator==@{operator==}!entt::null\_t@{entt::null\_t}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily constexpr bool entt\+::null\+\_\+t\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structentt_1_1null__t}{null\+\_\+t}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Compares two null objects. 
+
+\begin{DoxyReturn}{Returns}
+True in all cases. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

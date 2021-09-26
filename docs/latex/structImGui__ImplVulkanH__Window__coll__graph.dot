@@ -1,0 +1,20 @@
+digraph "ImGui_ImplVulkanH_Window"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ImGui_ImplVulkanH_Window",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" FrameSemaphores" ];
+  Node2 [label="ImGui_ImplVulkanH_FrameSemaphores",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImGui__ImplVulkanH__FrameSemaphores.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Frames" ];
+  Node3 [label="ImGui_ImplVulkanH_Frame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImGui__ImplVulkanH__Frame.html",tooltip=" "];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" SurfaceFormat" ];
+  Node4 [label="VkSurfaceFormatKHR",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkSurfaceFormatKHR.html",tooltip=" "];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" ClearValue" ];
+  Node5 [label="VkClearValue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$unionVkClearValue.html",tooltip=" "];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" color" ];
+  Node6 [label="VkClearColorValue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$unionVkClearColorValue.html",tooltip=" "];
+  Node7 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" depthStencil" ];
+  Node7 [label="VkClearDepthStencilValue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkClearDepthStencilValue.html",tooltip=" "];
+}

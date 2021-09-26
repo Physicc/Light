@@ -1,0 +1,398 @@
+\hypertarget{classentt_1_1basic__any}{}\doxysection{entt\+::basic\+\_\+any$<$ Len, Align $>$ Class Template Reference}
+\label{classentt_1_1basic__any}\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+
+
+A S\+BO friendly, type-\/safe container for single values of any type.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__any_a0fa1301c7772ebb7cd0fd63b9b5fddb1}\label{classentt_1_1basic__any_a0fa1301c7772ebb7cd0fd63b9b5fddb1}} 
+\mbox{\hyperlink{classentt_1_1basic__any_a0fa1301c7772ebb7cd0fd63b9b5fddb1}{basic\+\_\+any}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type , typename... Args$>$ }\\\mbox{\hyperlink{classentt_1_1basic__any_a46274e39f2a4a355ad3616356545708e}{basic\+\_\+any}} (std\+::in\+\_\+place\+\_\+type\+\_\+t$<$ Type $>$, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Constructs an any by directly initializing the new object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\\mbox{\hyperlink{classentt_1_1basic__any_af043c9a0f8b0d5fb3d4beeaeaeb22019}{basic\+\_\+any}} (std\+::reference\+\_\+wrapper$<$ Type $>$ value) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs an any that holds an unmanaged object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$\+Type$>$, basic\+\_\+any$>$$>$$>$ }\\\mbox{\hyperlink{classentt_1_1basic__any_afb1d00c509ae9127faa1cc2a5887bdab}{basic\+\_\+any}} (Type \&\&value)
+\begin{DoxyCompactList}\small\item\em Constructs an any from a given value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__any_a3196700b32252e5b59a79994b907afda}{basic\+\_\+any}} (const \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__any_a2810a09a90d69834e42bdc7bd1252449}{basic\+\_\+any}} (\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \&\&other) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__any_ab103382955f577cd8a714c7b5b89d9c6}\label{classentt_1_1basic__any_ab103382955f577cd8a714c7b5b89d9c6}} 
+\mbox{\hyperlink{classentt_1_1basic__any_ab103382955f577cd8a714c7b5b89d9c6}{$\sim$basic\+\_\+any}} ()
+\begin{DoxyCompactList}\small\item\em Frees the internal storage, whatever it means. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \& \mbox{\hyperlink{classentt_1_1basic__any_a2918b13d6957ccaae7796ea76be6807f}{operator=}} (const \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \& \mbox{\hyperlink{classentt_1_1basic__any_ab8d80c9b2be44588959c2a3cb451c162}{operator=}} (\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \& \mbox{\hyperlink{classentt_1_1basic__any_ab1dd53fe030c4149004716a47accfad0}{operator=}} (std\+::reference\+\_\+wrapper$<$ Type $>$ value) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Value assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$ std\+::decay\+\_\+t$<$ Type $>$, \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} $>$, \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \& $>$ \mbox{\hyperlink{classentt_1_1basic__any_a58bb0a9c97a6a75e5b7984acf6fd268b}{operator=}} (Type \&\&value)
+\begin{DoxyCompactList}\small\item\em Value assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} \mbox{\hyperlink{classentt_1_1basic__any_af11076822990a1db441e3f1ce20e03e6}{type}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the type of the contained object. \end{DoxyCompactList}\item 
+const void $\ast$ \mbox{\hyperlink{classentt_1_1basic__any_aa610337ac3455769ec1e1728e8086312}{data}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an opaque pointer to the contained instance. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{classentt_1_1basic__any_a18c77c794d1ec7ba41671a1c68103fbc}{data}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an opaque pointer to the contained instance. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type , typename... Args$>$ }\\void \mbox{\hyperlink{classentt_1_1basic__any_a49b67a9480577a425c502085858c0fb0}{emplace}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Replaces the contained object by creating a new instance directly. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__any_a0f267d3bbc148e7e240b902b1819c9a6}\label{classentt_1_1basic__any_a0f267d3bbc148e7e240b902b1819c9a6}} 
+void \mbox{\hyperlink{classentt_1_1basic__any_a0f267d3bbc148e7e240b902b1819c9a6}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Destroys contained object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__any_af2edc51a14602f18db93c11a59a10d2d}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns false if a wrapper is empty, true otherwise. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1basic__any_a6b891e7ded7ae2a6b4b9d5468625e8d7}{operator==}} (const \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \&other) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if two wrappers differ in their content. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \mbox{\hyperlink{classentt_1_1basic__any_a498e9613bd13096f01f793571e42e8de}{as\+\_\+ref}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Aliasing constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \mbox{\hyperlink{classentt_1_1basic__any_a2e4d2dea5af3cc973ad42c32e70221a7}{as\+\_\+ref}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Aliasing constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$\newline
+class entt\+::basic\+\_\+any$<$ Len, Align $>$}
+
+A S\+BO friendly, type-\/safe container for single values of any type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Len} & Size of the storage reserved for the small buffer optimization. \\
+\hline
+{\em Align} & Optional alignment requirement. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__any_a46274e39f2a4a355ad3616356545708e}\label{classentt_1_1basic__any_a46274e39f2a4a355ad3616356545708e}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!basic\_any@{basic\_any}}
+\index{basic\_any@{basic\_any}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_any()}{basic\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+template$<$typename Type , typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} (\begin{DoxyParamCaption}\item[{std\+::in\+\_\+place\+\_\+type\+\_\+t$<$ Type $>$}]{,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs an any by directly initializing the new object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+{\em Args} & Types of arguments to use to construct the new instance. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__any_af043c9a0f8b0d5fb3d4beeaeaeb22019}\label{classentt_1_1basic__any_af043c9a0f8b0d5fb3d4beeaeaeb22019}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!basic\_any@{basic\_any}}
+\index{basic\_any@{basic\_any}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_any()}{basic\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+template$<$typename Type $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} (\begin{DoxyParamCaption}\item[{std\+::reference\+\_\+wrapper$<$ Type $>$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an any that holds an unmanaged object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__any_afb1d00c509ae9127faa1cc2a5887bdab}\label{classentt_1_1basic__any_afb1d00c509ae9127faa1cc2a5887bdab}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!basic\_any@{basic\_any}}
+\index{basic\_any@{basic\_any}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_any()}{basic\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+template$<$typename Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$\+Type$>$, basic\+\_\+any$>$$>$$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} (\begin{DoxyParamCaption}\item[{Type \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an any from a given value. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__any_a3196700b32252e5b59a79994b907afda}\label{classentt_1_1basic__any_a3196700b32252e5b59a79994b907afda}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!basic\_any@{basic\_any}}
+\index{basic\_any@{basic\_any}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_any()}{basic\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}$<$ Len, Align $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to copy from. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__any_a2810a09a90d69834e42bdc7bd1252449}\label{classentt_1_1basic__any_a2810a09a90d69834e42bdc7bd1252449}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!basic\_any@{basic\_any}}
+\index{basic\_any@{basic\_any}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_any()}{basic\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}$<$ Len, Align $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to move from. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__any_a2e4d2dea5af3cc973ad42c32e70221a7}\label{classentt_1_1basic__any_a2e4d2dea5af3cc973ad42c32e70221a7}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!as\_ref@{as\_ref}}
+\index{as\_ref@{as\_ref}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{as\_ref()}{as\_ref()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::as\+\_\+ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Aliasing constructor. 
+
+\begin{DoxyReturn}{Returns}
+An any that shares a reference to an unmanaged object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_a498e9613bd13096f01f793571e42e8de}\label{classentt_1_1basic__any_a498e9613bd13096f01f793571e42e8de}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!as\_ref@{as\_ref}}
+\index{as\_ref@{as\_ref}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{as\_ref()}{as\_ref()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::as\+\_\+ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Aliasing constructor. 
+
+\begin{DoxyReturn}{Returns}
+An any that shares a reference to an unmanaged object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_aa610337ac3455769ec1e1728e8086312}\label{classentt_1_1basic__any_aa610337ac3455769ec1e1728e8086312}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!data@{data}}
+\index{data@{data}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+const void$\ast$ \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an opaque pointer to the contained instance. 
+
+\begin{DoxyReturn}{Returns}
+An opaque pointer the contained instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_a18c77c794d1ec7ba41671a1c68103fbc}\label{classentt_1_1basic__any_a18c77c794d1ec7ba41671a1c68103fbc}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!data@{data}}
+\index{data@{data}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+void$\ast$ \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an opaque pointer to the contained instance. 
+
+\begin{DoxyReturn}{Returns}
+An opaque pointer the contained instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_a49b67a9480577a425c502085858c0fb0}\label{classentt_1_1basic__any_a49b67a9480577a425c502085858c0fb0}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!emplace@{emplace}}
+\index{emplace@{emplace}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+template$<$typename Type , typename... Args$>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::emplace (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Replaces the contained object by creating a new instance directly. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+{\em Args} & Types of arguments to use to construct the new instance. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__any_af2edc51a14602f18db93c11a59a10d2d}\label{classentt_1_1basic__any_af2edc51a14602f18db93c11a59a10d2d}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns false if a wrapper is empty, true otherwise. 
+
+\begin{DoxyReturn}{Returns}
+False if the wrapper is empty, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_ab8d80c9b2be44588959c2a3cb451c162}\label{classentt_1_1basic__any_ab8d80c9b2be44588959c2a3cb451c162}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}\& \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}$<$ Len, Align $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move assignment operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to move from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_a2918b13d6957ccaae7796ea76be6807f}\label{classentt_1_1basic__any_a2918b13d6957ccaae7796ea76be6807f}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}\& \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}$<$ Len, Align $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assignment operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to copy from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_ab1dd53fe030c4149004716a47accfad0}\label{classentt_1_1basic__any_ab1dd53fe030c4149004716a47accfad0}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+template$<$typename Type $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}\& \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::operator= (\begin{DoxyParamCaption}\item[{std\+::reference\+\_\+wrapper$<$ Type $>$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Value assignment operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_a58bb0a9c97a6a75e5b7984acf6fd268b}\label{classentt_1_1basic__any_a58bb0a9c97a6a75e5b7984acf6fd268b}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+template$<$typename Type $>$ \\
+std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$Type$>$, \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}$>$, \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}} \&$>$ \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::operator= (\begin{DoxyParamCaption}\item[{Type \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Value assignment operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_a6b891e7ded7ae2a6b4b9d5468625e8d7}\label{classentt_1_1basic__any_a6b891e7ded7ae2a6b4b9d5468625e8d7}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__any}{basic\+\_\+any}}$<$ Len, Align $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if two wrappers differ in their content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Wrapper with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the two objects differ in their content, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__any_af11076822990a1db441e3f1ce20e03e6}\label{classentt_1_1basic__any_af11076822990a1db441e3f1ce20e03e6}} 
+\index{entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}!type@{type}}
+\index{type@{type}!entt::basic\_any$<$ Len, Align $>$@{entt::basic\_any$<$ Len, Align $>$}}
+\doxysubsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Len, std\+::size\+\_\+t Align$>$ \\
+\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} \mbox{\hyperlink{classentt_1_1basic__any}{entt\+::basic\+\_\+any}}$<$ Len, Align $>$\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the type of the contained object. 
+
+\begin{DoxyReturn}{Returns}
+The type of the contained object, if any. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$structLight_1_1Component.html" title=" " alt="" coords="5,132,143,159"/>
+<area shape="rect" id="node2" href="$structLight_1_1CameraComponent.html" title=" " alt="" coords="212,5,400,32"/>
+<area shape="rect" id="node3" href="$structLight_1_1LightComponent.html" title=" " alt="" coords="221,56,391,83"/>
+<area shape="rect" id="node4" href="$structLight_1_1MeshComponent.html" title=" " alt="" coords="220,107,392,133"/>
+<area shape="rect" id="node5" href="$structLight_1_1MeshRendererComponent.html" title=" " alt="" coords="191,157,421,184"/>
+<area shape="rect" id="node6" href="$structLight_1_1TagComponent.html" title=" " alt="" coords="227,208,385,235"/>
+<area shape="rect" id="node7" href="$structLight_1_1TransformComponent.html" title=" " alt="" coords="205,259,407,285"/>
+</map>

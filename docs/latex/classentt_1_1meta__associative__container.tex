@@ -1,0 +1,265 @@
+\hypertarget{classentt_1_1meta__associative__container}{}\doxysection{entt\+::meta\+\_\+associative\+\_\+container Class Reference}
+\label{classentt_1_1meta__associative__container}\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+
+
+Proxy object for associative containers.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Opaque iterator for associative containers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a9ef078a3364ff3d53cec2bda15f4782f}\label{classentt_1_1meta__associative__container_a9ef078a3364ff3d53cec2bda15f4782f}} 
+using \mbox{\hyperlink{classentt_1_1meta__associative__container_a9ef078a3364ff3d53cec2bda15f4782f}{size\+\_\+type}} = std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}\label{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}} 
+using \mbox{\hyperlink{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}{iterator}} = \mbox{\hyperlink{classentt_1_1meta__associative__container_1_1meta__iterator}{meta\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Meta iterator type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a1b8bb1a763476d6d7877d965c26d7dfe}\label{classentt_1_1meta__associative__container_a1b8bb1a763476d6d7877d965c26d7dfe}} 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_a1b8bb1a763476d6d7877d965c26d7dfe}{meta\+\_\+associative\+\_\+container}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\\mbox{\hyperlink{classentt_1_1meta__associative__container_ae2db58f249b454e65af78ce458b2a173}{meta\+\_\+associative\+\_\+container}} (std\+::in\+\_\+place\+\_\+type\+\_\+t$<$ Type $>$, \mbox{\hyperlink{classentt_1_1basic__any}{any}} instance) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Construct a proxy object for associative containers. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__associative__container_ad3d275af1e341d9277a2218218beea2d}{key\+\_\+only}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns true if a container is also key-\/only, false otherwise. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__associative__container_a0170d08e8b0713bd13adf9078a2167ad}{key\+\_\+type}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the meta key type of a container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__associative__container_a98275f3b5f2b79ba625de17f25bf420c}{mapped\+\_\+type}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the meta mapped type of a container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__associative__container_aa2f0441437bdfcf959bfb22a5fd7e10c}{value\+\_\+type}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the meta value type of a container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_a9ef078a3364ff3d53cec2bda15f4782f}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__associative__container_abf34bca3f0a5b40e1423f845ca3070ad}{size}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the size of a container. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__associative__container_af8d886eee95047430e1272ae419be3e4}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the content of a container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}{iterator}} \mbox{\hyperlink{classentt_1_1meta__associative__container_a86dcac50a81b30cd2720b3ac69318ada}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the first element of a container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}{iterator}} \mbox{\hyperlink{classentt_1_1meta__associative__container_a33088db7e4cf2bc52ec2d47fa62d4705}{end}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator that is past the last element of a container. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__associative__container_a292d90c2d8cbee3d6c2c32a899a9cb5e}{insert}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}, \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}})
+\begin{DoxyCompactList}\small\item\em Inserts an element (a key/value pair) into a container. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__associative__container_ab171d3ca8fd0787911540ac8c7cb2818}{erase}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}})
+\begin{DoxyCompactList}\small\item\em Removes the specified element from a container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}{iterator}} \mbox{\hyperlink{classentt_1_1meta__associative__container_a2886d0a5df87b31cb7c8804ab097b585}{find}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}})
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the element with a given key, if any. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container_a22b09675a3d752ca138ca5e5af7a6d80}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns false if a proxy is invalid, true otherwise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Proxy object for associative containers. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_ae2db58f249b454e65af78ce458b2a173}\label{classentt_1_1meta__associative__container_ae2db58f249b454e65af78ce458b2a173}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!meta\_associative\_container@{meta\_associative\_container}}
+\index{meta\_associative\_container@{meta\_associative\_container}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{meta\_associative\_container()}{meta\_associative\_container()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+entt\+::meta\+\_\+associative\+\_\+container\+::meta\+\_\+associative\+\_\+container (\begin{DoxyParamCaption}\item[{std\+::in\+\_\+place\+\_\+type\+\_\+t$<$ Type $>$}]{,  }\item[{\mbox{\hyperlink{classentt_1_1basic__any}{any}}}]{instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a proxy object for associative containers. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of container to wrap. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & The container to wrap. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a86dcac50a81b30cd2720b3ac69318ada}\label{classentt_1_1meta__associative__container_a86dcac50a81b30cd2720b3ac69318ada}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!begin@{begin}}
+\index{begin@{begin}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}{meta\+\_\+associative\+\_\+container\+::iterator}} entt\+::meta\+\_\+associative\+\_\+container\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator to the first element of a container. 
+
+\begin{DoxyReturn}{Returns}
+An iterator to the first element of the container. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_af8d886eee95047430e1272ae419be3e4}\label{classentt_1_1meta__associative__container_af8d886eee95047430e1272ae419be3e4}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!clear@{clear}}
+\index{clear@{clear}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+associative\+\_\+container\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the content of a container. 
+
+\begin{DoxyReturn}{Returns}
+True in case of success, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a33088db7e4cf2bc52ec2d47fa62d4705}\label{classentt_1_1meta__associative__container_a33088db7e4cf2bc52ec2d47fa62d4705}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!end@{end}}
+\index{end@{end}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}{meta\+\_\+associative\+\_\+container\+::iterator}} entt\+::meta\+\_\+associative\+\_\+container\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator that is past the last element of a container. 
+
+\begin{DoxyReturn}{Returns}
+An iterator that is past the last element of the container. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_ab171d3ca8fd0787911540ac8c7cb2818}\label{classentt_1_1meta__associative__container_ab171d3ca8fd0787911540ac8c7cb2818}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!erase@{erase}}
+\index{erase@{erase}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+associative\+\_\+container\+::erase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes the specified element from a container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the element to remove. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A bool denoting whether the removal took place. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a2886d0a5df87b31cb7c8804ab097b585}\label{classentt_1_1meta__associative__container_a2886d0a5df87b31cb7c8804ab097b585}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!find@{find}}
+\index{find@{find}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container_aafbaf281035562432a4e8e55443e9584}{meta\+\_\+associative\+\_\+container\+::iterator}} entt\+::meta\+\_\+associative\+\_\+container\+::find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator to the element with a given key, if any. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the element to search. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An iterator to the element with the given key, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a292d90c2d8cbee3d6c2c32a899a9cb5e}\label{classentt_1_1meta__associative__container_a292d90c2d8cbee3d6c2c32a899a9cb5e}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!insert@{insert}}
+\index{insert@{insert}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+associative\+\_\+container\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}}]{key,  }\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}}]{value = {\ttfamily \{\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts an element (a key/value pair) into a container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the element to insert. \\
+\hline
+{\em value} & The value of the element to insert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A bool denoting whether the insertion took place. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_ad3d275af1e341d9277a2218218beea2d}\label{classentt_1_1meta__associative__container_ad3d275af1e341d9277a2218218beea2d}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!key\_only@{key\_only}}
+\index{key\_only@{key\_only}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{key\_only()}{key\_only()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+associative\+\_\+container\+::key\+\_\+only (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns true if a container is also key-\/only, false otherwise. 
+
+\begin{DoxyReturn}{Returns}
+True if the associative container is also key-\/only, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a0170d08e8b0713bd13adf9078a2167ad}\label{classentt_1_1meta__associative__container_a0170d08e8b0713bd13adf9078a2167ad}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!key\_type@{key\_type}}
+\index{key\_type@{key\_type}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{key\_type()}{key\_type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+associative\+\_\+container\+::key\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the meta key type of a container. 
+
+\begin{DoxyReturn}{Returns}
+The meta key type of the a container. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a98275f3b5f2b79ba625de17f25bf420c}\label{classentt_1_1meta__associative__container_a98275f3b5f2b79ba625de17f25bf420c}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!mapped\_type@{mapped\_type}}
+\index{mapped\_type@{mapped\_type}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{mapped\_type()}{mapped\_type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+associative\+\_\+container\+::mapped\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the meta mapped type of a container. 
+
+\begin{DoxyReturn}{Returns}
+The meta mapped type of the a container. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_a22b09675a3d752ca138ca5e5af7a6d80}\label{classentt_1_1meta__associative__container_a22b09675a3d752ca138ca5e5af7a6d80}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+associative\+\_\+container\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns false if a proxy is invalid, true otherwise. 
+
+\begin{DoxyReturn}{Returns}
+False if the proxy is invalid, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_abf34bca3f0a5b40e1423f845ca3070ad}\label{classentt_1_1meta__associative__container_abf34bca3f0a5b40e1423f845ca3070ad}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!size@{size}}
+\index{size@{size}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container_a9ef078a3364ff3d53cec2bda15f4782f}{meta\+\_\+associative\+\_\+container\+::size\+\_\+type}} entt\+::meta\+\_\+associative\+\_\+container\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the size of a container. 
+
+\begin{DoxyReturn}{Returns}
+The size of the container. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__associative__container_aa2f0441437bdfcf959bfb22a5fd7e10c}\label{classentt_1_1meta__associative__container_aa2f0441437bdfcf959bfb22a5fd7e10c}} 
+\index{entt::meta\_associative\_container@{entt::meta\_associative\_container}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!entt::meta\_associative\_container@{entt::meta\_associative\_container}}
+\doxysubsubsection{\texorpdfstring{value\_type()}{value\_type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+associative\+\_\+container\+::value\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the meta value type of a container. 
+
+\begin{DoxyReturn}{Returns}
+The meta value type of the container. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

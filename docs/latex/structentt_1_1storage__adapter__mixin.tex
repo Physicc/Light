@@ -1,0 +1,140 @@
+\hypertarget{structentt_1_1storage__adapter__mixin}{}\doxysection{entt\+::storage\+\_\+adapter\+\_\+mixin$<$ Type $>$ Struct Template Reference}
+\label{structentt_1_1storage__adapter__mixin}\index{entt::storage\_adapter\_mixin$<$ Type $>$@{entt::storage\_adapter\_mixin$<$ Type $>$}}
+
+
+Mixin type to use to wrap basic storage classes.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+
+
+Inheritance diagram for entt\+::storage\+\_\+adapter\+\_\+mixin$<$ Type $>$\+:
+% FIG 0
+
+
+Collaboration diagram for entt\+::storage\+\_\+adapter\+\_\+mixin$<$ Type $>$\+:
+% FIG 1
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1storage__adapter__mixin_a5004a20309df319e85e315ffbb52d8df}\label{structentt_1_1storage__adapter__mixin_a5004a20309df319e85e315ffbb52d8df}} 
+using \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_a5004a20309df319e85e315ffbb52d8df}{value\+\_\+type}} = typename Type\+::value\+\_\+type
+\begin{DoxyCompactList}\small\item\em Type of the objects assigned to entities. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}\label{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}} 
+using \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} = typename Type\+::entity\+\_\+type
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\decltype(auto) \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_adce3f49e15f28c81d4d42fc2501aa972}{emplace}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} $>$ \&, const \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} entity, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Assigns entities to a storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename It , typename... Args$>$ }\\void \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_ae5a47ad69fca5a8593378cf420b1e078}{insert}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} $>$ \&, It first, It last, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Assigns entities to a storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Func$>$ }\\decltype(auto) \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_a600fe42b649d7569af42ee0a03f997de}{patch}} (\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} $>$ \&, const \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} entity, Func \&\&... func)
+\begin{DoxyCompactList}\small\item\em Patches the given instance for an entity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Type$>$\newline
+struct entt\+::storage\+\_\+adapter\+\_\+mixin$<$ Type $>$}
+
+Mixin type to use to wrap basic storage classes. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & The type of the underlying storage. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1storage__adapter__mixin_adce3f49e15f28c81d4d42fc2501aa972}\label{structentt_1_1storage__adapter__mixin_adce3f49e15f28c81d4d42fc2501aa972}} 
+\index{entt::storage\_adapter\_mixin$<$ Type $>$@{entt::storage\_adapter\_mixin$<$ Type $>$}!emplace@{emplace}}
+\index{emplace@{emplace}!entt::storage\_adapter\_mixin$<$ Type $>$@{entt::storage\_adapter\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+template$<$typename... Args$>$ \\
+decltype(auto) \mbox{\hyperlink{structentt_1_1storage__adapter__mixin}{entt\+::storage\+\_\+adapter\+\_\+mixin}}$<$ Type $>$\+::emplace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} $>$ \&}]{,  }\item[{const \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}}}]{entity,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns entities to a storage. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to construct the object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & A valid entity identifier. \\
+\hline
+{\em args} & Parameters to use to initialize the object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the newly created object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1storage__adapter__mixin_ae5a47ad69fca5a8593378cf420b1e078}\label{structentt_1_1storage__adapter__mixin_ae5a47ad69fca5a8593378cf420b1e078}} 
+\index{entt::storage\_adapter\_mixin$<$ Type $>$@{entt::storage\_adapter\_mixin$<$ Type $>$}!insert@{insert}}
+\index{insert@{insert}!entt::storage\_adapter\_mixin$<$ Type $>$@{entt::storage\_adapter\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+template$<$typename It , typename... Args$>$ \\
+void \mbox{\hyperlink{structentt_1_1storage__adapter__mixin}{entt\+::storage\+\_\+adapter\+\_\+mixin}}$<$ Type $>$\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} $>$ \&}]{,  }\item[{It}]{first,  }\item[{It}]{last,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns entities to a storage. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em It} & Type of input iterator. \\
+\hline
+{\em Args} & Types of arguments to use to construct the objects assigned to the entities. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em first} & An iterator to the first element of the range of entities. \\
+\hline
+{\em last} & An iterator past the last element of the range of entities. \\
+\hline
+{\em args} & Parameters to use to initialize the objects assigned to the entities. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structentt_1_1storage__adapter__mixin_a600fe42b649d7569af42ee0a03f997de}\label{structentt_1_1storage__adapter__mixin_a600fe42b649d7569af42ee0a03f997de}} 
+\index{entt::storage\_adapter\_mixin$<$ Type $>$@{entt::storage\_adapter\_mixin$<$ Type $>$}!patch@{patch}}
+\index{patch@{patch}!entt::storage\_adapter\_mixin$<$ Type $>$@{entt::storage\_adapter\_mixin$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{patch()}{patch()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+template$<$typename... Func$>$ \\
+decltype(auto) \mbox{\hyperlink{structentt_1_1storage__adapter__mixin}{entt\+::storage\+\_\+adapter\+\_\+mixin}}$<$ Type $>$\+::patch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}} $>$ \&}]{,  }\item[{const \mbox{\hyperlink{structentt_1_1storage__adapter__mixin_af4b2c512f61d1d14880f7dd6fe257b72}{entity\+\_\+type}}}]{entity,  }\item[{Func \&\&...}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Patches the given instance for an entity. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Types of the function objects to invoke. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & A valid entity identifier. \\
+\hline
+{\em func} & Valid function objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the patched instance. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

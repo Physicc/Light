@@ -1,0 +1,872 @@
+\hypertarget{classentt_1_1meta__type}{}\doxysection{entt\+::meta\+\_\+type Class Reference}
+\label{classentt_1_1meta__type}\index{entt::meta\_type@{entt::meta\_type}}
+
+
+Opaque wrapper for types.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1meta__type_a2dc19d640208c4f887a1abb5d4fe7f61}\label{classentt_1_1meta__type_a2dc19d640208c4f887a1abb5d4fe7f61}} 
+using \mbox{\hyperlink{classentt_1_1meta__type_a2dc19d640208c4f887a1abb5d4fe7f61}{node\+\_\+type}} = internal\+::meta\+\_\+type\+\_\+node
+\begin{DoxyCompactList}\small\item\em Node type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__type_af5c8ce79f2b30967048acc2f4c890ff4}\label{classentt_1_1meta__type_af5c8ce79f2b30967048acc2f4c890ff4}} 
+using \mbox{\hyperlink{classentt_1_1meta__type_af5c8ce79f2b30967048acc2f4c890ff4}{base\+\_\+node\+\_\+type}} = internal\+::meta\+\_\+base\+\_\+node
+\begin{DoxyCompactList}\small\item\em Node type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}\label{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}} 
+using \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} = typename node\+\_\+type\+::size\+\_\+type
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classentt_1_1meta__type_a6345b33ebbe6e64f88a68c1a475e8b7c}{meta\+\_\+type}} (\mbox{\hyperlink{classentt_1_1meta__type_a2dc19d640208c4f887a1abb5d4fe7f61}{node\+\_\+type}} $\ast$curr=nullptr) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs an instance from a given node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type_adbaa5c44410192fa9c180390557eabaa}{meta\+\_\+type}} (\mbox{\hyperlink{classentt_1_1meta__type_af5c8ce79f2b30967048acc2f4c890ff4}{base\+\_\+node\+\_\+type}} $\ast$curr) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs an instance from a given base node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} \mbox{\hyperlink{classentt_1_1meta__type_a8ffeefdb6d9254116ff37aac58ce7e58}{info}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the type info object of the underlying type. \end{DoxyCompactList}\item 
+id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the identifier assigned to a type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_a48818a482e6a05bda3331e1f196289ef}{size\+\_\+of}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the size of the underlying type if known. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a4a8aea6060bd82daf287bb6c63c1955a}{is\+\_\+void}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to void or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a222c4b6ae628f9ed6f90cd3573f788c8}{is\+\_\+integral}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to an integral type or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_acb95ab1d8952b3595b0d820cee1aa79d}{is\+\_\+floating\+\_\+point}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a floating-\/point type or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a708c42df22be9647eca05a8c9701a7b2}{is\+\_\+array}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to an array type or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_ab2d4f56d08063128d0b4bc5cb4b1b0c9}{is\+\_\+enum}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to an enum or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_ad3503617450b2814e53362206bb6fecd}{is\+\_\+union}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to an union or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a9d1e5e6cd4c097143a3055b8e56a8641}{is\+\_\+class}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a class or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a8eec2742984f892febcbc48a6192bdfd}{is\+\_\+pointer}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a pointer or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a5e2c3e0856d2eff7ce2403000c67c0d6}{is\+\_\+function\+\_\+pointer}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a function pointer or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a486ce6d737b37675403f3e719a2a51a2}{is\+\_\+member\+\_\+object\+\_\+pointer}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a pointer to data member or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a184083298b97b476f02509fd5379bdbb}{is\+\_\+member\+\_\+function\+\_\+pointer}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a pointer to member function or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a071a34b9d02eccc2671392aa324915a2}{is\+\_\+pointer\+\_\+like}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type is a pointer-\/like type or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a7046beb9dfeb498b427c3ffadc789bb4}{is\+\_\+sequence\+\_\+container}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a sequence container or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_ab5a7d5ad87f190e0c96d962bc27e30e7}{is\+\_\+associative\+\_\+container}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to an associative container or not. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_ac653566548909fa2b41a373e5d32e497}{is\+\_\+template\+\_\+specialization}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a type refers to a recognized class template specialization or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_a6be4573e4462d28fe8f2db38d2db5ee9}{template\+\_\+arity}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the number of template arguments, if any. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_a89cb39667fba50faa2f663b6955507c8}{template\+\_\+type}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a tag for the class template of the underlying type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_af5d8b26556cb180944c91aa0998d9c1f}{template\+\_\+arg}} (\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} index) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the type of the i-\/th template argument of a type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_aa679a936b6692453fb95c8163f6da8dd}{rank}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Provides the number of dimensions of an array type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_aa75218063e84b6c596201a353aa157c5}{extent}} (\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} dim=\{\}) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em The number of elements along the given dimension of an array type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_a89df1ddbee0b5aef2651f1fc712ada20}{remove\+\_\+pointer}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Provides the type for which the pointer is defined. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_a1cee84bcd77ef63480c84dba5c959f2b}{remove\+\_\+extent}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Provides the type for which the array is defined. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$ \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}}, internal\+::meta\+\_\+base\+\_\+node $>$ \mbox{\hyperlink{classentt_1_1meta__type_a9b5b19a9088eadf5ce935ebbdfd7f035}{base}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a range to use to visit top-\/level base meta types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__type_a3c85444a003cbd6ae1063563f4694af5}{base}} (const id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}}) const
+\begin{DoxyCompactList}\small\item\em Returns the base meta type associated with a given identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$ \mbox{\hyperlink{structentt_1_1meta__ctor}{meta\+\_\+ctor}} $>$ \mbox{\hyperlink{classentt_1_1meta__type_a62788454d7856b2ab9e390a54e6bbdee}{ctor}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a range to use to visit top-\/level constructors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{structentt_1_1meta__ctor}{meta\+\_\+ctor}} \mbox{\hyperlink{classentt_1_1meta__type_ad6fbae0fc5752d7cdb68d88d9e34de59}{ctor}} () const
+\begin{DoxyCompactList}\small\item\em Returns a constructor for a given list of types of arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$ \mbox{\hyperlink{structentt_1_1meta__data}{meta\+\_\+data}} $>$ \mbox{\hyperlink{classentt_1_1meta__type_a41eab08f4f4301ca187e487ede028ced}{data}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a range to use to visit top-\/level data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__data}{meta\+\_\+data}} \mbox{\hyperlink{classentt_1_1meta__type_a68a81b038954d1727a6bb051ed1e810c}{data}} (const id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}}) const
+\begin{DoxyCompactList}\small\item\em Returns the data associated with a given identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$ \mbox{\hyperlink{structentt_1_1meta__func}{meta\+\_\+func}} $>$ \mbox{\hyperlink{classentt_1_1meta__type_aa17fa5611d1d53e7548ab30af2b6ab81}{func}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a range to use to visit top-\/level functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__func}{meta\+\_\+func}} \mbox{\hyperlink{classentt_1_1meta__type_a3e345e527b4f36c2146254e1ed9b6649}{func}} (const id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}}) const
+\begin{DoxyCompactList}\small\item\em Returns the function associated with a given identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__type_acd24936afdaa36484a6e508d52f49663}{construct}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$const args, const \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} sz) const
+\begin{DoxyCompactList}\small\item\em Creates an instance of the underlying type, if possible. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__type_ad9c9a821b8047a5b48efadd2a045da2a}{construct}} (Args \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Creates an instance of the underlying type, if possible. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__type_ad846c918ce1e2f496b7464cc6a6d6d5e}{invoke}} (const id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}}, \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} instance, \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$const args, const \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} sz) const
+\begin{DoxyCompactList}\small\item\em Invokes a function given an identifier, if possible. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__type_acbeff9efb5dd4d79be3def6a1a9700bb}{invoke}} (const id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}}, \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} instance, Args \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Invokes a function given an identifier, if possible. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\bool \mbox{\hyperlink{classentt_1_1meta__type_a708bdf89918c3fdf2b3539454201f1e9}{set}} (const id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}}, \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} instance, Type \&\&value) const
+\begin{DoxyCompactList}\small\item\em Sets the value of a given variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__type_ab702cf8050c2625eaf9e4c82c8381117}{get}} (const id\+\_\+type \mbox{\hyperlink{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}{id}}, \mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}} instance) const
+\begin{DoxyCompactList}\small\item\em Gets the value of a given variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$ \mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}} $>$ \mbox{\hyperlink{classentt_1_1meta__type_aa57292530e23da5065c0fbe47337e3cb}{prop}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a range to use to visit top-\/level properties. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}} \mbox{\hyperlink{classentt_1_1meta__type_a4931fc02b58faf3b4c6c99e57d264691}{prop}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} key) const
+\begin{DoxyCompactList}\small\item\em Returns the property associated with a given key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type_ae8101e23b4b79a4452f063736f86b3ad}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns true if an object is valid, false otherwise. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__type_a838362aa3598bfa4cc18041d3445bace}{operator==}} (const \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \&other) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if two objects refer to the same type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classentt_1_1meta__type_a030f1335f97db286dc0b65969c50fa87}{reset}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Resets a type and all its parts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Opaque wrapper for types. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__type_a6345b33ebbe6e64f88a68c1a475e8b7c}\label{classentt_1_1meta__type_a6345b33ebbe6e64f88a68c1a475e8b7c}} 
+\index{entt::meta\_type@{entt::meta\_type}!meta\_type@{meta\_type}}
+\index{meta\_type@{meta\_type}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{meta\_type()}{meta\_type()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+type\+::meta\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__type_a2dc19d640208c4f887a1abb5d4fe7f61}{node\+\_\+type}} $\ast$}]{curr = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an instance from a given node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr} & The underlying node with which to construct the instance. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1meta__type_adbaa5c44410192fa9c180390557eabaa}\label{classentt_1_1meta__type_adbaa5c44410192fa9c180390557eabaa}} 
+\index{entt::meta\_type@{entt::meta\_type}!meta\_type@{meta\_type}}
+\index{meta\_type@{meta\_type}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{meta\_type()}{meta\_type()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+type\+::meta\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__type_af5c8ce79f2b30967048acc2f4c890ff4}{base\+\_\+node\+\_\+type}} $\ast$}]{curr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an instance from a given base node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr} & The base node with which to construct the instance. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__type_a9b5b19a9088eadf5ce935ebbdfd7f035}\label{classentt_1_1meta__type_a9b5b19a9088eadf5ce935ebbdfd7f035}} 
+\index{entt::meta\_type@{entt::meta\_type}!base@{base}}
+\index{base@{base}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{base()}{base()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}}, internal\+::meta\+\_\+base\+\_\+node$>$ entt\+::meta\+\_\+type\+::base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a range to use to visit top-\/level base meta types. 
+
+\begin{DoxyReturn}{Returns}
+An iterable range to use to visit top-\/level base meta types. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a3c85444a003cbd6ae1063563f4694af5}\label{classentt_1_1meta__type_a3c85444a003cbd6ae1063563f4694af5}} 
+\index{entt::meta\_type@{entt::meta\_type}!base@{base}}
+\index{base@{base}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{base()}{base()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+type\+::base (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the base meta type associated with a given identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The base meta type associated with the given identifier, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ad9c9a821b8047a5b48efadd2a045da2a}\label{classentt_1_1meta__type_ad9c9a821b8047a5b48efadd2a045da2a}} 
+\index{entt::meta\_type@{entt::meta\_type}!construct@{construct}}
+\index{construct@{construct}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{construct()}{construct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+type\+::construct (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an instance of the underlying type, if possible. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classentt_1_1meta__type_acd24936afdaa36484a6e508d52f49663}{construct}}
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to construct the instance. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the new instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_acd24936afdaa36484a6e508d52f49663}\label{classentt_1_1meta__type_acd24936afdaa36484a6e508d52f49663}} 
+\index{entt::meta\_type@{entt::meta\_type}!construct@{construct}}
+\index{construct@{construct}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{construct()}{construct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+type\+::construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$const}]{args,  }\item[{const \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}}}]{sz }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an instance of the underlying type, if possible. 
+
+Parameters must be such that a cast or conversion to the required types is possible. Otherwise, an empty and thus invalid wrapper is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+{\em sz} & Number of parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the new instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ad6fbae0fc5752d7cdb68d88d9e34de59}\label{classentt_1_1meta__type_ad6fbae0fc5752d7cdb68d88d9e34de59}} 
+\index{entt::meta\_type@{entt::meta\_type}!ctor@{ctor}}
+\index{ctor@{ctor}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{ctor()}{ctor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{structentt_1_1meta__ctor}{meta\+\_\+ctor}} entt\+::meta\+\_\+type\+::ctor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a constructor for a given list of types of arguments. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Constructor arguments. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The requested constructor, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a62788454d7856b2ab9e390a54e6bbdee}\label{classentt_1_1meta__type_a62788454d7856b2ab9e390a54e6bbdee}} 
+\index{entt::meta\_type@{entt::meta\_type}!ctor@{ctor}}
+\index{ctor@{ctor}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{ctor()}{ctor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$\mbox{\hyperlink{structentt_1_1meta__ctor}{meta\+\_\+ctor}}$>$ entt\+::meta\+\_\+type\+::ctor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a range to use to visit top-\/level constructors. 
+
+\begin{DoxyReturn}{Returns}
+An iterable range to use to visit top-\/level constructors. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a41eab08f4f4301ca187e487ede028ced}\label{classentt_1_1meta__type_a41eab08f4f4301ca187e487ede028ced}} 
+\index{entt::meta\_type@{entt::meta\_type}!data@{data}}
+\index{data@{data}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$\mbox{\hyperlink{structentt_1_1meta__data}{meta\+\_\+data}}$>$ entt\+::meta\+\_\+type\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a range to use to visit top-\/level data. 
+
+\begin{DoxyReturn}{Returns}
+An iterable range to use to visit top-\/level data. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a68a81b038954d1727a6bb051ed1e810c}\label{classentt_1_1meta__type_a68a81b038954d1727a6bb051ed1e810c}} 
+\index{entt::meta\_type@{entt::meta\_type}!data@{data}}
+\index{data@{data}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1meta__data}{meta\+\_\+data}} entt\+::meta\+\_\+type\+::data (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the data associated with a given identifier. 
+
+The data of the base classes will also be visited, if any.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The data associated with the given identifier, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_aa75218063e84b6c596201a353aa157c5}\label{classentt_1_1meta__type_aa75218063e84b6c596201a353aa157c5}} 
+\index{entt::meta\_type@{entt::meta\_type}!extent@{extent}}
+\index{extent@{extent}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{extent()}{extent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} entt\+::meta\+\_\+type\+::extent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}}}]{dim = {\ttfamily \{\}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The number of elements along the given dimension of an array type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dim} & The dimension of which to return the number of elements. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of elements along the given dimension in case of array types, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_aa17fa5611d1d53e7548ab30af2b6ab81}\label{classentt_1_1meta__type_aa17fa5611d1d53e7548ab30af2b6ab81}} 
+\index{entt::meta\_type@{entt::meta\_type}!func@{func}}
+\index{func@{func}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{func()}{func()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$\mbox{\hyperlink{structentt_1_1meta__func}{meta\+\_\+func}}$>$ entt\+::meta\+\_\+type\+::func (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a range to use to visit top-\/level functions. 
+
+\begin{DoxyReturn}{Returns}
+An iterable range to use to visit top-\/level functions. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a3e345e527b4f36c2146254e1ed9b6649}\label{classentt_1_1meta__type_a3e345e527b4f36c2146254e1ed9b6649}} 
+\index{entt::meta\_type@{entt::meta\_type}!func@{func}}
+\index{func@{func}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{func()}{func()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1meta__func}{meta\+\_\+func}} entt\+::meta\+\_\+type\+::func (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the function associated with a given identifier. 
+
+The functions of the base classes will also be visited, if any.~\newline
+ In the case of overloaded functions, the first one with the required identifier will be returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function associated with the given identifier, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ab702cf8050c2625eaf9e4c82c8381117}\label{classentt_1_1meta__type_ab702cf8050c2625eaf9e4c82c8381117}} 
+\index{entt::meta\_type@{entt::meta\_type}!get@{get}}
+\index{get@{get}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+type\+::get (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}}}]{instance }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the value of a given variable. 
+
+It must be possible to cast the instance to the parent type of the data member. Otherwise, invoking the getter results in an undefined behavior.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+{\em instance} & An opaque instance of the underlying type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the value of the underlying variable. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}\label{classentt_1_1meta__type_aeb8e5f88ad2c503b01bdd45cd80dd34c}} 
+\index{entt::meta\_type@{entt::meta\_type}!id@{id}}
+\index{id@{id}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{id()}{id()}}
+{\footnotesize\ttfamily id\+\_\+type entt\+::meta\+\_\+type\+::id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the identifier assigned to a type. 
+
+\begin{DoxyReturn}{Returns}
+The identifier assigned to the type. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a8ffeefdb6d9254116ff37aac58ce7e58}\label{classentt_1_1meta__type_a8ffeefdb6d9254116ff37aac58ce7e58}} 
+\index{entt::meta\_type@{entt::meta\_type}!info@{info}}
+\index{info@{info}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{info()}{info()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1type__info}{type\+\_\+info}} entt\+::meta\+\_\+type\+::info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the type info object of the underlying type. 
+
+\begin{DoxyReturn}{Returns}
+The type info object of the underlying type. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_acbeff9efb5dd4d79be3def6a1a9700bb}\label{classentt_1_1meta__type_acbeff9efb5dd4d79be3def6a1a9700bb}} 
+\index{entt::meta\_type@{entt::meta\_type}!invoke@{invoke}}
+\index{invoke@{invoke}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{invoke()}{invoke()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+type\+::invoke (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}}}]{instance,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Invokes a function given an identifier, if possible. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classentt_1_1meta__type_ad846c918ce1e2f496b7464cc6a6d6d5e}{invoke}}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to invoke the function. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & An opaque instance of the underlying type. \\
+\hline
+{\em args} & Parameters to use to invoke the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the new instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ad846c918ce1e2f496b7464cc6a6d6d5e}\label{classentt_1_1meta__type_ad846c918ce1e2f496b7464cc6a6d6d5e}} 
+\index{entt::meta\_type@{entt::meta\_type}!invoke@{invoke}}
+\index{invoke@{invoke}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{invoke()}{invoke()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+type\+::invoke (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}}}]{instance,  }\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $\ast$const}]{args,  }\item[{const \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}}}]{sz }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Invokes a function given an identifier, if possible. 
+
+It must be possible to cast the instance to the parent type of the member function. Otherwise, invoking the underlying function results in an undefined behavior.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structentt_1_1meta__func_a83fb3576c1a3873de1e1e041f759180b}{meta\+\_\+func\+::invoke}}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+{\em instance} & An opaque instance of the underlying type. \\
+\hline
+{\em args} & Parameters to use to invoke the function. \\
+\hline
+{\em sz} & Number of parameters to use to invoke the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the returned value, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a708c42df22be9647eca05a8c9701a7b2}\label{classentt_1_1meta__type_a708c42df22be9647eca05a8c9701a7b2}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_array@{is\_array}}
+\index{is\_array@{is\_array}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_array()}{is\_array()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to an array type or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is an array type, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ab5a7d5ad87f190e0c96d962bc27e30e7}\label{classentt_1_1meta__type_ab5a7d5ad87f190e0c96d962bc27e30e7}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_associative\_container@{is\_associative\_container}}
+\index{is\_associative\_container@{is\_associative\_container}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_associative\_container()}{is\_associative\_container()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+associative\+\_\+container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to an associative container or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the type is an associative container, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a9d1e5e6cd4c097143a3055b8e56a8641}\label{classentt_1_1meta__type_a9d1e5e6cd4c097143a3055b8e56a8641}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_class@{is\_class}}
+\index{is\_class@{is\_class}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_class()}{is\_class()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a class or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is a class, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ab2d4f56d08063128d0b4bc5cb4b1b0c9}\label{classentt_1_1meta__type_ab2d4f56d08063128d0b4bc5cb4b1b0c9}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_enum@{is\_enum}}
+\index{is\_enum@{is\_enum}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_enum()}{is\_enum()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+enum (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to an enum or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is an enum, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_acb95ab1d8952b3595b0d820cee1aa79d}\label{classentt_1_1meta__type_acb95ab1d8952b3595b0d820cee1aa79d}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_floating\_point@{is\_floating\_point}}
+\index{is\_floating\_point@{is\_floating\_point}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_floating\_point()}{is\_floating\_point()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+floating\+\_\+point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a floating-\/point type or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is a floating-\/point type, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a5e2c3e0856d2eff7ce2403000c67c0d6}\label{classentt_1_1meta__type_a5e2c3e0856d2eff7ce2403000c67c0d6}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_function\_pointer@{is\_function\_pointer}}
+\index{is\_function\_pointer@{is\_function\_pointer}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_function\_pointer()}{is\_function\_pointer()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+function\+\_\+pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a function pointer or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is a function pointer, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a222c4b6ae628f9ed6f90cd3573f788c8}\label{classentt_1_1meta__type_a222c4b6ae628f9ed6f90cd3573f788c8}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_integral@{is\_integral}}
+\index{is\_integral@{is\_integral}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_integral()}{is\_integral()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+integral (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to an integral type or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is an integral type, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a184083298b97b476f02509fd5379bdbb}\label{classentt_1_1meta__type_a184083298b97b476f02509fd5379bdbb}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_member\_function\_pointer@{is\_member\_function\_pointer}}
+\index{is\_member\_function\_pointer@{is\_member\_function\_pointer}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_member\_function\_pointer()}{is\_member\_function\_pointer()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+member\+\_\+function\+\_\+pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a pointer to member function or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is a pointer to member function, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a486ce6d737b37675403f3e719a2a51a2}\label{classentt_1_1meta__type_a486ce6d737b37675403f3e719a2a51a2}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_member\_object\_pointer@{is\_member\_object\_pointer}}
+\index{is\_member\_object\_pointer@{is\_member\_object\_pointer}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_member\_object\_pointer()}{is\_member\_object\_pointer()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+member\+\_\+object\+\_\+pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a pointer to data member or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is a pointer to data member, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a8eec2742984f892febcbc48a6192bdfd}\label{classentt_1_1meta__type_a8eec2742984f892febcbc48a6192bdfd}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_pointer@{is\_pointer}}
+\index{is\_pointer@{is\_pointer}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_pointer()}{is\_pointer()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a pointer or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is a pointer, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a071a34b9d02eccc2671392aa324915a2}\label{classentt_1_1meta__type_a071a34b9d02eccc2671392aa324915a2}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_pointer\_like@{is\_pointer\_like}}
+\index{is\_pointer\_like@{is\_pointer\_like}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_pointer\_like()}{is\_pointer\_like()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+pointer\+\_\+like (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type is a pointer-\/like type or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is a pointer-\/like one, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a7046beb9dfeb498b427c3ffadc789bb4}\label{classentt_1_1meta__type_a7046beb9dfeb498b427c3ffadc789bb4}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_sequence\_container@{is\_sequence\_container}}
+\index{is\_sequence\_container@{is\_sequence\_container}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_sequence\_container()}{is\_sequence\_container()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+sequence\+\_\+container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a sequence container or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the type is a sequence container, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ac653566548909fa2b41a373e5d32e497}\label{classentt_1_1meta__type_ac653566548909fa2b41a373e5d32e497}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_template\_specialization@{is\_template\_specialization}}
+\index{is\_template\_specialization@{is\_template\_specialization}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_template\_specialization()}{is\_template\_specialization()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+template\+\_\+specialization (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to a recognized class template specialization or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the type is a recognized class template specialization, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ad3503617450b2814e53362206bb6fecd}\label{classentt_1_1meta__type_ad3503617450b2814e53362206bb6fecd}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_union@{is\_union}}
+\index{is\_union@{is\_union}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_union()}{is\_union()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+union (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to an union or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is an union, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a4a8aea6060bd82daf287bb6c63c1955a}\label{classentt_1_1meta__type_a4a8aea6060bd82daf287bb6c63c1955a}} 
+\index{entt::meta\_type@{entt::meta\_type}!is\_void@{is\_void}}
+\index{is\_void@{is\_void}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{is\_void()}{is\_void()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::is\+\_\+void (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a type refers to void or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the underlying type is void, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_ae8101e23b4b79a4452f063736f86b3ad}\label{classentt_1_1meta__type_ae8101e23b4b79a4452f063736f86b3ad}} 
+\index{entt::meta\_type@{entt::meta\_type}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+type\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns true if an object is valid, false otherwise. 
+
+\begin{DoxyReturn}{Returns}
+True if the object is valid, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a838362aa3598bfa4cc18041d3445bace}\label{classentt_1_1meta__type_a838362aa3598bfa4cc18041d3445bace}} 
+\index{entt::meta\_type@{entt::meta\_type}!operator==@{operator==}}
+\index{operator==@{operator==}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+type\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if two objects refer to the same type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The object with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the objects refer to the same type, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_aa57292530e23da5065c0fbe47337e3cb}\label{classentt_1_1meta__type_aa57292530e23da5065c0fbe47337e3cb}} 
+\index{entt::meta\_type@{entt::meta\_type}!prop@{prop}}
+\index{prop@{prop}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{prop()}{prop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__range}{meta\+\_\+range}}$<$\mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}}$>$ entt\+::meta\+\_\+type\+::prop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a range to use to visit top-\/level properties. 
+
+\begin{DoxyReturn}{Returns}
+An iterable range to use to visit top-\/level properties. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a4931fc02b58faf3b4c6c99e57d264691}\label{classentt_1_1meta__type_a4931fc02b58faf3b4c6c99e57d264691}} 
+\index{entt::meta\_type@{entt::meta\_type}!prop@{prop}}
+\index{prop@{prop}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{prop()}{prop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structentt_1_1meta__prop}{meta\+\_\+prop}} entt\+::meta\+\_\+type\+::prop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the property associated with a given key. 
+
+Properties of the base classes will also be visited, if any.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to use to search for a property. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The property associated with the given key, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_aa679a936b6692453fb95c8163f6da8dd}\label{classentt_1_1meta__type_aa679a936b6692453fb95c8163f6da8dd}} 
+\index{entt::meta\_type@{entt::meta\_type}!rank@{rank}}
+\index{rank@{rank}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{rank()}{rank()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} entt\+::meta\+\_\+type\+::rank (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Provides the number of dimensions of an array type. 
+
+\begin{DoxyReturn}{Returns}
+The number of dimensions in case of array types, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a1cee84bcd77ef63480c84dba5c959f2b}\label{classentt_1_1meta__type_a1cee84bcd77ef63480c84dba5c959f2b}} 
+\index{entt::meta\_type@{entt::meta\_type}!remove\_extent@{remove\_extent}}
+\index{remove\_extent@{remove\_extent}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{remove\_extent()}{remove\_extent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+type\+::remove\+\_\+extent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Provides the type for which the array is defined. 
+
+\begin{DoxyReturn}{Returns}
+The type for which the array is defined or this type if it doesn\textquotesingle{}t refer to an array type. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a89df1ddbee0b5aef2651f1fc712ada20}\label{classentt_1_1meta__type_a89df1ddbee0b5aef2651f1fc712ada20}} 
+\index{entt::meta\_type@{entt::meta\_type}!remove\_pointer@{remove\_pointer}}
+\index{remove\_pointer@{remove\_pointer}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{remove\_pointer()}{remove\_pointer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+type\+::remove\+\_\+pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Provides the type for which the pointer is defined. 
+
+\begin{DoxyReturn}{Returns}
+The type for which the pointer is defined or this type if it doesn\textquotesingle{}t refer to a pointer type. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a030f1335f97db286dc0b65969c50fa87}\label{classentt_1_1meta__type_a030f1335f97db286dc0b65969c50fa87}} 
+\index{entt::meta\_type@{entt::meta\_type}!reset@{reset}}
+\index{reset@{reset}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void entt\+::meta\+\_\+type\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resets a type and all its parts. 
+
+This function resets a type and all its data members, member functions and properties, as well as its constructors, destructors and conversion functions if any.~\newline
+ Base classes aren\textquotesingle{}t reset but the link between the two types is removed.
+
+The type is also removed from the list of searchable types. \mbox{\Hypertarget{classentt_1_1meta__type_a708bdf89918c3fdf2b3539454201f1e9}\label{classentt_1_1meta__type_a708bdf89918c3fdf2b3539454201f1e9}} 
+\index{entt::meta\_type@{entt::meta\_type}!set@{set}}
+\index{set@{set}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+bool entt\+::meta\+\_\+type\+::set (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{\mbox{\hyperlink{structentt_1_1meta__handle}{meta\+\_\+handle}}}]{instance,  }\item[{Type \&\&}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the value of a given variable. 
+
+It must be possible to cast the instance to the parent type of the data member. Otherwise, invoking the setter results in an undefined behavior.~\newline
+ The type of the value must be such that a cast or conversion to the type of the variable is possible. Otherwise, invoking the setter does nothing.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of value to assign. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+{\em instance} & An opaque instance of the underlying type. \\
+\hline
+{\em value} & Parameter to use to set the underlying variable. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True in case of success, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a48818a482e6a05bda3331e1f196289ef}\label{classentt_1_1meta__type_a48818a482e6a05bda3331e1f196289ef}} 
+\index{entt::meta\_type@{entt::meta\_type}!size\_of@{size\_of}}
+\index{size\_of@{size\_of}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{size\_of()}{size\_of()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} entt\+::meta\+\_\+type\+::size\+\_\+of (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the size of the underlying type if known. 
+
+\begin{DoxyReturn}{Returns}
+The size of the underlying type if known, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_af5d8b26556cb180944c91aa0998d9c1f}\label{classentt_1_1meta__type_af5d8b26556cb180944c91aa0998d9c1f}} 
+\index{entt::meta\_type@{entt::meta\_type}!template\_arg@{template\_arg}}
+\index{template\_arg@{template\_arg}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{template\_arg()}{template\_arg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+type\+::template\+\_\+arg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}}}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the type of the i-\/th template argument of a type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the template argument of which to return the type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The type of the i-\/th template argument of a type. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a6be4573e4462d28fe8f2db38d2db5ee9}\label{classentt_1_1meta__type_a6be4573e4462d28fe8f2db38d2db5ee9}} 
+\index{entt::meta\_type@{entt::meta\_type}!template\_arity@{template\_arity}}
+\index{template\_arity@{template\_arity}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{template\_arity()}{template\_arity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type_a9d7a45ed06b058813b928e2778499a5e}{size\+\_\+type}} entt\+::meta\+\_\+type\+::template\+\_\+arity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of template arguments, if any. 
+
+\begin{DoxyReturn}{Returns}
+The number of template arguments, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__type_a89cb39667fba50faa2f663b6955507c8}\label{classentt_1_1meta__type_a89cb39667fba50faa2f663b6955507c8}} 
+\index{entt::meta\_type@{entt::meta\_type}!template\_type@{template\_type}}
+\index{template\_type@{template\_type}!entt::meta\_type@{entt::meta\_type}}
+\doxysubsubsection{\texorpdfstring{template\_type()}{template\_type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+type\+::template\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a tag for the class template of the underlying type. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structentt_1_1meta__class__template__tag}{meta\+\_\+class\+\_\+template\+\_\+tag}}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The tag for the class template of the underlying type. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

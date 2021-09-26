@@ -1,0 +1,179 @@
+This guide introduces the monitor related functions of G\+L\+FW. For details on a specific function in this category, see the \mbox{\hyperlink{group__monitor}{Monitor reference}}. There are also guides for the other areas of G\+L\+FW.
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{intro_guide}{Introduction to the A\+PI}}
+\item \mbox{\hyperlink{window_guide}{Window guide}}
+\item \mbox{\hyperlink{context_guide}{Context guide}}
+\item \mbox{\hyperlink{vulkan_guide}{Vulkan guide}}
+\item \mbox{\hyperlink{input_guide}{Input guide}}
+\end{DoxyItemize}\hypertarget{monitor_guide_monitor_object}{}\doxysection{Monitor objects}\label{monitor_guide_monitor_object}
+A monitor object represents a currently connected monitor and is represented as a pointer to the \href{https://en.wikipedia.org/wiki/Opaque_data_type}{\texttt{ opaque}} type \mbox{\hyperlink{group__monitor_ga8d9efd1cde9426692c73fe40437d0ae3}{G\+L\+F\+Wmonitor}}. Monitor objects cannot be created or destroyed by the application and retain their addresses until the monitors they represent are disconnected or until the library is \mbox{\hyperlink{intro_guide_intro_init_terminate}{terminated}}.
+
+Each monitor has a current video mode, a list of supported video modes, a virtual position, a human-\/readable name, an estimated physical size and a gamma ramp. One of the monitors is the primary monitor.
+
+The virtual position of a monitor is in \mbox{\hyperlink{intro_guide_coordinate_systems}{screen coordinates}} and, together with the current video mode, describes the viewports that the connected monitors provide into the virtual desktop that spans them.
+
+To see how G\+L\+FW views your monitor setup and its available video modes, run the {\ttfamily monitors} test program.\hypertarget{monitor_guide_monitor_monitors}{}\doxysubsection{Retrieving monitors}\label{monitor_guide_monitor_monitors}
+The primary monitor is returned by \mbox{\hyperlink{group__monitor_ga34befff4f9f0fae09dd8de6fb0eb4f3e}{glfw\+Get\+Primary\+Monitor}}. It is the user\textquotesingle{}s preferred monitor and is usually the one with global UI elements like task bar or menu bar.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga8d9efd1cde9426692c73fe40437d0ae3}{GLFWmonitor}}* primary = \mbox{\hyperlink{group__monitor_ga34befff4f9f0fae09dd8de6fb0eb4f3e}{glfwGetPrimaryMonitor}}();}
+\end{DoxyCode}
+
+
+You can retrieve all currently connected monitors with \mbox{\hyperlink{group__monitor_ga8c78e5db186ee10d00c053faf81998af}{glfw\+Get\+Monitors}}. See the reference documentation for the lifetime of the returned array.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} count;}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga8d9efd1cde9426692c73fe40437d0ae3}{GLFWmonitor}}** monitors = \mbox{\hyperlink{group__monitor_ga8c78e5db186ee10d00c053faf81998af}{glfwGetMonitors}}(\&count);}
+\end{DoxyCode}
+
+
+The primary monitor is always the first monitor in the returned array, but other monitors may be moved to a different index when a monitor is connected or disconnected.\hypertarget{monitor_guide_monitor_event}{}\doxysubsection{Monitor configuration changes}\label{monitor_guide_monitor_event}
+If you wish to be notified when a monitor is connected or disconnected, set a monitor callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga9fa7cc37cd79216a7fc0b77af54109a1}{glfwSetMonitorCallback}}(monitor\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the handle for the monitor that has been connected or disconnected and the event that occurred.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} monitor\_callback(\mbox{\hyperlink{group__monitor_ga8d9efd1cde9426692c73fe40437d0ae3}{GLFWmonitor}}* monitor, \textcolor{keywordtype}{int} event)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (event == GLFW\_CONNECTED)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The monitor was connected}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (event == GLFW\_DISCONNECTED)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The monitor was disconnected}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+If a monitor is disconnected, all windows that are full screen on it will be switched to windowed mode before the callback is called. Only \mbox{\hyperlink{group__monitor_ga91b8eb39ab135ffa70436028effdd4bd}{glfw\+Get\+Monitor\+Name}} and \mbox{\hyperlink{group__monitor_ga11bc263d3967b86e2ec3e5e48762206d}{glfw\+Get\+Monitor\+User\+Pointer}} will return useful values for a disconnected monitor and only before the monitor callback returns.\hypertarget{monitor_guide_monitor_properties}{}\doxysection{Monitor properties}\label{monitor_guide_monitor_properties}
+Each monitor has a current video mode, a list of supported video modes, a virtual position, a content scale, a human-\/readable name, a user pointer, an estimated physical size and a gamma ramp.\hypertarget{monitor_guide_monitor_modes}{}\doxysubsection{Video modes}\label{monitor_guide_monitor_modes}
+G\+L\+FW generally does a good job selecting a suitable video mode when you create a full screen window, change its video mode or make a windowed one full screen, but it is sometimes useful to know exactly which video modes are supported.
+
+Video modes are represented as \mbox{\hyperlink{structGLFWvidmode}{G\+L\+F\+Wvidmode}} structures. You can get an array of the video modes supported by a monitor with \mbox{\hyperlink{group__monitor_ga6e4beef7caeec2ae59d37a7a05fcb387}{glfw\+Get\+Video\+Modes}}. See the reference documentation for the lifetime of the returned array.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} count;}
+\DoxyCodeLine{\mbox{\hyperlink{structGLFWvidmode}{GLFWvidmode}}* modes = \mbox{\hyperlink{group__monitor_ga6e4beef7caeec2ae59d37a7a05fcb387}{glfwGetVideoModes}}(monitor, \&count);}
+\end{DoxyCode}
+
+
+To get the current video mode of a monitor call \mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfw\+Get\+Video\+Mode}}. See the reference documentation for the lifetime of the returned pointer.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{structGLFWvidmode}{GLFWvidmode}}* mode = \mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfwGetVideoMode}}(monitor);}
+\end{DoxyCode}
+
+
+The resolution of a video mode is specified in \mbox{\hyperlink{intro_guide_coordinate_systems}{screen coordinates}}, not pixels.\hypertarget{monitor_guide_monitor_size}{}\doxysubsection{Physical size}\label{monitor_guide_monitor_size}
+The physical size of a monitor in millimetres, or an estimation of it, can be retrieved with \mbox{\hyperlink{group__monitor_gad0e93a9e42b32394369cabbbdc1ab702}{glfw\+Get\+Monitor\+Physical\+Size}}. This has no relation to its current {\itshape resolution}, i.\+e. the width and height of its current \mbox{\hyperlink{monitor_guide_monitor_modes}{video mode}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} width\_mm, height\_mm;}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_gad0e93a9e42b32394369cabbbdc1ab702}{glfwGetMonitorPhysicalSize}}(monitor, \&width\_mm, \&height\_mm);}
+\end{DoxyCode}
+
+
+While this can be used to calculate the raw D\+PI of a monitor, this is often not useful. Instead use the \mbox{\hyperlink{monitor_guide_monitor_scale}{monitor content scale}} and \mbox{\hyperlink{window_guide_window_scale}{window content scale}} to scale your content.\hypertarget{monitor_guide_monitor_scale}{}\doxysubsection{Content scale}\label{monitor_guide_monitor_scale}
+The content scale for a monitor can be retrieved with \mbox{\hyperlink{group__monitor_ga28d856d94bea2ce8f09a67bb0346aaff}{glfw\+Get\+Monitor\+Content\+Scale}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{float} xscale, yscale;}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga28d856d94bea2ce8f09a67bb0346aaff}{glfwGetMonitorContentScale}}(monitor, \&xscale, \&yscale);}
+\end{DoxyCode}
+
+
+The content scale is the ratio between the current D\+PI and the platform\textquotesingle{}s default D\+PI. This is especially important for text and any UI elements. If the pixel dimensions of your UI scaled by this look appropriate on your machine then it should appear at a reasonable size on other machines regardless of their D\+PI and scaling settings. This relies on the system D\+PI and scaling settings being somewhat correct.
+
+The content scale may depend on both the monitor resolution and pixel density and on user settings. It may be very different from the raw D\+PI calculated from the physical size and current resolution.\hypertarget{monitor_guide_monitor_pos}{}\doxysubsection{Virtual position}\label{monitor_guide_monitor_pos}
+The position of the monitor on the virtual desktop, in \mbox{\hyperlink{intro_guide_coordinate_systems}{screen coordinates}}, can be retrieved with \mbox{\hyperlink{group__monitor_ga45b5481a614ad7beb2aade9746d07563}{glfw\+Get\+Monitor\+Pos}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} xpos, ypos;}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga45b5481a614ad7beb2aade9746d07563}{glfwGetMonitorPos}}(monitor, \&xpos, \&ypos);}
+\end{DoxyCode}
+\hypertarget{monitor_guide_monitor_workarea}{}\doxysubsection{Work area}\label{monitor_guide_monitor_workarea}
+The area of a monitor not occupied by global task bars or menu bars is the work area. This is specified in \mbox{\hyperlink{intro_guide_coordinate_systems}{screen coordinates}} and can be retrieved with \mbox{\hyperlink{group__monitor_ga5a3ac0f6e3786df47aabccfb5760b31d}{glfw\+Get\+Monitor\+Workarea}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} xpos, ypos, width, height;}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga5a3ac0f6e3786df47aabccfb5760b31d}{glfwGetMonitorWorkarea}}(monitor, \&xpos, \&ypos, \&width, \&height);}
+\end{DoxyCode}
+\hypertarget{monitor_guide_monitor_name}{}\doxysubsection{Human-\/readable name}\label{monitor_guide_monitor_name}
+The human-\/readable, U\+T\+F-\/8 encoded name of a monitor is returned by \mbox{\hyperlink{group__monitor_ga91b8eb39ab135ffa70436028effdd4bd}{glfw\+Get\+Monitor\+Name}}. See the reference documentation for the lifetime of the returned string.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name = \mbox{\hyperlink{group__monitor_ga91b8eb39ab135ffa70436028effdd4bd}{glfwGetMonitorName}}(monitor);}
+\end{DoxyCode}
+
+
+Monitor names are not guaranteed to be unique. Two monitors of the same model and make may have the same name. Only the monitor handle is guaranteed to be unique, and only until that monitor is disconnected.\hypertarget{monitor_guide_monitor_userptr}{}\doxysubsection{User pointer}\label{monitor_guide_monitor_userptr}
+Each monitor has a user pointer that can be set with \mbox{\hyperlink{group__monitor_ga6d89c74c1c293f0ab78a00c3c6d1ae44}{glfw\+Set\+Monitor\+User\+Pointer}} and queried with \mbox{\hyperlink{group__monitor_ga11bc263d3967b86e2ec3e5e48762206d}{glfw\+Get\+Monitor\+User\+Pointer}}. This can be used for any purpose you need and will not be modified by G\+L\+FW. The value will be kept until the monitor is disconnected or until the library is terminated.
+
+The initial value of the pointer is {\ttfamily N\+U\+LL}.\hypertarget{monitor_guide_monitor_gamma}{}\doxysubsection{Gamma ramp}\label{monitor_guide_monitor_gamma}
+The gamma ramp of a monitor can be set with \mbox{\hyperlink{group__monitor_gac9f36a1cfa10eab191d3029ea8bc9558}{glfw\+Set\+Gamma\+Ramp}}, which accepts a monitor handle and a pointer to a \mbox{\hyperlink{structGLFWgammaramp}{G\+L\+F\+Wgammaramp}} structure.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{structGLFWgammaramp}{GLFWgammaramp}} ramp;}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} red[256], green[256], blue[256];}
+\DoxyCodeLine{}
+\DoxyCodeLine{ramp.\mbox{\hyperlink{structGLFWgammaramp_ad620e1cffbff9a32c51bca46301b59a5}{size}} = 256;}
+\DoxyCodeLine{ramp.\mbox{\hyperlink{structGLFWgammaramp_a87eabbc644cdb77145caf4a0a1b5d9bd}{red}} = red;}
+\DoxyCodeLine{ramp.\mbox{\hyperlink{structGLFWgammaramp_acea1bf88573f37cb0583a0fc005bbd0c}{green}} = green;}
+\DoxyCodeLine{ramp.\mbox{\hyperlink{structGLFWgammaramp_abd4ac5a186d9c000b9313099898df32a}{blue}} = blue;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (i = 0;  i < ramp.\mbox{\hyperlink{structGLFWgammaramp_ad620e1cffbff9a32c51bca46301b59a5}{size}};  i++)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// Fill out gamma ramp arrays as desired}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_gac9f36a1cfa10eab191d3029ea8bc9558}{glfwSetGammaRamp}}(monitor, \&ramp);}
+\end{DoxyCode}
+
+
+The gamma ramp data is copied before the function returns, so there is no need to keep it around once the ramp has been set.
+
+It is recommended that your gamma ramp have the same size as the current gamma ramp for that monitor.
+
+The current gamma ramp for a monitor is returned by \mbox{\hyperlink{group__monitor_ga8105b3de53e6b20f161439dcf6201a04}{glfw\+Get\+Gamma\+Ramp}}. See the reference documentation for the lifetime of the returned structure.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{structGLFWgammaramp}{GLFWgammaramp}}* ramp = \mbox{\hyperlink{group__monitor_ga8105b3de53e6b20f161439dcf6201a04}{glfwGetGammaRamp}}(monitor);}
+\end{DoxyCode}
+
+
+If you wish to set a regular gamma ramp, you can have G\+L\+FW calculate it for you from the desired exponent with \mbox{\hyperlink{group__monitor_ga3e4ab484476c935b4cd0bf49a5c429d6}{glfw\+Set\+Gamma}}, which in turn calls \mbox{\hyperlink{group__monitor_gac9f36a1cfa10eab191d3029ea8bc9558}{glfw\+Set\+Gamma\+Ramp}} with the resulting ramp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga3e4ab484476c935b4cd0bf49a5c429d6}{glfwSetGamma}}(monitor, 1.0);}
+\end{DoxyCode}
+
+
+To experiment with gamma correction via the \mbox{\hyperlink{group__monitor_ga3e4ab484476c935b4cd0bf49a5c429d6}{glfw\+Set\+Gamma}} function, run the {\ttfamily gamma} test program.
+
+\begin{DoxyNote}{Note}
+The software controlled gamma ramp is applied {\itshape in addition} to the hardware gamma correction, which today is usually an approximation of s\+R\+GB gamma. This means that setting a perfectly linear ramp, or gamma 1.\+0, will produce the default (usually s\+R\+G\+B-\/like) behavior. 
+\end{DoxyNote}

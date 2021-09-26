@@ -1,0 +1,45 @@
+\hypertarget{structentt_1_1storage__traits}{}\doxysection{entt\+::storage\+\_\+traits$<$ Entity, Type, typename $>$ Struct Template Reference}
+\label{structentt_1_1storage__traits}\index{entt::storage\_traits$<$ Entity, Type, typename $>$@{entt::storage\_traits$<$ Entity, Type, typename $>$}}
+
+
+Defines the component-\/to-\/storage conversion.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1storage__traits_a7cda978d208a50c536ae96570d76bf8e}\label{structentt_1_1storage__traits_a7cda978d208a50c536ae96570d76bf8e}} 
+using \mbox{\hyperlink{structentt_1_1storage__traits_a7cda978d208a50c536ae96570d76bf8e}{storage\+\_\+type}} = \mbox{\hyperlink{classentt_1_1sigh__storage__mixin}{sigh\+\_\+storage\+\_\+mixin}}$<$ \mbox{\hyperlink{classentt_1_1basic__storage}{basic\+\_\+storage}}$<$ Entity, Type $>$ $>$
+\begin{DoxyCompactList}\small\item\em Resulting type after component-\/to-\/storage conversion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity, typename Type, typename = void$>$\newline
+struct entt\+::storage\+\_\+traits$<$ Entity, Type, typename $>$}
+
+Defines the component-\/to-\/storage conversion. 
+
+Formally\+:
+
+
+\begin{DoxyItemize}
+\item If the component type is a non-\/const one, the member typedef type is the declared storage type.
+\item If the component type is a const one, the member typedef type is the declared storage type, except it has a const-\/qualifier added.
+\end{DoxyItemize}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+{\em Type} & Type of objects assigned to the entities. \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

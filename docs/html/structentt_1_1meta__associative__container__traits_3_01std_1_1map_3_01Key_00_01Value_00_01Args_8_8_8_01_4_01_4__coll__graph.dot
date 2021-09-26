@@ -1,0 +1,12 @@
+digraph "entt::meta_associative_container_traits&lt; std::map&lt; Key, Value, Args... &gt; &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="entt::meta_associative\l_container_traits\< std\l::map\< Key, Value, Args... \> \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Meta associative container traits for std::maps of any type."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="entt::meta_container\l_traits\< std::map\< Key,\l Value, Args... \>, basic\l_container, basic_associative\l_container, basic_dynamic_container,\l basic_dynamic_associative_container,\l dynamic_associative_key_value_container \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structentt_1_1meta__container__traits.html",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="entt::basic_container\l\< std::map\< Key, Value,\l Args... \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structentt_1_1basic__container.html",tooltip=" "];
+}

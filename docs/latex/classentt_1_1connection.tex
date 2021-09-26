@@ -1,0 +1,54 @@
+\hypertarget{classentt_1_1connection}{}\doxysection{entt\+::connection Class Reference}
+\label{classentt_1_1connection}\index{entt::connection@{entt::connection}}
+
+
+Connection class.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1connection_a1d11f6b9d00a3f0e5364111438a1cee5}\label{classentt_1_1connection_a1d11f6b9d00a3f0e5364111438a1cee5}} 
+\mbox{\hyperlink{classentt_1_1connection_a1d11f6b9d00a3f0e5364111438a1cee5}{connection}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1connection_a6763393665228bcf52ad41a21105d468}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a connection is properly initialized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1connection_ae564477ab623301169916c1992c970a8}\label{classentt_1_1connection_ae564477ab623301169916c1992c970a8}} 
+void \mbox{\hyperlink{classentt_1_1connection_ae564477ab623301169916c1992c970a8}{release}} ()
+\begin{DoxyCompactList}\small\item\em Breaks the connection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1connection_afe2b37ace8306e708a0dc76c658a4b19}\label{classentt_1_1connection_afe2b37ace8306e708a0dc76c658a4b19}} 
+{\footnotesize template$<$typename $>$ }\\class \mbox{\hyperlink{classentt_1_1connection_afe2b37ace8306e708a0dc76c658a4b19}{sink}}
+\begin{DoxyCompactList}\small\item\em A sink is allowed to create connection objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Connection class. 
+
+Opaque object the aim of which is to allow users to release an already estabilished connection without having to keep a reference to the signal or the sink that generated it. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1connection_a6763393665228bcf52ad41a21105d468}\label{classentt_1_1connection_a6763393665228bcf52ad41a21105d468}} 
+\index{entt::connection@{entt::connection}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::connection@{entt::connection}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::connection\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Checks whether a connection is properly initialized. 
+
+\begin{DoxyReturn}{Returns}
+True if the connection is properly initialized, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}
