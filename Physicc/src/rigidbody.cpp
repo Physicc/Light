@@ -19,11 +19,17 @@ namespace Physicc
 	 * gravity is acting on the object or not.
 	 */
 	RigidBody::RigidBody(const float mass, const glm::vec3& velocity,
-						const float gravityScale = 1 )
+						const float gravityScale = 1)
 		: m_mass(mass),
           m_velocity(velocity),
           m_gravityScale(gravityScale),
           m_force(glm::vec3(0))
+	{
+	}
+
+	RigidBody::RigidBody(const RigidBody& other) : m_force(other.m_force),
+	m_mass(other.m_mass), m_collider(other.m_collider), m_velocity(other.velocity),
+	m_gravityScale(other.gravityScale)
 	{
 	}
 }

@@ -15,6 +15,7 @@ namespace Physicc
 	{
 		public:
 			RigidBody(float mass, const glm::vec3& velocity, float gravityScale);
+			RigidBody(const Rigidbody& other);
 
 			[[nodiscard]] inline glm::vec3 getVelocity() const
 			{
