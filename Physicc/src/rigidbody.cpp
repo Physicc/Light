@@ -28,8 +28,8 @@ namespace Physicc
 	}
 
 	RigidBody::RigidBody(const RigidBody& other) : m_force(other.m_force),
-	m_mass(other.m_mass), m_collider(other.m_collider), m_velocity(other.velocity),
-	m_gravityScale(other.gravityScale)
+	m_mass(other.m_mass), m_collider(other.m_collider), m_velocity(other.m_velocity),
+	m_gravityScale(other.m_gravityScale)
 	{
 	}
 }
