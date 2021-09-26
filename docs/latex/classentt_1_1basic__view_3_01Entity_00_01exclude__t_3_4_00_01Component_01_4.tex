@@ -1,0 +1,477 @@
+\hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4}{}\doxysection{entt\+::basic\+\_\+view$<$ Entity, exclude\+\_\+t$<$$>$, Component $>$ Class Template Reference}
+\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4}\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+
+
+Single component view specialization.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8bd979c3e567bccfbc7a598442092d81}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8bd979c3e567bccfbc7a598442092d81}} 
+using \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8bd979c3e567bccfbc7a598442092d81}{raw\+\_\+type}} = Component
+\begin{DoxyCompactList}\small\item\em Type of component iterated by the view. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}} 
+using \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} = Entity
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a6df04cc90dcce96291a88546aa287ca7}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a6df04cc90dcce96291a88546aa287ca7}} 
+using \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a6df04cc90dcce96291a88546aa287ca7}{size\+\_\+type}} = std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}} 
+using \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}} = typename \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$\+::\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}}
+\begin{DoxyCompactList}\small\item\em Random access iterator type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}} 
+using \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}{reverse\+\_\+iterator}} = typename \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$\+::\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}{reverse\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Reversed iterator type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a83c115dc1f68b5910f49941f0af9f4c7}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a83c115dc1f68b5910f49941f0af9f4c7}} 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a83c115dc1f68b5910f49941f0af9f4c7}{basic\+\_\+view}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Default constructor to use to create empty, invalid views. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ad2ea9203747a3e22b291580108c07a1d}{basic\+\_\+view}} (storage\+\_\+type \&ref) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs a single-\/type view from a storage class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a6df04cc90dcce96291a88546aa287ca7}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8648cc860a64d9adcfc261679b8a174e}{size}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the number of entities that have the given component. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a155822d1b039f427ef7577547ea06783}{empty}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a view is empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8bd979c3e567bccfbc7a598442092d81}{raw\+\_\+type}} $\ast$ \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af0bd1c0efb41c883001d6fd21c975c0f}{raw}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Direct access to the list of components. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} $\ast$ \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1cb3cdf5882c092430ad0651e6d6094c}{data}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Direct access to the list of entities. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_aea757bf271fd1b6887ab3aab82cc177a}{begin}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the first entity of the view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a9d5cdc02d9acb5840147fe48bae7ca82}{end}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator that is past the last entity of the view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a07372170465f8a955cf4e1299aa51ac9}{rbegin}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the first entity of the reversed view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ab4fe861f2e66e8a291b22d2d69b69e9e}{rend}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator that is past the last entity of the reversed view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af725dc018cfa7e82fbc399cbb90cf058}{front}} () const
+\begin{DoxyCompactList}\small\item\em Returns the first entity of the view, if any. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ae9b20bc36216f6cfc53422d6893fbda0}{back}} () const
+\begin{DoxyCompactList}\small\item\em Returns the last entity of the view, if any. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_abf629e07ec0f9d2d4e7708be10a4f6ca}{find}} (const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} entt) const
+\begin{DoxyCompactList}\small\item\em Finds an entity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_adf5a394814faea3fcee93545da1e6a39}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a6df04cc90dcce96291a88546aa287ca7}{size\+\_\+type}} pos) const
+\begin{DoxyCompactList}\small\item\em Returns the identifier that occupies the given position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8aa2c45f5f8445432594650be989ba93}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if a view is properly initialized. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0ef29186802313e0e92ede3963324d14}{contains}} (const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} entt) const
+\begin{DoxyCompactList}\small\item\em Checks if a view contains an entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Comp$>$ }\\decltype(auto) \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8c17c82e34d8d77a2358afa5c97832f2}{get}} (const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} entt) const
+\begin{DoxyCompactList}\small\item\em Returns the component assigned to the given entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func $>$ }\\void \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ae0e899f8d7e4a58bba6abc9c5b9b83c2}{each}} (Func func) const
+\begin{DoxyCompactList}\small\item\em Iterates entities and components and applies the given function object to them. \end{DoxyCompactList}\item 
+iterable\+\_\+view \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a7293daa09949b51f61311bb74b0cb19d}{each}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterable object to use to {\itshape visit} the view. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Id , typename... E\+Lhs, typename... C\+Lhs, typename... E\+Rhs, typename... C\+Rhs$>$ }\\auto \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a997b4ff9d1150975c30d66d946b2b5bb}{operator$\vert$}} (const \mbox{\hyperlink{classentt_1_1basic__view}{basic\+\_\+view}}$<$ Id, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ E\+Lhs... $>$, C\+Lhs... $>$ \&, const \mbox{\hyperlink{classentt_1_1basic__view}{basic\+\_\+view}}$<$ Id, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ E\+Rhs... $>$, C\+Rhs... $>$ \&)
+\begin{DoxyCompactList}\small\item\em Combines two views in a {\itshape more specific} one (friend function). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity, typename Component$>$\newline
+class entt\+::basic\+\_\+view$<$ Entity, exclude\+\_\+t$<$$>$, Component $>$}
+
+Single component view specialization. 
+
+Single component views are specialized in order to get a boost in terms of performance. This kind of views can access the underlying data structure directly and avoid superfluous checks.
+
+{\bfseries{Important}} 
+
+Iterators aren\textquotesingle{}t invalidated if\+:
+
+
+\begin{DoxyItemize}
+\item New instances of the given component are created and assigned to entities.
+\item The entity currently pointed is modified (as an example, the given component is removed from the entity to which the iterator points).
+\item The entity currently pointed is destroyed.
+\end{DoxyItemize}
+
+In all other cases, modifying the pool iterated by the view in any way invalidates all the iterators and using them results in undefined behavior.
+
+\begin{DoxyNote}{Note}
+Views share a reference to the underlying data structure of the registry that generated them. Therefore any change to the entities and to the components made by means of the registry are immediately reflected by views.
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Lifetime of a view must not overcome that of the registry that generated it. In any other case, attempting to use a view results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+{\em Component} & Type of component iterated by the view. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ad2ea9203747a3e22b291580108c07a1d}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ad2ea9203747a3e22b291580108c07a1d}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!basic\_view@{basic\_view}}
+\index{basic\_view@{basic\_view}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_view()}{basic\_view()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::\mbox{\hyperlink{classentt_1_1basic__view}{basic\+\_\+view}} (\begin{DoxyParamCaption}\item[{storage\+\_\+type \&}]{ref }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a single-\/type view from a storage class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ref} & The storage for the type to iterate. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ae9b20bc36216f6cfc53422d6893fbda0}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ae9b20bc36216f6cfc53422d6893fbda0}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!back@{back}}
+\index{back@{back}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{back()}{back()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the last entity of the view, if any. 
+
+\begin{DoxyReturn}{Returns}
+The last entity of the view if one exists, the null entity otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_aea757bf271fd1b6887ab3aab82cc177a}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_aea757bf271fd1b6887ab3aab82cc177a}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!begin@{begin}}
+\index{begin@{begin}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator to the first entity of the view. 
+
+The returned iterator points to the first entity of the view. If the view is empty, the returned iterator will be equal to {\ttfamily \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a9d5cdc02d9acb5840147fe48bae7ca82}{end()}}}.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the first entity of the view. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0ef29186802313e0e92ede3963324d14}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0ef29186802313e0e92ede3963324d14}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!contains@{contains}}
+\index{contains@{contains}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a view contains an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & A valid entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the view contains the given entity, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1cb3cdf5882c092430ad0651e6d6094c}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1cb3cdf5882c092430ad0651e6d6094c}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!data@{data}}
+\index{data@{data}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}}$\ast$ \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to the list of entities. 
+
+The returned pointer is such that range {\ttfamily \mbox{[}\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1cb3cdf5882c092430ad0651e6d6094c}{data()}}, \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1cb3cdf5882c092430ad0651e6d6094c}{data()}} + \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8648cc860a64d9adcfc261679b8a174e}{size()}})} is always a valid range, even if the container is empty.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the array of entities. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a7293daa09949b51f61311bb74b0cb19d}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a7293daa09949b51f61311bb74b0cb19d}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!each@{each}}
+\index{each@{each}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{each()}{each()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+iterable\+\_\+view \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::each (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterable object to use to {\itshape visit} the view. 
+
+The iterable object returns tuples that contain the current entity and a reference to its component if it\textquotesingle{}s a non-\/empty one. The {\itshape constness} of the component is as requested.
+
+\begin{DoxyNote}{Note}
+Empty types aren\textquotesingle{}t explicitly instantiated and therefore they are never returned during iterations.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+An iterable object to use to {\itshape visit} the view. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ae0e899f8d7e4a58bba6abc9c5b9b83c2}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ae0e899f8d7e4a58bba6abc9c5b9b83c2}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!each@{each}}
+\index{each@{each}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{each()}{each()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+template$<$typename Func $>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::each (\begin{DoxyParamCaption}\item[{Func}]{func }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterates entities and components and applies the given function object to them. 
+
+The function object is invoked for each entity. It is provided with the entity itself and a reference to the component if it\textquotesingle{}s a non-\/empty one. The {\itshape constness} of the component is as requested.~\newline
+ The signature of the function must be equivalent to one of the following forms\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void(\textcolor{keyword}{const} \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\_type}}, Component \&);}
+\DoxyCodeLine{void(Component \&);}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+Empty types aren\textquotesingle{}t explicitly instantiated and therefore they are never returned during iterations.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Type of the function object to invoke. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em func} & A valid function object. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a155822d1b039f427ef7577547ea06783}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a155822d1b039f427ef7577547ea06783}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!empty@{empty}}
+\index{empty@{empty}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a view is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if the view is empty, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a9d5cdc02d9acb5840147fe48bae7ca82}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a9d5cdc02d9acb5840147fe48bae7ca82}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!end@{end}}
+\index{end@{end}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator that is past the last entity of the view. 
+
+The returned iterator points to the entity following the last entity of the view. Attempting to dereference the returned iterator results in undefined behavior.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the entity following the last entity of the view. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_abf629e07ec0f9d2d4e7708be10a4f6ca}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_abf629e07ec0f9d2d4e7708be10a4f6ca}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!find@{find}}
+\index{find@{find}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a1363664c9ba7b23612f8ee1bae02048e}{iterator}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::find (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Finds an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & A valid entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An iterator to the given entity if it\textquotesingle{}s found, past the end iterator otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af725dc018cfa7e82fbc399cbb90cf058}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af725dc018cfa7e82fbc399cbb90cf058}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!front@{front}}
+\index{front@{front}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{front()}{front()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::front (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the first entity of the view, if any. 
+
+\begin{DoxyReturn}{Returns}
+The first entity of the view if one exists, the null entity otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8c17c82e34d8d77a2358afa5c97832f2}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8c17c82e34d8d77a2358afa5c97832f2}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!get@{get}}
+\index{get@{get}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+template$<$typename... Comp$>$ \\
+decltype(auto) \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the component assigned to the given entity. 
+
+Prefer this function instead of {\ttfamily \mbox{\hyperlink{classentt_1_1basic__registry_a3a683bb33971cc5a0bbbf4a9409208df}{registry\+::get}}} during iterations. It has far better performance than its counterpart.
+
+\begin{DoxyWarning}{Warning}
+Attempting to use an invalid component type results in a compilation error. Attempting to use an entity that doesn\textquotesingle{}t belong to the view results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Comp} & Types of components to get. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & A valid entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The component assigned to the entity. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8aa2c45f5f8445432594650be989ba93}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8aa2c45f5f8445432594650be989ba93}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Checks if a view is properly initialized. 
+
+\begin{DoxyReturn}{Returns}
+True if the view is properly initialized, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_adf5a394814faea3fcee93545da1e6a39}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_adf5a394814faea3fcee93545da1e6a39}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a0494ae46c922ce0c897aef9d7bd18533}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a6df04cc90dcce96291a88546aa287ca7}{size\+\_\+type}}}]{pos }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the identifier that occupies the given position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Position of the element to return. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The identifier that occupies the given position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af0bd1c0efb41c883001d6fd21c975c0f}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af0bd1c0efb41c883001d6fd21c975c0f}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!raw@{raw}}
+\index{raw@{raw}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{raw()}{raw()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8bd979c3e567bccfbc7a598442092d81}{raw\+\_\+type}}$\ast$ \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to the list of components. 
+
+The returned pointer is such that range {\ttfamily \mbox{[}\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af0bd1c0efb41c883001d6fd21c975c0f}{raw()}}, \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_af0bd1c0efb41c883001d6fd21c975c0f}{raw()}} + \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8648cc860a64d9adcfc261679b8a174e}{size()}})} is always a valid range, even if the container is empty.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the array of components. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a07372170465f8a955cf4e1299aa51ac9}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a07372170465f8a955cf4e1299aa51ac9}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!rbegin@{rbegin}}
+\index{rbegin@{rbegin}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{rbegin()}{rbegin()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::rbegin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator to the first entity of the reversed view. 
+
+The returned iterator points to the first entity of the reversed view. If the view is empty, the returned iterator will be equal to {\ttfamily \mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ab4fe861f2e66e8a291b22d2d69b69e9e}{rend()}}}.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the first entity of the reversed view. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ab4fe861f2e66e8a291b22d2d69b69e9e}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ab4fe861f2e66e8a291b22d2d69b69e9e}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!rend@{rend}}
+\index{rend@{rend}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{rend()}{rend()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_ac6908355d99c46b70396c17ade970084}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::rend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator that is past the last entity of the reversed view. 
+
+The returned iterator points to the entity following the last entity of the reversed view. Attempting to dereference the returned iterator results in undefined behavior.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the entity following the last entity of the reversed view. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8648cc860a64d9adcfc261679b8a174e}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a8648cc860a64d9adcfc261679b8a174e}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!size@{size}}
+\index{size@{size}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a6df04cc90dcce96291a88546aa287ca7}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__view}{entt\+::basic\+\_\+view}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$$>$, Component $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of entities that have the given component. 
+
+\begin{DoxyReturn}{Returns}
+Number of entities that have the given component. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a997b4ff9d1150975c30d66d946b2b5bb}\label{classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4_a997b4ff9d1150975c30d66d946b2b5bb}} 
+\index{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}!operator\texttt{"|}@{operator\texttt{"|}}}
+\index{operator\texttt{"|}@{operator\texttt{"|}}!entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$@{entt::basic\_view$<$ Entity, exclude\_t$<$$>$, Component $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texttt{"|}}{operator|}}
+{\footnotesize\ttfamily template$<$typename Entity , typename Component $>$ \\
+template$<$typename Id , typename... E\+Lhs, typename... C\+Lhs, typename... E\+Rhs, typename... C\+Rhs$>$ \\
+auto operator$\vert$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__view}{basic\+\_\+view}}$<$ Id, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ E\+Lhs... $>$, C\+Lhs... $>$ \&}]{,  }\item[{const \mbox{\hyperlink{classentt_1_1basic__view}{basic\+\_\+view}}$<$ Id, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ E\+Rhs... $>$, C\+Rhs... $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Combines two views in a {\itshape more specific} one (friend function). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Id} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+{\em E\+Lhs} & Filter list of the first view. \\
+\hline
+{\em C\+Lhs} & Component list of the first view. \\
+\hline
+{\em E\+Rhs} & Filter list of the second view. \\
+\hline
+{\em C\+Rhs} & Component list of the second view. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A more specific view. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

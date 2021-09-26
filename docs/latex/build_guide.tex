@@ -1,0 +1,246 @@
+This is about compiling and linking applications that use G\+L\+FW. For information on how to write such applications, start with the \mbox{\hyperlink{quick_guide}{introductory tutorial}}. For information on how to compile the G\+L\+FW library itself, see \mbox{\hyperlink{compile_guide}{Compiling G\+L\+FW}}.
+
+This is not a tutorial on compilation or linking. It assumes basic understanding of how to compile and link a C program as well as how to use the specific compiler of your chosen development environment. The compilation and linking process should be explained in your C programming material and in the documentation for your development environment.\hypertarget{build_guide_build_include}{}\doxysection{Including the G\+L\+F\+W header file}\label{build_guide_build_include}
+You should include the G\+L\+FW header in the source files where you use Open\+GL or G\+L\+FW.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <GLFW/glfw3.h>}}
+\end{DoxyCode}
+
+
+This header defines all the constants and declares all the types and function prototypes of the G\+L\+FW A\+PI. By default it also includes the Open\+GL header from your development environment. See \mbox{\hyperlink{build_guide_build_macros}{option macros}} below for how to select Open\+GL ES headers and more.
+
+The G\+L\+FW header also defines any platform-\/specific macros needed by your Open\+GL header, so that it can be included without needing any window system headers.
+
+It does this only when needed, so if window system headers are included, the G\+L\+FW header does not try to redefine those symbols. The reverse is not true, i.\+e. {\ttfamily windows.\+h} cannot cope if any Win32 symbols have already been defined.
+
+In other words\+:
+
+
+\begin{DoxyItemize}
+\item Use the G\+L\+FW header to include Open\+GL or Open\+GL ES headers portably
+\item Do not include window system headers unless you will use those A\+P\+Is directly
+\item If you do need such headers, include them before the G\+L\+FW header
+\end{DoxyItemize}
+
+If you are using an Open\+GL extension loading library such as \href{https://github.com/Dav1dde/glad}{\texttt{ glad}}, the extension loader header should be included before the G\+L\+FW one. G\+L\+FW attempts to detect any Open\+GL or Open\+GL ES header or extension loader header included before it and will then disable the inclusion of the default Open\+GL header. Most extension loaders also define macros that disable similar headers below it.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <glad/gl.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <GLFW/glfw3.h>}}
+\end{DoxyCode}
+
+
+Both of these mechanisms depend on the extension loader header defining a known macro. If yours doesn\textquotesingle{}t or you don\textquotesingle{}t know which one your users will pick, the \mbox{\hyperlink{build_guide_GLFW_INCLUDE_NONE}{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+N\+O\+NE}} macro will explicitly to prevent the G\+L\+FW header from including the Open\+GL header. This will also allow you to include the two headers in any order.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define GLFW\_INCLUDE\_NONE}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <GLFW/glfw3.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <glad/gl.h>}}
+\end{DoxyCode}
+\hypertarget{build_guide_build_macros}{}\doxysubsection{G\+L\+F\+W header option macros}\label{build_guide_build_macros}
+These macros may be defined before the inclusion of the G\+L\+FW header and affect its behavior.
+
+\label{build_guide_GLFW_DLL}%
+\Hypertarget{build_guide_GLFW_DLL}%
+{\bfseries{G\+L\+F\+W\+\_\+\+D\+LL}} is required on Windows when using the G\+L\+FW D\+LL, to tell the compiler that the G\+L\+FW functions are defined in a D\+LL.
+
+The following macros control which Open\+GL or Open\+GL ES A\+PI header is included. Only one of these may be defined at a time.
+
+\begin{DoxyNote}{Note}
+G\+L\+FW does not provide any of the A\+PI headers mentioned below. They are provided by your development environment or your Open\+GL, Open\+GL ES or Vulkan S\+DK, and most of them can be downloaded from the \href{https://www.khronos.org/registry/}{\texttt{ Khronos Registry}}.
+\end{DoxyNote}
+\label{build_guide_GLFW_INCLUDE_GLCOREARB}%
+\Hypertarget{build_guide_GLFW_INCLUDE_GLCOREARB}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+G\+L\+C\+O\+R\+E\+A\+RB}} makes the G\+L\+FW header include the modern {\ttfamily \mbox{\hyperlink{glcorearb_8h_source}{G\+L/glcorearb.\+h}}} header ({\ttfamily Open\+G\+L/gl3.\+h} on mac\+OS) instead of the regular Open\+GL header.
+
+\label{build_guide_GLFW_INCLUDE_ES1}%
+\Hypertarget{build_guide_GLFW_INCLUDE_ES1}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+S1}} makes the G\+L\+FW header include the Open\+GL ES 1.\+x {\ttfamily G\+L\+E\+S/gl.\+h} header instead of the regular Open\+GL header.
+
+\label{build_guide_GLFW_INCLUDE_ES2}%
+\Hypertarget{build_guide_GLFW_INCLUDE_ES2}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+S2}} makes the G\+L\+FW header include the Open\+GL ES 2.\+0 {\ttfamily G\+L\+E\+S2/gl2.\+h} header instead of the regular Open\+GL header.
+
+\label{build_guide_GLFW_INCLUDE_ES3}%
+\Hypertarget{build_guide_GLFW_INCLUDE_ES3}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+S3}} makes the G\+L\+FW header include the Open\+GL ES 3.\+0 {\ttfamily G\+L\+E\+S3/gl3.\+h} header instead of the regular Open\+GL header.
+
+\label{build_guide_GLFW_INCLUDE_ES31}%
+\Hypertarget{build_guide_GLFW_INCLUDE_ES31}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+S31}} makes the G\+L\+FW header include the Open\+GL ES 3.\+1 {\ttfamily G\+L\+E\+S3/gl31.\+h} header instead of the regular Open\+GL header.
+
+\label{build_guide_GLFW_INCLUDE_ES32}%
+\Hypertarget{build_guide_GLFW_INCLUDE_ES32}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+S32}} makes the G\+L\+FW header include the Open\+GL ES 3.\+2 {\ttfamily G\+L\+E\+S3/gl32.\+h} header instead of the regular Open\+GL header.
+
+\label{build_guide_GLFW_INCLUDE_NONE}%
+\Hypertarget{build_guide_GLFW_INCLUDE_NONE}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+N\+O\+NE}} makes the G\+L\+FW header not include any Open\+GL or Open\+GL ES A\+PI header. This is useful in combination with an extension loading library.
+
+If none of the above inclusion macros are defined, the standard Open\+GL {\ttfamily G\+L/gl.\+h} header ({\ttfamily Open\+G\+L/gl.\+h} on mac\+OS) is included, unless G\+L\+FW detects the inclusion guards of any Open\+GL, Open\+GL ES or extension loader header it knows about.
+
+The following macros control the inclusion of additional A\+PI headers. Any number of these may be defined simultaneously, and/or together with one of the above macros.
+
+\label{build_guide_GLFW_INCLUDE_VULKAN}%
+\Hypertarget{build_guide_GLFW_INCLUDE_VULKAN}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+V\+U\+L\+K\+AN}} makes the G\+L\+FW header include the Vulkan {\ttfamily vulkan/vulkan.\+h} header in addition to any selected Open\+GL or Open\+GL ES header.
+
+\label{build_guide_GLFW_INCLUDE_GLEXT}%
+\Hypertarget{build_guide_GLFW_INCLUDE_GLEXT}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+G\+L\+E\+XT}} makes the G\+L\+FW header include the appropriate extension header for the Open\+GL or Open\+GL ES header selected above after and in addition to that header.
+
+\label{build_guide_GLFW_INCLUDE_GLU}%
+\Hypertarget{build_guide_GLFW_INCLUDE_GLU}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+G\+LU}} makes the header include the G\+LU header in addition to the header selected above. This should only be used with the standard Open\+GL header and only for compatibility with legacy code. G\+LU has been deprecated and should not be used in new code.
+
+\begin{DoxyNote}{Note}
+None of these macros may be defined during the compilation of G\+L\+FW itself. If your build includes G\+L\+FW and you define any these in your build files, make sure they are not applied to the G\+L\+FW sources.
+\end{DoxyNote}
+\hypertarget{build_guide_build_link}{}\doxysection{Link with the right libraries}\label{build_guide_build_link}
+G\+L\+FW is essentially a wrapper of various platform-\/specific A\+P\+Is and therefore needs to link against many different system libraries. If you are using G\+L\+FW as a shared library / dynamic library / D\+LL then it takes care of these links. However, if you are using G\+L\+FW as a static library then your executable will need to link against these libraries.
+
+On Windows and mac\+OS, the list of system libraries is static and can be hard-\/coded into your build environment. See the section for your development environment below. On Linux and other Unix-\/like operating systems, the list varies but can be retrieved in various ways as described below.
+
+A good general introduction to linking is \href{https://www.lurklurk.org/linkers/linkers.html}{\texttt{ Beginner\textquotesingle{}s Guide to Linkers}} by David Drysdale.\hypertarget{build_guide_build_link_win32}{}\doxysubsection{With Min\+G\+W or Visual C++ on Windows}\label{build_guide_build_link_win32}
+The static version of the G\+L\+FW library is named {\ttfamily glfw3}. When using this version, it is also necessary to link with some libraries that G\+L\+FW uses.
+
+When using Min\+GW to link an application with the static version of G\+L\+FW, you must also explicitly link with {\ttfamily gdi32}. Other toolchains including Min\+G\+W-\/w64 include it in the set of default libraries along with other dependencies like {\ttfamily user32} and {\ttfamily kernel32}.
+
+The link library for the G\+L\+FW D\+LL is named {\ttfamily glfw3dll}. When compiling an application that uses the D\+LL version of G\+L\+FW, you need to define the \mbox{\hyperlink{build_guide_GLFW_DLL}{G\+L\+F\+W\+\_\+\+D\+LL}} macro {\itshape before} any inclusion of the G\+L\+FW header. This can be done either with a compiler switch or by defining it in your source code.\hypertarget{build_guide_build_link_cmake_source}{}\doxysubsection{With C\+Make and G\+L\+F\+W source}\label{build_guide_build_link_cmake_source}
+This section is about using C\+Make to compile and link G\+L\+FW along with your application. If you want to use an installed binary instead, see \mbox{\hyperlink{build_guide_build_link_cmake_package}{With C\+Make and installed G\+L\+FW binaries}}.
+
+With a few changes to your {\ttfamily C\+Make\+Lists.\+txt} you can have the G\+L\+FW source tree built along with your application.
+
+When including G\+L\+FW as part of your build, you probably don\textquotesingle{}t want to build the G\+L\+FW tests, examples and documentation. To disable these, set the corresponding cache variables before adding the G\+L\+FW source tree.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(GLFW\_BUILD\_DOCS OFF CACHE BOOL \textcolor{stringliteral}{""} FORCE)}
+\DoxyCodeLine{set(GLFW\_BUILD\_TESTS OFF CACHE BOOL \textcolor{stringliteral}{""} FORCE)}
+\DoxyCodeLine{set(GLFW\_BUILD\_EXAMPLES OFF CACHE BOOL \textcolor{stringliteral}{""} FORCE)}
+\end{DoxyCode}
+
+
+Add the root directory of the G\+L\+FW source tree to your project. This will add the {\ttfamily glfw} target to your project.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_subdirectory(path/to/glfw)}
+\end{DoxyCode}
+
+
+Once G\+L\+FW has been added, link your application against the {\ttfamily glfw} target. This adds the G\+L\+FW library and its link-\/time dependencies as it is currently configured, the include directory for the G\+L\+FW header and, when applicable, the \mbox{\hyperlink{build_guide_GLFW_DLL}{G\+L\+F\+W\+\_\+\+D\+LL}} macro.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_link\_libraries(myapp glfw)}
+\end{DoxyCode}
+
+
+Note that the {\ttfamily glfw} target does not depend on Open\+GL, as G\+L\+FW loads any Open\+GL, Open\+GL ES or Vulkan libraries it needs at runtime. If your application calls Open\+GL directly, instead of using a modern \mbox{\hyperlink{context_guide_context_glext_auto}{extension loader library}}, use the Open\+GL C\+Make package.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(OpenGL REQUIRED)}
+\end{DoxyCode}
+
+
+If Open\+GL is found, the {\ttfamily Open\+G\+L\+::\+GL} target is added to your project, containing library and include directory paths. Link against this like any other library.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_link\_libraries(myapp OpenGL::GL)}
+\end{DoxyCode}
+
+
+For a minimal example of a program and G\+L\+FW sources built with C\+Make, see the \href{https://github.com/juliettef/GLFW-CMake-starter}{\texttt{ G\+L\+FW C\+Make Starter}} on Git\+Hub.\hypertarget{build_guide_build_link_cmake_package}{}\doxysubsection{With C\+Make and installed G\+L\+F\+W binaries}\label{build_guide_build_link_cmake_package}
+This section is about using C\+Make to link G\+L\+FW after it has been built and installed. If you want to build it along with your application instead, see \mbox{\hyperlink{build_guide_build_link_cmake_source}{With C\+Make and G\+L\+FW source}}.
+
+With a few changes to your {\ttfamily C\+Make\+Lists.\+txt} you can locate the package and target files generated when G\+L\+FW is installed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(glfw3 3.3 REQUIRED)}
+\end{DoxyCode}
+
+
+Once G\+L\+FW has been added to the project, link against it with the {\ttfamily glfw} target. This adds the G\+L\+FW library and its link-\/time dependencies, the include directory for the G\+L\+FW header and, when applicable, the \mbox{\hyperlink{build_guide_GLFW_DLL}{G\+L\+F\+W\+\_\+\+D\+LL}} macro.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_link\_libraries(myapp glfw)}
+\end{DoxyCode}
+
+
+Note that the {\ttfamily glfw} target does not depend on Open\+GL, as G\+L\+FW loads any Open\+GL, Open\+GL ES or Vulkan libraries it needs at runtime. If your application calls Open\+GL directly, instead of using a modern \mbox{\hyperlink{context_guide_context_glext_auto}{extension loader library}}, use the Open\+GL C\+Make package.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(OpenGL REQUIRED)}
+\end{DoxyCode}
+
+
+If Open\+GL is found, the {\ttfamily Open\+G\+L\+::\+GL} target is added to your project, containing library and include directory paths. Link against this like any other library.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_link\_libraries(myapp OpenGL::GL)}
+\end{DoxyCode}
+\hypertarget{build_guide_build_link_pkgconfig}{}\doxysubsection{With makefiles and pkg-\/config on Unix}\label{build_guide_build_link_pkgconfig}
+G\+L\+FW supports \href{https://www.freedesktop.org/wiki/Software/pkg-config/}{\texttt{ pkg-\/config}}, and the {\ttfamily glfw3.\+pc} pkg-\/config file is generated when the G\+L\+FW library is built and is installed along with it. A pkg-\/config file describes all necessary compile-\/time and link-\/time flags and dependencies needed to use a library. When they are updated or if they differ between systems, you will get the correct ones automatically.
+
+A typical compile and link command-\/line when using the static version of the G\+L\+FW library may look like this\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cc \$(pkg-\/config -\/-\/cflags glfw3) -\/o myprog myprog.c \$(pkg-\/config -\/-\/static -\/-\/libs glfw3)}
+\end{DoxyCode}
+
+
+If you are using the shared version of the G\+L\+FW library, omit the {\ttfamily -\/-\/static} flag.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cc \$(pkg-\/config -\/-\/cflags glfw3) -\/o myprog myprog.c \$(pkg-\/config -\/-\/libs glfw3)}
+\end{DoxyCode}
+
+
+You can also use the {\ttfamily glfw3.\+pc} file without installing it first, by using the {\ttfamily P\+K\+G\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH} environment variable.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{env PKG\_CONFIG\_PATH=path/to/glfw/src cc \$(pkg-\/config -\/-\/cflags glfw3) -\/o myprog myprog.c \$(pkg-\/config -\/-\/libs glfw3)}
+\end{DoxyCode}
+
+
+The dependencies do not include Open\+GL, as G\+L\+FW loads any Open\+GL, Open\+GL ES or Vulkan libraries it needs at runtime. If your application calls Open\+GL directly, instead of using a modern \mbox{\hyperlink{context_guide_context_glext_auto}{extension loader library}}, you should add the {\ttfamily gl} pkg-\/config package.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cc \$(pkg-\/config -\/-\/cflags glfw3 gl) -\/o myprog myprog.c \$(pkg-\/config -\/-\/libs glfw3 gl)}
+\end{DoxyCode}
+\hypertarget{build_guide_build_link_xcode}{}\doxysubsection{With Xcode on mac\+OS}\label{build_guide_build_link_xcode}
+If you are using the dynamic library version of G\+L\+FW, add it to the project dependencies.
+
+If you are using the static library version of G\+L\+FW, add it and the Cocoa, Open\+GL and I\+O\+Kit frameworks to the project as dependencies. They can all be found in {\ttfamily /\+System/\+Library/\+Frameworks}.\hypertarget{build_guide_build_link_osx}{}\doxysubsection{With command-\/line on mac\+OS}\label{build_guide_build_link_osx}
+It is recommended that you use \mbox{\hyperlink{build_guide_build_link_pkgconfig}{pkg-\/config}} when building from the command line on mac\+OS. That way you will get any new dependencies added automatically. If you still wish to build manually, you need to add the required frameworks and libraries to your command-\/line yourself using the {\ttfamily -\/l} and {\ttfamily -\/framework} switches.
+
+If you are using the dynamic G\+L\+FW library, which is named {\ttfamily libglfw.\+3.\+dylib}, do\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cc -\/o myprog myprog.c -\/lglfw -\/framework Cocoa -\/framework OpenGL -\/framework IOKit}
+\end{DoxyCode}
+
+
+If you are using the static library, named {\ttfamily libglfw3.\+a}, substitute {\ttfamily -\/lglfw3} for {\ttfamily -\/lglfw}.
+
+Note that you do not add the {\ttfamily .framework} extension to a framework when linking against it from the command-\/line.
+
+\begin{DoxyNote}{Note}
+Your machine may have {\ttfamily lib\+GL.$\ast$.dylib} style Open\+GL library, but that is for the X Window System and will not work with the mac\+OS native version of G\+L\+FW. 
+\end{DoxyNote}

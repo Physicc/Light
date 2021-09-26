@@ -1,0 +1,37 @@
+digraph "_GLFWlibraryWin32"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="_GLFWlibraryWin32",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" GetCapabilities" ];
+  Node2 [label="_XINPUT_CAPABILITIES",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__XINPUT__CAPABILITIES.html",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Gamepad" ];
+  Node3 [label="_XINPUT_GAMEPAD",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__XINPUT__GAMEPAD.html",tooltip=" "];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Vibration" ];
+  Node4 [label="_XINPUT_VIBRATION",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__XINPUT__VIBRATION.html",tooltip=" "];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" GetState" ];
+  Node5 [label="_XINPUT_STATE",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__XINPUT__STATE.html",tooltip=" "];
+  Node3 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Gamepad" ];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" disabledCursorWindow" ];
+  Node6 [label="_GLFWwindow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWwindow.html",tooltip=" "];
+  Node7 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" context" ];
+  Node7 [label="_GLFWcontext",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWcontext.html",tooltip=" "];
+  Node6 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" makeCurrent\nswapBuffers\ndestroy" ];
+  Node8 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" videoMode" ];
+  Node8 [label="GLFWvidmode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGLFWvidmode.html",tooltip="Video mode type."];
+  Node9 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" monitor" ];
+  Node9 [label="_GLFWmonitor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWmonitor.html",tooltip=" "];
+  Node8 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" modes\ncurrentMode" ];
+  Node10 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" originalRamp\ncurrentRamp" ];
+  Node10 [label="GLFWgammaramp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structGLFWgammaramp.html",tooltip="Gamma ramp."];
+  Node6 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" window" ];
+  Node11 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" cursor" ];
+  Node11 [label="_GLFWcursor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct__GLFWcursor.html",tooltip=" "];
+  Node11 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ];
+  Node6 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ];
+  Node12 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" ChangeWindowMessageFilterEx_" ];
+  Node12 [label="CHANGEFILTERSTRUCT",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structCHANGEFILTERSTRUCT.html",tooltip=" "];
+  Node13 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" EnableBlurBehindWindow" ];
+  Node13 [label="DWM_BLURBEHIND",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structDWM__BLURBEHIND.html",tooltip=" "];
+}

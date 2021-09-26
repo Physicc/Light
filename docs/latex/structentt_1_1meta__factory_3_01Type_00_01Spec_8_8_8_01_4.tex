@@ -1,0 +1,128 @@
+\hypertarget{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4}{}\doxysection{entt\+::meta\+\_\+factory$<$ Type, Spec... $>$ Struct Template Reference}
+\label{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4}\index{entt::meta\_factory$<$ Type, Spec... $>$@{entt::meta\_factory$<$ Type, Spec... $>$}}
+
+
+Extended meta factory to be used for reflection purposes.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+
+
+Inheritance diagram for entt\+::meta\+\_\+factory$<$ Type, Spec... $>$\+:
+% FIG 0
+
+
+Collaboration diagram for entt\+::meta\+\_\+factory$<$ Type, Spec... $>$\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_a8311152ec6c2179a5b853d77048bd757}{meta\+\_\+factory}} (internal\+::meta\+\_\+prop\+\_\+node $\ast$$\ast$target) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs an extended factory from a given node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Property\+Or\+Key , typename... Value$>$ }\\auto \mbox{\hyperlink{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_ae0869aeab7f26e4a98c02cc45ee115cd}{prop}} (Property\+Or\+Key \&\&property\+\_\+or\+\_\+key, Value \&\&... value) \&\&
+\begin{DoxyCompactList}\small\item\em Assigns a property to the last meta object created. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Property$>$ }\\auto \mbox{\hyperlink{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_aaf64cc4c2a8feaf7e37f95be39775d5f}{props}} (Property... property) \&\&
+\begin{DoxyCompactList}\small\item\em Assigns properties to the last meta object created. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Type, typename... Spec$>$\newline
+struct entt\+::meta\+\_\+factory$<$ Type, Spec... $>$}
+
+Extended meta factory to be used for reflection purposes. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Reflected type for which the factory was created. \\
+\hline
+{\em Spec} & Property specialization pack used to disambiguate overloads. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_a8311152ec6c2179a5b853d77048bd757}\label{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_a8311152ec6c2179a5b853d77048bd757}} 
+\index{entt::meta\_factory$<$ Type, Spec... $>$@{entt::meta\_factory$<$ Type, Spec... $>$}!meta\_factory@{meta\_factory}}
+\index{meta\_factory@{meta\_factory}!entt::meta\_factory$<$ Type, Spec... $>$@{entt::meta\_factory$<$ Type, Spec... $>$}}
+\doxysubsubsection{\texorpdfstring{meta\_factory()}{meta\_factory()}}
+{\footnotesize\ttfamily template$<$typename Type , typename... Spec$>$ \\
+\mbox{\hyperlink{structentt_1_1meta__factory}{entt\+::meta\+\_\+factory}}$<$ Type, Spec... $>$\+::\mbox{\hyperlink{structentt_1_1meta__factory}{meta\+\_\+factory}} (\begin{DoxyParamCaption}\item[{internal\+::meta\+\_\+prop\+\_\+node $\ast$$\ast$}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an extended factory from a given node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The underlying node to which to assign the properties. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_ae0869aeab7f26e4a98c02cc45ee115cd}\label{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_ae0869aeab7f26e4a98c02cc45ee115cd}} 
+\index{entt::meta\_factory$<$ Type, Spec... $>$@{entt::meta\_factory$<$ Type, Spec... $>$}!prop@{prop}}
+\index{prop@{prop}!entt::meta\_factory$<$ Type, Spec... $>$@{entt::meta\_factory$<$ Type, Spec... $>$}}
+\doxysubsubsection{\texorpdfstring{prop()}{prop()}}
+{\footnotesize\ttfamily template$<$typename Type , typename... Spec$>$ \\
+template$<$typename Property\+Or\+Key , typename... Value$>$ \\
+auto \mbox{\hyperlink{structentt_1_1meta__factory}{entt\+::meta\+\_\+factory}}$<$ Type, Spec... $>$\+::prop (\begin{DoxyParamCaption}\item[{Property\+Or\+Key \&\&}]{property\+\_\+or\+\_\+key,  }\item[{Value \&\&...}]{value }\end{DoxyParamCaption}) \&\&\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns a property to the last meta object created. 
+
+Both the key and the value (if any) must be at least copy constructible.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Property\+Or\+Key} & Type of the property or property key. \\
+\hline
+{\em Value} & Optional type of the property value. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em property\+\_\+or\+\_\+key} & Property or property key. \\
+\hline
+{\em value} & Optional property value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta factory for the parent type. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_aaf64cc4c2a8feaf7e37f95be39775d5f}\label{structentt_1_1meta__factory_3_01Type_00_01Spec_8_8_8_01_4_aaf64cc4c2a8feaf7e37f95be39775d5f}} 
+\index{entt::meta\_factory$<$ Type, Spec... $>$@{entt::meta\_factory$<$ Type, Spec... $>$}!props@{props}}
+\index{props@{props}!entt::meta\_factory$<$ Type, Spec... $>$@{entt::meta\_factory$<$ Type, Spec... $>$}}
+\doxysubsubsection{\texorpdfstring{props()}{props()}}
+{\footnotesize\ttfamily template$<$typename Type , typename... Spec$>$ \\
+template$<$typename... Property$>$ \\
+auto \mbox{\hyperlink{structentt_1_1meta__factory}{entt\+::meta\+\_\+factory}}$<$ Type, Spec... $>$\+::props (\begin{DoxyParamCaption}\item[{Property...}]{property }\end{DoxyParamCaption}) \&\&\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns properties to the last meta object created. 
+
+Both the keys and the values (if any) must be at least copy constructible.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Property} & Types of the properties. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em property} & Properties to assign to the last meta object created. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta factory for the parent type. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

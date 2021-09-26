@@ -1,0 +1,44 @@
+There are several interfaces inside G\+L\+FW. Each interface has its own area of responsibility and its own naming conventions.\hypertarget{internals_guide_internals_public}{}\doxysection{Public interface}\label{internals_guide_internals_public}
+The most well-\/known is the public interface, described in the glfw3.\+h header file. This is implemented in source files shared by all platforms and these files contain no platform-\/specific code. This code usually ends up calling the platform and internal interfaces to do the actual work.
+
+The public interface uses the Open\+GL naming conventions except with G\+L\+FW and glfw instead of GL and gl. For struct members, where Open\+GL sets no precedent, it use headless camel case.
+
+Examples\+: {\ttfamily glfw\+Create\+Window}, {\ttfamily G\+L\+F\+Wwindow}, {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS}\hypertarget{internals_guide_internals_native}{}\doxysection{Native interface}\label{internals_guide_internals_native}
+The \mbox{\hyperlink{group__native}{native interface}} is a small set of publicly available but platform-\/specific functions, described in the glfw3native.\+h header file and used to gain access to the underlying window, context and (on some platforms) display handles used by the platform interface.
+
+The function names of the native interface are similar to those of the public interface, but embeds the name of the interface that the returned handle is from.
+
+Examples\+: {\ttfamily glfw\+Get\+X11\+Window}, {\ttfamily glfw\+Get\+W\+G\+L\+Context}\hypertarget{internals_guide_internals_internal}{}\doxysection{Internal interface}\label{internals_guide_internals_internal}
+The internal interface consists of utility functions used by all other interfaces. It is shared code implemented in the same shared source files as the public and event interfaces. The internal interface is described in the \mbox{\hyperlink{internal_8h_source}{internal.\+h}} header file.
+
+The internal interface is in charge of G\+L\+FW\textquotesingle{}s global data, which it stores in a {\ttfamily \mbox{\hyperlink{struct__GLFWlibrary}{\+\_\+\+G\+L\+F\+Wlibrary}}} struct named {\ttfamily \+\_\+glfw}.
+
+The internal interface uses the same style as the public interface, except all global names have a leading underscore.
+
+Examples\+: {\ttfamily \+\_\+glfw\+Is\+Valid\+Context\+Config}, {\ttfamily \mbox{\hyperlink{struct__GLFWwindow}{\+\_\+\+G\+L\+F\+Wwindow}}}, {\ttfamily \+\_\+glfw.\+monitor\+Count}\hypertarget{internals_guide_internals_platform}{}\doxysection{Platform interface}\label{internals_guide_internals_platform}
+The platform interface implements all platform-\/specific operations as a service to the public interface. This includes event processing. The platform interface is never directly called by application code and never directly calls application-\/provided callbacks. It is also prohibited from modifying the platform-\/independent part of the internal structs. Instead, it calls the event interface when events interesting to G\+L\+FW are received.
+
+The platform interface mirrors those parts of the public interface that needs to perform platform-\/specific operations on some or all platforms. The are also named the same except that the glfw function prefix is replaced by \+\_\+glfw\+Platform.
+
+Examples\+: {\ttfamily \+\_\+glfw\+Platform\+Create\+Window}
+
+The platform interface also defines structs that contain platform-\/specific global and per-\/object state. Their names mirror those of the internal interface, except that an interface-\/specific suffix is added.
+
+Examples\+: {\ttfamily \mbox{\hyperlink{struct__GLFWwindowX11}{\+\_\+\+G\+L\+F\+Wwindow\+X11}}}, {\ttfamily \mbox{\hyperlink{struct__GLFWcontextWGL}{\+\_\+\+G\+L\+F\+Wcontext\+W\+GL}}}
+
+These structs are incorporated as members into the internal interface structs using special macros that name them after the specific interface used. This prevents shared code from accidentally using these members.
+
+Examples\+: {\ttfamily window-\/$>$win32.\+handle}, {\ttfamily \+\_\+glfw.\+x11.\+display}\hypertarget{internals_guide_internals_event}{}\doxysection{Event interface}\label{internals_guide_internals_event}
+The event interface is implemented in the same shared source files as the public interface and is responsible for delivering the events it receives to the application, either via callbacks, via window state changes or both.
+
+The function names of the event interface use a {\ttfamily \+\_\+glfw\+Input} prefix and the Object\+Event pattern.
+
+Examples\+: {\ttfamily \+\_\+glfw\+Input\+Window\+Focus}, {\ttfamily \+\_\+glfw\+Input\+Cursor\+Pos}\hypertarget{internals_guide_internals_static}{}\doxysection{Static functions}\label{internals_guide_internals_static}
+Static functions may be used by any interface and have no prefixes or suffixes. These use headless camel case.
+
+Examples\+: {\ttfamily is\+Valid\+Element\+For\+Joystick}\hypertarget{internals_guide_internals_config}{}\doxysection{Configuration macros}\label{internals_guide_internals_config}
+G\+L\+FW uses a number of configuration macros to select at compile time which interfaces and code paths to use. They are defined in the glfw\+\_\+config.\+h header file, which is generated from the {\ttfamily glfw\+\_\+config.\+h.\+in} file by C\+Make.
+
+Configuration macros the same style as tokens in the public interface, except with a leading underscore.
+
+Examples\+: {\ttfamily \+\_\+\+G\+L\+F\+W\+\_\+\+W\+I\+N32}, {\ttfamily \+\_\+\+G\+L\+F\+W\+\_\+\+B\+U\+I\+L\+D\+\_\+\+D\+LL} 

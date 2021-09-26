@@ -1,0 +1,727 @@
+\hypertarget{classentt_1_1meta__any}{}\doxysection{entt\+::meta\+\_\+any Class Reference}
+\label{classentt_1_1meta__any}\index{entt::meta\_any@{entt::meta\_any}}
+
+
+Opaque wrapper for values of any type.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1meta__any_a7d9eaa43621da68af96080b7f345f2b6}\label{classentt_1_1meta__any_a7d9eaa43621da68af96080b7f345f2b6}} 
+\mbox{\hyperlink{classentt_1_1meta__any_a7d9eaa43621da68af96080b7f345f2b6}{meta\+\_\+any}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type , typename... Args$>$ }\\\mbox{\hyperlink{classentt_1_1meta__any_ab3f48ed052dfade00d8f34cb7e381990}{meta\+\_\+any}} (std\+::in\+\_\+place\+\_\+type\+\_\+t$<$ Type $>$, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Constructs a meta any by directly initializing the new object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\\mbox{\hyperlink{classentt_1_1meta__any_a7c5f042e2e14803083d602d9d401c9cc}{meta\+\_\+any}} (std\+::reference\+\_\+wrapper$<$ Type $>$ value)
+\begin{DoxyCompactList}\small\item\em Constructs a meta any that holds an unmanaged object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$\+Type$>$, meta\+\_\+any$>$$>$$>$ }\\\mbox{\hyperlink{classentt_1_1meta__any_a7e1dba79e26c96a353743a327d1c7b8e}{meta\+\_\+any}} (Type \&\&value)
+\begin{DoxyCompactList}\small\item\em Constructs a meta any from a given value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any_a51936bb6212a3bfc87b71afb2d6085c3}{meta\+\_\+any}} (const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&other)=default
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any_a16de68c4d78064eb025627588936edfb}{meta\+\_\+any}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&\&other) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__any_a816dae3d4ed3e41fcb376ec5ec9c38c1}\label{classentt_1_1meta__any_a816dae3d4ed3e41fcb376ec5ec9c38c1}} 
+\mbox{\hyperlink{classentt_1_1meta__any_a816dae3d4ed3e41fcb376ec5ec9c38c1}{$\sim$meta\+\_\+any}} ()
+\begin{DoxyCompactList}\small\item\em Frees the internal storage, whatever it means. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \& \mbox{\hyperlink{classentt_1_1meta__any_a97360c78351767409f9db58c9f785ad5}{operator=}} (const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \& \mbox{\hyperlink{classentt_1_1meta__any_a867681175c0928270919df9476ba10c5}{operator=}} (\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \& \mbox{\hyperlink{classentt_1_1meta__any_a8445d64eba15304c586ee57664e4bfa6}{operator=}} (std\+::reference\+\_\+wrapper$<$ Type $>$ value)
+\begin{DoxyCompactList}\small\item\em Value assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$ std\+::decay\+\_\+t$<$ Type $>$, \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} $>$, \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \& $>$ \mbox{\hyperlink{classentt_1_1meta__any_ae9298a9b894c870392da35f696fbb044}{operator=}} (Type \&\&value)
+\begin{DoxyCompactList}\small\item\em Value assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} \mbox{\hyperlink{classentt_1_1meta__any_a406ea303f140056a30103d90afab2737}{type}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the type of the underlying object. \end{DoxyCompactList}\item 
+const void $\ast$ \mbox{\hyperlink{classentt_1_1meta__any_a427ee14f12077f8634919fa5c501f93a}{data}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an opaque pointer to the contained instance. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{classentt_1_1meta__any_a2726c037b90fef702cc90eb54e741b49}{data}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an opaque pointer to the contained instance. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_aa7149ea45d21a2152626cbaa91ed6f71}{invoke}} (const id\+\_\+type id, Args \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Invokes the underlying function, if possible. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_a1ab4b908f152ff2a9311878f55caca19}{invoke}} (const id\+\_\+type id, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Invokes the underlying function, if possible. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\bool \mbox{\hyperlink{classentt_1_1meta__any_aa82e0c3e29683d99cc611618d101488b}{set}} (const id\+\_\+type id, Type \&\&value)
+\begin{DoxyCompactList}\small\item\em Sets the value of a given variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_a57e3fcd87f90240e6152324ab8e761dc}{get}} (const id\+\_\+type id) const
+\begin{DoxyCompactList}\small\item\em Gets the value of a given variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_ac79a3b8f874ad75bcccaa2055dc730fb}{get}} (const id\+\_\+type id)
+\begin{DoxyCompactList}\small\item\em Gets the value of a given variable. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\const Type $\ast$ \mbox{\hyperlink{classentt_1_1meta__any_aa545482520009cfd0b70c77269487213}{try\+\_\+cast}} () const
+\begin{DoxyCompactList}\small\item\em Tries to cast an instance to a given type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\Type $\ast$ \mbox{\hyperlink{classentt_1_1meta__any_a92f9591ef0d0e8d146be79b2103efb33}{try\+\_\+cast}} ()
+\begin{DoxyCompactList}\small\item\em Tries to cast an instance to a given type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\Type \mbox{\hyperlink{classentt_1_1meta__any_a88f4699d57d87d6b450e681af5c9a07d}{cast}} () const
+\begin{DoxyCompactList}\small\item\em Tries to cast an instance to a given type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\Type \mbox{\hyperlink{classentt_1_1meta__any_a451353f531eac9870b155bf360aa08d0}{cast}} ()
+\begin{DoxyCompactList}\small\item\em Tries to cast an instance to a given type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_a66606e3abbe512e064a0e1440a069594}{allow\+\_\+cast}} () const
+\begin{DoxyCompactList}\small\item\em Converts an object in such a way that a given cast becomes viable. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\bool \mbox{\hyperlink{classentt_1_1meta__any_af3bf7b2771fc6a67c2a26b19d364e85a}{allow\+\_\+cast}} ()
+\begin{DoxyCompactList}\small\item\em Converts an object in such a way that a given cast becomes viable. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type , typename... Args$>$ }\\void \mbox{\hyperlink{classentt_1_1meta__any_a5b214afbab6c460f91fa050118bf1e86}{emplace}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Replaces the contained object by creating a new instance directly. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1meta__any_a92cb99988bdeb9453f2470b02c5249fb}\label{classentt_1_1meta__any_a92cb99988bdeb9453f2470b02c5249fb}} 
+void \mbox{\hyperlink{classentt_1_1meta__any_a92cb99988bdeb9453f2470b02c5249fb}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Destroys contained object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__sequence__container}{meta\+\_\+sequence\+\_\+container}} \mbox{\hyperlink{classentt_1_1meta__any_ac1e6e00eb336c09be1372b844db81fbc}{as\+\_\+sequence\+\_\+container}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a sequence container proxy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__sequence__container}{meta\+\_\+sequence\+\_\+container}} \mbox{\hyperlink{classentt_1_1meta__any_ad9d6eb41b0b087c9970a2d05cb76e425}{as\+\_\+sequence\+\_\+container}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns a sequence container proxy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container}{meta\+\_\+associative\+\_\+container}} \mbox{\hyperlink{classentt_1_1meta__any_a1ab0be5861490f21276c0d8469dac130}{as\+\_\+associative\+\_\+container}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an associative container proxy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__associative__container}{meta\+\_\+associative\+\_\+container}} \mbox{\hyperlink{classentt_1_1meta__any_accbb2c6fd3efd26ff546395bdf740410}{as\+\_\+associative\+\_\+container}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an associative container proxy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_a2b28bd70a688e571186c5ed707e441aa}{operator$\ast$}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Indirection operator for dereferencing opaque objects. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_a1194d940c7fa56a80c5547130c4650c7}{operator$\ast$}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Indirection operator for dereferencing opaque objects. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any_ad1cbe0447f1b0df45706712566f1b2a0}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns false if a wrapper is invalid, true otherwise. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1meta__any_a1bd17bffb75be10543e85c78185d765a}{operator==}} (const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if two wrappers differ in their content. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_a99109e7108a58d22820ed6c31714fdc3}{as\+\_\+ref}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Aliasing constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \mbox{\hyperlink{classentt_1_1meta__any_a36650073ef31677801dcfbb924b146d0}{as\+\_\+ref}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Aliasing constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Opaque wrapper for values of any type. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__any_ab3f48ed052dfade00d8f34cb7e381990}\label{classentt_1_1meta__any_ab3f48ed052dfade00d8f34cb7e381990}} 
+\index{entt::meta\_any@{entt::meta\_any}!meta\_any@{meta\_any}}
+\index{meta\_any@{meta\_any}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{meta\_any()}{meta\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$typename Type , typename... Args$>$ \\
+entt\+::meta\+\_\+any\+::meta\+\_\+any (\begin{DoxyParamCaption}\item[{std\+::in\+\_\+place\+\_\+type\+\_\+t$<$ Type $>$}]{,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a meta any by directly initializing the new object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+{\em Args} & Types of arguments to use to construct the new instance. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1meta__any_a7c5f042e2e14803083d602d9d401c9cc}\label{classentt_1_1meta__any_a7c5f042e2e14803083d602d9d401c9cc}} 
+\index{entt::meta\_any@{entt::meta\_any}!meta\_any@{meta\_any}}
+\index{meta\_any@{meta\_any}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{meta\_any()}{meta\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+entt\+::meta\+\_\+any\+::meta\+\_\+any (\begin{DoxyParamCaption}\item[{std\+::reference\+\_\+wrapper$<$ Type $>$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a meta any that holds an unmanaged object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1meta__any_a7e1dba79e26c96a353743a327d1c7b8e}\label{classentt_1_1meta__any_a7e1dba79e26c96a353743a327d1c7b8e}} 
+\index{entt::meta\_any@{entt::meta\_any}!meta\_any@{meta\_any}}
+\index{meta\_any@{meta\_any}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{meta\_any()}{meta\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$typename Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$\+Type$>$, meta\+\_\+any$>$$>$$>$ \\
+entt\+::meta\+\_\+any\+::meta\+\_\+any (\begin{DoxyParamCaption}\item[{Type \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a meta any from a given value. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1meta__any_a51936bb6212a3bfc87b71afb2d6085c3}\label{classentt_1_1meta__any_a51936bb6212a3bfc87b71afb2d6085c3}} 
+\index{entt::meta\_any@{entt::meta\_any}!meta\_any@{meta\_any}}
+\index{meta\_any@{meta\_any}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{meta\_any()}{meta\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+any\+::meta\+\_\+any (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to copy from. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1meta__any_a16de68c4d78064eb025627588936edfb}\label{classentt_1_1meta__any_a16de68c4d78064eb025627588936edfb}} 
+\index{entt::meta\_any@{entt::meta\_any}!meta\_any@{meta\_any}}
+\index{meta\_any@{meta\_any}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{meta\_any()}{meta\_any()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+any\+::meta\+\_\+any (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to move from. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1meta__any_af3bf7b2771fc6a67c2a26b19d364e85a}\label{classentt_1_1meta__any_af3bf7b2771fc6a67c2a26b19d364e85a}} 
+\index{entt::meta\_any@{entt::meta\_any}!allow\_cast@{allow\_cast}}
+\index{allow\_cast@{allow\_cast}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{allow\_cast()}{allow\_cast()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+bool entt\+::meta\+\_\+any\+::allow\+\_\+cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts an object in such a way that a given cast becomes viable. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type to which the cast is requested. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+True if there exists a viable conversion, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a66606e3abbe512e064a0e1440a069594}\label{classentt_1_1meta__any_a66606e3abbe512e064a0e1440a069594}} 
+\index{entt::meta\_any@{entt::meta\_any}!allow\_cast@{allow\_cast}}
+\index{allow\_cast@{allow\_cast}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{allow\_cast()}{allow\_cast()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::allow\+\_\+cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts an object in such a way that a given cast becomes viable. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type to which the cast is requested. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A valid meta any object if there exists a viable conversion, an invalid one otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_accbb2c6fd3efd26ff546395bdf740410}\label{classentt_1_1meta__any_accbb2c6fd3efd26ff546395bdf740410}} 
+\index{entt::meta\_any@{entt::meta\_any}!as\_associative\_container@{as\_associative\_container}}
+\index{as\_associative\_container@{as\_associative\_container}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{as\_associative\_container()}{as\_associative\_container()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container}{meta\+\_\+associative\+\_\+container}} entt\+::meta\+\_\+any\+::as\+\_\+associative\+\_\+container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an associative container proxy. 
+
+\begin{DoxyReturn}{Returns}
+An associative container proxy for the underlying object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a1ab0be5861490f21276c0d8469dac130}\label{classentt_1_1meta__any_a1ab0be5861490f21276c0d8469dac130}} 
+\index{entt::meta\_any@{entt::meta\_any}!as\_associative\_container@{as\_associative\_container}}
+\index{as\_associative\_container@{as\_associative\_container}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{as\_associative\_container()}{as\_associative\_container()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__associative__container}{meta\+\_\+associative\+\_\+container}} entt\+::meta\+\_\+any\+::as\+\_\+associative\+\_\+container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an associative container proxy. 
+
+\begin{DoxyReturn}{Returns}
+An associative container proxy for the underlying object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a36650073ef31677801dcfbb924b146d0}\label{classentt_1_1meta__any_a36650073ef31677801dcfbb924b146d0}} 
+\index{entt::meta\_any@{entt::meta\_any}!as\_ref@{as\_ref}}
+\index{as\_ref@{as\_ref}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{as\_ref()}{as\_ref()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::as\+\_\+ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Aliasing constructor. 
+
+\begin{DoxyReturn}{Returns}
+A meta any that shares a reference to an unmanaged object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a99109e7108a58d22820ed6c31714fdc3}\label{classentt_1_1meta__any_a99109e7108a58d22820ed6c31714fdc3}} 
+\index{entt::meta\_any@{entt::meta\_any}!as\_ref@{as\_ref}}
+\index{as\_ref@{as\_ref}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{as\_ref()}{as\_ref()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::as\+\_\+ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Aliasing constructor. 
+
+\begin{DoxyReturn}{Returns}
+A meta any that shares a reference to an unmanaged object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_ad9d6eb41b0b087c9970a2d05cb76e425}\label{classentt_1_1meta__any_ad9d6eb41b0b087c9970a2d05cb76e425}} 
+\index{entt::meta\_any@{entt::meta\_any}!as\_sequence\_container@{as\_sequence\_container}}
+\index{as\_sequence\_container@{as\_sequence\_container}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{as\_sequence\_container()}{as\_sequence\_container()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__sequence__container}{meta\+\_\+sequence\+\_\+container}} entt\+::meta\+\_\+any\+::as\+\_\+sequence\+\_\+container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a sequence container proxy. 
+
+\begin{DoxyReturn}{Returns}
+A sequence container proxy for the underlying object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_ac1e6e00eb336c09be1372b844db81fbc}\label{classentt_1_1meta__any_ac1e6e00eb336c09be1372b844db81fbc}} 
+\index{entt::meta\_any@{entt::meta\_any}!as\_sequence\_container@{as\_sequence\_container}}
+\index{as\_sequence\_container@{as\_sequence\_container}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{as\_sequence\_container()}{as\_sequence\_container()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__sequence__container}{meta\+\_\+sequence\+\_\+container}} entt\+::meta\+\_\+any\+::as\+\_\+sequence\+\_\+container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a sequence container proxy. 
+
+\begin{DoxyReturn}{Returns}
+A sequence container proxy for the underlying object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a451353f531eac9870b155bf360aa08d0}\label{classentt_1_1meta__any_a451353f531eac9870b155bf360aa08d0}} 
+\index{entt::meta\_any@{entt::meta\_any}!cast@{cast}}
+\index{cast@{cast}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+Type entt\+::meta\+\_\+any\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to cast an instance to a given type. 
+
+The type of the instance must be such that the cast is possible.
+
+\begin{DoxyWarning}{Warning}
+Attempting to perform an invalid cast results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type to which to cast the instance. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A reference to the contained instance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a88f4699d57d87d6b450e681af5c9a07d}\label{classentt_1_1meta__any_a88f4699d57d87d6b450e681af5c9a07d}} 
+\index{entt::meta\_any@{entt::meta\_any}!cast@{cast}}
+\index{cast@{cast}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+Type entt\+::meta\+\_\+any\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to cast an instance to a given type. 
+
+The type of the instance must be such that the cast is possible.
+
+\begin{DoxyWarning}{Warning}
+Attempting to perform an invalid cast results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type to which to cast the instance. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A reference to the contained instance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a427ee14f12077f8634919fa5c501f93a}\label{classentt_1_1meta__any_a427ee14f12077f8634919fa5c501f93a}} 
+\index{entt::meta\_any@{entt::meta\_any}!data@{data}}
+\index{data@{data}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const void$\ast$ entt\+::meta\+\_\+any\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an opaque pointer to the contained instance. 
+
+\begin{DoxyReturn}{Returns}
+An opaque pointer the contained instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a2726c037b90fef702cc90eb54e741b49}\label{classentt_1_1meta__any_a2726c037b90fef702cc90eb54e741b49}} 
+\index{entt::meta\_any@{entt::meta\_any}!data@{data}}
+\index{data@{data}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void$\ast$ entt\+::meta\+\_\+any\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an opaque pointer to the contained instance. 
+
+\begin{DoxyReturn}{Returns}
+An opaque pointer the contained instance, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a5b214afbab6c460f91fa050118bf1e86}\label{classentt_1_1meta__any_a5b214afbab6c460f91fa050118bf1e86}} 
+\index{entt::meta\_any@{entt::meta\_any}!emplace@{emplace}}
+\index{emplace@{emplace}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}}
+{\footnotesize\ttfamily template$<$typename Type , typename... Args$>$ \\
+void entt\+::meta\+\_\+any\+::emplace (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Replaces the contained object by creating a new instance directly. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+{\em Args} & Types of arguments to use to construct the new instance. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to construct the instance. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1meta__any_ac79a3b8f874ad75bcccaa2055dc730fb}\label{classentt_1_1meta__any_ac79a3b8f874ad75bcccaa2055dc730fb}} 
+\index{entt::meta\_any@{entt::meta\_any}!get@{get}}
+\index{get@{get}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::get (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the value of a given variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the value of the underlying variable. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a57e3fcd87f90240e6152324ab8e761dc}\label{classentt_1_1meta__any_a57e3fcd87f90240e6152324ab8e761dc}} 
+\index{entt::meta\_any@{entt::meta\_any}!get@{get}}
+\index{get@{get}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::get (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the value of a given variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the value of the underlying variable. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a1ab4b908f152ff2a9311878f55caca19}\label{classentt_1_1meta__any_a1ab4b908f152ff2a9311878f55caca19}} 
+\index{entt::meta\_any@{entt::meta\_any}!invoke@{invoke}}
+\index{invoke@{invoke}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{invoke()}{invoke()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::invoke (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Invokes the underlying function, if possible. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structentt_1_1meta__func_a83fb3576c1a3873de1e1e041f759180b}{meta\+\_\+func\+::invoke}}
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to invoke the function. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+{\em args} & Parameters to use to invoke the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the returned value, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_aa7149ea45d21a2152626cbaa91ed6f71}\label{classentt_1_1meta__any_aa7149ea45d21a2152626cbaa91ed6f71}} 
+\index{entt::meta\_any@{entt::meta\_any}!invoke@{invoke}}
+\index{invoke@{invoke}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{invoke()}{invoke()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::invoke (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) const}
+
+
+
+Invokes the underlying function, if possible. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structentt_1_1meta__func_a83fb3576c1a3873de1e1e041f759180b}{meta\+\_\+func\+::invoke}}
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to invoke the function. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+{\em args} & Parameters to use to invoke the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A meta any containing the returned value, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_ad1cbe0447f1b0df45706712566f1b2a0}\label{classentt_1_1meta__any_ad1cbe0447f1b0df45706712566f1b2a0}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily entt\+::meta\+\_\+any\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns false if a wrapper is invalid, true otherwise. 
+
+\begin{DoxyReturn}{Returns}
+False if the wrapper is invalid, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a1194d940c7fa56a80c5547130c4650c7}\label{classentt_1_1meta__any_a1194d940c7fa56a80c5547130c4650c7}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Indirection operator for dereferencing opaque objects. 
+
+\begin{DoxyReturn}{Returns}
+A meta any that shares a reference to an unmanaged object if the wrapped element is dereferenceable, an invalid meta any otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a2b28bd70a688e571186c5ed707e441aa}\label{classentt_1_1meta__any_a2b28bd70a688e571186c5ed707e441aa}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} entt\+::meta\+\_\+any\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Indirection operator for dereferencing opaque objects. 
+
+\begin{DoxyReturn}{Returns}
+A meta any that shares a reference to an unmanaged object if the wrapped element is dereferenceable, an invalid meta any otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a97360c78351767409f9db58c9f785ad5}\label{classentt_1_1meta__any_a97360c78351767409f9db58c9f785ad5}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}\& entt\+::meta\+\_\+any\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assignment operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to copy from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This meta any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a867681175c0928270919df9476ba10c5}\label{classentt_1_1meta__any_a867681175c0928270919df9476ba10c5}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}\& entt\+::meta\+\_\+any\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move assignment operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The instance to move from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This meta any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a8445d64eba15304c586ee57664e4bfa6}\label{classentt_1_1meta__any_a8445d64eba15304c586ee57664e4bfa6}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+\mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}\& entt\+::meta\+\_\+any\+::operator= (\begin{DoxyParamCaption}\item[{std\+::reference\+\_\+wrapper$<$ Type $>$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Value assignment operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This meta any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_ae9298a9b894c870392da35f696fbb044}\label{classentt_1_1meta__any_ae9298a9b894c870392da35f696fbb044}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$Type$>$, \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}}$>$, \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&$>$ entt\+::meta\+\_\+any\+::operator= (\begin{DoxyParamCaption}\item[{Type \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Value assignment operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of object to use to initialize the wrapper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & An instance of an object to use to initialize the wrapper. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This meta any object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a1bd17bffb75be10543e85c78185d765a}\label{classentt_1_1meta__any_a1bd17bffb75be10543e85c78185d765a}} 
+\index{entt::meta\_any@{entt::meta\_any}!operator==@{operator==}}
+\index{operator==@{operator==}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool entt\+::meta\+\_\+any\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1meta__any}{meta\+\_\+any}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if two wrappers differ in their content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Wrapper with which to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the two objects differ in their content, true otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_aa82e0c3e29683d99cc611618d101488b}\label{classentt_1_1meta__any_aa82e0c3e29683d99cc611618d101488b}} 
+\index{entt::meta\_any@{entt::meta\_any}!set@{set}}
+\index{set@{set}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+bool entt\+::meta\+\_\+any\+::set (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{Type \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Sets the value of a given variable. 
+
+The type of the value must be such that a cast or conversion to the type of the variable is possible. Otherwise, invoking the setter does nothing.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of value to assign. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier. \\
+\hline
+{\em value} & Parameter to use to set the underlying variable. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True in case of success, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a92f9591ef0d0e8d146be79b2103efb33}\label{classentt_1_1meta__any_a92f9591ef0d0e8d146be79b2103efb33}} 
+\index{entt::meta\_any@{entt::meta\_any}!try\_cast@{try\_cast}}
+\index{try\_cast@{try\_cast}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{try\_cast()}{try\_cast()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+Type$\ast$ entt\+::meta\+\_\+any\+::try\+\_\+cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to cast an instance to a given type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type to which to cast the instance. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A (possibly null) pointer to the contained instance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_aa545482520009cfd0b70c77269487213}\label{classentt_1_1meta__any_aa545482520009cfd0b70c77269487213}} 
+\index{entt::meta\_any@{entt::meta\_any}!try\_cast@{try\_cast}}
+\index{try\_cast@{try\_cast}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{try\_cast()}{try\_cast()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+const Type$\ast$ entt\+::meta\+\_\+any\+::try\+\_\+cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to cast an instance to a given type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type to which to cast the instance. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A (possibly null) pointer to the contained instance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1meta__any_a406ea303f140056a30103d90afab2737}\label{classentt_1_1meta__any_a406ea303f140056a30103d90afab2737}} 
+\index{entt::meta\_any@{entt::meta\_any}!type@{type}}
+\index{type@{type}!entt::meta\_any@{entt::meta\_any}}
+\doxysubsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classentt_1_1meta__type}{meta\+\_\+type}} entt\+::meta\+\_\+any\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the type of the underlying object. 
+
+\begin{DoxyReturn}{Returns}
+The type of the underlying object, if any. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,89 @@
+\hypertarget{structentt_1_1as__view}{}\doxysection{entt\+::as\+\_\+view$<$ Entity $>$ Struct Template Reference}
+\label{structentt_1_1as__view}\index{entt::as\_view$<$ Entity $>$@{entt::as\_view$<$ Entity $>$}}
+
+
+Converts a registry to a view.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1as__view_ae9599a1614990478c3331fbf562f36c7}\label{structentt_1_1as__view_ae9599a1614990478c3331fbf562f36c7}} 
+using \mbox{\hyperlink{structentt_1_1as__view_ae9599a1614990478c3331fbf562f36c7}{entity\+\_\+type}} = std\+::remove\+\_\+const\+\_\+t$<$ Entity $>$
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1as__view_acf6e812f1ff9a8a0a0af828b6597dace}\label{structentt_1_1as__view_acf6e812f1ff9a8a0a0af828b6597dace}} 
+using \mbox{\hyperlink{structentt_1_1as__view_acf6e812f1ff9a8a0a0af828b6597dace}{registry\+\_\+type}} = constness\+\_\+as\+\_\+t$<$ \mbox{\hyperlink{classentt_1_1basic__registry}{basic\+\_\+registry}}$<$ \mbox{\hyperlink{structentt_1_1as__view_ae9599a1614990478c3331fbf562f36c7}{entity\+\_\+type}} $>$, Entity $>$
+\begin{DoxyCompactList}\small\item\em Type of registry to convert. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structentt_1_1as__view_a8d83558fc960341520be54b389035fa1}{as\+\_\+view}} (\mbox{\hyperlink{structentt_1_1as__view_acf6e812f1ff9a8a0a0af828b6597dace}{registry\+\_\+type}} \&source) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs a converter for a given registry. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Exclude , typename... Component$>$ }\\\mbox{\hyperlink{structentt_1_1as__view_a60dbb15ef8f1a184510c0652ed1c6afd}{operator basic\+\_\+view$<$ entity\+\_\+type, Exclude, Component... $>$}} () const
+\begin{DoxyCompactList}\small\item\em Conversion function from a registry to a view. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity$>$\newline
+struct entt\+::as\+\_\+view$<$ Entity $>$}
+
+Converts a registry to a view. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1as__view_a8d83558fc960341520be54b389035fa1}\label{structentt_1_1as__view_a8d83558fc960341520be54b389035fa1}} 
+\index{entt::as\_view$<$ Entity $>$@{entt::as\_view$<$ Entity $>$}!as\_view@{as\_view}}
+\index{as\_view@{as\_view}!entt::as\_view$<$ Entity $>$@{entt::as\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{as\_view()}{as\_view()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{structentt_1_1as__view}{entt\+::as\+\_\+view}}$<$ Entity $>$\+::\mbox{\hyperlink{structentt_1_1as__view}{as\+\_\+view}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structentt_1_1as__view_acf6e812f1ff9a8a0a0af828b6597dace}{registry\+\_\+type}} \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a converter for a given registry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & A valid reference to a registry. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1as__view_a60dbb15ef8f1a184510c0652ed1c6afd}\label{structentt_1_1as__view_a60dbb15ef8f1a184510c0652ed1c6afd}} 
+\index{entt::as\_view$<$ Entity $>$@{entt::as\_view$<$ Entity $>$}!operator basic\_view$<$ entity\_type, Exclude, Component... $>$@{operator basic\_view$<$ entity\_type, Exclude, Component... $>$}}
+\index{operator basic\_view$<$ entity\_type, Exclude, Component... $>$@{operator basic\_view$<$ entity\_type, Exclude, Component... $>$}!entt::as\_view$<$ Entity $>$@{entt::as\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{operator basic\_view$<$ entity\_type, Exclude, Component... $>$()}{operator basic\_view< entity\_type, Exclude, Component... >()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+template$<$typename Exclude , typename... Component$>$ \\
+\mbox{\hyperlink{structentt_1_1as__view}{entt\+::as\+\_\+view}}$<$ Entity $>$\+::operator \mbox{\hyperlink{classentt_1_1basic__view}{basic\+\_\+view}}$<$ \mbox{\hyperlink{structentt_1_1as__view_ae9599a1614990478c3331fbf562f36c7}{entity\+\_\+type}}, Exclude, Component... $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Conversion function from a registry to a view. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Exclude} & Types of components used to filter the view. \\
+\hline
+{\em Component} & Type of components used to construct the view. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A newly created view. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

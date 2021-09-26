@@ -1,0 +1,158 @@
+\hypertarget{classentt_1_1basic__organizer}{}\doxysection{entt\+::basic\+\_\+organizer$<$ Entity $>$ Class Template Reference}
+\label{classentt_1_1basic__organizer}\index{entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}}
+
+
+Utility class for creating a static task graph.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex}{vertex}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structVertex}{Vertex}} type of a task graph defined as an adjacency list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__organizer_a36b865f5d3802e48a0fa027c43e3a39c}\label{classentt_1_1basic__organizer_a36b865f5d3802e48a0fa027c43e3a39c}} 
+using \mbox{\hyperlink{classentt_1_1basic__organizer_a36b865f5d3802e48a0fa027c43e3a39c}{entity\+\_\+type}} = Entity
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}\label{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}} 
+using \mbox{\hyperlink{classentt_1_1basic__organizer_afcf528b532b3c41ab06c11d5c82a7260}{size\+\_\+type}} = std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__organizer_a8eb83a2af62a10e9515776b8f26b1edc}\label{classentt_1_1basic__organizer_a8eb83a2af62a10e9515776b8f26b1edc}} 
+using \mbox{\hyperlink{classentt_1_1basic__organizer_a8eb83a2af62a10e9515776b8f26b1edc}{function\+\_\+type}} = callback\+\_\+type
+\begin{DoxyCompactList}\small\item\em Raw task function type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$auto Candidate, typename... Req$>$ }\\void \mbox{\hyperlink{classentt_1_1basic__organizer_a9c26a53ceaa41f54d88678b636e96ad5}{emplace}} (const char $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Adds a free function to the task list. \end{DoxyCompactList}\item 
+{\footnotesize template$<$auto Candidate, typename... Req, typename Type $>$ }\\void \mbox{\hyperlink{classentt_1_1basic__organizer_ae28283f55e13443712ddfd29bf01f9f7}{emplace}} (Type \&value\+\_\+or\+\_\+instance, const char $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Adds a free function with payload or a member function with an instance to the task list. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Req$>$ }\\void \mbox{\hyperlink{classentt_1_1basic__organizer_abed2a897fe81bd69f85ed9305c1fcdc3}{emplace}} (\mbox{\hyperlink{classentt_1_1basic__organizer_a8eb83a2af62a10e9515776b8f26b1edc}{function\+\_\+type}} $\ast$func, const void $\ast$payload=nullptr, const char $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Adds an user defined function with optional payload to the task list. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex}{vertex}} $>$ \mbox{\hyperlink{classentt_1_1basic__organizer_abb49a4c59833592036dce927cae6143d}{graph}} ()
+\begin{DoxyCompactList}\small\item\em Generates a task graph for the current content. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__organizer_abd9bb70defec160e5da0d5807c11b18f}\label{classentt_1_1basic__organizer_abd9bb70defec160e5da0d5807c11b18f}} 
+void \mbox{\hyperlink{classentt_1_1basic__organizer_abd9bb70defec160e5da0d5807c11b18f}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Erases all elements from a container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity$>$\newline
+class entt\+::basic\+\_\+organizer$<$ Entity $>$}
+
+Utility class for creating a static task graph. 
+
+This class offers minimal support (but sufficient in many cases) for creating an execution graph from functions and their requirements on resources.~\newline
+ Note that the resulting tasks aren\textquotesingle{}t executed in any case. This isn\textquotesingle{}t the goal of the tool. Instead, they are returned to the user in the form of a graph that allows for safe execution.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__organizer_a9c26a53ceaa41f54d88678b636e96ad5}\label{classentt_1_1basic__organizer_a9c26a53ceaa41f54d88678b636e96ad5}} 
+\index{entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}!emplace@{emplace}}
+\index{emplace@{emplace}!entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+template$<$auto Candidate, typename... Req$>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::emplace (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a free function to the task list. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Candidate} & Function to add to the task list. \\
+\hline
+{\em Req} & Additional requirements and/or override resource access mode. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Optional name to associate with the task. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__organizer_abed2a897fe81bd69f85ed9305c1fcdc3}\label{classentt_1_1basic__organizer_abed2a897fe81bd69f85ed9305c1fcdc3}} 
+\index{entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}!emplace@{emplace}}
+\index{emplace@{emplace}!entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+template$<$typename... Req$>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::emplace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentt_1_1basic__organizer_a8eb83a2af62a10e9515776b8f26b1edc}{function\+\_\+type}} $\ast$}]{func,  }\item[{const void $\ast$}]{payload = {\ttfamily nullptr},  }\item[{const char $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds an user defined function with optional payload to the task list. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Req} & Additional requirements and/or override resource access mode. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function to add to the task list. \\
+\hline
+{\em payload} & User defined arbitrary data. \\
+\hline
+{\em name} & Optional name to associate with the task. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__organizer_ae28283f55e13443712ddfd29bf01f9f7}\label{classentt_1_1basic__organizer_ae28283f55e13443712ddfd29bf01f9f7}} 
+\index{entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}!emplace@{emplace}}
+\index{emplace@{emplace}!entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+template$<$auto Candidate, typename... Req, typename Type $>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::emplace (\begin{DoxyParamCaption}\item[{Type \&}]{value\+\_\+or\+\_\+instance,  }\item[{const char $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a free function with payload or a member function with an instance to the task list. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Candidate} & Function or member to add to the task list. \\
+\hline
+{\em Req} & Additional requirements and/or override resource access mode. \\
+\hline
+{\em Type} & Type of class or type of payload. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value\+\_\+or\+\_\+instance} & A valid object that fits the purpose. \\
+\hline
+{\em name} & Optional name to associate with the task. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__organizer_abb49a4c59833592036dce927cae6143d}\label{classentt_1_1basic__organizer_abb49a4c59833592036dce927cae6143d}} 
+\index{entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}!graph@{graph}}
+\index{graph@{graph}!entt::basic\_organizer$<$ Entity $>$@{entt::basic\_organizer$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{graph()}{graph()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+std\+::vector$<$\mbox{\hyperlink{structentt_1_1basic__organizer_1_1vertex}{vertex}}$>$ \mbox{\hyperlink{classentt_1_1basic__organizer}{entt\+::basic\+\_\+organizer}}$<$ Entity $>$\+::graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generates a task graph for the current content. 
+
+\begin{DoxyReturn}{Returns}
+The adjacency list of the task graph. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

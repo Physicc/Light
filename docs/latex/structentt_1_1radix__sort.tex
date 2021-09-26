@@ -1,0 +1,71 @@
+\hypertarget{structentt_1_1radix__sort}{}\doxysection{entt\+::radix\+\_\+sort$<$ Bit, N $>$ Struct Template Reference}
+\label{structentt_1_1radix__sort}\index{entt::radix\_sort$<$ Bit, N $>$@{entt::radix\_sort$<$ Bit, N $>$}}
+
+
+Function object for performing L\+SD radix sort.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename It , typename Getter  = identity$>$ }\\void \mbox{\hyperlink{structentt_1_1radix__sort_a1989f6fbe18d3d82fdea9745d6b9ee96}{operator()}} (It first, It last, Getter getter=Getter\{\}) const
+\begin{DoxyCompactList}\small\item\em Sorts the elements in a range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std\+::size\+\_\+t Bit, std\+::size\+\_\+t N$>$\newline
+struct entt\+::radix\+\_\+sort$<$ Bit, N $>$}
+
+Function object for performing L\+SD radix sort. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Bit} & Number of bits processed per pass. \\
+\hline
+{\em N} & Maximum number of bits to sort. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1radix__sort_a1989f6fbe18d3d82fdea9745d6b9ee96}\label{structentt_1_1radix__sort_a1989f6fbe18d3d82fdea9745d6b9ee96}} 
+\index{entt::radix\_sort$<$ Bit, N $>$@{entt::radix\_sort$<$ Bit, N $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!entt::radix\_sort$<$ Bit, N $>$@{entt::radix\_sort$<$ Bit, N $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Bit, std\+::size\+\_\+t N$>$ \\
+template$<$typename It , typename Getter  = identity$>$ \\
+void \mbox{\hyperlink{structentt_1_1radix__sort}{entt\+::radix\+\_\+sort}}$<$ Bit, N $>$\+::operator() (\begin{DoxyParamCaption}\item[{It}]{first,  }\item[{It}]{last,  }\item[{Getter}]{getter = {\ttfamily Getter\{\}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sorts the elements in a range. 
+
+Sorts the elements in a range using the given {\itshape getter} to access the actual data to be sorted.
+
+This implementation is inspired by the online book \href{http://www.pbr-book.org/3ed-2018/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies.html\#RadixSort}{\texttt{ Physically Based Rendering}}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em It} & Type of random access iterator. \\
+\hline
+{\em Getter} & Type of {\itshape getter} function object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em first} & An iterator to the first element of the range to sort. \\
+\hline
+{\em last} & An iterator past the last element of the range to sort. \\
+\hline
+{\em getter} & A valid {\itshape getter} function object. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,51 @@
+\hypertarget{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4}{}\doxysection{entt\+::entt\+\_\+traits$<$ std\+::uint64\+\_\+t $>$ Struct Reference}
+\label{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4}\index{entt::entt\_traits$<$ std::uint64\_t $>$@{entt::entt\_traits$<$ std::uint64\_t $>$}}
+
+
+Entity traits for a 64 bits entity identifier.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a304eb4dc4a1487cf2966d902214f7185}\label{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a304eb4dc4a1487cf2966d902214f7185}} 
+using \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a304eb4dc4a1487cf2966d902214f7185}{entity\+\_\+type}} = std\+::uint64\+\_\+t
+\begin{DoxyCompactList}\small\item\em Underlying entity type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_aeac4d9172940a9dec0682860ac176725}\label{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_aeac4d9172940a9dec0682860ac176725}} 
+using \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_aeac4d9172940a9dec0682860ac176725}{version\+\_\+type}} = std\+::uint32\+\_\+t
+\begin{DoxyCompactList}\small\item\em Underlying version type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_afba2f77f80b0bf89a208f6876ab67271}\label{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_afba2f77f80b0bf89a208f6876ab67271}} 
+using \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_afba2f77f80b0bf89a208f6876ab67271}{difference\+\_\+type}} = std\+::int64\+\_\+t
+\begin{DoxyCompactList}\small\item\em Difference type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a8768144681f59ba78802bff2646930dd}\label{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a8768144681f59ba78802bff2646930dd}} 
+static constexpr \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a304eb4dc4a1487cf2966d902214f7185}{entity\+\_\+type}} \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a8768144681f59ba78802bff2646930dd}{entity\+\_\+mask}} = 0x\+F\+F\+F\+F\+F\+F\+FF
+\begin{DoxyCompactList}\small\item\em Mask to use to get the entity number out of an identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a71ffda25f3b437989eaea515728afd15}\label{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a71ffda25f3b437989eaea515728afd15}} 
+static constexpr \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a304eb4dc4a1487cf2966d902214f7185}{entity\+\_\+type}} \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a71ffda25f3b437989eaea515728afd15}{version\+\_\+mask}} = 0x\+F\+F\+F\+F\+F\+F\+FF
+\begin{DoxyCompactList}\small\item\em Mask to use to get the version out of an identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a07ede4f7b1001d13e0882b4e630571d5}\label{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a07ede4f7b1001d13e0882b4e630571d5}} 
+static constexpr std\+::size\+\_\+t \mbox{\hyperlink{structentt_1_1entt__traits_3_01std_1_1uint64__t_01_4_a07ede4f7b1001d13e0882b4e630571d5}{entity\+\_\+shift}} = 32u
+\begin{DoxyCompactList}\small\item\em Extent of the entity number within an identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entity traits for a 64 bits entity identifier. 
+
+A 64 bits entity identifier guarantees\+:
+
+
+\begin{DoxyItemize}
+\item 32 bits for the entity number (an indecently large number).
+\item 32 bit for the version (an indecently large number). 
+\end{DoxyItemize}
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

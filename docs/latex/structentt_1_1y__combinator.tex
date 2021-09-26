@@ -1,0 +1,110 @@
+\hypertarget{structentt_1_1y__combinator}{}\doxysection{entt\+::y\+\_\+combinator$<$ Func $>$ Struct Template Reference}
+\label{structentt_1_1y__combinator}\index{entt::y\_combinator$<$ Func $>$@{entt::y\_combinator$<$ Func $>$}}
+
+
+Basic implementation of a y-\/combinator.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structentt_1_1y__combinator_a3ef9b5550c3de06bed6297ae3b79815f}{y\+\_\+combinator}} (Func recursive)
+\begin{DoxyCompactList}\small\item\em Constructs a y-\/combinator from a given function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... Args$>$ }\\decltype(auto) \mbox{\hyperlink{structentt_1_1y__combinator_aaf600432620d702c835ff5555f962c40}{operator()}} (Args \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Invokes a y-\/combinator and therefore its underlying function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... Args$>$ }\\decltype(auto) \mbox{\hyperlink{structentt_1_1y__combinator_ab87fd1de40da60ffef1d0ed9b76280a8}{operator()}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Invokes a y-\/combinator and therefore its underlying function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Func$>$\newline
+struct entt\+::y\+\_\+combinator$<$ Func $>$}
+
+Basic implementation of a y-\/combinator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Type of a potentially recursive function. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1y__combinator_a3ef9b5550c3de06bed6297ae3b79815f}\label{structentt_1_1y__combinator_a3ef9b5550c3de06bed6297ae3b79815f}} 
+\index{entt::y\_combinator$<$ Func $>$@{entt::y\_combinator$<$ Func $>$}!y\_combinator@{y\_combinator}}
+\index{y\_combinator@{y\_combinator}!entt::y\_combinator$<$ Func $>$@{entt::y\_combinator$<$ Func $>$}}
+\doxysubsubsection{\texorpdfstring{y\_combinator()}{y\_combinator()}}
+{\footnotesize\ttfamily template$<$class Func $>$ \\
+\mbox{\hyperlink{structentt_1_1y__combinator}{entt\+::y\+\_\+combinator}}$<$ Func $>$\+::\mbox{\hyperlink{structentt_1_1y__combinator}{y\+\_\+combinator}} (\begin{DoxyParamCaption}\item[{Func}]{recursive }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a y-\/combinator from a given function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em recursive} & A potentially recursive function. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1y__combinator_ab87fd1de40da60ffef1d0ed9b76280a8}\label{structentt_1_1y__combinator_ab87fd1de40da60ffef1d0ed9b76280a8}} 
+\index{entt::y\_combinator$<$ Func $>$@{entt::y\_combinator$<$ Func $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!entt::y\_combinator$<$ Func $>$@{entt::y\_combinator$<$ Func $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Func $>$ \\
+template$<$class... Args$>$ \\
+decltype(auto) \mbox{\hyperlink{structentt_1_1y__combinator}{entt\+::y\+\_\+combinator}}$<$ Func $>$\+::operator() (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Invokes a y-\/combinator and therefore its underlying function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to invoke the underlying function. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to invoke the underlying function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value of the underlying function, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1y__combinator_aaf600432620d702c835ff5555f962c40}\label{structentt_1_1y__combinator_aaf600432620d702c835ff5555f962c40}} 
+\index{entt::y\_combinator$<$ Func $>$@{entt::y\_combinator$<$ Func $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!entt::y\_combinator$<$ Func $>$@{entt::y\_combinator$<$ Func $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Func $>$ \\
+template$<$class... Args$>$ \\
+decltype(auto) \mbox{\hyperlink{structentt_1_1y__combinator}{entt\+::y\+\_\+combinator}}$<$ Func $>$\+::operator() (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Invokes a y-\/combinator and therefore its underlying function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Types of arguments to use to invoke the underlying function. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parameters to use to invoke the underlying function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value of the underlying function, if any. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

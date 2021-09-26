@@ -1,0 +1,56 @@
+\hypertarget{structentt_1_1insertion__sort}{}\doxysection{entt\+::insertion\+\_\+sort Struct Reference}
+\label{structentt_1_1insertion__sort}\index{entt::insertion\_sort@{entt::insertion\_sort}}
+
+
+Function object for performing insertion sort.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename It , typename Compare  = std\+::less$<$$>$$>$ }\\void \mbox{\hyperlink{structentt_1_1insertion__sort_a73a5644fe5b683f9b9376c89ac47f2b8}{operator()}} (It first, It last, Compare compare=Compare\{\}) const
+\begin{DoxyCompactList}\small\item\em Sorts the elements in a range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function object for performing insertion sort. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1insertion__sort_a73a5644fe5b683f9b9376c89ac47f2b8}\label{structentt_1_1insertion__sort_a73a5644fe5b683f9b9376c89ac47f2b8}} 
+\index{entt::insertion\_sort@{entt::insertion\_sort}!operator()@{operator()}}
+\index{operator()@{operator()}!entt::insertion\_sort@{entt::insertion\_sort}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename It , typename Compare  = std\+::less$<$$>$$>$ \\
+void entt\+::insertion\+\_\+sort\+::operator() (\begin{DoxyParamCaption}\item[{It}]{first,  }\item[{It}]{last,  }\item[{Compare}]{compare = {\ttfamily Compare\{\}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sorts the elements in a range. 
+
+Sorts the elements in a range using the given binary comparison function.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em It} & Type of random access iterator. \\
+\hline
+{\em Compare} & Type of comparison function object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em first} & An iterator to the first element of the range to sort. \\
+\hline
+{\em last} & An iterator past the last element of the range to sort. \\
+\hline
+{\em compare} & A valid comparison function object. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,9 @@
+digraph "entt::type_list_element&lt; Index, type_list&lt; Type, Other... &gt; &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="entt::type_list_element\l\< Index, type_list\< Type,\l Other... \> \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Provides compile-time indexed access to the types of a type list."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="entt::type_list_element\l\< Index - 1u, type_list\l\< Other... \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structentt_1_1type__list__element.html",tooltip=" "];
+}

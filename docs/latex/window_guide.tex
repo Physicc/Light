@@ -1,0 +1,1126 @@
+This guide introduces the window related functions of G\+L\+FW. For details on a specific function in this category, see the \mbox{\hyperlink{group__window}{Window reference}}. There are also guides for the other areas of G\+L\+FW.
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{intro_guide}{Introduction to the A\+PI}}
+\item \mbox{\hyperlink{context_guide}{Context guide}}
+\item \mbox{\hyperlink{vulkan_guide}{Vulkan guide}}
+\item \mbox{\hyperlink{monitor_guide}{Monitor guide}}
+\item \mbox{\hyperlink{input_guide}{Input guide}}
+\end{DoxyItemize}\hypertarget{window_guide_window_object}{}\doxysection{Window objects}\label{window_guide_window_object}
+The \mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{G\+L\+F\+Wwindow}} object encapsulates both a window and a context. They are created with \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}} and destroyed with \mbox{\hyperlink{group__window_ga806747476b7247d292be3711c323ea10}{glfw\+Destroy\+Window}}, or \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}}, if any remain. As the window and context are inseparably linked, the object pointer is used as both a context and window handle.
+
+To see the event stream provided to the various window related callbacks, run the {\ttfamily events} test program.\hypertarget{window_guide_window_creation}{}\doxysubsection{Window creation}\label{window_guide_window_creation}
+A window and its Open\+GL or Open\+GL ES context are created with \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}}, which returns a handle to the created window object. For example, this creates a 640 by 480 windowed mode window\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window = \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfwCreateWindow}}(640, 480, \textcolor{stringliteral}{"My Title"}, NULL, NULL);}
+\end{DoxyCode}
+
+
+If window creation fails, {\ttfamily N\+U\+LL} will be returned, so it is necessary to check the return value.
+
+The window handle is passed to all window related functions and is provided to along with all input events, so event handlers can tell which window received the event.\hypertarget{window_guide_window_full_screen}{}\doxysubsubsection{Full screen windows}\label{window_guide_window_full_screen}
+To create a full screen window, you need to specify which monitor the window should use. In most cases, the user\textquotesingle{}s primary monitor is a good choice. For more information about retrieving monitors, see \mbox{\hyperlink{monitor_guide_monitor_monitors}{Retrieving monitors}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window = \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfwCreateWindow}}(640, 480, \textcolor{stringliteral}{"My Title"}, \mbox{\hyperlink{group__monitor_ga34befff4f9f0fae09dd8de6fb0eb4f3e}{glfwGetPrimaryMonitor}}(), NULL);}
+\end{DoxyCode}
+
+
+Full screen windows cover the entire display area of a monitor, have no border or decorations.
+
+Windowed mode windows can be made full screen by setting a monitor with \mbox{\hyperlink{group__window_ga12fabf78575e59c00f822f323ae0b6ae}{glfw\+Set\+Window\+Monitor}}, and full screen ones can be made windowed by unsetting it with the same function.
+
+Each field of the \mbox{\hyperlink{structGLFWvidmode}{G\+L\+F\+Wvidmode}} structure corresponds to a function parameter or window hint and combine to form the {\itshape desired video mode} for that window. The supported video mode most closely matching the desired video mode will be set for the chosen monitor as long as the window has input focus. For more information about retrieving video modes, see \mbox{\hyperlink{monitor_guide_monitor_modes}{Video modes}}.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Video mode field }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Corresponds to  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Video mode field }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Corresponds to  }\\\cline{1-2}
+\endhead
+\mbox{\hyperlink{structGLFWvidmode_a698dcb200562051a7249cb6ae154c71d}{G\+L\+F\+Wvidmode.\+width}} &{\ttfamily width} parameter of \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}}  \\\cline{1-2}
+\mbox{\hyperlink{structGLFWvidmode_ac65942a5f6981695517437a9d571d03c}{G\+L\+F\+Wvidmode.\+height}} &{\ttfamily height} parameter of \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}}  \\\cline{1-2}
+\mbox{\hyperlink{structGLFWvidmode_a6066c4ecd251098700062d3b735dba1b}{G\+L\+F\+Wvidmode.\+red\+Bits}} &\mbox{\hyperlink{window_guide_GLFW_RED_BITS}{G\+L\+F\+W\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS}} hint  \\\cline{1-2}
+\mbox{\hyperlink{structGLFWvidmode_a292fdd281f3485fb3ff102a5bda43faa}{G\+L\+F\+Wvidmode.\+green\+Bits}} &\mbox{\hyperlink{window_guide_GLFW_GREEN_BITS}{G\+L\+F\+W\+\_\+\+G\+R\+E\+E\+N\+\_\+\+B\+I\+TS}} hint  \\\cline{1-2}
+\mbox{\hyperlink{structGLFWvidmode_af310977f58d2e3b188175b6e3d314047}{G\+L\+F\+Wvidmode.\+blue\+Bits}} &\mbox{\hyperlink{window_guide_GLFW_BLUE_BITS}{G\+L\+F\+W\+\_\+\+B\+L\+U\+E\+\_\+\+B\+I\+TS}} hint  \\\cline{1-2}
+\mbox{\hyperlink{structGLFWvidmode_a791bdd6c7697b09f7e9c97054bf05649}{G\+L\+F\+Wvidmode.\+refresh\+Rate}} &\mbox{\hyperlink{window_guide_GLFW_REFRESH_RATE}{G\+L\+F\+W\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+R\+A\+TE}} hint  \\\cline{1-2}
+\end{longtabu}
+
+
+Once you have a full screen window, you can change its resolution, refresh rate and monitor with \mbox{\hyperlink{group__window_ga12fabf78575e59c00f822f323ae0b6ae}{glfw\+Set\+Window\+Monitor}}. If you only need change its resolution you can also call \mbox{\hyperlink{group__window_gae54d1f4915ded15e267ddd3f41496cd2}{glfw\+Set\+Window\+Size}}. In all cases, the new video mode will be selected the same way as the video mode chosen by \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}}. If the window has an Open\+GL or Open\+GL ES context, it will be unaffected.
+
+By default, the original video mode of the monitor will be restored and the window iconified if it loses input focus, to allow the user to switch back to the desktop. This behavior can be disabled with the \mbox{\hyperlink{window_guide_GLFW_AUTO_ICONIFY_hint}{G\+L\+F\+W\+\_\+\+A\+U\+T\+O\+\_\+\+I\+C\+O\+N\+I\+FY}} window hint, for example if you wish to simultaneously cover multiple monitors with full screen windows.
+
+If a monitor is disconnected, all windows that are full screen on that monitor will be switched to windowed mode. See \mbox{\hyperlink{monitor_guide_monitor_event}{Monitor configuration changes}} for more information.\hypertarget{window_guide_window_windowed_full_screen}{}\doxysubsubsection{\char`\"{}\+Windowed full screen\char`\"{} windows}\label{window_guide_window_windowed_full_screen}
+If the closest match for the desired video mode is the current one, the video mode will not be changed, making window creation faster and application switching much smoother. This is sometimes called {\itshape windowed full screen} or {\itshape borderless full screen} window and counts as a full screen window. To create such a window, request the current video mode.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{structGLFWvidmode}{GLFWvidmode}}* mode = \mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfwGetVideoMode}}(monitor);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_gaf78ed8e417dbcc1e354906cc2708c982}{GLFW\_RED\_BITS}}, mode-\/>redBits);}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_gafba3b72638c914e5fb8a237dd4c50d4d}{GLFW\_GREEN\_BITS}}, mode-\/>greenBits);}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_gab292ea403db6d514537b515311bf9ae3}{GLFW\_BLUE\_BITS}}, mode-\/>blueBits);}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_ga0f20825e6e47ee8ba389024519682212}{GLFW\_REFRESH\_RATE}}, mode-\/>refreshRate);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window = \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfwCreateWindow}}(mode-\/>width, mode-\/>height, \textcolor{stringliteral}{"My Title"}, monitor, NULL);}
+\end{DoxyCode}
+
+
+This also works for windowed mode windows that are made full screen.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{structGLFWvidmode}{GLFWvidmode}}* mode = \mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfwGetVideoMode}}(monitor);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga12fabf78575e59c00f822f323ae0b6ae}{glfwSetWindowMonitor}}(window, monitor, 0, 0, mode-\/>width, mode-\/>height, mode-\/>refreshRate);}
+\end{DoxyCode}
+
+
+Note that \mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfw\+Get\+Video\+Mode}} returns the {\itshape current} video mode of a monitor, so if you already have a full screen window on that monitor that you want to make windowed full screen, you need to have saved the desktop resolution before.\hypertarget{window_guide_window_destruction}{}\doxysubsection{Window destruction}\label{window_guide_window_destruction}
+When a window is no longer needed, destroy it with \mbox{\hyperlink{group__window_ga806747476b7247d292be3711c323ea10}{glfw\+Destroy\+Window}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga806747476b7247d292be3711c323ea10}{glfwDestroyWindow}}(window);}
+\end{DoxyCode}
+
+
+Window destruction always succeeds. Before the actual destruction, all callbacks are removed so no further events will be delivered for the window. All windows remaining when \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}} is called are destroyed as well.
+
+When a full screen window is destroyed, the original video mode of its monitor is restored, but the gamma ramp is left untouched.\hypertarget{window_guide_window_hints}{}\doxysubsection{Window creation hints}\label{window_guide_window_hints}
+There are a number of hints that can be set before the creation of a window and context. Some affect the window itself, others affect the framebuffer or context. These hints are set to their default values each time the library is initialized with \mbox{\hyperlink{group__init_gab41771f0215a2e0afb4cf1cf98082d40}{glfw\+Init}}. Integer value hints can be set individually with \mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfw\+Window\+Hint}} and string value hints with \mbox{\hyperlink{group__window_ga3c2270562d7ba13d92680ba1090adafe}{glfw\+Window\+Hint\+String}}. You can reset all at once to their defaults with \mbox{\hyperlink{group__window_ga8050ddceed9dc6bd9d3aa35666195cd4}{glfw\+Default\+Window\+Hints}}.
+
+Some hints are platform specific. These are always valid to set on any platform but they will only affect their specific platform. Other platforms will ignore them. Setting these hints requires no platform specific headers or calls.
+
+\begin{DoxyNote}{Note}
+Window hints need to be set before the creation of the window and context you wish to have the specified attributes. They function as additional arguments to \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}}.
+\end{DoxyNote}
+\hypertarget{window_guide_window_hints_hard}{}\doxysubsubsection{Hard and soft constraints}\label{window_guide_window_hints_hard}
+Some window hints are hard constraints. These must match the available capabilities {\itshape exactly} for window and context creation to succeed. Hints that are not hard constraints are matched as closely as possible, but the resulting context and framebuffer may differ from what these hints requested.
+
+The following hints are always hard constraints\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{window_guide_GLFW_STEREO}{G\+L\+F\+W\+\_\+\+S\+T\+E\+R\+EO}}
+\item \mbox{\hyperlink{window_guide_GLFW_DOUBLEBUFFER}{G\+L\+F\+W\+\_\+\+D\+O\+U\+B\+L\+E\+B\+U\+F\+F\+ER}}
+\item \mbox{\hyperlink{window_guide_GLFW_CLIENT_API_hint}{G\+L\+F\+W\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+PI}}
+\item \mbox{\hyperlink{window_guide_GLFW_CONTEXT_CREATION_API_hint}{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+A\+PI}}
+\end{DoxyItemize}
+
+The following additional hints are hard constraints when requesting an Open\+GL context, but are ignored when requesting an Open\+GL ES context\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{window_guide_GLFW_OPENGL_FORWARD_COMPAT_hint}{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+F\+O\+R\+W\+A\+R\+D\+\_\+\+C\+O\+M\+P\+AT}}
+\item \mbox{\hyperlink{window_guide_GLFW_OPENGL_PROFILE_hint}{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+P\+R\+O\+F\+I\+LE}}
+\end{DoxyItemize}\hypertarget{window_guide_window_hints_wnd}{}\doxysubsubsection{Window related hints}\label{window_guide_window_hints_wnd}
+\label{window_guide_GLFW_RESIZABLE_hint}%
+\Hypertarget{window_guide_GLFW_RESIZABLE_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+R\+E\+S\+I\+Z\+A\+B\+LE}} specifies whether the windowed mode window will be resizable {\itshape by the user}. The window will still be resizable using the \mbox{\hyperlink{group__window_gae54d1f4915ded15e267ddd3f41496cd2}{glfw\+Set\+Window\+Size}} function. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for full screen and undecorated windows.
+
+\label{window_guide_GLFW_VISIBLE_hint}%
+\Hypertarget{window_guide_GLFW_VISIBLE_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+V\+I\+S\+I\+B\+LE}} specifies whether the windowed mode window will be initially visible. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for full screen windows.
+
+\label{window_guide_GLFW_DECORATED_hint}%
+\Hypertarget{window_guide_GLFW_DECORATED_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+D\+E\+C\+O\+R\+A\+T\+ED}} specifies whether the windowed mode window will have window decorations such as a border, a close widget, etc. An undecorated window will not be resizable by the user but will still allow the user to generate close events on some platforms. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for full screen windows.
+
+\label{window_guide_GLFW_FOCUSED_hint}%
+\Hypertarget{window_guide_GLFW_FOCUSED_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+ED}} specifies whether the windowed mode window will be given input focus when created. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for full screen and initially hidden windows.
+
+\label{window_guide_GLFW_AUTO_ICONIFY_hint}%
+\Hypertarget{window_guide_GLFW_AUTO_ICONIFY_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+A\+U\+T\+O\+\_\+\+I\+C\+O\+N\+I\+FY}} specifies whether the full screen window will automatically iconify and restore the previous video mode on input focus loss. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for windowed mode windows.
+
+\label{window_guide_GLFW_FLOATING_hint}%
+\Hypertarget{window_guide_GLFW_FLOATING_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+F\+L\+O\+A\+T\+I\+NG}} specifies whether the windowed mode window will be floating above other regular windows, also called topmost or always-\/on-\/top. This is intended primarily for debugging purposes and cannot be used to implement proper full screen windows. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for full screen windows.
+
+\label{window_guide_GLFW_MAXIMIZED_hint}%
+\Hypertarget{window_guide_GLFW_MAXIMIZED_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+M\+A\+X\+I\+M\+I\+Z\+ED}} specifies whether the windowed mode window will be maximized when created. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for full screen windows.
+
+\label{window_guide_GLFW_CENTER_CURSOR_hint}%
+\Hypertarget{window_guide_GLFW_CENTER_CURSOR_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+E\+N\+T\+E\+R\+\_\+\+C\+U\+R\+S\+OR}} specifies whether the cursor should be centered over newly created full screen windows. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This hint is ignored for windowed mode windows.
+
+\label{window_guide_GLFW_TRANSPARENT_FRAMEBUFFER_hint}%
+\Hypertarget{window_guide_GLFW_TRANSPARENT_FRAMEBUFFER_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+T\+R\+A\+N\+S\+P\+A\+R\+E\+N\+T\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+ER}} specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer alpha channel will be used to combine the framebuffer with the background. This does not affect window decorations. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}.
+
+\label{window_guide_GLFW_FOCUS_ON_SHOW_hint}%
+\Hypertarget{window_guide_GLFW_FOCUS_ON_SHOW_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+\_\+\+O\+N\+\_\+\+S\+H\+OW}} specifies whether the window will be given input focus when \mbox{\hyperlink{group__window_ga7945bcdff9e5e058cf36505d6873ed8c}{glfw\+Show\+Window}} is called. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}.
+
+\label{window_guide_GLFW_SCALE_TO_MONITOR}%
+\Hypertarget{window_guide_GLFW_SCALE_TO_MONITOR}%
+{\bfseries{G\+L\+F\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+T\+O\+\_\+\+M\+O\+N\+I\+T\+OR}} specified whether the window content area should be resized based on the \mbox{\hyperlink{monitor_guide_monitor_scale}{monitor content scale}} of any monitor it is placed on. This includes the initial placement when the window is created. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}.
+
+This hint only has an effect on platforms where screen coordinates and pixels always map 1\+:1 such as Windows and X11. On platforms like mac\+OS the resolution of the framebuffer is changed independently of the window size.\hypertarget{window_guide_window_hints_fb}{}\doxysubsubsection{Framebuffer related hints}\label{window_guide_window_hints_fb}
+\label{window_guide_GLFW_RED_BITS}%
+\Hypertarget{window_guide_GLFW_RED_BITS}%
+\label{window_guide_GLFW_GREEN_BITS}%
+\Hypertarget{window_guide_GLFW_GREEN_BITS}%
+\label{window_guide_GLFW_BLUE_BITS}%
+\Hypertarget{window_guide_GLFW_BLUE_BITS}%
+\label{window_guide_GLFW_ALPHA_BITS}%
+\Hypertarget{window_guide_GLFW_ALPHA_BITS}%
+\label{window_guide_GLFW_DEPTH_BITS}%
+\Hypertarget{window_guide_GLFW_DEPTH_BITS}%
+\label{window_guide_GLFW_STENCIL_BITS}%
+\Hypertarget{window_guide_GLFW_STENCIL_BITS}%
+{\bfseries{G\+L\+F\+W\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS}}, {\bfseries{G\+L\+F\+W\+\_\+\+G\+R\+E\+E\+N\+\_\+\+B\+I\+TS}}, {\bfseries{G\+L\+F\+W\+\_\+\+B\+L\+U\+E\+\_\+\+B\+I\+TS}}, {\bfseries{G\+L\+F\+W\+\_\+\+A\+L\+P\+H\+A\+\_\+\+B\+I\+TS}}, {\bfseries{G\+L\+F\+W\+\_\+\+D\+E\+P\+T\+H\+\_\+\+B\+I\+TS}} and {\bfseries{G\+L\+F\+W\+\_\+\+S\+T\+E\+N\+C\+I\+L\+\_\+\+B\+I\+TS}} specify the desired bit depths of the various components of the default framebuffer. A value of {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE} means the application has no preference.
+
+\label{window_guide_GLFW_ACCUM_RED_BITS}%
+\Hypertarget{window_guide_GLFW_ACCUM_RED_BITS}%
+\label{window_guide_GLFW_ACCUM_GREEN_BITS}%
+\Hypertarget{window_guide_GLFW_ACCUM_GREEN_BITS}%
+\label{window_guide_GLFW_ACCUM_BLUE_BITS}%
+\Hypertarget{window_guide_GLFW_ACCUM_BLUE_BITS}%
+\label{window_guide_GLFW_ACCUM_ALPHA_BITS}%
+\Hypertarget{window_guide_GLFW_ACCUM_ALPHA_BITS}%
+{\bfseries{G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS}}, {\bfseries{G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+G\+R\+E\+E\+N\+\_\+\+B\+I\+TS}}, {\bfseries{G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+B\+L\+U\+E\+\_\+\+B\+I\+TS}} and {\bfseries{G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+A\+L\+P\+H\+A\+\_\+\+B\+I\+TS}} specify the desired bit depths of the various components of the accumulation buffer. A value of {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE} means the application has no preference.
+
+\begin{DoxyParagraph}{}
+Accumulation buffers are a legacy Open\+GL feature and should not be used in new code.
+\end{DoxyParagraph}
+\label{window_guide_GLFW_AUX_BUFFERS}%
+\Hypertarget{window_guide_GLFW_AUX_BUFFERS}%
+{\bfseries{G\+L\+F\+W\+\_\+\+A\+U\+X\+\_\+\+B\+U\+F\+F\+E\+RS}} specifies the desired number of auxiliary buffers. A value of {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE} means the application has no preference.
+
+\begin{DoxyParagraph}{}
+Auxiliary buffers are a legacy Open\+GL feature and should not be used in new code.
+\end{DoxyParagraph}
+\label{window_guide_GLFW_STEREO}%
+\Hypertarget{window_guide_GLFW_STEREO}%
+{\bfseries{G\+L\+F\+W\+\_\+\+S\+T\+E\+R\+EO}} specifies whether to use Open\+GL stereoscopic rendering. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This is a hard constraint.
+
+\label{window_guide_GLFW_SAMPLES}%
+\Hypertarget{window_guide_GLFW_SAMPLES}%
+{\bfseries{G\+L\+F\+W\+\_\+\+S\+A\+M\+P\+L\+ES}} specifies the desired number of samples to use for multisampling. Zero disables multisampling. A value of {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE} means the application has no preference.
+
+\label{window_guide_GLFW_SRGB_CAPABLE}%
+\Hypertarget{window_guide_GLFW_SRGB_CAPABLE}%
+{\bfseries{G\+L\+F\+W\+\_\+\+S\+R\+G\+B\+\_\+\+C\+A\+P\+A\+B\+LE}} specifies whether the framebuffer should be s\+R\+GB capable. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}.
+
+\begin{DoxyParagraph}{}
+{\bfseries{Open\+GL\+:}} If enabled and supported by the system, the {\ttfamily G\+L\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+E\+R\+\_\+\+S\+R\+GB} enable will control s\+R\+GB rendering. By default, s\+R\+GB rendering will be disabled.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+{\bfseries{Open\+GL ES\+:}} If enabled and supported by the system, the context will always have s\+R\+GB rendering enabled.
+\end{DoxyParagraph}
+\label{window_guide_GLFW_DOUBLEBUFFER}%
+\Hypertarget{window_guide_GLFW_DOUBLEBUFFER}%
+{\bfseries{G\+L\+F\+W\+\_\+\+D\+O\+U\+B\+L\+E\+B\+U\+F\+F\+ER}} specifies whether the framebuffer should be double buffered. You nearly always want to use double buffering. This is a hard constraint. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}.\hypertarget{window_guide_window_hints_mtr}{}\doxysubsubsection{Monitor related hints}\label{window_guide_window_hints_mtr}
+\label{window_guide_GLFW_REFRESH_RATE}%
+\Hypertarget{window_guide_GLFW_REFRESH_RATE}%
+{\bfseries{G\+L\+F\+W\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+R\+A\+TE}} specifies the desired refresh rate for full screen windows. A value of {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE} means the highest available refresh rate will be used. This hint is ignored for windowed mode windows.\hypertarget{window_guide_window_hints_ctx}{}\doxysubsubsection{Context related hints}\label{window_guide_window_hints_ctx}
+\label{window_guide_GLFW_CLIENT_API_hint}%
+\Hypertarget{window_guide_GLFW_CLIENT_API_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+PI}} specifies which client A\+PI to create the context for. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+PI}, {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+E\+S\+\_\+\+A\+PI} and {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+A\+PI}. This is a hard constraint.
+
+\label{window_guide_GLFW_CONTEXT_CREATION_API_hint}%
+\Hypertarget{window_guide_GLFW_CONTEXT_CREATION_API_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+A\+PI}} specifies which context creation A\+PI to use to create the context. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI}, {\ttfamily G\+L\+F\+W\+\_\+\+E\+G\+L\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI} and {\ttfamily G\+L\+F\+W\+\_\+\+O\+S\+M\+E\+S\+A\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI}. This is a hard constraint. If no client A\+PI is requested, this hint is ignored.
+
+\begin{DoxyParagraph}{}
+@macos The E\+GL A\+PI is not available on this platform and requests to use it will fail.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+{\bfseries{Wayland\+:}} The E\+GL A\+PI {\itshape is} the native context creation A\+PI, so this hint will have no effect.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+{\bfseries{O\+S\+Mesa\+:}} As its name implies, an Open\+GL context created with O\+S\+Mesa does not update the window contents when its buffers are swapped. Use Open\+GL functions or the O\+S\+Mesa native access functions glfw\+Get\+O\+S\+Mesa\+Color\+Buffer and glfw\+Get\+O\+S\+Mesa\+Depth\+Buffer to retrieve the framebuffer contents.
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+An Open\+GL extension loader library that assumes it knows which context creation A\+PI is used on a given platform may fail if you change this hint. This can be resolved by having it load via \mbox{\hyperlink{group__context_ga0e8af175218929615c16e74938c10f2a}{glfw\+Get\+Proc\+Address}}, which always uses the selected A\+PI.
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\mbox{\hyperlink{bug__bug000004}{Bug}}]On some Linux systems, creating contexts via both the native and E\+GL A\+P\+Is in a single process will cause the application to segfault. Stick to one A\+PI or the other on Linux for now.\end{DoxyRefDesc}
+
+
+\label{window_guide_GLFW_CONTEXT_VERSION_MAJOR_hint}%
+\Hypertarget{window_guide_GLFW_CONTEXT_VERSION_MAJOR_hint}%
+\label{window_guide_GLFW_CONTEXT_VERSION_MINOR_hint}%
+\Hypertarget{window_guide_GLFW_CONTEXT_VERSION_MINOR_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}} and {\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}} specify the client A\+PI version that the created context must be compatible with. The exact behavior of these hints depend on the requested client A\+PI.
+
+\begin{DoxyNote}{Note}
+Do not confuse these hints with {\ttfamily G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR} and {\ttfamily G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}, which provide the A\+PI version of the G\+L\+FW header.
+\end{DoxyNote}
+\begin{DoxyParagraph}{}
+{\bfseries{Open\+GL\+:}} These hints are not hard constraints, but creation will fail if the Open\+GL version of the created context is less than the one requested. It is therefore perfectly safe to use the default of version 1.\+0 for legacy code and you will still get backwards-\/compatible contexts of version 3.\+0 and above when available.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+While there is no way to ask the driver for a context of the highest supported version, G\+L\+FW will attempt to provide this when you ask for a version 1.\+0 context, which is the default for these hints.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+{\bfseries{Open\+GL ES\+:}} These hints are not hard constraints, but creation will fail if the Open\+GL ES version of the created context is less than the one requested. Additionally, Open\+GL ES 1.\+x cannot be returned if 2.\+0 or later was requested, and vice versa. This is because Open\+GL ES 3.\+x is backward compatible with 2.\+0, but Open\+GL ES 2.\+0 is not backward compatible with 1.\+x.
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+@macos The OS only supports forward-\/compatible core profile contexts for Open\+GL versions 3.\+2 and later. Before creating an Open\+GL context of version 3.\+2 or later you must set the \mbox{\hyperlink{window_guide_GLFW_OPENGL_FORWARD_COMPAT_hint}{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+F\+O\+R\+W\+A\+R\+D\+\_\+\+C\+O\+M\+P\+AT}} and \mbox{\hyperlink{window_guide_GLFW_OPENGL_PROFILE_hint}{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+P\+R\+O\+F\+I\+LE}} hints accordingly. Open\+GL 3.\+0 and 3.\+1 contexts are not supported at all on mac\+OS.
+\end{DoxyNote}
+\label{window_guide_GLFW_OPENGL_FORWARD_COMPAT_hint}%
+\Hypertarget{window_guide_GLFW_OPENGL_FORWARD_COMPAT_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+F\+O\+R\+W\+A\+R\+D\+\_\+\+C\+O\+M\+P\+AT}} specifies whether the Open\+GL context should be forward-\/compatible, i.\+e. one where all functionality deprecated in the requested version of Open\+GL is removed. This must only be used if the requested Open\+GL version is 3.\+0 or above. If Open\+GL ES is requested, this hint is ignored.
+
+\begin{DoxyParagraph}{}
+Forward-\/compatibility is described in detail in the \href{https://www.opengl.org/registry/}{\texttt{ Open\+GL Reference Manual}}.
+\end{DoxyParagraph}
+\label{window_guide_GLFW_OPENGL_DEBUG_CONTEXT_hint}%
+\Hypertarget{window_guide_GLFW_OPENGL_DEBUG_CONTEXT_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+D\+E\+B\+U\+G\+\_\+\+C\+O\+N\+T\+E\+XT}} specifies whether the context should be created in debug mode, which may provide additional error and diagnostic reporting functionality. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}.
+
+\begin{DoxyParagraph}{}
+Debug contexts for Open\+GL and Open\+GL ES are described in detail by the \href{https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_debug.txt}{\texttt{ G\+L\+\_\+\+K\+H\+R\+\_\+debug}} extension.
+\end{DoxyParagraph}
+\label{window_guide_GLFW_OPENGL_PROFILE_hint}%
+\Hypertarget{window_guide_GLFW_OPENGL_PROFILE_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+P\+R\+O\+F\+I\+LE}} specifies which Open\+GL profile to create the context for. Possible values are one of {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+C\+O\+R\+E\+\_\+\+P\+R\+O\+F\+I\+LE} or {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+C\+O\+M\+P\+A\+T\+\_\+\+P\+R\+O\+F\+I\+LE}, or {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+N\+Y\+\_\+\+P\+R\+O\+F\+I\+LE} to not request a specific profile. If requesting an Open\+GL version below 3.\+2, {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+N\+Y\+\_\+\+P\+R\+O\+F\+I\+LE} must be used. If Open\+GL ES is requested, this hint is ignored.
+
+\begin{DoxyParagraph}{}
+Open\+GL profiles are described in detail in the \href{https://www.opengl.org/registry/}{\texttt{ Open\+GL Reference Manual}}.
+\end{DoxyParagraph}
+\label{window_guide_GLFW_CONTEXT_ROBUSTNESS_hint}%
+\Hypertarget{window_guide_GLFW_CONTEXT_ROBUSTNESS_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+O\+B\+U\+S\+T\+N\+E\+SS}} specifies the robustness strategy to be used by the context. This can be one of {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+R\+E\+S\+E\+T\+\_\+\+N\+O\+T\+I\+F\+I\+C\+A\+T\+I\+ON} or {\ttfamily G\+L\+F\+W\+\_\+\+L\+O\+S\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+O\+N\+\_\+\+R\+E\+S\+ET}, or {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+R\+O\+B\+U\+S\+T\+N\+E\+SS} to not request a robustness strategy.
+
+\label{window_guide_GLFW_CONTEXT_RELEASE_BEHAVIOR_hint}%
+\Hypertarget{window_guide_GLFW_CONTEXT_RELEASE_BEHAVIOR_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR}} specifies the release behavior to be used by the context. Possible values are one of {\ttfamily G\+L\+F\+W\+\_\+\+A\+N\+Y\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR}, {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+F\+L\+U\+SH} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+N\+O\+NE}. If the behavior is {\ttfamily G\+L\+F\+W\+\_\+\+A\+N\+Y\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR}, the default behavior of the context creation A\+PI will be used. If the behavior is {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+F\+L\+U\+SH}, the pipeline will be flushed whenever the context is released from being the current one. If the behavior is {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+N\+O\+NE}, the pipeline will not be flushed on release.
+
+\begin{DoxyParagraph}{}
+Context release behaviors are described in detail by the \href{https://www.opengl.org/registry/specs/KHR/context_flush_control.txt}{\texttt{ G\+L\+\_\+\+K\+H\+R\+\_\+context\+\_\+flush\+\_\+control}} extension.
+\end{DoxyParagraph}
+\label{window_guide_GLFW_CONTEXT_NO_ERROR_hint}%
+\Hypertarget{window_guide_GLFW_CONTEXT_NO_ERROR_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+N\+O\+\_\+\+E\+R\+R\+OR}} specifies whether errors should be generated by the context. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. If enabled, situations that would have generated errors instead cause undefined behavior.
+
+\begin{DoxyParagraph}{}
+The no error mode for Open\+GL and Open\+GL ES is described in detail by the \href{https://www.opengl.org/registry/specs/KHR/no_error.txt}{\texttt{ G\+L\+\_\+\+K\+H\+R\+\_\+no\+\_\+error}} extension.
+\end{DoxyParagraph}
+\hypertarget{window_guide_window_hints_osx}{}\doxysubsubsection{mac\+O\+S specific window hints}\label{window_guide_window_hints_osx}
+\label{window_guide_GLFW_COCOA_RETINA_FRAMEBUFFER_hint}%
+\Hypertarget{window_guide_GLFW_COCOA_RETINA_FRAMEBUFFER_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+C\+O\+A\+\_\+\+R\+E\+T\+I\+N\+A\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+ER}} specifies whether to use full resolution framebuffers on Retina displays. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This is ignored on other platforms.
+
+\label{window_guide_GLFW_COCOA_FRAME_NAME_hint}%
+\Hypertarget{window_guide_GLFW_COCOA_FRAME_NAME_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+C\+O\+A\+\_\+\+F\+R\+A\+M\+E\+\_\+\+N\+A\+ME}} specifies the U\+T\+F-\/8 encoded name to use for autosaving the window frame, or if empty disables frame autosaving for the window. This is ignored on other platforms. This is set with \mbox{\hyperlink{group__window_ga3c2270562d7ba13d92680ba1090adafe}{glfw\+Window\+Hint\+String}}.
+
+\label{window_guide_GLFW_COCOA_GRAPHICS_SWITCHING_hint}%
+\Hypertarget{window_guide_GLFW_COCOA_GRAPHICS_SWITCHING_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+C\+O\+A\+\_\+\+G\+R\+A\+P\+H\+I\+C\+S\+\_\+\+S\+W\+I\+T\+C\+H\+I\+NG}} specifies whether to in Automatic Graphics Switching, i.\+e. to allow the system to choose the integrated G\+PU for the Open\+GL context and move it between G\+P\+Us if necessary or whether to force it to always run on the discrete G\+PU. This only affects systems with both integrated and discrete G\+P\+Us. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. This is ignored on other platforms.
+
+\begin{DoxyParagraph}{}
+Simpler programs and tools may want to enable this to save power, while games and other applications performing advanced rendering will want to leave it disabled.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+A bundled application that wishes to participate in Automatic Graphics Switching should also declare this in its {\ttfamily Info.\+plist} by setting the {\ttfamily N\+S\+Supports\+Automatic\+Graphics\+Switching} key to {\ttfamily true}.
+\end{DoxyParagraph}
+\hypertarget{window_guide_window_hints_x11}{}\doxysubsubsection{X11 specific window hints}\label{window_guide_window_hints_x11}
+\label{window_guide_GLFW_X11_CLASS_NAME_hint}%
+\Hypertarget{window_guide_GLFW_X11_CLASS_NAME_hint}%
+\label{window_guide_GLFW_X11_INSTANCE_NAME_hint}%
+\Hypertarget{window_guide_GLFW_X11_INSTANCE_NAME_hint}%
+{\bfseries{G\+L\+F\+W\+\_\+\+X11\+\_\+\+C\+L\+A\+S\+S\+\_\+\+N\+A\+ME}} and {\bfseries{G\+L\+F\+W\+\_\+\+X11\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E\+\_\+\+N\+A\+ME}} specifies the desired A\+S\+C\+II encoded class and instance parts of the I\+C\+C\+CM {\ttfamily W\+M\+\_\+\+C\+L\+A\+SS} window property. These are set with \mbox{\hyperlink{group__window_ga3c2270562d7ba13d92680ba1090adafe}{glfw\+Window\+Hint\+String}}.\hypertarget{window_guide_window_hints_values}{}\doxysubsubsection{Supported and default values}\label{window_guide_window_hints_values}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Window hint }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Default value }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Supported values  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Window hint }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Default value }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Supported values  }\\\cline{1-3}
+\endhead
+G\+L\+F\+W\+\_\+\+R\+E\+S\+I\+Z\+A\+B\+LE &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+V\+I\+S\+I\+B\+LE &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+D\+E\+C\+O\+R\+A\+T\+ED &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+ED &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+A\+U\+T\+O\+\_\+\+I\+C\+O\+N\+I\+FY &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+F\+L\+O\+A\+T\+I\+NG &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+M\+A\+X\+I\+M\+I\+Z\+ED &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+E\+N\+T\+E\+R\+\_\+\+C\+U\+R\+S\+OR &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+T\+R\+A\+N\+S\+P\+A\+R\+E\+N\+T\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+ER &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+\_\+\+O\+N\+\_\+\+S\+H\+OW &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+T\+O\+\_\+\+M\+O\+N\+I\+T\+OR &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS &8 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+G\+R\+E\+E\+N\+\_\+\+B\+I\+TS &8 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+B\+L\+U\+E\+\_\+\+B\+I\+TS &8 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+A\+L\+P\+H\+A\+\_\+\+B\+I\+TS &8 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+D\+E\+P\+T\+H\+\_\+\+B\+I\+TS &24 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+S\+T\+E\+N\+C\+I\+L\+\_\+\+B\+I\+TS &8 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS &0 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+G\+R\+E\+E\+N\+\_\+\+B\+I\+TS &0 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+B\+L\+U\+E\+\_\+\+B\+I\+TS &0 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+A\+C\+C\+U\+M\+\_\+\+A\+L\+P\+H\+A\+\_\+\+B\+I\+TS &0 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+A\+U\+X\+\_\+\+B\+U\+F\+F\+E\+RS &0 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+S\+A\+M\+P\+L\+ES &0 &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+R\+A\+TE &{\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE} &0 to {\ttfamily I\+N\+T\+\_\+\+M\+AX} or {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+S\+T\+E\+R\+EO &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+S\+R\+G\+B\+\_\+\+C\+A\+P\+A\+B\+LE &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+D\+O\+U\+B\+L\+E\+B\+U\+F\+F\+ER &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+PI &{\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+PI} &{\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+PI}, {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+E\+S\+\_\+\+A\+PI} or {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+A\+PI}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+A\+PI &{\ttfamily G\+L\+F\+W\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI} &{\ttfamily G\+L\+F\+W\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI}, {\ttfamily G\+L\+F\+W\+\_\+\+E\+G\+L\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI} or {\ttfamily G\+L\+F\+W\+\_\+\+O\+S\+M\+E\+S\+A\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR &1 &Any valid major version number of the chosen client A\+PI  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR &0 &Any valid minor version number of the chosen client A\+PI  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+O\+B\+U\+S\+T\+N\+E\+SS &{\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+R\+O\+B\+U\+S\+T\+N\+E\+SS} &{\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+R\+O\+B\+U\+S\+T\+N\+E\+SS}, {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+R\+E\+S\+E\+T\+\_\+\+N\+O\+T\+I\+F\+I\+C\+A\+T\+I\+ON} or {\ttfamily G\+L\+F\+W\+\_\+\+L\+O\+S\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+O\+N\+\_\+\+R\+E\+S\+ET}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR &{\ttfamily G\+L\+F\+W\+\_\+\+A\+N\+Y\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR} &{\ttfamily G\+L\+F\+W\+\_\+\+A\+N\+Y\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR}, {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+F\+L\+U\+SH} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+N\+O\+NE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+F\+O\+R\+W\+A\+R\+D\+\_\+\+C\+O\+M\+P\+AT &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+D\+E\+B\+U\+G\+\_\+\+C\+O\+N\+T\+E\+XT &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+P\+R\+O\+F\+I\+LE &{\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+N\+Y\+\_\+\+P\+R\+O\+F\+I\+LE} &{\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+N\+Y\+\_\+\+P\+R\+O\+F\+I\+LE}, {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+C\+O\+M\+P\+A\+T\+\_\+\+P\+R\+O\+F\+I\+LE} or {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+C\+O\+R\+E\+\_\+\+P\+R\+O\+F\+I\+LE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+C\+O\+A\+\_\+\+R\+E\+T\+I\+N\+A\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+ER &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+C\+O\+A\+\_\+\+F\+R\+A\+M\+E\+\_\+\+N\+A\+ME &{\ttfamily \char`\"{}\char`\"{}} &A U\+T\+F-\/8 encoded frame autosave name  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+C\+O\+C\+O\+A\+\_\+\+G\+R\+A\+P\+H\+I\+C\+S\+\_\+\+S\+W\+I\+T\+C\+H\+I\+NG &{\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} &{\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+X11\+\_\+\+C\+L\+A\+S\+S\+\_\+\+N\+A\+ME &{\ttfamily \char`\"{}\char`\"{}} &An A\+S\+C\+II encoded {\ttfamily W\+M\+\_\+\+C\+L\+A\+SS} class name  \\\cline{1-3}
+G\+L\+F\+W\+\_\+\+X11\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E\+\_\+\+N\+A\+ME &{\ttfamily \char`\"{}\char`\"{}} &An A\+S\+C\+II encoded {\ttfamily W\+M\+\_\+\+C\+L\+A\+SS} instance name  \\\cline{1-3}
+\end{longtabu}
+\hypertarget{window_guide_window_events}{}\doxysection{Window event processing}\label{window_guide_window_events}
+See \mbox{\hyperlink{input_guide_events}{Event processing}}.\hypertarget{window_guide_window_properties}{}\doxysection{Window properties and events}\label{window_guide_window_properties}
+\hypertarget{window_guide_window_userptr}{}\doxysubsection{User pointer}\label{window_guide_window_userptr}
+Each window has a user pointer that can be set with \mbox{\hyperlink{group__window_gacc9e68faee3c1763b54cd9bc405cf43e}{glfw\+Set\+Window\+User\+Pointer}} and queried with \mbox{\hyperlink{group__window_gad07c1ae8809c4f47e55ad8cc3f60e794}{glfw\+Get\+Window\+User\+Pointer}}. This can be used for any purpose you need and will not be modified by G\+L\+FW throughout the life-\/time of the window.
+
+The initial value of the pointer is {\ttfamily N\+U\+LL}.\hypertarget{window_guide_window_close}{}\doxysubsection{Window closing and close flag}\label{window_guide_window_close}
+When the user attempts to close the window, for example by clicking the close widget or using a key chord like Alt+\+F4, the {\itshape close flag} of the window is set. The window is however not actually destroyed and, unless you watch for this state change, nothing further happens.
+
+The current state of the close flag is returned by \mbox{\hyperlink{group__window_gaa6162f67dfa38b8beda2fea623649332}{glfw\+Window\+Should\+Close}} and can be set or cleared directly with \mbox{\hyperlink{group__window_ga1cadeda7a1e2f224e06a8415d30741aa}{glfw\+Set\+Window\+Should\+Close}}. A common pattern is to use the close flag as a main loop condition.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (!\mbox{\hyperlink{group__window_gaa6162f67dfa38b8beda2fea623649332}{glfwWindowShouldClose}}(window))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    render(window);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfwSwapBuffers}}(window);}
+\DoxyCodeLine{    \mbox{\hyperlink{group__window_ga872d16e4c77f58c0436f356255920cfc}{glfwPollEvents}}();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+If you wish to be notified when the user attempts to close a window, set a close callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga693d778815971a06e1a5a7bcdeff3d36}{glfwSetWindowCloseCallback}}(window, window\_close\_callback);}
+\end{DoxyCode}
+
+
+The callback function is called directly {\itshape after} the close flag has been set. It can be used for example to filter close requests and clear the close flag again unless certain conditions are met.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_close\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!time\_to\_close)}
+\DoxyCodeLine{        \mbox{\hyperlink{group__window_ga1cadeda7a1e2f224e06a8415d30741aa}{glfwSetWindowShouldClose}}(window, \mbox{\hyperlink{group__init_gac877fe3b627d21ef3a0a23e0a73ba8c5}{GLFW\_FALSE}});}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+\hypertarget{window_guide_window_size}{}\doxysubsection{Window size}\label{window_guide_window_size}
+The size of a window can be changed with \mbox{\hyperlink{group__window_gae54d1f4915ded15e267ddd3f41496cd2}{glfw\+Set\+Window\+Size}}. For windowed mode windows, this sets the size, in \mbox{\hyperlink{intro_guide_coordinate_systems}{screen coordinates}} of the {\itshape content area} or {\itshape content area} of the window. The window system may impose limits on window size.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gae54d1f4915ded15e267ddd3f41496cd2}{glfwSetWindowSize}}(window, 640, 480);}
+\end{DoxyCode}
+
+
+For full screen windows, the specified size becomes the new resolution of the window\textquotesingle{}s desired video mode. The video mode most closely matching the new desired video mode is set immediately. The window is resized to fit the resolution of the set video mode.
+
+If you wish to be notified when a window is resized, whether by the user, the system or your own code, set a size callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gab0754f8d5c7c4d5cae2a9937a0e00bc5}{glfwSetWindowSizeCallback}}(window, window\_size\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the new size, in screen coordinates, of the content area of the window when the window is resized.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_size\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+There is also \mbox{\hyperlink{group__window_ga7feb769ebb3f3d21579b5a3fb07be76e}{glfw\+Get\+Window\+Size}} for directly retrieving the current size of a window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} width, height;}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga7feb769ebb3f3d21579b5a3fb07be76e}{glfwGetWindowSize}}(window, \&width, \&height);}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+Do not pass the window size to {\ttfamily gl\+Viewport} or other pixel-\/based Open\+GL calls. The window size is in screen coordinates, not pixels. Use the \mbox{\hyperlink{window_guide_window_fbsize}{framebuffer size}}, which is in pixels, for pixel-\/based calls.
+\end{DoxyNote}
+The above functions work with the size of the content area, but decorated windows typically have title bars and window frames around this rectangle. You can retrieve the extents of these with \mbox{\hyperlink{group__window_gaad46cdaae2eb732f68d3a1499a7c5409}{glfw\+Get\+Window\+Frame\+Size}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} left, top, right, bottom;}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gaad46cdaae2eb732f68d3a1499a7c5409}{glfwGetWindowFrameSize}}(window, \&left, \&top, \&right, \&bottom);}
+\end{DoxyCode}
+
+
+The returned values are the distances, in screen coordinates, from the edges of the content area to the corresponding edges of the full window. As they are distances and not coordinates, they are always zero or positive.\hypertarget{window_guide_window_fbsize}{}\doxysubsection{Framebuffer size}\label{window_guide_window_fbsize}
+While the size of a window is measured in screen coordinates, Open\+GL works with pixels. The size you pass into {\ttfamily gl\+Viewport}, for example, should be in pixels. On some machines screen coordinates and pixels are the same, but on others they will not be. There is a second set of functions to retrieve the size, in pixels, of the framebuffer of a window.
+
+If you wish to be notified when the framebuffer of a window is resized, whether by the user or the system, set a size callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga41d69f9f263d7b33ea03cf58772b4ea0}{glfwSetFramebufferSizeCallback}}(window, framebuffer\_size\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the new size of the framebuffer when it is resized, which can for example be used to update the Open\+GL viewport.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} framebuffer\_size\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    glViewport(0, 0, width, height);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+There is also \mbox{\hyperlink{group__window_gaf7d17f3534b4b6dc9a6f905e3a240b7e}{glfw\+Get\+Framebuffer\+Size}} for directly retrieving the current size of the framebuffer of a window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} width, height;}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gaf7d17f3534b4b6dc9a6f905e3a240b7e}{glfwGetFramebufferSize}}(window, \&width, \&height);}
+\DoxyCodeLine{glViewport(0, 0, width, height);}
+\end{DoxyCode}
+
+
+The size of a framebuffer may change independently of the size of a window, for example if the window is dragged between a regular monitor and a high-\/\+D\+PI one.\hypertarget{window_guide_window_scale}{}\doxysubsection{Window content scale}\label{window_guide_window_scale}
+The content scale for a window can be retrieved with \mbox{\hyperlink{group__window_ga72718c983a9fffaa27f786bfe7d1c9ee}{glfw\+Get\+Window\+Content\+Scale}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{float} xscale, yscale;}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga72718c983a9fffaa27f786bfe7d1c9ee}{glfwGetWindowContentScale}}(window, \&xscale, \&yscale);}
+\end{DoxyCode}
+
+
+The content scale is the ratio between the current D\+PI and the platform\textquotesingle{}s default D\+PI. This is especially important for text and any UI elements. If the pixel dimensions of your UI scaled by this look appropriate on your machine then it should appear at a reasonable size on other machines regardless of their D\+PI and scaling settings. This relies on the system D\+PI and scaling settings being somewhat correct.
+
+On systems where each monitors can have its own content scale, the window content scale will depend on which monitor the system considers the window to be on.
+
+If you wish to be notified when the content scale of a window changes, whether because of a system setting change or because it was moved to a monitor with a different scale, set a content scale callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gac6edcddbe785445d0d2b7b7be500836e}{glfwSetWindowContentScaleCallback}}(window, window\_content\_scale\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the new content scale of the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_content\_scale\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{float} xscale, \textcolor{keywordtype}{float} yscale)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    set\_interface\_scale(xscale, yscale);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+On platforms where pixels and screen coordinates always map 1\+:1, the window will need to be resized to appear the same size when it is moved to a monitor with a different content scale. To have this done automatically both when the window is created and when its content scale later changes, set the \mbox{\hyperlink{window_guide_GLFW_SCALE_TO_MONITOR}{G\+L\+F\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+T\+O\+\_\+\+M\+O\+N\+I\+T\+OR}} window hint.\hypertarget{window_guide_window_sizelimits}{}\doxysubsection{Window size limits}\label{window_guide_window_sizelimits}
+The minimum and maximum size of the content area of a windowed mode window can be enforced with \mbox{\hyperlink{group__window_ga8af814fc98d786d1de2505b40b707de8}{glfw\+Set\+Window\+Size\+Limits}}. The user may resize the window to any size and aspect ratio within the specified limits, unless the aspect ratio is also set.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga8af814fc98d786d1de2505b40b707de8}{glfwSetWindowSizeLimits}}(window, 200, 200, 400, 400);}
+\end{DoxyCode}
+
+
+To specify only a minimum size or only a maximum one, set the other pair to {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga8af814fc98d786d1de2505b40b707de8}{glfwSetWindowSizeLimits}}(window, 640, 480, GLFW\_DONT\_CARE, GLFW\_DONT\_CARE);}
+\end{DoxyCode}
+
+
+To disable size limits for a window, set them all to {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}.
+
+The aspect ratio of the content area of a windowed mode window can be enforced with \mbox{\hyperlink{group__window_gad2ae94a2c5ee1c46a36e13a8f4ac68ac}{glfw\+Set\+Window\+Aspect\+Ratio}}. The user may resize the window freely unless size limits are also set, but the size will be constrained to maintain the aspect ratio.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gad2ae94a2c5ee1c46a36e13a8f4ac68ac}{glfwSetWindowAspectRatio}}(window, 16, 9);}
+\end{DoxyCode}
+
+
+The aspect ratio is specified as a numerator and denominator, corresponding to the width and height, respectively. If you want a window to maintain its current aspect ratio, use its current size as the ratio.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} width, height;}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga7feb769ebb3f3d21579b5a3fb07be76e}{glfwGetWindowSize}}(window, \&width, \&height);}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gad2ae94a2c5ee1c46a36e13a8f4ac68ac}{glfwSetWindowAspectRatio}}(window, width, height);}
+\end{DoxyCode}
+
+
+To disable the aspect ratio limit for a window, set both terms to {\ttfamily G\+L\+F\+W\+\_\+\+D\+O\+N\+T\+\_\+\+C\+A\+RE}.
+
+You can have both size limits and aspect ratio set for a window, but the results are undefined if they conflict.\hypertarget{window_guide_window_pos}{}\doxysubsection{Window position}\label{window_guide_window_pos}
+The position of a windowed-\/mode window can be changed with \mbox{\hyperlink{group__window_ga0dc8d880a0d87be16d3ea8114561f6f0}{glfw\+Set\+Window\+Pos}}. This moves the window so that the upper-\/left corner of its content area has the specified \mbox{\hyperlink{intro_guide_coordinate_systems}{screen coordinates}}. The window system may put limitations on window placement.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga0dc8d880a0d87be16d3ea8114561f6f0}{glfwSetWindowPos}}(window, 100, 100);}
+\end{DoxyCode}
+
+
+If you wish to be notified when a window is moved, whether by the user, the system or your own code, set a position callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga517b6e80b982efa06e9b8ca89d4a75a6}{glfwSetWindowPosCallback}}(window, window\_pos\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the new position, in screen coordinates, of the upper-\/left corner of the content area when the window is moved.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_pos\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} xpos, \textcolor{keywordtype}{int} ypos)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+There is also \mbox{\hyperlink{group__window_ga0076a8591ef7494d359730cf2250b45b}{glfw\+Get\+Window\+Pos}} for directly retrieving the current position of the content area of the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} xpos, ypos;}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga0076a8591ef7494d359730cf2250b45b}{glfwGetWindowPos}}(window, \&xpos, \&ypos);}
+\end{DoxyCode}
+\hypertarget{window_guide_window_title}{}\doxysubsection{Window title}\label{window_guide_window_title}
+All G\+L\+FW windows have a title, although undecorated or full screen windows may not display it or only display it in a task bar or similar interface. You can set a U\+T\+F-\/8 encoded window title with \mbox{\hyperlink{group__window_ga861ed3414ab8120e2f74151a666ed1dc}{glfw\+Set\+Window\+Title}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga861ed3414ab8120e2f74151a666ed1dc}{glfwSetWindowTitle}}(window, \textcolor{stringliteral}{"My Window"});}
+\end{DoxyCode}
+
+
+The specified string is copied before the function returns, so there is no need to keep it around.
+
+As long as your source file is encoded as U\+T\+F-\/8, you can use any Unicode characters directly in the source.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga861ed3414ab8120e2f74151a666ed1dc}{glfwSetWindowTitle}}(window, \textcolor{stringliteral}{"ラストエグザイル"});}
+\end{DoxyCode}
+
+
+If you are using C++11 or C11, you can use a U\+T\+F-\/8 string literal.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga861ed3414ab8120e2f74151a666ed1dc}{glfwSetWindowTitle}}(window, u8\textcolor{stringliteral}{"This is always a UTF-\/8 string"});}
+\end{DoxyCode}
+\hypertarget{window_guide_window_icon}{}\doxysubsection{Window icon}\label{window_guide_window_icon}
+Decorated windows have icons on some platforms. You can set this icon by specifying a list of candidate images with \mbox{\hyperlink{group__window_ga182987a1a62a41a924842b9473d560df}{glfw\+Set\+Window\+Icon}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{structGLFWimage}{GLFWimage}} images[2];}
+\DoxyCodeLine{images[0] = load\_icon(\textcolor{stringliteral}{"my\_icon.png"});}
+\DoxyCodeLine{images[1] = load\_icon(\textcolor{stringliteral}{"my\_icon\_small.png"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga182987a1a62a41a924842b9473d560df}{glfwSetWindowIcon}}(window, 2, images);}
+\end{DoxyCode}
+
+
+The image data is 32-\/bit, little-\/endian, non-\/premultiplied R\+G\+BA, i.\+e. eight bits per channel with the red channel first. The pixels are arranged canonically as sequential rows, starting from the top-\/left corner.
+
+To revert to the default window icon, pass in an empty image array.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga182987a1a62a41a924842b9473d560df}{glfwSetWindowIcon}}(window, 0, NULL);}
+\end{DoxyCode}
+\hypertarget{window_guide_window_monitor}{}\doxysubsection{Window monitor}\label{window_guide_window_monitor}
+Full screen windows are associated with a specific monitor. You can get the handle for this monitor with \mbox{\hyperlink{group__window_gad441645a53bc9274a0ee163d40f0c637}{glfw\+Get\+Window\+Monitor}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__monitor_ga8d9efd1cde9426692c73fe40437d0ae3}{GLFWmonitor}}* monitor = \mbox{\hyperlink{group__window_gad441645a53bc9274a0ee163d40f0c637}{glfwGetWindowMonitor}}(window);}
+\end{DoxyCode}
+
+
+This monitor handle is one of those returned by \mbox{\hyperlink{group__monitor_ga8c78e5db186ee10d00c053faf81998af}{glfw\+Get\+Monitors}}.
+
+For windowed mode windows, this function returns {\ttfamily N\+U\+LL}. This is how to tell full screen windows from windowed mode windows.
+
+You can move windows between monitors or between full screen and windowed mode with \mbox{\hyperlink{group__window_ga12fabf78575e59c00f822f323ae0b6ae}{glfw\+Set\+Window\+Monitor}}. When making a window full screen on the same or on a different monitor, specify the desired monitor, resolution and refresh rate. The position arguments are ignored.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{structGLFWvidmode}{GLFWvidmode}}* mode = \mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfwGetVideoMode}}(monitor);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga12fabf78575e59c00f822f323ae0b6ae}{glfwSetWindowMonitor}}(window, monitor, 0, 0, mode-\/>width, mode-\/>height, mode-\/>refreshRate);}
+\end{DoxyCode}
+
+
+When making the window windowed, specify the desired position and size. The refresh rate argument is ignored.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga12fabf78575e59c00f822f323ae0b6ae}{glfwSetWindowMonitor}}(window, NULL, xpos, ypos, width, height, 0);}
+\end{DoxyCode}
+
+
+This restores any previous window settings such as whether it is decorated, floating, resizable, has size or aspect ratio limits, etc.. To restore a window that was originally windowed to its original size and position, save these before making it full screen and then pass them in as above.\hypertarget{window_guide_window_iconify}{}\doxysubsection{Window iconification}\label{window_guide_window_iconify}
+Windows can be iconified (i.\+e. minimized) with \mbox{\hyperlink{group__window_ga24274e3c6ecd44e11fec5e6b66e4d7f3}{glfw\+Iconify\+Window}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga24274e3c6ecd44e11fec5e6b66e4d7f3}{glfwIconifyWindow}}(window);}
+\end{DoxyCode}
+
+
+When a full screen window is iconified, the original video mode of its monitor is restored until the user or application restores the window.
+
+Iconified windows can be restored with \mbox{\hyperlink{group__window_ga1e29caf0b819f578b04db52fff17256c}{glfw\+Restore\+Window}}. This function also restores windows from maximization.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga1e29caf0b819f578b04db52fff17256c}{glfwRestoreWindow}}(window);}
+\end{DoxyCode}
+
+
+When a full screen window is restored, the desired video mode is restored to its monitor as well.
+
+If you wish to be notified when a window is iconified or restored, whether by the user, system or your own code, set an iconify callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga3e9f355edb6b9247149ddea2335eda69}{glfwSetWindowIconifyCallback}}(window, window\_iconify\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives changes in the iconification state of the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_iconify\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} iconified)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (iconified)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The window was iconified}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The window was restored}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+You can also get the current iconification state with \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} iconified = \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfwGetWindowAttrib}}(window, \mbox{\hyperlink{group__window_ga39d44b7c056e55e581355a92d240b58a}{GLFW\_ICONIFIED}});}
+\end{DoxyCode}
+\hypertarget{window_guide_window_maximize}{}\doxysubsection{Window maximization}\label{window_guide_window_maximize}
+Windows can be maximized (i.\+e. zoomed) with \mbox{\hyperlink{group__window_ga4f825a55367d3fabde3d06e7f30128e8}{glfw\+Maximize\+Window}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga4f825a55367d3fabde3d06e7f30128e8}{glfwMaximizeWindow}}(window);}
+\end{DoxyCode}
+
+
+Full screen windows cannot be maximized and passing a full screen window to this function does nothing.
+
+Maximized windows can be restored with \mbox{\hyperlink{group__window_ga1e29caf0b819f578b04db52fff17256c}{glfw\+Restore\+Window}}. This function also restores windows from iconification.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga1e29caf0b819f578b04db52fff17256c}{glfwRestoreWindow}}(window);}
+\end{DoxyCode}
+
+
+If you wish to be notified when a window is maximized or restored, whether by the user, system or your own code, set a maximize callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gae77b3960dcd40514fb7b2b8a6eb98137}{glfwSetWindowMaximizeCallback}}(window, window\_maximize\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives changes in the maximization state of the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_maximize\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} maximized)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (maximized)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The window was maximized}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The window was restored}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+You can also get the current maximization state with \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} maximized = \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfwGetWindowAttrib}}(window, \mbox{\hyperlink{group__window_gad8ccb396253ad0b72c6d4c917eb38a03}{GLFW\_MAXIMIZED}});}
+\end{DoxyCode}
+
+
+By default, newly created windows are not maximized. You can change this behavior by setting the \mbox{\hyperlink{window_guide_GLFW_MAXIMIZED_hint}{G\+L\+F\+W\+\_\+\+M\+A\+X\+I\+M\+I\+Z\+ED}} window hint before creating the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_gad8ccb396253ad0b72c6d4c917eb38a03}{GLFW\_MAXIMIZED}}, \mbox{\hyperlink{group__init_ga2744fbb29b5631bb28802dbe0cf36eba}{GLFW\_TRUE}});}
+\end{DoxyCode}
+\hypertarget{window_guide_window_hide}{}\doxysubsection{Window visibility}\label{window_guide_window_hide}
+Windowed mode windows can be hidden with \mbox{\hyperlink{group__window_gaa17e287d521544bdeceafa09ac036e20}{glfw\+Hide\+Window}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gaa17e287d521544bdeceafa09ac036e20}{glfwHideWindow}}(window);}
+\end{DoxyCode}
+
+
+This makes the window completely invisible to the user, including removing it from the task bar, dock or window list. Full screen windows cannot be hidden and calling \mbox{\hyperlink{group__window_gaa17e287d521544bdeceafa09ac036e20}{glfw\+Hide\+Window}} on a full screen window does nothing.
+
+Hidden windows can be shown with \mbox{\hyperlink{group__window_ga7945bcdff9e5e058cf36505d6873ed8c}{glfw\+Show\+Window}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga7945bcdff9e5e058cf36505d6873ed8c}{glfwShowWindow}}(window);}
+\end{DoxyCode}
+
+
+By default, this function will also set the input focus to that window. Set the \mbox{\hyperlink{window_guide_GLFW_FOCUS_ON_SHOW_hint}{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+\_\+\+O\+N\+\_\+\+S\+H\+OW}} window hint to change this behavior for all newly created windows, or change the behavior for an existing window with \mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfw\+Set\+Window\+Attrib}}.
+
+You can also get the current visibility state with \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} visible = \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfwGetWindowAttrib}}(window, \mbox{\hyperlink{group__window_gafb3cdc45297e06d8f1eb13adc69ca6c4}{GLFW\_VISIBLE}});}
+\end{DoxyCode}
+
+
+By default, newly created windows are visible. You can change this behavior by setting the \mbox{\hyperlink{window_guide_GLFW_VISIBLE_hint}{G\+L\+F\+W\+\_\+\+V\+I\+S\+I\+B\+LE}} window hint before creating the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_gafb3cdc45297e06d8f1eb13adc69ca6c4}{GLFW\_VISIBLE}}, \mbox{\hyperlink{group__init_gac877fe3b627d21ef3a0a23e0a73ba8c5}{GLFW\_FALSE}});}
+\end{DoxyCode}
+
+
+Windows created hidden are completely invisible to the user until shown. This can be useful if you need to set up your window further before showing it, for example moving it to a specific location.\hypertarget{window_guide_window_focus}{}\doxysubsection{Window input focus}\label{window_guide_window_focus}
+Windows can be given input focus and brought to the front with \mbox{\hyperlink{group__window_ga0da0e3daaa2d100f44a115c09077b510}{glfw\+Focus\+Window}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga0da0e3daaa2d100f44a115c09077b510}{glfwFocusWindow}}(window);}
+\end{DoxyCode}
+
+
+Keep in mind that it can be very disruptive to the user when a window is forced to the top. For a less disruptive way of getting the user\textquotesingle{}s attention, see \mbox{\hyperlink{window_guide_window_attention}{attention requests}}.
+
+If you wish to be notified when a window gains or loses input focus, whether by the user, system or your own code, set a focus callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gacce1c4dd273b5c4c60b05599f8725b4e}{glfwSetWindowFocusCallback}}(window, window\_focus\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives changes in the input focus state of the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_focus\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} focused)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (focused)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The window gained input focus}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The window lost input focus}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+You can also get the current input focus state with \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} focused = \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfwGetWindowAttrib}}(window, \mbox{\hyperlink{group__window_ga54ddb14825a1541a56e22afb5f832a9e}{GLFW\_FOCUSED}});}
+\end{DoxyCode}
+
+
+By default, newly created windows are given input focus. You can change this behavior by setting the \mbox{\hyperlink{window_guide_GLFW_FOCUSED_hint}{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+ED}} window hint before creating the window.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_ga54ddb14825a1541a56e22afb5f832a9e}{GLFW\_FOCUSED}}, \mbox{\hyperlink{group__init_gac877fe3b627d21ef3a0a23e0a73ba8c5}{GLFW\_FALSE}});}
+\end{DoxyCode}
+\hypertarget{window_guide_window_attention}{}\doxysubsection{Window attention request}\label{window_guide_window_attention}
+If you wish to notify the user of an event without interrupting, you can request attention with \mbox{\hyperlink{group__window_gad0c9629abb49447bedd28080642b8538}{glfw\+Request\+Window\+Attention}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gad0c9629abb49447bedd28080642b8538}{glfwRequestWindowAttention}}(window);}
+\end{DoxyCode}
+
+
+The system will highlight the specified window, or on platforms where this is not supported, the application as a whole. Once the user has given it attention, the system will automatically end the request.\hypertarget{window_guide_window_refresh}{}\doxysubsection{Window damage and refresh}\label{window_guide_window_refresh}
+If you wish to be notified when the contents of a window is damaged and needs to be refreshed, set a window refresh callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga62bfa902c07a03b8ad9be37da31a4be7}{glfwSetWindowRefreshCallback}}(m\_handle, window\_refresh\_callback);}
+\end{DoxyCode}
+
+
+The callback function is called when the contents of the window needs to be refreshed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_refresh\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    draw\_editor\_ui(window);}
+\DoxyCodeLine{    \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfwSwapBuffers}}(window);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+On compositing window systems such as Aero, Compiz or Aqua, where the window contents are saved off-\/screen, this callback might only be called when the window or framebuffer is resized.
+\end{DoxyNote}
+\hypertarget{window_guide_window_transparency}{}\doxysubsection{Window transparency}\label{window_guide_window_transparency}
+G\+L\+FW supports two kinds of transparency for windows; framebuffer transparency and whole window transparency. A single window may not use both methods. The results of doing this are undefined.
+
+Both methods require the platform to support it and not every version of every platform G\+L\+FW supports does this, so there are mechanisms to check whether the window really is transparent.
+
+Window framebuffers can be made transparent on a per-\/pixel per-\/frame basis with the \mbox{\hyperlink{window_guide_GLFW_TRANSPARENT_FRAMEBUFFER_hint}{G\+L\+F\+W\+\_\+\+T\+R\+A\+N\+S\+P\+A\+R\+E\+N\+T\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+ER}} window hint.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfwWindowHint}}(\mbox{\hyperlink{group__window_ga60a0578c3b9449027d683a9c6abb9f14}{GLFW\_TRANSPARENT\_FRAMEBUFFER}}, \mbox{\hyperlink{group__init_ga2744fbb29b5631bb28802dbe0cf36eba}{GLFW\_TRUE}});}
+\end{DoxyCode}
+
+
+If supported by the system, the window content area will be composited with the background using the framebuffer per-\/pixel alpha channel. This requires desktop compositing to be enabled on the system. It does not affect window decorations.
+
+You can check whether the window framebuffer was successfully made transparent with the \mbox{\hyperlink{window_guide_GLFW_TRANSPARENT_FRAMEBUFFER_attrib}{G\+L\+F\+W\+\_\+\+T\+R\+A\+N\+S\+P\+A\+R\+E\+N\+T\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+ER}} window attribute.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfwGetWindowAttrib}}(window, \mbox{\hyperlink{group__window_ga60a0578c3b9449027d683a9c6abb9f14}{GLFW\_TRANSPARENT\_FRAMEBUFFER}}))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// window framebuffer is currently transparent}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+G\+L\+FW comes with an example that enabled framebuffer transparency called {\ttfamily gears}.
+
+The opacity of the whole window, including any decorations, can be set with \mbox{\hyperlink{group__window_ga62a784fe328f227727cbcd0d07480ff3}{glfw\+Set\+Window\+Opacity}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga62a784fe328f227727cbcd0d07480ff3}{glfwSetWindowOpacity}}(window, 0.5f);}
+\end{DoxyCode}
+
+
+The opacity (or alpha) value is a positive finite number between zero and one, where 0 (zero) is fully transparent and 1 (one) is fully opaque. The initial opacity value for newly created windows is 1.
+
+The current opacity of a window can be queried with \mbox{\hyperlink{group__window_gad124d57a1c1c519f60c9765cd0c2a89c}{glfw\+Get\+Window\+Opacity}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{float} opacity = \mbox{\hyperlink{group__window_gad124d57a1c1c519f60c9765cd0c2a89c}{glfwGetWindowOpacity}}(window);}
+\end{DoxyCode}
+
+
+If the system does not support whole window transparency, this function always returns one.
+
+G\+L\+FW comes with a test program that lets you control whole window transparency at run-\/time called {\ttfamily opacity}.\hypertarget{window_guide_window_attribs}{}\doxysubsection{Window attributes}\label{window_guide_window_attribs}
+Windows have a number of attributes that can be returned using \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}}. Some reflect state that may change as a result of user interaction, (e.\+g. whether it has input focus), while others reflect inherent properties of the window (e.\+g. what kind of border it has). Some are related to the window and others to its Open\+GL or Open\+GL ES context.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfwGetWindowAttrib}}(window, \mbox{\hyperlink{group__window_ga54ddb14825a1541a56e22afb5f832a9e}{GLFW\_FOCUSED}}))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// window has input focus}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The \mbox{\hyperlink{window_guide_GLFW_DECORATED_attrib}{G\+L\+F\+W\+\_\+\+D\+E\+C\+O\+R\+A\+T\+ED}}, \mbox{\hyperlink{window_guide_GLFW_RESIZABLE_attrib}{G\+L\+F\+W\+\_\+\+R\+E\+S\+I\+Z\+A\+B\+LE}}, \mbox{\hyperlink{window_guide_GLFW_FLOATING_attrib}{G\+L\+F\+W\+\_\+\+F\+L\+O\+A\+T\+I\+NG}}, \mbox{\hyperlink{window_guide_GLFW_AUTO_ICONIFY_attrib}{G\+L\+F\+W\+\_\+\+A\+U\+T\+O\+\_\+\+I\+C\+O\+N\+I\+FY}} and \mbox{\hyperlink{window_guide_GLFW_FOCUS_ON_SHOW_attrib}{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+\_\+\+O\+N\+\_\+\+S\+H\+OW}} window attributes can be changed with \mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfw\+Set\+Window\+Attrib}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfwSetWindowAttrib}}(window, \mbox{\hyperlink{group__window_gadba13c7a1b3aa40831eb2beedbd5bd1d}{GLFW\_RESIZABLE}}, \mbox{\hyperlink{group__init_gac877fe3b627d21ef3a0a23e0a73ba8c5}{GLFW\_FALSE}});}
+\end{DoxyCode}
+\hypertarget{window_guide_window_attribs_wnd}{}\doxysubsubsection{Window related attributes}\label{window_guide_window_attribs_wnd}
+\label{window_guide_GLFW_FOCUSED_attrib}%
+\Hypertarget{window_guide_GLFW_FOCUSED_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+ED}} indicates whether the specified window has input focus. See \mbox{\hyperlink{window_guide_window_focus}{Window input focus}} for details.
+
+\label{window_guide_GLFW_ICONIFIED_attrib}%
+\Hypertarget{window_guide_GLFW_ICONIFIED_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+I\+C\+O\+N\+I\+F\+I\+ED}} indicates whether the specified window is iconified. See \mbox{\hyperlink{window_guide_window_iconify}{Window iconification}} for details.
+
+\label{window_guide_GLFW_MAXIMIZED_attrib}%
+\Hypertarget{window_guide_GLFW_MAXIMIZED_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+M\+A\+X\+I\+M\+I\+Z\+ED}} indicates whether the specified window is maximized. See \mbox{\hyperlink{window_guide_window_maximize}{Window maximization}} for details.
+
+\label{window_guide_GLFW_HOVERED_attrib}%
+\Hypertarget{window_guide_GLFW_HOVERED_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+H\+O\+V\+E\+R\+ED}} indicates whether the cursor is currently directly over the content area of the window, with no other windows between. See \mbox{\hyperlink{input_guide_cursor_enter}{Cursor enter/leave events}} for details.
+
+\label{window_guide_GLFW_VISIBLE_attrib}%
+\Hypertarget{window_guide_GLFW_VISIBLE_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+V\+I\+S\+I\+B\+LE}} indicates whether the specified window is visible. See \mbox{\hyperlink{window_guide_window_hide}{Window visibility}} for details.
+
+\label{window_guide_GLFW_RESIZABLE_attrib}%
+\Hypertarget{window_guide_GLFW_RESIZABLE_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+R\+E\+S\+I\+Z\+A\+B\+LE}} indicates whether the specified window is resizable {\itshape by the user}. This can be set before creation with the \mbox{\hyperlink{window_guide_GLFW_RESIZABLE_hint}{G\+L\+F\+W\+\_\+\+R\+E\+S\+I\+Z\+A\+B\+LE}} window hint or after with \mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfw\+Set\+Window\+Attrib}}.
+
+\label{window_guide_GLFW_DECORATED_attrib}%
+\Hypertarget{window_guide_GLFW_DECORATED_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+D\+E\+C\+O\+R\+A\+T\+ED}} indicates whether the specified window has decorations such as a border, a close widget, etc. This can be set before creation with the \mbox{\hyperlink{window_guide_GLFW_DECORATED_hint}{G\+L\+F\+W\+\_\+\+D\+E\+C\+O\+R\+A\+T\+ED}} window hint or after with \mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfw\+Set\+Window\+Attrib}}.
+
+\label{window_guide_GLFW_AUTO_ICONIFY_attrib}%
+\Hypertarget{window_guide_GLFW_AUTO_ICONIFY_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+A\+U\+T\+O\+\_\+\+I\+C\+O\+N\+I\+FY}} indicates whether the specified full screen window is iconified on focus loss, a close widget, etc. This can be set before creation with the \mbox{\hyperlink{window_guide_GLFW_AUTO_ICONIFY_hint}{G\+L\+F\+W\+\_\+\+A\+U\+T\+O\+\_\+\+I\+C\+O\+N\+I\+FY}} window hint or after with \mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfw\+Set\+Window\+Attrib}}.
+
+\label{window_guide_GLFW_FLOATING_attrib}%
+\Hypertarget{window_guide_GLFW_FLOATING_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+F\+L\+O\+A\+T\+I\+NG}} indicates whether the specified window is floating, also called topmost or always-\/on-\/top. This can be set before creation with the \mbox{\hyperlink{window_guide_GLFW_FLOATING_hint}{G\+L\+F\+W\+\_\+\+F\+L\+O\+A\+T\+I\+NG}} window hint or after with \mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfw\+Set\+Window\+Attrib}}.
+
+\label{window_guide_GLFW_TRANSPARENT_FRAMEBUFFER_attrib}%
+\Hypertarget{window_guide_GLFW_TRANSPARENT_FRAMEBUFFER_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+T\+R\+A\+N\+S\+P\+A\+R\+E\+N\+T\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+ER}} indicates whether the specified window has a transparent framebuffer, i.\+e. the window contents is composited with the background using the window framebuffer alpha channel. See \mbox{\hyperlink{window_guide_window_transparency}{Window transparency}} for details.
+
+\label{window_guide_GLFW_FOCUS_ON_SHOW_attrib}%
+\Hypertarget{window_guide_GLFW_FOCUS_ON_SHOW_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+\_\+\+O\+N\+\_\+\+S\+H\+OW}} specifies whether the window will be given input focus when \mbox{\hyperlink{group__window_ga7945bcdff9e5e058cf36505d6873ed8c}{glfw\+Show\+Window}} is called. This can be set before creation with the \mbox{\hyperlink{window_guide_GLFW_FOCUS_ON_SHOW_hint}{G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+\_\+\+O\+N\+\_\+\+S\+H\+OW}} window hint or after with \mbox{\hyperlink{group__window_gad39f43f07856efcf3d656426a9284c75}{glfw\+Set\+Window\+Attrib}}.\hypertarget{window_guide_window_attribs_ctx}{}\doxysubsubsection{Context related attributes}\label{window_guide_window_attribs_ctx}
+\label{window_guide_GLFW_CLIENT_API_attrib}%
+\Hypertarget{window_guide_GLFW_CLIENT_API_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+PI}} indicates the client A\+PI provided by the window\textquotesingle{}s context; either {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+PI}, {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+E\+S\+\_\+\+A\+PI} or {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+A\+PI}.
+
+\label{window_guide_GLFW_CONTEXT_CREATION_API_attrib}%
+\Hypertarget{window_guide_GLFW_CONTEXT_CREATION_API_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+A\+PI}} indicates the context creation A\+PI used to create the window\textquotesingle{}s context; either {\ttfamily G\+L\+F\+W\+\_\+\+N\+A\+T\+I\+V\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI}, {\ttfamily G\+L\+F\+W\+\_\+\+E\+G\+L\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI} or {\ttfamily G\+L\+F\+W\+\_\+\+O\+S\+M\+E\+S\+A\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+A\+PI}.
+
+\label{window_guide_GLFW_CONTEXT_VERSION_MAJOR_attrib}%
+\Hypertarget{window_guide_GLFW_CONTEXT_VERSION_MAJOR_attrib}%
+\label{window_guide_GLFW_CONTEXT_VERSION_MINOR_attrib}%
+\Hypertarget{window_guide_GLFW_CONTEXT_VERSION_MINOR_attrib}%
+\label{window_guide_GLFW_CONTEXT_REVISION_attrib}%
+\Hypertarget{window_guide_GLFW_CONTEXT_REVISION_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}, {\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}} and {\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+E\+V\+I\+S\+I\+ON}} indicate the client A\+PI version of the window\textquotesingle{}s context.
+
+\begin{DoxyNote}{Note}
+Do not confuse these attributes with {\ttfamily G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}, {\ttfamily G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR} and {\ttfamily G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+R\+E\+V\+I\+S\+I\+ON} which provide the A\+PI version of the G\+L\+FW header.
+\end{DoxyNote}
+\label{window_guide_GLFW_OPENGL_FORWARD_COMPAT_attrib}%
+\Hypertarget{window_guide_GLFW_OPENGL_FORWARD_COMPAT_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+F\+O\+R\+W\+A\+R\+D\+\_\+\+C\+O\+M\+P\+AT}} is {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} if the window\textquotesingle{}s context is an Open\+GL forward-\/compatible one, or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} otherwise.
+
+\label{window_guide_GLFW_OPENGL_DEBUG_CONTEXT_attrib}%
+\Hypertarget{window_guide_GLFW_OPENGL_DEBUG_CONTEXT_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+D\+E\+B\+U\+G\+\_\+\+C\+O\+N\+T\+E\+XT}} is {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} if the window\textquotesingle{}s context is in debug mode, or {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE} otherwise.
+
+\label{window_guide_GLFW_OPENGL_PROFILE_attrib}%
+\Hypertarget{window_guide_GLFW_OPENGL_PROFILE_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+P\+R\+O\+F\+I\+LE}} indicates the Open\+GL profile used by the context. This is {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+C\+O\+R\+E\+\_\+\+P\+R\+O\+F\+I\+LE} or {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+C\+O\+M\+P\+A\+T\+\_\+\+P\+R\+O\+F\+I\+LE} if the context uses a known profile, or {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+A\+N\+Y\+\_\+\+P\+R\+O\+F\+I\+LE} if the Open\+GL profile is unknown or the context is an Open\+GL ES context. Note that the returned profile may not match the profile bits of the context flags, as G\+L\+FW will try other means of detecting the profile when no bits are set.
+
+\label{window_guide_GLFW_CONTEXT_RELEASE_BEHAVIOR_attrib}%
+\Hypertarget{window_guide_GLFW_CONTEXT_RELEASE_BEHAVIOR_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR}} indicates the release used by the context. Possible values are one of {\ttfamily G\+L\+F\+W\+\_\+\+A\+N\+Y\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR}, {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+F\+L\+U\+SH} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+N\+O\+NE}. If the behavior is {\ttfamily G\+L\+F\+W\+\_\+\+A\+N\+Y\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+OR}, the default behavior of the context creation A\+PI will be used. If the behavior is {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+F\+L\+U\+SH}, the pipeline will be flushed whenever the context is released from being the current one. If the behavior is {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+B\+E\+H\+A\+V\+I\+O\+R\+\_\+\+N\+O\+NE}, the pipeline will not be flushed on release.
+
+\label{window_guide_GLFW_CONTEXT_NO_ERROR_attrib}%
+\Hypertarget{window_guide_GLFW_CONTEXT_NO_ERROR_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+N\+O\+\_\+\+E\+R\+R\+OR}} indicates whether errors are generated by the context. Possible values are {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} and {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}. If enabled, situations that would have generated errors instead cause undefined behavior.
+
+\label{window_guide_GLFW_CONTEXT_ROBUSTNESS_attrib}%
+\Hypertarget{window_guide_GLFW_CONTEXT_ROBUSTNESS_attrib}%
+{\bfseries{G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+O\+B\+U\+S\+T\+N\+E\+SS}} indicates the robustness strategy used by the context. This is {\ttfamily G\+L\+F\+W\+\_\+\+L\+O\+S\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+O\+N\+\_\+\+R\+E\+S\+ET} or {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+R\+E\+S\+E\+T\+\_\+\+N\+O\+T\+I\+F\+I\+C\+A\+T\+I\+ON} if the window\textquotesingle{}s context supports robustness, or {\ttfamily G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+R\+O\+B\+U\+S\+T\+N\+E\+SS} otherwise.\hypertarget{window_guide_window_attribs_fb}{}\doxysubsubsection{Framebuffer related attributes}\label{window_guide_window_attribs_fb}
+G\+L\+FW does not expose attributes of the default framebuffer (i.\+e. the framebuffer attached to the window) as these can be queried directly with either Open\+GL, Open\+GL ES or Vulkan.
+
+If you are using version 3.\+0 or later of Open\+GL or Open\+GL ES, the {\ttfamily gl\+Get\+Framebuffer\+Attachment\+Parameteriv} function can be used to retrieve the number of bits for the red, green, blue, alpha, depth and stencil buffer channels. Otherwise, the {\ttfamily gl\+Get\+Integerv} function can be used.
+
+The number of M\+S\+AA samples are always retrieved with {\ttfamily gl\+Get\+Integerv}. For contexts supporting framebuffer objects, the number of samples of the currently bound framebuffer is returned.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Attribute }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ gl\+Get\+Integerv }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ gl\+Get\+Framebuffer\+Attachment\+Parameteriv  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Attribute }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ gl\+Get\+Integerv }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ gl\+Get\+Framebuffer\+Attachment\+Parameteriv  }\\\cline{1-3}
+\endhead
+Red bits &{\ttfamily G\+L\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS} &{\ttfamily G\+L\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+E\+R\+\_\+\+A\+T\+T\+A\+C\+H\+M\+E\+N\+T\+\_\+\+R\+E\+D\+\_\+\+S\+I\+ZE}  \\\cline{1-3}
+Green bits &{\ttfamily G\+L\+\_\+\+G\+R\+E\+E\+N\+\_\+\+B\+I\+TS} &{\ttfamily G\+L\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+E\+R\+\_\+\+A\+T\+T\+A\+C\+H\+M\+E\+N\+T\+\_\+\+G\+R\+E\+E\+N\+\_\+\+S\+I\+ZE}  \\\cline{1-3}
+Blue bits &{\ttfamily G\+L\+\_\+\+B\+L\+U\+E\+\_\+\+B\+I\+TS} &{\ttfamily G\+L\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+E\+R\+\_\+\+A\+T\+T\+A\+C\+H\+M\+E\+N\+T\+\_\+\+B\+L\+U\+E\+\_\+\+S\+I\+ZE}  \\\cline{1-3}
+Alpha bits &{\ttfamily G\+L\+\_\+\+A\+L\+P\+H\+A\+\_\+\+B\+I\+TS} &{\ttfamily G\+L\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+E\+R\+\_\+\+A\+T\+T\+A\+C\+H\+M\+E\+N\+T\+\_\+\+A\+L\+P\+H\+A\+\_\+\+S\+I\+ZE}  \\\cline{1-3}
+Depth bits &{\ttfamily G\+L\+\_\+\+D\+E\+P\+T\+H\+\_\+\+B\+I\+TS} &{\ttfamily G\+L\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+E\+R\+\_\+\+A\+T\+T\+A\+C\+H\+M\+E\+N\+T\+\_\+\+D\+E\+P\+T\+H\+\_\+\+S\+I\+ZE}  \\\cline{1-3}
+Stencil bits &{\ttfamily G\+L\+\_\+\+S\+T\+E\+N\+C\+I\+L\+\_\+\+B\+I\+TS} &{\ttfamily G\+L\+\_\+\+F\+R\+A\+M\+E\+B\+U\+F\+F\+E\+R\+\_\+\+A\+T\+T\+A\+C\+H\+M\+E\+N\+T\+\_\+\+S\+T\+E\+N\+C\+I\+L\+\_\+\+S\+I\+ZE}  \\\cline{1-3}
+M\+S\+AA samples &{\ttfamily G\+L\+\_\+\+S\+A\+M\+P\+L\+ES} &{\itshape Not provided by this function}  \\\cline{1-3}
+\end{longtabu}
+
+
+When calling {\ttfamily gl\+Get\+Framebuffer\+Attachment\+Parameteriv}, the red, green, blue and alpha sizes are queried from the {\ttfamily G\+L\+\_\+\+B\+A\+C\+K\+\_\+\+L\+E\+FT}, while the depth and stencil sizes are queried from the {\ttfamily G\+L\+\_\+\+D\+E\+P\+TH} and {\ttfamily G\+L\+\_\+\+S\+T\+E\+N\+C\+IL} attachments, respectively.\hypertarget{window_guide_buffer_swap}{}\doxysection{Buffer swapping}\label{window_guide_buffer_swap}
+G\+L\+FW windows are by default double buffered. That means that you have two rendering buffers; a front buffer and a back buffer. The front buffer is the one being displayed and the back buffer the one you render to.
+
+When the entire frame has been rendered, it is time to swap the back and the front buffers in order to display what has been rendered and begin rendering a new frame. This is done with \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfw\+Swap\+Buffers}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfwSwapBuffers}}(window);}
+\end{DoxyCode}
+
+
+Sometimes it can be useful to select when the buffer swap will occur. With the function \mbox{\hyperlink{group__context_ga12a595c06947cec4967c6e1f14210a8a}{glfw\+Swap\+Interval}} it is possible to select the minimum number of monitor refreshes the driver should wait from the time \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfw\+Swap\+Buffers}} was called before swapping the buffers\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__context_ga12a595c06947cec4967c6e1f14210a8a}{glfwSwapInterval}}(1);}
+\end{DoxyCode}
+
+
+If the interval is zero, the swap will take place immediately when \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfw\+Swap\+Buffers}} is called without waiting for a refresh. Otherwise at least interval retraces will pass between each buffer swap. Using a swap interval of zero can be useful for benchmarking purposes, when it is not desirable to measure the time it takes to wait for the vertical retrace. However, a swap interval of one lets you avoid tearing.
+
+Note that this may not work on all machines, as some drivers have user-\/controlled settings that override any swap interval the application requests.
+
+A context that supports either the {\ttfamily W\+G\+L\+\_\+\+E\+X\+T\+\_\+swap\+\_\+control\+\_\+tear} or the {\ttfamily G\+L\+X\+\_\+\+E\+X\+T\+\_\+swap\+\_\+control\+\_\+tear} extension also accepts {\itshape negative} swap intervals, which allows the driver to swap immediately even if a frame arrives a little bit late. This trades the risk of visible tears for greater framerate stability. You can check for these extensions with \mbox{\hyperlink{group__context_ga9a28c712d35f9e43534e1d03b051c04c}{glfw\+Extension\+Supported}}. 

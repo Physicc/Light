@@ -1,0 +1,201 @@
+\hypertarget{classentt_1_1basic__runtime__view}{}\doxysection{entt\+::basic\+\_\+runtime\+\_\+view$<$ Entity $>$ Class Template Reference}
+\label{classentt_1_1basic__runtime__view}\index{entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}}
+
+
+Runtime view.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_a7ede80f53e93473099819167d42bf2f1}\label{classentt_1_1basic__runtime__view_a7ede80f53e93473099819167d42bf2f1}} 
+using \mbox{\hyperlink{classentt_1_1basic__runtime__view_a7ede80f53e93473099819167d42bf2f1}{entity\+\_\+type}} = Entity
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_aabb4450ce3d686fe05bd92e5975d11fb}\label{classentt_1_1basic__runtime__view_aabb4450ce3d686fe05bd92e5975d11fb}} 
+using \mbox{\hyperlink{classentt_1_1basic__runtime__view_aabb4450ce3d686fe05bd92e5975d11fb}{size\+\_\+type}} = std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_a9ae6398953c3d724227e0fb25a7b61bd}\label{classentt_1_1basic__runtime__view_a9ae6398953c3d724227e0fb25a7b61bd}} 
+using \mbox{\hyperlink{classentt_1_1basic__runtime__view_a9ae6398953c3d724227e0fb25a7b61bd}{iterator}} = view\+\_\+iterator
+\begin{DoxyCompactList}\small\item\em Bidirectional iterator type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_a22547465ccf2e229f539ffb5750e3919}\label{classentt_1_1basic__runtime__view_a22547465ccf2e229f539ffb5750e3919}} 
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_a22547465ccf2e229f539ffb5750e3919}{basic\+\_\+runtime\+\_\+view}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Default constructor to use to create empty, invalid views. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_a0c86a37e0c0c2a4434a728a24fbd6faf}{basic\+\_\+runtime\+\_\+view}} (std\+::vector$<$ const \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$ $\ast$ $>$ cpools, std\+::vector$<$ const \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$ $\ast$ $>$ epools) E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Constructs a runtime view from a set of storage classes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_aabb4450ce3d686fe05bd92e5975d11fb}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__runtime__view_afc03b5d755f01f2417beadca306a30f7}{size\+\_\+hint}} () const
+\begin{DoxyCompactList}\small\item\em Estimates the number of entities iterated by the view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_a9ae6398953c3d724227e0fb25a7b61bd}{iterator}} \mbox{\hyperlink{classentt_1_1basic__runtime__view_aa1d8a9b29404f27c02ff496fb52318ec}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the first entity that has the given components. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_a9ae6398953c3d724227e0fb25a7b61bd}{iterator}} \mbox{\hyperlink{classentt_1_1basic__runtime__view_a5fc38f0e738d83d81a98b65b0e45d30b}{end}} () const
+\begin{DoxyCompactList}\small\item\em Returns an iterator that is past the last entity that has the given components. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1basic__runtime__view_ace695506c87fd0299c49ce90e816074f}{contains}} (const \mbox{\hyperlink{classentt_1_1basic__runtime__view_a7ede80f53e93473099819167d42bf2f1}{entity\+\_\+type}} entt) const
+\begin{DoxyCompactList}\small\item\em Checks if a view contains an entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func $>$ }\\void \mbox{\hyperlink{classentt_1_1basic__runtime__view_a79fe059a28f768f4dc82edf48438cce0}{each}} (Func func) const
+\begin{DoxyCompactList}\small\item\em Iterates entities and applies the given function object to them. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity$>$\newline
+class entt\+::basic\+\_\+runtime\+\_\+view$<$ Entity $>$}
+
+Runtime view. 
+
+Runtime views iterate over those entities that have at least all the given components in their bags. During initialization, a runtime view looks at the number of entities available for each component and picks up a reference to the smallest set of candidate entities in order to get a performance boost when iterate.~\newline
+ Order of elements during iterations are highly dependent on the order of the underlying data structures. See sparse\+\_\+set and its specializations for more details.
+
+{\bfseries{Important}} 
+
+Iterators aren\textquotesingle{}t invalidated if\+:
+
+
+\begin{DoxyItemize}
+\item New instances of the given components are created and assigned to entities.
+\item The entity currently pointed is modified (as an example, if one of the given components is removed from the entity to which the iterator points).
+\item The entity currently pointed is destroyed.
+\end{DoxyItemize}
+
+In all the other cases, modifying the pools of the given components in any way invalidates all the iterators and using them results in undefined behavior.
+
+\begin{DoxyNote}{Note}
+Views share references to the underlying data structures of the registry that generated them. Therefore any change to the entities and to the components made by means of the registry are immediately reflected by the views, unless a pool was missing when the view was built (in this case, the view won\textquotesingle{}t have a valid reference and won\textquotesingle{}t be updated accordingly).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Lifetime of a view must not overcome that of the registry that generated it. In any other case, attempting to use a view results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_a0c86a37e0c0c2a4434a728a24fbd6faf}\label{classentt_1_1basic__runtime__view_a0c86a37e0c0c2a4434a728a24fbd6faf}} 
+\index{entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}!basic\_runtime\_view@{basic\_runtime\_view}}
+\index{basic\_runtime\_view@{basic\_runtime\_view}!entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_runtime\_view()}{basic\_runtime\_view()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__runtime__view}{entt\+::basic\+\_\+runtime\+\_\+view}}$<$ Entity $>$\+::\mbox{\hyperlink{classentt_1_1basic__runtime__view}{basic\+\_\+runtime\+\_\+view}} (\begin{DoxyParamCaption}\item[{std\+::vector$<$ const \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$ $\ast$ $>$}]{cpools,  }\item[{std\+::vector$<$ const \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$ $\ast$ $>$}]{epools }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a runtime view from a set of storage classes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cpools} & The storage for the types to iterate. \\
+\hline
+{\em epools} & The storage for the types used to filter the view. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_aa1d8a9b29404f27c02ff496fb52318ec}\label{classentt_1_1basic__runtime__view_aa1d8a9b29404f27c02ff496fb52318ec}} 
+\index{entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}!begin@{begin}}
+\index{begin@{begin}!entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_a9ae6398953c3d724227e0fb25a7b61bd}{iterator}} \mbox{\hyperlink{classentt_1_1basic__runtime__view}{entt\+::basic\+\_\+runtime\+\_\+view}}$<$ Entity $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator to the first entity that has the given components. 
+
+The returned iterator points to the first entity that has the given components. If the view is empty, the returned iterator will be equal to {\ttfamily \mbox{\hyperlink{classentt_1_1basic__runtime__view_a5fc38f0e738d83d81a98b65b0e45d30b}{end()}}}.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the first entity that has the given components. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_ace695506c87fd0299c49ce90e816074f}\label{classentt_1_1basic__runtime__view_ace695506c87fd0299c49ce90e816074f}} 
+\index{entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}!contains@{contains}}
+\index{contains@{contains}!entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__runtime__view}{entt\+::basic\+\_\+runtime\+\_\+view}}$<$ Entity $>$\+::contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__runtime__view_a7ede80f53e93473099819167d42bf2f1}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a view contains an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & A valid entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the view contains the given entity, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_a79fe059a28f768f4dc82edf48438cce0}\label{classentt_1_1basic__runtime__view_a79fe059a28f768f4dc82edf48438cce0}} 
+\index{entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}!each@{each}}
+\index{each@{each}!entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{each()}{each()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+template$<$typename Func $>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__runtime__view}{entt\+::basic\+\_\+runtime\+\_\+view}}$<$ Entity $>$\+::each (\begin{DoxyParamCaption}\item[{Func}]{func }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterates entities and applies the given function object to them. 
+
+The function object is invoked for each entity. It is provided only with the entity itself. To get the components, users can use the registry with which the view was built.~\newline
+ The signature of the function should be equivalent to the following\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void(\textcolor{keyword}{const} \mbox{\hyperlink{classentt_1_1basic__runtime__view_a7ede80f53e93473099819167d42bf2f1}{entity\_type}});}
+\end{DoxyCode}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Type of the function object to invoke. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em func} & A valid function object. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_a5fc38f0e738d83d81a98b65b0e45d30b}\label{classentt_1_1basic__runtime__view_a5fc38f0e738d83d81a98b65b0e45d30b}} 
+\index{entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}!end@{end}}
+\index{end@{end}!entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_a9ae6398953c3d724227e0fb25a7b61bd}{iterator}} \mbox{\hyperlink{classentt_1_1basic__runtime__view}{entt\+::basic\+\_\+runtime\+\_\+view}}$<$ Entity $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator that is past the last entity that has the given components. 
+
+The returned iterator points to the entity following the last entity that has the given components. Attempting to dereference the returned iterator results in undefined behavior.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the entity following the last entity that has the given components. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__runtime__view_afc03b5d755f01f2417beadca306a30f7}\label{classentt_1_1basic__runtime__view_afc03b5d755f01f2417beadca306a30f7}} 
+\index{entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}!size\_hint@{size\_hint}}
+\index{size\_hint@{size\_hint}!entt::basic\_runtime\_view$<$ Entity $>$@{entt::basic\_runtime\_view$<$ Entity $>$}}
+\doxysubsubsection{\texorpdfstring{size\_hint()}{size\_hint()}}
+{\footnotesize\ttfamily template$<$typename Entity $>$ \\
+\mbox{\hyperlink{classentt_1_1basic__runtime__view_aabb4450ce3d686fe05bd92e5975d11fb}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__runtime__view}{entt\+::basic\+\_\+runtime\+\_\+view}}$<$ Entity $>$\+::size\+\_\+hint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Estimates the number of entities iterated by the view. 
+
+\begin{DoxyReturn}{Returns}
+Estimated number of entities iterated by the view. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

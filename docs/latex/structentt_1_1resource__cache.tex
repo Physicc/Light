@@ -1,0 +1,330 @@
+\hypertarget{structentt_1_1resource__cache}{}\doxysection{entt\+::resource\+\_\+cache$<$ Resource $>$ Struct Template Reference}
+\label{structentt_1_1resource__cache}\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+
+
+Simple cache for resources of a given type.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1resource__cache_aa9251f4bd388f39b18b6b416f58170e1}\label{structentt_1_1resource__cache_aa9251f4bd388f39b18b6b416f58170e1}} 
+using \mbox{\hyperlink{structentt_1_1resource__cache_aa9251f4bd388f39b18b6b416f58170e1}{size\+\_\+type}} = std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1resource__cache_a3c660fb622942292cf7242e5361f80b7}\label{structentt_1_1resource__cache_a3c660fb622942292cf7242e5361f80b7}} 
+using \mbox{\hyperlink{structentt_1_1resource__cache_a3c660fb622942292cf7242e5361f80b7}{resource\+\_\+type}} = Resource
+\begin{DoxyCompactList}\small\item\em Type of resources managed by a cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1resource__cache_a919d10578aeda6ad9dd04e1b969b8a9c}\label{structentt_1_1resource__cache_a919d10578aeda6ad9dd04e1b969b8a9c}} 
+\mbox{\hyperlink{structentt_1_1resource__cache_a919d10578aeda6ad9dd04e1b969b8a9c}{resource\+\_\+cache}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structentt_1_1resource__cache_ac785934919090b5755a87ab34804b163}\label{structentt_1_1resource__cache_ac785934919090b5755a87ab34804b163}} 
+\mbox{\hyperlink{structentt_1_1resource__cache_ac785934919090b5755a87ab34804b163}{resource\+\_\+cache}} (\mbox{\hyperlink{structentt_1_1resource__cache}{resource\+\_\+cache}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1resource__cache}{resource\+\_\+cache}} \& \mbox{\hyperlink{structentt_1_1resource__cache_a1aecfbf6c4faaadb05ce5005c202223c}{operator=}} (\mbox{\hyperlink{structentt_1_1resource__cache}{resource\+\_\+cache}} \&\&)=default
+\begin{DoxyCompactList}\small\item\em Default move assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1resource__cache_aa9251f4bd388f39b18b6b416f58170e1}{size\+\_\+type}} \mbox{\hyperlink{structentt_1_1resource__cache_a115fe363ea30ae2e6fe2d2c7420c672c}{size}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Number of resources managed by a cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structentt_1_1resource__cache_a3a192adacbb198fe09b2c2a473d433d8}{empty}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns true if a cache contains no resources, false otherwise. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structentt_1_1resource__cache_a2873906f1ee00b11980eadb6008da7ff}{clear}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Clears a cache and discards all its resources. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Loader , typename... Args$>$ }\\\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$ Resource $>$ \mbox{\hyperlink{structentt_1_1resource__cache_affaadb8b5411b4cfba216884a04db4a0}{load}} (const id\+\_\+type id, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Loads the resource that corresponds to a given identifier. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Loader , typename... Args$>$ }\\\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$ Resource $>$ \mbox{\hyperlink{structentt_1_1resource__cache_a17b0f5627b25c079908554a7355b01c3}{reload}} (const id\+\_\+type id, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Reloads a resource or loads it for the first time if not present. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Loader , typename... Args$>$ }\\\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$ Resource $>$ \mbox{\hyperlink{structentt_1_1resource__cache_a74d899246a6acf2414d6b149e12533c2}{temp}} (Args \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Creates a temporary handle for a resource. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$ Resource $>$ \mbox{\hyperlink{structentt_1_1resource__cache_a3edbffb3ca0064d87da2da7d3f73530f}{handle}} (const id\+\_\+type id) const
+\begin{DoxyCompactList}\small\item\em Creates a handle for a given resource identifier. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structentt_1_1resource__cache_a86bac75a12d6b8334c6438708f4b792f}{contains}} (const id\+\_\+type id) const
+\begin{DoxyCompactList}\small\item\em Checks if a cache contains a given identifier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structentt_1_1resource__cache_a2620d6e8d97603ccd29f4e439e446480}{discard}} (const id\+\_\+type id)
+\begin{DoxyCompactList}\small\item\em Discards the resource that corresponds to a given identifier. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func $>$ }\\void \mbox{\hyperlink{structentt_1_1resource__cache_a0af1a225eb2a22f38380fbb6b90ebc5e}{each}} (Func func) const
+\begin{DoxyCompactList}\small\item\em Iterates all resources. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Resource$>$\newline
+struct entt\+::resource\+\_\+cache$<$ Resource $>$}
+
+Simple cache for resources of a given type. 
+
+Minimal implementation of a cache for resources of a given type. It doesn\textquotesingle{}t offer much functionalities but it\textquotesingle{}s suitable for small or medium sized applications and can be freely inherited to add targeted functionalities for large sized applications.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Resource} & Type of resources managed by a cache. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a2873906f1ee00b11980eadb6008da7ff}\label{structentt_1_1resource__cache_a2873906f1ee00b11980eadb6008da7ff}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!clear@{clear}}
+\index{clear@{clear}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+void \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears a cache and discards all its resources. 
+
+Handles are not invalidated and the memory used by a resource isn\textquotesingle{}t freed as long as at least a handle keeps the resource itself alive. \mbox{\Hypertarget{structentt_1_1resource__cache_a86bac75a12d6b8334c6438708f4b792f}\label{structentt_1_1resource__cache_a86bac75a12d6b8334c6438708f4b792f}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!contains@{contains}}
+\index{contains@{contains}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+bool \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::contains (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a cache contains a given identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique resource identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the cache contains the resource, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a2620d6e8d97603ccd29f4e439e446480}\label{structentt_1_1resource__cache_a2620d6e8d97603ccd29f4e439e446480}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!discard@{discard}}
+\index{discard@{discard}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{discard()}{discard()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+void \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::discard (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Discards the resource that corresponds to a given identifier. 
+
+Handles are not invalidated and the memory used by the resource isn\textquotesingle{}t freed as long as at least a handle keeps the resource itself alive.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique resource identifier. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a0af1a225eb2a22f38380fbb6b90ebc5e}\label{structentt_1_1resource__cache_a0af1a225eb2a22f38380fbb6b90ebc5e}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!each@{each}}
+\index{each@{each}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{each()}{each()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+template$<$typename Func $>$ \\
+void \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::each (\begin{DoxyParamCaption}\item[{Func}]{func }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterates all resources. 
+
+The function object is invoked for each element. It is provided with either the resource identifier, the resource handle or both of them.~\newline
+ The signature of the function must be equivalent to one of the following forms\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void(\textcolor{keyword}{const} entt::id\_type);}
+\DoxyCodeLine{void(\mbox{\hyperlink{structentt_1_1resource__handle}{entt::resource\_handle<Resource>}});}
+\DoxyCodeLine{void(\textcolor{keyword}{const} entt::id\_type, \mbox{\hyperlink{structentt_1_1resource__handle}{entt::resource\_handle<Resource>}});}
+\end{DoxyCode}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Type of the function object to invoke. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em func} & A valid function object. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a3a192adacbb198fe09b2c2a473d433d8}\label{structentt_1_1resource__cache_a3a192adacbb198fe09b2c2a473d433d8}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!empty@{empty}}
+\index{empty@{empty}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+bool \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns true if a cache contains no resources, false otherwise. 
+
+\begin{DoxyReturn}{Returns}
+True if the cache contains no resources, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a3edbffb3ca0064d87da2da7d3f73530f}\label{structentt_1_1resource__cache_a3edbffb3ca0064d87da2da7d3f73530f}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!handle@{handle}}
+\index{handle@{handle}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$Resource$>$ \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::\mbox{\hyperlink{structentt_1_1basic__handle}{handle}} (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a handle for a given resource identifier. 
+
+A resource handle can be in a either valid or invalid state. In other terms, a resource handle is properly initialized with a resource if the cache contains the resource itself. Otherwise the returned handle is uninitialized and accessing it results in undefined behavior.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique resource identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A handle for the given resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__cache_affaadb8b5411b4cfba216884a04db4a0}\label{structentt_1_1resource__cache_affaadb8b5411b4cfba216884a04db4a0}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!load@{load}}
+\index{load@{load}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+template$<$typename Loader , typename... Args$>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$Resource$>$ \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::load (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loads the resource that corresponds to a given identifier. 
+
+In case an identifier isn\textquotesingle{}t already present in the cache, it loads its resource and stores it aside for future uses. Arguments are forwarded directly to the loader in order to construct properly the requested resource.
+
+\begin{DoxyNote}{Note}
+If the identifier is already present in the cache, this function does nothing and the arguments are simply discarded.
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+If the resource cannot be loaded correctly, the returned handle will be invalid and any use of it will result in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Loader} & Type of loader to use to load the resource if required. \\
+\hline
+{\em Args} & Types of arguments to use to load the resource if required. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique resource identifier. \\
+\hline
+{\em args} & Arguments to use to load the resource if required. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A handle for the given resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a1aecfbf6c4faaadb05ce5005c202223c}\label{structentt_1_1resource__cache_a1aecfbf6c4faaadb05ce5005c202223c}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+\mbox{\hyperlink{structentt_1_1resource__cache}{resource\+\_\+cache}}\& \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structentt_1_1resource__cache}{resource\+\_\+cache}}$<$ Resource $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default move assignment operator. 
+
+\begin{DoxyReturn}{Returns}
+This cache. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a17b0f5627b25c079908554a7355b01c3}\label{structentt_1_1resource__cache_a17b0f5627b25c079908554a7355b01c3}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!reload@{reload}}
+\index{reload@{reload}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{reload()}{reload()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+template$<$typename Loader , typename... Args$>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$Resource$>$ \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::reload (\begin{DoxyParamCaption}\item[{const id\+\_\+type}]{id,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reloads a resource or loads it for the first time if not present. 
+
+Equivalent to the following snippet (pseudocode)\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cache.discard(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{cache.load(\textcolor{keywordtype}{id}, args...);}
+\end{DoxyCode}
+
+
+Arguments are forwarded directly to the loader in order to construct properly the requested resource.
+
+\begin{DoxyWarning}{Warning}
+If the resource cannot be loaded correctly, the returned handle will be invalid and any use of it will result in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Loader} & Type of loader to use to load the resource. \\
+\hline
+{\em Args} & Types of arguments to use to load the resource. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique resource identifier. \\
+\hline
+{\em args} & Arguments to use to load the resource. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A handle for the given resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a115fe363ea30ae2e6fe2d2c7420c672c}\label{structentt_1_1resource__cache_a115fe363ea30ae2e6fe2d2c7420c672c}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!size@{size}}
+\index{size@{size}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+\mbox{\hyperlink{structentt_1_1resource__cache_aa9251f4bd388f39b18b6b416f58170e1}{size\+\_\+type}} \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of resources managed by a cache. 
+
+\begin{DoxyReturn}{Returns}
+Number of resources currently stored. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1resource__cache_a74d899246a6acf2414d6b149e12533c2}\label{structentt_1_1resource__cache_a74d899246a6acf2414d6b149e12533c2}} 
+\index{entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}!temp@{temp}}
+\index{temp@{temp}!entt::resource\_cache$<$ Resource $>$@{entt::resource\_cache$<$ Resource $>$}}
+\doxysubsubsection{\texorpdfstring{temp()}{temp()}}
+{\footnotesize\ttfamily template$<$typename Resource $>$ \\
+template$<$typename Loader , typename... Args$>$ \\
+\mbox{\hyperlink{structentt_1_1resource__handle}{resource\+\_\+handle}}$<$Resource$>$ \mbox{\hyperlink{structentt_1_1resource__cache}{entt\+::resource\+\_\+cache}}$<$ Resource $>$\+::temp (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a temporary handle for a resource. 
+
+Arguments are forwarded directly to the loader in order to construct properly the requested resource. The handle isn\textquotesingle{}t stored aside and the cache isn\textquotesingle{}t in charge of the lifetime of the resource itself.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Loader} & Type of loader to use to load the resource. \\
+\hline
+{\em Args} & Types of arguments to use to load the resource. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Arguments to use to load the resource. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A handle for the given resource. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

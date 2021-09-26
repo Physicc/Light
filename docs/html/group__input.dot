@@ -1,0 +1,23 @@
+digraph "Input reference"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=box];
+  rankdir=LR;
+  Node3 [label="Keyboard keys",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__keys.html",tooltip="Keyboard key IDs."];
+  Node7 [label="Gamepad buttons",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__gamepad__buttons.html",tooltip="Gamepad buttons."];
+  Node4 [label="Modifier key flags",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__mods.html",tooltip="Modifier key flags."];
+  Node8 [label="Gamepad axes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__gamepad__axes.html",tooltip="Gamepad axes."];
+  Node5 [label="Mouse buttons",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__buttons.html",tooltip="Mouse button IDs."];
+  Node9 [label="Standard cursor shapes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__shapes.html",tooltip="Standard system cursor shapes."];
+  Node6 [label="Joysticks",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__joysticks.html",tooltip="Joystick IDs."];
+  Node2 [label="Joystick hat states",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__hat__state.html",tooltip="Joystick hat states."];
+  Node1 [label="Input reference",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Functions and types related to input handling."];
+  Node1->Node2 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node9 [shape=plaintext, dir="back", style="solid"];
+}

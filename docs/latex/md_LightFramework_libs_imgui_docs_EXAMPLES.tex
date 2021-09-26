@@ -1,0 +1,188 @@
+\+\_\+(You may browse this at \href{https://github.com/ocornut/imgui/blob/master/docs/EXAMPLES.md}{\texttt{ https\+://github.\+com/ocornut/imgui/blob/master/docs/\+E\+X\+A\+M\+P\+L\+E\+S.\+md}} or view this file with any Markdown viewer)\+\_\+\hypertarget{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md40}{}\doxysubsection{Dear Im\+Gui\+: Examples}\label{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md40}
+{\bfseries{The \href{https://github.com/ocornut/imgui/blob/master/examples}{\texttt{ examples/}} folder example applications (standalone, ready-\/to-\/build) for variety of platforms and graphics A\+P\+Is.}} They all use standard backends from the \href{https://github.com/ocornut/imgui/blob/master/backends}{\texttt{ backends/}} folder (see \href{https://github.com/ocornut/imgui/blob/master/docs/BACKENDS.md}{\texttt{ B\+A\+C\+K\+E\+N\+D\+S.\+md}}).
+
+The purpose of Examples is to showcase integration with backends, let you try Dear Im\+Gui, and guide you toward integrating Dear Im\+Gui in your own application/game/engine. {\bfseries{Once Dear Im\+Gui is setup and running, run and refer to {\ttfamily Im\+Gui\+::\+Show\+Demo\+Window()} in imgui\+\_\+demo.\+cpp for usage of the end-\/user A\+PI.}}
+
+You can find Windows binaries for some of those example applications at\+: \href{http://www.dearimgui.org/binaries}{\texttt{ http\+://www.\+dearimgui.\+org/binaries}}\hypertarget{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md41}{}\doxysubsubsection{Getting Started}\label{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md41}
+Integration in a typical existing application, should take $<$20 lines when using standard backends. \begin{DoxyVerb}At initialization:
+  call ImGui::CreateContext()
+  call ImGui_ImplXXXX_Init() for each backend.
+
+At the beginning of your frame:
+  call ImGui_ImplXXXX_NewFrame() for each backend.
+  call ImGui::NewFrame()
+
+At the end of your frame:
+  call ImGui::Render()
+  call ImGui_ImplXXXX_RenderDrawData() for your Renderer backend.
+
+At shutdown:
+  call ImGui_ImplXXXX_Shutdown() for each backend.
+  call ImGui::DestroyContext()
+\end{DoxyVerb}
+
+
+Example (using \mbox{[}backends/imgui\+\_\+impl\+\_\+win32.\+cpp\mbox{]}(\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_win32.cpp}{\texttt{ https\+://github.\+com/ocornut/imgui/blob/master/backends/imgui\+\_\+impl\+\_\+win32.\+cpp}}) + \mbox{[}backends/imgui\+\_\+impl\+\_\+dx11.\+cpp\mbox{]}(\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_dx11.cpp}{\texttt{ https\+://github.\+com/ocornut/imgui/blob/master/backends/imgui\+\_\+impl\+\_\+dx11.\+cpp}}))\+: \begin{DoxyVerb}// Create a Dear ImGui context, setup some options
+ImGui::CreateContext();
+ImGuiIO& io = ImGui::GetIO();
+io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable some options
+
+// Initialize Platform + Renderer backends (here: using imgui_impl_win32.cpp + imgui_impl_dx11.cpp)
+ImGui_ImplWin32_Init(my_hwnd);
+ImGui_ImplDX11_Init(my_d3d_device, my_d3d_device_context);
+
+// Application main loop
+while (true)
+{
+    // Beginning of frame: update Renderer + Platform backend, start Dear ImGui frame
+    ImGui_ImplDX11_NewFrame();
+    ImGui_ImplWin32_NewFrame();
+    ImGui::NewFrame();
+
+    // Any application code here
+    ImGui::Text("Hello, world!");
+
+    // End of frame: render Dear ImGui
+    ImGui::Render();
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+    // Swap
+    g_pSwapChain->Present(1, 0);
+}
+
+// Shutdown
+ImGui_ImplDX11_Shutdown();
+ImGui_ImplWin32_Shutdown();
+ImGui::DestroyContext();
+\end{DoxyVerb}
+
+
+Please read \textquotesingle{}P\+R\+O\+G\+R\+A\+M\+M\+ER G\+U\+I\+DE\textquotesingle{} in imgui.\+cpp for notes on how to setup Dear Im\+Gui in your codebase. Please read the comments and instruction at the top of each file. Please read F\+AQ at \href{http://www.dearimgui.org/faq}{\texttt{ http\+://www.\+dearimgui.\+org/faq}}
+
+If you are using of the backend provided here, you can add the backends/imgui\+\_\+impl\+\_\+xxxx(.cpp,.h) files to your project and use as-\/in. Each imgui\+\_\+impl\+\_\+xxxx.\+cpp file comes with its own individual Changelog, so if you want to update them later it will be easier to catch up with what changed.\hypertarget{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md42}{}\doxysubsubsection{Examples Applications}\label{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md42}
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_allegro5/}{\texttt{ example\+\_\+allegro5/}} ~\newline
+ Allegro 5 example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+allegro5.\+cpp
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_android_opengl3/}{\texttt{ example\+\_\+android\+\_\+opengl3/}} ~\newline
+ Android + Open\+G\+L3 (ES) example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+android.\+cpp + imgui\+\_\+impl\+\_\+opengl3.\+cpp
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_metal/}{\texttt{ example\+\_\+apple\+\_\+metal/}} ~\newline
+ O\+SX \& i\+OS + Metal example. ~\newline
+ = main.\+m + imgui\+\_\+impl\+\_\+osx.\+mm + imgui\+\_\+impl\+\_\+metal.\+mm ~\newline
+ It is based on the \char`\"{}cross-\/platform\char`\"{} game template provided with Xcode as of Xcode 9. (NB\+: imgui\+\_\+impl\+\_\+osx.\+mm is currently not as feature complete as other platforms backends. You may prefer to use the G\+L\+FW Or S\+DL backends, which will also support Windows and Linux.)
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_apple_opengl2/}{\texttt{ example\+\_\+apple\+\_\+opengl2/}} ~\newline
+ O\+SX + Open\+G\+L2 example. ~\newline
+ = main.\+mm + imgui\+\_\+impl\+\_\+osx.\+mm + imgui\+\_\+impl\+\_\+opengl2.\+cpp ~\newline
+ (NB\+: imgui\+\_\+impl\+\_\+osx.\+mm is currently not as feature complete as other platforms backends. You may prefer to use the G\+L\+FW Or S\+DL backends, which will also support Windows and Linux.)
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_emscripten_opengl3/}{\texttt{ example\+\_\+emscripten\+\_\+opengl3/}} ~\newline
+ Emcripten + S\+D\+L2 + Open\+G\+L3+/\+E\+S2/\+E\+S3 example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+sdl.\+cpp + imgui\+\_\+impl\+\_\+opengl3.\+cpp ~\newline
+ Note that other examples based on S\+DL or G\+L\+FW + Open\+GL could easily be modified to work with Emscripten. We provide this to make the Emscripten differences obvious, and have them not pollute all other examples.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_emscripten_wgpu/}{\texttt{ example\+\_\+emscripten\+\_\+wgpu/}} ~\newline
+ Emcripten + G\+L\+FW + Web\+G\+PU example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+glfw.\+cpp + imgui\+\_\+impl\+\_\+wgpu.\+cpp
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_glfw_metal/}{\texttt{ example\+\_\+glfw\+\_\+metal/}} ~\newline
+ G\+L\+FW (Mac) + Metal example. ~\newline
+ = main.\+mm + imgui\+\_\+impl\+\_\+glfw.\+cpp + imgui\+\_\+impl\+\_\+metal.\+mm
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl2/}{\texttt{ example\+\_\+glfw\+\_\+opengl2/}} ~\newline
+ G\+L\+FW + Open\+G\+L2 example (legacy, fixed pipeline). ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+glfw.\+cpp + imgui\+\_\+impl\+\_\+opengl2.\+cpp ~\newline
+ {\bfseries{DO N\+OT U\+SE O\+P\+E\+N\+G\+L2 C\+O\+DE IF Y\+O\+UR C\+O\+D\+E/\+E\+N\+G\+I\+NE IS U\+S\+I\+NG M\+O\+D\+E\+RN O\+P\+E\+N\+GL (S\+H\+A\+D\+E\+RS, V\+BO, V\+AO, etc.)}} ~\newline
+ {\bfseries{Prefer using O\+P\+E\+N\+G\+L3 code (with gl3w/glew/glad/glad2/glbinding, you can replace the Open\+GL function loader)}} ~\newline
+ This code is mostly provided as a reference to learn about Dear Im\+Gui integration, because it is shorter. If your code is using G\+L3+ context or any semi modern Open\+GL calls, using this renderer is likely to make things more complicated, will require your code to reset many Open\+GL attributes to their initial state, and might confuse your G\+PU driver. One star, not recommended.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl3/}{\texttt{ example\+\_\+glfw\+\_\+opengl3/}} ~\newline
+ G\+L\+FW (Win32, Mac, Linux) + Open\+G\+L3+/\+E\+S2/\+E\+S3 example (programmable pipeline). ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+glfw.\+cpp + imgui\+\_\+impl\+\_\+opengl3.\+cpp ~\newline
+ This uses more modern Open\+GL calls and custom shaders. ~\newline
+ Prefer using that if you are using modern Open\+GL in your application (anything with shaders). (Please be mindful that accessing Open\+G\+L3+ functions requires a function loader, which are a frequent source for confusion for new users. We use a loader in imgui\+\_\+impl\+\_\+opengl3.\+cpp which may be different from the one your app normally use. Read \mbox{\hyperlink{imgui__impl__opengl3_8h_source}{imgui\+\_\+impl\+\_\+opengl3.\+h}} for details and how to change it.)
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_glfw_vulkan/}{\texttt{ example\+\_\+glfw\+\_\+vulkan/}} ~\newline
+ G\+L\+FW (Win32, Mac, Linux) + Vulkan example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+glfw.\+cpp + imgui\+\_\+impl\+\_\+vulkan.\+cpp ~\newline
+ This is quite long and tedious, because\+: Vulkan. For this example, the main.\+cpp file exceptionally use helpers function from \mbox{\hyperlink{imgui__impl__vulkan_8h_source}{imgui\+\_\+impl\+\_\+vulkan.\+h}}/cpp.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_glut_opengl2/}{\texttt{ example\+\_\+glut\+\_\+opengl2/}} ~\newline
+ G\+L\+UT (e.\+g., Free\+G\+L\+UT on Linux/\+Windows, G\+L\+UT framework on O\+SX) + Open\+G\+L2 example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+glut.\+cpp + imgui\+\_\+impl\+\_\+opengl2.\+cpp ~\newline
+ Note that G\+L\+U\+T/\+Free\+G\+L\+UT is largely obsolete software, prefer using G\+L\+FW or S\+DL.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_marmalade/}{\texttt{ example\+\_\+marmalade/}} ~\newline
+ Marmalade example using Iw\+Gx. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+marmalade.\+cpp
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_null/}{\texttt{ example\+\_\+null/}} ~\newline
+ Null example, compile and link imgui, create context, run headless with no inputs and no graphics output. ~\newline
+ = main.\+cpp ~\newline
+ This is used to quickly test compilation of core imgui files in as many setups as possible. Because this application doesn\textquotesingle{}t create a window nor a graphic context, there\textquotesingle{}s no graphics output.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_sdl_directx11/}{\texttt{ example\+\_\+sdl\+\_\+directx11/}} ~\newline
+ S\+D\+L2 + Direct\+X11 example, Windows only. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+sdl.\+cpp + imgui\+\_\+impl\+\_\+dx11.\+cpp ~\newline
+ This to demonstrate usage of DirectX with S\+DL.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_sdl_metal/}{\texttt{ example\+\_\+sdl\+\_\+metal/}} ~\newline
+ S\+D\+L2 (Mac) + Metal example. ~\newline
+ = main.\+mm + imgui\+\_\+impl\+\_\+sdl.\+cpp + imgui\+\_\+impl\+\_\+metal.\+mm
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_sdl_opengl2/}{\texttt{ example\+\_\+sdl\+\_\+opengl2/}} ~\newline
+ S\+D\+L2 (Win32, Mac, Linux etc.) + Open\+GL example (legacy, fixed pipeline). ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+sdl.\+cpp + imgui\+\_\+impl\+\_\+opengl2.\+cpp ~\newline
+ {\bfseries{DO N\+OT U\+SE O\+P\+E\+N\+G\+L2 C\+O\+DE IF Y\+O\+UR C\+O\+D\+E/\+E\+N\+G\+I\+NE IS U\+S\+I\+NG M\+O\+D\+E\+RN O\+P\+E\+N\+GL (S\+H\+A\+D\+E\+RS, V\+BO, V\+AO, etc.)}} ~\newline
+ {\bfseries{Prefer using O\+P\+E\+N\+G\+L3 code (with gl3w/glew/glad/glad2/glbinding, you can replace the Open\+GL function loader)}} ~\newline
+ This code is mostly provided as a reference to learn about Dear Im\+Gui integration, because it is shorter. If your code is using G\+L3+ context or any semi modern Open\+GL calls, using this renderer is likely to make things more complicated, will require your code to reset many Open\+GL attributes to their initial state, and might confuse your G\+PU driver. One star, not recommended.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_sdl_opengl3/}{\texttt{ example\+\_\+sdl\+\_\+opengl3/}} ~\newline
+ S\+D\+L2 (Win32, Mac, Linux, etc.) + Open\+G\+L3+/\+E\+S2/\+E\+S3 example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+sdl.\+cpp + imgui\+\_\+impl\+\_\+opengl3.\+cpp ~\newline
+ This uses more modern Open\+GL calls and custom shaders. ~\newline
+ Prefer using that if you are using modern Open\+GL in your application (anything with shaders). (Please be mindful that accessing Open\+G\+L3+ functions requires a function loader, which are a frequent source for confusion for new users. We use a loader in imgui\+\_\+impl\+\_\+opengl3.\+cpp which may be different from the one your app normally use. Read \mbox{\hyperlink{imgui__impl__opengl3_8h_source}{imgui\+\_\+impl\+\_\+opengl3.\+h}} for details and how to change it.)
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_sdl_vulkan/}{\texttt{ example\+\_\+sdl\+\_\+vulkan/}} ~\newline
+ S\+D\+L2 (Win32, Mac, Linux, etc.) + Vulkan example. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+sdl.\+cpp + imgui\+\_\+impl\+\_\+vulkan.\+cpp ~\newline
+ This is quite long and tedious, because\+: Vulkan. ~\newline
+ For this example, the main.\+cpp file exceptionally use helpers function from \mbox{\hyperlink{imgui__impl__vulkan_8h_source}{imgui\+\_\+impl\+\_\+vulkan.\+h}}/cpp.
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx9/}{\texttt{ example\+\_\+win32\+\_\+directx9/}} ~\newline
+ Direct\+X9 example, Windows only. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+win32.\+cpp + imgui\+\_\+impl\+\_\+dx9.\+cpp
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx10/}{\texttt{ example\+\_\+win32\+\_\+directx10/}} ~\newline
+ Direct\+X10 example, Windows only. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+win32.\+cpp + imgui\+\_\+impl\+\_\+dx10.\+cpp
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx11/}{\texttt{ example\+\_\+win32\+\_\+directx11/}} ~\newline
+ Direct\+X11 example, Windows only. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+win32.\+cpp + imgui\+\_\+impl\+\_\+dx11.\+cpp
+
+\href{https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx12/}{\texttt{ example\+\_\+win32\+\_\+directx12/}} ~\newline
+ Direct\+X12 example, Windows only. ~\newline
+ = main.\+cpp + imgui\+\_\+impl\+\_\+win32.\+cpp + imgui\+\_\+impl\+\_\+dx12.\+cpp ~\newline
+ This is quite long and tedious, because\+: Direct\+X12.\hypertarget{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md43}{}\doxysubsubsection{Miscallaneous}\label{md_LightFramework_libs_imgui_docs_EXAMPLES_autotoc_md43}
+{\bfseries{Building}}
+
+Unfortunately nowadays it is still tedious to create and maintain portable build files using external libraries (the kind we\textquotesingle{}re using here to create a window and render 3D triangles) without relying on third party software and build systems. For most examples here we choose to provide\+:
+\begin{DoxyItemize}
+\item Makefiles for Linux/\+O\+SX
+\item Batch files for Visual Studio 2008+
+\item A .sln project file for Visual Studio 2012+
+\item Xcode project files for the Apple examples Please let us know if they don\textquotesingle{}t work with your setup! You can probably just import the imgui\+\_\+impl\+\_\+xxx.\+cpp/.h files into your own codebase or compile those directly with a command-\/line compiler.
+\end{DoxyItemize}
+
+If you are interested in using Cmake to build and links examples, see\+: \href{https://github.com/ocornut/imgui/pull/1713}{\texttt{ https\+://github.\+com/ocornut/imgui/pull/1713}} and \href{https://github.com/ocornut/imgui/pull/3027}{\texttt{ https\+://github.\+com/ocornut/imgui/pull/3027}}
+
+{\bfseries{About mouse cursor latency}}
+
+Dear Im\+Gui has no particular extra lag for most behaviors, e.\+g. the value of \textquotesingle{}io.\+Mouse\+Pos\textquotesingle{} provided at the time of New\+Frame() will result in windows being moved to the right spot at the time of End\+Frame()/\+Render(). At 60 F\+PS your experience should be pleasant.
+
+However, consider that OS mouse cursors are typically drawn through a very specific hardware accelerated path and will feel smoother than the majority of contents rendered via regular graphics A\+PI (including, but not limited to Dear Im\+Gui windows). Because UI rendering and interaction happens on the same plane as the mouse, that disconnect may be jarring to particularly sensitive users. You may experiment with enabling the io.\+Mouse\+Draw\+Cursor flag to request Dear Im\+Gui to draw a mouse cursor using the regular graphics A\+PI, to help you visualize the difference between a \char`\"{}hardware\char`\"{} cursor and a regularly rendered software cursor. However, rendering a mouse cursor at 60 F\+PS will feel sluggish so you likely won\textquotesingle{}t want to enable that at all times. It might be beneficial for the user experience to switch to a software rendered cursor {\itshape only} when an interactive drag is in progress.
+
+Note that some setup or G\+PU drivers are likely to be causing extra display lag depending on their settings. If you feel that dragging windows feels laggy and you are not sure what the cause is\+: try to build a simple drawing a flat 2D shape directly under the mouse cursor! 

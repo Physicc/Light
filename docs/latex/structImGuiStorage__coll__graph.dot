@@ -1,0 +1,11 @@
+digraph "ImGuiStorage"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="ImGuiStorage",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Data" ];
+  Node2 [label="ImVector\< ImGuiStorage\l::ImGuiStoragePair \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImVector.html",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Data" ];
+  Node3 [label="ImGuiStorage::ImGuiStoragePair",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImGuiStorage_1_1ImGuiStoragePair.html",tooltip=" "];
+}

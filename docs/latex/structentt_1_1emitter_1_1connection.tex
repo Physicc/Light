@@ -1,0 +1,75 @@
+\hypertarget{structentt_1_1emitter_1_1connection}{}\doxysection{entt\+::emitter$<$ Derived $>$\+::connection$<$ Event $>$ Struct Template Reference}
+\label{structentt_1_1emitter_1_1connection}\index{entt::emitter$<$ Derived $>$::connection$<$ Event $>$@{entt::emitter$<$ Derived $>$::connection$<$ Event $>$}}
+
+
+Generic connection type for events.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+
+
+Inheritance diagram for entt\+::emitter$<$ Derived $>$\+::connection$<$ Event $>$\+:
+% FIG 0
+
+
+Collaboration diagram for entt\+::emitter$<$ Derived $>$\+::connection$<$ Event $>$\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1emitter_1_1connection_a3dcb29742c6824dd28743eb0d896f9c3}\label{structentt_1_1emitter_1_1connection_a3dcb29742c6824dd28743eb0d896f9c3}} 
+\mbox{\hyperlink{structentt_1_1emitter_1_1connection_a3dcb29742c6824dd28743eb0d896f9c3}{connection}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structentt_1_1emitter_1_1connection_a0fa687596e072155e92e586e9de089c3}{connection}} (typename pool\+\_\+handler$<$ Event $>$\+::connection\+\_\+type conn)
+\begin{DoxyCompactList}\small\item\em Creates a connection that wraps its underlying instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structentt_1_1emitter_1_1connection_a0f3bb10ad57dc0e06298fc9ba38a7bd9}\label{structentt_1_1emitter_1_1connection_a0f3bb10ad57dc0e06298fc9ba38a7bd9}} 
+class \mbox{\hyperlink{structentt_1_1emitter_1_1connection_a0f3bb10ad57dc0e06298fc9ba38a7bd9}{emitter}}
+\begin{DoxyCompactList}\small\item\em Event emitters are friend classes of connections. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Derived$>$\newline
+template$<$typename Event$>$\newline
+struct entt\+::emitter$<$ Derived $>$\+::connection$<$ Event $>$}
+
+Generic connection type for events. 
+
+Type of the connection object returned by the event emitter whenever a listener for the given type is registered.~\newline
+ It can be used to break connections still in use.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Event} & Type of event for which the connection is created. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structentt_1_1emitter_1_1connection_a0fa687596e072155e92e586e9de089c3}\label{structentt_1_1emitter_1_1connection_a0fa687596e072155e92e586e9de089c3}} 
+\index{entt::emitter$<$ Derived $>$::connection$<$ Event $>$@{entt::emitter$<$ Derived $>$::connection$<$ Event $>$}!connection@{connection}}
+\index{connection@{connection}!entt::emitter$<$ Derived $>$::connection$<$ Event $>$@{entt::emitter$<$ Derived $>$::connection$<$ Event $>$}}
+\doxysubsubsection{\texorpdfstring{connection()}{connection()}}
+{\footnotesize\ttfamily template$<$typename Derived $>$ \\
+template$<$typename Event $>$ \\
+\mbox{\hyperlink{classentt_1_1emitter}{entt\+::emitter}}$<$ Derived $>$\+::\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}}$<$ Event $>$\+::\mbox{\hyperlink{structentt_1_1emitter_1_1connection}{connection}} (\begin{DoxyParamCaption}\item[{typename pool\+\_\+handler$<$ Event $>$\+::connection\+\_\+type}]{conn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a connection that wraps its underlying instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em conn} & A connection object to wrap. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

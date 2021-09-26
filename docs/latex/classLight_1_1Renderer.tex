@@ -1,0 +1,35 @@
+\hypertarget{classLight_1_1Renderer}{}\doxysection{Light\+::Renderer Class Reference}
+\label{classLight_1_1Renderer}\index{Light::Renderer@{Light::Renderer}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_af4d840ce29ba148d197a24b273ac05c5}\label{classLight_1_1Renderer_af4d840ce29ba148d197a24b273ac05c5}} 
+static void {\bfseries init} ()
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_a40e43b8b55f6bfaf15debe0600192381}\label{classLight_1_1Renderer_a40e43b8b55f6bfaf15debe0600192381}} 
+static void {\bfseries on\+Window\+Resize} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_af281f468ceea86a472822f4a6a1165ab}\label{classLight_1_1Renderer_af281f468ceea86a472822f4a6a1165ab}} 
+static void {\bfseries begin\+Scene} (\mbox{\hyperlink{classLight_1_1Camera}{Camera}} \&camera, glm\+::mat4 camera\+\_\+view)
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_a458d15020955cf2b2b0ed5c655f242b1}\label{classLight_1_1Renderer_a458d15020955cf2b2b0ed5c655f242b1}} 
+static void {\bfseries end\+Scene} ()
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_a172625ba60a72d65cf66ab4377ee03f5}\label{classLight_1_1Renderer_a172625ba60a72d65cf66ab4377ee03f5}} 
+static void {\bfseries submit\+Light} (glm\+::vec3 light\+Pos, glm\+::vec3 light\+Col)
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_ad945c2822d982766d35fadd772de3ef8}\label{classLight_1_1Renderer_ad945c2822d982766d35fadd772de3ef8}} 
+static void {\bfseries submit} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classLight_1_1Shader}{Shader}} $>$ \&shader, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classLight_1_1VertexArray}{Vertex\+Array}} $>$ \&vao, glm\+::mat4 transform=glm\+::mat4(1.\+0f))
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_aa7f4c720b8ca1487fff9c1308ff89d2b}\label{classLight_1_1Renderer_aa7f4c720b8ca1487fff9c1308ff89d2b}} 
+static void {\bfseries submit\+ID} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classLight_1_1Shader}{Shader}} $>$ \&shader, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classLight_1_1VertexArray}{Vertex\+Array}} $>$ \&vao, glm\+::mat4 transform=glm\+::mat4(1.\+0f), int id=-\/1)
+\item 
+\mbox{\Hypertarget{classLight_1_1Renderer_a6d4f1cd4893f7f149b13c16c85c3f1d9}\label{classLight_1_1Renderer_a6d4f1cd4893f7f149b13c16c85c3f1d9}} 
+static void {\bfseries submit\+Skybox} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classLight_1_1Shader}{Shader}} $>$ \&shader, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classLight_1_1VertexArray}{Vertex\+Array}} $>$ \&vao)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Light/include/light/rendering/renderer.\+hpp\item 
+Light/src/rendering/renderer.\+cpp\end{DoxyCompactItemize}

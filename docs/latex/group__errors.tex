@@ -1,0 +1,352 @@
+\hypertarget{group__errors}{}\doxysection{Error codes}
+\label{group__errors}\index{Error codes@{Error codes}}
+
+
+Error codes.  
+
+
+Collaboration diagram for Error codes\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__errors_gafa30deee5db4d69c4c93d116ed87dbf4}{G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+E\+R\+R\+OR}}~0
+\begin{DoxyCompactList}\small\item\em No error has occurred. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga2374ee02c177f12e1fa76ff3ed15e14a}{G\+L\+F\+W\+\_\+\+N\+O\+T\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}}~0x00010001
+\begin{DoxyCompactList}\small\item\em G\+L\+FW has not been initialized. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gaa8290386e9528ccb9e42a3a4e16fc0d0}{G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+XT}}~0x00010002
+\begin{DoxyCompactList}\small\item\em No context is current for this thread. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga76f6bb9c4eea73db675f096b404593ce}{G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+UM}}~0x00010003
+\begin{DoxyCompactList}\small\item\em One of the arguments to the function was an invalid enum value. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}{G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+A\+L\+UE}}~0x00010004
+\begin{DoxyCompactList}\small\item\em One of the arguments to the function was an invalid value. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga9023953a2bcb98c2906afd071d21ee7f}{G\+L\+F\+W\+\_\+\+O\+U\+T\+\_\+\+O\+F\+\_\+\+M\+E\+M\+O\+RY}}~0x00010005
+\begin{DoxyCompactList}\small\item\em A memory allocation failed. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga56882b290db23261cc6c053c40c2d08e}{G\+L\+F\+W\+\_\+\+A\+P\+I\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}}~0x00010006
+\begin{DoxyCompactList}\small\item\em G\+L\+FW could not find support for the requested A\+PI on the system. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}{G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}}~0x00010007
+\begin{DoxyCompactList}\small\item\em The requested Open\+GL or Open\+GL ES version is not available. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gad44162d78100ea5e87cdd38426b8c7a1}{G\+L\+F\+W\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+E\+R\+R\+OR}}~0x00010008
+\begin{DoxyCompactList}\small\item\em A platform-\/specific error occurred that does not match any of the more specific categories. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga196e125ef261d94184e2b55c05762f14}{G\+L\+F\+W\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}}~0x00010009
+\begin{DoxyCompactList}\small\item\em The requested format is not supported or available. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gacff24d2757da752ae4c80bf452356487}{G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+C\+O\+N\+T\+E\+XT}}~0x0001000A
+\begin{DoxyCompactList}\small\item\em The specified window does not have an Open\+GL or Open\+GL ES context. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga2374ee02c177f12e1fa76ff3ed15e14a}{G\+L\+F\+W\+\_\+\+N\+O\+T\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}}~0x00010001
+\begin{DoxyCompactList}\small\item\em G\+L\+FW has not been initialized. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gaa8290386e9528ccb9e42a3a4e16fc0d0}{G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+XT}}~0x00010002
+\begin{DoxyCompactList}\small\item\em No context is current for this thread. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga76f6bb9c4eea73db675f096b404593ce}{G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+UM}}~0x00010003
+\begin{DoxyCompactList}\small\item\em One of the arguments to the function was an invalid enum value. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}{G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+A\+L\+UE}}~0x00010004
+\begin{DoxyCompactList}\small\item\em One of the arguments to the function was an invalid value. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga9023953a2bcb98c2906afd071d21ee7f}{G\+L\+F\+W\+\_\+\+O\+U\+T\+\_\+\+O\+F\+\_\+\+M\+E\+M\+O\+RY}}~0x00010005
+\begin{DoxyCompactList}\small\item\em A memory allocation failed. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga56882b290db23261cc6c053c40c2d08e}{G\+L\+F\+W\+\_\+\+A\+P\+I\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}}~0x00010006
+\begin{DoxyCompactList}\small\item\em G\+L\+FW could not find support for the requested A\+PI on the system. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}{G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}}~0x00010007
+\begin{DoxyCompactList}\small\item\em The requested Open\+GL or Open\+GL ES version is not available. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gad44162d78100ea5e87cdd38426b8c7a1}{G\+L\+F\+W\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+E\+R\+R\+OR}}~0x00010008
+\begin{DoxyCompactList}\small\item\em A platform-\/specific error occurred that does not match any of the more specific categories. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_ga196e125ef261d94184e2b55c05762f14}{G\+L\+F\+W\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}}~0x00010009
+\begin{DoxyCompactList}\small\item\em The requested format is not supported or available. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__errors_gacff24d2757da752ae4c80bf452356487}{G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+C\+O\+N\+T\+E\+XT}}~0x0001000A
+\begin{DoxyCompactList}\small\item\em The specified window does not have an Open\+GL or Open\+GL ES context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Error codes. 
+
+See \mbox{\hyperlink{intro_guide_error_handling}{error handling}} for how these are used. 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__errors_ga56882b290db23261cc6c053c40c2d08e}\label{group__errors_ga56882b290db23261cc6c053c40c2d08e}} 
+\index{Error codes@{Error codes}!GLFW\_API\_UNAVAILABLE@{GLFW\_API\_UNAVAILABLE}}
+\index{GLFW\_API\_UNAVAILABLE@{GLFW\_API\_UNAVAILABLE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_API\_UNAVAILABLE}{GLFW\_API\_UNAVAILABLE}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+A\+P\+I\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE~0x00010006}
+
+
+
+G\+L\+FW could not find support for the requested A\+PI on the system. 
+
+G\+L\+FW could not find support for the requested A\+PI on the system.
+
+@analysis The installed graphics driver does not support the requested A\+PI, or does not support it via the chosen context creation backend. Below are a few examples.
+
+\begin{DoxyParagraph}{}
+Some pre-\/installed Windows graphics drivers do not support Open\+GL. A\+MD only supports Open\+GL ES via E\+GL, while Nvidia and Intel only support it via a W\+GL or G\+LX extension. OS X does not provide Open\+GL ES at all. The Mesa E\+GL, Open\+GL and Open\+GL ES libraries do not interface with the Nvidia binary driver. Older graphics drivers do not support Vulkan. 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group__errors_ga56882b290db23261cc6c053c40c2d08e}\label{group__errors_ga56882b290db23261cc6c053c40c2d08e}} 
+\index{Error codes@{Error codes}!GLFW\_API\_UNAVAILABLE@{GLFW\_API\_UNAVAILABLE}}
+\index{GLFW\_API\_UNAVAILABLE@{GLFW\_API\_UNAVAILABLE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_API\_UNAVAILABLE}{GLFW\_API\_UNAVAILABLE}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+A\+P\+I\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE~0x00010006}
+
+
+
+G\+L\+FW could not find support for the requested A\+PI on the system. 
+
+G\+L\+FW could not find support for the requested A\+PI on the system.
+
+@analysis The installed graphics driver does not support the requested A\+PI, or does not support it via the chosen context creation backend. Below are a few examples.
+
+\begin{DoxyParagraph}{}
+Some pre-\/installed Windows graphics drivers do not support Open\+GL. A\+MD only supports Open\+GL ES via E\+GL, while Nvidia and Intel only support it via a W\+GL or G\+LX extension. mac\+OS does not provide Open\+GL ES at all. The Mesa E\+GL, Open\+GL and Open\+GL ES libraries do not interface with the Nvidia binary driver. Older graphics drivers do not support Vulkan. 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group__errors_ga196e125ef261d94184e2b55c05762f14}\label{group__errors_ga196e125ef261d94184e2b55c05762f14}} 
+\index{Error codes@{Error codes}!GLFW\_FORMAT\_UNAVAILABLE@{GLFW\_FORMAT\_UNAVAILABLE}}
+\index{GLFW\_FORMAT\_UNAVAILABLE@{GLFW\_FORMAT\_UNAVAILABLE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_FORMAT\_UNAVAILABLE}{GLFW\_FORMAT\_UNAVAILABLE}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE~0x00010009}
+
+
+
+The requested format is not supported or available. 
+
+If emitted during window creation, the requested pixel format is not supported.
+
+If emitted when querying the clipboard, the contents of the clipboard could not be converted to the requested format.
+
+@analysis If emitted during window creation, one or more \mbox{\hyperlink{window_guide_window_hints_hard}{hard constraints}} did not match any of the available pixel formats. If your application is sufficiently flexible, downgrade your requirements and try again. Otherwise, inform the user that their machine does not match your requirements.
+
+\begin{DoxyParagraph}{}
+If emitted when querying the clipboard, ignore the error or report it to the user, as appropriate. 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group__errors_ga196e125ef261d94184e2b55c05762f14}\label{group__errors_ga196e125ef261d94184e2b55c05762f14}} 
+\index{Error codes@{Error codes}!GLFW\_FORMAT\_UNAVAILABLE@{GLFW\_FORMAT\_UNAVAILABLE}}
+\index{GLFW\_FORMAT\_UNAVAILABLE@{GLFW\_FORMAT\_UNAVAILABLE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_FORMAT\_UNAVAILABLE}{GLFW\_FORMAT\_UNAVAILABLE}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+F\+O\+R\+M\+A\+T\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE~0x00010009}
+
+
+
+The requested format is not supported or available. 
+
+If emitted during window creation, the requested pixel format is not supported.
+
+If emitted when querying the clipboard, the contents of the clipboard could not be converted to the requested format.
+
+@analysis If emitted during window creation, one or more \mbox{\hyperlink{window_guide_window_hints_hard}{hard constraints}} did not match any of the available pixel formats. If your application is sufficiently flexible, downgrade your requirements and try again. Otherwise, inform the user that their machine does not match your requirements.
+
+\begin{DoxyParagraph}{}
+If emitted when querying the clipboard, ignore the error or report it to the user, as appropriate. 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group__errors_ga76f6bb9c4eea73db675f096b404593ce}\label{group__errors_ga76f6bb9c4eea73db675f096b404593ce}} 
+\index{Error codes@{Error codes}!GLFW\_INVALID\_ENUM@{GLFW\_INVALID\_ENUM}}
+\index{GLFW\_INVALID\_ENUM@{GLFW\_INVALID\_ENUM}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_INVALID\_ENUM}{GLFW\_INVALID\_ENUM}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+UM~0x00010003}
+
+
+
+One of the arguments to the function was an invalid enum value. 
+
+One of the arguments to the function was an invalid enum value, for example requesting \mbox{\hyperlink{window_guide_window_hints_fb}{G\+L\+F\+W\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS}} with \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}}.
+
+@analysis Application programmer error. Fix the offending call. \mbox{\Hypertarget{group__errors_ga76f6bb9c4eea73db675f096b404593ce}\label{group__errors_ga76f6bb9c4eea73db675f096b404593ce}} 
+\index{Error codes@{Error codes}!GLFW\_INVALID\_ENUM@{GLFW\_INVALID\_ENUM}}
+\index{GLFW\_INVALID\_ENUM@{GLFW\_INVALID\_ENUM}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_INVALID\_ENUM}{GLFW\_INVALID\_ENUM}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+UM~0x00010003}
+
+
+
+One of the arguments to the function was an invalid enum value. 
+
+One of the arguments to the function was an invalid enum value, for example requesting \mbox{\hyperlink{window_guide_GLFW_RED_BITS}{G\+L\+F\+W\+\_\+\+R\+E\+D\+\_\+\+B\+I\+TS}} with \mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}}.
+
+@analysis Application programmer error. Fix the offending call. \mbox{\Hypertarget{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}\label{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}} 
+\index{Error codes@{Error codes}!GLFW\_INVALID\_VALUE@{GLFW\_INVALID\_VALUE}}
+\index{GLFW\_INVALID\_VALUE@{GLFW\_INVALID\_VALUE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_INVALID\_VALUE}{GLFW\_INVALID\_VALUE}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+A\+L\+UE~0x00010004}
+
+
+
+One of the arguments to the function was an invalid value. 
+
+One of the arguments to the function was an invalid value, for example requesting a non-\/existent Open\+GL or Open\+GL ES version like 2.\+7.
+
+Requesting a valid but unavailable Open\+GL or Open\+GL ES version will instead result in a \mbox{\hyperlink{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}{G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}} error.
+
+@analysis Application programmer error. Fix the offending call. \mbox{\Hypertarget{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}\label{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}} 
+\index{Error codes@{Error codes}!GLFW\_INVALID\_VALUE@{GLFW\_INVALID\_VALUE}}
+\index{GLFW\_INVALID\_VALUE@{GLFW\_INVALID\_VALUE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_INVALID\_VALUE}{GLFW\_INVALID\_VALUE}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+A\+L\+UE~0x00010004}
+
+
+
+One of the arguments to the function was an invalid value. 
+
+One of the arguments to the function was an invalid value, for example requesting a non-\/existent Open\+GL or Open\+GL ES version like 2.\+7.
+
+Requesting a valid but unavailable Open\+GL or Open\+GL ES version will instead result in a \mbox{\hyperlink{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}{G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}} error.
+
+@analysis Application programmer error. Fix the offending call. \mbox{\Hypertarget{group__errors_gaa8290386e9528ccb9e42a3a4e16fc0d0}\label{group__errors_gaa8290386e9528ccb9e42a3a4e16fc0d0}} 
+\index{Error codes@{Error codes}!GLFW\_NO\_CURRENT\_CONTEXT@{GLFW\_NO\_CURRENT\_CONTEXT}}
+\index{GLFW\_NO\_CURRENT\_CONTEXT@{GLFW\_NO\_CURRENT\_CONTEXT}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_NO\_CURRENT\_CONTEXT}{GLFW\_NO\_CURRENT\_CONTEXT}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+XT~0x00010002}
+
+
+
+No context is current for this thread. 
+
+This occurs if a G\+L\+FW function was called that needs and operates on the current Open\+GL or Open\+GL ES context but no context is current on the calling thread. One such function is \mbox{\hyperlink{group__context_ga12a595c06947cec4967c6e1f14210a8a}{glfw\+Swap\+Interval}}.
+
+@analysis Application programmer error. Ensure a context is current before calling functions that require a current context. \mbox{\Hypertarget{group__errors_gaa8290386e9528ccb9e42a3a4e16fc0d0}\label{group__errors_gaa8290386e9528ccb9e42a3a4e16fc0d0}} 
+\index{Error codes@{Error codes}!GLFW\_NO\_CURRENT\_CONTEXT@{GLFW\_NO\_CURRENT\_CONTEXT}}
+\index{GLFW\_NO\_CURRENT\_CONTEXT@{GLFW\_NO\_CURRENT\_CONTEXT}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_NO\_CURRENT\_CONTEXT}{GLFW\_NO\_CURRENT\_CONTEXT}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+XT~0x00010002}
+
+
+
+No context is current for this thread. 
+
+This occurs if a G\+L\+FW function was called that needs and operates on the current Open\+GL or Open\+GL ES context but no context is current on the calling thread. One such function is \mbox{\hyperlink{group__context_ga12a595c06947cec4967c6e1f14210a8a}{glfw\+Swap\+Interval}}.
+
+@analysis Application programmer error. Ensure a context is current before calling functions that require a current context. \mbox{\Hypertarget{group__errors_gafa30deee5db4d69c4c93d116ed87dbf4}\label{group__errors_gafa30deee5db4d69c4c93d116ed87dbf4}} 
+\index{Error codes@{Error codes}!GLFW\_NO\_ERROR@{GLFW\_NO\_ERROR}}
+\index{GLFW\_NO\_ERROR@{GLFW\_NO\_ERROR}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_NO\_ERROR}{GLFW\_NO\_ERROR}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+E\+R\+R\+OR~0}
+
+
+
+No error has occurred. 
+
+No error has occurred.
+
+@analysis Yay. \mbox{\Hypertarget{group__errors_gacff24d2757da752ae4c80bf452356487}\label{group__errors_gacff24d2757da752ae4c80bf452356487}} 
+\index{Error codes@{Error codes}!GLFW\_NO\_WINDOW\_CONTEXT@{GLFW\_NO\_WINDOW\_CONTEXT}}
+\index{GLFW\_NO\_WINDOW\_CONTEXT@{GLFW\_NO\_WINDOW\_CONTEXT}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_NO\_WINDOW\_CONTEXT}{GLFW\_NO\_WINDOW\_CONTEXT}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+C\+O\+N\+T\+E\+XT~0x0001000A}
+
+
+
+The specified window does not have an Open\+GL or Open\+GL ES context. 
+
+A window that does not have an Open\+GL or Open\+GL ES context was passed to a function that requires it to have one.
+
+@analysis Application programmer error. Fix the offending call. \mbox{\Hypertarget{group__errors_gacff24d2757da752ae4c80bf452356487}\label{group__errors_gacff24d2757da752ae4c80bf452356487}} 
+\index{Error codes@{Error codes}!GLFW\_NO\_WINDOW\_CONTEXT@{GLFW\_NO\_WINDOW\_CONTEXT}}
+\index{GLFW\_NO\_WINDOW\_CONTEXT@{GLFW\_NO\_WINDOW\_CONTEXT}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_NO\_WINDOW\_CONTEXT}{GLFW\_NO\_WINDOW\_CONTEXT}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+N\+O\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+C\+O\+N\+T\+E\+XT~0x0001000A}
+
+
+
+The specified window does not have an Open\+GL or Open\+GL ES context. 
+
+A window that does not have an Open\+GL or Open\+GL ES context was passed to a function that requires it to have one.
+
+@analysis Application programmer error. Fix the offending call. \mbox{\Hypertarget{group__errors_ga2374ee02c177f12e1fa76ff3ed15e14a}\label{group__errors_ga2374ee02c177f12e1fa76ff3ed15e14a}} 
+\index{Error codes@{Error codes}!GLFW\_NOT\_INITIALIZED@{GLFW\_NOT\_INITIALIZED}}
+\index{GLFW\_NOT\_INITIALIZED@{GLFW\_NOT\_INITIALIZED}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_NOT\_INITIALIZED}{GLFW\_NOT\_INITIALIZED}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+N\+O\+T\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED~0x00010001}
+
+
+
+G\+L\+FW has not been initialized. 
+
+This occurs if a G\+L\+FW function was called that must not be called unless the library is \mbox{\hyperlink{intro_guide_intro_init}{initialized}}.
+
+@analysis Application programmer error. Initialize G\+L\+FW before calling any function that requires initialization. \mbox{\Hypertarget{group__errors_ga2374ee02c177f12e1fa76ff3ed15e14a}\label{group__errors_ga2374ee02c177f12e1fa76ff3ed15e14a}} 
+\index{Error codes@{Error codes}!GLFW\_NOT\_INITIALIZED@{GLFW\_NOT\_INITIALIZED}}
+\index{GLFW\_NOT\_INITIALIZED@{GLFW\_NOT\_INITIALIZED}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_NOT\_INITIALIZED}{GLFW\_NOT\_INITIALIZED}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+N\+O\+T\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED~0x00010001}
+
+
+
+G\+L\+FW has not been initialized. 
+
+This occurs if a G\+L\+FW function was called that must not be called unless the library is \mbox{\hyperlink{intro_guide_intro_init}{initialized}}.
+
+@analysis Application programmer error. Initialize G\+L\+FW before calling any function that requires initialization. \mbox{\Hypertarget{group__errors_ga9023953a2bcb98c2906afd071d21ee7f}\label{group__errors_ga9023953a2bcb98c2906afd071d21ee7f}} 
+\index{Error codes@{Error codes}!GLFW\_OUT\_OF\_MEMORY@{GLFW\_OUT\_OF\_MEMORY}}
+\index{GLFW\_OUT\_OF\_MEMORY@{GLFW\_OUT\_OF\_MEMORY}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_OUT\_OF\_MEMORY}{GLFW\_OUT\_OF\_MEMORY}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+O\+U\+T\+\_\+\+O\+F\+\_\+\+M\+E\+M\+O\+RY~0x00010005}
+
+
+
+A memory allocation failed. 
+
+A memory allocation failed.
+
+@analysis A bug in G\+L\+FW or the underlying operating system. Report the bug to our \href{https://github.com/glfw/glfw/issues}{\texttt{ issue tracker}}. \mbox{\Hypertarget{group__errors_ga9023953a2bcb98c2906afd071d21ee7f}\label{group__errors_ga9023953a2bcb98c2906afd071d21ee7f}} 
+\index{Error codes@{Error codes}!GLFW\_OUT\_OF\_MEMORY@{GLFW\_OUT\_OF\_MEMORY}}
+\index{GLFW\_OUT\_OF\_MEMORY@{GLFW\_OUT\_OF\_MEMORY}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_OUT\_OF\_MEMORY}{GLFW\_OUT\_OF\_MEMORY}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+O\+U\+T\+\_\+\+O\+F\+\_\+\+M\+E\+M\+O\+RY~0x00010005}
+
+
+
+A memory allocation failed. 
+
+A memory allocation failed.
+
+@analysis A bug in G\+L\+FW or the underlying operating system. Report the bug to our \href{https://github.com/glfw/glfw/issues}{\texttt{ issue tracker}}. \mbox{\Hypertarget{group__errors_gad44162d78100ea5e87cdd38426b8c7a1}\label{group__errors_gad44162d78100ea5e87cdd38426b8c7a1}} 
+\index{Error codes@{Error codes}!GLFW\_PLATFORM\_ERROR@{GLFW\_PLATFORM\_ERROR}}
+\index{GLFW\_PLATFORM\_ERROR@{GLFW\_PLATFORM\_ERROR}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_PLATFORM\_ERROR}{GLFW\_PLATFORM\_ERROR}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+E\+R\+R\+OR~0x00010008}
+
+
+
+A platform-\/specific error occurred that does not match any of the more specific categories. 
+
+A platform-\/specific error occurred that does not match any of the more specific categories.
+
+@analysis A bug or configuration error in G\+L\+FW, the underlying operating system or its drivers, or a lack of required resources. Report the issue to our \href{https://github.com/glfw/glfw/issues}{\texttt{ issue tracker}}. \mbox{\Hypertarget{group__errors_gad44162d78100ea5e87cdd38426b8c7a1}\label{group__errors_gad44162d78100ea5e87cdd38426b8c7a1}} 
+\index{Error codes@{Error codes}!GLFW\_PLATFORM\_ERROR@{GLFW\_PLATFORM\_ERROR}}
+\index{GLFW\_PLATFORM\_ERROR@{GLFW\_PLATFORM\_ERROR}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_PLATFORM\_ERROR}{GLFW\_PLATFORM\_ERROR}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+E\+R\+R\+OR~0x00010008}
+
+
+
+A platform-\/specific error occurred that does not match any of the more specific categories. 
+
+A platform-\/specific error occurred that does not match any of the more specific categories.
+
+@analysis A bug or configuration error in G\+L\+FW, the underlying operating system or its drivers, or a lack of required resources. Report the issue to our \href{https://github.com/glfw/glfw/issues}{\texttt{ issue tracker}}. \mbox{\Hypertarget{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}\label{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}} 
+\index{Error codes@{Error codes}!GLFW\_VERSION\_UNAVAILABLE@{GLFW\_VERSION\_UNAVAILABLE}}
+\index{GLFW\_VERSION\_UNAVAILABLE@{GLFW\_VERSION\_UNAVAILABLE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_VERSION\_UNAVAILABLE}{GLFW\_VERSION\_UNAVAILABLE}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE~0x00010007}
+
+
+
+The requested Open\+GL or Open\+GL ES version is not available. 
+
+The requested Open\+GL or Open\+GL ES version (including any requested context or framebuffer hints) is not available on this machine.
+
+@analysis The machine does not support your requirements. If your application is sufficiently flexible, downgrade your requirements and try again. Otherwise, inform the user that their machine does not match your requirements.
+
+\begin{DoxyParagraph}{}
+Future invalid Open\+GL and Open\+GL ES versions, for example Open\+GL 4.\+8 if 5.\+0 comes out before the 4.\+x series gets that far, also fail with this error and not \mbox{\hyperlink{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}{G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+A\+L\+UE}}, because G\+L\+FW cannot know what future versions will exist. 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}\label{group__errors_gad16c5565b4a69f9c2a9ac2c0dbc89462}} 
+\index{Error codes@{Error codes}!GLFW\_VERSION\_UNAVAILABLE@{GLFW\_VERSION\_UNAVAILABLE}}
+\index{GLFW\_VERSION\_UNAVAILABLE@{GLFW\_VERSION\_UNAVAILABLE}!Error codes@{Error codes}}
+\doxysubsubsection{\texorpdfstring{GLFW\_VERSION\_UNAVAILABLE}{GLFW\_VERSION\_UNAVAILABLE}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define G\+L\+F\+W\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE~0x00010007}
+
+
+
+The requested Open\+GL or Open\+GL ES version is not available. 
+
+The requested Open\+GL or Open\+GL ES version (including any requested context or framebuffer hints) is not available on this machine.
+
+@analysis The machine does not support your requirements. If your application is sufficiently flexible, downgrade your requirements and try again. Otherwise, inform the user that their machine does not match your requirements.
+
+\begin{DoxyParagraph}{}
+Future invalid Open\+GL and Open\+GL ES versions, for example Open\+GL 4.\+8 if 5.\+0 comes out before the 4.\+x series gets that far, also fail with this error and not \mbox{\hyperlink{group__errors_gaaf2ef9aa8202c2b82ac2d921e554c687}{G\+L\+F\+W\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+A\+L\+UE}}, because G\+L\+FW cannot know what future versions will exist. 
+\end{DoxyParagraph}

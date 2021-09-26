@@ -1,0 +1,120 @@
+\hypertarget{structImFont}{}\doxysection{Im\+Font Struct Reference}
+\label{structImFont}\index{ImFont@{ImFont}}
+
+
+Collaboration diagram for Im\+Font\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structImFont_ac6a773b73c6406fd8f08c4c93213a501}\label{structImFont_ac6a773b73c6406fd8f08c4c93213a501}} 
+const I\+M\+G\+U\+I\+\_\+\+A\+PI \mbox{\hyperlink{structImFontGlyph}{Im\+Font\+Glyph}} $\ast$ {\bfseries Find\+Glyph} (Im\+Wchar c) const
+\item 
+\mbox{\Hypertarget{structImFont_aa9ce4765070dfdee66bf5e5e81acaac3}\label{structImFont_aa9ce4765070dfdee66bf5e5e81acaac3}} 
+const I\+M\+G\+U\+I\+\_\+\+A\+PI \mbox{\hyperlink{structImFontGlyph}{Im\+Font\+Glyph}} $\ast$ {\bfseries Find\+Glyph\+No\+Fallback} (Im\+Wchar c) const
+\item 
+\mbox{\Hypertarget{structImFont_adffcff4e4e2d17455410bd4ba76b42e4}\label{structImFont_adffcff4e4e2d17455410bd4ba76b42e4}} 
+float {\bfseries Get\+Char\+Advance} (Im\+Wchar c) const
+\item 
+\mbox{\Hypertarget{structImFont_a97dafa61cc94e84be396d69b0d42b1ce}\label{structImFont_a97dafa61cc94e84be396d69b0d42b1ce}} 
+bool {\bfseries Is\+Loaded} () const
+\item 
+\mbox{\Hypertarget{structImFont_a11843ed46aaa122264d0da87ffafd627}\label{structImFont_a11843ed46aaa122264d0da87ffafd627}} 
+const char $\ast$ {\bfseries Get\+Debug\+Name} () const
+\item 
+\mbox{\Hypertarget{structImFont_ad67f64fd206ad197f4b93b1a1ae27cfe}\label{structImFont_ad67f64fd206ad197f4b93b1a1ae27cfe}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI \mbox{\hyperlink{structImVec2}{Im\+Vec2}} {\bfseries Calc\+Text\+SizeA} (float size, float max\+\_\+width, float wrap\+\_\+width, const char $\ast$text\+\_\+begin, const char $\ast$text\+\_\+end=N\+U\+LL, const char $\ast$$\ast$remaining=N\+U\+LL) const
+\item 
+\mbox{\Hypertarget{structImFont_a3781bb82a1ceba919cb6c98a398c7a67}\label{structImFont_a3781bb82a1ceba919cb6c98a398c7a67}} 
+const I\+M\+G\+U\+I\+\_\+\+A\+PI char $\ast$ {\bfseries Calc\+Word\+Wrap\+PositionA} (float scale, const char $\ast$text, const char $\ast$text\+\_\+end, float wrap\+\_\+width) const
+\item 
+\mbox{\Hypertarget{structImFont_aa8370ddcf8d3e4e034d07de9e00fcdd1}\label{structImFont_aa8370ddcf8d3e4e034d07de9e00fcdd1}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Render\+Char} (\mbox{\hyperlink{structImDrawList}{Im\+Draw\+List}} $\ast$draw\+\_\+list, float size, \mbox{\hyperlink{structImVec2}{Im\+Vec2}} pos, Im\+U32 col, Im\+Wchar c) const
+\item 
+\mbox{\Hypertarget{structImFont_a2877acf1cfcd964bc2e7fe600a08849e}\label{structImFont_a2877acf1cfcd964bc2e7fe600a08849e}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Render\+Text} (\mbox{\hyperlink{structImDrawList}{Im\+Draw\+List}} $\ast$draw\+\_\+list, float size, \mbox{\hyperlink{structImVec2}{Im\+Vec2}} pos, Im\+U32 col, const \mbox{\hyperlink{structImVec4}{Im\+Vec4}} \&clip\+\_\+rect, const char $\ast$text\+\_\+begin, const char $\ast$text\+\_\+end, float wrap\+\_\+width=0.\+0f, bool cpu\+\_\+fine\+\_\+clip=false) const
+\item 
+\mbox{\Hypertarget{structImFont_a04b3a1437bd0032722bbbd3613941162}\label{structImFont_a04b3a1437bd0032722bbbd3613941162}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Build\+Lookup\+Table} ()
+\item 
+\mbox{\Hypertarget{structImFont_aecf7773b1c40b433f91ee245f463de12}\label{structImFont_aecf7773b1c40b433f91ee245f463de12}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Clear\+Output\+Data} ()
+\item 
+\mbox{\Hypertarget{structImFont_ab7865a365d9653b4636b198d2f222fd6}\label{structImFont_ab7865a365d9653b4636b198d2f222fd6}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Grow\+Index} (int new\+\_\+size)
+\item 
+\mbox{\Hypertarget{structImFont_a1badad96fa8d41b4754fc7bdb826e6b2}\label{structImFont_a1badad96fa8d41b4754fc7bdb826e6b2}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Add\+Glyph} (const \mbox{\hyperlink{structImFontConfig}{Im\+Font\+Config}} $\ast$src\+\_\+cfg, Im\+Wchar c, float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float advance\+\_\+x)
+\item 
+\mbox{\Hypertarget{structImFont_aba8cd20f14ba47175d45d3f2063aa329}\label{structImFont_aba8cd20f14ba47175d45d3f2063aa329}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Add\+Remap\+Char} (Im\+Wchar dst, Im\+Wchar src, bool overwrite\+\_\+dst=true)
+\item 
+\mbox{\Hypertarget{structImFont_a52fbd5caef22c68bb8e0e251c6bfcc53}\label{structImFont_a52fbd5caef22c68bb8e0e251c6bfcc53}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Set\+Glyph\+Visible} (Im\+Wchar c, bool visible)
+\item 
+\mbox{\Hypertarget{structImFont_a1f504f78cc066db20ea2d688e73a560b}\label{structImFont_a1f504f78cc066db20ea2d688e73a560b}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI void {\bfseries Set\+Fallback\+Char} (Im\+Wchar c)
+\item 
+\mbox{\Hypertarget{structImFont_a4374ffca4f2d9a23599aac21c57e2a66}\label{structImFont_a4374ffca4f2d9a23599aac21c57e2a66}} 
+I\+M\+G\+U\+I\+\_\+\+A\+PI bool {\bfseries Is\+Glyph\+Range\+Unused} (unsigned int c\+\_\+begin, unsigned int c\+\_\+last)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structImFont_af906476eda06d8a842d0a843a247f530}\label{structImFont_af906476eda06d8a842d0a843a247f530}} 
+\mbox{\hyperlink{structImVector}{Im\+Vector}}$<$ float $>$ {\bfseries Index\+AdvanceX}
+\item 
+\mbox{\Hypertarget{structImFont_ad58a5ee4492a3a9fa56f73e5a40d728d}\label{structImFont_ad58a5ee4492a3a9fa56f73e5a40d728d}} 
+float {\bfseries Fallback\+AdvanceX}
+\item 
+\mbox{\Hypertarget{structImFont_a423e36d1594281f1a5a537e5b0d0a3d4}\label{structImFont_a423e36d1594281f1a5a537e5b0d0a3d4}} 
+float {\bfseries Font\+Size}
+\item 
+\mbox{\Hypertarget{structImFont_a0c948f3741da03da9bc1731e236173c8}\label{structImFont_a0c948f3741da03da9bc1731e236173c8}} 
+\mbox{\hyperlink{structImVector}{Im\+Vector}}$<$ Im\+Wchar $>$ {\bfseries Index\+Lookup}
+\item 
+\mbox{\Hypertarget{structImFont_a1a0901fc1a8cbd41d582d6cef4946bc9}\label{structImFont_a1a0901fc1a8cbd41d582d6cef4946bc9}} 
+\mbox{\hyperlink{structImVector}{Im\+Vector}}$<$ \mbox{\hyperlink{structImFontGlyph}{Im\+Font\+Glyph}} $>$ {\bfseries Glyphs}
+\item 
+\mbox{\Hypertarget{structImFont_a0e666b0c49646bd294103f4d288df4b8}\label{structImFont_a0e666b0c49646bd294103f4d288df4b8}} 
+const \mbox{\hyperlink{structImFontGlyph}{Im\+Font\+Glyph}} $\ast$ {\bfseries Fallback\+Glyph}
+\item 
+\mbox{\Hypertarget{structImFont_a8a5e0df6be5e3cabe91ae830524db960}\label{structImFont_a8a5e0df6be5e3cabe91ae830524db960}} 
+\mbox{\hyperlink{structImFontAtlas}{Im\+Font\+Atlas}} $\ast$ {\bfseries Container\+Atlas}
+\item 
+\mbox{\Hypertarget{structImFont_afff4a317b215a37599589941d6131fd0}\label{structImFont_afff4a317b215a37599589941d6131fd0}} 
+const \mbox{\hyperlink{structImFontConfig}{Im\+Font\+Config}} $\ast$ {\bfseries Config\+Data}
+\item 
+\mbox{\Hypertarget{structImFont_a4a30fc7711d628ad582ccb3188a51ddd}\label{structImFont_a4a30fc7711d628ad582ccb3188a51ddd}} 
+short {\bfseries Config\+Data\+Count}
+\item 
+\mbox{\Hypertarget{structImFont_ae54c2c4184bfcbc7b8f6da9cbc4f93c0}\label{structImFont_ae54c2c4184bfcbc7b8f6da9cbc4f93c0}} 
+Im\+Wchar {\bfseries Fallback\+Char}
+\item 
+\mbox{\Hypertarget{structImFont_a51df9d341917235207db60e775b11621}\label{structImFont_a51df9d341917235207db60e775b11621}} 
+Im\+Wchar {\bfseries Ellipsis\+Char}
+\item 
+\mbox{\Hypertarget{structImFont_a3858e851f69b3abbbefad76030a546ff}\label{structImFont_a3858e851f69b3abbbefad76030a546ff}} 
+bool {\bfseries Dirty\+Lookup\+Tables}
+\item 
+\mbox{\Hypertarget{structImFont_ae98fb07fd8862a7243d77b11f38bba19}\label{structImFont_ae98fb07fd8862a7243d77b11f38bba19}} 
+float {\bfseries Scale}
+\item 
+\mbox{\Hypertarget{structImFont_a5238ef18f8ad02b783fb8b3a195b708e}\label{structImFont_a5238ef18f8ad02b783fb8b3a195b708e}} 
+float {\bfseries Ascent}
+\item 
+\mbox{\Hypertarget{structImFont_abcca12aa908bf7105433e7db6088a5e5}\label{structImFont_abcca12aa908bf7105433e7db6088a5e5}} 
+float {\bfseries Descent}
+\item 
+\mbox{\Hypertarget{structImFont_a8087b2ee8b27dcf5c6e30a8318f87cc7}\label{structImFont_a8087b2ee8b27dcf5c6e30a8318f87cc7}} 
+int {\bfseries Metrics\+Total\+Surface}
+\item 
+\mbox{\Hypertarget{structImFont_a95184d1095ecc7da9c843579052e1009}\label{structImFont_a95184d1095ecc7da9c843579052e1009}} 
+Im\+U8 {\bfseries Used4k\+Pages\+Map} \mbox{[}(I\+M\+\_\+\+U\+N\+I\+C\+O\+D\+E\+\_\+\+C\+O\+D\+E\+P\+O\+I\+N\+T\+\_\+\+M\+AX+1)/4096/8\mbox{]}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/imgui/imgui.\+h\item 
+Light\+Framework/libs/imgui/imgui\+\_\+draw.\+cpp\end{DoxyCompactItemize}

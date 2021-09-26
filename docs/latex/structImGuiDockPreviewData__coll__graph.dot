@@ -1,0 +1,11 @@
+digraph "ImGuiDockPreviewData"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="ImGuiDockPreviewData",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" DropRectsDraw" ];
+  Node2 [label="ImRect",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImRect.html",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" Min\nMax" ];
+  Node3 [label="ImVec2",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structImVec2.html",tooltip=" "];
+}

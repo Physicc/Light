@@ -1,0 +1,77 @@
+\hypertarget{structentt_1_1monostate}{}\doxysection{entt\+::monostate$<$ id\+\_\+type $>$ Struct Template Reference}
+\label{structentt_1_1monostate}\index{entt::monostate$<$ id\_type $>$@{entt::monostate$<$ id\_type $>$}}
+
+
+Minimal implementation of the monostate pattern.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Type $>$ }\\void \mbox{\hyperlink{structentt_1_1monostate_afad7f660feb6b8696208ea3f838d14b8}{operator=}} (Type val) const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Assigns a value of a specific type to a given key. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Type $>$ }\\\mbox{\hyperlink{structentt_1_1monostate_a04c5f59a09efd1d56e60fa4a736f3086}{operator Type}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Gets a value of a specific type for a given key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$id\+\_\+type$>$\newline
+struct entt\+::monostate$<$ id\+\_\+type $>$}
+
+Minimal implementation of the monostate pattern. 
+
+A minimal, yet complete configuration system built on top of the monostate pattern. \mbox{\hyperlink{structThread}{Thread}} safe by design, it works only with basic types like {\ttfamily int}s or {\ttfamily bool}s.~\newline
+ Multiple types and therefore more than one value can be associated with a single key. Because of this, users must pay attention to use the same type both during an assignment and when they try to read back their data. Otherwise, they can incur in unexpected results. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structentt_1_1monostate_a04c5f59a09efd1d56e60fa4a736f3086}\label{structentt_1_1monostate_a04c5f59a09efd1d56e60fa4a736f3086}} 
+\index{entt::monostate$<$ id\_type $>$@{entt::monostate$<$ id\_type $>$}!operator Type@{operator Type}}
+\index{operator Type@{operator Type}!entt::monostate$<$ id\_type $>$@{entt::monostate$<$ id\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator Type()}{operator Type()}}
+{\footnotesize\ttfamily template$<$id\+\_\+type $>$ \\
+template$<$typename Type $>$ \\
+\mbox{\hyperlink{structentt_1_1monostate}{entt\+::monostate}}$<$ id\+\_\+type $>$\+::operator Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a value of a specific type for a given key. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of the value to get. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+Stored value, if any. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structentt_1_1monostate_afad7f660feb6b8696208ea3f838d14b8}\label{structentt_1_1monostate_afad7f660feb6b8696208ea3f838d14b8}} 
+\index{entt::monostate$<$ id\_type $>$@{entt::monostate$<$ id\_type $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!entt::monostate$<$ id\_type $>$@{entt::monostate$<$ id\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$id\+\_\+type $>$ \\
+template$<$typename Type $>$ \\
+void \mbox{\hyperlink{structentt_1_1monostate}{entt\+::monostate}}$<$ id\+\_\+type $>$\+::operator= (\begin{DoxyParamCaption}\item[{Type}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns a value of a specific type to a given key. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type} & Type of the value to assign. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & User data to assign to the given key. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

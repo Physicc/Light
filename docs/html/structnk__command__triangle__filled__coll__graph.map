@@ -1,0 +1,6 @@
+<map id="nk_command_triangle_filled" name="nk_command_triangle_filled">
+<area shape="rect" id="node1" title=" " alt="" coords="63,124,230,165"/>
+<area shape="rect" id="node2" href="$structnk__color.html" title=" " alt="" coords="5,5,83,32"/>
+<area shape="rect" id="node3" href="$structnk__vec2i.html" title=" " alt="" coords="107,5,187,32"/>
+<area shape="rect" id="node4" href="$structnk__command.html" title=" " alt="" coords="211,5,322,32"/>
+</map>

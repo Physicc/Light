@@ -1,0 +1,344 @@
+This is a transition guide for moving from G\+L\+FW 2 to 3. It describes what has changed or been removed, but does {\itshape not} include \mbox{\hyperlink{news}{new features}} unless they are required when moving an existing code base onto the new A\+PI. For example, the new multi-\/monitor functions are required to create full screen windows with G\+L\+FW 3.\hypertarget{moving_guide_moving_removed}{}\doxysection{Changed and removed features}\label{moving_guide_moving_removed}
+\hypertarget{moving_guide_moving_renamed_files}{}\doxysubsection{Renamed library and header file}\label{moving_guide_moving_renamed_files}
+The G\+L\+FW 3 header is named \mbox{\hyperlink{imgui_2examples_2libs_2glfw_2include_2GLFW_2glfw3_8h}{glfw3.\+h}} and moved to the {\ttfamily G\+L\+FW} directory, to avoid collisions with the headers of other major versions. Similarly, the G\+L\+FW 3 library is named {\ttfamily glfw3,} except when it\textquotesingle{}s installed as a shared library on Unix-\/like systems, where it uses the \href{https://en.wikipedia.org/wiki/soname}{\texttt{ soname}} {\ttfamily libglfw.\+so.\+3}.
+
+\begin{DoxyParagraph}{Old syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <GL/glfw.h>}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <GLFW/glfw3.h>}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_threads}{}\doxysubsection{Removal of threading functions}\label{moving_guide_moving_threads}
+The threading functions have been removed, including the per-\/thread sleep function. They were fairly primitive, under-\/used, poorly integrated and took time away from the focus of G\+L\+FW (i.\+e. context, input and window). There are better threading libraries available and native threading support is available in both \href{https://en.cppreference.com/w/cpp/thread}{\texttt{ C++11}} and \href{https://en.cppreference.com/w/c/thread}{\texttt{ C11}}, both of which are gaining traction.
+
+If you wish to use the C++11 or C11 facilities but your compiler doesn\textquotesingle{}t yet support them, see the \href{https://gitorious.org/tinythread/tinythreadpp}{\texttt{ Tiny\+Thread++}} and \href{https://github.com/tinycthread/tinycthread}{\texttt{ Tiny\+C\+Thread}} projects created by the original author of G\+L\+FW. These libraries implement a usable subset of the threading A\+P\+Is in C++11 and C11, and in fact some G\+L\+FW 3 test programs use Tiny\+C\+Thread.
+
+However, G\+L\+FW 3 has better support for {\itshape use from multiple threads} than G\+L\+FW 2 had. Contexts can be made current on any thread, although only a single thread at a time, and the documentation explicitly states which functions may be used from any thread and which must only be used from the main thread.
+
+\begin{DoxyParagraph}{Removed functions}
+{\ttfamily glfw\+Sleep}, {\ttfamily glfw\+Create\+Thread}, {\ttfamily glfw\+Destroy\+Thread}, {\ttfamily glfw\+Wait\+Thread}, {\ttfamily glfw\+Get\+Thread\+ID}, {\ttfamily glfw\+Create\+Mutex}, {\ttfamily glfw\+Destroy\+Mutex}, {\ttfamily glfw\+Lock\+Mutex}, {\ttfamily glfw\+Unlock\+Mutex}, {\ttfamily glfw\+Create\+Cond}, {\ttfamily glfw\+Destroy\+Cond}, {\ttfamily glfw\+Wait\+Cond}, {\ttfamily glfw\+Signal\+Cond}, {\ttfamily glfw\+Broadcast\+Cond} and {\ttfamily glfw\+Get\+Number\+Of\+Processors}.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Removed types}
+{\ttfamily G\+L\+F\+Wthreadfun}
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_image}{}\doxysubsection{Removal of image and texture loading}\label{moving_guide_moving_image}
+The image and texture loading functions have been removed. They only supported the Targa image format, making them mostly useful for beginner level examples. To become of sufficiently high quality to warrant keeping them in G\+L\+FW 3, they would need not only to support other formats, but also modern extensions to Open\+GL texturing. This would either add a number of external dependencies (libjpeg, libpng, etc.), or force G\+L\+FW to ship with inline versions of these libraries.
+
+As there already are libraries doing this, it is unnecessary both to duplicate the work and to tie the duplicate to G\+L\+FW. The resulting library would also be platform-\/independent, as both Open\+GL and stdio are available wherever G\+L\+FW is.
+
+\begin{DoxyParagraph}{Removed functions}
+{\ttfamily glfw\+Read\+Image}, {\ttfamily glfw\+Read\+Memory\+Image}, {\ttfamily glfw\+Free\+Image}, {\ttfamily glfw\+Load\+Texture2D}, {\ttfamily glfw\+Load\+Memory\+Texture2D} and {\ttfamily glfw\+Load\+Texture\+Image2D}.
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_stdcall}{}\doxysubsection{Removal of G\+L\+F\+W\+C\+A\+L\+L macro}\label{moving_guide_moving_stdcall}
+The {\ttfamily G\+L\+F\+W\+C\+A\+LL} macro, which made callback functions use \href{https://msdn.microsoft.com/en-us/library/zxk0tw93.aspx}{\texttt{ \+\_\+\+\_\+stdcall}} on Windows, has been removed. G\+L\+FW is written in C, not Pascal. Removing this macro means there\textquotesingle{}s one less thing for application programmers to remember, i.\+e. the requirement to mark all callback functions with {\ttfamily G\+L\+F\+W\+C\+A\+LL}. It also simplifies the creation of D\+L\+Ls and D\+LL link libraries, as there\textquotesingle{}s no need to explicitly disable {\ttfamily @n} entry point suffixes.
+
+\begin{DoxyParagraph}{Old syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} GLFWCALL callback\_function(...);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} callback\_function(...);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_window_handles}{}\doxysubsection{Window handle parameters}\label{moving_guide_moving_window_handles}
+Because G\+L\+FW 3 supports multiple windows, window handle parameters have been added to all window-\/related G\+L\+FW functions and callbacks. The handle of a newly created window is returned by \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}} (formerly {\ttfamily glfw\+Open\+Window}). Window handles are pointers to the \href{https://en.wikipedia.org/wiki/Opaque_data_type}{\texttt{ opaque}} type \mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{G\+L\+F\+Wwindow}}.
+
+\begin{DoxyParagraph}{Old syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga861ed3414ab8120e2f74151a666ed1dc}{glfwSetWindowTitle}}(\textcolor{stringliteral}{"New Window Title"});}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga861ed3414ab8120e2f74151a666ed1dc}{glfwSetWindowTitle}}(window, \textcolor{stringliteral}{"New Window Title"});}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_monitor}{}\doxysubsection{Explicit monitor selection}\label{moving_guide_moving_monitor}
+G\+L\+FW 3 provides support for multiple monitors. To request a full screen mode window, instead of passing {\ttfamily G\+L\+F\+W\+\_\+\+F\+U\+L\+L\+S\+C\+R\+E\+EN} you specify which monitor you wish the window to use. The \mbox{\hyperlink{group__monitor_ga34befff4f9f0fae09dd8de6fb0eb4f3e}{glfw\+Get\+Primary\+Monitor}} function returns the monitor that G\+L\+FW 2 would have selected, but there are many other \mbox{\hyperlink{monitor_guide}{monitor functions}}. Monitor handles are pointers to the \href{https://en.wikipedia.org/wiki/Opaque_data_type}{\texttt{ opaque}} type \mbox{\hyperlink{group__monitor_ga8d9efd1cde9426692c73fe40437d0ae3}{G\+L\+F\+Wmonitor}}.
+
+\begin{DoxyParagraph}{Old basic full screen}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{glfwOpenWindow(640, 480, 8, 8, 8, 0, 24, 0, GLFW\_FULLSCREEN);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New basic full screen}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{window = \mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfwCreateWindow}}(640, 480, \textcolor{stringliteral}{"My Window"}, \mbox{\hyperlink{group__monitor_ga34befff4f9f0fae09dd8de6fb0eb4f3e}{glfwGetPrimaryMonitor}}(), NULL);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+The framebuffer bit depth parameters of {\ttfamily glfw\+Open\+Window} have been turned into \mbox{\hyperlink{window_guide_window_hints}{window hints}}, but as they have been given \mbox{\hyperlink{window_guide_window_hints_values}{sane defaults}} you rarely need to set these hints.
+\end{DoxyNote}
+\hypertarget{moving_guide_moving_autopoll}{}\doxysubsection{Removal of automatic event polling}\label{moving_guide_moving_autopoll}
+G\+L\+FW 3 does not automatically poll for events in \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfw\+Swap\+Buffers}}, meaning you need to call \mbox{\hyperlink{group__window_ga872d16e4c77f58c0436f356255920cfc}{glfw\+Poll\+Events}} or \mbox{\hyperlink{group__window_ga6e042d05823c11e11c7339b81a237738}{glfw\+Wait\+Events}} yourself. Unlike buffer swap, which acts on a single window, the event processing functions act on all windows at once.
+
+\begin{DoxyParagraph}{Old basic main loop}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (...)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// Process input}}
+\DoxyCodeLine{    \textcolor{comment}{// Render output}}
+\DoxyCodeLine{    \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfwSwapBuffers}}();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New basic main loop}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (...)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// Process input}}
+\DoxyCodeLine{    \textcolor{comment}{// Render output}}
+\DoxyCodeLine{    \mbox{\hyperlink{group__window_gafb827800eedbfcbc97b1e5408df668d7}{glfwSwapBuffers}}(window);}
+\DoxyCodeLine{    \mbox{\hyperlink{group__window_ga872d16e4c77f58c0436f356255920cfc}{glfwPollEvents}}();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_context}{}\doxysubsection{Explicit context management}\label{moving_guide_moving_context}
+Each G\+L\+FW 3 window has its own Open\+GL context and only you, the application programmer, can know which context should be current on which thread at any given time. Therefore, G\+L\+FW 3 leaves that decision to you.
+
+This means that you need to call \mbox{\hyperlink{group__context_gafd76c93e15ec8b0b90506a9936a46185}{glfw\+Make\+Context\+Current}} after creating a window before you can call any Open\+GL functions.\hypertarget{moving_guide_moving_hidpi}{}\doxysubsection{Separation of window and framebuffer sizes}\label{moving_guide_moving_hidpi}
+Window positions and sizes now use screen coordinates, which may not be the same as pixels on machines with high-\/\+D\+PI monitors. This is important as Open\+GL uses pixels, not screen coordinates. For example, the rectangle specified with {\ttfamily gl\+Viewport} needs to use pixels. Therefore, framebuffer size functions have been added. You can retrieve the size of the framebuffer of a window with \mbox{\hyperlink{group__window_gaf7d17f3534b4b6dc9a6f905e3a240b7e}{glfw\+Get\+Framebuffer\+Size}} function. A framebuffer size callback has also been added, which can be set with \mbox{\hyperlink{group__window_ga41d69f9f263d7b33ea03cf58772b4ea0}{glfw\+Set\+Framebuffer\+Size\+Callback}}.
+
+\begin{DoxyParagraph}{Old basic viewport setup}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga7feb769ebb3f3d21579b5a3fb07be76e}{glfwGetWindowSize}}(\&width, \&height);}
+\DoxyCodeLine{glViewport(0, 0, width, height);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New basic viewport setup}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gaf7d17f3534b4b6dc9a6f905e3a240b7e}{glfwGetFramebufferSize}}(window, \&width, \&height);}
+\DoxyCodeLine{glViewport(0, 0, width, height);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_window_close}{}\doxysubsection{Window closing changes}\label{moving_guide_moving_window_close}
+The {\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+ED} window parameter has been removed. As long as the window has not been destroyed, whether through \mbox{\hyperlink{group__window_ga806747476b7247d292be3711c323ea10}{glfw\+Destroy\+Window}} or \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}}, the window is \char`\"{}open\char`\"{}.
+
+A user attempting to close a window is now just an event like any other. Unlike G\+L\+FW 2, windows and contexts created with G\+L\+FW 3 will never be destroyed unless you choose them to be. Each window now has a close flag that is set to {\ttfamily G\+L\+F\+W\+\_\+\+T\+R\+UE} when the user attempts to close that window. By default, nothing else happens and the window stays visible. It is then up to you to either destroy the window, take some other action or ignore the request.
+
+You can query the close flag at any time with \mbox{\hyperlink{group__window_gaa6162f67dfa38b8beda2fea623649332}{glfw\+Window\+Should\+Close}} and set it at any time with \mbox{\hyperlink{group__window_ga1cadeda7a1e2f224e06a8415d30741aa}{glfw\+Set\+Window\+Should\+Close}}.
+
+\begin{DoxyParagraph}{Old basic main loop}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (glfwGetWindowParam(GLFW\_OPENED))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    ...}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New basic main loop}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (!\mbox{\hyperlink{group__window_gaa6162f67dfa38b8beda2fea623649332}{glfwWindowShouldClose}}(window))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    ...}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+The close callback no longer returns a value. Instead, it is called after the close flag has been set so it can override its value, if it chooses to, before event processing completes. You may however not call \mbox{\hyperlink{group__window_ga806747476b7247d292be3711c323ea10}{glfw\+Destroy\+Window}} from the close callback (or any other window related callback).
+
+\begin{DoxyParagraph}{Old syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} GLFWCALL window\_close\_callback(\textcolor{keywordtype}{void});}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} window\_close\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+G\+L\+FW never clears the close flag to {\ttfamily G\+L\+F\+W\+\_\+\+F\+A\+L\+SE}, meaning you can use it for other reasons to close the window as well, for example the user choosing Quit from an in-\/game menu.
+\end{DoxyNote}
+\hypertarget{moving_guide_moving_hints}{}\doxysubsection{Persistent window hints}\label{moving_guide_moving_hints}
+The {\ttfamily glfw\+Open\+Window\+Hint} function has been renamed to \mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfw\+Window\+Hint}}.
+
+Window hints are no longer reset to their default values on window creation, but instead retain their values until modified by \mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfw\+Window\+Hint}} or \mbox{\hyperlink{group__window_ga8050ddceed9dc6bd9d3aa35666195cd4}{glfw\+Default\+Window\+Hints}}, or until the library is terminated and re-\/initialized.\hypertarget{moving_guide_moving_video_modes}{}\doxysubsection{Video mode enumeration}\label{moving_guide_moving_video_modes}
+Video mode enumeration is now per-\/monitor. The \mbox{\hyperlink{group__monitor_ga6e4beef7caeec2ae59d37a7a05fcb387}{glfw\+Get\+Video\+Modes}} function now returns all available modes for a specific monitor instead of requiring you to guess how large an array you need. The {\ttfamily glfw\+Get\+Desktop\+Mode} function, which had poorly defined behavior, has been replaced by \mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfw\+Get\+Video\+Mode}}, which returns the current mode of a monitor.\hypertarget{moving_guide_moving_char_up}{}\doxysubsection{Removal of character actions}\label{moving_guide_moving_char_up}
+The action parameter of the \mbox{\hyperlink{group__input_ga2c4c70bfb3fb990182a4591cd21a374d}{character callback}} has been removed. This was an artefact of the origin of G\+L\+FW, i.\+e. being developed in English by a Swede. However, many keyboard layouts require more than one key to produce characters with diacritical marks. Even the Swedish keyboard layout requires this for uncommon cases like ü.
+
+\begin{DoxyParagraph}{Old syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} GLFWCALL character\_callback(\textcolor{keywordtype}{int} character, \textcolor{keywordtype}{int} action);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} character\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} character);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_cursorpos}{}\doxysubsection{Cursor position changes}\label{moving_guide_moving_cursorpos}
+The {\ttfamily glfw\+Get\+Mouse\+Pos} function has been renamed to \mbox{\hyperlink{group__input_gad289438eb7cf53d11eca685373f44105}{glfw\+Get\+Cursor\+Pos}}, {\ttfamily glfw\+Set\+Mouse\+Pos} to \mbox{\hyperlink{group__input_gaaf152cc93418acb0ba342e3f4af922bc}{glfw\+Set\+Cursor\+Pos}} and {\ttfamily glfw\+Set\+Mouse\+Pos\+Callback} to \mbox{\hyperlink{group__input_ga74124d0eff27040fd10e4df9e17d129c}{glfw\+Set\+Cursor\+Pos\+Callback}}.
+
+The cursor position is now {\ttfamily double} instead of {\ttfamily int}, both for the direct functions and for the callback. Some platforms can provide sub-\/pixel cursor movement and this data is now passed on to the application where available. On platforms where this is not provided, the decimal part is zero.
+
+G\+L\+FW 3 only allows you to position the cursor within a window using \mbox{\hyperlink{group__input_gaaf152cc93418acb0ba342e3f4af922bc}{glfw\+Set\+Cursor\+Pos}} (formerly {\ttfamily glfw\+Set\+Mouse\+Pos}) when that window is active. Unless the window is active, the function fails silently.\hypertarget{moving_guide_moving_wheel}{}\doxysubsection{Wheel position replaced by scroll offsets}\label{moving_guide_moving_wheel}
+The {\ttfamily glfw\+Get\+Mouse\+Wheel} function has been removed. Scrolling is the input of offsets and has no absolute position. The mouse wheel callback has been replaced by a \mbox{\hyperlink{group__input_ga077345c3a10d906b2b3f2d550ae02971}{scroll callback}} that receives two-\/dimensional floating point scroll offsets. This allows you to receive precise scroll data from for example modern touchpads.
+
+\begin{DoxyParagraph}{Old syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} GLFWCALL mouse\_wheel\_callback(\textcolor{keywordtype}{int} position);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} scroll\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{double} xoffset, \textcolor{keywordtype}{double} yoffset);}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Removed functions}
+{\ttfamily glfw\+Get\+Mouse\+Wheel}
+\end{DoxyParagraph}
+\hypertarget{moving_guide_moving_repeat}{}\doxysubsection{Key repeat action}\label{moving_guide_moving_repeat}
+The {\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+E\+P\+E\+AT} enable has been removed and key repeat is always enabled for both keys and characters. A new key action, {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+P\+E\+AT}, has been added to allow the \mbox{\hyperlink{group__input_ga9c6c9d019ac11d888e45b11b14772659}{key callback}} to distinguish an initial key press from a repeat. Note that \mbox{\hyperlink{group__input_ga7d8ad8ffaf272808f04e1d5d33ec8859}{glfw\+Get\+Key}} still returns only {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}.\hypertarget{moving_guide_moving_keys}{}\doxysubsection{Physical key input}\label{moving_guide_moving_keys}
+G\+L\+FW 3 key tokens map to physical keys, unlike in G\+L\+FW 2 where they mapped to the values generated by the current keyboard layout. The tokens are named according to the values they would have using the standard US layout, but this is only a convenience, as most programmers are assumed to know that layout. This means that (for example) {\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+E\+F\+T\+\_\+\+B\+R\+A\+C\+K\+ET} is always a single key and is the same key in the same place regardless of what keyboard layouts the users of your program has.
+
+The key input facility was never meant for text input, although using it that way worked slightly better in G\+L\+FW 2. If you were using it to input text, you should be using the character callback instead, on both G\+L\+FW 2 and 3. This will give you the characters being input, as opposed to the keys being pressed.
+
+G\+L\+FW 3 has key tokens for all keys on a standard 105 key keyboard, so instead of having to remember whether to check for {\ttfamily a} or {\ttfamily A}, you now check for G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+A.\hypertarget{moving_guide_moving_joystick}{}\doxysubsection{Joystick function changes}\label{moving_guide_moving_joystick}
+The {\ttfamily glfw\+Get\+Joystick\+Pos} function has been renamed to \mbox{\hyperlink{group__input_ga0aabfd6d7a1fd2519d1dcdfac0f12d22}{glfw\+Get\+Joystick\+Axes}}.
+
+The {\ttfamily glfw\+Get\+Joystick\+Param} function and the {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+S\+E\+NT}, {\ttfamily G\+L\+F\+W\+\_\+\+A\+X\+ES} and {\ttfamily G\+L\+F\+W\+\_\+\+B\+U\+T\+T\+O\+NS} tokens have been replaced by the \mbox{\hyperlink{group__input_gacb1b7dfd79df673d48814c06fc436eff}{glfw\+Joystick\+Present}} function as well as axis and button counts returned by the \mbox{\hyperlink{group__input_ga0aabfd6d7a1fd2519d1dcdfac0f12d22}{glfw\+Get\+Joystick\+Axes}} and \mbox{\hyperlink{group__input_ga1d8a7150d464fb5b5a1dcb8be3a1a3da}{glfw\+Get\+Joystick\+Buttons}} functions.\hypertarget{moving_guide_moving_mbcs}{}\doxysubsection{Win32 M\+B\+C\+S support}\label{moving_guide_moving_mbcs}
+The Win32 port of G\+L\+FW 3 will not compile in \href{https://msdn.microsoft.com/en-us/library/5z097dxa.aspx}{\texttt{ M\+B\+CS mode}}. However, because the use of the Unicode version of the Win32 A\+PI doesn\textquotesingle{}t affect the process as a whole, but only those windows created using it, it\textquotesingle{}s perfectly possible to call M\+B\+CS functions from other parts of the same application. Therefore, even if an application using G\+L\+FW has M\+B\+CS mode code, there\textquotesingle{}s no need for G\+L\+FW itself to support it.\hypertarget{moving_guide_moving_windows}{}\doxysubsection{Support for versions of Windows older than XP}\label{moving_guide_moving_windows}
+All explicit support for version of Windows older than XP has been removed. There is no code that actively prevents G\+L\+FW 3 from running on these earlier versions, but it uses Win32 functions that those versions lack.
+
+Windows XP was released in 2001, and by now (January 2015) it has not only replaced almost all earlier versions of Windows, but is itself rapidly being replaced by Windows 7 and 8. The M\+S\+DN library doesn\textquotesingle{}t even provide documentation for version older than Windows 2000, making it difficult to maintain compatibility with these versions even if it was deemed worth the effort.
+
+The Win32 A\+PI has also not stood still, and G\+L\+FW 3 uses many functions only present on Windows XP or later. Even supporting an OS as new as XP (new from the perspective of G\+L\+FW 2, which still supports Windows 95) requires runtime checking for a number of functions that are present only on modern version of Windows.\hypertarget{moving_guide_moving_syskeys}{}\doxysubsection{Capture of system-\/wide hotkeys}\label{moving_guide_moving_syskeys}
+The ability to disable and capture system-\/wide hotkeys like Alt+\+Tab has been removed. Modern applications, whether they\textquotesingle{}re games, scientific visualisations or something else, are nowadays expected to be good desktop citizens and allow these hotkeys to function even when running in full screen mode.\hypertarget{moving_guide_moving_terminate}{}\doxysubsection{Automatic termination}\label{moving_guide_moving_terminate}
+G\+L\+FW 3 does not register \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}} with {\ttfamily atexit} at initialization, because {\ttfamily exit} calls registered functions from the calling thread and while it is permitted to call {\ttfamily exit} from any thread, \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}} must only be called from the main thread.
+
+To release all resources allocated by G\+L\+FW, you should call \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}} yourself, from the main thread, before the program terminates. Note that this destroys all windows not already destroyed with \mbox{\hyperlink{group__window_ga806747476b7247d292be3711c323ea10}{glfw\+Destroy\+Window}}, invalidating any window handles you may still have.\hypertarget{moving_guide_moving_glu}{}\doxysubsection{G\+L\+U header inclusion}\label{moving_guide_moving_glu}
+G\+L\+FW 3 does not by default include the G\+LU header and G\+LU itself has been deprecated by \href{https://en.wikipedia.org/wiki/Khronos_Group}{\texttt{ Khronos}}. {\bfseries{New projects should not use G\+LU}}, but if you need it for legacy code that has been moved to G\+L\+FW 3, you can request that the G\+L\+FW header includes it by defining \mbox{\hyperlink{build_guide_GLFW_INCLUDE_GLU}{G\+L\+F\+W\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+G\+LU}} before the inclusion of the G\+L\+FW header.
+
+\begin{DoxyParagraph}{Old syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <GL/glfw.h>}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{New syntax}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define GLFW\_INCLUDE\_GLU}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <GLFW/glfw3.h>}}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+There are many libraries that offer replacements for the functionality offered by G\+LU. For the matrix helper functions, see math libraries like \href{https://github.com/g-truc/glm}{\texttt{ G\+LM}} (for C++), \href{https://github.com/datenwolf/linmath.h}{\texttt{ linmath.\+h}} (for C) and others. For the tessellation functions, see for example \href{https://github.com/memononen/libtess2}{\texttt{ libtess2}}.\hypertarget{moving_guide_moving_tables}{}\doxysection{Name change tables}\label{moving_guide_moving_tables}
+\hypertarget{moving_guide_moving_renamed_functions}{}\doxysubsection{Renamed functions}\label{moving_guide_moving_renamed_functions}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 2 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 3 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Notes  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 2 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 3 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Notes  }\\\cline{1-3}
+\endhead
+{\ttfamily glfw\+Open\+Window} &\mbox{\hyperlink{group__window_gaaccd00fafe81e2db94e8cdf55721e055}{glfw\+Create\+Window}} &All channel bit depths are now hints  \\\cline{1-3}
+{\ttfamily glfw\+Close\+Window} &\mbox{\hyperlink{group__window_ga806747476b7247d292be3711c323ea10}{glfw\+Destroy\+Window}} &\\\cline{1-3}
+{\ttfamily glfw\+Open\+Window\+Hint} &\mbox{\hyperlink{group__window_ga69c40728499720bef8a49aa925ea0efa}{glfw\+Window\+Hint}} &Now accepts all {\ttfamily G\+L\+F\+W\+\_\+$\ast$\+\_\+\+B\+I\+TS} tokens  \\\cline{1-3}
+{\ttfamily glfw\+Enable} &\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfw\+Set\+Input\+Mode}} &\\\cline{1-3}
+{\ttfamily glfw\+Disable} &\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfw\+Set\+Input\+Mode}} &\\\cline{1-3}
+{\ttfamily glfw\+Get\+Mouse\+Pos} &\mbox{\hyperlink{group__input_gad289438eb7cf53d11eca685373f44105}{glfw\+Get\+Cursor\+Pos}} &\\\cline{1-3}
+{\ttfamily glfw\+Set\+Mouse\+Pos} &\mbox{\hyperlink{group__input_gaaf152cc93418acb0ba342e3f4af922bc}{glfw\+Set\+Cursor\+Pos}} &\\\cline{1-3}
+{\ttfamily glfw\+Set\+Mouse\+Pos\+Callback} &\mbox{\hyperlink{group__input_ga74124d0eff27040fd10e4df9e17d129c}{glfw\+Set\+Cursor\+Pos\+Callback}} &\\\cline{1-3}
+{\ttfamily glfw\+Set\+Mouse\+Wheel\+Callback} &\mbox{\hyperlink{group__input_gaa786b59f19ad8525d251cda8e0d7d29b}{glfw\+Set\+Scroll\+Callback}} &Accepts two-\/dimensional scroll offsets as doubles  \\\cline{1-3}
+{\ttfamily glfw\+Get\+Joystick\+Pos} &\mbox{\hyperlink{group__input_ga0aabfd6d7a1fd2519d1dcdfac0f12d22}{glfw\+Get\+Joystick\+Axes}} &\\\cline{1-3}
+{\ttfamily glfw\+Get\+Window\+Param} &\mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}} &\\\cline{1-3}
+{\ttfamily glfw\+Get\+G\+L\+Version} &\mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfw\+Get\+Window\+Attrib}} &Use {\ttfamily G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}, {\ttfamily G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR} and {\ttfamily G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+R\+E\+V\+I\+S\+I\+ON}  \\\cline{1-3}
+{\ttfamily glfw\+Get\+Desktop\+Mode} &\mbox{\hyperlink{group__monitor_gabc19f9e77d83fdfdd0de57bdb9cfc5a8}{glfw\+Get\+Video\+Mode}} &Returns the current mode of a monitor  \\\cline{1-3}
+{\ttfamily glfw\+Get\+Joystick\+Param} &\mbox{\hyperlink{group__input_gacb1b7dfd79df673d48814c06fc436eff}{glfw\+Joystick\+Present}} &The axis and button counts are provided by \mbox{\hyperlink{group__input_ga0aabfd6d7a1fd2519d1dcdfac0f12d22}{glfw\+Get\+Joystick\+Axes}} and \mbox{\hyperlink{group__input_ga1d8a7150d464fb5b5a1dcb8be3a1a3da}{glfw\+Get\+Joystick\+Buttons}}  \\\cline{1-3}
+\end{longtabu}
+\hypertarget{moving_guide_moving_renamed_types}{}\doxysubsection{Renamed types}\label{moving_guide_moving_renamed_types}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 2 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 3 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Notes  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 2 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 3 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Notes  }\\\cline{1-3}
+\endhead
+{\ttfamily G\+L\+F\+Wmousewheelfun} &\mbox{\hyperlink{group__input_ga077345c3a10d906b2b3f2d550ae02971}{G\+L\+F\+Wscrollfun}} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+Wmouseposfun} &\mbox{\hyperlink{group__input_ga081a67dfb879e14707a5abd7de242b8a}{G\+L\+F\+Wcursorposfun}} &\\\cline{1-3}
+\end{longtabu}
+\hypertarget{moving_guide_moving_renamed_tokens}{}\doxysubsection{Renamed tokens}\label{moving_guide_moving_renamed_tokens}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 2 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 3 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Notes  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 2 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ G\+L\+FW 3 }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Notes  }\\\cline{1-3}
+\endhead
+{\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR} &{\ttfamily G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR} &Renamed as it applies to Open\+GL ES as well  \\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR} &{\ttfamily G\+L\+F\+W\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR} &Renamed as it applies to Open\+GL ES as well  \\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+F\+S\+A\+A\+\_\+\+S\+A\+M\+P\+L\+ES} &{\ttfamily G\+L\+F\+W\+\_\+\+S\+A\+M\+P\+L\+ES} &Renamed to match the Open\+GL A\+PI  \\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+A\+C\+T\+I\+VE} &{\ttfamily G\+L\+F\+W\+\_\+\+F\+O\+C\+U\+S\+ED} &Renamed to match the window focus callback  \\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+N\+O\+\_\+\+R\+E\+S\+I\+ZE} &{\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+S\+I\+Z\+A\+B\+LE} &The default has been inverted  \\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+M\+O\+U\+S\+E\+\_\+\+C\+U\+R\+S\+OR} &{\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+OR} &Used with \mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfw\+Set\+Input\+Mode}}  \\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+E\+SC} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+E\+S\+C\+A\+PE} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+D\+EL} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+D\+E\+L\+E\+TE} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+P\+A\+G\+E\+UP} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+P\+A\+G\+E\+\_\+\+UP} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+P\+A\+G\+E\+D\+O\+WN} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+P\+A\+G\+E\+\_\+\+D\+O\+WN} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+K\+P\+\_\+\+N\+U\+M\+\_\+\+L\+O\+CK} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+N\+U\+M\+\_\+\+L\+O\+CK} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+C\+T\+RL} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+E\+F\+T\+\_\+\+C\+O\+N\+T\+R\+OL} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+S\+H\+I\+FT} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+E\+F\+T\+\_\+\+S\+H\+I\+FT} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+A\+LT} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+E\+F\+T\+\_\+\+A\+LT} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+S\+U\+P\+ER} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+E\+F\+T\+\_\+\+S\+U\+P\+ER} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+C\+T\+RL} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+I\+G\+H\+T\+\_\+\+C\+O\+N\+T\+R\+OL} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+S\+H\+I\+FT} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+I\+G\+H\+T\+\_\+\+S\+H\+I\+FT} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+A\+LT} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+I\+G\+H\+T\+\_\+\+A\+LT} &\\\cline{1-3}
+{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+S\+U\+P\+ER} &{\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+R\+I\+G\+H\+T\+\_\+\+S\+U\+P\+ER} &\\\cline{1-3}
+\end{longtabu}

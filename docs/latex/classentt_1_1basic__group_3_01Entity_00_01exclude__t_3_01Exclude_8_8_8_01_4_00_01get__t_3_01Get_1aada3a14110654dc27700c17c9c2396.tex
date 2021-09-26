@@ -1,0 +1,504 @@
+\hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396}{}\doxysection{entt\+::basic\+\_\+group$<$ Entity, exclude\+\_\+t$<$ Exclude... $>$, get\+\_\+t$<$ Get... $>$, Owned... $>$ Class Template Reference}
+\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396}\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+
+
+Owning group.  
+
+
+
+
+{\ttfamily \#include $<$entt.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}} 
+using \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} = Entity
+\begin{DoxyCompactList}\small\item\em Underlying entity identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a1c83478c5db4749a31a4fb638901a153}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a1c83478c5db4749a31a4fb638901a153}} 
+using \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a1c83478c5db4749a31a4fb638901a153}{size\+\_\+type}} = std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}} 
+using \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}} = typename \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$\+::\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}}
+\begin{DoxyCompactList}\small\item\em Random access iterator type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}} 
+using \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}{reverse\+\_\+iterator}} = typename \mbox{\hyperlink{classentt_1_1basic__sparse__set}{basic\+\_\+sparse\+\_\+set}}$<$ Entity $>$\+::\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}{reverse\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Reversed iterator type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a54788e802476d9cb81b51b6bd17efcc4}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a54788e802476d9cb81b51b6bd17efcc4}} 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a54788e802476d9cb81b51b6bd17efcc4}{basic\+\_\+group}} () E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Default constructor to use to create empty, invalid groups. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a1c83478c5db4749a31a4fb638901a153}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acf74917323f67e0b81b1253cc42308e9}{size}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns the number of entities that have the given components. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a6a5015a0bd9284e054f343954b011db8}{empty}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks whether a group is empty. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Component $>$ }\\Component $\ast$ \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a945850dca5e5d13ae5be53eaf863ac38}{raw}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Direct access to the list of components of a given pool. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} $\ast$ \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a50c2cb5276b7784011db9e937f31ada2}{data}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Direct access to the list of entities. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a42976cf4ac4e80f2dce11ea46de90516}{begin}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the first entity of the group. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a80fd2253d3ec3a052ffb4945fef713a2}{end}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator that is past the last entity of the group. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a3f1102861596fad66b1a7269bba7fd96}{rbegin}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the first entity of the reversed group. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac68513c3e37d032962bae71147ef8e1a}{rend}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterator that is past the last entity of the reversed group. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_aeb0d3d97b051c018ea05b8e1719ff7a1}{front}} () const
+\begin{DoxyCompactList}\small\item\em Returns the first entity of the group, if any. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a35b9bcc5466128faa93a6b2320c165dc}{back}} () const
+\begin{DoxyCompactList}\small\item\em Returns the last entity of the group, if any. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a40426861e4d1c0298b483174fba03a48}{find}} (const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} entt) const
+\begin{DoxyCompactList}\small\item\em Finds an entity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a3145c4dd82523187023c5fb9907b782d}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a1c83478c5db4749a31a4fb638901a153}{size\+\_\+type}} pos) const
+\begin{DoxyCompactList}\small\item\em Returns the identifier that occupies the given position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac55c06aca28b0405afa66b879c4b9546}{operator bool}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Checks if a group is properly initialized. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a64efa52ecf4be4e957d79bb4479dfb95}{contains}} (const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} entt) const
+\begin{DoxyCompactList}\small\item\em Checks if a group contains an entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Component$>$ }\\decltype(auto) \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a5c35161e6cc389a52a73768ebe61dd38}{get}} (const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} entt) const
+\begin{DoxyCompactList}\small\item\em Returns the components assigned to the given entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func $>$ }\\void \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_abd465a5a0743b54cac72bf0d9163b7f4}{each}} (Func func) const
+\begin{DoxyCompactList}\small\item\em Iterates entities and components and applies the given function object to them. \end{DoxyCompactList}\item 
+iterable\+\_\+group \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a2f5616a30b6aa1db7ceee8f47f6f5ce6}{each}} () const E\+N\+T\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT
+\begin{DoxyCompactList}\small\item\em Returns an iterable object to use to {\itshape visit} the group. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Component, typename Compare , typename Sort  = std\+\_\+sort, typename... Args$>$ }\\void \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a0c4a147763e5ec35c53f121c8555b499}{sort}} (Compare compare, Sort algo=Sort\{\}, Args \&\&... args) const
+\begin{DoxyCompactList}\small\item\em Sort a group according to the given comparison function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a60c928831c22b7dd2216dbc469f68f24}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a60c928831c22b7dd2216dbc469f68f24}} 
+class \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a60c928831c22b7dd2216dbc469f68f24}{basic\+\_\+registry$<$ Entity $>$}}
+\begin{DoxyCompactList}\small\item\em A registry is allowed to create groups. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Entity, typename... Exclude, typename... Get, typename... Owned$>$\newline
+class entt\+::basic\+\_\+group$<$ Entity, exclude\+\_\+t$<$ Exclude... $>$, get\+\_\+t$<$ Get... $>$, Owned... $>$}
+
+Owning group. 
+
+Owning groups return all entities and only the entities that have at least the given components. Moreover\+:
+
+
+\begin{DoxyItemize}
+\item It\textquotesingle{}s guaranteed that the entity list is tightly packed in memory for fast iterations.
+\item It\textquotesingle{}s guaranteed that the lists of owned components are tightly packed in memory for even faster iterations and to allow direct access.
+\item They stay true to the order of the owned components and all instances have the same order in memory.
+\end{DoxyItemize}
+
+The more types of components are owned by a group, the faster it is to iterate them.
+
+{\bfseries{Important}} 
+
+Iterators aren\textquotesingle{}t invalidated if\+:
+
+
+\begin{DoxyItemize}
+\item New instances of the given components are created and assigned to entities.
+\item The entity currently pointed is modified (as an example, if one of the given components is removed from the entity to which the iterator points).
+\item The entity currently pointed is destroyed.
+\end{DoxyItemize}
+
+In all other cases, modifying the pools iterated by the group in any way invalidates all the iterators and using them results in undefined behavior.
+
+\begin{DoxyNote}{Note}
+Groups share references to the underlying data structures of the registry that generated them. Therefore any change to the entities and to the components made by means of the registry are immediately reflected by all the groups. Moreover, sorting an owning group affects all the instance of the same group (it means that users don\textquotesingle{}t have to call {\ttfamily sort} on each instance to sort all of them because they share the underlying data structure).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Lifetime of a group must not overcome that of the registry that generated it. In any other case, attempting to use a group results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Entity} & A valid entity type (see \mbox{\hyperlink{structentt_1_1entt__traits}{entt\+\_\+traits}} for more details). \\
+\hline
+{\em Exclude} & Types of components used to filter the group. \\
+\hline
+{\em Get} & Types of components observed by the group. \\
+\hline
+{\em Owned} & Types of components owned by the group. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a35b9bcc5466128faa93a6b2320c165dc}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a35b9bcc5466128faa93a6b2320c165dc}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!back@{back}}
+\index{back@{back}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{back()}{back()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the last entity of the group, if any. 
+
+\begin{DoxyReturn}{Returns}
+The last entity of the group if one exists, the null entity otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a42976cf4ac4e80f2dce11ea46de90516}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a42976cf4ac4e80f2dce11ea46de90516}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!begin@{begin}}
+\index{begin@{begin}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator to the first entity of the group. 
+
+The returned iterator points to the first entity of the group. If the group is empty, the returned iterator will be equal to {\ttfamily \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a80fd2253d3ec3a052ffb4945fef713a2}{end()}}}.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the first entity of the group. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a64efa52ecf4be4e957d79bb4479dfb95}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a64efa52ecf4be4e957d79bb4479dfb95}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!contains@{contains}}
+\index{contains@{contains}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a group contains an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & A valid entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the group contains the given entity, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a50c2cb5276b7784011db9e937f31ada2}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a50c2cb5276b7784011db9e937f31ada2}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!data@{data}}
+\index{data@{data}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}}$\ast$ \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to the list of entities. 
+
+The returned pointer is such that range {\ttfamily \mbox{[}\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a50c2cb5276b7784011db9e937f31ada2}{data()}}, \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a50c2cb5276b7784011db9e937f31ada2}{data()}} + \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acf74917323f67e0b81b1253cc42308e9}{size()}})} is always a valid range, even if the container is empty.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the array of entities. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a2f5616a30b6aa1db7ceee8f47f6f5ce6}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a2f5616a30b6aa1db7ceee8f47f6f5ce6}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!each@{each}}
+\index{each@{each}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{each()}{each()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+iterable\+\_\+group \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::each (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterable object to use to {\itshape visit} the group. 
+
+The iterable object returns tuples that contain the current entity and a set of references to its non-\/empty components. The {\itshape constness} of the components is as requested.
+
+\begin{DoxyNote}{Note}
+Empty types aren\textquotesingle{}t explicitly instantiated and therefore they are never returned during iterations.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+An iterable object to use to {\itshape visit} the group. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_abd465a5a0743b54cac72bf0d9163b7f4}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_abd465a5a0743b54cac72bf0d9163b7f4}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!each@{each}}
+\index{each@{each}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{each()}{each()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+template$<$typename Func $>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::each (\begin{DoxyParamCaption}\item[{Func}]{func }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterates entities and components and applies the given function object to them. 
+
+The function object is invoked for each entity. It is provided with the entity itself and a set of references to non-\/empty components. The {\itshape constness} of the components is as requested.~\newline
+ The signature of the function must be equivalent to one of the following forms\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void(\textcolor{keyword}{const} \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\_type}}, Type \&...);}
+\DoxyCodeLine{void(Type \&...);}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+Empty types aren\textquotesingle{}t explicitly instantiated and therefore they are never returned during iterations.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Type of the function object to invoke. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em func} & A valid function object. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a6a5015a0bd9284e054f343954b011db8}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a6a5015a0bd9284e054f343954b011db8}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!empty@{empty}}
+\index{empty@{empty}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+bool \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether a group is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if the group is empty, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a80fd2253d3ec3a052ffb4945fef713a2}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a80fd2253d3ec3a052ffb4945fef713a2}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!end@{end}}
+\index{end@{end}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator that is past the last entity of the group. 
+
+The returned iterator points to the entity following the last entity of the group. Attempting to dereference the returned iterator results in undefined behavior.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the entity following the last entity of the group. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a40426861e4d1c0298b483174fba03a48}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a40426861e4d1c0298b483174fba03a48}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!find@{find}}
+\index{find@{find}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a720e71f06da569695a58420f58f749e9}{iterator}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::find (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Finds an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & A valid entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An iterator to the given entity if it\textquotesingle{}s found, past the end iterator otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_aeb0d3d97b051c018ea05b8e1719ff7a1}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_aeb0d3d97b051c018ea05b8e1719ff7a1}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!front@{front}}
+\index{front@{front}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{front()}{front()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::front (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the first entity of the group, if any. 
+
+\begin{DoxyReturn}{Returns}
+The first entity of the group if one exists, the null entity otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a5c35161e6cc389a52a73768ebe61dd38}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a5c35161e6cc389a52a73768ebe61dd38}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!get@{get}}
+\index{get@{get}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+template$<$typename... Component$>$ \\
+decltype(auto) \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}}}]{entt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the components assigned to the given entity. 
+
+Prefer this function instead of {\ttfamily \mbox{\hyperlink{classentt_1_1basic__registry_a3a683bb33971cc5a0bbbf4a9409208df}{registry\+::get}}} during iterations. It has far better performance than its counterpart.
+
+\begin{DoxyWarning}{Warning}
+Attempting to use an invalid component type results in a compilation error. Attempting to use an entity that doesn\textquotesingle{}t belong to the group results in undefined behavior.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & Types of components to get. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entt} & A valid entity identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The components assigned to the entity. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac55c06aca28b0405afa66b879c4b9546}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac55c06aca28b0405afa66b879c4b9546}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Checks if a group is properly initialized. 
+
+\begin{DoxyReturn}{Returns}
+True if the group is properly initialized, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a3145c4dd82523187023c5fb9907b782d}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a3145c4dd82523187023c5fb9907b782d}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac46b1e783b4e723442366071f9f23fce}{entity\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a1c83478c5db4749a31a4fb638901a153}{size\+\_\+type}}}]{pos }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the identifier that occupies the given position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Position of the element to return. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The identifier that occupies the given position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a945850dca5e5d13ae5be53eaf863ac38}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a945850dca5e5d13ae5be53eaf863ac38}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!raw@{raw}}
+\index{raw@{raw}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{raw()}{raw()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+template$<$typename Component $>$ \\
+Component$\ast$ \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to the list of components of a given pool. 
+
+The returned pointer is such that range {\ttfamily \mbox{[}raw$<$Component$>$(), raw$<$Component$>$() + \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acf74917323f67e0b81b1253cc42308e9}{size()}})} is always a valid range, even if the container is empty.~\newline
+
+
+\begin{DoxyWarning}{Warning}
+This function is only available for owned types.
+\end{DoxyWarning}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & Type of component in which one is interested. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the array of components. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a3f1102861596fad66b1a7269bba7fd96}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a3f1102861596fad66b1a7269bba7fd96}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!rbegin@{rbegin}}
+\index{rbegin@{rbegin}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{rbegin()}{rbegin()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::rbegin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator to the first entity of the reversed group. 
+
+The returned iterator points to the first entity of the reversed group. If the group is empty, the returned iterator will be equal to {\ttfamily \mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac68513c3e37d032962bae71147ef8e1a}{rend()}}}.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the first entity of the reversed group. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac68513c3e37d032962bae71147ef8e1a}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_ac68513c3e37d032962bae71147ef8e1a}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!rend@{rend}}
+\index{rend@{rend}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{rend()}{rend()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acdb732b267ba173980511c0e4b265bda}{reverse\+\_\+iterator}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::rend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an iterator that is past the last entity of the reversed group. 
+
+The returned iterator points to the entity following the last entity of the reversed group. Attempting to dereference the returned iterator results in undefined behavior.
+
+\begin{DoxyReturn}{Returns}
+An iterator to the entity following the last entity of the reversed group. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acf74917323f67e0b81b1253cc42308e9}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_acf74917323f67e0b81b1253cc42308e9}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!size@{size}}
+\index{size@{size}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+\mbox{\hyperlink{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a1c83478c5db4749a31a4fb638901a153}{size\+\_\+type}} \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of entities that have the given components. 
+
+\begin{DoxyReturn}{Returns}
+Number of entities that have the given components. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a0c4a147763e5ec35c53f121c8555b499}\label{classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396_a0c4a147763e5ec35c53f121c8555b499}} 
+\index{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}!sort@{sort}}
+\index{sort@{sort}!entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$@{entt::basic\_group$<$ Entity, exclude\_t$<$ Exclude... $>$, get\_t$<$ Get... $>$, Owned... $>$}}
+\doxysubsubsection{\texorpdfstring{sort()}{sort()}}
+{\footnotesize\ttfamily template$<$typename Entity , typename... Exclude, typename... Get, typename... Owned$>$ \\
+template$<$typename... Component, typename Compare , typename Sort  = std\+\_\+sort, typename... Args$>$ \\
+void \mbox{\hyperlink{classentt_1_1basic__group}{entt\+::basic\+\_\+group}}$<$ Entity, \mbox{\hyperlink{structentt_1_1exclude__t}{exclude\+\_\+t}}$<$ Exclude... $>$, \mbox{\hyperlink{structentt_1_1get__t}{get\+\_\+t}}$<$ Get... $>$, Owned... $>$\+::sort (\begin{DoxyParamCaption}\item[{Compare}]{compare,  }\item[{Sort}]{algo = {\ttfamily Sort\{\}},  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sort a group according to the given comparison function. 
+
+Sort the group so that iterating it with a couple of iterators returns entities and components in the expected order. See {\ttfamily begin} and {\ttfamily end} for more details.
+
+The comparison function object must return {\ttfamily true} if the first element is {\itshape less} than the second one, {\ttfamily false} otherwise. The signature of the comparison function should be equivalent to one of the following\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{bool(std::tuple<Component \&...>, std::tuple<Component \&...>);}
+\DoxyCodeLine{bool(\textcolor{keyword}{const} Component \&, \textcolor{keyword}{const} Component \&);}
+\DoxyCodeLine{bool(\textcolor{keyword}{const} Entity, \textcolor{keyword}{const} Entity);}
+\end{DoxyCode}
+
+
+Where {\ttfamily Component} are either owned types or not but still such that they are iterated by the group.~\newline
+ Moreover, the comparison function object shall induce a {\itshape strict weak ordering} on the values.
+
+The sort function oject must offer a member function template {\ttfamily operator()} that accepts three arguments\+:
+
+
+\begin{DoxyItemize}
+\item An iterator to the first element of the range to sort.
+\item An iterator past the last element of the range to sort.
+\item A comparison function to use to compare the elements.
+\end{DoxyItemize}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & Optional types of components to compare. \\
+\hline
+{\em Compare} & Type of comparison function object. \\
+\hline
+{\em Sort} & Type of sort function object. \\
+\hline
+{\em Args} & Types of arguments to forward to the sort function object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em compare} & A valid comparison function object. \\
+\hline
+{\em algo} & A valid sort function object. \\
+\hline
+{\em args} & Arguments to forward to the sort function object, if any. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Light\+Framework/libs/entt/entt.\+hpp\end{DoxyCompactItemize}

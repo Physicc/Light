@@ -1,0 +1,9 @@
+digraph "entt::basic_storage&lt; Entity, Type, std::enable_if_t&lt; is_empty_v&lt; Type &gt; &gt; &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="entt::basic_storage\l\< Entity, Type, std\l::enable_if_t\< is_empty\l_v\< Type \> \> \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Basic storage implementation."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="entt::basic_sparse\l_set\< Entity \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classentt_1_1basic__sparse__set.html",tooltip="Basic sparse set implementation."];
+}

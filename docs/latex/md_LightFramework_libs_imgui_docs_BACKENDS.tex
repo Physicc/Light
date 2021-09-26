@@ -1,0 +1,110 @@
+\+\_\+(You may browse this at \href{https://github.com/ocornut/imgui/blob/master/docs/BACKENDS.md}{\texttt{ https\+://github.\+com/ocornut/imgui/blob/master/docs/\+B\+A\+C\+K\+E\+N\+D\+S.\+md}} or view this file with any Markdown viewer)\+\_\+\hypertarget{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md33}{}\doxysubsection{Dear Im\+Gui\+: Backends}\label{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md33}
+{\bfseries{The backends/ folder contains backends for popular platforms/graphics A\+PI, which you can use in your application or engine to easily integrate Dear Im\+Gui.}} Each backend is typically self-\/contained in a pair of files\+: imgui\+\_\+impl\+\_\+\+X\+X\+X\+X.\+cpp + imgui\+\_\+impl\+\_\+\+X\+X\+X\+X.\+h.
+
+
+\begin{DoxyItemize}
+\item The \textquotesingle{}Platform\textquotesingle{} backends are in charge of\+: mouse/keyboard/gamepad inputs, cursor shape, timing, windowing.~\newline
+ e.\+g. Windows (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_win32.cpp}{\texttt{ imgui\+\_\+impl\+\_\+win32.\+cpp}}), G\+L\+FW (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_glfw.cpp}{\texttt{ imgui\+\_\+impl\+\_\+glfw.\+cpp}}), S\+D\+L2 (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_sdl.cpp}{\texttt{ imgui\+\_\+impl\+\_\+sdl.\+cpp}}), etc.
+\item The \textquotesingle{}Renderer\textquotesingle{} backends are in charge of\+: creating atlas texture, rendering imgui draw data.~\newline
+ e.\+g. Direct\+X11 (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_dx11.cpp}{\texttt{ imgui\+\_\+impl\+\_\+dx11.\+cpp}}), Open\+G\+L/\+Web\+GL (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_opengl3.cpp}{\texttt{ imgui\+\_\+impl\+\_\+opengl3.\+cpp}}, Vulkan (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_vulkan.cpp}{\texttt{ imgui\+\_\+impl\+\_\+vulkan.\+cpp}}, etc.
+\item For some high-\/level frameworks, a single backend usually handle both \textquotesingle{}Platform\textquotesingle{} and \textquotesingle{}Renderer\textquotesingle{} parts.~\newline
+ e.\+g. Allegro 5 (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_allegro5.cpp}{\texttt{ imgui\+\_\+impl\+\_\+allegro5.\+cpp}}), Marmalade (\href{https://github.com/ocornut/imgui/blob/master/backends/imgui_impl_marmalade.cpp}{\texttt{ imgui\+\_\+impl\+\_\+marmalade.\+cpp}}). If you end up creating a custom backend for your engine, you may want to do the same.
+\end{DoxyItemize}
+
+An application usually combines 1 Platform backend + 1 Renderer backend + main Dear Im\+Gui sources. For example, the \href{https://github.com/ocornut/imgui/tree/master/examples/example_win32_directx11}{\texttt{ example\+\_\+win32\+\_\+directx11}} application combines imgui\+\_\+impl\+\_\+win32.\+cpp + imgui\+\_\+impl\+\_\+dx11.\+cpp. There are 20+ examples in the \href{https://github.com/ocornut/imgui/blob/master/examples/}{\texttt{ examples/}} folder. See \href{https://github.com/ocornut/imgui/blob/master/docs/EXAMPLES.md}{\texttt{ E\+X\+A\+M\+P\+L\+E\+S.\+MD}} for details.
+
+{\bfseries{Once Dear Im\+Gui is setup and running, run and refer to {\ttfamily Im\+Gui\+::\+Show\+Demo\+Window()} in imgui\+\_\+demo.\+cpp for usage of the end-\/user A\+PI.}}\hypertarget{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md34}{}\doxysubsubsection{What are backends}\label{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md34}
+Dear Im\+Gui is highly portable and only requires a few things to run and render, typically\+:
+
+
+\begin{DoxyItemize}
+\item Required\+: providing mouse/keyboard inputs (fed into the {\ttfamily \mbox{\hyperlink{structImGuiIO}{Im\+Gui\+IO}}} structure).
+\item Required\+: uploading the font atlas texture into graphics memory.
+\item Required\+: rendering indexed textured triangles with a clipping rectangle.
+\end{DoxyItemize}
+
+Extra features are opt-\/in, our backends try to support as many as possible\+:
+
+
+\begin{DoxyItemize}
+\item Optional\+: custom texture binding support.
+\item Optional\+: clipboard support.
+\item Optional\+: gamepad support.
+\item Optional\+: mouse cursor shape support.
+\item Optional\+: I\+ME support.
+\item Optional\+: multi-\/viewports support. etc.
+\end{DoxyItemize}
+
+This is essentially what each backends are doing + obligatory portability cruft. Using default backends ensure you can get all those features including the ones that would be harder to implement on your side (e.\+g. multi-\/viewports support).
+
+It is important to understand the difference between the core Dear Im\+Gui library (files in the root folder) and backends which we are describing here (backends/ folder).
+
+
+\begin{DoxyItemize}
+\item Some issues may only be backend or platform specific.
+\item You should be able to write backends for pretty much any platform and any 3D graphics A\+PI. e.\+g. you can get creative and use software rendering or render remotely on a different machine.
+\end{DoxyItemize}\hypertarget{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md35}{}\doxysubsubsection{Integrating a backend}\label{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md35}
+See \char`\"{}\+Getting Started\char`\"{} section of \href{https://github.com/ocornut/imgui/blob/master/docs/EXAMPLES.md}{\texttt{ E\+X\+A\+M\+P\+L\+E\+S.\+MD}} for more details.\hypertarget{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md36}{}\doxysubsubsection{List of backends}\label{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md36}
+In the \href{https://github.com/ocornut/imgui/blob/master/backends}{\texttt{ backends/}} folder\+:
+
+List of Platforms Backends\+: \begin{DoxyVerb}imgui_impl_android.cpp    ; Android native app API
+imgui_impl_glfw.cpp       ; GLFW (Windows, macOS, Linux, etc.) http://www.glfw.org/
+imgui_impl_osx.mm         ; macOS native API (not as feature complete as glfw/sdl backends)
+imgui_impl_sdl.cpp        ; SDL2 (Windows, macOS, Linux, iOS, Android) https://www.libsdl.org
+imgui_impl_win32.cpp      ; Win32 native API (Windows)
+imgui_impl_glut.cpp       ; GLUT/FreeGLUT (this is prehistoric software and absolutely not recommended today!)
+\end{DoxyVerb}
+
+
+List of Renderer Backends\+: \begin{DoxyVerb}imgui_impl_dx9.cpp        ; DirectX9
+imgui_impl_dx10.cpp       ; DirectX10
+imgui_impl_dx11.cpp       ; DirectX11
+imgui_impl_dx12.cpp       ; DirectX12
+imgui_impl_metal.mm       ; Metal (with ObjC)
+imgui_impl_opengl2.cpp    ; OpenGL 2 (legacy, fixed pipeline <- don't use with modern OpenGL context)
+imgui_impl_opengl3.cpp    ; OpenGL 3/4, OpenGL ES 2, OpenGL ES 3 (modern programmable pipeline)
+imgui_impl_vulkan.cpp     ; Vulkan
+imgui_impl_wgpu.cpp       ; WebGPU
+\end{DoxyVerb}
+
+
+List of high-\/level Frameworks Backends (combining Platform + Renderer)\+: \begin{DoxyVerb}imgui_impl_allegro5.cpp
+imgui_impl_marmalade.cpp
+\end{DoxyVerb}
+
+
+Emscripten is also supported. The \href{https://github.com/ocornut/imgui/tree/master/examples/example_emscripten_opengl3}{\texttt{ example\+\_\+emscripten\+\_\+opengl3}} app uses imgui\+\_\+impl\+\_\+sdl.\+cpp + imgui\+\_\+impl\+\_\+opengl3.\+cpp, but other combos are possible.\hypertarget{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md37}{}\doxysubsubsection{Backends for third-\/party frameworks, graphics A\+P\+I or other languages}\label{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md37}
+See \href{https://github.com/ocornut/imgui/wiki/Bindings}{\texttt{ https\+://github.\+com/ocornut/imgui/wiki/\+Bindings}} for the full list.\hypertarget{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md38}{}\doxysubsubsection{Recommended Backends}\label{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md38}
+If you are not sure which backend to use, the recommended platform/frameworks for portable applications\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Library }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Website }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Backend }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Note  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Library }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Website }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Backend }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Note  }\\\cline{1-4}
+\endhead
+G\+L\+FW &\href{https://github.com/glfw/glfw}{\texttt{ https\+://github.\+com/glfw/glfw}} &imgui\+\_\+impl\+\_\+glfw.\+cpp &\\\cline{1-4}
+S\+D\+L2 &\href{https://www.libsdl.org}{\texttt{ https\+://www.\+libsdl.\+org}} &imgui\+\_\+impl\+\_\+sdl.\+cpp &\\\cline{1-4}
+Sokol &\href{https://github.com/floooh/sokol}{\texttt{ https\+://github.\+com/floooh/sokol}} &\href{https://github.com/floooh/sokol/blob/master/util/sokol_imgui.h}{\texttt{ util/sokol\+\_\+imgui.\+h}} &Lower-\/level than G\+L\+F\+W/\+S\+DL  \\\cline{1-4}
+\end{longtabu}
+\hypertarget{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md39}{}\doxysubsubsection{Using a custom engine?}\label{md_LightFramework_libs_imgui_docs_BACKENDS_autotoc_md39}
+You will likely be tempted to start by rewrite your own backend using your own custom/high-\/level facilities...~\newline
+ Think twice!
+
+If you are new to Dear Im\+Gui, first try using the existing backends as-\/is. You will save lots of time integrating the library. You can L\+A\+T\+ER decide to rewrite yourself a custom backend if you really need to. In most situations, custom backends have less features and more bugs than the standard backends we provide. If you want portability, you can use multiple backends and choose between them either at compile time or at runtime.
+
+{\bfseries{Example A}}\+: your engine is built over Windows + Direct\+X11 but you have your own high-\/level rendering system layered over Direct\+X11.~\newline
+ Suggestion\+: try using imgui\+\_\+impl\+\_\+win32.\+cpp + imgui\+\_\+impl\+\_\+dx11.\+cpp first. Once it works, if you really need it you can replace the imgui\+\_\+impl\+\_\+dx11.\+cpp code with a custom renderer using your own rendering functions, and keep using the standard Win32 code etc.
+
+{\bfseries{Example B}}\+: your engine runs on Windows, Mac, Linux and uses Direct\+X11, Metal, Vulkan respectively.~\newline
+ Suggestion\+: use multiple generic backends! Once it works, if you really need it you can replace parts of backends with your own abstractions.
+
+{\bfseries{Example C}}\+: your engine runs on platforms we can\textquotesingle{}t provide public backends for (e.\+g. P\+S4/\+P\+S5, Switch), and you have high-\/level systems everywhere.~\newline
+ Suggestion\+: try using a non-\/portable backend first (e.\+g. win32 + underlying graphics A\+PI) to get your desktop builds working first. This will get you running faster and get your acquainted with how Dear Im\+Gui works and is setup. You can then rewrite a custom backend using your own engine A\+PI.
+
+Also\+: The \href{https://github.com/ocornut/imgui/issues/1542}{\texttt{ multi-\/viewports feature}} of the \textquotesingle{}docking\textquotesingle{} branch allows Dear Im\+Gui windows to be seamlessly detached from the main application window. This is achieved using an extra layer to the Platform and Renderer backends, which allows Dear Im\+Gui to communicate platform-\/specific requests such as\+: \char`\"{}create an additional O\+S window\char`\"{}, \char`\"{}create a render context\char`\"{}, \char`\"{}get the O\+S position of this
+window\char`\"{} etc. See \textquotesingle{}\mbox{\hyperlink{structImGuiPlatformIO}{Im\+Gui\+Platform\+IO}}\textquotesingle{} for details. Supporting the multi-\/viewports feature correctly using 100\% of your own abstractions is more difficult than supporting single-\/viewport. If you decide to use unmodified imgui\+\_\+impl\+\_\+\+X\+X\+X\+X.\+cpp files, you can automatically benefit from improvements and fixes related to viewports and platform windows without extra work on your side. 

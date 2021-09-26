@@ -1,0 +1,715 @@
+This guide introduces the input related functions of G\+L\+FW. For details on a specific function in this category, see the \mbox{\hyperlink{group__input}{Input reference}}. There are also guides for the other areas of G\+L\+FW.
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{intro_guide}{Introduction to the A\+PI}}
+\item \mbox{\hyperlink{window_guide}{Window guide}}
+\item \mbox{\hyperlink{context_guide}{Context guide}}
+\item \mbox{\hyperlink{vulkan_guide}{Vulkan guide}}
+\item \mbox{\hyperlink{monitor_guide}{Monitor guide}}
+\end{DoxyItemize}
+
+G\+L\+FW provides many kinds of input. While some can only be polled, like time, or only received via callbacks, like scrolling, many provide both callbacks and polling. Callbacks are more work to use than polling but is less C\+PU intensive and guarantees that you do not miss state changes.
+
+All input callbacks receive a window handle. By using the \mbox{\hyperlink{window_guide_window_userptr}{window user pointer}}, you can access non-\/global structures or objects from your callbacks.
+
+To get a better feel for how the various events callbacks behave, run the {\ttfamily events} test program. It register every callback supported by G\+L\+FW and prints out all arguments provided for every event, along with time and sequence information.\hypertarget{input_guide_events}{}\doxysection{Event processing}\label{input_guide_events}
+G\+L\+FW needs to poll the window system for events both to provide input to the application and to prove to the window system that the application hasn\textquotesingle{}t locked up. Event processing is normally done each frame after \mbox{\hyperlink{window_guide_buffer_swap}{buffer swapping}}. Even when you have no windows, event polling needs to be done in order to receive monitor and joystick connection events.
+
+There are three functions for processing pending events. \mbox{\hyperlink{group__window_ga872d16e4c77f58c0436f356255920cfc}{glfw\+Poll\+Events}}, processes only those events that have already been received and then returns immediately.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga872d16e4c77f58c0436f356255920cfc}{glfwPollEvents}}();}
+\end{DoxyCode}
+
+
+This is the best choice when rendering continuously, like most games do.
+
+If you only need to update the contents of the window when you receive new input, \mbox{\hyperlink{group__window_ga6e042d05823c11e11c7339b81a237738}{glfw\+Wait\+Events}} is a better choice.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga6e042d05823c11e11c7339b81a237738}{glfwWaitEvents}}();}
+\end{DoxyCode}
+
+
+It puts the thread to sleep until at least one event has been received and then processes all received events. This saves a great deal of C\+PU cycles and is useful for, for example, editing tools.
+
+If you want to wait for events but have UI elements or other tasks that need periodic updates, \mbox{\hyperlink{group__window_ga05223a0a4c5e50f10f289e60398153aa}{glfw\+Wait\+Events\+Timeout}} lets you specify a timeout.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_ga05223a0a4c5e50f10f289e60398153aa}{glfwWaitEventsTimeout}}(0.7);}
+\end{DoxyCode}
+
+
+It puts the thread to sleep until at least one event has been received, or until the specified number of seconds have elapsed. It then processes any received events.
+
+If the main thread is sleeping in \mbox{\hyperlink{group__window_ga6e042d05823c11e11c7339b81a237738}{glfw\+Wait\+Events}}, you can wake it from another thread by posting an empty event to the event queue with \mbox{\hyperlink{group__window_gad6f6b997278c91c43b35970eb9713d7e}{glfw\+Post\+Empty\+Event}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__window_gad6f6b997278c91c43b35970eb9713d7e}{glfwPostEmptyEvent}}();}
+\end{DoxyCode}
+
+
+Do not assume that callbacks will {\itshape only} be called in response to the above functions. While it is necessary to process events in one or more of the ways above, window systems that require G\+L\+FW to register callbacks of its own can pass events to G\+L\+FW in response to many window system function calls. G\+L\+FW will pass those events on to the application callbacks before returning.
+
+For example, on Windows the system function that \mbox{\hyperlink{group__window_gae54d1f4915ded15e267ddd3f41496cd2}{glfw\+Set\+Window\+Size}} is implemented with will send window size events directly to the event callback that every window has and that G\+L\+FW implements for its windows. If you have set a \mbox{\hyperlink{window_guide_window_size}{window size callback}} G\+L\+FW will call it in turn with the new size before everything returns back out of the \mbox{\hyperlink{group__window_gae54d1f4915ded15e267ddd3f41496cd2}{glfw\+Set\+Window\+Size}} call.\hypertarget{input_guide_input_keyboard}{}\doxysection{Keyboard input}\label{input_guide_input_keyboard}
+G\+L\+FW divides keyboard input into two categories; key events and character events. Key events relate to actual physical keyboard keys, whereas character events relate to the Unicode code points generated by pressing some of them.
+
+Keys and characters do not map 1\+:1. A single key press may produce several characters, and a single character may require several keys to produce. This may not be the case on your machine, but your users are likely not all using the same keyboard layout, input method or even operating system as you.\hypertarget{input_guide_input_key}{}\doxysubsection{Key input}\label{input_guide_input_key}
+If you wish to be notified when a physical key is pressed or released or when it repeats, set a key callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gaa4cbcb81b939b8800e44cea971ddae47}{glfwSetKeyCallback}}(window, key\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the \mbox{\hyperlink{group__keys}{keyboard key}}, platform-\/specific scancode, key action and \mbox{\hyperlink{group__mods}{modifier bits}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} key\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} key, \textcolor{keywordtype}{int} scancode, \textcolor{keywordtype}{int} action, \textcolor{keywordtype}{int} mods)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (key == GLFW\_KEY\_E \&\& action == \mbox{\hyperlink{group__input_ga2485743d0b59df3791c45951c4195265}{GLFW\_PRESS}})}
+\DoxyCodeLine{        activate\_airship();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The action is one of {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS}, {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+P\+E\+AT} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}. The key will be {\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+U\+N\+K\+N\+O\+WN} if G\+L\+FW lacks a key token for it, for example {\itshape E-\/mail} and {\itshape Play} keys.
+
+The scancode is unique for every key, regardless of whether it has a key token. Scancodes are platform-\/specific but consistent over time, so keys will have different scancodes depending on the platform but they are safe to save to disk. You can query the scancode for any \mbox{\hyperlink{group__keys}{named key}} on the current platform with \mbox{\hyperlink{group__input_ga3ea3b9d74f8352506068620980e01fe5}{glfw\+Get\+Key\+Scancode}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} scancode = \mbox{\hyperlink{group__input_ga3ea3b9d74f8352506068620980e01fe5}{glfwGetKeyScancode}}(GLFW\_KEY\_X);}
+\DoxyCodeLine{set\_key\_mapping(scancode, swap\_weapons);}
+\end{DoxyCode}
+
+
+The last reported state for every \mbox{\hyperlink{group__keys}{named key}} is also saved in per-\/window state arrays that can be polled with \mbox{\hyperlink{group__input_ga7d8ad8ffaf272808f04e1d5d33ec8859}{glfw\+Get\+Key}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} state = \mbox{\hyperlink{group__input_ga7d8ad8ffaf272808f04e1d5d33ec8859}{glfwGetKey}}(window, GLFW\_KEY\_E);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (state == \mbox{\hyperlink{group__input_ga2485743d0b59df3791c45951c4195265}{GLFW\_PRESS}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    activate\_airship();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The returned state is one of {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}.
+
+This function only returns cached key event state. It does not poll the system for the current physical state of the key.
+
+\label{input_guide_GLFW_STICKY_KEYS}%
+\Hypertarget{input_guide_GLFW_STICKY_KEYS}%
+Whenever you poll state, you risk missing the state change you are looking for. If a pressed key is released again before you poll its state, you will have missed the key press. The recommended solution for this is to use a key callback, but there is also the {\ttfamily G\+L\+F\+W\+\_\+\+S\+T\+I\+C\+K\+Y\+\_\+\+K\+E\+YS} input mode.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfwSetInputMode}}(window, GLFW\_STICKY\_KEYS, \mbox{\hyperlink{group__init_ga2744fbb29b5631bb28802dbe0cf36eba}{GLFW\_TRUE}});}
+\end{DoxyCode}
+
+
+When sticky keys mode is enabled, the pollable state of a key will remain {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} until the state of that key is polled with \mbox{\hyperlink{group__input_ga7d8ad8ffaf272808f04e1d5d33ec8859}{glfw\+Get\+Key}}. Once it has been polled, if a key release event had been processed in the meantime, the state will reset to {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}, otherwise it will remain {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS}.
+
+\label{input_guide_GLFW_LOCK_KEY_MODS}%
+\Hypertarget{input_guide_GLFW_LOCK_KEY_MODS}%
+If you wish to know what the state of the Caps Lock and Num Lock keys was when input events were generated, set the {\ttfamily G\+L\+F\+W\+\_\+\+L\+O\+C\+K\+\_\+\+K\+E\+Y\+\_\+\+M\+O\+DS} input mode.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfwSetInputMode}}(window, GLFW\_LOCK\_KEY\_MODS, \mbox{\hyperlink{group__init_ga2744fbb29b5631bb28802dbe0cf36eba}{GLFW\_TRUE}});}
+\end{DoxyCode}
+
+
+When this input mode is enabled, any callback that receives \mbox{\hyperlink{group__mods}{modifier bits}} will have the \mbox{\hyperlink{group__mods_gaefeef8fcf825a6e43e241b337897200f}{G\+L\+F\+W\+\_\+\+M\+O\+D\+\_\+\+C\+A\+P\+S\+\_\+\+L\+O\+CK}} bit set if Caps Lock was on when the event occurred and the \mbox{\hyperlink{group__mods_ga64e020b8a42af8376e944baf61feecbe}{G\+L\+F\+W\+\_\+\+M\+O\+D\+\_\+\+N\+U\+M\+\_\+\+L\+O\+CK}} bit set if Num Lock was on.
+
+The {\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+L\+A\+ST} constant holds the highest value of any \mbox{\hyperlink{group__keys}{named key}}.\hypertarget{input_guide_input_char}{}\doxysubsection{Text input}\label{input_guide_input_char}
+G\+L\+FW supports text input in the form of a stream of \href{https://en.wikipedia.org/wiki/Unicode}{\texttt{ Unicode code points}}, as produced by the operating system text input system. Unlike key input, text input obeys keyboard layouts and modifier keys and supports composing characters using \href{https://en.wikipedia.org/wiki/Dead_key}{\texttt{ dead keys}}. Once received, you can encode the code points into U\+T\+F-\/8 or any other encoding you prefer.
+
+Because an {\ttfamily unsigned int} is 32 bits long on all platforms supported by G\+L\+FW, you can treat the code point argument as native endian U\+T\+F-\/32.
+
+If you wish to offer regular text input, set a character callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gad3d7e6e3134fa034cc1604162579585e}{glfwSetCharCallback}}(window, character\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives Unicode code points for key events that would have led to regular text input and generally behaves as a standard text field on that platform.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} character\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} codepoint)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+\hypertarget{input_guide_input_key_name}{}\doxysubsection{Key names}\label{input_guide_input_key_name}
+If you wish to refer to keys by name, you can query the keyboard layout dependent name of printable keys with \mbox{\hyperlink{group__input_ga37a7ae86bdce97276ef049055a3fcf2d}{glfw\+Get\+Key\+Name}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char}* key\_name = \mbox{\hyperlink{group__input_ga37a7ae86bdce97276ef049055a3fcf2d}{glfwGetKeyName}}(GLFW\_KEY\_W, 0);}
+\DoxyCodeLine{show\_tutorial\_hint(\textcolor{stringliteral}{"Press \%s to move forward"}, key\_name);}
+\end{DoxyCode}
+
+
+This function can handle both \mbox{\hyperlink{input_guide_input_key}{keys and scancodes}}. If the specified key is {\ttfamily G\+L\+F\+W\+\_\+\+K\+E\+Y\+\_\+\+U\+N\+K\+N\+O\+WN} then the scancode is used, otherwise it is ignored. This matches the behavior of the key callback, meaning the callback arguments can always be passed unmodified to this function.\hypertarget{input_guide_input_mouse}{}\doxysection{Mouse input}\label{input_guide_input_mouse}
+Mouse input comes in many forms, including mouse motion, button presses and scrolling offsets. The cursor appearance can also be changed, either to a custom image or a standard cursor shape from the system theme.\hypertarget{input_guide_cursor_pos}{}\doxysubsection{Cursor position}\label{input_guide_cursor_pos}
+If you wish to be notified when the cursor moves over the window, set a cursor position callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga74124d0eff27040fd10e4df9e17d129c}{glfwSetCursorPosCallback}}(window, cursor\_position\_callback);}
+\end{DoxyCode}
+
+
+The callback functions receives the cursor position, measured in screen coordinates but relative to the top-\/left corner of the window content area. On platforms that provide it, the full sub-\/pixel cursor position is passed on.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static} \textcolor{keywordtype}{void} cursor\_position\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{double} xpos, \textcolor{keywordtype}{double} ypos)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The cursor position is also saved per-\/window and can be polled with \mbox{\hyperlink{group__input_gad289438eb7cf53d11eca685373f44105}{glfw\+Get\+Cursor\+Pos}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double} xpos, ypos;}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gad289438eb7cf53d11eca685373f44105}{glfwGetCursorPos}}(window, \&xpos, \&ypos);}
+\end{DoxyCode}
+\hypertarget{input_guide_cursor_mode}{}\doxysubsection{Cursor mode}\label{input_guide_cursor_mode}
+\label{input_guide_GLFW_CURSOR}%
+\Hypertarget{input_guide_GLFW_CURSOR}%
+The {\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+OR} input mode provides several cursor modes for special forms of mouse motion input. By default, the cursor mode is {\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+N\+O\+R\+M\+AL}, meaning the regular arrow cursor (or another cursor set with \mbox{\hyperlink{group__input_gafaf103cea2f43530cff7de4e01126a4f}{glfw\+Set\+Cursor}}) is used and cursor motion is not limited.
+
+If you wish to implement mouse motion based camera controls or other input schemes that require unlimited mouse movement, set the cursor mode to {\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+I\+S\+A\+B\+L\+ED}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfwSetInputMode}}(window, GLFW\_CURSOR, GLFW\_CURSOR\_DISABLED);}
+\end{DoxyCode}
+
+
+This will hide the cursor and lock it to the specified window. G\+L\+FW will then take care of all the details of cursor re-\/centering and offset calculation and providing the application with a virtual cursor position. This virtual position is provided normally via both the cursor position callback and through polling.
+
+\begin{DoxyNote}{Note}
+You should not implement your own version of this functionality using other features of G\+L\+FW. It is not supported and will not work as robustly as {\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+D\+I\+S\+A\+B\+L\+ED}.
+\end{DoxyNote}
+If you only wish the cursor to become hidden when it is over a window but still want it to behave normally, set the cursor mode to {\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+H\+I\+D\+D\+EN}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfwSetInputMode}}(window, GLFW\_CURSOR, GLFW\_CURSOR\_HIDDEN);}
+\end{DoxyCode}
+
+
+This mode puts no limit on the motion of the cursor.
+
+To exit out of either of these special modes, restore the {\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+N\+O\+R\+M\+AL} cursor mode.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfwSetInputMode}}(window, GLFW\_CURSOR, GLFW\_CURSOR\_NORMAL);}
+\end{DoxyCode}
+
+
+\label{input_guide_GLFW_RAW_MOUSE_MOTION}%
+\Hypertarget{input_guide_GLFW_RAW_MOUSE_MOTION}%
+\hypertarget{input_guide_raw_mouse_motion}{}\doxysubsection{Raw mouse motion}\label{input_guide_raw_mouse_motion}
+When the cursor is disabled, raw (unscaled and unaccelerated) mouse motion can be enabled if available.
+
+Raw mouse motion is closer to the actual motion of the mouse across a surface. It is not affected by the scaling and acceleration applied to the motion of the desktop cursor. That processing is suitable for a cursor while raw motion is better for controlling for example a 3D camera. Because of this, raw mouse motion is only provided when the cursor is disabled.
+
+Call \mbox{\hyperlink{group__input_ga9b83d8957a566b22b3b768c7d1d4be03}{glfw\+Raw\+Mouse\+Motion\+Supported}} to check if the current machine provides raw motion and set the {\ttfamily G\+L\+F\+W\+\_\+\+R\+A\+W\+\_\+\+M\+O\+U\+S\+E\+\_\+\+M\+O\+T\+I\+ON} input mode to enable it. It is disabled by default.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{group__input_ga9b83d8957a566b22b3b768c7d1d4be03}{glfwRawMouseMotionSupported}}())}
+\DoxyCodeLine{    \mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfwSetInputMode}}(window, GLFW\_RAW\_MOUSE\_MOTION, \mbox{\hyperlink{group__init_ga2744fbb29b5631bb28802dbe0cf36eba}{GLFW\_TRUE}});}
+\end{DoxyCode}
+
+
+If supported, raw mouse motion can be enabled or disabled per-\/window and at any time but it will only be provided when the cursor is disabled.\hypertarget{input_guide_cursor_object}{}\doxysubsection{Cursor objects}\label{input_guide_cursor_object}
+G\+L\+FW supports creating both custom and system theme cursor images, encapsulated as \mbox{\hyperlink{imgui_2examples_2libs_2glfw_2include_2GLFW_2glfw3_8h_a89261ae18c75e863aaf2656ecdd238f4}{G\+L\+F\+Wcursor}} objects. They are created with \mbox{\hyperlink{group__input_ga21fc9f020f062db88813aa722c30ba2c}{glfw\+Create\+Cursor}} or \mbox{\hyperlink{group__input_gab7c5b6023b39a0021b1fcdabd1d15f09}{glfw\+Create\+Standard\+Cursor}} and destroyed with \mbox{\hyperlink{group__input_ga27556b7122117bc1bbb4bb3cc003ea43}{glfw\+Destroy\+Cursor}}, or \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}}, if any remain.\hypertarget{input_guide_cursor_custom}{}\doxysubsubsection{Custom cursor creation}\label{input_guide_cursor_custom}
+A custom cursor is created with \mbox{\hyperlink{group__input_ga21fc9f020f062db88813aa722c30ba2c}{glfw\+Create\+Cursor}}, which returns a handle to the created cursor object. For example, this creates a 16x16 white square cursor with the hot-\/spot in the upper-\/left corner\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} pixels[16 * 16 * 4];}
+\DoxyCodeLine{memset(pixels, 0xff, \textcolor{keyword}{sizeof}(pixels));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{structGLFWimage}{GLFWimage}} image;}
+\DoxyCodeLine{image.\mbox{\hyperlink{structGLFWimage_af6a71cc999fe6d3aea31dd7e9687d835}{width}} = 16;}
+\DoxyCodeLine{image.\mbox{\hyperlink{structGLFWimage_a0b7d95368f0c80d5e5c9875057c7dbec}{height}} = 16;}
+\DoxyCodeLine{image.\mbox{\hyperlink{structGLFWimage_a65a8d70274a35e7342f87703e233a70c}{pixels}} = pixels;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga89261ae18c75e863aaf2656ecdd238f4}{GLFWcursor}}* cursor = \mbox{\hyperlink{group__input_ga21fc9f020f062db88813aa722c30ba2c}{glfwCreateCursor}}(\&image, 0, 0);}
+\end{DoxyCode}
+
+
+If cursor creation fails, {\ttfamily N\+U\+LL} will be returned, so it is necessary to check the return value.
+
+The image data is 32-\/bit, little-\/endian, non-\/premultiplied R\+G\+BA, i.\+e. eight bits per channel with the red channel first. The pixels are arranged canonically as sequential rows, starting from the top-\/left corner.\hypertarget{input_guide_cursor_standard}{}\doxysubsubsection{Standard cursor creation}\label{input_guide_cursor_standard}
+A cursor with a \mbox{\hyperlink{group__shapes}{standard shape}} from the current system cursor theme can be can be created with \mbox{\hyperlink{group__input_gab7c5b6023b39a0021b1fcdabd1d15f09}{glfw\+Create\+Standard\+Cursor}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga89261ae18c75e863aaf2656ecdd238f4}{GLFWcursor}}* cursor = \mbox{\hyperlink{group__input_gab7c5b6023b39a0021b1fcdabd1d15f09}{glfwCreateStandardCursor}}(\mbox{\hyperlink{group__shapes_gabb3eb0109f11bb808fc34659177ca962}{GLFW\_HRESIZE\_CURSOR}});}
+\end{DoxyCode}
+
+
+These cursor objects behave in the exact same way as those created with \mbox{\hyperlink{group__input_ga21fc9f020f062db88813aa722c30ba2c}{glfw\+Create\+Cursor}} except that the system cursor theme provides the actual image.\hypertarget{input_guide_cursor_destruction}{}\doxysubsubsection{Cursor destruction}\label{input_guide_cursor_destruction}
+When a cursor is no longer needed, destroy it with \mbox{\hyperlink{group__input_ga27556b7122117bc1bbb4bb3cc003ea43}{glfw\+Destroy\+Cursor}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga27556b7122117bc1bbb4bb3cc003ea43}{glfwDestroyCursor}}(cursor);}
+\end{DoxyCode}
+
+
+Cursor destruction always succeeds. If the cursor is current for any window, that window will revert to the default cursor. This does not affect the cursor mode. All remaining cursors are destroyed when \mbox{\hyperlink{group__init_gafd90e6fd4819ea9e22e5e739519a6504}{glfw\+Terminate}} is called.\hypertarget{input_guide_cursor_set}{}\doxysubsubsection{Cursor setting}\label{input_guide_cursor_set}
+A cursor can be set as current for a window with \mbox{\hyperlink{group__input_gafaf103cea2f43530cff7de4e01126a4f}{glfw\+Set\+Cursor}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gafaf103cea2f43530cff7de4e01126a4f}{glfwSetCursor}}(window, cursor);}
+\end{DoxyCode}
+
+
+Once set, the cursor image will be used as long as the system cursor is over the content area of the window and the \mbox{\hyperlink{input_guide_cursor_mode}{cursor mode}} is set to {\ttfamily G\+L\+F\+W\+\_\+\+C\+U\+R\+S\+O\+R\+\_\+\+N\+O\+R\+M\+AL}.
+
+A single cursor may be set for any number of windows.
+
+To revert to the default cursor, set the cursor of that window to {\ttfamily N\+U\+LL}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gafaf103cea2f43530cff7de4e01126a4f}{glfwSetCursor}}(window, NULL);}
+\end{DoxyCode}
+
+
+When a cursor is destroyed, any window that has it set will revert to the default cursor. This does not affect the cursor mode.\hypertarget{input_guide_cursor_enter}{}\doxysubsection{Cursor enter/leave events}\label{input_guide_cursor_enter}
+If you wish to be notified when the cursor enters or leaves the content area of a window, set a cursor enter/leave callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gacdb3490e374c8bc08549c6f173ffa7c2}{glfwSetCursorEnterCallback}}(window, cursor\_enter\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the new classification of the cursor.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} cursor\_enter\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} entered)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (entered)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The cursor entered the content area of the window}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The cursor left the content area of the window}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+You can query whether the cursor is currently inside the content area of the window with the \mbox{\hyperlink{window_guide_GLFW_HOVERED_attrib}{G\+L\+F\+W\+\_\+\+H\+O\+V\+E\+R\+ED}} window attribute.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{group__window_ga1bb0c7e100418e284dbb800789c63d40}{glfwGetWindowAttrib}}(window, \mbox{\hyperlink{group__window_ga8665c71c6fa3d22425c6a0e8a3f89d8a}{GLFW\_HOVERED}}))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    highlight\_interface();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+\hypertarget{input_guide_input_mouse_button}{}\doxysubsection{Mouse button input}\label{input_guide_input_mouse_button}
+If you wish to be notified when a mouse button is pressed or released, set a mouse button callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gab8f17646f43cdca14e5095512618fdf6}{glfwSetMouseButtonCallback}}(window, mouse\_button\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the \mbox{\hyperlink{group__buttons}{mouse button}}, button action and \mbox{\hyperlink{group__mods}{modifier bits}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} mouse\_button\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} button, \textcolor{keywordtype}{int} action, \textcolor{keywordtype}{int} mods)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (button == GLFW\_MOUSE\_BUTTON\_RIGHT \&\& action == \mbox{\hyperlink{group__input_ga2485743d0b59df3791c45951c4195265}{GLFW\_PRESS}})}
+\DoxyCodeLine{        popup\_menu();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The action is one of {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}.
+
+Mouse button states for \mbox{\hyperlink{group__buttons}{named buttons}} are also saved in per-\/window state arrays that can be polled with \mbox{\hyperlink{group__input_ga6da5efb04f700c312a57a169fa9393a0}{glfw\+Get\+Mouse\+Button}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} state = \mbox{\hyperlink{group__input_ga6da5efb04f700c312a57a169fa9393a0}{glfwGetMouseButton}}(window, GLFW\_MOUSE\_BUTTON\_LEFT);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (state == \mbox{\hyperlink{group__input_ga2485743d0b59df3791c45951c4195265}{GLFW\_PRESS}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    upgrade\_cow();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The returned state is one of {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}.
+
+This function only returns cached mouse button event state. It does not poll the system for the current state of the mouse button.
+
+\label{input_guide_GLFW_STICKY_MOUSE_BUTTONS}%
+\Hypertarget{input_guide_GLFW_STICKY_MOUSE_BUTTONS}%
+Whenever you poll state, you risk missing the state change you are looking for. If a pressed mouse button is released again before you poll its state, you will have missed the button press. The recommended solution for this is to use a mouse button callback, but there is also the {\ttfamily G\+L\+F\+W\+\_\+\+S\+T\+I\+C\+K\+Y\+\_\+\+M\+O\+U\+S\+E\+\_\+\+B\+U\+T\+T\+O\+NS} input mode.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gae1eb729d2dd91dc33fd60e150a6e1684}{glfwSetInputMode}}(window, GLFW\_STICKY\_MOUSE\_BUTTONS, \mbox{\hyperlink{group__init_ga2744fbb29b5631bb28802dbe0cf36eba}{GLFW\_TRUE}});}
+\end{DoxyCode}
+
+
+When sticky mouse buttons mode is enabled, the pollable state of a mouse button will remain {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} until the state of that button is polled with \mbox{\hyperlink{group__input_ga6da5efb04f700c312a57a169fa9393a0}{glfw\+Get\+Mouse\+Button}}. Once it has been polled, if a mouse button release event had been processed in the meantime, the state will reset to {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}, otherwise it will remain {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS}.
+
+The {\ttfamily G\+L\+F\+W\+\_\+\+M\+O\+U\+S\+E\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+ST} constant holds the highest value of any \mbox{\hyperlink{group__buttons}{named button}}.\hypertarget{input_guide_scrolling}{}\doxysubsection{Scroll input}\label{input_guide_scrolling}
+If you wish to be notified when the user scrolls, whether with a mouse wheel or touchpad gesture, set a scroll callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gaa786b59f19ad8525d251cda8e0d7d29b}{glfwSetScrollCallback}}(window, scroll\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives two-\/dimensional scroll offsets.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} scroll\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{double} xoffset, \textcolor{keywordtype}{double} yoffset)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+A normal mouse wheel, being vertical, provides offsets along the Y-\/axis.\hypertarget{input_guide_joystick}{}\doxysection{Joystick input}\label{input_guide_joystick}
+The joystick functions expose connected joysticks and controllers, with both referred to as joysticks. It supports up to sixteen joysticks, ranging from {\ttfamily G\+L\+F\+W\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+1}, {\ttfamily G\+L\+F\+W\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+2} up to and including {\ttfamily G\+L\+F\+W\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+16} or {\ttfamily G\+L\+F\+W\+\_\+\+J\+O\+Y\+S\+T\+I\+C\+K\+\_\+\+L\+A\+ST}. You can test whether a \mbox{\hyperlink{group__joysticks}{joystick}} is present with \mbox{\hyperlink{group__input_gacb1b7dfd79df673d48814c06fc436eff}{glfw\+Joystick\+Present}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} present = \mbox{\hyperlink{group__input_gacb1b7dfd79df673d48814c06fc436eff}{glfwJoystickPresent}}(GLFW\_JOYSTICK\_1);}
+\end{DoxyCode}
+
+
+Each joystick has zero or more axes, zero or more buttons, zero or more hats, a human-\/readable name, a user pointer and an S\+DL compatible G\+U\+ID.
+
+When G\+L\+FW is initialized, detected joysticks are added to the beginning of the array. Once a joystick is detected, it keeps its assigned ID until it is disconnected or the library is terminated, so as joysticks are connected and disconnected, there may appear gaps in the I\+Ds.
+
+Joystick axis, button and hat state is updated when polled and does not require a window to be created or events to be processed. However, if you want joystick connection and disconnection events reliably delivered to the \mbox{\hyperlink{input_guide_joystick_event}{joystick callback}} then you must \mbox{\hyperlink{input_guide_events}{process events}}.
+
+To see all the properties of all connected joysticks in real-\/time, run the {\ttfamily joysticks} test program.\hypertarget{input_guide_joystick_axis}{}\doxysubsection{Joystick axis states}\label{input_guide_joystick_axis}
+The positions of all axes of a joystick are returned by \mbox{\hyperlink{group__input_ga0aabfd6d7a1fd2519d1dcdfac0f12d22}{glfw\+Get\+Joystick\+Axes}}. See the reference documentation for the lifetime of the returned array.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} count;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float}* axes = \mbox{\hyperlink{group__input_ga0aabfd6d7a1fd2519d1dcdfac0f12d22}{glfwGetJoystickAxes}}(GLFW\_JOYSTICK\_5, \&count);}
+\end{DoxyCode}
+
+
+Each element in the returned array is a value between -\/1.\+0 and 1.\+0.\hypertarget{input_guide_joystick_button}{}\doxysubsection{Joystick button states}\label{input_guide_joystick_button}
+The states of all buttons of a joystick are returned by \mbox{\hyperlink{group__input_ga1d8a7150d464fb5b5a1dcb8be3a1a3da}{glfw\+Get\+Joystick\+Buttons}}. See the reference documentation for the lifetime of the returned array.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} count;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* buttons = \mbox{\hyperlink{group__input_ga1d8a7150d464fb5b5a1dcb8be3a1a3da}{glfwGetJoystickButtons}}(GLFW\_JOYSTICK\_3, \&count);}
+\end{DoxyCode}
+
+
+Each element in the returned array is either {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE}.
+
+For backward compatibility with earlier versions that did not have \mbox{\hyperlink{group__input_gad415b53795a1aeced53b7b66c7943931}{glfw\+Get\+Joystick\+Hats}}, the button array by default also includes all hats. See the reference documentation for \mbox{\hyperlink{group__input_ga1d8a7150d464fb5b5a1dcb8be3a1a3da}{glfw\+Get\+Joystick\+Buttons}} for details.\hypertarget{input_guide_joystick_hat}{}\doxysubsection{Joystick hat states}\label{input_guide_joystick_hat}
+The states of all hats are returned by \mbox{\hyperlink{group__input_gad415b53795a1aeced53b7b66c7943931}{glfw\+Get\+Joystick\+Hats}}. See the reference documentation for the lifetime of the returned array.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} count;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* hats = \mbox{\hyperlink{group__input_gad415b53795a1aeced53b7b66c7943931}{glfwGetJoystickHats}}(GLFW\_JOYSTICK\_7, \&count);}
+\end{DoxyCode}
+
+
+Each element in the returned array is one of the following\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value  }\\\cline{1-2}
+\endhead
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+C\+E\+N\+T\+E\+R\+ED} &0  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+UP} &1  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+R\+I\+G\+HT} &2  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+D\+O\+WN} &4  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+L\+E\+FT} &8  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+R\+I\+G\+H\+T\+\_\+\+UP} &{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+R\+I\+G\+HT} $|$ {\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+UP}  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+R\+I\+G\+H\+T\+\_\+\+D\+O\+WN} &{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+R\+I\+G\+HT} $|$ {\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+D\+O\+WN}  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+L\+E\+F\+T\+\_\+\+UP} &{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+L\+E\+FT} $|$ {\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+UP}  \\\cline{1-2}
+{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+L\+E\+F\+T\+\_\+\+D\+O\+WN} &{\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+L\+E\+FT} $|$ {\ttfamily G\+L\+F\+W\+\_\+\+H\+A\+T\+\_\+\+D\+O\+WN}  \\\cline{1-2}
+\end{longtabu}
+
+
+The diagonal directions are bitwise combinations of the primary (up, right, down and left) directions and you can test for these individually by A\+N\+Ding it with the corresponding direction.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (hats[2] \& GLFW\_HAT\_RIGHT)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// State of hat 2 could be right-\/up, right or right-\/down}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+For backward compatibility with earlier versions that did not have \mbox{\hyperlink{group__input_gad415b53795a1aeced53b7b66c7943931}{glfw\+Get\+Joystick\+Hats}}, all hats are by default also included in the button array. See the reference documentation for \mbox{\hyperlink{group__input_ga1d8a7150d464fb5b5a1dcb8be3a1a3da}{glfw\+Get\+Joystick\+Buttons}} for details.\hypertarget{input_guide_joystick_name}{}\doxysubsection{Joystick name}\label{input_guide_joystick_name}
+The human-\/readable, U\+T\+F-\/8 encoded name of a joystick is returned by \mbox{\hyperlink{group__input_gae4afbc4946ff0f15eaf2d49722ea26d0}{glfw\+Get\+Joystick\+Name}}. See the reference documentation for the lifetime of the returned string.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name = \mbox{\hyperlink{group__input_gae4afbc4946ff0f15eaf2d49722ea26d0}{glfwGetJoystickName}}(GLFW\_JOYSTICK\_4);}
+\end{DoxyCode}
+
+
+Joystick names are not guaranteed to be unique. Two joysticks of the same model and make may have the same name. Only the \mbox{\hyperlink{group__joysticks}{joystick ID}} is guaranteed to be unique, and only until that joystick is disconnected.\hypertarget{input_guide_joystick_userptr}{}\doxysubsection{Joystick user pointer}\label{input_guide_joystick_userptr}
+Each joystick has a user pointer that can be set with \mbox{\hyperlink{group__input_ga3a8999c2d2634c7bcf4a04f1ec64895c}{glfw\+Set\+Joystick\+User\+Pointer}} and queried with \mbox{\hyperlink{group__input_gaf4317a5b0a7849f9b2b7b2b69366a72b}{glfw\+Get\+Joystick\+User\+Pointer}}. This can be used for any purpose you need and will not be modified by G\+L\+FW. The value will be kept until the joystick is disconnected or until the library is terminated.
+
+The initial value of the pointer is {\ttfamily N\+U\+LL}.\hypertarget{input_guide_joystick_event}{}\doxysubsection{Joystick configuration changes}\label{input_guide_joystick_event}
+If you wish to be notified when a joystick is connected or disconnected, set a joystick callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_gad90f60a4c0e04629928305b53e96154a}{glfwSetJoystickCallback}}(joystick\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives the ID of the joystick that has been connected and disconnected and the event that occurred.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} joystick\_callback(\textcolor{keywordtype}{int} jid, \textcolor{keywordtype}{int} event)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (event == GLFW\_CONNECTED)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The joystick was connected}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (event == GLFW\_DISCONNECTED)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// The joystick was disconnected}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+For joystick connection and disconnection events to be delivered on all platforms, you need to call one of the \mbox{\hyperlink{input_guide_events}{event processing}} functions. Joystick disconnection may also be detected and the callback called by joystick functions. The function will then return whatever it returns for a disconnected joystick.
+
+Only \mbox{\hyperlink{group__input_gae4afbc4946ff0f15eaf2d49722ea26d0}{glfw\+Get\+Joystick\+Name}} and \mbox{\hyperlink{group__input_gaf4317a5b0a7849f9b2b7b2b69366a72b}{glfw\+Get\+Joystick\+User\+Pointer}} will return useful values for a disconnected joystick and only before the monitor callback returns.\hypertarget{input_guide_gamepad}{}\doxysubsection{Gamepad input}\label{input_guide_gamepad}
+The joystick functions provide unlabeled axes, buttons and hats, with no indication of where they are located on the device. Their order may also vary between platforms even with the same device.
+
+To solve this problem the S\+DL community crowdsourced the \href{https://github.com/gabomdq/SDL_GameControllerDB}{\texttt{ S\+D\+L\+\_\+\+Game\+Controller\+DB}} project, a database of mappings from many different devices to an Xbox-\/like gamepad.
+
+G\+L\+FW supports this mapping format and contains a copy of the mappings available at the time of release. See \mbox{\hyperlink{input_guide_gamepad_mapping}{Gamepad mappings}} for how to update this at runtime. Mappings will be assigned to joysticks automatically any time a joystick is connected or the mappings are updated.
+
+You can check whether a joystick is both present and has a gamepad mapping with \mbox{\hyperlink{group__input_gac9720b6e5062a5fc5fc0bb4be6dc04a0}{glfw\+Joystick\+Is\+Gamepad}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{group__input_gac9720b6e5062a5fc5fc0bb4be6dc04a0}{glfwJoystickIsGamepad}}(GLFW\_JOYSTICK\_2))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// Use as gamepad}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+If you are only interested in gamepad input you can use this function instead of \mbox{\hyperlink{group__input_gacb1b7dfd79df673d48814c06fc436eff}{glfw\+Joystick\+Present}}.
+
+You can query the human-\/readable name provided by the gamepad mapping with \mbox{\hyperlink{group__input_ga36983e6ae6fa159a1426a0148a1ec00b}{glfw\+Get\+Gamepad\+Name}}. This may or may not be the same as the \mbox{\hyperlink{input_guide_joystick_name}{joystick name}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name = \mbox{\hyperlink{group__input_ga36983e6ae6fa159a1426a0148a1ec00b}{glfwGetGamepadName}}(GLFW\_JOYSTICK\_7);}
+\end{DoxyCode}
+
+
+To retrieve the gamepad state of a joystick, call \mbox{\hyperlink{group__input_ga6e138d3b0761546f5a12546f367501d6}{glfw\+Get\+Gamepad\+State}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{structGLFWgamepadstate}{GLFWgamepadstate}} state;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{group__input_ga6e138d3b0761546f5a12546f367501d6}{glfwGetGamepadState}}(GLFW\_JOYSTICK\_3, \&state))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (state.\mbox{\hyperlink{structGLFWgamepadstate_a27e9896b51c65df15fba2c7139bfdb9a}{buttons}}[GLFW\_GAMEPAD\_BUTTON\_A])}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        input\_jump();}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    input\_speed(state.\mbox{\hyperlink{structGLFWgamepadstate_a8b2c8939b1d31458de5359998375c189}{axes}}[GLFW\_GAMEPAD\_AXIS\_RIGHT\_TRIGGER]);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The \mbox{\hyperlink{structGLFWgamepadstate}{G\+L\+F\+Wgamepadstate}} struct has two arrays; one for button states and one for axis states. The values for each button and axis are the same as for the \mbox{\hyperlink{group__input_ga1d8a7150d464fb5b5a1dcb8be3a1a3da}{glfw\+Get\+Joystick\+Buttons}} and \mbox{\hyperlink{group__input_ga0aabfd6d7a1fd2519d1dcdfac0f12d22}{glfw\+Get\+Joystick\+Axes}} functions, i.\+e. {\ttfamily G\+L\+F\+W\+\_\+\+P\+R\+E\+SS} or {\ttfamily G\+L\+F\+W\+\_\+\+R\+E\+L\+E\+A\+SE} for buttons and -\/1.\+0 to 1.\+0 inclusive for axes.
+
+The sizes of the arrays and the positions within each array are fixed.
+
+The \mbox{\hyperlink{group__gamepad__buttons}{button indices}} are {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+A}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+B}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+X}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+Y}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+\+B\+U\+M\+P\+ER}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+\+B\+U\+M\+P\+ER}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+B\+A\+CK}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+T\+A\+RT}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+G\+U\+I\+DE}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+\+T\+H\+U\+MB}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+\+T\+H\+U\+MB}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+D\+P\+A\+D\+\_\+\+UP}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+D\+P\+A\+D\+\_\+\+R\+I\+G\+HT}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+D\+P\+A\+D\+\_\+\+D\+O\+WN} and {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+D\+P\+A\+D\+\_\+\+L\+E\+FT}.
+
+For those who prefer, there are also the {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+R\+O\+SS}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+C\+I\+R\+C\+LE}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+S\+Q\+U\+A\+RE} and {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+T\+R\+I\+A\+N\+G\+LE} aliases for the A, B, X and Y button indices.
+
+The \mbox{\hyperlink{group__gamepad__axes}{axis indices}} are {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+A\+X\+I\+S\+\_\+\+L\+E\+F\+T\+\_\+X}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+A\+X\+I\+S\+\_\+\+L\+E\+F\+T\+\_\+Y}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+A\+X\+I\+S\+\_\+\+R\+I\+G\+H\+T\+\_\+X}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+A\+X\+I\+S\+\_\+\+R\+I\+G\+H\+T\+\_\+Y}, {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+A\+X\+I\+S\+\_\+\+L\+E\+F\+T\+\_\+\+T\+R\+I\+G\+G\+ER} and {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+A\+X\+I\+S\+\_\+\+R\+I\+G\+H\+T\+\_\+\+T\+R\+I\+G\+G\+ER}.
+
+The {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+B\+U\+T\+T\+O\+N\+\_\+\+L\+A\+ST} and {\ttfamily G\+L\+F\+W\+\_\+\+G\+A\+M\+E\+P\+A\+D\+\_\+\+A\+X\+I\+S\+\_\+\+L\+A\+ST} constants equal the largest available index for each array.\hypertarget{input_guide_gamepad_mapping}{}\doxysubsection{Gamepad mappings}\label{input_guide_gamepad_mapping}
+G\+L\+FW contains a copy of the mappings available in \href{https://github.com/gabomdq/SDL_GameControllerDB}{\texttt{ S\+D\+L\+\_\+\+Game\+Controller\+DB}} at the time of release. Newer ones can be added at runtime with \mbox{\hyperlink{group__input_ga276a2aec236a671a99f6f0a9be7fa3fc}{glfw\+Update\+Gamepad\+Mappings}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char}* mappings = load\_file\_contents(\textcolor{stringliteral}{"game/data/gamecontrollerdb.txt"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga276a2aec236a671a99f6f0a9be7fa3fc}{glfwUpdateGamepadMappings}}(mappings);}
+\end{DoxyCode}
+
+
+This function supports everything from single lines up to and including the unmodified contents of the whole {\ttfamily gamecontrollerdb.\+txt} file.
+
+Below is a description of the mapping format. Please keep in mind that {\bfseries{this description is not authoritative}}. The format is defined by the S\+DL and S\+D\+L\+\_\+\+Game\+Controller\+DB projects and their documentation and code takes precedence.
+
+Each mapping is a single line of comma-\/separated values describing the G\+U\+ID, name and layout of the gamepad. Lines that do not begin with a hexadecimal digit are ignored.
+
+The first value is always the gamepad G\+U\+ID, a 32 character long hexadecimal string that typically identifies its make, model, revision and the type of connection to the computer. When this information is not available, the G\+U\+ID is generated using the gamepad name. G\+L\+FW uses the S\+DL 2.\+0.\+5+ G\+U\+ID format but can convert from the older formats.
+
+The second value is always the human-\/readable name of the gamepad.
+
+All subsequent values are in the form {\ttfamily $<$field$>$\+:$<$value$>$} and describe the layout of the mapping. These fields may not all be present and may occur in any order.
+
+The button fields are {\ttfamily a}, {\ttfamily b}, {\ttfamily c}, {\ttfamily d}, {\ttfamily back}, {\ttfamily start}, {\ttfamily guide}, {\ttfamily dpup}, {\ttfamily dpright}, {\ttfamily dpdown}, {\ttfamily dpleft}, {\ttfamily leftshoulder}, {\ttfamily rightshoulder}, {\ttfamily leftstick} and {\ttfamily rightstick}.
+
+The axis fields are {\ttfamily leftx}, {\ttfamily lefty}, {\ttfamily rightx}, {\ttfamily righty}, {\ttfamily lefttrigger} and {\ttfamily righttrigger}.
+
+The value of an axis or button field can be a joystick button, a joystick axis, a hat bitmask or empty. Joystick buttons are specified as {\ttfamily bN}, for example {\ttfamily b2} for the third button. Joystick axes are specified as {\ttfamily aN}, for example {\ttfamily a7} for the eighth button. Joystick hat bit masks are specified as {\ttfamily h\+N.\+N}, for example {\ttfamily h0.\+8} for left on the first hat. More than one bit may be set in the mask.
+
+Before an axis there may be a {\ttfamily +} or {\ttfamily -\/} range modifier, for example {\ttfamily +a3} for the positive half of the fourth axis. This restricts input to only the positive or negative halves of the joystick axis. After an axis or half-\/axis there may be the {\ttfamily $\sim$} inversion modifier, for example {\ttfamily a2$\sim$} or {\ttfamily -\/a7$\sim$}. This negates the values of the gamepad axis.
+
+The hat bit mask match the \mbox{\hyperlink{group__hat__state}{hat states}} in the joystick functions.
+
+There is also the special {\ttfamily platform} field that specifies which platform the mapping is valid for. Possible values are {\ttfamily Windows}, {\ttfamily Mac OS X} and {\ttfamily Linux}.
+
+Below is an example of what a gamepad mapping might look like. It is the one built into G\+L\+FW for Xbox controllers accessed via the X\+Input A\+PI on Windows. This example has been broken into several lines to fit on the page, but real gamepad mappings must be a single line.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{78696e70757401000000000000000000,XInput Gamepad (GLFW),platform:Windows,a:b0,}
+\DoxyCodeLine{b:b1,x:b2,y:b3,leftshoulder:b4,rightshoulder:b5,back:b6,start:b7,leftstick:b8,}
+\DoxyCodeLine{rightstick:b9,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:a4,}
+\DoxyCodeLine{righttrigger:a5,dpup:h0.1,dpright:h0.2,dpdown:h0.4,dpleft:h0.8,}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+G\+L\+FW does not yet support the output range and modifiers {\ttfamily +} and {\ttfamily -\/} that were recently added to S\+DL. The input modifiers {\ttfamily +}, {\ttfamily -\/} and {\ttfamily $\sim$} are supported and described above.
+\end{DoxyNote}
+\hypertarget{input_guide_time}{}\doxysection{Time input}\label{input_guide_time}
+G\+L\+FW provides high-\/resolution time input, in seconds, with \mbox{\hyperlink{group__input_ga03d4a1039b8662c71eeb40beea8cb622}{glfw\+Get\+Time}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double} seconds = \mbox{\hyperlink{group__input_ga03d4a1039b8662c71eeb40beea8cb622}{glfwGetTime}}();}
+\end{DoxyCode}
+
+
+It returns the number of seconds since the library was initialized with \mbox{\hyperlink{group__init_gab41771f0215a2e0afb4cf1cf98082d40}{glfw\+Init}}. The platform-\/specific time sources used typically have micro-\/ or nanosecond resolution.
+
+You can modify the base time with \mbox{\hyperlink{group__input_ga94360a3628a09f32708f83cc3fa48590}{glfw\+Set\+Time}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga94360a3628a09f32708f83cc3fa48590}{glfwSetTime}}(4.0);}
+\end{DoxyCode}
+
+
+This sets the time to the specified time, in seconds, and it continues to count from there.
+
+You can also access the raw timer used to implement the functions above, with \mbox{\hyperlink{group__input_gaa00c3e32227eb70b3968fca0bfe4ae26}{glfw\+Get\+Timer\+Value}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint64\_t value = \mbox{\hyperlink{group__input_gaa00c3e32227eb70b3968fca0bfe4ae26}{glfwGetTimerValue}}();}
+\end{DoxyCode}
+
+
+This value is in 1~/~frequency seconds. The frequency of the raw timer varies depending on the operating system and hardware. You can query the frequency, in Hz, with \mbox{\hyperlink{group__input_gaa92d10b10013372778efbf6367714371}{glfw\+Get\+Timer\+Frequency}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint64\_t frequency = \mbox{\hyperlink{group__input_gaa92d10b10013372778efbf6367714371}{glfwGetTimerFrequency}}();}
+\end{DoxyCode}
+\hypertarget{input_guide_clipboard}{}\doxysection{Clipboard input and output}\label{input_guide_clipboard}
+If the system clipboard contains a U\+T\+F-\/8 encoded string or if it can be converted to one, you can retrieve it with \mbox{\hyperlink{group__input_ga4528c0d169a69a8bfa269917c8559539}{glfw\+Get\+Clipboard\+String}}. See the reference documentation for the lifetime of the returned string.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char}* text = \mbox{\hyperlink{group__input_ga4528c0d169a69a8bfa269917c8559539}{glfwGetClipboardString}}(NULL);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (text)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    insert\_text(text);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+If the clipboard is empty or if its contents could not be converted, {\ttfamily N\+U\+LL} is returned.
+
+The contents of the system clipboard can be set to a U\+T\+F-\/8 encoded string with \mbox{\hyperlink{group__input_ga7a580309bbc185a0459c3559021d2fd7}{glfw\+Set\+Clipboard\+String}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga7a580309bbc185a0459c3559021d2fd7}{glfwSetClipboardString}}(NULL, \textcolor{stringliteral}{"A string with words in it"});}
+\end{DoxyCode}
+\hypertarget{input_guide_path_drop}{}\doxysection{Path drop input}\label{input_guide_path_drop}
+If you wish to receive the paths of files and/or directories dropped on a window, set a file drop callback.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__input_ga8bab819b7b0ef9bc1a38e58c577c1d13}{glfwSetDropCallback}}(window, drop\_callback);}
+\end{DoxyCode}
+
+
+The callback function receives an array of paths encoded as U\+T\+F-\/8.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} drop\_callback(\mbox{\hyperlink{group__window_ga3c96d80d363e67d13a41b5d1821f3242}{GLFWwindow}}* window, \textcolor{keywordtype}{int} count, \textcolor{keyword}{const} \textcolor{keywordtype}{char}** paths)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (i = 0;  i < count;  i++)}
+\DoxyCodeLine{        handle\_dropped\_file(paths[i]);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+The path array and its strings are only valid until the file drop callback returns, as they may have been generated specifically for that event. You need to make a deep copy of the array if you want to keep the paths. 

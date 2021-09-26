@@ -1,0 +1,39 @@
+digraph "nk_style_property"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="nk_style_property",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" hover\nnormal\nactive" ];
+  Node2 [label="nk_style_item",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnk__style__item.html",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" data" ];
+  Node3 [label="nk_style_item_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$unionnk__style__item__data.html",tooltip=" "];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" color" ];
+  Node4 [label="nk_color",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnk__color.html",tooltip=" "];
+  Node5 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" image" ];
+  Node5 [label="nk_image",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnk__image.html",tooltip=" "];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" handle" ];
+  Node6 [label="nk_handle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$unionnk__handle.html",tooltip=" "];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" label_hover\nlabel_normal\nlabel_active\nborder_color" ];
+  Node7 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" dec_button\ninc_button" ];
+  Node7 [label="nk_style_button",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnk__style__button.html",tooltip=" "];
+  Node2 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" hover\nnormal\nactive" ];
+  Node4 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" text_hover\ntext_normal\ntext_background\nborder_color\ntext_active" ];
+  Node8 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" padding\ntouch_padding\nimage_padding" ];
+  Node8 [label="nk_vec2",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnk__vec2.html",tooltip=" "];
+  Node6 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" userdata" ];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" padding" ];
+  Node9 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" edit" ];
+  Node9 [label="nk_style_edit",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnk__style__edit.html",tooltip=" "];
+  Node2 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" hover\nnormal\nactive" ];
+  Node4 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" text_hover\ntext_normal\ncursor_hover\nselected_normal\nborder_color\nselected_text_hover\ntext_active\ncursor_text_normal\nselected_text_normal\ncursor_text_hover\n..." ];
+  Node8 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" padding\nscrollbar_size" ];
+  Node10 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" scrollbar" ];
+  Node10 [label="nk_style_scrollbar",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structnk__style__scrollbar.html",tooltip=" "];
+  Node2 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" cursor_active\nhover\ncursor_hover\nnormal\nactive\ncursor_normal" ];
+  Node4 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" cursor_border_color\nborder_color" ];
+  Node7 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" dec_button\ninc_button" ];
+  Node8 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" padding" ];
+  Node6 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" userdata" ];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" userdata" ];
+}
