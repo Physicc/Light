@@ -125,7 +125,7 @@ namespace Physicc
 			            glm::vec3 scale = glm::vec3(1));
 
 			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
-			inline glm::vec3 getCentroid() const override;
+			glm::vec3 getCentroid() const override;
 
 		private:
 			std::vector<glm::vec4> m_vertices;
@@ -146,7 +146,7 @@ namespace Physicc
 
 			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
-			inline glm::vec3 getCentroid() const override;
+			glm::vec3 getCentroid() const override;
 
 		private:
 			float m_radius;

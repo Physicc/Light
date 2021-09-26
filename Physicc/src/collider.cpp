@@ -99,7 +99,7 @@ namespace Physicc
 		//returning initializer list instead of an actual object
 	}
 
-	inline glm::vec3 BoxCollider::getCentroid() const
+	glm::vec3 BoxCollider::getCentroid() const
 	{
 		return m_position;
 	}
@@ -135,7 +135,7 @@ namespace Physicc
 		return {lowerBound, upperBound};
 	}
 
-	inline glm::vec3 SphereCollider::getCentroid() const
+	glm::vec3 SphereCollider::getCentroid() const
 	{
 		return m_position;
 	}
