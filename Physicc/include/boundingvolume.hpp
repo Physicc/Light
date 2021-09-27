@@ -42,6 +42,7 @@ namespace Physicc
 		 * BV class.
 		 *
 		 * @tparam Derived
+		 * @tparam BoundingObject
 		 * TODO: Update this Doxygen comment
 		 */
 		template <typename Derived, typename BoundingObject>
