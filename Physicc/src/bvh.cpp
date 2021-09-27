@@ -70,9 +70,6 @@ namespace Physicc
 	BVH::Axis BVH::getMedianCuttingAxis(int start, int end)
 	{
 		//TODO: Suggest a better name
-//		float x_min = 0, x_max = 0;
-//		float y_min = 0, y_max = 0;
-//		float z_min = 0, z_max = 0;
 
 		glm::vec3 min(m_rigidBodyList[start].getCentroid()),
 			max(m_rigidBodyList[start].getCentroid());
