@@ -14,7 +14,7 @@ jobs:
           uses: mattnotmitt/doxygen-action@v1.3.1
           with:
             enable-latex: true
-            working-directory: ${{ github.workspace }}/
+            #working-directory: ${{ github.workspace }}
         - name: Deploy
           uses: peaceiris/actions-gh-pages@v3
           with:
