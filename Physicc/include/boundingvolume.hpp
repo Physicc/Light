@@ -35,8 +35,8 @@ namespace Physicc
 
 		/**
 		 * A templated class that defines the Bounding Volume (BV) of an object, but
-		 * in a way that allows others to hot swap actual bounding volumes (like
-		 * AABBs, OBBs, 8-DOPs, etc.).
+		 * in a way that allows hot swapping actual bounding volumes (like AABBs, OBBs, 8-DOPs,
+		 * etc.).
 		 *
 		 * TODO: Figure out if this is good enough as a description of the
 		 * BV class.
