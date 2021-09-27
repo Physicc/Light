@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="entt::basic_view\< Entity,\l exclude_t\<\>, Component \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classentt_1_1basic__view_3_01Entity_00_01exclude__t_3_4_00_01Component_01_4.html",tooltip="Single component view specialization."];
+}

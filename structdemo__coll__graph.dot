@@ -1,0 +1,38 @@
+digraph "demo"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="demo",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" buffers" ,fontname="Helvetica"];
+  Node2 [label="SwapchainBuffers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSwapchainBuffers.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" vi_attrs" ,fontname="Helvetica"];
+  Node3 [label="VkVertexInputAttributeDescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkVertexInputAttributeDescription.html",tooltip=" "];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" vi" ,fontname="Helvetica"];
+  Node4 [label="VkPipelineVertexInputState\lCreateInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkPipelineVertexInputStateCreateInfo.html",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pVertexAttributeDescriptions" ,fontname="Helvetica"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pVertexBindingDescriptions" ,fontname="Helvetica"];
+  Node5 [label="VkVertexInputBindingDescription",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkVertexInputBindingDescription.html",tooltip=" "];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" textures" ,fontname="Helvetica"];
+  Node6 [label="texture_object",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtexture__object.html",tooltip=" "];
+  Node7 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" gpu_features" ,fontname="Helvetica"];
+  Node7 [label="VkPhysicalDeviceFeatures",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkPhysicalDeviceFeatures.html",tooltip=" "];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" memory_properties" ,fontname="Helvetica"];
+  Node8 [label="VkPhysicalDeviceMemoryProperties",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkPhysicalDeviceMemoryProperties.html",tooltip=" "];
+  Node9 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" memoryTypes" ,fontname="Helvetica"];
+  Node9 [label="VkMemoryType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkMemoryType.html",tooltip=" "];
+  Node10 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" memoryHeaps" ,fontname="Helvetica"];
+  Node10 [label="VkMemoryHeap",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkMemoryHeap.html",tooltip=" "];
+  Node11 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" queue_props" ,fontname="Helvetica"];
+  Node11 [label="VkQueueFamilyProperties",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkQueueFamilyProperties.html",tooltip=" "];
+  Node12 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" minImageTransferGranularity" ,fontname="Helvetica"];
+  Node12 [label="VkExtent3D",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkExtent3D.html",tooltip=" "];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" vi_bindings" ,fontname="Helvetica"];
+  Node13 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" gpu_props" ,fontname="Helvetica"];
+  Node13 [label="VkPhysicalDeviceProperties",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkPhysicalDeviceProperties.html",tooltip=" "];
+  Node14 -> Node13 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" sparseProperties" ,fontname="Helvetica"];
+  Node14 [label="VkPhysicalDeviceSparseProperties",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkPhysicalDeviceSparseProperties.html",tooltip=" "];
+  Node15 -> Node13 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" limits" ,fontname="Helvetica"];
+  Node15 [label="VkPhysicalDeviceLimits",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVkPhysicalDeviceLimits.html",tooltip=" "];
+}
