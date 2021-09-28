@@ -27,7 +27,12 @@ namespace Physicc
 			{
 			}
 			//the existence of this constructor does not promote this struct from a
-			//POD to a non-POD type. (at least, it shouldn't.)
+			//POD to a non-POD type.
+
+			inline bool operator==(const AABB& other)
+			{
+				return (lowerBound == other.lowerBound) && (upperBound == other.upperBound);
+			}
 
 			glm::vec3 lowerBound;
 			glm::vec3 upperBound;
@@ -112,7 +117,8 @@ namespace Physicc
 					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
-				[[nodiscard]] bool operator==(const BaseBV& other)
+				//TODO: Should this function be inline?
+				[[nodiscard]] inline bool operator==(const BaseBV& other)
 				{
 					return typeCast() == other.typeCast();
 				}
@@ -204,8 +210,7 @@ namespace Physicc
 
 				inline bool operator==(const BoxBV& other) const
 				{
-					return m_volume.lowerBound == other.m_volume.lowerBound
-						&& m_volume.upperBound == other.m_volume.upperBound;
+					return m_volume == other.m_volume;
 				}
 
 			private:
