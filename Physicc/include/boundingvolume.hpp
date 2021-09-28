@@ -2,6 +2,7 @@
 #define __BOUNDINGVOLUME_H__
 
 #include "glm/glm.hpp"
+#include "glm/gtc/epsilon.hpp"
 
 namespace Physicc
 {
@@ -31,7 +32,9 @@ namespace Physicc
 
 			inline bool operator==(const AABB& other)
 			{
-				return (lowerBound == other.lowerBound) && (upperBound == other.upperBound);
+				float epsilon = 1e-5;
+				return glm::all(glm::epsilonEqual(lowerBound,other.lowerBound,epsilon))
+					&& glm::all(glm::epsilonEqual(upperBound,other.upperBound,epsilon));
 			}
 
 			glm::vec3 lowerBound;
