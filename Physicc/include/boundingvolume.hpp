@@ -112,6 +112,11 @@ namespace Physicc
 					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
+				[[nodiscard]] bool operator==(const BaseBV& other)
+				{
+					return typeCast() == other.typeCast();
+				}
+
 			private:
 				[[nodiscard]] inline Derived* typeCast()
 				{
@@ -196,6 +201,12 @@ namespace Physicc
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
+
+				inline bool operator==(const BoxBV& other) const
+				{
+					return m_volume.lowerBound == other.m_volume.lowerBound
+						&& m_volume.upperBound == other.m_volume.upperBound;
+				}
 
 			private:
 				T m_volume;
