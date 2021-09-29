@@ -30,7 +30,7 @@ namespace Physicc
 			//the existence of this constructor does not promote this struct from a
 			//POD to a non-POD type.
 
-			inline bool operator==(const AABB& other)
+			inline bool operator==(const AABB& other) const
 			{
 				float epsilon = 1e-5;
 				return glm::all(glm::epsilonEqual(lowerBound,other.lowerBound,epsilon))
@@ -121,9 +121,9 @@ namespace Physicc
 				}
 
 				//TODO: Should this function be inline?
-				[[nodiscard]] inline bool operator==(const BaseBV& other)
+				[[nodiscard]] inline bool operator==(const BaseBV& other) const
 				{
-					return typeCast() == other.typeCast();
+					return constTypeCast() == other.constTypeCast();
 				}
 
 			private:
