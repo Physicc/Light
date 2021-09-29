@@ -62,6 +62,7 @@ namespace Physicc
 					//Recurse through node2, with node1 constant.
 					getPotentialContactsWith(node1, node2->left, collisionArray);
 					getPotentialContactsWith(node1, node2->right, collisionArray);
+					
 
 				}
 			}
@@ -70,7 +71,9 @@ namespace Physicc
 			{
 				if (isLeaf(node))
 					return;
-
+				
+				LIGHT_ASSERT(node->left != nullptr && node->right != nullptr,"Invalid Node");
+				
 				getPotentialContacts(node->left, collisionArray);
 				getPotentialContacts(node->right, collisionArray);
 
