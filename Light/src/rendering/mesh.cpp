@@ -2,6 +2,7 @@
 #include "light/rendering/buffer.hpp"
 
 #include "core/assert.hpp"
+#include "core/logging.hpp"
 
 namespace Light
 {
@@ -39,12 +40,46 @@ namespace Light
 				{ Light::ShaderDataType::Float3, "a_Normal" }
 			});
 
-		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertex_data.data(), sizeof(vertices)));
+		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertex_data.data(), vertex_data.size() * sizeof(vertex_data[0])));
 		vbo->setLayout(layout);
 
 		std::shared_ptr<Light::IndexBuffer> ibo(Light::IndexBuffer::create(m_indices.data(), m_indices.size()));
 
 		m_vao->addVertexBuffer(vbo);
 		m_vao->setIndexBuffer(ibo);
+	}
+
+	void MeshLibrary::add(const std::string& name, std::shared_ptr<Mesh>& mesh) 
+	{
+		if(m_meshes.find(name) != m_meshes.end())
+		{
+			LIGHT_CORE_ERROR("Mesh already exists");
+		}
+
+		m_meshes[name] = mesh;
+	}
+	
+	void MeshLibrary::add(const std::string& name,
+				const std::vector<glm::vec3>& vertices,
+				const std::vector<glm::vec4>& colors,
+				const std::vector<glm::vec3>& normals,
+				const std::vector<unsigned int>& indices) 
+	{
+		if(m_meshes.find(name) != m_meshes.end())
+		{
+			LIGHT_CORE_ERROR("Mesh already exists");
+		}
+
+		m_meshes[name] = std::make_shared<Mesh>(vertices, colors, normals, indices);
+	}
+	
+	std::shared_ptr<Mesh> MeshLibrary::get(const std::string& name)
+	{
+		if(m_meshes.find(name) == m_meshes.end())
+		{
+			LIGHT_CORE_ERROR("Mesh does not exist");
+		}
+
+		return m_meshes[name];
 	}
 }

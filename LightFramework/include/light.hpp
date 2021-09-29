@@ -2,6 +2,7 @@
 #include "core/layer.hpp"
 #include "light/rendering/shader.hpp"
 #include "light/rendering/buffer.hpp"
+#include "light/rendering/mesh.hpp"
 #include "light/rendering/vertexarray.hpp"
 #include "light/rendering/rendercommand.hpp"
 #include "light/rendering/renderer.hpp"

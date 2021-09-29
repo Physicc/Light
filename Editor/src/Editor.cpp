@@ -11,7 +11,6 @@ class MainLayer : public Light::Layer
 public:
 	MainLayer(): Light::Layer("MainLayer"),
 					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f)
-					// m_lightPos(-1, 2, 1.5)
 	{
 		Light::FramebufferSpec fbspec;
 		fbspec.attachments = { 
@@ -52,66 +51,15 @@ public:
 		floor_transform.scale = glm::vec3(2, 0.1, 2);
 		floor.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
 
-		m_light = m_scene->addEntity("Light");
-		auto& light_transform = m_light.getComponent<Light::TransformComponent>();
+		auto light = m_scene->addEntity("Light");
+		auto& light_transform = light.getComponent<Light::TransformComponent>();
 		light_transform.position = glm::vec3(-1,2,1.5);
-		m_light.addComponent<Light::LightComponent>();
+		light.addComponent<Light::LightComponent>();
 
-		Light::BufferLayout layout({
-				{ Light::ShaderDataType::Float3, "a_Position" },
-				{ Light::ShaderDataType::Float4, "a_Color" },
-				{ Light::ShaderDataType::Float3, "a_Normal" }
-			});
+		addDefaultMeshes();
 
-		float vertices[] = {
-			//Front
-			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			//Left
-			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			//Right
-			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			//Top
-			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			//Bottom
-			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			//Back
-			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-		};
-
-		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertices, sizeof(vertices)));
-		vbo->setLayout(layout);
-
-		unsigned int indices[] = { 
-			0, 1, 2, 2, 3, 0,
-			4, 5, 6, 6, 7, 4,
-			8, 9, 10, 10, 11, 8,
-			12, 13, 14, 14, 15, 12,
-			16, 17, 18, 18, 19, 16,
-			20, 21, 22, 22, 23, 20
-		};
-
-		std::shared_ptr<Light::IndexBuffer> ibo(Light::IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
-
-		cube.addComponent<Light::MeshComponent>(vbo, ibo);
-		floor.addComponent<Light::MeshComponent>(vbo, ibo);
+		cube.addComponent<Light::MeshComponent>(m_meshes.get("cube"));
+		floor.addComponent<Light::MeshComponent>(m_meshes.get("cube"));
 
 		m_scenePanel.setContext(m_scene);
 	}
@@ -316,12 +264,92 @@ public:
 
 	}
 
+	void addDefaultMeshes()
+	{
+		std::vector<glm::vec3> vertices = {
+			glm::vec3(-0.5f, -0.5f, 0.5f),
+			glm::vec3(0.5f, -0.5f, 0.5f),
+			glm::vec3(0.5f, 0.5f, 0.5f),
+			glm::vec3(-0.5f, 0.5f, 0.5f),
+
+			glm::vec3(-0.5f, -0.5f, 0.5f),
+			glm::vec3(-0.5f, 0.5f, 0.5f),
+			glm::vec3(-0.5f, 0.5f, -0.5f),
+			glm::vec3(-0.5f, -0.5f, -0.5f),
+
+			glm::vec3(0.5f, -0.5f, 0.5f),
+			glm::vec3(0.5f, -0.5f, -0.5f),
+			glm::vec3(0.5f, 0.5f, -0.5f),
+			glm::vec3(0.5f, 0.5f, 0.5f),
+
+			glm::vec3(-0.5f, 0.5f, 0.5f),
+			glm::vec3(0.5f, 0.5f, 0.5f),
+			glm::vec3(0.5f, 0.5f, -0.5f),
+			glm::vec3(-0.5f, 0.5f, -0.5f),
+
+			glm::vec3(-0.5f, -0.5f, 0.5f),
+			glm::vec3(-0.5f, -0.5f, -0.5f),
+			glm::vec3(0.5f, -0.5f, -0.5f),
+			glm::vec3(0.5f, -0.5f, 0.5f),
+
+			glm::vec3(-0.5f, -0.5f, -0.5f),
+			glm::vec3(-0.5f, 0.5f, -0.5f),
+			glm::vec3(0.5f, 0.5f, -0.5f),
+			glm::vec3(0.5f, -0.5f, -0.5f)
+		};
+
+		std::vector<glm::vec4> color(24, {0.8f, 0.8f, 0.8f, 1.0f});
+
+		std::vector<glm::vec3> normals = {
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 0.0f, 0.0f),
+
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+
+			glm::vec3(0.0f, -1.0f, 0.0f),
+			glm::vec3(0.0f, -1.0f, 0.0f),
+			glm::vec3(0.0f, -1.0f, 0.0f),
+			glm::vec3(0.0f, -1.0f, 0.0f),
+
+			glm::vec3(0.0f, 0.0f, -1.0f),
+			glm::vec3(0.0f, 0.0f, -1.0f),
+			glm::vec3(0.0f, 0.0f, -1.0f),
+			glm::vec3(0.0f, 0.0f, -1.0f)
+		};
+
+		std::vector<unsigned int> indices = {
+			0, 1, 2, 2, 3, 0,
+			4, 5, 6, 6, 7, 4,
+			8, 9, 10, 10, 11, 8,
+			12, 13, 14, 14, 15, 12,
+			16, 17, 18, 18, 19, 16,
+			20, 21, 22, 22, 23, 20
+		};
+
+		m_meshes.add("cube", vertices, color, normals, indices);
+	}
+
 private:
+	Light::MeshLibrary m_meshes;
+
 	Light::EditorCamera m_camera;
 
 	std::shared_ptr<Light::Scene> m_scene;
-	Light::Entity m_light;
-
 	Light::ScenePanel m_scenePanel;
 
 	Light::Entity m_hoveredEntity;
@@ -329,8 +357,10 @@ private:
 	std::shared_ptr<Light::Framebuffer> m_framebuffer;
 	std::shared_ptr<Light::Framebuffer> m_framebuffer2;
 	std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
+	
 	glm::vec2 m_viewportPanelSize;
 	glm::vec2 m_viewportPos;
+
 	bool m_resizeViewport = false;
 	bool m_viewportFocused = false;
 	float m_time = 0.0f;
