@@ -26,6 +26,23 @@ namespace Light
 
 		ImGui::Begin("Properties");
 
+		if(m_selectionContext && ImGui::BeginPopupContextWindow())
+		{
+			if (ImGui::BeginMenu("Add Component"))
+			{
+				if(!m_selectionContext.hasComponent<MeshComponent>() && ImGui::MenuItem("Mesh"))
+				{
+					m_selectionContext.addComponent<MeshComponent>(m_meshLibrary->getMeshMap().begin()->second);
+				}
+				if(!m_selectionContext.hasComponent<MeshRendererComponent>() && ImGui::MenuItem("Mesh Renderer"))
+				{
+					m_selectionContext.addComponent<MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndPopup();
+		}
+
 		if(m_selectionContext)
 			drawAllComponents(m_selectionContext);
 
@@ -166,6 +183,60 @@ namespace Light
 			if(dragVec3("Rotation", rotationDeg, 5.0f))
 				component.rotation = glm::radians(rotationDeg);
 			dragVec3("Scale", component.scale, 0.1f, 1.0f);
+		});
+
+		drawComponent<MeshComponent>("Mesh", entity, [this](auto& component){
+			float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+			float itemWidth = ImGui::GetContentRegionAvail().x;
+
+			ImGui::Columns(2, NULL, false);
+			ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+
+			ImGui::Text("Mesh");
+
+			ImGui::NextColumn();
+
+			float fullWidth = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+			float offset = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth);
+			if(offset > 0.0f)
+				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset);
+
+			ImGui::SetNextItemWidth(fullWidth);
+
+			auto meshMap = m_meshLibrary->getMeshMap();
+			auto current = meshMap.begin();
+			
+			for (auto it = meshMap.begin(); it != meshMap.end(); it++)
+			{
+				if(it->second == component.mesh)
+				{
+					current = it;
+					break;
+				}
+			}
+	
+			if (ImGui::BeginCombo("##mesh", current->first.c_str(), 0))
+			{
+				for(auto it = meshMap.begin(); it != meshMap.end(); it++)
+				{
+					const bool selected = current == it;
+					if(ImGui::Selectable(it->first.c_str(), selected))
+					{
+						current = it;
+						component.mesh = it->second;
+					}
+
+					if(selected)
+						ImGui::SetItemDefaultFocus();
+				}
+				ImGui::EndCombo();
+			}
+
+			ImGui::Columns(1);
+		});
+
+		drawComponent<MeshRendererComponent>("Mesh Renderer", entity, [](auto& component){
+			ImGui::Text("Phong");
 		});
 	}
 }

@@ -7,6 +7,7 @@
 #include <glm/gtx/quaternion.hpp>
 #include "light/rendering/shader.hpp"
 #include "light/rendering/buffer.hpp"
+#include "light/rendering/mesh.hpp"
 #include "light/rendering/texture.hpp"
 #include "light/rendering/vertexarray.hpp"
 #include "light/rendering/camera.hpp"
@@ -63,9 +64,8 @@ namespace Light
 
 	struct MeshComponent : public Component
 	{
-		MeshComponent(std::shared_ptr<Light::VertexBuffer> vertexBuffer,
-			std::shared_ptr<Light::IndexBuffer> indexBuffer);
-		std::shared_ptr<Light::VertexArray> mesh;
+		MeshComponent(std::shared_ptr<Light::Mesh> mesh);
+		std::shared_ptr<Light::Mesh> mesh;
 	};
 
 	struct LightComponent : public Component

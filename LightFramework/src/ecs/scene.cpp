@@ -138,7 +138,7 @@ namespace Light
 			for (auto& entity : view)
 			{
 				auto [shader, mesh, transform] = view.get(entity);
-				Renderer::submitID(shader.shader, mesh.mesh, transform.getTransform(), (uint32_t)entity);
+				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity);
 
 			}
 		}
@@ -149,7 +149,7 @@ namespace Light
 		if(entity && entity.hasComponent<TransformComponent>() && entity.hasComponent<MeshComponent>())
 		{
 			auto [transform, mesh]= m_registry.get<TransformComponent, MeshComponent>((entt::entity)(uint32_t)entity);
-			Renderer::submit(m_outline_temp_shader, mesh.mesh, transform.getTransform());
+			Renderer::submit(m_outline_temp_shader, mesh.mesh->getVao(), transform.getTransform());
 		}
 	}
 
