@@ -3,6 +3,8 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
+#include <type_traits>
+
 #ifdef _MSC_VER
 	#define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -12,6 +14,30 @@ namespace Light
 	void ScenePanel::onImguiRender() 
 	{
 		ImGui::Begin("Scene");
+
+		if (ImGui::BeginPopupContextWindow())
+		{
+			if (ImGui::BeginMenu("Add Entity"))
+			{
+				if (ImGui::MenuItem("Empty Entity"))
+				{
+					m_context->addEntity("New Entity");
+				}
+				
+				if (ImGui::BeginMenu("Primitive"))
+				{
+					if (ImGui::MenuItem("Cube"))
+					{
+						auto entity = m_context->addEntity("Cube");
+						entity.addComponent<MeshComponent>(m_meshLibrary->get("Cube"));
+						entity.addComponent<MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+					}
+					ImGui::EndMenu();
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndPopup();
+		}
 
 		m_context->m_registry.each([&](auto entityHandle)
 		{
@@ -30,11 +56,11 @@ namespace Light
 		{
 			if (ImGui::BeginMenu("Add Component"))
 			{
-				if(!m_selectionContext.hasComponent<MeshComponent>() && ImGui::MenuItem("Mesh"))
+				if(ImGui::MenuItem("Mesh", nullptr, false, !m_selectionContext.hasComponent<MeshComponent>()))
 				{
 					m_selectionContext.addComponent<MeshComponent>(m_meshLibrary->getMeshMap().begin()->second);
 				}
-				if(!m_selectionContext.hasComponent<MeshRendererComponent>() && ImGui::MenuItem("Mesh Renderer"))
+				if(ImGui::MenuItem("Mesh Renderer", nullptr, false, !m_selectionContext.hasComponent<MeshRendererComponent>()))
 				{
 					m_selectionContext.addComponent<MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
 				}
@@ -55,15 +81,30 @@ namespace Light
 		
 		const ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ((m_selectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0);
 		bool opened = ImGui::TreeNodeEx(entity.getUUID().c_str(), flags, tag.c_str());
-		
+		bool toRemove = false;
 		if(ImGui::IsItemClicked())
 		{
 			m_selectionContext = entity;
 		}
 
+		if(ImGui::BeginPopupContextItem())
+		{
+			if (ImGui::MenuItem("Remove Entity"))
+			{
+				toRemove = true;
+			}
+			ImGui::EndPopup();
+		}
+
 		if(opened)
 		{
 			ImGui::TreePop();
+		}
+
+		if(toRemove)
+		{
+			m_context->removeEntity(entity);
+			m_selectionContext = {};
 		}
 	}
 
@@ -71,6 +112,10 @@ namespace Light
 	void drawComponent(const std::string& name, Entity entity, UIFunction uiFunction)
 	{
 		const ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_DefaultOpen;
+
+		constexpr bool removable = !std::is_same_v<T, TransformComponent>;
+
+		bool toRemove = false;
 		if(entity.hasComponent<T>())
 		{
 			auto& component = entity.getComponent<T>();
@@ -78,6 +123,14 @@ namespace Light
 			ImGui::Separator();
 
 			bool open = ImGui::TreeNodeEx(component.uuid.c_str(), flags, name.c_str());
+			if(removable && ImGui::BeginPopupContextItem())
+			{
+				if(ImGui::MenuItem("Remove Component"))
+				{
+					toRemove = true;
+				}
+				ImGui::EndPopup();
+			}
 
 			if(open)
 			{
@@ -85,6 +138,9 @@ namespace Light
 				ImGui::TreePop();
 			}
 		}
+
+		if(toRemove)
+			entity.removeComponent<T>();
 	}
 
 	static bool dragVec3(std::string label, glm::vec3& vec3,

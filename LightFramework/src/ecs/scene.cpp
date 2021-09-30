@@ -112,6 +112,12 @@ namespace Light
 		return entity;
 	}
 
+	void Scene::removeEntity(Entity entity) 
+	{
+		m_registry.destroy((entt::entity)(uint32_t)entity);
+	}
+	
+
 	void Scene::update(Timestep dt)
 	{
 		

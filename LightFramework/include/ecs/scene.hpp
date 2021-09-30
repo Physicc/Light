@@ -17,6 +17,7 @@ namespace Light
 		Scene();
 		~Scene() = default;
 		Entity addEntity(const std::string& name="");
+		void removeEntity(Entity entity);
 		void update(Light::Timestep dt);
 		void render();
 		void renderSelection(Entity entity);
@@ -34,7 +35,6 @@ namespace Light
 		friend class Entity;
 		friend class ScenePanel;
 	};
-	
 }
 
 #endif // __SCENE_HPP__
