@@ -142,7 +142,12 @@ namespace Physicc
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
 				//functions, to make the use of BVs easier.
-			public:
+			private:
+				//Hiding the exact implementation by making all the functions
+				//private
+
+				friend BaseBV<BoxBV<T>, T>;
+
 				BoxBV() = default;
 
 				BoxBV(const BoxBV& bv) = default;
@@ -198,7 +203,6 @@ namespace Physicc
 				{
 					return this->m_volume == other.m_volume;
 				}
-
 		};
 	}
 
