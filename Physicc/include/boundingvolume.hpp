@@ -6,10 +6,6 @@
 
 namespace Physicc
 {
-	//Verdict: Discuss commented functions (keep or discard? KEEP)
-
-	//Warning: Return types may need the template specified.
-
 	//Named namespace, to keep the implementation hidden from users (or at least
 	//make it harder to find)
 	namespace BVImpl
@@ -33,8 +29,8 @@ namespace Physicc
 			inline bool operator==(const AABB& other) const
 			{
 				float epsilon = 1e-5;
-				return glm::all(glm::epsilonEqual(lowerBound,other.lowerBound,epsilon))
-					&& glm::all(glm::epsilonEqual(upperBound,other.upperBound,epsilon));
+				return glm::all(glm::epsilonEqual(lowerBound, other.lowerBound, epsilon))
+					&& glm::all(glm::epsilonEqual(upperBound, other.upperBound, epsilon));
 			}
 
 			glm::vec3 lowerBound;
@@ -111,19 +107,14 @@ namespace Physicc
 				//to use this function will likely result in 5 pages of opaque
 				//errors.
 
-//				[[nodiscard]] inline BoundingObject getBoundingVolume() const
-//				{
-//					return constTypeCast()->getBoundingVolume();
-//				}
 				[[nodiscard]] Derived enclosingBV(const BaseBV& bv) const
 				{
 					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
-				//TODO: Should this function be inline?
 				[[nodiscard]] inline bool operator==(const BaseBV& other) const
 				{
-					return *constTypeCast() == *other.constTypeCast();
+					return constTypeCast() == other.constTypeCast();
 				}
 
 			private:
@@ -133,13 +124,7 @@ namespace Physicc
 				}
 				//A helper function just to make reading the code easier
 
-//				[[nodiscard]] inline const Derived* constTypeCast() const
-//				{
-//					return static_cast<const Derived*>(this);
-//				}
-//				//A helper function just to make reading the code easier
-
-				[[nodiscard]] inline const Derived* constTypeCast() const//constTypeCastToConst() const
+				[[nodiscard]] inline const Derived* constTypeCast() const
 				{
 					return static_cast<const Derived*>(this);
 				}
@@ -176,8 +161,6 @@ namespace Physicc
 				                      const glm::vec3& upperBound)
 				{
 					this->m_volume = {lowerBound, upperBound};
-//					this->m_volume.lowerBound = lowerBound;
-//					this->m_volume.upperBound = upperBound;
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
@@ -202,11 +185,6 @@ namespace Physicc
 						&& (this->m_volume.lowerBound.z <= bv.m_volume.upperBound.z
 							&& this->m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
-
-//				inline T getBoundingVolume() const
-//				{
-//					return this->m_volume;
-//				}
 
 				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
