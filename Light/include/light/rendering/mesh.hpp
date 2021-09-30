@@ -6,6 +6,7 @@
 #include <vector>
 #include <unordered_map>
 #include <memory>
+#include <set>
 #include "glm/glm.hpp"
 
 namespace Light
@@ -41,10 +42,13 @@ namespace Light
 			const std::vector<unsigned int> &indices);
 
 		std::shared_ptr<Mesh> get(const std::string &name);
+
+		std::unordered_map<std::string, std::shared_ptr<Mesh>> getMeshMap() { return m_meshes; }
 	
 	private:
 		std::unordered_map<std::string, std::shared_ptr<Mesh>> m_meshes;
 	};
+	
 }
 
 

@@ -56,12 +56,15 @@ public:
 		light_transform.position = glm::vec3(-1,2,1.5);
 		light.addComponent<Light::LightComponent>();
 
+		m_meshes = std::make_shared<Light::MeshLibrary>();
+
 		addDefaultMeshes();
 
-		cube.addComponent<Light::MeshComponent>(m_meshes.get("cube"));
-		floor.addComponent<Light::MeshComponent>(m_meshes.get("cube"));
+		cube.addComponent<Light::MeshComponent>(m_meshes->get("Cube"));
+		floor.addComponent<Light::MeshComponent>(m_meshes->get("Cube"));
 
 		m_scenePanel.setContext(m_scene);
+		m_scenePanel.setMeshLibrary(m_meshes);
 	}
 	~MainLayer() = default;
 
@@ -266,6 +269,8 @@ public:
 
 	void addDefaultMeshes()
 	{
+		m_meshes->add("None", std::vector<glm::vec3>(), std::vector<glm::vec4>(), std::vector<glm::vec3>(), std::vector<unsigned int>());
+
 		std::vector<glm::vec3> vertices = {
 			glm::vec3(-0.5f, -0.5f, 0.5f),
 			glm::vec3(0.5f, -0.5f, 0.5f),
@@ -341,11 +346,11 @@ public:
 			20, 21, 22, 22, 23, 20
 		};
 
-		m_meshes.add("cube", vertices, color, normals, indices);
+		m_meshes->add("Cube", vertices, color, normals, indices);
 	}
 
 private:
-	Light::MeshLibrary m_meshes;
+	std::shared_ptr<Light::MeshLibrary> m_meshes;
 
 	Light::EditorCamera m_camera;
 
