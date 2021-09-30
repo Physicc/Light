@@ -123,7 +123,7 @@ namespace Physicc
 				//TODO: Should this function be inline?
 				[[nodiscard]] inline bool operator==(const BaseBV& other) const
 				{
-					return constTypeCast() == other.constTypeCast();
+					return *constTypeCast() == *other.constTypeCast();
 				}
 
 			private:
@@ -144,6 +144,11 @@ namespace Physicc
 					return static_cast<const Derived*>(this);
 				}
 				//Another helper function just to make reading the code easier
+			protected:
+				BoundingObject m_volume;	
+				//For accessing non-templated member variables (or even functions) of a templated class
+				//inside a derived class, make sure to use "this" pointer.
+				//See here why: https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members  
 		};
 
 		template <typename T>
@@ -159,20 +164,20 @@ namespace Physicc
 
 				BoxBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
-					m_volume = {lowerBound, upperBound};
+					this->m_volume = {lowerBound, upperBound};
 				}
 
 				inline void setVolume(const T& volume)
 				{
-					m_volume = volume;
+					this->m_volume = volume;
 				}
 
 				inline void setVolume(const glm::vec3& lowerBound,
 				                      const glm::vec3& upperBound)
 				{
-					m_volume = {lowerBound, upperBound};
-//					m_volume.lowerBound = lowerBound;
-//					m_volume.upperBound = upperBound;
+					this->m_volume = {lowerBound, upperBound};
+//					this->m_volume.lowerBound = lowerBound;
+//					this->m_volume.upperBound = upperBound;
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
@@ -183,41 +188,39 @@ namespace Physicc
 					//never called by the end user. It is simply called by BV
 					//itself, which doesn't actually discard the return type, so
 					//we're good.
-					return (m_volume.upperBound.x - m_volume.lowerBound.x)
-						* (m_volume.upperBound.y - m_volume.lowerBound.y)
-						* (m_volume.upperBound.z - m_volume.lowerBound.z);
+					return (this->m_volume.upperBound.x - this->m_volume.lowerBound.x)
+						* (this->m_volume.upperBound.y - this->m_volume.lowerBound.y)
+						* (this->m_volume.upperBound.z - this->m_volume.lowerBound.z);
 				}
 
 				inline bool overlapsWith(const BoxBV& bv) const
 				{
-					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
-							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
-						&& (m_volume.lowerBound.y <= bv.m_volume.upperBound.y
-							&& m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
-						&& (m_volume.lowerBound.z <= bv.m_volume.upperBound.z
-							&& m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
+					return (this->m_volume.lowerBound.x <= bv.m_volume.upperBound.x
+							&& this->m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
+						&& (this->m_volume.lowerBound.y <= bv.m_volume.upperBound.y
+							&& this->m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
+						&& (this->m_volume.lowerBound.z <= bv.m_volume.upperBound.z
+							&& this->m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
 
 //				inline T getBoundingVolume() const
 //				{
-//					return m_volume;
+//					return this->m_volume;
 //				}
 
 				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
-					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
-						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
+					return {glm::min(this->m_volume.lowerBound, bv.m_volume.lowerBound),
+						glm::max(this->m_volume.upperBound, bv.m_volume.upperBound)};
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
 
 				inline bool operator==(const BoxBV& other) const
 				{
-					return m_volume == other.m_volume;
+					return this->m_volume == other.m_volume;
 				}
 
-			private:
-				T m_volume;
 		};
 	}
 
