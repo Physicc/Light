@@ -15,8 +15,8 @@
 namespace Physicc
 {
 	/**
-	 * @brief RigidBody initialized with a mass velocity, and a bool storing whether
-	 * gravity is acting on the object or not.
+	 * @brief RigidBody initialized with a mass velocity, and a float storing
+	 * the scale of the gravity is acting on the object.
 	 */
 	RigidBody::RigidBody(const float mass, const glm::vec3& velocity,
 						const float gravityScale = 1 )
