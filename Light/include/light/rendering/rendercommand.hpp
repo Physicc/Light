@@ -29,3 +29,4 @@ namespace Light
 }
 
 #endif // __RENDERCOMMAND_H__
+

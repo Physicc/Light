@@ -69,3 +69,4 @@ namespace Light
 
 }
 #endif // __EDITORCAMERA_H__
+

@@ -78,3 +78,4 @@ namespace Light
 }
 
 #endif // __EVENT_H__
+
