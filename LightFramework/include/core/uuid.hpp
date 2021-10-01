@@ -33,3 +33,4 @@ inline std::string newUUID()
 }
 
 #endif // __UUID_H__
+

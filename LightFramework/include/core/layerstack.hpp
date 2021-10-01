@@ -28,3 +28,4 @@ namespace Light
 }
 
 #endif // __LAYERSTACK_H__
+

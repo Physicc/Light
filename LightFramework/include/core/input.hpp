@@ -22,3 +22,4 @@ namespace Light {
 }
 
 #endif // __INPUT_H__
+

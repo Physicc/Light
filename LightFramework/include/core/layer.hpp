@@ -34,3 +34,4 @@ namespace Light
 }
 
 #endif // __LAYER_H__
+

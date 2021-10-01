@@ -39,3 +39,4 @@ namespace Light
 }
 
 #endif // __WINDOW_H__
+

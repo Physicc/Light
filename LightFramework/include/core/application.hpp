@@ -46,3 +46,4 @@ namespace Light
 	Application* createApplication();
 }
 #endif // __APPLICATION_H__
+
