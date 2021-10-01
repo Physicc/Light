@@ -164,3 +164,4 @@ namespace Light
 		Renderer::submit(m_outline_shader, m_outline_mesh);
 	}
 }
+

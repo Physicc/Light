@@ -151,3 +151,4 @@ namespace Light
 		return glm::quat(glm::vec3(-m_pitch, -m_yaw, 0.0f));
 	}
 }
+

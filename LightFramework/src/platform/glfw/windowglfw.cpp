@@ -184,3 +184,4 @@ namespace Light
 		return m_data.vSync;
 	}
 }
+
