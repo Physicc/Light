@@ -126,3 +126,4 @@
 #define LIGHT_KEY_MENU               348
 
 #define LIGHT_KEY_LAST               LIGHT_KEY_MENU
+
