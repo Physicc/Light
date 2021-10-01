@@ -16,3 +16,4 @@ namespace Light
 }
 
 #endif // __INPUTGLFW_H__
+

@@ -51,3 +51,4 @@ namespace Light
 }
 
 #endif // __WINDOWGLFW_H__
+
