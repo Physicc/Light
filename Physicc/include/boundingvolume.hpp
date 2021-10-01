@@ -114,7 +114,7 @@ namespace Physicc
 
 				[[nodiscard]] inline bool operator==(const BaseBV& other) const
 				{
-					return constTypeCast() == other.constTypeCast();
+					return *constTypeCast() == *other.constTypeCast();
 				}
 
 			private:
