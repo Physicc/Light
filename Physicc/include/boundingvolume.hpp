@@ -14,13 +14,33 @@ namespace Physicc
 	//make it harder to find)
 	namespace BVImpl
 	{
+#if __cplusplus > 201703L
+		template <typename T>
+		concept Equal =
+	       		requires (T a, T b)
+			{
+				(a == b) -> std::convertible_to<bool>;
+			};
+
+		concept EqualOrInequal =
+			requires (T a, T b)
+			{
+				(a == b) -> std::convertible_to<bool>;
+				(a != b) -> std::convertible_to<bool>;
+			};
+#endif
+
 		/**
 		 * @brief Axis Aligned Bounding Box
 		 *
 		 * Helper struct to store diagonally opposite points of the AABB
 		 *
 		 */
+#if __cplusplus > 201703L
+		struct AABB requires Equal<AABB> || EqualOrInequal<AABB>
+#else
 		struct AABB
+#endif
 		{
 			AABB() = default;
 			//lb = lowerBound, ub = upperBound
@@ -44,6 +64,7 @@ namespace Physicc
 #if __cplusplus > 201703L
 		template <typename Derived, typename BoundingObject>
 		concept SpecializedBV = std::derives_from<BaseBV<Derived>>
+			&& (Equal<Derived<BoundingObject>> || EqualOrInequal<Derived<BoundingObject>>)
 			&& requires (BaseBV<Derived, BoundingObject> bv, BoundingObject volume)
 			{
 				std::copy_constructible<BaseBV<Derived, BoundingObject>>;
@@ -159,10 +180,8 @@ namespace Physicc
 				//See here why: https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members
 		};
 
-//		template <typename T>
-//		class BoxBV : public BaseBV<BoxBV<T>, T>
-		template <typename BoundingObject>
-		class BoxBV : public BaseBV<BoxBV<BoundingObject>>
+		template <typename T>
+		class BoxBV : public BaseBV<BoxBV<T>, T>
 		{
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
@@ -171,8 +190,7 @@ namespace Physicc
 				//Hiding the exact implementation by making all the functions
 				//private
 
-				//friend BaseBV<BoxBV<T>, T>;
-				friend BaseBV<BoxBV<BoundingObject>>;
+				friend BaseBV<BoxBV<T>, T>;
 
 				BoxBV() = default;
 
@@ -183,7 +201,7 @@ namespace Physicc
 					this->m_volume = {lowerBound, upperBound};
 				}
 
-				inline void setVolume(const BoundingObject& volume)
+				inline void setVolume(const T& volume)
 				{
 					this->m_volume = volume;
 				}
