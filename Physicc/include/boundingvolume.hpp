@@ -48,8 +48,7 @@ namespace Physicc
 		 * @tparam Derived
 		 * TODO: Update this Doxygen comment
 		 */
-//		template <typename Derived, typename BoundingObject>
-		template <typename Derived>
+		template <typename Derived, typename BoundingObject>
 		class BaseBV
 		{
 				//CRTP (Curiously Recurring Template Pattern)
@@ -74,7 +73,7 @@ namespace Physicc
 				 * (AABB, OBB, etc.)
 				 * @param volume
 				 */
-				BaseBV(const Derived::BoundingObject& volume)
+				BaseBV(const BoundingObject& volume)
 				{
 					typeCast()->setVolume(volume);
 				}
@@ -131,16 +130,14 @@ namespace Physicc
 				}
 				//Another helper function just to make reading the code easier
 			protected:
-				typename Derived::BoundingObject m_volume;
+				BoundingObject m_volume;	
 				//For accessing non-templated member variables (or even functions) of a templated class
 				//inside a derived class, make sure to use "this" pointer.
 				//See here why: https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members  
 		};
 
-//		template <typename T>
-//		class BoxBV : public BaseBV<BoxBV<T>, T>
-		template <typename BoundingObject>
-		class BoxBV: public BaseBV<BoxBV<BoundingObject>>
+		template <typename T>
+		class BoxBV : public BaseBV<BoxBV<T>, T>
 		{
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
@@ -149,8 +146,7 @@ namespace Physicc
 				//Hiding the exact implementation by making all the functions
 				//private
 
-				//friend BaseBV<BoxBV<T>, T>;
-				friend BaseBV<BoxBV<BoundingObject>>
+				friend BaseBV<BoxBV<T>, T>;
 
 				BoxBV() = default;
 
@@ -212,18 +208,11 @@ namespace Physicc
 
 	namespace BoundingVolume
 	{
-		//typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
-		typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>> AABB;
+		typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
 
-//		template <typename Derived, typename BoundingObject>
-//		auto inline enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
-//								const BVImpl::BaseBV<Derived, BoundingObject>& volume2)
-//		{
-//			return volume1.enclosingBV(volume2);
-//		}
-		template <typename Derived>
-		auto inline enclosingBV(const BVImpl::BaseBV<Derived>& volume1,
-		                        const BVImpl::BaseBV<Derived>& volume2)
+		template <typename Derived, typename BoundingObject>
+		auto inline enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
+								const BVImpl::BaseBV<Derived, BoundingObject>& volume2)
 		{
 			return volume1.enclosingBV(volume2);
 		}
