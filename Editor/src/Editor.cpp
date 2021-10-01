@@ -388,3 +388,4 @@ Light::Application* Light::createApplication()
 {
 	return new Editor();
 }
+

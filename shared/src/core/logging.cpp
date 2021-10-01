@@ -15,3 +15,4 @@ namespace Light
 		s_clientLogger->set_level(spdlog::level::trace);
 	}
 }
+
