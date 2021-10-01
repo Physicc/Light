@@ -117,6 +117,11 @@ namespace Physicc
 					return *constTypeCast() == *other.constTypeCast();
 				}
 
+				[[nodiscard]] inline bool operator!=(const BaseBV& other) const
+				{
+					return !(*this == other);
+				}
+
 			private:
 				[[nodiscard]] inline Derived* typeCast()
 				{
