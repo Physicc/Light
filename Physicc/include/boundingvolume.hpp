@@ -140,7 +140,7 @@ namespace Physicc
 //		template <typename T>
 //		class BoxBV : public BaseBV<BoxBV<T>, T>
 		template <typename BoundingObject>
-		class BoxBV : public BaseBV<BoxBV<BoundingObject>>
+		class BoxBV: public BaseBV<BoxBV<BoundingObject>>
 		{
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
@@ -150,7 +150,7 @@ namespace Physicc
 				//private
 
 				//friend BaseBV<BoxBV<T>, T>;
-				friend BaseBV<BoxBV<BoundingObject>>;
+				friend BaseBV<BoxBV<BoundingObject>>
 
 				BoxBV() = default;
 
@@ -161,7 +161,7 @@ namespace Physicc
 					this->m_volume = {lowerBound, upperBound};
 				}
 
-				inline void setVolume(const BoundingObject& volume)
+				inline void setVolume(const T& volume)
 				{
 					this->m_volume = volume;
 				}
