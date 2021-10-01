@@ -21,3 +21,4 @@ namespace Light
 }
 
 #endif // __OPENGLCONTEXT_H__
+

@@ -47,3 +47,4 @@ namespace Light
 }
 
 #endif // __OPENGLFRAMEBUFFER_H__
+

@@ -39,3 +39,4 @@ namespace Light
 }
 
 #endif // __OPENGLSHADER_H__
+

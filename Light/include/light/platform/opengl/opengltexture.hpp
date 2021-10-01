@@ -40,3 +40,4 @@ namespace Light
 }
 
 #endif // __OPENGLTEXTURE_H__
+

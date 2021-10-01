@@ -20,3 +20,4 @@ namespace Light
 }
 
 #endif // __OPENGLRENDERERAPI_H__
+

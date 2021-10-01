@@ -32,3 +32,4 @@ namespace Light
 }
 
 #endif // __OPENGLVERTEXARRAY_H__
+
