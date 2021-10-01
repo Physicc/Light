@@ -38,3 +38,4 @@ namespace Light
 	};
 }
 #endif // __APPLICATIONEVENT_H__
+
