@@ -86,3 +86,4 @@ namespace Light
 		glBindVertexArray(0);
 	}
 }
+

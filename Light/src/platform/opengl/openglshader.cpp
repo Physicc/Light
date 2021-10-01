@@ -181,3 +181,4 @@ namespace Light
 		glUniformMatrix4fv(glGetUniformLocation(m_rendererId, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 	}
 }
+

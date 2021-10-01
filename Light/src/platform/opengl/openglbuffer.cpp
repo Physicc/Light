@@ -65,3 +65,4 @@ namespace Light
 		return m_count;
 	}
 }
+

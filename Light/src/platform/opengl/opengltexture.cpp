@@ -133,3 +133,4 @@ namespace Light
 		glBindTexture(GL_TEXTURE_CUBE_MAP, m_rendererId);
 	}
 }
+

@@ -48,3 +48,4 @@ namespace Light
 		glDrawElements(GL_TRIANGLES, vao->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 	}
 }
+
