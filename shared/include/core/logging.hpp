@@ -57,3 +57,4 @@ namespace Light
 #endif
 
 #endif // __LOGGING_H__
+
