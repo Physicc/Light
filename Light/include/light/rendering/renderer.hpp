@@ -36,3 +36,4 @@ namespace Light
 }
 
 #endif // __RENDERER_H__
+

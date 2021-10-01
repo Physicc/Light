@@ -24,3 +24,4 @@ namespace Light
 }
 
 #endif // __CAMERA_H__
+

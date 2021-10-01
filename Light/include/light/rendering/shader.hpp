@@ -47,3 +47,4 @@ namespace Light
 }
 
 #endif // __SHADER_H__
+

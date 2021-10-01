@@ -179,3 +179,4 @@ namespace Light
 }
 
 #endif // __BUFFER_H__
+

@@ -15,3 +15,4 @@ namespace Light
 }
 
 #endif // __GRAPHICSCONTEXT_H__
+

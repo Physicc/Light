@@ -28,3 +28,4 @@ namespace Light
 }
 
 #endif // __VERTEXARRAY_H__
+

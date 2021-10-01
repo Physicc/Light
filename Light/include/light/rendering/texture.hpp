@@ -37,3 +37,4 @@ namespace Light
 }
 
 #endif // __TEXTURE_H__
+
