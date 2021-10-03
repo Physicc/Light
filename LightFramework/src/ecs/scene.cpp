@@ -6,6 +6,7 @@
 #include "input/keycodes.hpp"
 #include "light/rendering/renderer.hpp"
 #include "light/rendering/buffer.hpp"
+#include "light/rendering/lights.hpp"
 
 namespace Light
 {
@@ -125,14 +126,16 @@ namespace Light
 
 	void Scene::render()
 	{
+		std::vector<PointLight> lights;
 		{
 			auto view = m_registry.view<LightComponent, TransformComponent>();
 			for(auto& entity: view)
 			{
 				auto[light, transform] = view.get(entity);
-				Renderer::submitLight(transform.position, light.m_lightColor);
+				lights.push_back({transform.position, light.m_lightColor});
 			}
 		}
+		Renderer::submitLight(lights);
 
 		// Render Skybox
 		m_skybox->bind();

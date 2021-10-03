@@ -23,6 +23,12 @@ namespace Light
 				{
 					m_context->addEntity("New Entity");
 				}
+
+				if (ImGui::MenuItem("Light"))
+				{
+					auto entity = m_context->addEntity("New Entity");
+					entity.addComponent<LightComponent>();
+				}
 				
 				if (ImGui::BeginMenu("Primitive"))
 				{
@@ -63,6 +69,10 @@ namespace Light
 				if(ImGui::MenuItem("Mesh Renderer", nullptr, false, !m_selectionContext.hasComponent<MeshRendererComponent>()))
 				{
 					m_selectionContext.addComponent<MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+				}
+				if(ImGui::MenuItem("Light", nullptr, false, !m_selectionContext.hasComponent<LightComponent>()))
+				{
+					m_selectionContext.addComponent<LightComponent>();
 				}
 				ImGui::EndMenu();
 			}
@@ -293,6 +303,27 @@ namespace Light
 
 		drawComponent<MeshRendererComponent>("Mesh Renderer", entity, [](auto& component){
 			ImGui::Text("Phong");
+		});
+
+		drawComponent<LightComponent>("Light", entity, [](auto& component){
+			float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+			float itemWidth = ImGui::GetContentRegionAvail().x;
+
+			ImGui::Columns(2, NULL, false);
+			ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+
+			ImGui::Text("Light Color");
+
+			ImGui::NextColumn();
+
+			float fullWidth = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+			float offset = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth);
+			if(offset > 0.0f)
+				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset);
+
+			ImGui::SetNextItemWidth(fullWidth);
+
+			ImGui::ColorEdit3("##color", &component.m_lightColor[0]);
 		});
 	}
 }

@@ -29,21 +29,40 @@ in vec3 v_worldPos;
 layout(location = 0) out vec4 color;
 layout(location = 1) out int entity;
 
-uniform vec3 u_lightPos;
-uniform vec3 u_lightCol;
+struct PointLight
+{
+	vec3 position;
+	vec3 color;
+};
+
+uniform PointLight u_pointLights[4];
+uniform int u_numPointLights;
 uniform int u_id;
 uniform int u_selectionId;
 
-void main()
+vec3 pointLightCalculate(PointLight light)
 {
 	vec3 norm = normalize(v_normal);
-	vec3 lightDir = normalize(u_lightPos - v_worldPos);
+	vec3 lightDir = normalize(light.position- v_worldPos);
+
+	float distance = length(light.position - v_worldPos);
+	float attentuation = 1.0 / (1.0 + 0.09 * distance + 0.032 * distance * distance);
 
 	float diff = max(dot(norm, lightDir), 0.0);
-	vec3 diffuse = diff*u_lightCol;
+	vec3 diffuse = diff*light.color;
 
 	vec3 ambient = vec3(v_color) * 0.3;
 
-	color = vec4(ambient + diffuse, 1.0) * v_color;
+	return (ambient + diffuse) * attentuation;
+}
+
+void main()
+{
+	color = vec4(0.0, 0.0, 0.0, 1.0);
+	for (int i = 0; i < u_numPointLights; i++)
+	{
+		color += vec4(pointLightCalculate(u_pointLights[i]), 0.0);
+	}
+	color *= v_color;
 	entity = u_id;
 }

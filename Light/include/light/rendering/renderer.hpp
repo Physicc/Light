@@ -6,6 +6,9 @@
 #include "light/rendering/vertexarray.hpp"
 #include "light/rendering/camera.hpp"
 #include "light/rendering/shader.hpp"
+#include "light/rendering/lights.hpp"
+
+#include <vector>
 namespace Light
 {
 	class Renderer
@@ -17,7 +20,7 @@ namespace Light
 		static void beginScene(Camera& camera, glm::mat4 camera_view);
 		static void endScene();
 
-		static void submitLight(glm::vec3 lightPos, glm::vec3 lightCol);
+		static void submitLight(const std::vector<PointLight> &lights);
 		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
 		static void submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f), int id = -1);
 		static void submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
@@ -25,9 +28,9 @@ namespace Light
 		struct SceneData
 		{
 			glm::mat4 viewProjectionMatrix;
-			glm::vec3 lightPos;
-			glm::vec3 lightCol;
 			glm::mat4 viewProjectionSkyboxMatrix;
+
+			std::vector<PointLight> pointLights;
 		};
 
 		static SceneData* s_sceneData;
