@@ -43,13 +43,13 @@ public:
 		m_scene = std::make_shared<Light::Scene>();
 
 		auto cube = m_scene->addEntity("Cube");
-		cube.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+		cube.addComponent<Light::MeshRendererComponent>("assets/shaders/phong.glsl");
 
 		auto floor = m_scene->addEntity("Floor");
 		auto& floor_transform = floor.getComponent<Light::TransformComponent>();
 		floor_transform.position = glm::vec3(0, -1, 0);
 		floor_transform.scale = glm::vec3(2, 0.1, 2);
-		floor.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+		floor.addComponent<Light::MeshRendererComponent>("assets/shaders/phong.glsl");
 
 		auto light = m_scene->addEntity("Light");
 		auto& light_transform = light.getComponent<Light::TransformComponent>();

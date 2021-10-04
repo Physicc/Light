@@ -67,8 +67,8 @@ namespace Light
 		m_skybox_mesh->addVertexBuffer(vbo);
 		m_skybox_mesh->setIndexBuffer(ibo);
 
-		m_skybox.reset(Light::Cubemap::create("../Editor/assets/cubemap"));
-		m_skybox_shader = Light::Shader::create("../Editor/assets/shaders/skybox.glsl");
+		m_skybox.reset(Light::Cubemap::create("assets/cubemap"));
+		m_skybox_shader = Light::Shader::create("assets/shaders/skybox.glsl");
 		m_skybox_shader->bind();
 		m_skybox_shader->setUniformInt("u_cubemap", 0);
 
@@ -96,12 +96,12 @@ namespace Light
 		m_outline_mesh->addVertexBuffer(vbo);
 		m_outline_mesh->setIndexBuffer(ibo);
 
-		m_outline_shader = Light::Shader::create("../Editor/assets/shaders/outline.glsl");
+		m_outline_shader = Light::Shader::create("assets/shaders/outline.glsl");
 		m_outline_shader->bind();
 		m_outline_shader->setUniformInt("ColorTexture", 0);
 		m_outline_shader->setUniformInt("IDTexture", 1);
 
-		m_outline_temp_shader = Light::Shader::create("../Editor/assets/shaders/outline-temp.glsl");
+		m_outline_temp_shader = Light::Shader::create("assets/shaders/outline-temp.glsl");
 	}
 
 	Entity Scene::addEntity(const std::string& name)

@@ -36,4 +36,6 @@ target_link_libraries(Editor LightFramework)
 add_subdirectory(../Physicc Physicc)
 target_link_libraries(Editor Physicc)
 
-add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/imgui.ini ${CMAKE_BINARY_DIR}/imgui.ini)
+add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/imgui.ini $<TARGET_FILE_DIR:Editor>)
+
+add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/Editor/assets/ $<TARGET_FILE_DIR:Editor>/assets)
