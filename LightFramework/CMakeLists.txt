@@ -42,7 +42,7 @@ add_definitions(-DGLFW_INCLUDE_NONE)
 
 # ImGUI
 add_subdirectory(libs/imgui)
-target_include_directories(LightFramework PRIVATE ../Light/libs/glad/include) # Hack so that imgui_impl can use glad
+target_include_directories(LightFramework PRIVATE ../Light/libs/glad/include) # Hack so that imgui_impl can use glad #47
 target_link_libraries(LightFramework imgui)
 
 # GLM
