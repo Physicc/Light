@@ -46,10 +46,18 @@ namespace Light
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
 
-		for (int i = 0; i < s_sceneData->pointLights.size(); i++)
+		for (int i = 0; i < 4; i++)
 		{
-			shader->setUniformVec3("u_pointLights[" + std::to_string(i) + "].position", s_sceneData->pointLights[i].position);
-			shader->setUniformVec3("u_pointLights[" + std::to_string(i) + "].color", s_sceneData->pointLights[i].color);
+			if (i < s_sceneData->pointLights.size())
+			{
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->pointLights[i].position, 1.0));
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
+			}
+			else
+			{
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
+			}
 		}
 
 		shader->setUniformInt("u_numPointLights", s_sceneData->pointLights.size());
