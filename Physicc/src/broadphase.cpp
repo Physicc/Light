@@ -9,10 +9,9 @@ namespace Physicc
 
 		struct PotentialContact
 		{
-			PotentialContact(RigidBody& body1, RigidBody& body2) //TODO: #40 #39 @wermos Add a copy constructor to RigidBody in Development
+			PotentialContact(RigidBody& body1, RigidBody& body2)
 			: rb1(body1), rb2(body2)
 			{
-
 			}
             RigidBody rb1;
 			RigidBody rb2;  
@@ -23,7 +22,6 @@ namespace Physicc
 		//outside this source file
 		namespace
 		{
-
 			//inlined function to improve readability
 			[[nodiscard]] inline bool isLeaf(BVHNode* node)
 			{
@@ -32,7 +30,6 @@ namespace Physicc
 
 			void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray)
 			{
-				//TODO: #41 @divyanshtiwari237 Check for the nullity of leaf nodes, and assert condition
 				if (isLeaf(node1) && isLeaf(node2))
 				{
 					//If both nodes are leaves, then we have a PotentialContact, and we add the collision pair to the collisionArray
@@ -72,7 +69,7 @@ namespace Physicc
 				if (isLeaf(node))
 					return;
 				
-				LIGHT_ASSERT(node->left != nullptr && node->right != nullptr,"Invalid Node");
+				LIGHT_ASSERT(node->left != nullptr && node->right != nullptr, "Invalid Node");
 				
 				getPotentialContacts(node->left, collisionArray);
 				getPotentialContacts(node->right, collisionArray);
@@ -83,6 +80,15 @@ namespace Physicc
 				}
 			}
 		}
-		
+
+		//Hook into the getPotentialContacts function for the outside world.
+		//The implementation is kept hidden (i.e. local to this source file) by
+		//using an anonymous namespace.
+		std::vector<PotentialContact> getPotentialContacts(BVHNode* node)
+		{
+			std::vector<PotentialContact> v;
+			getPotentialContacts(node,v);
+			return v;
+		}
 	}
 }
