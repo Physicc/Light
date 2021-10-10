@@ -1,23 +1,9 @@
-#include "rigidbody.hpp"
-#include "bvh.hpp"
-#include "core/assert.hpp"
+#include "broadphase.hpp"
 
 namespace Physicc
 {
 	namespace Broadphase
-	{
-
-		struct PotentialContact
-		{
-			PotentialContact(RigidBody& body1, RigidBody& body2)
-			: rb1(body1), rb2(body2)
-			{
-			}
-            RigidBody rb1;
-			RigidBody rb2;  
-		};
-
-		
+	{  
 		//Anonymous namespace to make the implementation of the function invisible
 		//outside this source file
 		namespace
