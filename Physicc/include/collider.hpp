@@ -11,7 +11,7 @@ namespace Physicc
 	/**
 	 * @brief Collider class
 	 *  
-	 * This is a virtual class which acts as the base for all the shape specific classes
+	 * This is a abstract class which acts as the base for all the shape specific classes
 	 */
 	class Collider
 	{
