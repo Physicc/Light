@@ -26,5 +26,5 @@ add_subdirectory(googletest)
 target_link_libraries(Test gtest_main)
 
 # Set Gtest options
-SET(BUILD_GMOCK OFF)
+set(BUILD_GMOCK OFF)
 set(INSTALL_GTEST OFF)
