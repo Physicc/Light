@@ -6,7 +6,7 @@ namespace Physicc
 	{  
 		//Anonymous namespace to make the implementation of the function invisible
 		//outside this source file
-		namespace
+		namespace BroadphaseImpl
 		{
 			//inlined function to improve readability
 			[[nodiscard]] inline bool isLeaf(BVHNode* node)
@@ -57,12 +57,12 @@ namespace Physicc
 				
 				LIGHT_ASSERT(node->left != nullptr && node->right != nullptr, "Invalid Node");
 				
-				getPotentialContacts(node->left, collisionArray);
-				getPotentialContacts(node->right, collisionArray);
+				BroadphaseImpl::getPotentialContacts(node->left, collisionArray);
+				BroadphaseImpl::getPotentialContacts(node->right, collisionArray);
 
 				if ((node->left)->volume.overlapsWith((node->right)->volume))
 				{
-					getPotentialContactsWith(node->left, node->right, collisionArray);
+					BroadphaseImpl::getPotentialContactsWith(node->left, node->right, collisionArray);
 				}
 			}
 		}
