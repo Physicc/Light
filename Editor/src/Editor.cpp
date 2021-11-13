@@ -16,7 +16,6 @@ public:
 		fbspec.attachments = { 
 			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
-			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
 		};
 		fbspec.width = 1280;
@@ -86,7 +85,7 @@ public:
 		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
 		Light::RenderCommand::clear();
 
-		m_framebuffer->clearAttachment(2, 0);
+		m_framebuffer->clearAttachment(1, 0);
 
 
 		Light::Renderer::beginScene(m_camera, m_camera.getViewMatrix());
