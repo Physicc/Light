@@ -98,8 +98,7 @@ namespace Light
 
 		m_outline_shader = Light::Shader::create("assets/shaders/outline.glsl");
 		m_outline_shader->bind();
-		m_outline_shader->setUniformInt("ColorTexture", 0);
-		m_outline_shader->setUniformInt("IDTexture", 1);
+		m_outline_shader->setUniformInt("IDTexture", 0);
 
 		m_outline_temp_shader = Light::Shader::create("assets/shaders/outline-temp.glsl");
 	}
@@ -162,14 +161,10 @@ namespace Light
 		}
 	}
 
-	void Scene::renderOutline(Entity entity)
+	void Scene::renderOutline()
 	{
 		m_outline_shader->bind();
 		m_outline_shader->setUniformInt("ColorTexture", 0);
-		if(entity)
-			m_outline_shader->setUniformInt("selectionID", uint32_t(entity));
-		else
-			m_outline_shader->setUniformInt("selectionID", -1);
 		Renderer::submit(m_outline_shader, m_outline_mesh);
 	}
 }

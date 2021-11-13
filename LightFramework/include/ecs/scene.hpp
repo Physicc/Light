@@ -21,7 +21,7 @@ namespace Light
 		void update(Light::Timestep dt);
 		void render();
 		void renderSelection(Entity entity);
-		void renderOutline(Entity entity);
+		void renderOutline();
 	private:
 		entt::registry m_registry;
 

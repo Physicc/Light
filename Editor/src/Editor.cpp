@@ -32,14 +32,6 @@ public:
 		fbspecOutline.height = 720;
 		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
 
-		Light::FramebufferSpec fbspec2;
-		fbspec2.width = 1280;
-		fbspec2.height = 720;
-		fbspec2.attachments = {
-			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER }
-		};
-		m_framebuffer2 = Light::Framebuffer::create(fbspec2);
-
 		m_scene = std::make_shared<Light::Scene>();
 
 		auto cube = m_scene->addEntity("Cube");
@@ -74,7 +66,6 @@ public:
 		{
 			m_camera.setViewportSize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_framebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
-			m_framebuffer2->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_outlineFramebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_resizeViewport = false;
 		}
@@ -125,13 +116,11 @@ public:
 		m_scene->renderSelection(entity);
 		m_outlineFramebuffer->unbind();
 
-		m_framebuffer2->bind();
-		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
-		Light::RenderCommand::clear();	
-		m_framebuffer->bindAttachmentTexture(0,0);
-		m_outlineFramebuffer->bindAttachmentTexture(0,1);
-		m_scene->renderOutline(m_hoveredEntity);
-		m_framebuffer2->unbind();
+		m_framebuffer->bind();
+		m_outlineFramebuffer->bindAttachmentTexture(0,0);
+		m_scene->renderOutline();
+		m_framebuffer->unbind();
+
 	}
 
 	bool onWindowResize(Light::WindowResizeEvent& e)
@@ -209,7 +198,7 @@ public:
 			m_resizeViewport = true;
 			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);
 		}
-		ImGui::Image(INT2VOIDP(m_framebuffer2->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
 		
 		ImGui::End();
 		ImGui::PopStyleVar();
@@ -360,7 +349,6 @@ private:
 	Light::Entity m_hoveredEntity;
 
 	std::shared_ptr<Light::Framebuffer> m_framebuffer;
-	std::shared_ptr<Light::Framebuffer> m_framebuffer2;
 	std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 	
 	glm::vec2 m_viewportPanelSize;
