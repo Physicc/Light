@@ -1,3 +1,18 @@
+/**
+ * @file broadphase.cpp
+ * @brief The Broadphase implimentation.
+ *
+ * The Broadphase file consists of methods which implement the broadphase
+ * collision-detection algorithm using the bvh node defined in bvh.hpp
+ *
+ * @author Tirthankar Mazumder (wermos)
+ * @author Divyansh Tiwari (divyanshtiwari237)
+ * @bug No known bugs.
+ */
+
+/* -- Includes -- */
+/* broadphase header */
+
 #include "broadphase.hpp"
 
 namespace Physicc
@@ -9,11 +24,23 @@ namespace Physicc
 		namespace BroadphaseImpl
 		{
 			//inlined function to improve readability
+			/**
+	 		* @fn  bool isLeaf(BVHNode* node)
+	 		* @brief Function used to check whether the given node is a leaf node
+			* @param node: input, BVHNode* node type
+	 		*/
 			[[nodiscard]] inline bool isLeaf(BVHNode* node)
 			{
 				return (node->left == nullptr) && (node->right == nullptr);
 			}
 
+			/**
+	 		* @fn void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray)
+	 		* @brief Function that calculates and stores potential collision pairs between two the nodes provided
+			* @param node1: input,BVHNode* node type 
+			* @param node2: input,BVHNode* node type
+			* @param collisionArray: input,std::vector<PotentialContact>& type
+	 		*/
 			void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray)
 			{
 				if (isLeaf(node1) && isLeaf(node2))
@@ -50,6 +77,12 @@ namespace Physicc
 				}
 			}
 
+			/**
+	 		* @fn vector<PotentialContact> getPotentialContacts(BVHNode* node)
+	 		* @brief Function that calculates and stores potential collision pairs that are inside the given node
+			* @param node: input,BVHNode* node type
+			* @param collisionArray: input,std::vector<PotentialContact>& type
+	 		*/
 			void getPotentialContacts(BVHNode* node, std::vector<PotentialContact>& collisionArray)
 			{
 				if (isLeaf(node))
@@ -70,6 +103,12 @@ namespace Physicc
 		//Hook into the getPotentialContacts function for the outside world.
 		//The implementation is kept hidden (i.e. local to this source file) by
 		//using an anonymous namespace.
+
+		/**
+	 	* @fn vector<PotentialContact> getPotentialContacts(BVHNode* node)
+	 	* @brief Function that calculates and stores potential collision pairs.
+		* @param node: input,BVHNode* node type
+	 	*/
 		std::vector<PotentialContact> getPotentialContacts(BVHNode* node)
 		{
 			std::vector<PotentialContact> v;
