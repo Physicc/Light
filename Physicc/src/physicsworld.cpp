@@ -29,7 +29,6 @@ namespace Physicc
 	}
 
 	/**
-	 * @fn void PhysicsWorld::addRigidBody(const RigidBody& object)
 	 * @brief Add a new RigidBody to m_objects
 	 * @param object: input, const RigidBody& type
 	 */
@@ -39,7 +38,6 @@ namespace Physicc
 	}
 
 	/**
-	 * @fn void PhysicsWorld::stepSimulation(float time)
 	 * @brief steps the simulation by time timestep
 	 * @param timestep: input, float type, time interval
 	 */

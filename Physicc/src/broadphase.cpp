@@ -24,9 +24,8 @@ namespace Physicc
 		namespace BroadphaseImpl
 		{
 			//inlined function to improve readability
-			/**
-	 		* @fn  bool isLeaf(BVHNode* node)
-	 		* @brief Function used to check whether the given node is a leaf node
+			/**	 		
+	 		* @brief Inlined function used to check whether the given node is a leaf node
 			* @param node: input, BVHNode* node type
 	 		*/
 			[[nodiscard]] inline bool isLeaf(BVHNode* node)
@@ -35,7 +34,6 @@ namespace Physicc
 			}
 
 			/**
-	 		* @fn void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray)
 	 		* @brief Function that calculates and stores potential collision pairs between two the nodes provided
 			* @param node1: input,BVHNode* node type 
 			* @param node2: input,BVHNode* node type
@@ -78,7 +76,6 @@ namespace Physicc
 			}
 
 			/**
-	 		* @fn vector<PotentialContact> getPotentialContacts(BVHNode* node)
 	 		* @brief Function that calculates and stores potential collision pairs that are inside the given node
 			* @param node: input,BVHNode* node type
 			* @param collisionArray: input,std::vector<PotentialContact>& type
@@ -105,7 +102,6 @@ namespace Physicc
 		//using an anonymous namespace.
 
 		/**
-	 	* @fn vector<PotentialContact> getPotentialContacts(BVHNode* node)
 	 	* @brief Function that calculates and stores potential collision pairs.
 		* @param node: input,BVHNode* node type
 	 	*/
