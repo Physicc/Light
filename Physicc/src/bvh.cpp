@@ -1,4 +1,5 @@
 #include "bvh.hpp"
+#include "core/assert.hpp"
 #include <utility>
 #include <algorithm>
 
@@ -150,6 +151,34 @@ namespace Physicc
 			buildTree(rightNode, start + 1 + (end - start) / 2, end);
 		}
 	}
+
+	/**
+	 * @brief Utility function for traversing the BVH tree and getting the leaf RigidBodies
+	 * 
+	 * @param tree 
+	 * @param root 
+	 */
+	void BVH::traverseTree(std::vector<RigidBody*>& tree, BVHNode* root)
+	{
+		if (!root) return;
+		if (root->left == NULL && root->right == NULL) 
+		{
+			tree.push_back(root->body);
+			return;
+		}
+		traverseTree(tree,root->left);
+		traverseTree(tree,root->right);
+		return;
+	}
+	
+	std::vector<RigidBody*>& BVH::convert()
+	{
+		//TODO: fix the function to not send a local variable reference
+		std::vector<RigidBody*> tree;
+		traverseTree(tree,m_head);
+		return tree;
+	}
+
 }
 
 

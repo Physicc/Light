@@ -25,7 +25,7 @@ namespace Physicc
 			//build a tree of the bounding volumes
 
 			//convert the tree into a linear data structure
-			std::vector<RigidBody>& convert();
+			std::vector<RigidBody*>& convert();
 
 		private:
 			BVHNode* m_head;
@@ -34,6 +34,8 @@ namespace Physicc
 			BoundingVolume::AABB computeBV(int start, int end);
 
 			void buildTree(BVHNode* node, int start, int end);
+
+			void traverseTree(std::vector<RigidBody*>& tree, BVHNode* root);
 
 			enum Axis {
 				X,

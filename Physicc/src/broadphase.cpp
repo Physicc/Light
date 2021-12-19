@@ -108,7 +108,7 @@ namespace Physicc
 		std::vector<PotentialContact> getPotentialContacts(BVHNode* node)
 		{
 			std::vector<PotentialContact> v;
-			getPotentialContacts(node,v);
+			BroadphaseImpl::getPotentialContacts(node,v);
 			return v;
 		}
 	}
