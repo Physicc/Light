@@ -19,6 +19,7 @@
 #include "ecs/components.hpp"
 #include "ecs/entity.hpp"
 #include "ecs/scene.hpp"
+#include "rendering/scenerenderer.hpp"
 
 #include "glm/gtc/type_ptr.hpp"
 

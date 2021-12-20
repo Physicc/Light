@@ -22,14 +22,7 @@ public:
 		fbspec.height = 720;
 		m_framebuffer = Light::Framebuffer::create(fbspec);
 
-		Light::FramebufferSpec fbspecOutline;
-		fbspecOutline.attachments = {
-			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
-			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
-		};
-		fbspecOutline.width = 1280;
-		fbspecOutline.height = 720;
-		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
+		m_sceneRenderer.setTargetFramebuffer(m_framebuffer);
 
 		m_scene = std::make_shared<Light::Scene>();
 
@@ -64,8 +57,8 @@ public:
 		if(m_resizeViewport)
 		{
 			m_camera.setViewportSize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_sceneRenderer.onViewportResize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_framebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
-			m_outlineFramebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_resizeViewport = false;
 		}
 		m_frameCount++;
@@ -81,19 +74,9 @@ public:
 		if(m_viewportFocused)
 			m_camera.onUpdate(ts);
 
+		m_sceneRenderer.renderEditor(m_scene, m_camera);
+
 		m_framebuffer->bind();
-		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
-		Light::RenderCommand::clear();
-
-		m_framebuffer->clearAttachment(1, 0);
-
-
-		Light::Renderer::beginScene(m_camera, m_camera.getViewMatrix());
-
-		m_scene->render();
-
-		Light::Renderer::endScene();
-
 		auto[x, y] = ImGui::GetMousePos();
 
 		glm::vec2 posRelativeToViewport = glm::vec2(x,y) - m_viewportPos;
@@ -109,16 +92,7 @@ public:
 		m_framebuffer->unbind();
 
 		auto entity = m_scenePanel.getSelectionContext();
-		m_outlineFramebuffer->bind();
-		Light::RenderCommand::setClearColor({0, 0, 0, 0});
-		Light::RenderCommand::clear();
-		m_scene->renderSelection(entity);
-		m_outlineFramebuffer->unbind();
-
-		m_framebuffer->bind();
-		m_outlineFramebuffer->bindAttachmentTexture(0,0);
-		m_scene->renderOutline();
-		m_framebuffer->unbind();
+		m_sceneRenderer.renderOutline(m_scene, entity);
 
 	}
 
@@ -340,15 +314,15 @@ public:
 private:
 	std::shared_ptr<Light::MeshLibrary> m_meshes;
 
+	Light::SceneRenderer m_sceneRenderer;
 	Light::EditorCamera m_camera;
+
+	std::shared_ptr<Light::Framebuffer> m_framebuffer;
 
 	std::shared_ptr<Light::Scene> m_scene;
 	Light::ScenePanel m_scenePanel;
 
 	Light::Entity m_hoveredEntity;
-
-	std::shared_ptr<Light::Framebuffer> m_framebuffer;
-	std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 	
 	glm::vec2 m_viewportPanelSize;
 	glm::vec2 m_viewportPos;
