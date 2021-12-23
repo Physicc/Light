@@ -5,8 +5,9 @@ namespace Physicc
 {
 	using Iterator = std::vector<RigidBody>::iterator;
 
-	BVH::BVH(std::vector<RigidBody> rigidBodyList) : m_rigidBodyList(std::move(
-		rigidBodyList)), m_head(nullptr)
+	BVH::BVH(std::vector<RigidBody> rigidBodyList)
+		: 	m_head(nullptr),
+			m_rigidBodyList(std::move(rigidBodyList)) 
 	{
 	}
 

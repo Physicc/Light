@@ -38,14 +38,14 @@ namespace Physicc
 		m_transform = glm::translate(glm::mat4(1.0f), m_position);
 		m_transform = glm::scale(m_transform, m_scale);
 		m_transform = glm::rotate(m_transform,
-		                          glm::radians(m_rotate.x),
-		                          glm::vec3(1.0, 0.0, 0.0));
+									glm::radians(m_rotate.x),
+									glm::vec3(1.0, 0.0, 0.0));
 		m_transform = glm::rotate(m_transform,
-		                          glm::radians(m_rotate.y),
-		                          glm::vec3(0.0, 1.0, 0.0));
+									glm::radians(m_rotate.y),
+									glm::vec3(0.0, 1.0, 0.0));
 		m_transform = glm::rotate(m_transform,
-		                          glm::radians(m_rotate.z),
-		                          glm::vec3(0.0, 0.0, 1.0));
+									glm::radians(m_rotate.z),
+									glm::vec3(0.0, 0.0, 1.0));
 	}
 
 	/**
@@ -57,10 +57,10 @@ namespace Physicc
 	 * 
 	 */
 	BoxCollider::BoxCollider(glm::vec3 position,
-	                         glm::vec3 rotation,
-	                         glm::vec3 scale)
+								glm::vec3 rotation,
+								glm::vec3 scale)
 		: Collider(position, rotation, scale),
-		  m_vertices(std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)))
+			m_vertices(std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)))
 	{
 		//Top-face vertices
 		m_vertices[0] = glm::vec4(scale * 0.5f, 0);
@@ -109,10 +109,10 @@ namespace Physicc
 	 * 
 	 */
 	SphereCollider::SphereCollider(float radius,
-	                               glm::vec3 position,
-	                               glm::vec3 rotation,
-	                               glm::vec3 scale)
-		: m_radius(radius), Collider(position, rotation, scale)
+									glm::vec3 position,
+									glm::vec3 rotation,
+									glm::vec3 scale)
+		: Collider(position, rotation, scale), m_radius(radius)
 	{
 		m_objectType = e_sphere;
 	}
