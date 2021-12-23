@@ -122,7 +122,7 @@ namespace Light
 			glGenTextures((GLsizei)m_colorAttachmentSpecs.size(), m_colorAttachmentIds.data());
 
 			// Attach all color buffers
-			for(int i = 0; i < m_colorAttachmentSpecs.size(); i++)
+			for(int i = 0; i < (int)m_colorAttachmentSpecs.size(); i++)
 			{
 				glBindTexture(textureTarget, m_colorAttachmentIds[i]);
 

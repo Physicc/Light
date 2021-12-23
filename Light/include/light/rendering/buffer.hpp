@@ -19,8 +19,8 @@ namespace Light
 	struct BufferElement
 	{
 		BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-			:	m_type(type), m_name(name), m_normalized(normalized), m_offset(0),
-				m_size(getSize(type)), m_componentCount(getComponentCount(type))
+			:	m_type(type), m_name(name), m_offset(0), m_size(getSize(type)),
+				m_componentCount(getComponentCount(type)), m_normalized(normalized)
 		{}
 
 		void setOffset(uint32_t offset)
