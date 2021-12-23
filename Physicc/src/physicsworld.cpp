@@ -45,9 +45,10 @@ namespace Physicc
 	 */
 	void PhysicsWorld::stepSimulation(float timestep)
 	{
+		(void)timestep; // Suppress unused parameter warning
 		for(std::size_t i = 0; i < m_objects.size(); i++)
 		{
-			timestep = 0; // Suppress warning, temporary
+
 		}
 	}
 }

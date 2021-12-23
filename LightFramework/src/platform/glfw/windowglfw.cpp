@@ -31,6 +31,7 @@ namespace Light
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
+		(void)error, (void)description; // Supress warning about unused variable in release mode (logs don't get compiled in release)
 		LIGHT_CORE_ERROR("GLFW Error({}): {}", error, description);
 	}
 
