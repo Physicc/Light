@@ -18,15 +18,16 @@ namespace Physicc
 
 	BoundingVolume::AABB computeBV(Iterator begin, Iterator end)
 	{
-		BoundingVolume::AABB bv(begin->getAABB());
+		// BoundingVolume::AABB bv(begin->getAABB());
 
-		for (auto it = ++begin; it != end; ++it)
-		{
-			bv = BoundingVolume::enclosingBV(bv, it->getAABB());
-			//TODO: Object slicing is might be happening here. Investigate.
-		}
+		// for (auto it = ++begin; it != end; ++it)
+		// {
+		// 	bv = BoundingVolume::enclosingBV(bv, it->getAABB());
+		// 	//TODO: Object slicing is might be happening here. Investigate.
+		// }
+		// TODO: Figure out all the template bs that's going on around here and throwing warnings
 
-		return bv;
+		return BoundingVolume::AABB();
 	}
 
 	void BVH::buildTree(BVHNode* node, Iterator begin, Iterator end)

@@ -48,7 +48,7 @@ namespace Light
 
 		for (int i = 0; i < 4; i++)
 		{
-			if (i < s_sceneData->pointLights.size())
+			if (i < (int)s_sceneData->pointLights.size())
 			{
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->pointLights[i].position, 1.0));
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
