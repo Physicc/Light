@@ -94,4 +94,12 @@ On Linux, you can also append `-- -j<num>` to the end of the above command, to r
 
 
 
+##### Attributions
+
+* Icon created by Chaowalit Koetchuea for thenounproject
+
+* Project heavily inspired from [Cherno's Hazel](https://github.com/TheCherno/Hazel)
+
+
+
 

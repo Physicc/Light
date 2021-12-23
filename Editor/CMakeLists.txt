@@ -10,6 +10,11 @@ file(GLOB_RECURSE SOURCES
         src/*.cpp
         )
 
+if (WIN32)
+    # Append ../assets/light.rc to list sources
+    list(APPEND SOURCES assets/icon/light.rc)
+endif()
+
 # add the executable
 add_executable(Editor ${SOURCES})
 

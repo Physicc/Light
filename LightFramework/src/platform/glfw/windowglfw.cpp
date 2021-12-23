@@ -5,6 +5,8 @@
 #include "events/applicationevent.hpp"
 #include "core/logging.hpp"
 
+#include "stb_image.h"
+
 namespace Light
 {
 	static bool glfwInitialized = false;
@@ -63,6 +65,12 @@ namespace Light
 		LIGHT_CORE_INFO("Created window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
 		m_context = new OpenGLContext(m_window);
 		m_context->init();
+
+
+		GLFWimage icon;
+		icon.pixels = stbi_load("assets/icon/light.png", &icon.width, &icon.height, nullptr, 4);
+		glfwSetWindowIcon(m_window, 1, &icon);
+
 
 		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
