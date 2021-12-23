@@ -27,6 +27,9 @@ namespace Physicc
 		// }
 		// TODO: Figure out all the template bs that's going on around here and throwing warnings
 
+		(void)begin;
+		(void)end;
+
 		return BoundingVolume::AABB();
 	}
 
