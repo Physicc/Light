@@ -1,12 +1,8 @@
 #ifndef __MESH_H__
 #define __MESH_H__
 
+#include "core/base.hpp"
 #include "light/rendering/vertexarray.hpp"
-
-#include <vector>
-#include <unordered_map>
-#include <memory>
-#include <set>
 #include "glm/glm.hpp"
 
 namespace Light

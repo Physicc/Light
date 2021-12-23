@@ -12,6 +12,18 @@ list(APPEND SOURCES ../shared/src/core/logging.cpp)
 # add the executable
 add_library(LightFramework STATIC ${SOURCES})
 
+# -Werror
+target_compile_options(LightFramework PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+
+# Supress glm quat warning
+target_compile_definitions(LightFramework PRIVATE
+    -DGLM_FORCE_SILENT_WARNINGS
+)
+
+
 # add includes
 target_include_directories(LightFramework PUBLIC include)
 target_include_directories(LightFramework PUBLIC ../shared/include)

@@ -178,7 +178,7 @@ public:
 
 		// Perf Stats
 		{
-			ImGuiIO& io = ImGui::GetIO();
+			// ImGuiIO& io = ImGui::GetIO();
 			ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
 			if (s_stats_corner != -1)
 			{

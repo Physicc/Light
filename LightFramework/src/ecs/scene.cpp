@@ -30,7 +30,7 @@ namespace Light
 	}
 	
 
-	void Scene::update(Timestep dt)
+	void Scene::update(Timestep)
 	{
 		
 	}

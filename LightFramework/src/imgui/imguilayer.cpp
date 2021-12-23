@@ -75,7 +75,7 @@ namespace Light
 	void ImguiLayer::end()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		Application& app = Application::get();
+		// Application& app = Application::get();
 		//io.DisplaySize = ImVec2(app.getWindow().getWidth(), app.getWindow().getHeight());
 
 		// Rendering

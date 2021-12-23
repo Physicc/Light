@@ -79,7 +79,7 @@ namespace Light
 	OpenGLFramebuffer::~OpenGLFramebuffer() 
 	{
 		glDeleteFramebuffers(1, &m_rendererId);
-		glDeleteTextures(m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
+		glDeleteTextures((GLsizei)m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
 		glDeleteTextures(1, &m_depthAttachmentId);
 	}
 
@@ -103,7 +103,7 @@ namespace Light
 		if(m_rendererId != 0)
 		{
 			glDeleteFramebuffers(1, &m_rendererId);
-			glDeleteTextures(m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
+			glDeleteTextures((GLsizei)m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
 			if(m_depthAttachmentId != 0)
 				glDeleteRenderbuffers(1, &m_depthAttachmentId);
 
@@ -119,7 +119,7 @@ namespace Light
 		{
 			GLenum textureTarget = m_spec.samples > 1 ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
 			m_colorAttachmentIds.resize(m_colorAttachmentSpecs.size());
-			glGenTextures(m_colorAttachmentSpecs.size(), m_colorAttachmentIds.data());
+			glGenTextures((GLsizei)m_colorAttachmentSpecs.size(), m_colorAttachmentIds.data());
 
 			// Attach all color buffers
 			for(int i = 0; i < m_colorAttachmentSpecs.size(); i++)
@@ -209,7 +209,7 @@ namespace Light
 			LIGHT_CORE_ASSERT(m_colorAttachmentSpecs.size() <= 4, "Only 4 color attachments supported");
 
 			GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-			glDrawBuffers(m_colorAttachmentSpecs.size(), buffers);
+			glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
 		}
 		else if(m_colorAttachmentSpecs.empty())
 		{
@@ -258,11 +258,11 @@ namespace Light
 		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
 		
 		glDrawBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
-		glClearColor(clearValue, clearValue, clearValue, clearValue);
+		glClearColor((GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-		glDrawBuffers(m_colorAttachmentSpecs.size(), buffers);
+		glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
 
 	}
 	
@@ -275,7 +275,7 @@ namespace Light
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-		glDrawBuffers(m_colorAttachmentSpecs.size(), buffers);
+		glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
 	}
 
 	void OpenGLFramebuffer::bind() 

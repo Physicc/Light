@@ -19,8 +19,8 @@ namespace Light
 	struct BufferElement
 	{
 		BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-			: m_type(type), m_name(name), m_normalized(normalized), m_offset(0),
-              m_size(getSize(type)), m_componentCount(getComponentCount(type))
+			:	m_type(type), m_name(name), m_normalized(normalized), m_offset(0),
+				m_size(getSize(type)), m_componentCount(getComponentCount(type))
 		{}
 
 		void setOffset(uint32_t offset)
@@ -79,7 +79,7 @@ namespace Light
 			case ShaderDataType::Bool: 		return 1;
 			default:
 				LIGHT_CORE_WARN("Unsupported Shader data type");
-				return -1;
+				return 0;
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace Light
 			case ShaderDataType::Bool: 		return 1;
 			default:
 				LIGHT_CORE_WARN("Unsupported Shader data type");
-				return -1;
+				return 0;
 			}
 		}
 	};

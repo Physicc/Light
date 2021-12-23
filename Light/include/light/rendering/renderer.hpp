@@ -8,7 +8,6 @@
 #include "light/rendering/shader.hpp"
 #include "light/rendering/lights.hpp"
 
-#include <vector>
 namespace Light
 {
 	class Renderer

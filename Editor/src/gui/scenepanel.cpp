@@ -1,13 +1,15 @@
+
+#ifdef _MSC_VER
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "gui/scenepanel.hpp"
+
 
 #include "imgui.h"
 #include "imgui_internal.h"
 
 #include <type_traits>
 
-#ifdef _MSC_VER
-	#define _CRT_SECURE_NO_WARNINGS
-#endif
 
 namespace Light
 {
@@ -133,13 +135,16 @@ namespace Light
 			ImGui::Separator();
 
 			bool open = ImGui::TreeNodeEx(component.uuid.c_str(), flags, name.c_str());
-			if(removable && ImGui::BeginPopupContextItem())
+			if constexpr(removable)
 			{
-				if(ImGui::MenuItem("Remove Component"))
+				if (ImGui::BeginPopupContextItem())
 				{
-					toRemove = true;
+					if(ImGui::MenuItem("Remove Component"))
+					{
+						toRemove = true;
+					}
+					ImGui::EndPopup();
 				}
-				ImGui::EndPopup();
 			}
 
 			if(open)
@@ -252,7 +257,7 @@ namespace Light
 		});
 
 		drawComponent<MeshComponent>("Mesh", entity, [this](auto& component){
-			float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+			// float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
 			float itemWidth = ImGui::GetContentRegionAvail().x;
 
 			ImGui::Columns(2, NULL, false);
@@ -301,12 +306,12 @@ namespace Light
 			ImGui::Columns(1);
 		});
 
-		drawComponent<MeshRendererComponent>("Mesh Renderer", entity, [](auto& component){
+		drawComponent<MeshRendererComponent>("Mesh Renderer", entity, [](auto&){
 			ImGui::Text("Phong");
 		});
 
 		drawComponent<LightComponent>("Light", entity, [](auto& component){
-			float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+			// float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
 			float itemWidth = ImGui::GetContentRegionAvail().x;
 
 			ImGui::Columns(2, NULL, false);

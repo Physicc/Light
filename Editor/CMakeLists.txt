@@ -18,6 +18,16 @@ endif()
 # add the executable
 add_executable(Editor ${SOURCES})
 
+# -Werror
+target_compile_options(Editor PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+# Supress glm quat warning
+target_compile_definitions(Editor PRIVATE
+    -DGLM_FORCE_SILENT_WARNINGS
+)
+
 if (WIN32)
     if (MSVC)
         set_target_properties(

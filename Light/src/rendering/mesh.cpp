@@ -16,7 +16,7 @@ namespace Light
 
 		std::vector<float> vertex_data(vertices.size() * (3 + 4 + 3));
 
-		int num_verts = vertices.size();
+		int num_verts = (int)vertices.size();
 
 		for (int i = 0; i < num_verts; i++)
 		{
@@ -40,10 +40,10 @@ namespace Light
 				{ Light::ShaderDataType::Float3, "a_Normal" }
 			});
 
-		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertex_data.data(), vertex_data.size() * sizeof(vertex_data[0])));
+		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertex_data.data(), (uint32_t)vertex_data.size() * sizeof(vertex_data[0])));
 		vbo->setLayout(layout);
 
-		std::shared_ptr<Light::IndexBuffer> ibo(Light::IndexBuffer::create(m_indices.data(), m_indices.size()));
+		std::shared_ptr<Light::IndexBuffer> ibo(Light::IndexBuffer::create(m_indices.data(), (uint32_t)m_indices.size()));
 
 		m_vao->addVertexBuffer(vbo);
 		m_vao->setIndexBuffer(ibo);

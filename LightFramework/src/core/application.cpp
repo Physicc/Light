@@ -75,7 +75,7 @@ namespace Light
 		}
 	}
 
-	bool Application::onWindowClose(WindowCloseEvent& e)
+	bool Application::onWindowClose(WindowCloseEvent&)
 	{
         m_running = false;
 		return true;

@@ -27,6 +27,6 @@ namespace Light
 		auto window = (GLFWwindow*)Application::get().getWindow().getNativeWindow();
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
-		return {xpos, ypos};
+		return {(float)xpos, (float)ypos};
 	}
 }

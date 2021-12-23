@@ -60,7 +60,7 @@ namespace Light
 			}
 		}
 
-		shader->setUniformInt("u_numPointLights", s_sceneData->pointLights.size());
+		shader->setUniformInt("u_numPointLights", (int)s_sceneData->pointLights.size());
 		shader->setUniformInt("u_id", id);
 
 		shader->setUniformMat4("u_transform", transform);

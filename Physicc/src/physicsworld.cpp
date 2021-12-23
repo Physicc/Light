@@ -47,7 +47,7 @@ namespace Physicc
 	{
 		for(std::size_t i = 0; i < m_objects.size(); i++)
 		{
-			
+			timestep = 0; // Suppress warning, temporary
 		}
 	}
 }

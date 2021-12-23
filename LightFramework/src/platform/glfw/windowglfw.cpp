@@ -1,9 +1,12 @@
+#include "core/logging.hpp"
+// Include logging.hpp BEFORE windowglfw.hpp because windowglfw.hpp
+// includes Windows.h and windowglfw.hpp includes glad.h which
+// should be included after Windows.h (APIENTRY Macro redefinition warning)
 #include "platform/glfw/windowglfw.hpp"
 #include "light/platform/opengl/openglcontext.hpp"
 #include "events/keyevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/applicationevent.hpp"
-#include "core/logging.hpp"
 
 #include "stb_image.h"
 
@@ -72,7 +75,7 @@ namespace Light
 		glfwSetWindowIcon(m_window, 1, &icon);
 
 
-		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int, int action, int)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -102,7 +105,7 @@ namespace Light
 
 		});
 
-		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
+		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 

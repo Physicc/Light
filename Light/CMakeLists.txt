@@ -14,6 +14,18 @@ endif()
 # add the executable
 add_library(Light STATIC ${SOURCES})
 
+# -Werror
+target_compile_options(Light PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+
+# Supress glm quat warning
+target_compile_definitions(Light PRIVATE
+    -DGLM_FORCE_SILENT_WARNINGS
+)
+
+
 # add includes
 target_include_directories(Light PUBLIC include)
 target_include_directories(Light PUBLIC ../shared/include)
