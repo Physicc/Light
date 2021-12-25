@@ -92,7 +92,7 @@ namespace Light
 		auto& tag = entity.getComponent<TagComponent>().tag;
 		
 		const ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ((m_selectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0);
-		bool opened = ImGui::TreeNodeEx(entity.getUUID().c_str(), flags, tag.c_str());
+		bool opened = ImGui::TreeNodeEx(entity.getUUID().c_str(), flags, "%s", tag.c_str()); // Use %s as argument to avoid format string vulnerability
 		bool toRemove = false;
 		if(ImGui::IsItemClicked())
 		{
@@ -134,7 +134,7 @@ namespace Light
 
 			ImGui::Separator();
 
-			bool open = ImGui::TreeNodeEx(component.uuid.c_str(), flags, name.c_str());
+			bool open = ImGui::TreeNodeEx(component.uuid.c_str(), flags, "%s", name.c_str());
 			if constexpr(removable)
 			{
 				if (ImGui::BeginPopupContextItem())
@@ -171,7 +171,7 @@ namespace Light
 
 		ImGui::Columns(2, NULL, false);
 		ImGui::SetColumnWidth(0, glm::max(itemWidth/3, minLabelWidth));
-		ImGui::Text(label.c_str());
+		ImGui::Text("%s", label.c_str());
 		if(ImGui::BeginPopupContextItem("reset"))
 		{
 			if(ImGui::MenuItem("Reset Values"))
