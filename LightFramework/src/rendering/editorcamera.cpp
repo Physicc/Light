@@ -10,8 +10,8 @@
 namespace Light
 {
 	EditorCamera::EditorCamera(float fovy, float aspectRatio, float near, float far)
-		:	m_fovy(fovy),
-			m_aspectRatio(aspectRatio),
+		:	m_aspectRatio(aspectRatio),
+			m_fovy(fovy),
 			m_near(near),
 			m_far(far)
 	{

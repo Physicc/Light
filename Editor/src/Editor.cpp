@@ -166,7 +166,7 @@ public:
 		m_viewportFocused = ImGui::IsWindowFocused();
 
 		ImVec2 viewPortPanelSize = ImGui::GetContentRegionAvail();
-		if(m_viewportPanelSize != *(glm::vec2*)&viewPortPanelSize)
+		if(m_viewportPanelSize.x != viewPortPanelSize.x || m_viewportPanelSize.y != viewPortPanelSize.y)
 		{
 			m_resizeViewport = true;
 			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);

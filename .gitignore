@@ -33,6 +33,7 @@
 
 # build files
 build
+buildWsl
 
 # vscode files
 .vscode
