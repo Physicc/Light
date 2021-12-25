@@ -27,7 +27,7 @@ namespace Physicc
 		}
 		// TODO: #49 Figure out all the template bs that's going on around here and throwing warnings
 
-		return BoundingVolume::AABB();
+		return bv;
 	}
 
 	void BVH::buildTree(BVHNode* node, Iterator begin, Iterator end)
