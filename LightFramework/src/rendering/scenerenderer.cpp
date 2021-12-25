@@ -9,7 +9,7 @@ namespace Light {
 		// Initialize the outline framebuffer
 		Light::FramebufferSpec fbspecOutline;
 		fbspecOutline.attachments = {
-			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
 		};
 		fbspecOutline.width = 1280;
@@ -175,7 +175,6 @@ namespace Light {
 		m_framebuffer->bind();
 		m_outlineFramebuffer->bindAttachmentTexture(0,0);
 		m_outline_shader->bind();
-		m_outline_shader->setUniformInt("ColorTexture", 0);
 		Renderer::submit(m_outline_shader, m_outline_mesh);
 		m_framebuffer->unbind();
 	}

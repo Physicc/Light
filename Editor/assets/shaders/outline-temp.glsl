@@ -18,9 +18,9 @@ in vec3 v_normal;
 in vec4 v_color;
 in vec3 v_worldPos;
 
-layout(location = 0) out int selection;
+layout(location = 0) out vec4 selection;
 
 void main()
 {
-	selection = 1;
+	selection = vec4(1.0,1.0,1.0,1.0);
 }

@@ -25,7 +25,6 @@ namespace Physicc
 			bv = BoundingVolume::enclosingBV(bv, it->getAABB());
 			//TODO: Object slicing is might be happening here. Investigate.
 		}
-		// TODO: #49 Figure out all the template bs that's going on around here and throwing warnings
 
 		return bv;
 	}
