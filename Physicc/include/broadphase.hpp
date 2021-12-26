@@ -8,6 +8,10 @@ namespace Physicc
     {
         struct PotentialContact
 		{
+            /**
+	        * @brief A struct that's used to store a pair of rigidbody
+	        * that might be colliding.
+	        */
 			PotentialContact(RigidBody& body1, RigidBody& body2)
             : rb1(body1), rb2(body2)
 		    {

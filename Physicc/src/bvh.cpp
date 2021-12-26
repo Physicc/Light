@@ -1,6 +1,8 @@
 #include "bvh.hpp"
+#include "core/assert.hpp"
 #include <utility>
 #include <algorithm>
+#include <stack>
 
 namespace Physicc
 {
@@ -150,6 +152,34 @@ namespace Physicc
 			buildTree(rightNode, start + 1 + (end - start) / 2, end);
 		}
 	}
+	
+	std::vector<RigidBody*> BVH::convert()
+	{
+		std::stack<BVHNode*> s;
+		s.push(m_head);
+		std::vector<RigidBody*> tree;
+		BVHNode* curr = m_head;
+		while(!s.empty() || curr != NULL)
+		{
+			
+			while(curr != NULL)
+			{
+				s.push(curr);
+				curr = curr->left;
+			}
+
+			curr = s.top();
+			s.pop();
+
+			if(curr->left == NULL && curr->right == NULL)
+			{
+				tree.push_back(curr->body);
+			}
+			curr = curr->right;
+		}
+		return tree;
+	}
+
 }
 
 

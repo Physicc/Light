@@ -18,7 +18,7 @@
 namespace Physicc
 {
 	/**
-	 * @brief Construct a new Collider:: Collider object
+	 * @brief Construct a new Collider::Collider object
 	 * 
 	 * @param position Position of the object. Default = (0,0,0)
 	 * @param rotation Rotations about the axes. Default = (0,0,0)
