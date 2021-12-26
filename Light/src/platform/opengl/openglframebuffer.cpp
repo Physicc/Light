@@ -12,7 +12,7 @@ namespace Light
 		return std::make_shared<OpenGLFramebuffer>(spec);
 	}
 
-	static GLenum TexFormat2OpenGLType(FramebufferTextureFormat fmt)
+	static GLenum TexFormat2OpenGLFormat(FramebufferTextureFormat fmt)
 	{
 		switch (fmt)
 		{
@@ -21,14 +21,14 @@ namespace Light
 		case FramebufferTextureFormat::RED_INTEGER:
 			return GL_RED_INTEGER;
 		case FramebufferTextureFormat::DEPTH24_STENCIL8:
-			return GL_DEPTH24_STENCIL8;
+			return GL_DEPTH_STENCIL;
 		default:
 			LIGHT_CORE_ERROR("Unrecognized Framebuffer texture format");
 			return GL_NONE;
 		}
 	}
 
-	static GLenum TexFormat2OpenGLInternalType(FramebufferTextureFormat fmt)
+	static GLenum TexFormat2OpenGLInternalFormat(FramebufferTextureFormat fmt)
 	{
 		switch (fmt)
 		{
@@ -41,6 +41,22 @@ namespace Light
 		default:
 			LIGHT_CORE_ERROR("Unrecognized Framebuffer texture internal format");
 			return GL_NONE;
+		}
+	}
+
+	static GLenum TexFormat2OpenGLType(FramebufferTextureFormat fmt)
+	{
+		switch(fmt)
+		{
+		case FramebufferTextureFormat::RGBA8:
+			return GL_UNSIGNED_BYTE;
+		case FramebufferTextureFormat::RED_INTEGER:
+			return GL_INT;
+		case FramebufferTextureFormat::DEPTH24_STENCIL8:
+			return GL_UNSIGNED_INT_24_8;
+		default:
+			LIGHT_CORE_ERROR("Unrecognized Framebuffer texture internal format");
+			return GL_NONE;	
 		}
 	}
 
@@ -131,7 +147,7 @@ namespace Light
 					glTexImage2DMultisample(
 						textureTarget,
 						m_spec.samples,
-						TexFormat2OpenGLInternalType(m_colorAttachmentSpecs[i].textureFormat),
+						TexFormat2OpenGLInternalFormat(m_colorAttachmentSpecs[i].textureFormat),
 						m_spec.width,
 						m_spec.height,
 						GL_FALSE
@@ -142,17 +158,25 @@ namespace Light
 					glTexImage2D(
 						textureTarget,
 						0,
-						TexFormat2OpenGLInternalType(m_colorAttachmentSpecs[i].textureFormat),
+						TexFormat2OpenGLInternalFormat(m_colorAttachmentSpecs[i].textureFormat),
 						m_spec.width,
 						m_spec.height,
 						0,
+						TexFormat2OpenGLFormat(m_colorAttachmentSpecs[i].textureFormat),
 						TexFormat2OpenGLType(m_colorAttachmentSpecs[i].textureFormat),
-						GL_UNSIGNED_BYTE,
 						nullptr
 					);
 
-					glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-					glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+					if(m_colorAttachmentSpecs[i].textureFormat == FramebufferTextureFormat::RED_INTEGER)
+					{
+						glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+						glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+					}
+					else
+					{
+						glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+						glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+					}
 					glTexParameterfv(textureTarget, GL_TEXTURE_BORDER_COLOR, &(glm::vec4(0,0,0,0)[0]));
 
 					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
@@ -182,7 +206,7 @@ namespace Light
 				glRenderbufferStorageMultisample(
 					GL_RENDERBUFFER,
 					m_spec.samples,
-					TexFormat2OpenGLType(m_depthAttachmentSpec.textureFormat),
+					TexFormat2OpenGLFormat(m_depthAttachmentSpec.textureFormat),
 					m_spec.width,
 					m_spec.height
 				);
@@ -191,7 +215,7 @@ namespace Light
 			{
 				glRenderbufferStorage(
 					GL_RENDERBUFFER,
-					TexFormat2OpenGLInternalType(m_depthAttachmentSpec.textureFormat),
+					TexFormat2OpenGLInternalFormat(m_depthAttachmentSpec.textureFormat),
 					m_spec.width,
 					m_spec.height
 				);
@@ -256,14 +280,16 @@ namespace Light
 	void OpenGLFramebuffer::clearAttachment(uint32_t attachmentIndex, int clearValue) 
 	{
 		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
+		LIGHT_CORE_ASSERT(m_colorAttachmentSpecs[attachmentIndex].textureFormat == FramebufferTextureFormat::RED_INTEGER, "Can call clearAttachment(,int) only on RED_INTEGER format");
 		
-		glDrawBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
-		glClearColor((GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue);
-		glClear(GL_COLOR_BUFFER_BIT);
-
+		// glDrawBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
 		GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
 		glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
+		GLint clearColor[] = { clearValue, clearValue, clearValue, clearValue };
+		glClearBufferiv(GL_COLOR, attachmentIndex, clearColor);
 
+		// glClearColor((GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue);
+		// glClear(GL_COLOR_BUFFER_BIT);
 	}
 	
 	void OpenGLFramebuffer::clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) 
@@ -276,6 +302,11 @@ namespace Light
 
 		GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
 		glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
+	}
+
+	void OpenGLFramebuffer::clearDepthAttachment() 
+	{
+		glClearBufferfi(GL_DEPTH_STENCIL, 0, 1.0f, 0);
 	}
 
 	void OpenGLFramebuffer::bind() 
@@ -303,5 +334,6 @@ namespace Light
 		{
 			glBindTexture(GL_TEXTURE_2D, m_colorAttachmentIds[attachmentIndex]);
 		}
+
 	}
 }

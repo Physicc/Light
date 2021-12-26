@@ -17,11 +17,11 @@ void main()
 in vec2 v_texcoord;
 layout(location = 0) out vec4 v_color;
 
-uniform sampler2D IDTexture;
+uniform isampler2D IDTexture;
 
 void main()
 {
-	float pixelId = texture(IDTexture, v_texcoord).r;
+	int pixelId = texture(IDTexture, v_texcoord).r;
 
 	bool nearby = false;
 	bool border = false;
@@ -30,7 +30,7 @@ void main()
 	{
 		for(int j = -5; j < 5; j++)
 		{
-			if(texture(IDTexture, v_texcoord + vec2(i,j)/1000).r == 1)
+			if(texture(IDTexture, v_texcoord + vec2(i,j)/1000).r != 0)
 				nearby = true;
 			if(v_texcoord.x + float(i)/1000 <= 0 || v_texcoord.x + float(i)/1000 >= 1 || v_texcoord.y + float(j)/1000 <= 0 || v_texcoord.y + float(j)/1000 >= 1)
 				border = true;

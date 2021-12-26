@@ -1,7 +1,9 @@
+#include "core/logging.hpp"
 #include "rendering/scenerenderer.hpp"
 
 #include "light/rendering/renderer.hpp"
 #include "light/rendering/rendercommand.hpp"
+
 
 namespace Light {
 	SceneRenderer::SceneRenderer()
@@ -9,7 +11,7 @@ namespace Light {
 		// Initialize the outline framebuffer
 		Light::FramebufferSpec fbspecOutline;
 		fbspecOutline.attachments = {
-			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
 		};
 		fbspecOutline.width = 1280;
@@ -105,7 +107,6 @@ namespace Light {
 		// Outline Shader init
 		m_outline_shader = Light::Shader::create("assets/shaders/outline.glsl");
 		m_outline_shader->bind();
-		m_outline_shader->setUniformInt("IDTexture", 0);
 
 		m_outline_temp_shader = Light::Shader::create("assets/shaders/outline-temp.glsl");
 	}
@@ -163,8 +164,8 @@ namespace Light {
 	void SceneRenderer::renderOutline(std::shared_ptr<Scene> scene, Entity entity)
 	{
 		m_outlineFramebuffer->bind();
-		Light::RenderCommand::setClearColor({0, 0, 0, 0});
-		Light::RenderCommand::clear();
+		m_outlineFramebuffer->clearAttachment(0, 0);
+		m_outlineFramebuffer->clearDepthAttachment();
 		if(entity && entity.hasComponent<TransformComponent>() && entity.hasComponent<MeshComponent>())
 		{
 			auto [transform, mesh]= scene->m_registry.get<TransformComponent, MeshComponent>((entt::entity)(uint32_t)entity);
@@ -175,6 +176,7 @@ namespace Light {
 		m_framebuffer->bind();
 		m_outlineFramebuffer->bindAttachmentTexture(0,0);
 		m_outline_shader->bind();
+		m_outline_shader->setUniformInt("IDTexture", 0);
 		Renderer::submit(m_outline_shader, m_outline_mesh);
 		m_framebuffer->unbind();
 	}
