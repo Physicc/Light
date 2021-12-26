@@ -21,7 +21,10 @@ namespace Physicc
 		public:
 			BVH(std::vector<RigidBody> rigidBodyList);
 
-			inline void buildTree();
+			inline void buildTree()
+			{
+				buildTree(m_head, 0, m_rigidBodyList.size() - 1);
+			}
 			//build a tree of the bounding volumes
 
 			//convert the tree into a linear data structure
