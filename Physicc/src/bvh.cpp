@@ -9,8 +9,9 @@ namespace Physicc
 	using Iterator = std::vector<RigidBody>::iterator;
 
 	BVH::BVH(std::vector<RigidBody> rigidBodyList) : m_rigidBodyList(std::move(
-		rigidBodyList)), m_head(nullptr)
+		rigidBodyList))
 	{
+		m_head = new BVHNode;
 	}
 
 	BoundingVolume::AABB BVH::computeBV(int start, int end)
@@ -52,8 +53,8 @@ namespace Physicc
 			          std::next(m_rigidBodyList.begin(), end),
 			          [](const RigidBody& rigidBody1,
 			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().y
-				            > rigidBody2.getCentroid().y;
+			            return rigidBody1.getCentroid().z
+				            > rigidBody2.getCentroid().z;
 			          });
 		}
 	}
@@ -87,11 +88,6 @@ namespace Physicc
 		{
 			return Axis::Z;
 		}
-	}
-
-	inline void BVH::buildTree()
-	{
-		buildTree(m_head, 0, m_rigidBodyList.size() - 1);
 	}
 
 //	auto BVH::partitionRigidBodies(Iterator begin,
