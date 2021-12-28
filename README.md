@@ -145,15 +145,20 @@ sudo apt install xorg-dev
 
 * If you are on Linux and do not have a dedicated GPU, run the following command
 
-	`export MESA_GL_VERSION_OVERRIDE=3.3`
+	```bash
+	export MESA_GL_VERSION_OVERRIDE=3.3
+	```
 
 * Change into build directory (This should be the current working directory)
 	
-	`cd build`
-	
+	```bash
+	cd build
+	```
 * Run the executable
 	
-	`./Editor`
+	```bash
+	./Editor
+	```
 
 ### Visual Studio 2019
 
