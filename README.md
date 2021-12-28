@@ -187,7 +187,7 @@ sudo apt install xorg-dev
 
 ## Documentation
 
-[Link](physicc.github.io/Light/) to documentation (may be outdated)
+[Link](https://physicc.github.io/Light/) to documentation (may be outdated)
 
 ## Contributing
 
