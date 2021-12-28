@@ -32,6 +32,7 @@ namespace Light
 
 		LIGHT_CORE_INFO("OpenGL Vendor: {0}", glGetString(GL_VENDOR));
 		LIGHT_CORE_INFO("OpenGL Device: {0}", glGetString(GL_RENDERER));
+		LIGHT_CORE_INFO("OpenGL Version: {0}", glGetString(GL_VERSION));
 
 	}
 	

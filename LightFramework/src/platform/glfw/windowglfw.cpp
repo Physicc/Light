@@ -65,6 +65,7 @@ namespace Light
 		if(!m_window)
 		{
 			LIGHT_CORE_CRITICAL("Could not create window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
+			exit(1);
 		}
 		LIGHT_CORE_INFO("Created window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
 		m_context = new OpenGLContext(m_window);
