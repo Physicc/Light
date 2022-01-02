@@ -81,7 +81,7 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structPhysicc_1_1BVHNode.html">    9</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structPhysicc_1_1BVHNode.html">BVHNode</a></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BoundingVolume::AABB</a> volume;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a> volume;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="classPhysicc_1_1RigidBody.html">RigidBody</a>* body = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="structPhysicc_1_1BVHNode.html">BVHNode</a>* parent = <span class="keyword">nullptr</span>;</div>
@@ -106,14 +106,14 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">using</span> Iterator = std::vector&lt;RigidBody&gt;::iterator;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BoundingVolume::AABB</a> computeBV(Iterator begin, Iterator end);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a> computeBV(Iterator begin, Iterator end);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordtype">void</span> buildTree(<a class="code" href="structPhysicc_1_1BVHNode.html">BVHNode</a>* node, Iterator begin, Iterator end);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    };</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//__BVH_H__</span></div>
 <div class="ttc" id="aclassPhysicc_1_1BVH_html"><div class="ttname"><a href="classPhysicc_1_1BVH.html">Physicc::BVH</a></div><div class="ttdef"><b>Definition:</b> bvh.hpp:20</div></div>
-<div class="ttc" id="aclassPhysicc_1_1BVImpl_1_1BaseBV_html"><div class="ttname"><a href="classPhysicc_1_1BVImpl_1_1BaseBV.html">Physicc::BVImpl::BaseBV&lt; BVImpl::BoxBV&lt; BVImpl::AABB &gt;, BVImpl::AABB &gt;</a></div></div>
+<div class="ttc" id="aclassPhysicc_1_1BVImpl_1_1BoxBV_html"><div class="ttname"><a href="classPhysicc_1_1BVImpl_1_1BoxBV.html">Physicc::BVImpl::BoxBV&lt; BVImpl::AABB &gt;</a></div></div>
 <div class="ttc" id="aclassPhysicc_1_1RigidBody_html"><div class="ttname"><a href="classPhysicc_1_1RigidBody.html">Physicc::RigidBody</a></div><div class="ttdoc">Rigid Body Class.</div><div class="ttdef"><b>Definition:</b> rigidbody.hpp:15</div></div>
 <div class="ttc" id="astructPhysicc_1_1BVHNode_html"><div class="ttname"><a href="structPhysicc_1_1BVHNode.html">Physicc::BVHNode</a></div><div class="ttdef"><b>Definition:</b> bvh.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->

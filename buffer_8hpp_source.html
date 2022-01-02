@@ -92,8 +92,8 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structLight_1_1BufferElement.html">   19</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structLight_1_1BufferElement.html">BufferElement</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="structLight_1_1BufferElement.html">BufferElement</a>(ShaderDataType type, std::string name, <span class="keywordtype">bool</span> normalized = <span class="keyword">false</span>)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            : m_type(type), m_name(name), m_normalized(normalized), m_offset(0),</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;              m_size(getSize(type)), m_componentCount(getComponentCount(type))</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            :   m_type(type), m_name(name), m_offset(0), m_size(getSize(type)),</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                m_componentCount(getComponentCount(type)), m_normalized(normalized)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        {}</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">void</span> setOffset(uint32_t offset)</div>
@@ -152,7 +152,7 @@ $(function() {
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">case</span> ShaderDataType::Bool:      <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">default</span>:</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                LIGHT_CORE_WARN(<span class="stringliteral">&quot;Unsupported Shader data type&quot;</span>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
@@ -173,7 +173,7 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">case</span> ShaderDataType::Bool:      <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">default</span>:</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                LIGHT_CORE_WARN(<span class="stringliteral">&quot;Unsupported Shader data type&quot;</span>);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    };</div>

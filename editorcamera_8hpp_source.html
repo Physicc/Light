@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">void</span> onEvent(<a class="code" href="classLight_1_1Event.html">Event</a>&amp; e);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span> setViewportSize(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span> setViewportSize(uint32_t width, uint32_t height);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">const</span> glm::mat4&amp; getViewMatrix()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_viewMatrix; }</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        glm::mat4 getViewProjectionMatrix() { <span class="keywordflow">return</span> getProjectionMatrix() * m_viewMatrix; }</div>
@@ -135,7 +135,7 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        glm::vec2 m_initialMousePos = {0.0, 0.0};</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">float</span> m_viewportWidth = 1280, m_viewportHeight = 720;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        uint32_t m_viewportWidth = 1280, m_viewportHeight = 720;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    };</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>

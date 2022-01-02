@@ -158,18 +158,19 @@ $(function() {
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> clearAttachment(uint32_t attachmentIndex, <span class="keywordtype">int</span> clearValue) = 0;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) = 0;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> bind() = 0;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> unbind() = 0;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) = 0;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">static</span> std::shared_ptr&lt;Framebuffer&gt; create(<span class="keyword">const</span> <a class="code" href="structLight_1_1FramebufferSpec.html">FramebufferSpec</a>&amp; spec);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    };  </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __FRAMEBUFFER_H__</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> clearDepthAttachment() = 0;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> bind() = 0;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> unbind() = 0;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) = 0;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">static</span> std::shared_ptr&lt;Framebuffer&gt; create(<span class="keyword">const</span> <a class="code" href="structLight_1_1FramebufferSpec.html">FramebufferSpec</a>&amp; spec);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    };  </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __FRAMEBUFFER_H__</span></div>
 <div class="ttc" id="aclassLight_1_1Framebuffer_html"><div class="ttname"><a href="classLight_1_1Framebuffer.html">Light::Framebuffer</a></div><div class="ttdef"><b>Definition:</b> framebuffer.hpp:76</div></div>
 <div class="ttc" id="astructLight_1_1FramebufferAttachmentsSpec_html"><div class="ttname"><a href="structLight_1_1FramebufferAttachmentsSpec.html">Light::FramebufferAttachmentsSpec</a></div><div class="ttdef"><b>Definition:</b> framebuffer.hpp:52</div></div>
 <div class="ttc" id="astructLight_1_1FramebufferSpec_html"><div class="ttname"><a href="structLight_1_1FramebufferSpec.html">Light::FramebufferSpec</a></div><div class="ttdef"><b>Definition:</b> framebuffer.hpp:66</div></div>

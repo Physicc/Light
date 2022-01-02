@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['physicsworld_141',['PhysicsWorld',['../classPhysicc_1_1PhysicsWorld.html',1,'Physicc']]]
+  ['physicsworld_147',['PhysicsWorld',['../classPhysicc_1_1PhysicsWorld.html',1,'Physicc']]],
+  ['pointlight_148',['PointLight',['../structLight_1_1PointLight.html',1,'Light']]]
 ];
