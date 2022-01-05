@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update -q
-          sudo apt-get install -yq --no-install-recommends gcc-10 g++-10 xorg-dev
+          sudo apt-get install -yq --no-install-recommends clang-11 xorg-dev
       
       - name: Configure CMake
         run: |
