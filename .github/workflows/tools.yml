@@ -23,6 +23,9 @@ jobs:
           cmake -B${{ github.workspace }}/build \
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
                 -G"Unix Makefiles"
+        env:
+          CC: clang-11
+          CXX: clang++-11
       
       - name: Build
         run: |
