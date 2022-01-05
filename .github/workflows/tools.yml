@@ -89,7 +89,7 @@ jobs:
               -- /m:12
 
     - name: Upload executable as artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: TracyServerWin
-          path: build/TracyServer/Release/TracyServer.exe
+      uses: actions/upload-artifact@v2
+      with: 
+        name: TracyServerWin
+        path: build/TracyServer/Release/TracyServer.exe
