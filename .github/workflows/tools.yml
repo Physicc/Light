@@ -68,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
           name: TracyServerOSX
-          path: build/TracyServer
+          path: build/TracyServer/Release/TracyServer
 
   windows_build:
     runs-on: windows-latest
