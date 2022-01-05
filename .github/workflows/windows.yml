@@ -36,6 +36,7 @@ jobs:
       run: |
         cmake --build ${{github.workspace}}/build `
               --config ${{env.BUILD_TYPE}} `
+              --target Editor Test `
               -- /m:12
   
   windows_mingw-w64:
@@ -67,4 +68,5 @@ jobs:
         run: |
           cmake --build ${{github.workspace}}/build `
                 --config ${{env.BUILD_TYPE}} `
+                --target Editor Test `
                 -- -j2

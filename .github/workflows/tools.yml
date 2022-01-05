@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update -q
-          sudo apt-get install gcc-10 g++-10
+          sudo apt-get install -yq --no-install-recommends gcc-10 g++-10 xorg-dev
       
       - name: Configure CMake
         run: |
@@ -28,7 +28,7 @@ jobs:
         run: |
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
-                --target TracyServer
+                --target TracyServer \
                 -- -j2
 
       - name: Upload executable as artifact
@@ -59,7 +59,7 @@ jobs:
         run: |
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
-                --target TracyServer
+                --target TracyServer \
                 -- -j2
 
       - name: Upload executable as artifact
