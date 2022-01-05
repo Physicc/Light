@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
           name: TracyServerUbuntu
-          path: build/TracyServer
+          path: build/TracyServer/TracyServer
     
   osx_build:
     runs-on: macos-10.15 
