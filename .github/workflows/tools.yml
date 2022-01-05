@@ -59,8 +59,7 @@ jobs:
         run: |
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
-                --target TracyServer \
-                -- -j2
+                --target TracyServer
 
       - name: Upload executable as artifact
         uses: actions/upload-artifact@v2
