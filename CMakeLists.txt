@@ -9,3 +9,5 @@ project(Physics)
 add_subdirectory(Editor Editor)
 
 add_subdirectory(Testing Test)
+
+add_subdirectory(tools/tracy TracyServer)
