@@ -2,16 +2,16 @@ Light
 ====
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Windows](https://github.com/Physicc/Light/actions/workflows/windows.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/windows.yml) [![OSX](https://github.com/Physicc/Light/actions/workflows/osx.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/osx.yml) [![Linux GCC](https://github.com/Physicc/Light/actions/workflows/linux-gcc.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/linux-gcc.yml) [![Linux Clang](https://github.com/Physicc/Light/actions/workflows/linux-clang.yml/badge.svg)](https://github.com/Physicc/Light/actions/workflows/linux-clang.yml)
 
-Lightweight Game Engine written in C++
+Lightweight Game Engine written in C++17
 
 ----
 
-Light is a lightweight game engine written in C++. It is currently in development and is not yet ready for use. We are a small team consisting of students from Indian Institute of Technology Bombay. We are working on this project to primarily learn about game engine development, and to document our process so that others can learn from our mistakes.
+Light is a lightweight game engine written in C++17. It is currently in development and is not yet ready for use. We are a small team consisting of students from Indian Institute of Technology Bombay. We are working on this project to primarily learn about game engine development, and to document our process so that others can learn from our mistakes.
 
 ## Modules
 
 * **Light**: The rendering backbone of the engine
-	* Wraps around OpenGL API
+	* Wraps around the OpenGL API
 * **LightFramework**: The main game engine framework
 	* Input
 	* Windowing
@@ -59,7 +59,7 @@ We aim to support as the most common desktop platforms
 * X11
 * CMake
 
-Install X11 via
+You can install X11 by running
 
 ```bash
 sudo apt install xorg-dev
@@ -88,8 +88,8 @@ sudo apt install xorg-dev
 
 * Select kit
 	* Select `GCC` if you are using `mingw-w64` as your compiler
-	* Select kit as `Visual Studio 2019` if you are using `MSVC (from VS2019)` as your compiler
-	
+	* Select `Visual Studio 2019` if you are using `MSVC (from VS2019)` as your compiler
+
 * Select build target as `Editor`
 
 * Press the Build button
@@ -137,8 +137,8 @@ sudo apt install xorg-dev
 	```
 
 	On Linux, you can also append `-- -j<num>` to the end of the above command, to run the build on `<num>` cores.
-	
-	eg. 
+
+	eg.
 	```bash
 	cmake --build build -- -j4	# for 4 cores
 	```
@@ -149,20 +149,20 @@ sudo apt install xorg-dev
 	export MESA_GL_VERSION_OVERRIDE=3.3
 	```
 
-* Change into build directory (This should be the current working directory)
-	
+* Change into the `build` directory (This should be the current working directory)
+
 	```bash
 	cd build
 	```
 * Run the executable
-	
+
 	```bash
 	./Editor
 	```
 
 ### Visual Studio 2019
 
-* You can if you wish to, use VS2019 as your IDE instead of VSCode on Windows.
+* You can if you wish to, use VS2019 as your IDE instead of VS Code on Windows.
 
 * Recursively clone the git module:
 
@@ -203,7 +203,7 @@ You can send pull requests, but please follow the guidelines on [CONTRIBUTING.md
 
 ## Attributions
 
-* Icon created by Chaowalit Koetchuea for thenounproject
+* Icon created by [Chaowalit Koetchuea](https://thenounproject.com/chabacoffee2011/) for [thenounproject](https://thenounproject.com/)
 
 * Project heavily inspired from [Cherno's Hazel](https://github.com/TheCherno/Hazel)
 
