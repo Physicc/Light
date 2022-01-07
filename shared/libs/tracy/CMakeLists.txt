@@ -11,3 +11,9 @@ target_include_directories(TracyClient SYSTEM PUBLIC ${SRC_DIR})
 target_include_directories(TracyClient PUBLIC ./)
 
 target_compile_definitions(TracyClient PUBLIC "$<$<CONFIG:RelProfile>:TRACY_ENABLE>")
+
+if(WIN32)
+	if(MinGW)
+		target_compile_definitions(TracyClient PUBLIC "_WIN32_WINNT=0x0602" "WINVER=0x0602")
+	endif()
+endif()

@@ -36,6 +36,14 @@ list(FILTER SRC_FILES EXCLUDE REGEX ".*nfd/nfd_win.cpp")
 
 add_executable(TracyServer ${SRC_FILES})
 target_include_directories(TracyServer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tracy/imgui)
+
+set(CAPSTONE_ARCHITECTURE_DEFAULT OFF CACHE BOOL "Captstone architecures disabled by default" FORCE)
+set(archlist ARM ARM64 X86)
+
+foreach(arch in ${archlist})
+	set(CAPSTONE_${arch}_SUPPORT ON CACHE BOOL "Enable ${arch} support" FORCE)
+endforeach()
+
 target_include_directories(TracyServer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/capstone/include/capstone)
 
 target_compile_definitions(TracyServer PRIVATE TRACY_NO_FILESELECTOR IMGUI_ENABLE_FREETYPE _CRT_SECURE_NO_DEPRECATE _CRT_NONSTDC_NO_DEPRECATE WIN32_LEAN_AND_MEAN NOMINMAX _USE_MATH_DEFINES ZSTD_DISABLE_ASM)
