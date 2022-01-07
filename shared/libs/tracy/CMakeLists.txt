@@ -15,5 +15,6 @@ target_compile_definitions(TracyClient PUBLIC "$<$<CONFIG:RelProfile>:TRACY_ENAB
 if(WIN32)
 	if(MINGW)
 		target_compile_definitions(TracyClient PUBLIC "_WIN32_WINNT=0x0602" "WINVER=0x0602")
+		target_link_libraries(TracyClient PRIVATE ws2_32 wsock32 dbghelp)
 	endif()
 endif()
