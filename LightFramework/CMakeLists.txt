@@ -67,17 +67,6 @@ add_subdirectory(../shared/libs/spdlog spdlog)
 #EnTT
 target_include_directories(LightFramework PUBLIC libs/entt)
 
-if (UNIX)
-	if (NOT APPLE)
-		find_package(Threads REQUIRED)
-		find_package(X11 REQUIRED)
-	endif()
-endif()
-
-if (UNIX)
-	if (APPLE)
-		target_link_libraries(LightFramework "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
-	else()
-		target_link_libraries(LightFramework ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
-	endif()
-endif()
+#TracyClient
+target_include_directories(LightFramework PUBLIC ../shared/libs/tracy/tracy)
+target_link_libraries(LightFramework TracyClient)

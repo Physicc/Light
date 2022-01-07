@@ -51,6 +51,9 @@ target_link_libraries(Editor LightFramework)
 add_subdirectory(../Physicc Physicc)
 target_link_libraries(Editor Physicc)
 
+add_subdirectory(../shared/libs/tracy TracyClient)
+target_link_libraries(Editor TracyClient)
+
 add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/imgui.ini $<TARGET_FILE_DIR:Editor>)
 
 add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/assets)

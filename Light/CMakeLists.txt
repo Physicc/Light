@@ -25,7 +25,6 @@ target_compile_definitions(Light PRIVATE
     -DGLM_FORCE_SILENT_WARNINGS
 )
 
-
 # add includes
 target_include_directories(Light PUBLIC include)
 target_include_directories(Light PUBLIC ../shared/include)
@@ -46,10 +45,10 @@ endif()
 
 # target_link_libraries(Light PRIVATE shared)
 
-# add OpenGL library
-cmake_policy(SET CMP0072 NEW)
-find_package(OpenGL REQUIRED)
-target_link_libraries(Light PUBLIC ${OPENGL_gl_LIBRARY})
+# # add OpenGL library
+# cmake_policy(SET CMP0072 NEW)
+# find_package(OpenGL REQUIRED)
+# target_link_libraries(Light PUBLIC ${OPENGL_gl_LIBRARY})
 
 # GLAD
 add_subdirectory(libs/glad)

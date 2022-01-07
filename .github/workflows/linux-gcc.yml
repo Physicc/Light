@@ -7,7 +7,8 @@ on:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
+  # We build RelProfile to test both Release and Profiling aspects of the build
+  BUILD_TYPE: RelProfile
 
 jobs:
   ubuntu_build:
@@ -27,15 +28,11 @@ jobs:
         run: |
           sudo apt-get update -q
           sudo apt-get install -yq --no-install-recommends \
-                               libglfw3-dev \
-                               libxrandr-dev \
-                               libxinerama-dev \
-                               libxcursor-dev \
-                               libxi-dev \
-                               uuid-dev \
-                               gcc-${{ matrix.gcc-version }} \
-                               g++-${{ matrix.gcc-version }}
-     
+                                xorg-dev \
+                                uuid-dev \
+                                gcc-${{ matrix.gcc-version }} \
+                                g++-${{ matrix.gcc-version }}
+
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
         with:

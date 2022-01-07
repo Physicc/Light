@@ -1,3 +1,5 @@
+#include "tools/Tracy.hpp"
+
 #include "core/application.hpp"
 
 #include "light/rendering/renderer.hpp"
@@ -72,6 +74,8 @@ namespace Light
 			m_imguiLayer->end();
 
 			m_window->onUpdate();
+
+			FrameMark;
 		}
 	}
 
