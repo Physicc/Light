@@ -37,7 +37,7 @@ list(FILTER SRC_FILES EXCLUDE REGEX ".*nfd/nfd_win.cpp")
 add_executable(TracyServer ${SRC_FILES})
 target_include_directories(TracyServer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tracy/imgui)
 
-set(CAPSTONE_ARCHITECTURE_DEFAULT OFF CACHE BOOL "Captstone architecures disabled by default" FORCE)
+set(CAPSTONE_ARCHITECTURE_DEFAULT OFF CACHE BOOL "Capstone architecures disabled by default" FORCE)
 set(archlist ARM ARM64 X86)
 
 foreach(arch in ${archlist})
@@ -60,6 +60,8 @@ set(CAPSTONE_BUILD_CSTOOL OFF CACHE BOOL "Build cstool")
 add_subdirectory(capstone)
 target_link_libraries(TracyServer capstone-static)
 
+set(FT_DISABLE_HARFBUZZ ON CACHE BOOL "Disable HarfBuzz (used for improving auto-hinting of OpenType fonts)")
+set(FT_DISABLE_BROTLI ON CACHE BOOL "Disable support of compressed WOFF2 fonts.")
 add_subdirectory(freetype)
 target_link_libraries(TracyServer freetype)
 
