@@ -32,6 +32,8 @@ target_include_directories(Physicc PUBLIC ../shared/include)
 add_subdirectory(../shared/libs/glm glm)
 target_link_libraries(Physicc glm)
 
+add_subdirectory(../shared/libs/tracy TracyClient)
+target_link_libraries(Physicc TracyClient)
 
 
 
