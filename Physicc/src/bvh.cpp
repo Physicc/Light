@@ -122,7 +122,7 @@ namespace Physicc
 		//All nodes are equal to nullptr until they are explicitly assigned
 		//non-null values
 
-		LIGHT_ASSERT(start > end, "Pray to god that Jesus helps you, for start is greater than end.");
+		// LIGHT_ASSERT(start > end, "Pray to god that Jesus helps you, for start is greater than end.");
 		if (start == end)
 		{
 			//then the only element left in this sliced vector is the one at
@@ -153,24 +153,24 @@ namespace Physicc
 	{
 		std::stack<BVHNode*> s;
 		std::vector<RigidBody*> tree;
-		BVHNode* curr = m_head;
-		while(!s.empty() || curr != NULL)
+		BVHNode* currentNode = m_head;
+		while(!s.empty() || currentNode != nullptr)
 		{
 			
-			while(curr != NULL)
+			while(currentNode != nullptr)
 			{
-				s.push(curr);
-				curr = curr->left;
+				s.push(currentNode);
+				currentNode = currentNode->left;
 			}
 
-			curr = s.top();
+			currentNode = s.top();
 			s.pop();
 
-			if(curr->left == NULL && curr->right == NULL)
+			if(currentNode->left == nullptr && currentNode->right == nullptr)
 			{
-				tree.push_back(curr->body);
+				tree.push_back(currentNode->body);
 			}
-			curr = curr->right;
+			currentNode = currentNode->right;
 		}
 		return tree;
 	}
