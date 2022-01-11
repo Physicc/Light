@@ -1,6 +1,8 @@
 #ifndef __COLLIDER_H__
 #define __COLLIDER_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "boundingvolume.hpp"
@@ -27,6 +29,8 @@ namespace Physicc
 	 		 */
 			[[nodiscard]] inline glm::vec3 getPosition()
 			{
+				ZoneScoped;
+
 				return m_position;
 			}
 
@@ -37,6 +41,8 @@ namespace Physicc
 			 */
 			[[nodiscard]] inline glm::vec3 getRotate()
 			{
+				ZoneScoped;
+
 				return m_rotate;
 			}
 
@@ -47,6 +53,8 @@ namespace Physicc
 			 */
 			[[nodiscard]] inline glm::vec3 getScale()
 			{
+				ZoneScoped;
+
 				return m_scale;
 			}
 
@@ -57,6 +65,8 @@ namespace Physicc
 			 */
 			[[nodiscard]] inline glm::mat4 getTransform()
 			{
+				ZoneScoped;
+
 				return m_transform;
 			}
 
@@ -67,6 +77,8 @@ namespace Physicc
 			 */
 			inline void setPosition(glm::vec3 position)
 			{
+				ZoneScoped;
+
 				m_position = position;
 			}
 
@@ -77,6 +89,8 @@ namespace Physicc
 			 */
 			inline void setRotate(glm::vec3 rotate)
 			{
+				ZoneScoped;
+
 				m_rotate = rotate;
 			}
 
@@ -87,6 +101,8 @@ namespace Physicc
 			 */
 			inline void setScale(glm::vec3 scale)
 			{
+				ZoneScoped;
+
 				m_scale = scale;
 			}
 

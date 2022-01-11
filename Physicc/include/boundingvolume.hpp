@@ -1,6 +1,8 @@
 #ifndef __BOUNDINGVOLUME_H__
 #define __BOUNDINGVOLUME_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 
 namespace Physicc
@@ -72,11 +74,15 @@ namespace Physicc
 				 */
 				BaseBV(const BoundingObject& volume)
 				{
+					ZoneScoped;
+
 					typeCast()->setVolume(volume);
 				}
 
 				BaseBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
+					ZoneScoped;
+
 					typeCast()->setVolume(lowerBound, upperBound);
 				}
 
@@ -89,6 +95,8 @@ namespace Physicc
  				 */
 				[[nodiscard]] inline bool overlapsWith(const BaseBV& bv) const
 				{
+					ZoneScoped;
+
 					return constTypeCast()->overlapsWith(static_cast<const Derived&>(bv));
 				}
 				//implicit contract: all child classes of BaseBV must have this
@@ -96,6 +104,8 @@ namespace Physicc
 
 				[[nodiscard]] inline float getVolume() const
 				{
+					ZoneScoped;
+
 					return constTypeCast()->getVolume();
 				}
 				//Since template instantiations are lazy, a (child) class that
@@ -110,6 +120,8 @@ namespace Physicc
 //				}
 				[[nodiscard]] Derived enclosingBV(const BaseBV& bv) const
 				{
+					ZoneScoped;
+
 					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
@@ -146,17 +158,23 @@ namespace Physicc
 
 				BoxBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
+					ZoneScoped;
+
 					m_volume = {lowerBound, upperBound};
 				}
 
 				inline void setVolume(const T& volume)
 				{
+					ZoneScoped;
+
 					m_volume = volume;
 				}
 
 				inline void setVolume(const glm::vec3& lowerBound,
 				                      const glm::vec3& upperBound)
 				{
+					ZoneScoped;
+
 					m_volume = {lowerBound, upperBound};
 //					m_volume.lowerBound = lowerBound;
 //					m_volume.upperBound = upperBound;
@@ -166,6 +184,8 @@ namespace Physicc
 
 				inline float getVolume() const
 				{
+					ZoneScoped;
+
 					//[[nodiscard]] is not needed here because this function is
 					//never called by the end user. It is simply called by BV
 					//itself, which doesn't actually discard the return type, so
@@ -177,6 +197,8 @@ namespace Physicc
 
 				inline bool overlapsWith(const BoxBV& bv) const
 				{
+					ZoneScoped;
+
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
 							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
 						&& (m_volume.lowerBound.y <= bv.m_volume.upperBound.y
@@ -192,6 +214,8 @@ namespace Physicc
 
 				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
+					ZoneScoped;
+
 					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
 				}
@@ -211,6 +235,8 @@ namespace Physicc
 		auto inline enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
 								const BVImpl::BaseBV<Derived, BoundingObject>& volume2)
 		{
+			ZoneScoped;
+
 			return volume1.enclosingBV(volume2);
 		}
 		//returns the minimal bounding volume that encompasses both of them

@@ -1,4 +1,7 @@
+#include "tools/Tracy.hpp"
+
 #include "bvh.hpp"
+
 #include <utility>
 
 namespace Physicc
@@ -13,11 +16,15 @@ namespace Physicc
 
 	inline void BVH::buildTree()
 	{
+		ZoneScoped;
+
 		buildTree(m_head, m_rigidBodyList.begin(), m_rigidBodyList.end());
 	}
 
 	BoundingVolume::AABB computeBV(Iterator begin, Iterator end)
 	{
+		ZoneScoped;
+
 		BoundingVolume::AABB bv(begin->getAABB());
 
 		for (auto it = ++begin; it != end; ++it)
@@ -31,6 +38,8 @@ namespace Physicc
 
 	void BVH::buildTree(BVHNode* node, Iterator begin, Iterator end)
 	{
+		ZoneScoped;
+
 		//implicit convention:
 		//no children = leaf node
 		//no parent = head node
