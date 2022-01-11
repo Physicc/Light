@@ -152,7 +152,6 @@ namespace Physicc
 	std::vector<RigidBody*> BVH::convert()
 	{
 		std::stack<BVHNode*> s;
-		s.push(m_head);
 		std::vector<RigidBody*> tree;
 		BVHNode* curr = m_head;
 		while(!s.empty() || curr != NULL)
