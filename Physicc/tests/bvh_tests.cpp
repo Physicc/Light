@@ -24,10 +24,14 @@ TEST_F(BVH_tests, Check_bvh_tree){
     Physicc::BVH test_bvh(test_vector);
     test_bvh.buildTree();
     std::vector<Physicc::RigidBody*> calc = test_bvh.convert();
-    std::vector<Physicc::RigidBody*> ans {&test_vector[0],&test_vector[1],&test_vector[2]};
-    // for(auto x : calc){
-    //     std::cout<<glm::to_string(x->getCentroid())<<std::endl;
+    std::vector<glm::vec3> centroids;
+    for(auto body:calc){
+        centroids.push_back(body->getCentroid());
+    }
+    std::vector<glm::vec3> ans {test_vector[2].getCentroid(),test_vector[1].getCentroid(),test_vector[0].getCentroid()};
+    // for(auto x : centroids){
+    //     std::cout<<glm::to_string(x)<<std::endl;
     // }
-    EXPECT_EQ(ans,calc);
+    EXPECT_EQ(ans,centroids);
 }
 
