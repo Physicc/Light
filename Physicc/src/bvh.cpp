@@ -3,22 +3,23 @@
 #include <utility>
 #include <algorithm>
 #include <stack>
+#include <memory>
 
 namespace Physicc
 {
-	using Iterator = std::vector<RigidBody>::iterator;
+	//using Iterator = std::vector<RigidBody>::iterator;
 
-	BVH::BVH(std::vector<RigidBody> rigidBodyList) : m_rigidBodyList(std::move(
-		rigidBodyList))
+	BVH::BVH(std::vector<RigidBody> rigidBodyList) :
+		m_rigidBodyList(rigidBodyList)
 	{
-		m_head = new BVHNode;
+		m_head = std::make_shared<BVHNode>();
 	}
 
-	BoundingVolume::AABB BVH::computeBV(int start, int end)
+	BoundingVolume::AABB BVH::computeBV(std::size_t start, std::size_t end)
 	{
 		BoundingVolume::AABB bv(m_rigidBodyList[start].getAABB());
 
-		for (int i = start + 1; i != end; i++)
+		for (std::size_t i = start + 1; i != end; i++)
 		{
 			bv = BoundingVolume::enclosingBV(bv, m_rigidBodyList[i].getAABB());
 			//TODO: Object slicing is might be happening here. Investigate.
@@ -27,12 +28,12 @@ namespace Physicc
 		return bv;
 	}
 
-	void BVH::sort(Axis axis, int start, int end)
+	void BVH::sort(Axis axis, std::size_t start, std::size_t end)
 	{
 		if (axis == X)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end+1),
+			          std::next(m_rigidBodyList.begin(), end + 1),
 			          [](const RigidBody& rigidBody1,
 			             const RigidBody& rigidBody2) {
 			            return rigidBody1.getCentroid().x
@@ -41,7 +42,7 @@ namespace Physicc
 		} else if (axis == Y)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end+1),
+			          std::next(m_rigidBodyList.begin(), end + 1),
 			          [](const RigidBody& rigidBody1,
 			             const RigidBody& rigidBody2) {
 			            return rigidBody1.getCentroid().y
@@ -50,7 +51,7 @@ namespace Physicc
 		} else
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end+1),
+			          std::next(m_rigidBodyList.begin(), end + 1),
 			          [](const RigidBody& rigidBody1,
 			             const RigidBody& rigidBody2) {
 			            return rigidBody1.getCentroid().z
@@ -59,18 +60,15 @@ namespace Physicc
 		}
 	}
 
-	BVH::Axis BVH::getMedianCuttingAxis(int start, int end)
+	BVH::Axis BVH::getMedianCuttingAxis(std::size_t start, std::size_t end)
 	{
 		//TODO: Suggest a better name
-//		float x_min = 0, x_max = 0;
-//		float y_min = 0, y_max = 0;
-//		float z_min = 0, z_max = 0;
-
 		glm::vec3 min(m_rigidBodyList[start].getCentroid()),
 			max(m_rigidBodyList[start].getCentroid());
 
-		for (int i = start + 1; i <= end; i++)
+		for (std::size_t i = start + 1; i <= end; ++i)
 		{
+			// glm::min and glm::max find the coordinate-wise mins and maxes.
 			min = glm::min(min, m_rigidBodyList[i].getCentroid());
 			max = glm::max(max, m_rigidBodyList[i].getCentroid());
 		}
@@ -113,7 +111,7 @@ namespace Physicc
 ////
 ////	}
 
-	void BVH::buildTree(BVHNode* node, int start, int end)
+	void BVH::buildTree(std::shared_ptr<BVHNode> node, std::size_t start, std::size_t end)
 	{
 		//implicit convention:
 		//no children = leaf node
@@ -122,21 +120,21 @@ namespace Physicc
 		//All nodes are equal to nullptr until they are explicitly assigned
 		//non-null values
 
-		// LIGHT_ASSERT(start > end, "Pray to god that Jesus helps you, for start is greater than end.");
+		LIGHT_ASSERT(start > end, "Pray to god that Jesus helps you, for start is greater than end.");
 		if (start == end)
 		{
 			//then the only element left in this sliced vector is the one at
 			//`start`
 			node->volume = m_rigidBodyList[start].getAABB();
-			node->body = &m_rigidBodyList[start];
+			node->body = std::make_unique<RigidBody>(m_rigidBodyList[start]);
 		} else
 		{
 			node->volume = computeBV(start, end);
 
 			sort(getMedianCuttingAxis(start, end), start, end);
 
-			auto leftNode = new BVHNode;
-			auto rightNode = new BVHNode;
+			auto leftNode = std::make_shared<BVHNode>();
+			auto rightNode = std::make_shared<BVHNode>();
 
 			node->left = leftNode;
 			node->right = rightNode;
@@ -153,24 +151,24 @@ namespace Physicc
 	{
 		std::stack<BVHNode*> s;
 		std::vector<RigidBody*> tree;
-		BVHNode* currentNode = m_head;
-		while(!s.empty() || currentNode != nullptr)
+		BVHNode* currentNode = m_head.get();
+		while (!s.empty() || currentNode != nullptr)
 		{
 			
-			while(currentNode != nullptr)
+			while (currentNode != nullptr)
 			{
 				s.push(currentNode);
-				currentNode = currentNode->left;
+				currentNode = currentNode->left.get();
 			}
 
 			currentNode = s.top();
 			s.pop();
 
-			if(currentNode->left == nullptr && currentNode->right == nullptr)
+			if (currentNode->left == nullptr && currentNode->right == nullptr)
 			{
-				tree.push_back(currentNode->body);
+				tree.push_back(currentNode->body.get());
 			}
-			currentNode = currentNode->right;
+			currentNode = currentNode->right.get();
 		}
 		return tree;
 	}
