@@ -32,7 +32,7 @@ namespace Physicc
 		if (axis == X)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end),
+			          std::next(m_rigidBodyList.begin(), end+1),
 			          [](const RigidBody& rigidBody1,
 			             const RigidBody& rigidBody2) {
 			            return rigidBody1.getCentroid().x
@@ -41,7 +41,7 @@ namespace Physicc
 		} else if (axis == Y)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end),
+			          std::next(m_rigidBodyList.begin(), end+1),
 			          [](const RigidBody& rigidBody1,
 			             const RigidBody& rigidBody2) {
 			            return rigidBody1.getCentroid().y
@@ -50,7 +50,7 @@ namespace Physicc
 		} else
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end),
+			          std::next(m_rigidBodyList.begin(), end+1),
 			          [](const RigidBody& rigidBody1,
 			             const RigidBody& rigidBody2) {
 			            return rigidBody1.getCentroid().z
