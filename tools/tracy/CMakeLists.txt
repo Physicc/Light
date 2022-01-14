@@ -60,8 +60,8 @@ set(CAPSTONE_BUILD_CSTOOL OFF CACHE BOOL "Build cstool")
 add_subdirectory(capstone)
 target_link_libraries(TracyServer capstone-static)
 
-set(FT_DISABLE_HARFBUZZ ON CACHE BOOL "Disable HarfBuzz (used for improving auto-hinting of OpenType fonts)")
-set(FT_DISABLE_BROTLI ON CACHE BOOL "Disable support of compressed WOFF2 fonts.")
+set(FT_DISABLE_HARFBUZZ ON CACHE BOOL "Disable HarfBuzz (used for improving auto-hinting of OpenType fonts)" FORCE)
+set(FT_DISABLE_BROTLI ON CACHE BOOL "Disable support of compressed WOFF2 fonts." FORCE)
 add_subdirectory(freetype)
 target_link_libraries(TracyServer freetype)
 
