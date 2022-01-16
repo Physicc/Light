@@ -10,8 +10,7 @@ namespace Physicc
 	struct BVHNode
 	{
 		BoundingVolume::AABB volume;
-		std::unique_ptr<RigidBody> body;
-		//TODO: Ensure that a unique_ptr is the proper smart pointer type for the RigidBody.
+		std::weak_ptr<RigidBody> body;
 
 		std::shared_ptr<BVHNode> parent;
 		std::shared_ptr<BVHNode> left;
