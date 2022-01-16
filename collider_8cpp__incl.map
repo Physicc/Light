@@ -1,8 +1,9 @@
 <map id="Physicc/src/collider.cpp" name="Physicc/src/collider.cpp">
-<area shape="rect" id="node1" title="Contains the collider classes." alt="" coords="153,5,326,32"/>
-<area shape="rect" id="node2" href="$collider_8hpp_source.html" title=" " alt="" coords="190,80,289,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="114,229,218,256"/>
-<area shape="rect" id="node4" title=" " alt="" coords="26,155,243,181"/>
-<area shape="rect" id="node5" href="$boundingvolume_8hpp_source.html" title=" " alt="" coords="267,155,426,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="450,155,512,181"/>
+<area shape="rect" id="node1" title="Contains the collider classes." alt="" coords="348,5,507,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="455,229,565,256"/>
+<area shape="rect" id="node3" href="$collider_8hpp_source.html" title=" " alt="" coords="325,80,412,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,229,97,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="199,155,389,181"/>
+<area shape="rect" id="node6" href="$boundingvolume_8hpp_source.html" title=" " alt="" coords="35,155,175,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="414,155,473,181"/>
 </map>
