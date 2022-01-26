@@ -29,7 +29,7 @@ namespace Physicc
 			//build a binary tree of the bounding volumes
 
 			//convert the tree into a linear data structure
-			std::vector<RigidBody*> convert();
+			std::vector<std::weak_ptr<RigidBody>> convert();
 
 		private:
 			std::shared_ptr<BVHNode> m_head;

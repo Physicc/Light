@@ -44,7 +44,7 @@ namespace Physicc
 				if (isLeaf(node1) && isLeaf(node2))
 				{
 					//If both nodes are leaves, then we have a PotentialContact, and we add the collision pair to the collisionArray
-					collisionArray.push_back(PotentialContact(*(node1->body), *(node2->body)));
+					collisionArray.push_back(PotentialContact(node1->body, node2->body));
 				} else if (isLeaf(node1) && !isLeaf(node2))
 				{
 					//If only of the nodes is a leaf, then make sure that node2 is the leaf node and that we recurse through node1

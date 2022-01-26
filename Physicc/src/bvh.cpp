@@ -101,7 +101,7 @@ namespace Physicc
 			//then the only element left in this sliced vector is the one at
 			//`start`
 			node->volume = m_rigidBodyList[start].getAABB();
-			node->body = std::make_unique<RigidBody>(m_rigidBodyList[start]);
+			node->body = std::make_shared<RigidBody>(m_rigidBodyList[start]);
 		} else
 		{
 			node->volume = computeBV(start, end);
@@ -122,10 +122,10 @@ namespace Physicc
 		}
 	}
 	
-	std::vector<RigidBody*> BVH::convert()
+	std::vector<std::weak_ptr<RigidBody>> BVH::convert()
 	{
 		std::stack<BVHNode*> s;
-		std::vector<RigidBody*> tree;
+		std::vector<std::weak_ptr<RigidBody>> tree;
 		BVHNode* currentNode = m_head.get();
 		while (!s.empty() || currentNode != nullptr)
 		{
@@ -141,7 +141,7 @@ namespace Physicc
 
 			if (currentNode->left == nullptr && currentNode->right == nullptr)
 			{
-				tree.push_back(currentNode->body.get());
+				tree.push_back(currentNode->body);
 			}
 			currentNode = currentNode->right.get();
 		}
