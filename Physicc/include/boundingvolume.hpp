@@ -119,13 +119,7 @@ namespace Physicc
 				}
 				//A helper function just to make reading the code easier
 
-//				[[nodiscard]] inline const Derived* constTypeCast() const
-//				{
-//					return static_cast<const Derived*>(this);
-//				}
-//				//A helper function just to make reading the code easier
-
-				[[nodiscard]] inline const Derived* constTypeCast() const//constTypeCastToConst() const
+				[[nodiscard]] inline const Derived* constTypeCast() const
 				{
 					return static_cast<const Derived*>(this);
 				}
@@ -157,8 +151,6 @@ namespace Physicc
 				                      const glm::vec3& upperBound)
 				{
 					m_volume = {lowerBound, upperBound};
-//					m_volume.lowerBound = lowerBound;
-//					m_volume.upperBound = upperBound;
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
@@ -207,7 +199,7 @@ namespace Physicc
 		typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
 
 		template <typename Derived, typename BoundingObject>
-		auto inline enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
+		inline auto enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
 								const BVImpl::BaseBV<Derived, BoundingObject>& volume2)
 		{
 			return volume1.enclosingBV(volume2);
