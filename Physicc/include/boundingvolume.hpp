@@ -71,12 +71,12 @@ namespace Physicc
 				 */
 				BaseBV(const BoundingObject& volume)
 				{
-					typeCast()->setVolume(volume);
+					typeCast()->setBoundingVolumeImpl(volume);
 				}
 
 				BaseBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
-					typeCast()->setVolume(lowerBound, upperBound);
+					typeCast()->setBoundingVolumeImpl(lowerBound, upperBound);
 				}
 
 				/**
@@ -88,28 +88,36 @@ namespace Physicc
  				 */
 				[[nodiscard]] inline bool overlapsWith(const BaseBV& bv) const
 				{
-					return constTypeCast()->overlapsWith(static_cast<const Derived&>(bv));
+					return constTypeCast()->overlapsWithImpl(static_cast<const Derived&>(bv));
 				}
 				//implicit contract: all child classes of BaseBV must have this
 				//function implemented
 
 				[[nodiscard]] inline float getVolume() const
 				{
-					return constTypeCast()->getVolume();
+					return constTypeCast()->getVolumeImpl();
 				}
 				//Since template instantiations are lazy, a (child) class that
-				//doesn't have getVolume() defined simply won't generate any
+				//doesn't have getVolumeImpl() defined simply won't generate any
 				//code for this function. However, this also means that trying
 				//to use this function will likely result in 5 pages of opaque
 				//errors.
 
-//				[[nodiscard]] inline BoundingObject getBoundingVolume() const
-//				{
-//					return constTypeCast()->getBoundingVolume();
-//				}
+				[[nodiscard]] inline glm::vec3 getLowerBound() const
+				{
+					return constTypeCast()->getUpperBoundImpl();
+				}
+
+				[[nodiscard]] inline glm::vec3 getUpperBound() const
+				{
+					return constTypeCast()->getUpperBoundImpl();
+				}
+				//For the same reason as before, the above two functions can safely
+				//reside in the base class.
+
 				[[nodiscard]] Derived enclosingBV(const BaseBV& bv) const
 				{
-					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
+					return constTypeCast()->enclosingBVImpl(static_cast<const Derived&>(bv));
 				}
 
 			private:
@@ -142,20 +150,20 @@ namespace Physicc
 					m_volume = {lowerBound, upperBound};
 				}
 
-				inline void setVolume(const T& volume)
+				inline void setBoundingVolumeImpl(const T& volume)
 				{
 					m_volume = volume;
 				}
 
-				inline void setVolume(const glm::vec3& lowerBound,
-				                      const glm::vec3& upperBound)
+				inline void setBoundingVolumeImpl(const glm::vec3& lowerBound,
+												  const glm::vec3& upperBound)
 				{
 					m_volume = {lowerBound, upperBound};
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
 
-				inline float getVolume() const
+				inline float getVolumeImpl() const
 				{
 					//[[nodiscard]] is not needed here because this function is
 					//never called by the end user. It is simply called by BV
@@ -166,7 +174,17 @@ namespace Physicc
 						* (m_volume.upperBound.z - m_volume.lowerBound.z);
 				}
 
-				inline bool overlapsWith(const BoxBV& bv) const
+				inline glm::vec3 getLowerBoundImpl() const
+				{
+					return m_volume.lowerBound;
+				}
+
+				inline glm::vec3 getUpperBoundImpl() const
+				{
+					return m_volume.upperBound;
+				}
+
+				inline bool overlapsWithImpl(const BoxBV& bv) const
 				{
 					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
 							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
@@ -176,12 +194,7 @@ namespace Physicc
 							&& m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
 
-//				inline T getBoundingVolume() const
-//				{
-//					return m_volume;
-//				}
-
-				inline BoxBV enclosingBV(const BoxBV& bv) const
+				inline BoxBV enclosingBVImpl(const BoxBV& bv) const
 				{
 					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
@@ -204,9 +217,8 @@ namespace Physicc
 		{
 			return volume1.enclosingBV(volume2);
 		}
-		//returns the minimal bounding volume that encompasses both of them
+		// returns the minimal bounding volume that encompasses both of them
 	}
 }
 
 #endif //__BOUNDINGVOLUME_H__
-
