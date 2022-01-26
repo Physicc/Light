@@ -7,8 +7,6 @@
 
 namespace Physicc
 {
-	//using Iterator = std::vector<RigidBody>::iterator;
-
 	BVH::BVH(std::vector<RigidBody> rigidBodyList) :
 		m_rigidBodyList(rigidBodyList)
 	{
@@ -88,29 +86,6 @@ namespace Physicc
 		}
 	}
 
-//	auto BVH::partitionRigidBodies(Iterator begin,
-////	                               Iterator end,
-////	                               BoundingVolume::AABB)
-////	{
-////		glm::vec3 centroidMean(0);
-////
-////		for (auto it = begin; it != end; ++it) {
-////			centroidMean += it->getCentroid();
-////		}
-////
-////		centroidMean /= std::distance(begin, end);
-////
-////		//check how good the x-axis is, as a splitting axis.
-////		float leftVolumeSumX = 0;
-////		float rightVolumeSumX = 0;
-////
-////		int leftObjectsX = 0;
-////		int rightObjectsX = 0;
-////		int splitObjectsX = 0;
-////
-////
-////	}
-
 	void BVH::buildTree(std::shared_ptr<BVHNode> node, std::size_t start, std::size_t end)
 	{
 		//implicit convention:
@@ -172,23 +147,4 @@ namespace Physicc
 		}
 		return tree;
 	}
-
 }
-
-
-////next, we split the vector of objects based on our heuristic
-//auto[partitionIndex, axis] = partitionRigidBodies(begin,
-//                                                  end,
-//                                                  node->volume);
-////TODO: How to implement stop criteria? Should we implement them?
-//
-//if (partitionIndex != begin)
-//{
-//BVHNode* newNode = new BVHNode;
-//buildTree(newNode, begin, partitionIndex);
-//}
-//if (partitionIndex != end)
-//{
-//BVHNode* newNode = new BVHNode;
-//buildTree(newNode, partitionIndex, end);
-//}
