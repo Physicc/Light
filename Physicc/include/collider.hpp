@@ -125,6 +125,7 @@ namespace Physicc
 			            glm::vec3 scale = glm::vec3(1));
 
 			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
+
 			inline glm::vec3 getCentroid() const override
 			{
 				return m_position;

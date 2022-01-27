@@ -129,6 +129,5 @@ namespace Physicc
 
 		return {lowerBound, upperBound};
 	}
-
 }
 

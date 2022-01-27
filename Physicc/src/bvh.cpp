@@ -1,3 +1,14 @@
+/**
+ * @file bvh.cpp
+ * @brief Constructs a BVH given a list of RigidBody objects.
+ * @author Divyansh Tiwari (divyanshtiwari237)
+ * @author Tirthankar mazumder (wermos)
+ * @bug No known bugs.
+ */
+
+/* -- Includes -- */
+/*bvh header*/
+
 #include "bvh.hpp"
 #include "core/assert.hpp"
 #include <utility>
