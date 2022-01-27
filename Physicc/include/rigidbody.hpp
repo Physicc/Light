@@ -33,6 +33,11 @@ namespace Physicc
 
 			}
 
+			inline void setPosition(const glm::vec3& position)
+			{
+				m_collider.setPosition(position);
+			}
+
 			void setForce();
 
 			[[nodiscard]] inline BoundingVolume::AABB getAABB() const

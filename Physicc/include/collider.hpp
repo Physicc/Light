@@ -11,7 +11,7 @@ namespace Physicc
 	/**
 	 * @brief Collider class
 	 *  
-	 * This is a virtual class which acts as the base for all the shape specific classes
+	 * This is a abstract class which acts as the base for all the shape specific classes
 	 */
 	class Collider
 	{
@@ -125,7 +125,11 @@ namespace Physicc
 			            glm::vec3 scale = glm::vec3(1));
 
 			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
-			glm::vec3 getCentroid() const override;
+
+			inline glm::vec3 getCentroid() const override
+			{
+				return m_position;
+			}
 
 		private:
 			std::vector<glm::vec4> m_vertices;
@@ -146,7 +150,10 @@ namespace Physicc
 
 			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
-			glm::vec3 getCentroid() const override;
+			inline glm::vec3 getCentroid() const override
+			{
+				return m_position;
+			}
 
 		private:
 			float m_radius;

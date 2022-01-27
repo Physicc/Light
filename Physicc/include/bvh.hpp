@@ -3,17 +3,18 @@
 
 #include "boundingvolume.hpp"
 #include "rigidbody.hpp"
+#include <memory>
 
 namespace Physicc
 {
 	struct BVHNode
 	{
 		BoundingVolume::AABB volume;
-		RigidBody* body = nullptr;
+		std::weak_ptr<RigidBody> body;
 
-		BVHNode* parent = nullptr;
-		BVHNode* left = nullptr;
-		BVHNode* right = nullptr;
+		std::shared_ptr<BVHNode> parent;
+		std::shared_ptr<BVHNode> left;
+		std::shared_ptr<BVHNode> right;
 	};
 
 	class BVH
@@ -21,19 +22,22 @@ namespace Physicc
 		public:
 			BVH(std::vector<RigidBody> rigidBodyList);
 
-			inline void buildTree();
-			//build a tree of the bounding volumes
+			inline void buildTree()
+			{
+				buildTree(m_head, 0, m_rigidBodyList.size() - 1);
+			}
+			//build a binary tree of the bounding volumes
 
 			//convert the tree into a linear data structure
-			std::vector<RigidBody>& convert();
+			std::vector<std::weak_ptr<RigidBody>> convert();
 
 		private:
-			BVHNode* m_head;
+			std::shared_ptr<BVHNode> m_head;
 			std::vector<RigidBody> m_rigidBodyList;
 
-			BoundingVolume::AABB computeBV(int start, int end);
+			BoundingVolume::AABB computeBV(std::size_t start, std::size_t end);
 
-			void buildTree(BVHNode* node, int start, int end);
+			void buildTree(std::shared_ptr<BVHNode> node, std::size_t start, std::size_t end);
 
 			enum Axis {
 				X,
@@ -41,8 +45,8 @@ namespace Physicc
 				Z,
 			};
 
-			void sort(Axis axis, int start, int end);
-			Axis getMedianCuttingAxis(int start, int end);
+			void sort(Axis axis, std::size_t start, std::size_t end);
+			Axis getMedianCuttingAxis(std::size_t start, std::size_t end);
 	};
 }
 

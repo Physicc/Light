@@ -18,7 +18,7 @@
 namespace Physicc
 {
 	/**
-	 * @brief Construct a new Collider:: Collider object
+	 * @brief Construct a new Collider::Collider object
 	 * 
 	 * @param position Position of the object. Default = (0,0,0)
 	 * @param rotation Rotations about the axes. Default = (0,0,0)
@@ -99,11 +99,6 @@ namespace Physicc
 		//returning initializer list instead of an actual object
 	}
 
-	glm::vec3 BoxCollider::getCentroid() const
-	{
-		return m_position;
-	}
-
 	/**
 	 * @brief Creates a SphereCollider object
 	 * 
@@ -129,15 +124,10 @@ namespace Physicc
 	 */
 	BoundingVolume::AABB SphereCollider::getAABB() const
 	{
-		glm::vec3 lowerBound = m_position - m_radius;;
+		glm::vec3 lowerBound = m_position - m_radius;
 		glm::vec3 upperBound = m_position + m_radius;
 
 		return {lowerBound, upperBound};
-	}
-
-	glm::vec3 SphereCollider::getCentroid() const
-	{
-		return m_position;
 	}
 }
 
