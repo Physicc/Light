@@ -221,7 +221,7 @@ namespace Physicc
 				inline void setBoundingVolumeImpl(const glm::vec3& lowerBound,
 												  const glm::vec3& upperBound)
 				{
-					m_volume = {lowerBound, upperBound};
+					this->m_volume = {lowerBound, upperBound};
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
@@ -239,12 +239,12 @@ namespace Physicc
 
 				inline glm::vec3 getLowerBoundImpl() const
 				{
-					return m_volume.lowerBound;
+					return this->m_volume.lowerBound;
 				}
 
 				inline glm::vec3 getUpperBoundImpl() const
 				{
-					return m_volume.upperBound;
+					return this->m_volume.upperBound;
 				}
 
 				inline bool overlapsWithImpl(const BoxBV& bv) const
