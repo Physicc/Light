@@ -4,7 +4,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/epsilon.hpp"
 
-#if __cplusplus > 201703L
+#ifdef __cpp_lib_concepts
 #include <concepts>
 #endif
 
@@ -14,10 +14,10 @@ namespace Physicc
 	//make it harder to find)
 	namespace BVImpl
 	{
-#if __cplusplus > 201703L
+#ifdef __cpp_lib_concepts
 		template <typename T>
 		concept Equal =
-	       		requires (T a, T b)
+				requires (T a, T b)
 			{
 				(a == b) -> std::convertible_to<bool>;
 			};
@@ -36,7 +36,7 @@ namespace Physicc
 		 * Helper struct to store diagonally opposite points of the AABB
 		 *
 		 */
-#if __cplusplus > 201703L
+#ifdef __cpp_lib_concepts
 		struct AABB requires Equal<AABB> || EqualOrInequal<AABB>
 #else
 		struct AABB
@@ -61,7 +61,7 @@ namespace Physicc
 			glm::vec3 upperBound;
 		};
 
-#if __cplusplus > 201703L
+#ifdef __cpp_lib_concepts
 		template <typename Derived, typename BoundingObject>
 		concept SpecializedBV = std::derives_from<BaseBV<Derived>>
 			&& (Equal<Derived<BoundingObject>> || EqualOrInequal<Derived<BoundingObject>>)
@@ -88,7 +88,7 @@ namespace Physicc
 		 * @tparam Derived
 		 * TODO: Update this Doxygen comment
 		 */
-#if __cplusplus > 201703L
+#ifdef __cpp_lib_concepts
 		template <typename Derived, typename BoundingObject> requires SpecializedBV<Derived, BoundingObject>
 #else
 		template <typename Derived, typename BoundingObject>
