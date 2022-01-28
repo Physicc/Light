@@ -97,19 +97,22 @@ namespace Physicc
 
 			virtual glm::vec3 getCentroid() const = 0;
 
+			virtual Type getType() const = 0; 
+
+			static Type getStaticType() = 0;
 		protected:
-			enum Type
+			enum class Type
 			{
-				e_box = 0,
-				e_sphere = 1,
-				e_typecount = 2
+				Box = 0,
+				Sphere = 1,
+				Typecount = 2
 			};
 
 			glm::vec3 m_position;
 			glm::vec3 m_rotate;
 			glm::vec3 m_scale;
 			glm::mat4 m_transform;
-			Type m_objectType;
+			static Type m_objectType;
 	};
 
 	/** 
@@ -129,6 +132,16 @@ namespace Physicc
 			inline glm::vec3 getCentroid() const override
 			{
 				return m_position;
+			}
+
+			inline Type getType() const override
+			{
+				return Box;
+			}
+
+			inline static Type getStaticType()
+			{
+				return Box;
 			}
 
 		private:
@@ -155,6 +168,15 @@ namespace Physicc
 				return m_position;
 			}
 
+			inline Type getType() const override
+			{
+				return Sphere;
+			}
+
+			inline static Type getStaticType()
+			{
+				return Sphere;
+			}
 		private:
 			float m_radius;
 	};
