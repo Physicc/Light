@@ -3,6 +3,7 @@
 
 #include "glm/glm.hpp"
 #include "collider.hpp"
+#include <memory>
 
 namespace Physicc
 {
@@ -50,9 +51,19 @@ namespace Physicc
 				return m_collider.getCentroid();
 			}
 
+			[[nodiscard]] inline void setCollider(const std::unique_ptr<Collider> collider)
+			{
+				m_collider = collider;
+			}
+
+			[[nodiscard]] inline std::unique_ptr<Collider> getCollider()
+			{
+				return m_collider;
+			}
+
 		private:
 			glm::vec3 m_force;
-			BoxCollider m_collider;
+			std::unique_ptr<Collider> m_collider;
 			float m_mass;
 			glm::vec3 m_velocity;
 			float m_gravityScale;
