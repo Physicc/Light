@@ -18,7 +18,7 @@ namespace Physicc
 	{
 		public:
 			RigidBody(float mass, const glm::vec3& velocity, float gravityScale);
-			RigidBody(const RigidBody& other);
+			RigidBody(const RigidBody& other) = default;
 
 			[[nodiscard]] inline glm::vec3 getVelocity() const
 			{
@@ -27,8 +27,7 @@ namespace Physicc
 				return m_velocity;
 			}
 
-
-            inline void setVelocity(const glm::vec3& velocity)
+			inline void setVelocity(const glm::vec3& velocity)
 			{
 				ZoneScoped;
 

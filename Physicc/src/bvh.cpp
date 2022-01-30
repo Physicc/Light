@@ -42,30 +42,30 @@ namespace Physicc
 		if (axis == X)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end + 1),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().x
-				            > rigidBody2.getCentroid().x;
-			          });
+						std::next(m_rigidBodyList.begin(), end + 1),
+						[](const RigidBody& rigidBody1,
+						const RigidBody& rigidBody2) {
+						return rigidBody1.getCentroid().x
+							> rigidBody2.getCentroid().x;
+					});
 		} else if (axis == Y)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end + 1),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().y
-				            > rigidBody2.getCentroid().y;
-			          });
+						std::next(m_rigidBodyList.begin(), end + 1),
+						[](const RigidBody& rigidBody1,
+						const RigidBody& rigidBody2) {
+						return 	rigidBody1.getCentroid().y
+								> rigidBody2.getCentroid().y;
+					});
 		} else
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end + 1),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().z
-				            > rigidBody2.getCentroid().z;
-			          });
+						std::next(m_rigidBodyList.begin(), end + 1),
+						[](const RigidBody& rigidBody1,
+						const RigidBody& rigidBody2) {
+						return 	rigidBody1.getCentroid().z
+								> rigidBody2.getCentroid().z;
+					});
 		}
 	}
 

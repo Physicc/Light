@@ -93,12 +93,12 @@ namespace Physicc
 				 */
 				BaseBV(const BoundingObject& volume)
 				{
-					typeCast()->setBoundingVolumeImpl(volume);
+					typeCast()->setBoundingVolume(volume);
 				}
 
 				BaseBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
-					typeCast()->setBoundingVolumeImpl(lowerBound, upperBound);
+					typeCast()->setBoundingVolume(lowerBound, upperBound);
 				}
 
 				/**
@@ -110,36 +110,36 @@ namespace Physicc
  				 */
 				[[nodiscard]] inline bool overlapsWith(const BaseBV& bv) const
 				{
-					return constTypeCast()->overlapsWithImpl(static_cast<const Derived&>(bv));
+					return constTypeCast()->overlapsWith(static_cast<const Derived&>(bv));
 				}
 				//implicit contract: all child classes of BaseBV must have this
 				//function implemented
 
 				[[nodiscard]] inline float getVolume() const
 				{
-					return constTypeCast()->getVolumeImpl();
+					return constTypeCast()->getVolume();
 				}
 				//Since template instantiations are lazy, a (child) class that
-				//doesn't have getVolumeImpl() defined simply won't generate any
+				//doesn't have getVolume() defined simply won't generate any
 				//code for this function. However, this also means that trying
 				//to use this function will likely result in 5 pages of opaque
 				//errors.
 
 				[[nodiscard]] inline glm::vec3 getLowerBound() const
 				{
-					return constTypeCast()->getUpperBoundImpl();
+					return constTypeCast()->getUpperBound();
 				}
 
 				[[nodiscard]] inline glm::vec3 getUpperBound() const
 				{
-					return constTypeCast()->getUpperBoundImpl();
+					return constTypeCast()->getUpperBound();
 				}
 				//For the same reason as before, the above two functions can safely
 				//reside in the base class.
 
 				[[nodiscard]] Derived enclosingBV(const BaseBV& bv) const
 				{
-					return constTypeCast()->enclosingBVImpl(static_cast<const Derived&>(bv));
+					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
 			private:
@@ -167,12 +167,8 @@ namespace Physicc
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
 				//functions, to make the use of BVs easier.
-			private:
-				//Hiding the exact implementation by making all the functions
-				//private
 
-				friend BaseBV<BoxBV<T>, T>;
-
+			public:
 				BoxBV() = default;
 
 				BoxBV(const BoxBV& bv) = default;
@@ -182,20 +178,22 @@ namespace Physicc
 					this->m_volume = {lowerBound, upperBound};
 				}
 
-				inline void setBoundingVolumeImpl(const T& volume)
+				// friend BaseBV<BoxBV<T>, T>;
+
+				inline void setBoundingVolume(const T& volume)
 				{
 					this->m_volume = volume;
 				}
 
-				inline void setBoundingVolumeImpl(const glm::vec3& lowerBound,
-												  const glm::vec3& upperBound)
+				inline void setBoundingVolume(const glm::vec3& lowerBound,
+												const glm::vec3& upperBound)
 				{
 					this->m_volume = {lowerBound, upperBound};
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
 
-				inline float getVolumeImpl() const
+				inline float getVolume() const
 				{
 					ZoneScoped;
 
@@ -213,12 +211,12 @@ namespace Physicc
 					return this->m_volume.lowerBound;
 				}
 
-				inline glm::vec3 getUpperBoundImpl() const
+				inline glm::vec3 getUpperBound() const
 				{
 					return this->m_volume.upperBound;
 				}
 
-				inline bool overlapsWithImpl(const BoxBV& bv) const
+				inline bool overlapsWith(const BoxBV& bv) const
 				{
 					return (this->m_volume.lowerBound.x <= bv.m_volume.upperBound.x
 							&& this->m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
@@ -228,7 +226,7 @@ namespace Physicc
 							&& this->m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
 
-				inline BoxBV enclosingBVImpl(const BoxBV& bv) const
+				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
 					return {glm::min(this->m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(this->m_volume.upperBound, bv.m_volume.upperBound)};
