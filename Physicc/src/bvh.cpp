@@ -108,7 +108,7 @@ namespace Physicc
 		//All nodes are equal to nullptr until they are explicitly assigned
 		//non-null values
 
-		LIGHT_ASSERT(start > end, "Pray to god that Jesus helps you, for start is greater than end.");
+		LIGHT_ASSERT(start <= end, "Pray to god that Jesus helps you, for start is greater than end.");
 		if (start == end)
 		{
 			//then the only element left in this sliced vector is the one at
