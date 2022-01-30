@@ -36,34 +36,29 @@ namespace Physicc
 
 			inline void setPosition(const glm::vec3& position)
 			{
-				m_collider.setPosition(position);
+				m_collider->setPosition(position);
 			}
 
 			void setForce();
 
 			[[nodiscard]] inline BoundingVolume::AABB getAABB() const
 			{
-				return m_collider.getAABB();
+				return m_collider->getAABB();
 			}
 
 			[[nodiscard]] inline glm::vec3 getCentroid() const
 			{
-				return m_collider.getCentroid();
+				return m_collider->getCentroid();
 			}
 
-			[[nodiscard]] inline void setCollider(const std::unique_ptr<Collider> collider)
+			inline void setCollider(const std::shared_ptr<Collider> collider)
 			{
 				m_collider = collider;
 			}
 
-			[[nodiscard]] inline std::unique_ptr<Collider> getCollider()
-			{
-				return m_collider;
-			}
-
 		private:
 			glm::vec3 m_force;
-			std::unique_ptr<Collider> m_collider;
+			std::shared_ptr<Collider> m_collider;
 			float m_mass;
 			glm::vec3 m_velocity;
 			float m_gravityScale;
