@@ -37,3 +37,6 @@ buildWsl
 
 # vscode files
 .vscode
+
+# doc files
+docs

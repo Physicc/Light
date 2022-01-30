@@ -1,5 +1,0 @@
-<map id="Physicc::Collider" name="Physicc::Collider">
-<area shape="rect" id="node1" title="Collider class." alt="" coords="113,5,242,32"/>
-<area shape="rect" id="node2" href="$classPhysicc_1_1BoxCollider.html" title="BoxCollider class." alt="" coords="5,80,160,107"/>
-<area shape="rect" id="node3" href="$classPhysicc_1_1SphereCollider.html" title="SphereCollider class." alt="" coords="185,80,359,107"/>
-</map>
