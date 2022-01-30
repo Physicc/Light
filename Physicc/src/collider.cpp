@@ -114,7 +114,7 @@ namespace Physicc
 	                               glm::vec3 scale)
 		: m_radius(radius), Collider(position, rotation, scale)
 	{
-		m_objectType = e_sphere;
+		m_objectType = Type::Sphere;
 	}
 
 	/**
