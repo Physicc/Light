@@ -99,6 +99,8 @@ namespace Physicc
 
 	void BVH::buildTree(std::shared_ptr<BVHNode> node, std::size_t start, std::size_t end)
 	{
+		ZoneScoped;
+
 		//implicit convention:
 		//no children = leaf node
 		//no parent = head node
@@ -132,7 +134,7 @@ namespace Physicc
 			buildTree(rightNode, start + 1 + (end - start) / 2, end);
 		}
 	}
-	
+
 	std::vector<std::weak_ptr<RigidBody>> BVH::convert()
 	{
 		std::stack<BVHNode*> s;
@@ -140,7 +142,7 @@ namespace Physicc
 		BVHNode* currentNode = m_head.get();
 		while (!s.empty() || currentNode != nullptr)
 		{
-			
+
 			while (currentNode != nullptr)
 			{
 				s.push(currentNode);

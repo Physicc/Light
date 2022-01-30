@@ -1,3 +1,5 @@
+#include "tools/Tracy.hpp"
+
 #include "core/application.hpp"
 
 #include "light/rendering/renderer.hpp"
@@ -72,10 +74,12 @@ namespace Light
 			m_imguiLayer->end();
 
 			m_window->onUpdate();
+
+			FrameMark;
 		}
 	}
 
-	bool Application::onWindowClose(WindowCloseEvent& e)
+	bool Application::onWindowClose(WindowCloseEvent&)
 	{
         m_running = false;
 		return true;

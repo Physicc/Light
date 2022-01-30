@@ -14,6 +14,8 @@
 /* -- Includes -- */
 /* physicsworld header */
 
+#include "tools/Tracy.hpp"
+
 #include "physicsworld.hpp"
 
 namespace Physicc
@@ -34,6 +36,8 @@ namespace Physicc
 	 */
 	void PhysicsWorld::addRigidBody(const RigidBody& object)
 	{
+		ZoneScoped;
+
 		m_objects.push_back(object);
 	}
 
@@ -43,9 +47,12 @@ namespace Physicc
 	 */
 	void PhysicsWorld::stepSimulation(float timestep)
 	{
+		ZoneScoped;
+
+		(void)timestep; // Suppress unused parameter warning
 		for(std::size_t i = 0; i < m_objects.size(); i++)
 		{
-			
+
 		}
 	}
 }

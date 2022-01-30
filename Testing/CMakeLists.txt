@@ -33,5 +33,5 @@ target_include_directories(Test PUBLIC ../shared/include/)
 target_link_libraries(Test Physicc)
 
 # Set Gtest options
-SET(BUILD_GMOCK OFF)
+set(BUILD_GMOCK OFF)
 set(INSTALL_GTEST OFF)

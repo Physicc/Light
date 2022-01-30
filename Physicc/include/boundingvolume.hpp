@@ -1,6 +1,8 @@
 #ifndef __BOUNDINGVOLUME_H__
 #define __BOUNDINGVOLUME_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 #include "glm/gtc/epsilon.hpp"
 
@@ -50,13 +52,14 @@ namespace Physicc
 
 		/**
 		 * A templated class that defines the Bounding Volume (BV) of an object, but
-		 * in a way that allows others to hot swap actual bounding volumes (like
-		 * AABBs, OBBs, 8-DOPs, etc.).
+		 * in a way that allows hot swapping actual bounding volumes (like AABBs, OBBs, 8-DOPs,
+		 * etc.).
 		 *
 		 * TODO: Figure out if this is good enough as a description of the
 		 * BV class.
 		 *
 		 * @tparam Derived
+		 * @tparam BoundingObject
 		 * TODO: Update this Doxygen comment
 		 */
 #ifdef __cpp_lib_concepts
@@ -194,6 +197,8 @@ namespace Physicc
 
 				inline float getVolumeImpl() const
 				{
+					ZoneScoped;
+
 					//[[nodiscard]] is not needed here because this function is
 					//never called by the end user. It is simply called by BV
 					//itself, which doesn't actually discard the return type, so
@@ -241,6 +246,8 @@ namespace Physicc
 		inline auto enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
 								const BVImpl::BaseBV<Derived, BoundingObject>& volume2)
 		{
+			ZoneScoped;
+
 			return volume1.enclosingBV(volume2);
 		}
 		// returns the minimal bounding volume that encompasses both of them

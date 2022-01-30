@@ -1,6 +1,8 @@
 #ifndef __RIGIDBODY_H__
 #define __RIGIDBODY_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 #include "collider.hpp"
 #include <memory>
@@ -16,20 +18,27 @@ namespace Physicc
 	{
 		public:
 			RigidBody(float mass, const glm::vec3& velocity, float gravityScale);
+			RigidBody(const RigidBody& other);
 
 			[[nodiscard]] inline glm::vec3 getVelocity() const
 			{
+				ZoneScoped;
+
 				return m_velocity;
 			}
 
-			
+
             inline void setVelocity(const glm::vec3& velocity)
 			{
+				ZoneScoped;
+
 				m_velocity = velocity;
 			}
 
 			inline void setGravityScale(const float gravityScale)
 			{
+				ZoneScoped;
+
 				m_gravityScale = gravityScale;
 
 			}

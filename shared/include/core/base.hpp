@@ -7,15 +7,13 @@
 #include <vector>
 #include <algorithm>
 #include <cstdint>
+#include <unordered_map>
+#include <memory>
+#include <set>
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <unordered_map>
-
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtx/string_cast.hpp"
 
 
 #define BIT(x) (1 << x)
@@ -56,5 +54,9 @@
 #else
 
 #endif
+
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 #endif // __BASE_H__

@@ -15,8 +15,8 @@ namespace Light
 
 		virtual void onAttach() {}
 		virtual void onDetach() {}
-		virtual void onEvent(Event& e) {}
-		virtual void onUpdate(Timestep ts) {}
+		virtual void onEvent(Event&) {}
+		virtual void onUpdate(Timestep) {}
 		virtual void onImguiRender() {}
 
 		inline const std::string& getName() { return m_name; }

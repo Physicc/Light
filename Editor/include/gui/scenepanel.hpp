@@ -13,6 +13,8 @@ namespace Light
 
 		inline void setContext(std::shared_ptr<Light::Scene> context) { m_context = context; m_selectionContext = {}; }
 
+		inline void setMeshLibrary(std::shared_ptr<Light::MeshLibrary> meshLibrary) { m_meshLibrary = meshLibrary; }
+
 		void onImguiRender();
 
 		void setSelectionContext(Entity context) { m_selectionContext = context; }
@@ -23,8 +25,10 @@ namespace Light
 
 		void drawAllComponents(Entity entity);
 
-		std::shared_ptr<Light::Scene> m_context; 
+		std::shared_ptr<Light::Scene> m_context;
 		Entity m_selectionContext;
+
+		std::shared_ptr<MeshLibrary> m_meshLibrary;
 	};
 
 }
