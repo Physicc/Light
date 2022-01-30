@@ -14,33 +14,13 @@ namespace Physicc
 	//make it harder to find)
 	namespace BVImpl
 	{
-#ifdef __cpp_lib_concepts
-		template <typename T>
-		concept Equal =
-				requires (T a, T b)
-			{
-				(a == b) -> std::convertible_to<bool>;
-			};
-
-		concept EqualOrInequal =
-			requires (T a, T b)
-			{
-				(a == b) -> std::convertible_to<bool>;
-				(a != b) -> std::convertible_to<bool>;
-			};
-#endif
-
 		/**
 		 * @brief Axis Aligned Bounding Box
 		 *
 		 * Helper struct to store diagonally opposite points of the AABB
 		 *
 		 */
-#ifdef __cpp_lib_concepts
-		struct AABB requires Equal<AABB> || EqualOrInequal<AABB>
-#else
 		struct AABB
-#endif
 		{
 			AABB() = default;
 			//lb = lowerBound, ub = upperBound
@@ -49,14 +29,6 @@ namespace Physicc
 			}
 			//the existence of this constructor does not promote this struct from a
 			//POD to a non-POD type.
-
-			inline bool operator==(const AABB& other) const
-			{
-				float epsilon = 1e-5;
-				return glm::all(glm::epsilonEqual(lowerBound, other.lowerBound, epsilon))
-					&& glm::all(glm::epsilonEqual(upperBound, other.upperBound, epsilon));
-			}
-
 			glm::vec3 lowerBound;
 			glm::vec3 upperBound;
 		};
@@ -64,7 +36,6 @@ namespace Physicc
 #ifdef __cpp_lib_concepts
 		template <typename Derived, typename BoundingObject>
 		concept SpecializedBV = std::derives_from<BaseBV<Derived>>
-			&& (Equal<Derived<BoundingObject>> || EqualOrInequal<Derived<BoundingObject>>)
 			&& requires (BaseBV<Derived, BoundingObject> bv, BoundingObject volume)
 			{
 				std::copy_constructible<BaseBV<Derived, BoundingObject>>;
@@ -168,11 +139,6 @@ namespace Physicc
 					return constTypeCast()->enclosingBVImpl(static_cast<const Derived&>(bv));
 				}
 
-				[[nodiscard]] inline bool operator==(const BaseBV& other) const
-				{
-					return *constTypeCast() == *other.constTypeCast();
-				}
-
 			private:
 				[[nodiscard]] inline Derived* typeCast()
 				{
@@ -264,11 +230,6 @@ namespace Physicc
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
-
-				inline bool operator==(const BoxBV& other) const
-				{
-					return this->m_volume == other.m_volume;
-				}
 		};
 	}
 
