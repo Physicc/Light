@@ -12,6 +12,9 @@ class BVH_tests : public ::testing::Test {
 			test_vector.emplace_back(Physicc::RigidBody{20, glm::vec3(1), 1.0f});
 			test_vector.emplace_back(Physicc::RigidBody{20, glm::vec3(1), 1.0f});
 
+			test_vector[0].setCollider(std::make_shared<Physicc::BoxCollider>());
+			test_vector[1].setCollider(std::make_shared<Physicc::BoxCollider>());
+			test_vector[2].setCollider(std::make_shared<Physicc::BoxCollider>());
 			test_vector[1].setPosition(glm::vec3(1.0f));
 			test_vector[2].setPosition(glm::vec3(2.0f));
 		}

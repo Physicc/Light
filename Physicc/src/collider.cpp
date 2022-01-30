@@ -19,13 +19,6 @@
 
 namespace Physicc
 {
-	/**
-	 * @brief Construct a new Collider::Collider object
-	 *
-	 * @param position Position of the object. Default = (0,0,0)
-	 * @param rotation Rotations about the axes. Default = (0,0,0)
-	 * @param scale Length along each of the axes. Default = (1,1,1)
-	 */
 	Collider::Collider(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 		: m_position(position), m_rotate(rotation), m_scale(scale)
 	{
@@ -122,7 +115,6 @@ namespace Physicc
 									glm::vec3 scale)
 		: Collider(position, rotation, scale), m_radius(radius)
 	{
-		m_objectType = Type::Sphere;
 	}
 
 	/**

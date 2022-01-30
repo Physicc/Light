@@ -13,7 +13,7 @@ public:
 					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f)
 	{
 		Light::FramebufferSpec fbspec;
-		fbspec.attachments = { 
+		fbspec.attachments = {
 			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
@@ -172,7 +172,7 @@ public:
 			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);
 		}
 		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
-		
+
 		ImGui::End();
 		ImGui::PopStyleVar();
 
@@ -323,7 +323,7 @@ private:
 	Light::ScenePanel m_scenePanel;
 
 	Light::Entity m_hoveredEntity;
-	
+
 	glm::vec2 m_viewportPanelSize;
 	glm::vec2 m_viewportPos;
 
