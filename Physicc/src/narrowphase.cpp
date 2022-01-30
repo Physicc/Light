@@ -13,17 +13,21 @@ namespace Physicc
             
         }
 
-        Contact CollisionDetector::SphereSphere(Broadphase::PotentialContact a)
+        std::vector<Narrowphase::Contact> CollisionDetector::getContacts()
+        {
+        }
+
+        Contact SphereSphere(Broadphase::PotentialContact a)
+        {
+             
+        }
+
+        Contact BoxSphere(Broadphase::PotentialContact a)
         {
 
         }
 
-        Contact CollisionDetector::BoxSphere(Broadphase::PotentialContact a)
-        {
-
-        }
-
-        Contact CollisionDetector::BoxBox(Broadphase::PotentialContact a)
+        Contact BoxBox(Broadphase::PotentialContact a)
         {
 
         }

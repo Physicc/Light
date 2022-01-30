@@ -15,6 +15,7 @@ namespace Physicc
 {
     namespace Narrowphase
     {
+            
         struct Contact
         {
 
@@ -38,28 +39,34 @@ namespace Physicc
             }
             
 
-            // Move individual components to another structure
-
-            Contact SphereSphere(Broadphase::PotentialContact a)
-            {
-            }
-
-            Contact BoxSphere(Broadphase::PotentialContact a)
-            {
-            }
-
-            Contact BoxBox(Broadphase::PotentialContact a)
-            {
-            }
+            // Move individual components to individual function
 
             bool generateContacts()
             {
             }
 
+            std::vector<Narrowphase::Contact> getContacts()
+            {
+            }
+
             private:
             std::vector<Broadphase::PotentialContact> collisionArray;
+            std::vector<Narrowphase::Contact> collisions;
 
         };
+
+
+        Contact SphereSphere(Broadphase::PotentialContact a)
+        {
+        }
+
+        Contact BoxSphere(Broadphase::PotentialContact a)
+        {
+        }
+
+        Contact BoxBox(Broadphase::PotentialContact a)
+        {
+        }
     }
 }
 
