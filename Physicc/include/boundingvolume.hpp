@@ -235,7 +235,7 @@ namespace Physicc
 
 	namespace BoundingVolume
 	{
-		typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
+		typedef BVImpl::BoxBV<BVImpl::AABB> AABB;
 
 		template <typename Derived, typename BoundingObject>
 		inline auto enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
