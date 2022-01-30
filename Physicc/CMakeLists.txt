@@ -43,6 +43,11 @@ target_link_libraries(Physicc glm)
 
 target_link_libraries(Physicc TracyClient)
 
+# Add testing
+# TODO: add option to disable tests
+add_subdirectory(tests)
+
+
 
 
 
