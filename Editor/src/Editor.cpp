@@ -1,4 +1,3 @@
-
 #include "gui/scenepanel.hpp"
 
 #include "physicsworld.hpp"
@@ -6,17 +5,16 @@
 #include "light.hpp"
 #include "core/entrypoint.hpp"
 
+
 class MainLayer : public Light::Layer
 {
 public:
 	MainLayer(): Light::Layer("MainLayer"),
 					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f)
-					// m_lightPos(-1, 2, 1.5)
 	{
 		Light::FramebufferSpec fbspec;
-		fbspec.attachments = { 
+		fbspec.attachments = {
 			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
-			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
 		};
@@ -24,96 +22,33 @@ public:
 		fbspec.height = 720;
 		m_framebuffer = Light::Framebuffer::create(fbspec);
 
-		Light::FramebufferSpec fbspecOutline;
-		fbspecOutline.attachments = {
-			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
-			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
-		};
-		fbspecOutline.width = 1280;
-		fbspecOutline.height = 720;
-		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
-
-		Light::FramebufferSpec fbspec2;
-		fbspec2.width = 1280;
-		fbspec2.height = 720;
-		fbspec2.attachments = {
-			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER }
-		};
-		m_framebuffer2 = Light::Framebuffer::create(fbspec2);
+		m_sceneRenderer.setTargetFramebuffer(m_framebuffer);
 
 		m_scene = std::make_shared<Light::Scene>();
 
 		auto cube = m_scene->addEntity("Cube");
-		cube.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+		cube.addComponent<Light::MeshRendererComponent>("assets/shaders/phong.glsl");
 
 		auto floor = m_scene->addEntity("Floor");
 		auto& floor_transform = floor.getComponent<Light::TransformComponent>();
 		floor_transform.position = glm::vec3(0, -1, 0);
 		floor_transform.scale = glm::vec3(2, 0.1, 2);
-		floor.addComponent<Light::MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+		floor.addComponent<Light::MeshRendererComponent>("assets/shaders/phong.glsl");
 
-		m_light = m_scene->addEntity("Light");
-		auto& light_transform = m_light.getComponent<Light::TransformComponent>();
+		auto light = m_scene->addEntity("Light");
+		auto& light_transform = light.getComponent<Light::TransformComponent>();
 		light_transform.position = glm::vec3(-1,2,1.5);
-		m_light.addComponent<Light::LightComponent>();
+		light.addComponent<Light::LightComponent>();
 
-		Light::BufferLayout layout({
-				{ Light::ShaderDataType::Float3, "a_Position" },
-				{ Light::ShaderDataType::Float4, "a_Color" },
-				{ Light::ShaderDataType::Float3, "a_Normal" }
-			});
+		m_meshes = std::make_shared<Light::MeshLibrary>();
 
-		float vertices[] = {
-			//Front
-			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, 1.0f,
-			//Left
-			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, -1.0f, 0.0f, 0.0f,
-			//Right
-			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 1.0f, 0.0f, 0.0f,
-			//Top
-			-0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 1.0f, 0.0f,
-			//Bottom
-			-0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, -1.0f, 0.0f,
-			//Back
-			-0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-			-0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-			0.5f, 0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-			0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.8f, 1.0f, 0.0f, 0.0f, -1.0f,
-		};
+		addDefaultMeshes();
 
-		std::shared_ptr<Light::VertexBuffer> vbo(Light::VertexBuffer::create(vertices, sizeof(vertices)));
-		vbo->setLayout(layout);
-
-		unsigned int indices[] = { 
-			0, 1, 2, 2, 3, 0,
-			4, 5, 6, 6, 7, 4,
-			8, 9, 10, 10, 11, 8,
-			12, 13, 14, 14, 15, 12,
-			16, 17, 18, 18, 19, 16,
-			20, 21, 22, 22, 23, 20
-		};
-
-		std::shared_ptr<Light::IndexBuffer> ibo(Light::IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
-
-		cube.addComponent<Light::MeshComponent>(vbo, ibo);
-		floor.addComponent<Light::MeshComponent>(vbo, ibo);
+		cube.addComponent<Light::MeshComponent>(m_meshes->get("Cube"));
+		floor.addComponent<Light::MeshComponent>(m_meshes->get("Cube"));
 
 		m_scenePanel.setContext(m_scene);
+		m_scenePanel.setMeshLibrary(m_meshes);
 	}
 	~MainLayer() = default;
 
@@ -122,9 +57,8 @@ public:
 		if(m_resizeViewport)
 		{
 			m_camera.setViewportSize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
+			m_sceneRenderer.onViewportResize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_framebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
-			m_framebuffer2->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
-			m_outlineFramebuffer->resize(int(m_viewportPanelSize.x), int(m_viewportPanelSize.y));
 			m_resizeViewport = false;
 		}
 		m_frameCount++;
@@ -140,19 +74,9 @@ public:
 		if(m_viewportFocused)
 			m_camera.onUpdate(ts);
 
+		m_sceneRenderer.renderEditor(m_scene, m_camera);
+
 		m_framebuffer->bind();
-		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
-		Light::RenderCommand::clear();
-
-		m_framebuffer->clearAttachment(2, 0);
-
-
-		Light::Renderer::beginScene(m_camera, m_camera.getViewMatrix());
-
-		m_scene->render();
-
-		Light::Renderer::endScene();
-
 		auto[x, y] = ImGui::GetMousePos();
 
 		glm::vec2 posRelativeToViewport = glm::vec2(x,y) - m_viewportPos;
@@ -168,19 +92,8 @@ public:
 		m_framebuffer->unbind();
 
 		auto entity = m_scenePanel.getSelectionContext();
-		m_outlineFramebuffer->bind();
-		Light::RenderCommand::setClearColor({0, 0, 0, 0});
-		Light::RenderCommand::clear();
-		m_scene->renderSelection(entity);
-		m_outlineFramebuffer->unbind();
+		m_sceneRenderer.renderOutline(m_scene, entity);
 
-		m_framebuffer2->bind();
-		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
-		Light::RenderCommand::clear();	
-		m_framebuffer->bindAttachmentTexture(0,0);
-		m_outlineFramebuffer->bindAttachmentTexture(0,1);
-		m_scene->renderOutline(m_hoveredEntity);
-		m_framebuffer2->unbind();
 	}
 
 	bool onWindowResize(Light::WindowResizeEvent& e)
@@ -253,19 +166,19 @@ public:
 		m_viewportFocused = ImGui::IsWindowFocused();
 
 		ImVec2 viewPortPanelSize = ImGui::GetContentRegionAvail();
-		if(m_viewportPanelSize != *(glm::vec2*)&viewPortPanelSize)
+		if(m_viewportPanelSize.x != viewPortPanelSize.x || m_viewportPanelSize.y != viewPortPanelSize.y)
 		{
 			m_resizeViewport = true;
 			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);
 		}
-		ImGui::Image(INT2VOIDP(m_framebuffer2->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
-		
+		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
+
 		ImGui::End();
 		ImGui::PopStyleVar();
 
 		// Perf Stats
 		{
-			ImGuiIO& io = ImGui::GetIO();
+			// ImGuiIO& io = ImGui::GetIO();
 			ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
 			if (s_stats_corner != -1)
 			{
@@ -316,21 +229,104 @@ public:
 
 	}
 
+	void addDefaultMeshes()
+	{
+		m_meshes->add("None", std::vector<glm::vec3>(), std::vector<glm::vec4>(), std::vector<glm::vec3>(), std::vector<unsigned int>());
+
+		std::vector<glm::vec3> vertices = {
+			glm::vec3(-0.5f, -0.5f, 0.5f),
+			glm::vec3(0.5f, -0.5f, 0.5f),
+			glm::vec3(0.5f, 0.5f, 0.5f),
+			glm::vec3(-0.5f, 0.5f, 0.5f),
+
+			glm::vec3(-0.5f, -0.5f, 0.5f),
+			glm::vec3(-0.5f, 0.5f, 0.5f),
+			glm::vec3(-0.5f, 0.5f, -0.5f),
+			glm::vec3(-0.5f, -0.5f, -0.5f),
+
+			glm::vec3(0.5f, -0.5f, 0.5f),
+			glm::vec3(0.5f, -0.5f, -0.5f),
+			glm::vec3(0.5f, 0.5f, -0.5f),
+			glm::vec3(0.5f, 0.5f, 0.5f),
+
+			glm::vec3(-0.5f, 0.5f, 0.5f),
+			glm::vec3(0.5f, 0.5f, 0.5f),
+			glm::vec3(0.5f, 0.5f, -0.5f),
+			glm::vec3(-0.5f, 0.5f, -0.5f),
+
+			glm::vec3(-0.5f, -0.5f, 0.5f),
+			glm::vec3(-0.5f, -0.5f, -0.5f),
+			glm::vec3(0.5f, -0.5f, -0.5f),
+			glm::vec3(0.5f, -0.5f, 0.5f),
+
+			glm::vec3(-0.5f, -0.5f, -0.5f),
+			glm::vec3(-0.5f, 0.5f, -0.5f),
+			glm::vec3(0.5f, 0.5f, -0.5f),
+			glm::vec3(0.5f, -0.5f, -0.5f)
+		};
+
+		std::vector<glm::vec4> color(24, {0.8f, 0.8f, 0.8f, 1.0f});
+
+		std::vector<glm::vec3> normals = {
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+			glm::vec3(-1.0f, 0.0f, 0.0f),
+
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 0.0f, 0.0f),
+
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+
+			glm::vec3(0.0f, -1.0f, 0.0f),
+			glm::vec3(0.0f, -1.0f, 0.0f),
+			glm::vec3(0.0f, -1.0f, 0.0f),
+			glm::vec3(0.0f, -1.0f, 0.0f),
+
+			glm::vec3(0.0f, 0.0f, -1.0f),
+			glm::vec3(0.0f, 0.0f, -1.0f),
+			glm::vec3(0.0f, 0.0f, -1.0f),
+			glm::vec3(0.0f, 0.0f, -1.0f)
+		};
+
+		std::vector<unsigned int> indices = {
+			0, 1, 2, 2, 3, 0,
+			4, 5, 6, 6, 7, 4,
+			8, 9, 10, 10, 11, 8,
+			12, 13, 14, 14, 15, 12,
+			16, 17, 18, 18, 19, 16,
+			20, 21, 22, 22, 23, 20
+		};
+
+		m_meshes->add("Cube", vertices, color, normals, indices);
+	}
+
 private:
+	std::shared_ptr<Light::MeshLibrary> m_meshes;
+
+	Light::SceneRenderer m_sceneRenderer;
 	Light::EditorCamera m_camera;
 
-	std::shared_ptr<Light::Scene> m_scene;
-	Light::Entity m_light;
+	std::shared_ptr<Light::Framebuffer> m_framebuffer;
 
+	std::shared_ptr<Light::Scene> m_scene;
 	Light::ScenePanel m_scenePanel;
 
 	Light::Entity m_hoveredEntity;
 
-	std::shared_ptr<Light::Framebuffer> m_framebuffer;
-	std::shared_ptr<Light::Framebuffer> m_framebuffer2;
-	std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 	glm::vec2 m_viewportPanelSize;
 	glm::vec2 m_viewportPos;
+
 	bool m_resizeViewport = false;
 	bool m_viewportFocused = false;
 	float m_time = 0.0f;

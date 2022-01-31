@@ -8,11 +8,8 @@ namespace Light
 
 	MeshRendererComponent::MeshRendererComponent(const char *path) : shader(Light::Shader::create(path)) {}
 
-	MeshComponent::MeshComponent(std::shared_ptr<Light::VertexBuffer> vertexBuffer,
-		std::shared_ptr<Light::IndexBuffer> indexBuffer)
-		: mesh(Light::VertexArray::create())
+	MeshComponent::MeshComponent(std::shared_ptr<Light::Mesh> mesh)
+		: mesh(mesh)
 	{
-		mesh->addVertexBuffer(vertexBuffer);
-		mesh->setIndexBuffer(indexBuffer);
 	}
 }

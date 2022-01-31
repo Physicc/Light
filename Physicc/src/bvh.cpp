@@ -42,30 +42,30 @@ namespace Physicc
 		if (axis == X)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end + 1),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().x
-				            > rigidBody2.getCentroid().x;
-			          });
+						std::next(m_rigidBodyList.begin(), end + 1),
+						[](const RigidBody& rigidBody1,
+						const RigidBody& rigidBody2) {
+						return rigidBody1.getCentroid().x
+							> rigidBody2.getCentroid().x;
+					});
 		} else if (axis == Y)
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end + 1),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().y
-				            > rigidBody2.getCentroid().y;
-			          });
+						std::next(m_rigidBodyList.begin(), end + 1),
+						[](const RigidBody& rigidBody1,
+						const RigidBody& rigidBody2) {
+						return 	rigidBody1.getCentroid().y
+								> rigidBody2.getCentroid().y;
+					});
 		} else
 		{
 			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end + 1),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().z
-				            > rigidBody2.getCentroid().z;
-			          });
+						std::next(m_rigidBodyList.begin(), end + 1),
+						[](const RigidBody& rigidBody1,
+						const RigidBody& rigidBody2) {
+						return 	rigidBody1.getCentroid().z
+								> rigidBody2.getCentroid().z;
+					});
 		}
 	}
 
@@ -99,6 +99,8 @@ namespace Physicc
 
 	void BVH::buildTree(std::shared_ptr<BVHNode> node, std::size_t start, std::size_t end)
 	{
+		ZoneScoped;
+
 		//implicit convention:
 		//no children = leaf node
 		//no parent = head node
@@ -106,7 +108,7 @@ namespace Physicc
 		//All nodes are equal to nullptr until they are explicitly assigned
 		//non-null values
 
-		LIGHT_ASSERT(start > end, "Pray to god that Jesus helps you, for start is greater than end.");
+		LIGHT_ASSERT(start <= end, "Pray to god that Jesus helps you, for start is greater than end.");
 		if (start == end)
 		{
 			//then the only element left in this sliced vector is the one at
@@ -132,7 +134,7 @@ namespace Physicc
 			buildTree(rightNode, start + 1 + (end - start) / 2, end);
 		}
 	}
-	
+
 	std::vector<std::weak_ptr<RigidBody>> BVH::convert()
 	{
 		std::stack<BVHNode*> s;
@@ -140,7 +142,7 @@ namespace Physicc
 		BVHNode* currentNode = m_head.get();
 		while (!s.empty() || currentNode != nullptr)
 		{
-			
+
 			while (currentNode != nullptr)
 			{
 				s.push(currentNode);

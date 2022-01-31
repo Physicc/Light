@@ -28,10 +28,9 @@ namespace Light
 		
 	}
 
-	void Renderer::submitLight(glm::vec3 lightPos, glm::vec3 lightCol) 
+	void Renderer::submitLight(const std::vector<PointLight> &lights) 
 	{
-		s_sceneData->lightPos = lightPos;
-		s_sceneData->lightCol = lightCol;
+		s_sceneData->pointLights = lights;
 	}
 	
 	void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform) 
@@ -46,8 +45,22 @@ namespace Light
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
-		shader->setUniformVec3("u_lightPos", s_sceneData->lightPos);
-		shader->setUniformVec3("u_lightCol", s_sceneData->lightCol);
+
+		for (int i = 0; i < 4; i++)
+		{
+			if (i < (int)s_sceneData->pointLights.size())
+			{
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->pointLights[i].position, 1.0));
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
+			}
+			else
+			{
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
+			}
+		}
+
+		shader->setUniformInt("u_numPointLights", (int)s_sceneData->pointLights.size());
 		shader->setUniformInt("u_id", id);
 
 		shader->setUniformMat4("u_transform", transform);

@@ -1,8 +1,11 @@
 #ifndef __RIGIDBODY_H__
 #define __RIGIDBODY_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 #include "collider.hpp"
+#include <memory>
 
 namespace Physicc
 {
@@ -15,44 +18,55 @@ namespace Physicc
 	{
 		public:
 			RigidBody(float mass, const glm::vec3& velocity, float gravityScale);
+			RigidBody(const RigidBody& other) = default;
 
 			[[nodiscard]] inline glm::vec3 getVelocity() const
 			{
+				ZoneScoped;
+
 				return m_velocity;
 			}
 
-			
-            inline void setVelocity(const glm::vec3& velocity)
+			inline void setVelocity(const glm::vec3& velocity)
 			{
+				ZoneScoped;
+
 				m_velocity = velocity;
 			}
 
 			inline void setGravityScale(const float gravityScale)
 			{
+				ZoneScoped;
+
 				m_gravityScale = gravityScale;
 
 			}
 
 			inline void setPosition(const glm::vec3& position)
 			{
-				m_collider.setPosition(position);
+				m_collider->setPosition(position);
 			}
 
 			void setForce();
 
 			[[nodiscard]] inline BoundingVolume::AABB getAABB() const
 			{
-				return m_collider.getAABB();
+				return m_collider->getAABB();
 			}
 
 			[[nodiscard]] inline glm::vec3 getCentroid() const
 			{
-				return m_collider.getCentroid();
+				return m_collider->getCentroid();
+			}
+
+			inline void setCollider(const std::shared_ptr<Collider> collider)
+			{
+				m_collider = collider;
 			}
 
 		private:
 			glm::vec3 m_force;
-			BoxCollider m_collider;
+			std::shared_ptr<Collider> m_collider;
 			float m_mass;
 			glm::vec3 m_velocity;
 			float m_gravityScale;

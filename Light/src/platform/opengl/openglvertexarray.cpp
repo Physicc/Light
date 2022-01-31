@@ -23,7 +23,7 @@ namespace Light
 		case ShaderDataType::Bool: 		return GL_BOOL;
 		default:
 			LIGHT_CORE_ERROR("Unsupported Shader data type");
-			return -1;
+			return 0;
 		}
 	}
 

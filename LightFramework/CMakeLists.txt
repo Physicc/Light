@@ -12,6 +12,18 @@ list(APPEND SOURCES ../shared/src/core/logging.cpp)
 # add the executable
 add_library(LightFramework STATIC ${SOURCES})
 
+# -Werror
+target_compile_options(LightFramework PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+
+# Supress glm quat warning
+target_compile_definitions(LightFramework PRIVATE
+    -DGLM_FORCE_SILENT_WARNINGS
+)
+
+
 # add includes
 target_include_directories(LightFramework PUBLIC include)
 target_include_directories(LightFramework PUBLIC ../shared/include)
@@ -42,7 +54,8 @@ add_definitions(-DGLFW_INCLUDE_NONE)
 
 # ImGUI
 add_subdirectory(libs/imgui)
-target_link_libraries(LightFramework glad glfw imgui)
+target_include_directories(LightFramework PRIVATE ../Light/libs/glad/include) # Hack so that imgui_impl can use glad #47
+target_link_libraries(LightFramework imgui)
 
 # GLM
 target_include_directories(LightFramework PUBLIC ../shared/libs/glm)
@@ -54,17 +67,6 @@ add_subdirectory(../shared/libs/spdlog spdlog)
 #EnTT
 target_include_directories(LightFramework PUBLIC libs/entt)
 
-if (UNIX)
-	if (NOT APPLE)
-		find_package(Threads REQUIRED)
-		find_package(X11 REQUIRED)
-	endif()
-endif()
-
-if (UNIX)
-	if (APPLE)
-		target_link_libraries(LightFramework "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
-	else()
-		target_link_libraries(LightFramework ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES} ${CMAKE_DL_LIBS}) 
-	endif()
-endif()
+#TracyClient
+target_include_directories(LightFramework PUBLIC ../shared/libs/tracy/tracy)
+target_link_libraries(LightFramework TracyClient)

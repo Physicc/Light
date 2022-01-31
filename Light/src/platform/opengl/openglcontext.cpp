@@ -30,11 +30,9 @@ namespace Light
 			exit(1);
 		}
 
-
-		const GLubyte* vendor = glGetString(GL_VENDOR);
-		const GLubyte* renderer= glGetString(GL_RENDERER);
-		LIGHT_CORE_INFO("OpenGL Vendor: {0}", vendor);
-		LIGHT_CORE_INFO("OpenGL Device: {0}", renderer);
+		LIGHT_CORE_INFO("OpenGL Vendor: {0}", glGetString(GL_VENDOR));
+		LIGHT_CORE_INFO("OpenGL Device: {0}", glGetString(GL_RENDERER));
+		LIGHT_CORE_INFO("OpenGL Version: {0}", glGetString(GL_VERSION));
 
 	}
 	

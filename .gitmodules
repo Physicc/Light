@@ -10,3 +10,13 @@
 [submodule "Testing/googletest"]
 	path = Testing/googletest
 	url = https://github.com/google/googletest.git
+[submodule "tools/tracy/freetype"]
+	path = tools/tracy/freetype
+	url = https://github.com/freetype/freetype
+[submodule "tools/tracy/tracy"]
+	path = tools/tracy/tracy
+	url = https://github.com/wolfpld/tracy
+[submodule "tools/tracy/capstone"]
+	path = tools/tracy/capstone
+	url = https://github.com/dropTableUsers42/capstone
+	branch = next
