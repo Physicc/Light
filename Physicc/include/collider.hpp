@@ -1,25 +1,16 @@
 #ifndef __COLLIDER_H__
 #define __COLLIDER_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "boundingvolume.hpp"
 #include <vector>
 
 namespace Physicc
 {
 	/**
-	 * @brief Axis Aligned Bounding Box 
-	 * 
-	 * Helper class to store diagonally opposite points of the AABB
-	 * 
-	 */
-	struct AABB
-	{
-		glm::vec3 lowerBound;
-		glm::vec3 upperBound;
-	};
-
-	/** 
 	 * @brief Collider class
 	 *  
 	 * This is a virtual class which acts as the base for all the shape specific classes
@@ -38,16 +29,20 @@ namespace Physicc
 	 		 */
 			[[nodiscard]] inline glm::vec3 getPosition()
 			{
+				ZoneScoped;
+
 				return m_position;
 			}
 
 			/**
-			 * @brief get Angle of rotation of the object about it's center
+			 * @brief get Angle of rotation of the object about its center
 			 *
 			 * @return glm::vec3
 			 */
 			[[nodiscard]] inline glm::vec3 getRotate()
 			{
+				ZoneScoped;
+
 				return m_rotate;
 			}
 
@@ -58,6 +53,8 @@ namespace Physicc
 			 */
 			[[nodiscard]] inline glm::vec3 getScale()
 			{
+				ZoneScoped;
+
 				return m_scale;
 			}
 
@@ -68,42 +65,51 @@ namespace Physicc
 			 */
 			[[nodiscard]] inline glm::mat4 getTransform()
 			{
+				ZoneScoped;
+
 				return m_transform;
 			}
 
 			/**
 			 * @brief set Position of object's center
 			 *
-			 * @param newpos Takes the (x,y,z) coordinates to place the object at
+			 * @param position Takes the (x,y,z) coordinates to place the object's center at
 			 */
 			inline void setPosition(glm::vec3 position)
 			{
+				ZoneScoped;
+
 				m_position = position;
 			}
 
 			/**
 			 * @brief Set rotation of object about it's center
 			 *
-			 * @param newrotate vec3 containing rotation values about x,y,z axes
+			 * @param rotate vec3 containing rotation values about x, y, z axes
 			 */
 			inline void setRotate(glm::vec3 rotate)
 			{
+				ZoneScoped;
+
 				m_rotate = rotate;
 			}
 
 			/**
 			 * @brief get Position of object's center
 			 *
-			 * @param newscale New scale of the object
+			 * @param scale New scale of the object
 			 */
 			inline void setScale(glm::vec3 scale)
 			{
+				ZoneScoped;
+
 				m_scale = scale;
 			}
 
 			void updateTransform();
 
-			virtual AABB getAABB() const;    //Each child will calculate AABB according to it's own shape
+			virtual BoundingVolume::AABB getAABB() const = 0;
+			//Each child will calculate its AABB according to its own shape
 
 		protected:
 			enum Type
@@ -132,7 +138,7 @@ namespace Physicc
 			            glm::vec3 rotation = glm::vec3(0),
 			            glm::vec3 scale = glm::vec3(1));
 
-			AABB getAABB() const override;
+			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
 		private:
 			std::vector<glm::vec4> m_vertices;
@@ -151,7 +157,7 @@ namespace Physicc
 			               glm::vec3 rotation = glm::vec3(0),
 			               glm::vec3 scale = glm::vec3(1));
 
-			AABB getAABB() const override;
+			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
 		private:
 			float m_radius;

@@ -1,17 +1,51 @@
-#include "gui/scenepanel.hpp"
-
-#include "imgui.h"
-#include "imgui_internal.h"
 
 #ifdef _MSC_VER
 	#define _CRT_SECURE_NO_WARNINGS
 #endif
+#include "gui/scenepanel.hpp"
+
+
+#include "imgui.h"
+#include "imgui_internal.h"
+
+#include <type_traits>
+
 
 namespace Light
 {
-	void ScenePanel::onImguiRender() 
+	void ScenePanel::onImguiRender()
 	{
 		ImGui::Begin("Scene");
+
+		if (ImGui::BeginPopupContextWindow())
+		{
+			if (ImGui::BeginMenu("Add Entity"))
+			{
+				if (ImGui::MenuItem("Empty Entity"))
+				{
+					m_context->addEntity("New Entity");
+				}
+
+				if (ImGui::MenuItem("Light"))
+				{
+					auto entity = m_context->addEntity("New Entity");
+					entity.addComponent<LightComponent>();
+				}
+
+				if (ImGui::BeginMenu("Primitive"))
+				{
+					if (ImGui::MenuItem("Cube"))
+					{
+						auto entity = m_context->addEntity("Cube");
+						entity.addComponent<MeshComponent>(m_meshLibrary->get("Cube"));
+						entity.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+					}
+					ImGui::EndMenu();
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndPopup();
+		}
 
 		m_context->m_registry.each([&](auto entityHandle)
 		{
@@ -30,13 +64,17 @@ namespace Light
 		{
 			if (ImGui::BeginMenu("Add Component"))
 			{
-				if(!m_selectionContext.hasComponent<MeshComponent>() && ImGui::MenuItem("Mesh"))
+				if(ImGui::MenuItem("Mesh", nullptr, false, !m_selectionContext.hasComponent<MeshComponent>()))
 				{
 					m_selectionContext.addComponent<MeshComponent>(m_meshLibrary->getMeshMap().begin()->second);
 				}
-				if(!m_selectionContext.hasComponent<MeshRendererComponent>() && ImGui::MenuItem("Mesh Renderer"))
+				if(ImGui::MenuItem("Mesh Renderer", nullptr, false, !m_selectionContext.hasComponent<MeshRendererComponent>()))
 				{
-					m_selectionContext.addComponent<MeshRendererComponent>("../Editor/assets/shaders/phong.glsl");
+					m_selectionContext.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+				}
+				if(ImGui::MenuItem("Light", nullptr, false, !m_selectionContext.hasComponent<LightComponent>()))
+				{
+					m_selectionContext.addComponent<LightComponent>();
 				}
 				ImGui::EndMenu();
 			}
@@ -49,21 +87,36 @@ namespace Light
 		ImGui::End();
 	}
 
-	void ScenePanel::drawSceneNode(Entity entity) 
+	void ScenePanel::drawSceneNode(Entity entity)
 	{
 		auto& tag = entity.getComponent<TagComponent>().tag;
-		
+
 		const ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ((m_selectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0);
-		bool opened = ImGui::TreeNodeEx(entity.getUUID().c_str(), flags, tag.c_str());
-		
+		bool opened = ImGui::TreeNodeEx(entity.getUUID().c_str(), flags, "%s", tag.c_str()); // Use %s as argument to avoid format string vulnerability
+		bool toRemove = false;
 		if(ImGui::IsItemClicked())
 		{
 			m_selectionContext = entity;
 		}
 
+		if(ImGui::BeginPopupContextItem())
+		{
+			if (ImGui::MenuItem("Remove Entity"))
+			{
+				toRemove = true;
+			}
+			ImGui::EndPopup();
+		}
+
 		if(opened)
 		{
 			ImGui::TreePop();
+		}
+
+		if(toRemove)
+		{
+			m_context->removeEntity(entity);
+			m_selectionContext = {};
 		}
 	}
 
@@ -71,13 +124,28 @@ namespace Light
 	void drawComponent(const std::string& name, Entity entity, UIFunction uiFunction)
 	{
 		const ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_DefaultOpen;
+
+		constexpr bool removable = !std::is_same_v<T, TransformComponent>;
+
+		bool toRemove = false;
 		if(entity.hasComponent<T>())
 		{
 			auto& component = entity.getComponent<T>();
 
 			ImGui::Separator();
 
-			bool open = ImGui::TreeNodeEx(component.uuid.c_str(), flags, name.c_str());
+			bool open = ImGui::TreeNodeEx(component.uuid.c_str(), flags, "%s", name.c_str());
+			if constexpr(removable)
+			{
+				if (ImGui::BeginPopupContextItem())
+				{
+					if(ImGui::MenuItem("Remove Component"))
+					{
+						toRemove = true;
+					}
+					ImGui::EndPopup();
+				}
+			}
 
 			if(open)
 			{
@@ -85,6 +153,9 @@ namespace Light
 				ImGui::TreePop();
 			}
 		}
+
+		if(toRemove)
+			entity.removeComponent<T>();
 	}
 
 	static bool dragVec3(std::string label, glm::vec3& vec3,
@@ -100,7 +171,7 @@ namespace Light
 
 		ImGui::Columns(2, NULL, false);
 		ImGui::SetColumnWidth(0, glm::max(itemWidth/3, minLabelWidth));
-		ImGui::Text(label.c_str());
+		ImGui::Text("%s", label.c_str());
 		if(ImGui::BeginPopupContextItem("reset"))
 		{
 			if(ImGui::MenuItem("Reset Values"))
@@ -153,7 +224,7 @@ namespace Light
 		ImGui::SameLine();
 		ImGui::SetNextItemWidth(fullWidth - width * 2 - lineHeight - 2.0f);
 		ret |= ImGui::InputFloat("##zedit", &vec3.z, 0.0f, 0.0f, fmt);
-		
+
 		ImGui::PopStyleVar();
 
 		ImGui::Columns(1);
@@ -163,7 +234,7 @@ namespace Light
 		return ret;
 	}
 
-	void ScenePanel::drawAllComponents(Entity entity) 
+	void ScenePanel::drawAllComponents(Entity entity)
 	{
 		if(entity.hasComponent<TagComponent>())
 		{
@@ -186,7 +257,7 @@ namespace Light
 		});
 
 		drawComponent<MeshComponent>("Mesh", entity, [this](auto& component){
-			float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+			// float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
 			float itemWidth = ImGui::GetContentRegionAvail().x;
 
 			ImGui::Columns(2, NULL, false);
@@ -205,7 +276,7 @@ namespace Light
 
 			auto meshMap = m_meshLibrary->getMeshMap();
 			auto current = meshMap.begin();
-			
+
 			for (auto it = meshMap.begin(); it != meshMap.end(); it++)
 			{
 				if(it->second == component.mesh)
@@ -214,7 +285,7 @@ namespace Light
 					break;
 				}
 			}
-	
+
 			if (ImGui::BeginCombo("##mesh", current->first.c_str(), 0))
 			{
 				for(auto it = meshMap.begin(); it != meshMap.end(); it++)
@@ -235,8 +306,29 @@ namespace Light
 			ImGui::Columns(1);
 		});
 
-		drawComponent<MeshRendererComponent>("Mesh Renderer", entity, [](auto& component){
+		drawComponent<MeshRendererComponent>("Mesh Renderer", entity, [](auto&){
 			ImGui::Text("Phong");
+		});
+
+		drawComponent<LightComponent>("Light", entity, [](auto& component){
+			// float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+			float itemWidth = ImGui::GetContentRegionAvail().x;
+
+			ImGui::Columns(2, NULL, false);
+			ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+
+			ImGui::Text("Light Color");
+
+			ImGui::NextColumn();
+
+			float fullWidth = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+			float offset = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth);
+			if(offset > 0.0f)
+				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset);
+
+			ImGui::SetNextItemWidth(fullWidth);
+
+			ImGui::ColorEdit3("##color", &component.m_lightColor[0]);
 		});
 	}
 }

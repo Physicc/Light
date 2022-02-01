@@ -16,10 +16,6 @@ if (WIN32)
     if (MSVC)
         set_property(TARGET Test PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 	endif()
-elseif (UNIX)
-	if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-		target_link_libraries(Test m)
-	endif()
 endif()
 
 # include gtest headers
@@ -30,5 +26,5 @@ add_subdirectory(googletest)
 target_link_libraries(Test gtest_main)
 
 # Set Gtest options
-SET(BUILD_GMOCK OFF)
+set(BUILD_GMOCK OFF)
 set(INSTALL_GTEST OFF)

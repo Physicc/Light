@@ -1,12 +1,8 @@
 #ifndef __MESH_H__
 #define __MESH_H__
 
+#include "core/base.hpp"
 #include "light/rendering/vertexarray.hpp"
-
-#include <vector>
-#include <unordered_map>
-#include <memory>
-#include <set>
 #include "glm/glm.hpp"
 
 namespace Light
@@ -44,11 +40,11 @@ namespace Light
 		std::shared_ptr<Mesh> get(const std::string &name);
 
 		std::unordered_map<std::string, std::shared_ptr<Mesh>> getMeshMap() { return m_meshes; }
-	
+
 	private:
 		std::unordered_map<std::string, std::shared_ptr<Mesh>> m_meshes;
 	};
-	
+
 }
 
 

@@ -2,6 +2,7 @@
 #define __UUID_H__
 
 #include <string>
+
 extern "C"
 {
 	#if defined _WIN32

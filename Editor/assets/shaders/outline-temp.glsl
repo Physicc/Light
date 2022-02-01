@@ -19,7 +19,6 @@ in vec4 v_color;
 in vec3 v_worldPos;
 
 layout(location = 0) out int selection;
-
 void main()
 {
 	selection = 1;

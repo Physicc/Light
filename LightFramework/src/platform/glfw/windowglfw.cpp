@@ -1,9 +1,14 @@
+#include "core/logging.hpp"
+// Include logging.hpp BEFORE windowglfw.hpp because windowglfw.hpp
+// includes Windows.h and windowglfw.hpp includes glad.h which
+// should be included after Windows.h (APIENTRY Macro redefinition warning)
 #include "platform/glfw/windowglfw.hpp"
 #include "light/platform/opengl/openglcontext.hpp"
 #include "events/keyevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/applicationevent.hpp"
-#include "core/logging.hpp"
+
+#include "stb_image.h"
 
 namespace Light
 {
@@ -26,6 +31,7 @@ namespace Light
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
+		(void)error, (void)description; // Supress warning about unused variable in release mode (logs don't get compiled in release)
 		LIGHT_CORE_ERROR("GLFW Error({}): {}", error, description);
 	}
 
@@ -59,12 +65,19 @@ namespace Light
 		if(!m_window)
 		{
 			LIGHT_CORE_CRITICAL("Could not create window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
+			exit(1);
 		}
 		LIGHT_CORE_INFO("Created window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);
 		m_context = new OpenGLContext(m_window);
 		m_context->init();
 
-		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+
+		GLFWimage icon;
+		icon.pixels = stbi_load("assets/icon/light.png", &icon.width, &icon.height, nullptr, 4);
+		glfwSetWindowIcon(m_window, 1, &icon);
+
+
+		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int, int action, int)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
@@ -94,7 +107,7 @@ namespace Light
 
 		});
 
-		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
+		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int)
 		{
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 

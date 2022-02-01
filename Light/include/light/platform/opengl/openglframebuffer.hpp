@@ -25,6 +25,7 @@ namespace Light
 
 		void clearAttachment(uint32_t attachmentIndex, int clearValue) override;
 		void clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) override;
+		void clearDepthAttachment() override;
 
 		inline uint32_t getColorAttachmentRendererId(uint32_t attachmentIndex = 0) const override
 		{

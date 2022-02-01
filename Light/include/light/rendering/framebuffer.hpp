@@ -89,6 +89,7 @@ namespace Light
 
 		virtual void clearAttachment(uint32_t attachmentIndex, int clearValue) = 0;
 		virtual void clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) = 0;
+		virtual void clearDepthAttachment() = 0;
 
 		virtual void bind() = 0;
 		virtual void unbind() = 0;
