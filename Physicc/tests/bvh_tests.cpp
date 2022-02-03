@@ -8,35 +8,40 @@ class BVH_tests : public ::testing::Test {
 	protected:
 		void SetUp() override
 		{
-			test_vector.emplace_back(Physicc::RigidBody{20, glm::vec3(1), 1.0f});
-			test_vector.emplace_back(Physicc::RigidBody{20, glm::vec3(1), 1.0f});
-			test_vector.emplace_back(Physicc::RigidBody{20, glm::vec3(1), 1.0f});
+			testVector.emplace_back(20, glm::vec3(1), 1.0f);
+			testVector.emplace_back(20, glm::vec3(1), 1.0f);
+			testVector.emplace_back(20, glm::vec3(1), 1.0f);
 
-			test_vector[0].setCollider(std::make_shared<Physicc::BoxCollider>());
-			test_vector[1].setCollider(std::make_shared<Physicc::BoxCollider>());
-			test_vector[2].setCollider(std::make_shared<Physicc::BoxCollider>());
-			test_vector[1].setPosition(glm::vec3(1.0f));
-			test_vector[2].setPosition(glm::vec3(2.0f));
+			testVector[0].setCollider(std::make_shared<Physicc::BoxCollider>());
+			testVector[1].setCollider(std::make_shared<Physicc::BoxCollider>());
+			testVector[2].setCollider(std::make_shared<Physicc::BoxCollider>());
+			testVector[1].setPosition(glm::vec3(1.0f));
+			testVector[2].setPosition(glm::vec3(2.0f));
 		}
 
-		// void TearDown() override{}
+		void TearDown() override
+		{
+			testVector.clear();
+		}
 
-		std::vector<Physicc::RigidBody> test_vector;
+		std::vector<Physicc::RigidBody> testVector;
 };
 
 TEST_F(BVH_tests, Check_bvh_tree){
-	Physicc::BVH test_bvh(test_vector);
-	test_bvh.buildTree();
-	std::vector<std::weak_ptr<Physicc::RigidBody>> calc = test_bvh.convert();
+	Physicc::BVH testBVH(testVector);
+	testBVH.buildTree();
+	std::vector<std::weak_ptr<Physicc::RigidBody>> calc = testBVH.convert();
 	std::vector<glm::vec3> centroids;
-	for(auto body:calc){
+	for (auto body : calc)
+	{
 		auto temp = body.lock();
 		centroids.push_back(temp->getCentroid());
 	}
-	std::vector<glm::vec3> ans {test_vector[2].getCentroid(),test_vector[1].getCentroid(),test_vector[0].getCentroid()};
-	// for(auto x : centroids){
-	//     std::cout<<glm::to_string(x)<<std::endl;
+	std::vector<glm::vec3> ans {testVector[2].getCentroid(),testVector[1].getCentroid(),testVector[0].getCentroid()};
+	// for (auto x : centroids)
+	// {
+	//     std::cout << glm::to_string(x) << std::endl;
 	// }
-	EXPECT_EQ(ans,centroids);
+	EXPECT_EQ(ans, centroids);
 }
 
