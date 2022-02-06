@@ -1,8 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node0 [label="entt::type_list_element\l\< 0u, type_list\< Type,\l Other... \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structentt_1_1type__list__element_3_010u_00_01type__list_3_01Type_00_01Other_8_8_8_01_4_01_4.html",tooltip="Provides compile-time indexed access to the types of a type list."];
-}

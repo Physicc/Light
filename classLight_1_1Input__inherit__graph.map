@@ -1,4 +1,4 @@
 <map id="Light::Input" name="Light::Input">
-<area shape="rect" id="node1" title=" " alt="" coords="21,5,115,32"/>
-<area shape="rect" id="node2" href="$classLight_1_1InputGlfw.html" title=" " alt="" coords="5,80,131,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="19,5,105,32"/>
+<area shape="rect" id="node2" href="$classLight_1_1InputGlfw.html" title=" " alt="" coords="5,80,119,107"/>
 </map>

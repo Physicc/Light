@@ -1,8 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node0 [label="entt::basic_group\<\l Entity, exclude_t\<\l Exclude... \>, get_t\l\< Get... \>, Owned... \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classentt_1_1basic__group_3_01Entity_00_01exclude__t_3_01Exclude_8_8_8_01_4_00_01get__t_3_01Get_1aada3a14110654dc27700c17c9c2396.html",tooltip="Owning group."];
-}

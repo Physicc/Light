@@ -1,5 +1,5 @@
 <map id="Light::KeyPressedEvent" name="Light::KeyPressedEvent">
-<area shape="rect" id="node1" title=" " alt="" coords="5,155,180,181"/>
-<area shape="rect" id="node2" href="$classLight_1_1KeyEvent.html" title=" " alt="" coords="31,80,154,107"/>
-<area shape="rect" id="node3" href="$classLight_1_1Event.html" title=" " alt="" coords="43,5,142,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,155,165,181"/>
+<area shape="rect" id="node2" href="$classLight_1_1KeyEvent.html" title=" " alt="" coords="29,80,141,107"/>
+<area shape="rect" id="node3" href="$classLight_1_1Event.html" title=" " alt="" coords="40,5,131,32"/>
 </map>

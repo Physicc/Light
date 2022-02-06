@@ -1,8 +1,0 @@
-<map id="nk_str" name="nk_str">
-<area shape="rect" id="node1" title=" " alt="" coords="169,303,232,329"/>
-<area shape="rect" id="node2" href="$structnk__buffer.html" title=" " alt="" coords="159,213,243,240"/>
-<area shape="rect" id="node3" href="$structnk__allocator.html" title=" " alt="" coords="5,124,108,151"/>
-<area shape="rect" id="node4" href="$unionnk__handle.html" title=" " alt="" coords="12,5,101,32"/>
-<area shape="rect" id="node5" href="$structnk__buffer__marker.html" title=" " alt="" coords="132,124,269,151"/>
-<area shape="rect" id="node6" href="$structnk__memory.html" title=" " alt="" coords="293,124,393,151"/>
-</map>

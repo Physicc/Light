@@ -1,4 +1,4 @@
 <map id="Light::Cubemap" name="Light::Cubemap">
-<area shape="rect" id="node1" title=" " alt="" coords="31,5,155,32"/>
-<area shape="rect" id="node2" href="$classLight_1_1OpenGLCubemap.html" title=" " alt="" coords="5,80,180,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="30,5,142,32"/>
+<area shape="rect" id="node2" href="$classLight_1_1OpenGLCubemap.html" title=" " alt="" coords="5,80,167,107"/>
 </map>
