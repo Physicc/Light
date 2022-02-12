@@ -1,0 +1,26 @@
+rigidbodies =vec<rigidbody>
+r1 = rigidbody(m1,v1)
+r2 = rigidbody(m2,v2)
+r3 = rigidbody(m3,v3)
+
+rigidbodies.push_back(r1) //box
+rigidbodies.push_back(r2) //sphere
+rigidbodies.push_back(r3) //box
+
+p1 = std::make_shared<boxcollider>(position = pos1)
+p2 = std::make_shared<spherecollider>(position = pos2)
+p3 = std::make_shared<boxcollider>(position = pos3)
+
+rigidbodies[0].setcollider(p1)
+rigidbodies[1].setcollider(p2)
+rigidbodies[2].setcollider(p3)
+
+
+
+
+Test1
+BVH bvh(rigidbodies)
+bvh.buildtree()
+potentialContacts =getPotentialContacts(bvh)
+
+potentialContacts[0].rb1.setPosition
