@@ -1,26 +1,32 @@
-rigidbodies =vec<rigidbody>
-r1 = rigidbody(m1,v1)
-r2 = rigidbody(m2,v2)
-r3 = rigidbody(m3,v3)
-
-rigidbodies.push_back(r1) //box
-rigidbodies.push_back(r2) //sphere
-rigidbodies.push_back(r3) //box
-
-p1 = std::make_shared<boxcollider>(position = pos1)
-p2 = std::make_shared<spherecollider>(position = pos2)
-p3 = std::make_shared<boxcollider>(position = pos3)
-
-rigidbodies[0].setcollider(p1)
-rigidbodies[1].setcollider(p2)
-rigidbodies[2].setcollider(p3)
+Tear down
+rigidbodies = vec<rigidbody>
+r0 = rigidbody(m1,v1)
+r1 = rigidbody(m2,v2)
+r2 = rigidbody(m3,v3)
+r3 = rigidbody(m4,v4)
 
 
 
 
-Test1
+
+Test1 //sphere-sphere, obvious collision, only checking Sphere-Sphere
+rigidbodies.push_back(r0) //sphere
+rigidbodies.push_back(r1) //sphere
+
+p0 = std::make_shared<spherecollider>(position = glm::vec3(0))
+p1 = std::make_shared<spherecollider>(position = glm::vec3(1, 0, 0))
+
+rigidbodies[0].setcollider(p0)
+rigidbodies[1].setcollider(p1)
+
 BVH bvh(rigidbodies)
 bvh.buildtree()
-potentialContacts =getPotentialContacts(bvh)
+potentialContacts = getPotentialContacts(bvh) //single element array
 
-potentialContacts[0].rb1.setPosition
+CollisionDetector coldet(potentialContacts);
+
+contactArray = coldet.SphereSphere(potentialContacts[0]) //change function to templated function later on
+
+expectedAnswer = //write the expected answer here
+
+EXPECT_EQ(contactArray, expectedAnswer)
