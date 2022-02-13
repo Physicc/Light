@@ -5,10 +5,13 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/epsilon.hpp"
+<<<<<<< HEAD
+=======
 
 #ifdef __cpp_lib_concepts
 #include <concepts>
 #endif
+>>>>>>> feature/broadphase
 
 namespace Physicc
 {
@@ -125,18 +128,6 @@ namespace Physicc
 				//to use this function will likely result in 5 pages of opaque
 				//errors.
 
-				[[nodiscard]] inline glm::vec3 getLowerBound() const
-				{
-					return constTypeCast()->getUpperBound();
-				}
-
-				[[nodiscard]] inline glm::vec3 getUpperBound() const
-				{
-					return constTypeCast()->getUpperBound();
-				}
-				//For the same reason as before, the above two functions can safely
-				//reside in the base class.
-
 				[[nodiscard]] Derived enclosingBV(const BaseBV& bv) const
 				{
 					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
@@ -167,6 +158,11 @@ namespace Physicc
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
 				//functions, to make the use of BVs easier.
+			private:
+				//Hiding the exact implementation by making all the functions
+				//private
+				friend BaseBV<BoxBV<T>, T>;
+
 
 			public:
 				BoxBV() = default;
@@ -204,16 +200,6 @@ namespace Physicc
 					return (this->m_volume.upperBound.x - this->m_volume.lowerBound.x)
 						* (this->m_volume.upperBound.y - this->m_volume.lowerBound.y)
 						* (this->m_volume.upperBound.z - this->m_volume.lowerBound.z);
-				}
-
-				inline glm::vec3 getLowerBoundImpl() const
-				{
-					return this->m_volume.lowerBound;
-				}
-
-				inline glm::vec3 getUpperBound() const
-				{
-					return this->m_volume.upperBound;
 				}
 
 				inline bool overlapsWith(const BoxBV& bv) const
