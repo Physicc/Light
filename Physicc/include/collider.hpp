@@ -23,7 +23,7 @@ namespace Physicc
 		 *
 		 * @return glm::vec3
 		 */
-		[[nodiscard]] inline glm::vec3 getPosition()
+		[[nodiscard]] inline glm::vec3 getPosition() const
 		{
 			ZoneScoped;
 
@@ -35,7 +35,7 @@ namespace Physicc
 		 *
 		 * @return glm::vec3
 		 */
-		[[nodiscard]] inline glm::vec3 getRotate()
+		[[nodiscard]] inline glm::vec3 getRotate() const
 		{
 			ZoneScoped;
 
@@ -47,7 +47,7 @@ namespace Physicc
 		 *
 		 * @return glm::vec3
 		 */
-		[[nodiscard]] inline glm::vec3 getScale()
+		[[nodiscard]] inline glm::vec3 getScale() const
 		{
 			ZoneScoped;
 
@@ -59,7 +59,7 @@ namespace Physicc
 		 *
 		 * @return glm::mat4
 		 */
-		[[nodiscard]] inline glm::mat4 getTransform()
+		[[nodiscard]] inline glm::mat4 getTransform() const
 		{
 			ZoneScoped;
 
@@ -71,7 +71,7 @@ namespace Physicc
 		 *
 		 * @param position Takes the (x,y,z) coordinates to place the object's center at
 		 */
-		inline void setPosition(glm::vec3 position)
+		inline void setPosition(const glm::vec3 position)
 		{
 			ZoneScoped;
 
@@ -83,7 +83,7 @@ namespace Physicc
 		 *
 		 * @param rotate vec3 containing rotation values about x, y, z axes
 		 */
-		inline void setRotate(glm::vec3 rotate)
+		inline void setRotate(const glm::vec3 rotate)
 		{
 			ZoneScoped;
 
@@ -95,7 +95,7 @@ namespace Physicc
 		 *
 		 * @param scale New scale of the object
 		 */
-		inline void setScale(glm::vec3 scale)
+		inline void setScale(const glm::vec3 scale)
 		{
 			ZoneScoped;
 
@@ -158,7 +158,7 @@ namespace Physicc
 
 		[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
-		inline glm::vec3 getCentroid() const override
+		[[nodiscard]] inline glm::vec3 getCentroid() const override
 		{
 			return m_position;
 		}
@@ -192,7 +192,7 @@ namespace Physicc
 
 		[[nodiscard]] BoundingVolume::AABB getAABB() const override;
 
-		inline glm::vec3 getCentroid() const override
+		[[nodiscard]] inline glm::vec3 getCentroid() const override
 		{
 			return m_position;
 		}
