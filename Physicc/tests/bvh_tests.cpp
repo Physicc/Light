@@ -3,18 +3,20 @@
 #include "bvh.hpp"
 #include "glm/gtx/string_cast.hpp"
 #include <memory>
+// #include <iostream>
 
-class BVH_tests : public ::testing::Test {
+class BVHTests : public ::testing::Test {
 	protected:
 		void SetUp() override
 		{
-			testVector.emplace_back(20, glm::vec3(1), 1.0f);
-			testVector.emplace_back(20, glm::vec3(1), 1.0f);
-			testVector.emplace_back(20, glm::vec3(1), 1.0f);
+			testVector.emplace_back(std::make_shared<Physicc::RigidBody>(20, glm::vec3(1), 1.0f));
+			testVector.emplace_back(std::make_shared<Physicc::RigidBody>(20, glm::vec3(1), 1.0f));
+			testVector.emplace_back(std::make_shared<Physicc::RigidBody>(20, glm::vec3(1), 1.0f));
 
 			testVector[0].setCollider(std::make_shared<Physicc::BoxCollider>());
 			testVector[1].setCollider(std::make_shared<Physicc::BoxCollider>());
 			testVector[2].setCollider(std::make_shared<Physicc::BoxCollider>());
+
 			testVector[1].setPosition(glm::vec3(1.0f));
 			testVector[2].setPosition(glm::vec3(2.0f));
 		}
@@ -27,7 +29,7 @@ class BVH_tests : public ::testing::Test {
 		std::vector<Physicc::RigidBody> testVector;
 };
 
-TEST_F(BVH_tests, Check_bvh_tree){
+TEST_F(BVHTests, CheckBVHTree) {
 	Physicc::BVH testBVH(testVector);
 	testBVH.buildTree();
 	std::vector<std::weak_ptr<Physicc::RigidBody>> calc = testBVH.convert();
@@ -36,8 +38,9 @@ TEST_F(BVH_tests, Check_bvh_tree){
 	{
 		auto temp = body.lock();
 		centroids.push_back(temp->getCentroid());
+		// std::cout << "passed\n";
 	}
-	std::vector<glm::vec3> ans {testVector[2].getCentroid(),testVector[1].getCentroid(),testVector[0].getCentroid()};
+	std::vector<glm::vec3> ans {testVector[2].getCentroid(), testVector[1].getCentroid(), testVector[0].getCentroid()};
 	// for (auto x : centroids)
 	// {
 	//     std::cout << glm::to_string(x) << std::endl;
