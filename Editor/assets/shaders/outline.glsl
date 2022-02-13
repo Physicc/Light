@@ -15,16 +15,13 @@ void main()
 #version 330 core
 
 in vec2 v_texcoord;
-out vec4 v_color;
+layout(location = 0) out vec4 v_color;
 
-uniform sampler2D ColorTexture;
 uniform isampler2D IDTexture;
-uniform int selectionID;
 
 void main()
 {
 	int pixelId = texture(IDTexture, v_texcoord).r;
-	vec4 color = texture(ColorTexture, v_texcoord);
 
 	bool nearby = false;
 	bool border = false;
@@ -33,15 +30,15 @@ void main()
 	{
 		for(int j = -5; j < 5; j++)
 		{
-			if(texture(IDTexture, v_texcoord + vec2(i,j)/1000).r == 1)
+			if(texture(IDTexture, v_texcoord + vec2(i,j)/1000).r != 0)
 				nearby = true;
 			if(v_texcoord.x + float(i)/1000 <= 0 || v_texcoord.x + float(i)/1000 >= 1 || v_texcoord.y + float(j)/1000 <= 0 || v_texcoord.y + float(j)/1000 >= 1)
 				border = true;
 		}
 	}
 
-	if((pixelId == 0 && nearby) || (pixelId == 1 && border))
+	if ((pixelId == 0 && nearby) || (pixelId != 0 && border))
 		v_color = vec4(0.9, 0.6, 0.0, 1.0);
 	else
-		v_color = color;
+		discard;
 }

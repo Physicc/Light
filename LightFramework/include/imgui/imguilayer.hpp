@@ -21,8 +21,6 @@ namespace Light
 
 		void begin();
 		void end();
-	private:
-		float m_time = 0.0;
 	};
 }
 

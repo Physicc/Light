@@ -7,7 +7,7 @@
 
 extern Light::Application* Light::createApplication();
 
-int main(int argc, char** argv)
+int main(int, char**)
 {
 	Light::Logger::init();
 

@@ -10,16 +10,16 @@
 namespace Light
 {
 	EditorCamera::EditorCamera(float fovy, float aspectRatio, float near, float far)
-		: m_fovy(fovy),
-          m_aspectRatio(aspectRatio),
-          m_near(near),
-          m_far(far)
+		:	m_aspectRatio(aspectRatio),
+			m_fovy(fovy),
+			m_near(near),
+			m_far(far)
 	{
 		updateView();
 		updateProjection();
 	}
 
-	void EditorCamera::setViewportSize(int width, int height)
+	void EditorCamera::setViewportSize(uint32_t width, uint32_t height)
 	{
         m_viewportWidth = width;
         m_viewportHeight = height;
@@ -66,7 +66,7 @@ namespace Light
 		return speed;
 	}
 	
-	void EditorCamera::onUpdate(Timestep ts) 
+	void EditorCamera::onUpdate(Timestep) 
 	{
 		auto[mouseX, mouseY] = Input::getMousePos();
 		const glm::vec2& mouse{ mouseX, mouseY };

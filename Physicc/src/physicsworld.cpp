@@ -14,6 +14,8 @@
 /* -- Includes -- */
 /* physicsworld header */
 
+#include "tools/Tracy.hpp"
+
 #include "physicsworld.hpp"
 
 namespace Physicc
@@ -29,25 +31,28 @@ namespace Physicc
 	}
 
 	/**
-	 * @fn void PhysicsWorld::addRigidBody(const RigidBody& object)
 	 * @brief Add a new RigidBody to m_objects
 	 * @param object: input, const RigidBody& type
 	 */
 	void PhysicsWorld::addRigidBody(const RigidBody& object)
 	{
+		ZoneScoped;
+
 		m_objects.push_back(object);
 	}
 
 	/**
-	 * @fn void PhysicsWorld::stepSimulation(float time)
 	 * @brief steps the simulation by time timestep
 	 * @param timestep: input, float type, time interval
 	 */
 	void PhysicsWorld::stepSimulation(float timestep)
 	{
+		ZoneScoped;
+
+		(void)timestep; // Suppress unused parameter warning
 		for(std::size_t i = 0; i < m_objects.size(); i++)
 		{
-			
+
 		}
 	}
 }

@@ -1,8 +1,17 @@
 #ifndef __BOUNDINGVOLUME_H__
 #define __BOUNDINGVOLUME_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 #include "glm/gtc/epsilon.hpp"
+<<<<<<< HEAD
+=======
+
+#ifdef __cpp_lib_concepts
+#include <concepts>
+#endif
+>>>>>>> feature/broadphase
 
 namespace Physicc
 {
@@ -25,30 +34,42 @@ namespace Physicc
 			}
 			//the existence of this constructor does not promote this struct from a
 			//POD to a non-POD type.
-
-			inline bool operator==(const AABB& other) const
-			{
-				float epsilon = 1e-5;
-				return glm::all(glm::epsilonEqual(lowerBound, other.lowerBound, epsilon))
-					&& glm::all(glm::epsilonEqual(upperBound, other.upperBound, epsilon));
-			}
-
 			glm::vec3 lowerBound;
 			glm::vec3 upperBound;
 		};
 
+#ifdef __cpp_lib_concepts
+		template <typename Derived, typename BoundingObject>
+		concept SpecializedBV = std::derives_from<BaseBV<Derived>>
+			&& requires (BaseBV<Derived, BoundingObject> bv, BoundingObject volume)
+			{
+				std::copy_constructible<BaseBV<Derived, BoundingObject>>;
+				std::is_constructible_from(volume);
+			}
+			&& requires (BaseBV<Derived, BoundingObject> bv1, BaseBV<Derived, BoundingObject bv2)
+			{
+				bv1.overlapsWith(bv2);
+				bv1.enclosingBV(bv2);
+			};
+#endif
+
 		/**
 		 * A templated class that defines the Bounding Volume (BV) of an object, but
-		 * in a way that allows others to hot swap actual bounding volumes (like
-		 * AABBs, OBBs, 8-DOPs, etc.).
+		 * in a way that allows hot swapping actual bounding volumes (like AABBs, OBBs, 8-DOPs,
+		 * etc.).
 		 *
 		 * TODO: Figure out if this is good enough as a description of the
 		 * BV class.
 		 *
 		 * @tparam Derived
+		 * @tparam BoundingObject
 		 * TODO: Update this Doxygen comment
 		 */
+#ifdef __cpp_lib_concepts
+		template <typename Derived, typename BoundingObject> requires SpecializedBV<Derived, BoundingObject>
+#else
 		template <typename Derived, typename BoundingObject>
+#endif
 		class BaseBV
 		{
 				//CRTP (Curiously Recurring Template Pattern)
@@ -75,12 +96,12 @@ namespace Physicc
 				 */
 				BaseBV(const BoundingObject& volume)
 				{
-					typeCast()->setVolume(volume);
+					typeCast()->setBoundingVolume(volume);
 				}
 
 				BaseBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
-					typeCast()->setVolume(lowerBound, upperBound);
+					typeCast()->setBoundingVolume(lowerBound, upperBound);
 				}
 
 				/**
@@ -135,10 +156,10 @@ namespace Physicc
 				}
 				//Another helper function just to make reading the code easier
 			protected:
-				BoundingObject m_volume;	
+				BoundingObject m_volume;
 				//For accessing non-templated member variables (or even functions) of a templated class
 				//inside a derived class, make sure to use "this" pointer.
-				//See here why: https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members  
+				//See here why: https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members
 		};
 
 		template <typename T>
@@ -153,6 +174,8 @@ namespace Physicc
 
 				friend BaseBV<BoxBV<T>, T>;
 
+
+			public:
 				BoxBV() = default;
 
 				BoxBV(const BoxBV& bv) = default;
@@ -162,13 +185,15 @@ namespace Physicc
 					this->m_volume = {lowerBound, upperBound};
 				}
 
-				inline void setVolume(const T& volume)
+				// friend BaseBV<BoxBV<T>, T>;
+
+				inline void setBoundingVolume(const T& volume)
 				{
 					this->m_volume = volume;
 				}
 
-				inline void setVolume(const glm::vec3& lowerBound,
-				                      const glm::vec3& upperBound)
+				inline void setBoundingVolume(const glm::vec3& lowerBound,
+												const glm::vec3& upperBound)
 				{
 					this->m_volume = {lowerBound, upperBound};
 					//implicit contract: any BoxBV will have a struct that has
@@ -177,6 +202,8 @@ namespace Physicc
 
 				inline float getVolume() const
 				{
+					ZoneScoped;
+
 					//[[nodiscard]] is not needed here because this function is
 					//never called by the end user. It is simply called by BV
 					//itself, which doesn't actually discard the return type, so
@@ -203,27 +230,23 @@ namespace Physicc
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
-
-				inline bool operator==(const BoxBV& other) const
-				{
-					return this->m_volume == other.m_volume;
-				}
 		};
 	}
 
 	namespace BoundingVolume
 	{
-		typedef BVImpl::BaseBV<BVImpl::BoxBV<BVImpl::AABB>, BVImpl::AABB> AABB;
+		typedef BVImpl::BoxBV<BVImpl::AABB> AABB;
 
 		template <typename Derived, typename BoundingObject>
-		auto inline enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
+		inline auto enclosingBV(const BVImpl::BaseBV<Derived, BoundingObject>& volume1,
 								const BVImpl::BaseBV<Derived, BoundingObject>& volume2)
 		{
+			ZoneScoped;
+
 			return volume1.enclosingBV(volume2);
 		}
-		//returns the minimal bounding volume that encompasses both of them
+		// returns the minimal bounding volume that encompasses both of them
 	}
 }
 
 #endif //__BOUNDINGVOLUME_H__
-

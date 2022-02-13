@@ -1,6 +1,9 @@
+#include "core/logging.hpp"
+// Include logging.hpp BEFORE openglshader.hpp because logging.hpp
+// includes Windows.h and openglshader.hpp includes glad.h which
+// should be included after Windows.h (APIENTRY Macro redefinition warning)
 #include "light/platform/opengl/openglshader.hpp"
 
-#include "core/logging.hpp"
 
 namespace Light
 {
@@ -16,7 +19,7 @@ namespace Light
 		}
 
 		LIGHT_CORE_ERROR("Shader type not supported!");
-		return -1;
+		return 0;
 	}
 
 	std::shared_ptr<Shader> Shader::create(const char* shaderPath)
@@ -46,10 +49,11 @@ namespace Light
 		}
 		catch (std::ifstream::failure& e)
 		{
-			LIGHT_CORE_ERROR("Shader file read failure");
+			(void)e; // Supress warning about unused variable in release mode (logs don't get compiled in release)
+			LIGHT_CORE_ERROR("Shader file read failure:" + e.what());
 		}
 
-        m_rendererId = glCreateProgram();
+		m_rendererId = glCreateProgram();
 
 		std::vector<uint32_t> shaderIds;
 
