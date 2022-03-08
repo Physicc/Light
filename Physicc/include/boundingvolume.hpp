@@ -5,13 +5,10 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/epsilon.hpp"
-<<<<<<< HEAD
-=======
 
 #ifdef __cpp_lib_concepts
 #include <concepts>
 #endif
->>>>>>> feature/broadphase
 
 namespace Physicc
 {
