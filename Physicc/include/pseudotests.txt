@@ -23,9 +23,9 @@ BVH bvh(rigidbodies)
 bvh.buildtree()
 potentialContacts = getPotentialContacts(bvh) //single element array
 
-CollisionDetector coldet(potentialContacts);
+CollisionDetector collisionDetector(potentialContacts);
 
-contactArray = coldet.SphereSphere(potentialContacts[0]) //change function to templated function later on
+contactArray = collisionDetector.SphereSphere(potentialContacts[0]) //change function to templated function later on
 
 expectedAnswer = //write the expected answer here
 

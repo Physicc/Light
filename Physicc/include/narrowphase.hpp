@@ -43,6 +43,9 @@ namespace Physicc
 
             bool generateContacts()
             {
+				// Take in the entire array of potential contacts and then
+				// traverse through every single one, and dispatch it to the
+				// correct narrow phase collision detecting function.
             }
 
             std::vector<Narrowphase::Contact> getContacts()
@@ -51,21 +54,28 @@ namespace Physicc
 
             private:
             std::vector<Broadphase::PotentialContact> collisionArray;
-            std::vector<Narrowphase::Contact> collisions;
-
+            std::vector<Narrowphase::Contact> collisionInfo;
+			// the above should return a complete list of contact info for every collision
+			std::vector<std::pair<RigidBody, RigidBody>>> collision;
         };
 
 
-        Contact SphereSphere(Broadphase::PotentialContact a)
+        bool SphereSphere(Broadphase::PotentialContact a)
         {
+			// returns true if the spheres in `a` are colliding. Otherwise
+			// returns false. Also writes the data to the public collision array.
         }
 
-        Contact BoxSphere(Broadphase::PotentialContact a)
+        bool BoxSphere(Broadphase::PotentialContact a)
         {
+			// returns true if the box and the sphere in `a` are colliding.
+			// Otherwise returns false. Also writes the data to the public collision array.
         }
 
-        Contact BoxBox(Broadphase::PotentialContact a)
+        bool BoxBox(Broadphase::PotentialContact a)
         {
+			// returns true if boxes the in `a` are colliding. Otherwise
+			// returns false. Also writes the data to the public collision array.
         }
     }
 }
