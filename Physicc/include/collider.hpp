@@ -207,6 +207,10 @@ namespace Physicc
 			return Type::Sphere;
 		}
 
+		inline float getRadius(){
+			return m_radius;
+		}
+
 	private:
 		float m_radius;
 	};

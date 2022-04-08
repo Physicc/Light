@@ -60,23 +60,11 @@ namespace Physicc
         };
 
 
-        bool SphereSphere(Broadphase::PotentialContact a)
-        {
-			// returns true if the spheres in `a` are colliding. Otherwise
-			// returns false. Also writes the data to the public collision array.
-        }
+        bool SphereSphere(Broadphase::PotentialContact a);
 
-        bool BoxSphere(Broadphase::PotentialContact a)
-        {
-			// returns true if the box and the sphere in `a` are colliding.
-			// Otherwise returns false. Also writes the data to the public collision array.
-        }
+        bool BoxSphere(Broadphase::PotentialContact a);
 
-        bool BoxBox(Broadphase::PotentialContact a)
-        {
-			// returns true if boxes the in `a` are colliding. Otherwise
-			// returns false. Also writes the data to the public collision array.
-        }
+        bool BoxBox(Broadphase::PotentialContact a);
     }
 }
 

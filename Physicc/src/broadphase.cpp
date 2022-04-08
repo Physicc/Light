@@ -95,6 +95,8 @@ namespace Physicc
 					BroadphaseImpl::getPotentialContactsWith(node->left.get(), node->right.get(), collisionArray);
 				}
 			}
+
+
 		}
 
 		//Hook into the getPotentialContacts function for the outside world.
@@ -108,6 +110,10 @@ namespace Physicc
 			std::vector<PotentialContact> v;
 			BroadphaseImpl::getPotentialContacts(node, v);
 			return v;
+		}
+
+		std::vector<PotentialContact> getPotentialContacts(BVH bvh){
+			return getPotentialContacts(bvh.getHeadNode());
 		}
 	}
 }
