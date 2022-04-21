@@ -12,72 +12,57 @@
 
 #include "core/logging.hpp"
 
-// namespace Light
-// {
-// 	template <typename T>
-// 	class Resource
-// 	{
-// 	public:
-// 		Resource(std::string location, std::string name = "") : m_location(location), m_name(name)
-// 		{
-// 			if(m_location.length != 0 && m_name.length() == 0)
-// 			{
-// 				m_name = location;
-// 			}
-// 		}
+namespace Light
+{
+	struct ResourceType
+	{
+	public:
+		ResourceType();
+		ResourceType(const ResourceType& other) = default;
+		ResourceType(ResourceType&& other) = default;
 
-// 		template <typename... Args>
-// 		void create(Args&&... args)
-// 		{
-// 			if(m_location.length() > 0)
-// 			{
-// 				LIGHT_CORE_WARN("Will not create resource {0} which can be loaded from disk", m_name);
-// 				return;
-// 			}
+		~ResourceType() = default;
 
-// 			m_resourcePointer = std::make_shared<T>(std::forward<Args>(args)...);
-// 		}
+		ResourceType& operator=(const ResourceType& other) = default;
+		ResourceType& operator=(ResourceType&& other) = default;
 
-// 		void load()
-// 		{
-// 			if(m_location.length() == 0)
-// 			{
-// 				LIGHT_CORE_ERROR("Cannot load resource {0} from disk without disk location", m_name);
-// 				return;
-// 			}
-// 			else
-// 			{
-// 				m_resourcePointer = std::shared_ptr<T>(T::loadFromFile(m_filename));
-// 			}
+		bool operator==(const ResourceType& other) const;
 
-// 			m_loaded = true;
-// 		}
+		operator int() const;
+	private:
+		static int m_numTypes;
+		const int m_type;
+	};
 
-// 		void unload()
-// 		{
-// 			if(m_location.length() == 0)
-// 			{
-// 				LIGHT_CORE_WARN("Won't be able to reload resource {0} from disk without disk location", m_name);
-// 				m_loaded = false;
-// 				return;
-// 			}
+	class ResourceBase
+	{
+	public:
+		virtual ~ResourceBase() = default;
+		virtual ResourceType getType() const = 0;
+	};
 
-// 			m_loaded = false;
-// 		}
+	template<class T>
+	class Resource : public ResourceBase
+	{
+	private:
+		Resource() = default;
+		friend T;
 
-// 		inline std::shared_ptr<T> operator->() { return m_resourcePointer; }
+	public:
+		static ResourceType getStaticType() { return m_type; }
+		ResourceType getType() const override { return m_type; }
 
-// 	private:
-// 		std::shared_ptr<T> m_resourcePointer;
+	private:
+		static ResourceType m_type;
+	};
 
-// 		std::string m_name;
-// 		std::string m_location;
+	template<class T>
+	ResourceType Resource<T>::m_type;
 
-// 		bool m_loaded;
-// 	};
-// }
+};
 
-
+#define RESOURCE_CLASS(name) \
+	class name final : public Light::Resource<name>
 
 
 #endif // __RESOURCE_H__

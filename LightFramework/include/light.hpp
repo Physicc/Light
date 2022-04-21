@@ -20,6 +20,9 @@
 #include "ecs/entity.hpp"
 #include "ecs/scene.hpp"
 #include "rendering/scenerenderer.hpp"
+#include "resources/resource.hpp"
+#include "resources/resourcecache.hpp"
+#include "resources/resourcemanager.hpp"
 
 #include "glm/gtc/type_ptr.hpp"
 

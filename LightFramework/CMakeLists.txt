@@ -70,3 +70,5 @@ target_include_directories(LightFramework PUBLIC libs/entt)
 #TracyClient
 target_include_directories(LightFramework PUBLIC ../shared/libs/tracy/tracy)
 target_link_libraries(LightFramework TracyClient)
+
+add_subdirectory(tests)
