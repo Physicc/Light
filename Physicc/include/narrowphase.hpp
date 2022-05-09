@@ -7,6 +7,7 @@
 #include "broadphase.hpp"
 #include <vector>
 #include <array>
+#include <cstddef> // for std::size_t
 
 /**
  * TODO: Write BoxSphere and BoxBox functions, make it so that the functions return all the
@@ -76,16 +77,24 @@ namespace Physicc::Narrowphase
 	template <typename... CollisionTypes>
 	struct collisionFunctionMatrix
 	{
+		typedef bool (*)(Broadphase::PotentialContact) collisionFuncSignature;
 		collisionFunctionMatrix()
 		{
 			// When an object of this struct is instatiated, we will contruct the matrix.
 
 		}
 
-		constexpr std::array<bool (*)(Broadphase::PotentialContact), sizeof...(CollisionTypes)> matrix;
+		constexpr std::array<std::array<collisionFuncSignature,
+				  sizeof...(CollisionTypes), sizeof...(CollisionTypes)>> matrix;
 
 		private:
 		// We need a bunch of helper functions to construct the matrix
+
+		template <typename Head, typename... CollisionTypes, std::size_t row, std::size_t col>
+		constructRow() {
+			matrix[row][col] = 
+
+		}
 	};
 }
 
