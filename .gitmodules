@@ -1,9 +1,6 @@
 [submodule "LightFramework/libs/imgui"]
 	path = LightFramework/libs/imgui
 	url = https://github.com/dropTableUsers42/imgui.git
-[submodule "bullet3"]
-	path = bullet3
-	url = https://github.com/dropTableUsers42/bullet3.git
 [submodule "Light/libs/spdlog"]
 	path = shared/libs/spdlog
 	url = https://github.com/dropTableUsers42/spdlog.git
