@@ -22,6 +22,21 @@ namespace Light
 		glm::vec3 position;
 		glm::vec3 color;
 	};
+
+	struct SpotLight
+	{
+		glm::vec3 position;
+		glm::vec3 color;
+		glm::vec3 direction;
+		float innerCutoff;
+		float outerCutoff;
+	};
+
+	struct DirectionalLight
+	{
+		glm::vec3 direction;
+		glm::vec3 color;
+	};
 }
 
 #endif // __LIGHTS_H__

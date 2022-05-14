@@ -29,21 +29,20 @@ namespace Light
 		std::string tag;
 
 		TagComponent() = default;
-		TagComponent(const TagComponent&) = default;
-		TagComponent(const std::string& tag) : tag(tag) {}
+		TagComponent(const TagComponent &) = default;
+		TagComponent(const std::string &tag) : tag(tag) {}
 	};
 	struct TransformComponent : public Component
 	{
-		TransformComponent(glm::vec3 position = glm::vec3(0,0,0),
-			glm::vec3 rotation = glm::vec3(0,0,0),
-			glm::vec3 scale = glm::vec3(0.5))
-		: position(position), rotation(rotation), scale(scale) {}
+		TransformComponent(glm::vec3 position = glm::vec3(0, 0, 0),
+						   glm::vec3 rotation = glm::vec3(0, 0, 0),
+						   glm::vec3 scale = glm::vec3(0.5))
+			: position(position), rotation(rotation), scale(scale) {}
 		inline glm::mat4 getTransform() const
 		{
-			return glm::translate(glm::mat4(1.0f), position)
-				* glm::toMat4(glm::quat(rotation))
-				* glm::scale(glm::mat4(1.0f), glm::abs(scale));
+			return glm::translate(glm::mat4(1.0f), position) * glm::toMat4(glm::quat(rotation)) * glm::scale(glm::mat4(1.0f), glm::abs(scale));
 		}
+
 		glm::vec3 position;
 		glm::vec3 rotation;
 		glm::vec3 scale;
@@ -51,12 +50,12 @@ namespace Light
 
 	struct MeshRendererComponent : public Component
 	{
-		MeshRendererComponent(const char* path);
+		MeshRendererComponent(const char *path);
 		inline void bind()
 		{
 			shader->bind();
 		}
-		inline void setUniformInt(const std::string& name, int value)
+		inline void setUniformInt(const std::string &name, int value)
 		{
 			shader->setUniformInt(name, value);
 		}
