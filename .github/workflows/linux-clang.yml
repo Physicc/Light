@@ -15,14 +15,27 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-18.04, ubuntu-20.04 ]
+        os: [ ubuntu-18.04, ubuntu-20.04, ubuntu-22.04 ]
 
         clang-version: [ 9, 10, 11 ]
+
+        include:
+          - os: ubuntu-22.04
+            clang-version: 12
+          - os: ubuntu-22.04
+            clang-version: 13
+          - os: ubuntu-22.04
+            clang-version: 14
+
         exclude:
           # excludes clang-11 on Ubuntu 18.04 because it doesn't exist in the
-          #standard repositories.
+          # standard repositories.
         - os: ubuntu-18.04
           clang-version: 11
+        - os: ubuntu-22.04
+          clang-version: 9
+        - os: ubuntu-22.04
+          clang-version: 10
     
     name: ${{ matrix.os }} (Clang ${{matrix.clang-version }})
     steps:
