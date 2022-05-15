@@ -76,6 +76,7 @@ namespace Light
 		LightType m_lightType = LightType::Directional;
 		float m_inner = 12.5;
 		float m_outer = 17.5;
+		float m_range  = 10.0;
 	};
 
 	struct CameraComponent : public Component

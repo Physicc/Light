@@ -33,6 +33,7 @@ struct PointLight
 {
 	vec4 position;
 	vec4 color;
+	float range;
 };
 struct SpotLight
 {
@@ -41,12 +42,14 @@ struct SpotLight
 		vec4 direction;
 		float innerCutoff;
 		float outerCutoff;
+		float range;
 };
 
 struct DirectionalLight
 {
 	vec4 direction;
 	vec4 color;
+
 };
 
 uniform PointLight u_pointLights[4];
@@ -63,7 +66,7 @@ vec4 pointLightCalculate(PointLight light, vec3 norm, vec3 viewDir)
 	float distance = length(light.position.xyz - v_worldPos);
 	vec3 lightDir = (light.position.xyz - v_worldPos) / distance;
 
-	float attentuation = 1.0 / (1.0 + 0.09 * distance + 0.032 * distance * distance);
+	float attentuation = clamp(1 - (distance * distance)/(light.range * light.range), 0.0 , 1.0);
 
 	float diff = max(dot(norm, lightDir), 0.0);
 	vec4 diffuse = diff * light.color;
@@ -101,8 +104,8 @@ vec4 spotLightCalculate(SpotLight light, vec3 norm, vec3 viewDir)
 	vec3 lightDir = normalize(light.position.xyz - v_worldPos);
 	vec4 result;
 
-	float attentuation = 1.0 / (1.0 + 0.09 * distance + 0.032 * distance * distance);
-
+	
+	float attentuation = clamp(1 - distance/light.range, 0.0 , 1.0);
 	float theta = dot(lightDir, light.direction.xyz);
 	if (theta > light.outerCutoff)
 	{	

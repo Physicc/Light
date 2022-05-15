@@ -138,10 +138,10 @@ namespace Light
 					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), light.m_lightColor});
 					break;
 				case 1:
-					pointLights.push_back({transform.position, light.m_lightColor});
+					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
 					break;
 				case 2:
-					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer))});
+					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer)), light.m_range});
 					break;
 				default:
 					break;

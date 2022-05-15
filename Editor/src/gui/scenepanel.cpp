@@ -364,10 +364,8 @@ namespace Light
 				}
 				ImGui::EndCombo();
 			}
-
-			
-
 			ImGui::Columns(1);
+
 			if(static_cast<int>(type)== 2)
 			{	
 				
@@ -409,6 +407,34 @@ namespace Light
 				ImGui::SetNextItemWidth(width - lineHeight - 2.0f);
 				ImGui::DragFloat("##outerRad", &component.m_outer, 1.0f, 0.0f, 0.0f, fmt);
 				
+
+				ImGui::Columns(1);
+
+			}
+
+			if(static_cast<int>(type)== 2 || static_cast<int>(type)== 1)
+			{	
+				
+				component.m_range = (component.m_range>0.01f)?component.m_range:1;
+				
+			
+				float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+				const char* fmt = "%.3f";
+				ImGui::Columns(2, NULL, false);
+				ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+				ImGui::Text("Range");
+				ImGui::NextColumn();
+
+				fullWidth = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+				offset = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth);
+				if(offset > 0.0f)
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset);
+
+				ImGui::SetNextItemWidth(fullWidth);
+				float width = fullWidth / 3.0f;
+				ImGui::SetNextItemWidth(width - lineHeight - 2.0f);
+				ImGui::DragFloat("##range", &component.m_range, 1.0f, 0.0f, 0.0f, fmt);
+
 
 				ImGui::Columns(1);
 

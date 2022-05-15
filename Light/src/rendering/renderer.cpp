@@ -62,10 +62,12 @@ namespace Light
 			{
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->pointLights[i].position, 1.0));
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
+				shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].range", s_sceneData->pointLights[i].range);
 			} else
 			{
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].range", 0.001f);
 			}
 		}
 
@@ -78,6 +80,7 @@ namespace Light
 				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].direction", glm::vec4(s_sceneData->spotLights[i].direction, 1.0));
 				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", s_sceneData->spotLights[i].innerCutoff);
 				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", s_sceneData->spotLights[i].outerCutoff);
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].range", s_sceneData->spotLights[i].range);
 			} else
 			{
 				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
@@ -85,6 +88,7 @@ namespace Light
 				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].direction", glm::vec4(0.0, 0.0, 0.0, 1.0));
 				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", 0.0);
 				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", 0.0);
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].range", 0.001f);
 			}
 		}
 
