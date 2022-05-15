@@ -23,7 +23,7 @@ namespace Light
 	{
 		m_viewportWidth = width;
 		m_viewportHeight = height;
-		m_aspectRatio = float(width) / height;
+		m_aspectRatio = static_cast<float>(width) / height;
 		updateProjection();
 	}
 
