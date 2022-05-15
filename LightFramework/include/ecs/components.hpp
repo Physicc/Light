@@ -74,6 +74,8 @@ namespace Light
 		LightComponent(glm::vec3 lightColor) : m_lightColor(lightColor) {}
 		glm::vec3 m_lightColor;
 		LightType m_lightType = LightType::Directional;
+		float m_inner = 12.5;
+		float m_outer = 17.5;
 	};
 
 	struct CameraComponent : public Component

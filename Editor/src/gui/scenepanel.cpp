@@ -367,26 +367,52 @@ namespace Light
 
 			
 
-			// ImGui::Columns(1);
-			// if(static_cast<int>(type)== 2){
-			// 	ImGui::Columns(2, NULL, false);
-			// ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+			ImGui::Columns(1);
+			if(static_cast<int>(type)== 2)
+			{	
+				
+				component.m_inner = glm::clamp(component.m_inner, 0.0f, 90.0f);
+				component.m_outer = glm::clamp(component.m_outer, component.m_inner, 90.0f);
+				
+			
+				float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+				const char* fmt = "%.3f";
+				ImGui::Columns(2, NULL, false);
+				ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+				ImGui::Text("Inner Cutoff");
+				ImGui::NextColumn();
 
-			// ImGui::Text("Light Nigga");
+				fullWidth = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+				offset = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth);
+				if(offset > 0.0f)
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset);
 
-			// ImGui::NextColumn();
+				ImGui::SetNextItemWidth(fullWidth);
+				float width = fullWidth / 3.0f;
+				ImGui::SetNextItemWidth(width - lineHeight - 2.0f);
+				ImGui::DragFloat("##innerRad", &component.m_inner, 1.0f, 0.0f, 0.0f, fmt);
 
-			// float fullWidth1 = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
-			// float offset1 = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth1);
-			// if(offset1 > 0.0f)
-			// 	ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset1);
 
-			// // ImGui::SetNextItemWidth(fullWidth);
+				ImGui::Columns(1);
 
-			// // ImGui::ColorEdit3("##color", &component.m_lightColor[0]);
+				ImGui::Columns(2, NULL, false);
+				ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+				ImGui::Text("Outer Cutoff");
+				ImGui::NextColumn();
 
-			// ImGui::Columns(1);
-			// }
+				fullWidth = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+				offset = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth);
+				if(offset > 0.0f)
+				 		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset);
+				ImGui::SetNextItemWidth(fullWidth);
+				width = fullWidth / 3.0f;
+				ImGui::SetNextItemWidth(width - lineHeight - 2.0f);
+				ImGui::DragFloat("##outerRad", &component.m_outer, 1.0f, 0.0f, 0.0f, fmt);
+				
+
+				ImGui::Columns(1);
+
+			}
 			
 		});
 	}

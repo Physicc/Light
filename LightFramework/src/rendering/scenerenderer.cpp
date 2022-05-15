@@ -141,7 +141,7 @@ namespace Light
 					pointLights.push_back({transform.position, light.m_lightColor});
 					break;
 				case 2:
-					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(12.5)), (float)glm::cos(glm::radians(17.5))});
+					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer))});
 					break;
 				default:
 					break;
