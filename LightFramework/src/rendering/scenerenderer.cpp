@@ -135,13 +135,13 @@ namespace Light
 				switch (static_cast<int>(light.m_lightType))
 				{
 				case 0:
-					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(1.0, 1.0, 1.0, 0.0)), light.m_lightColor});
+					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), light.m_lightColor});
 					break;
 				case 1:
 					pointLights.push_back({transform.position, light.m_lightColor});
 					break;
 				case 2:
-					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0, 0, 1.0, 0.0)), (float)glm::cos(glm::radians(12.5)), (float)glm::cos(glm::radians(17.5))});
+					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(12.5)), (float)glm::cos(glm::radians(17.5))});
 					break;
 				default:
 					break;
