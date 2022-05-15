@@ -365,7 +365,29 @@ namespace Light
 				ImGui::EndCombo();
 			}
 
-			ImGui::Columns(1);
+			
+
+			// ImGui::Columns(1);
+			// if(static_cast<int>(type)== 2){
+			// 	ImGui::Columns(2, NULL, false);
+			// ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+
+			// ImGui::Text("Light Nigga");
+
+			// ImGui::NextColumn();
+
+			// float fullWidth1 = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+			// float offset1 = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth1);
+			// if(offset1 > 0.0f)
+			// 	ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset1);
+
+			// // ImGui::SetNextItemWidth(fullWidth);
+
+			// // ImGui::ColorEdit3("##color", &component.m_lightColor[0]);
+
+			// ImGui::Columns(1);
+			// }
+			
 		});
 	}
 }

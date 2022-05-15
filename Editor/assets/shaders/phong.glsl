@@ -69,8 +69,8 @@ vec4 pointLightCalculate(PointLight light, vec3 norm, vec3 viewDir)
 	vec4 diffuse = diff * light.color;
 
 	//specular
-	vec3 reflectDir = normalize(reflect(-lightDir, norm));
-	float spec = pow(max(dot(reflectDir, viewDir), 0.0), 32);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	float spec = pow(max(dot(norm, viewDir), 0.0), 64);
 	vec4 specular = spec * light.color;
 	diffuse = diffuse * attentuation;
 	specular = specular * attentuation;
@@ -81,14 +81,14 @@ vec4 pointLightCalculate(PointLight light, vec3 norm, vec3 viewDir)
 vec4 directionalLightCalculate(DirectionalLight light, vec3 norm, vec3 viewDir)
 {	
 	vec4 color = vec4(light.color);
-	vec3 direction = normalize(vec3(light.direction));
-	float diff = max(dot(norm, direction), 0.0);
+	vec3 lightDir = normalize(vec3(light.direction));
+	float diff = max(dot(norm, lightDir), 0.0);
 	vec4 diffuse = diff * color;
 
 
 	//specular
-	vec3 reflectDir = normalize(reflect(-direction, norm));
-	float spec = pow(max(dot(reflectDir, viewDir), 0.0), 32);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	float spec = pow(max(dot(halfwayDir, norm), 0.0), 64);
 	vec4 specular = spec * color;
 
 	vec4 result = diffuse + specular;
@@ -97,11 +97,11 @@ vec4 directionalLightCalculate(DirectionalLight light, vec3 norm, vec3 viewDir)
 
 vec4 spotLightCalculate(SpotLight light, vec3 norm, vec3 viewDir)
 {
-
+	float distance = length(light.position.xyz - v_worldPos);
 	vec3 lightDir = normalize(light.position.xyz - v_worldPos);
 	vec4 result;
 
-	
+	float attentuation = 1.0 / (1.0 + 0.09 * distance + 0.032 * distance * distance);
 
 	float theta = dot(lightDir, light.direction.xyz);
 	if (theta > light.outerCutoff)
@@ -109,11 +109,11 @@ vec4 spotLightCalculate(SpotLight light, vec3 norm, vec3 viewDir)
 		float intensity = clamp((theta - light.outerCutoff) / (light.innerCutoff - light.outerCutoff), 0.0, 1.0);
 		float diff = max(dot(norm, lightDir), 0.0);
 		vec4 diffuse = diff * light.color;
-		vec3 reflectDir = normalize(reflect(-lightDir, norm));
-		float spec = pow(max(dot(reflectDir, viewDir), 0.0), 64);
+		vec3 halfwayDir = normalize(lightDir + viewDir);
+		float spec = pow(max(dot(halfwayDir, norm), 0.0), 64);
 		vec4 specular = spec * light.color;
-		diffuse *= intensity;
-		specular *= intensity;
+		diffuse = diffuse * intensity * attentuation;
+		specular = specular * intensity * attentuation;
 		result = diffuse + specular;
 	} else
 	{
