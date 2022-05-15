@@ -52,7 +52,7 @@ namespace Light
 				-1.0, 1.0, -1.0,
 				1.0, 1.0, -1.0,
 				1.0, -1.0, -1.0
-				};
+			};
 
 		std::shared_ptr<VertexBuffer> vbo(VertexBuffer::create(vertices, sizeof(vertices)));
 
