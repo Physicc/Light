@@ -75,18 +75,30 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __LIGHTS_H__</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;glm/glm.hpp&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>Light</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structLight_1_1PointLight.html">    8</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structLight_1_1PointLight.html">PointLight</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        glm::vec3 position;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        glm::vec3 color;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    };</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __LIGHTS_H__</span></div>
-<div class="ttc" id="astructLight_1_1PointLight_html"><div class="ttname"><a href="structLight_1_1PointLight.html">Light::PointLight</a></div><div class="ttdef"><b>Definition:</b> lights.hpp:9</div></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>Light</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">enum class</span> LightType</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        Directional = 0,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        Point = 1,</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        Spot = 2,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        NumLightTypes</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    };</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">extern</span> std::string LightTypeStrings[(int)LightType::NumLightTypes];</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structLight_1_1PointLight.html">   20</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structLight_1_1PointLight.html">PointLight</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        glm::vec3 position;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        glm::vec3 color;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __LIGHTS_H__</span></div>
+<div class="ttc" id="astructLight_1_1PointLight_html"><div class="ttname"><a href="structLight_1_1PointLight.html">Light::PointLight</a></div><div class="ttdef"><b>Definition:</b> lights.hpp:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
