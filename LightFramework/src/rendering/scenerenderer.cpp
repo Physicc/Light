@@ -80,11 +80,13 @@ namespace Light
 		// Outline Mesh (Screen space quad)
 		m_outline_mesh.reset(Light::VertexArray::create());
 
-		float screen_vertices[] = {
+		float screen_vertices[] = 
+		{
 			-1.0, -1.0,
 			-1.0, 1.0,
 			1.0, 1.0,
-			1.0, -1.0};
+			1.0, -1.0
+		};
 
 		vbo.reset(VertexBuffer::create(screen_vertices, sizeof(screen_vertices)));
 
