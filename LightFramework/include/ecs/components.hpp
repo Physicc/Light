@@ -29,8 +29,8 @@ namespace Light
 		std::string tag;
 
 		TagComponent() = default;
-		TagComponent(const TagComponent &) = default;
-		TagComponent(const std::string &tag) : tag(tag) {}
+		TagComponent(const TagComponent&) = default;
+		TagComponent(const std::string& tag) : tag(tag) {}
 	};
 	struct TransformComponent : public Component
 	{
@@ -50,12 +50,12 @@ namespace Light
 
 	struct MeshRendererComponent : public Component
 	{
-		MeshRendererComponent(const char *path);
+		MeshRendererComponent(const char* path);
 		inline void bind()
 		{
 			shader->bind();
 		}
-		inline void setUniformInt(const std::string &name, int value)
+		inline void setUniformInt(const std::string& name, int value)
 		{
 			shader->setUniformInt(name, value);
 		}

@@ -16,15 +16,15 @@ namespace Light
 		static void init();
 		static void onWindowResize(uint32_t width, uint32_t height);
 
-		static void beginScene(Camera &camera, glm::mat4 camera_view, glm::vec3 camPos);
+		static void beginScene(Camera& camera, glm::mat4 camera_view, glm::vec3 camPos);
 		static void endScene();
 
-		static void submitLight(const std::vector<PointLight> &lights);
-		static void submitLight(const std::vector<SpotLight> &lights);
-		static void submitLight(const std::vector<DirectionalLight> &lights);
-		static void submit(const std::shared_ptr<Shader> &shader, const std::shared_ptr<VertexArray> &vao, glm::mat4 transform = glm::mat4(1.0f));
-		static void submitID(const std::shared_ptr<Shader> &shader, const std::shared_ptr<VertexArray> &vao, glm::mat4 transform = glm::mat4(1.0f), int id = -1);
-		static void submitSkybox(const std::shared_ptr<Shader> &shader, const std::shared_ptr<VertexArray> &vao);
+		static void submitLight(const std::vector<PointLight>& lights);
+		static void submitLight(const std::vector<SpotLight>& lights);
+		static void submitLight(const std::vector<DirectionalLight>& lights);
+		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
+		static void submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f), int id = -1);
+		static void submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
 
 	private:
 		struct SceneData
@@ -37,7 +37,7 @@ namespace Light
 			std::vector<DirectionalLight> directionalLights;
 		};
 
-		static SceneData *s_sceneData;
+		static SceneData* s_sceneData;
 	};
 
 }

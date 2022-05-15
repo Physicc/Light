@@ -33,13 +33,13 @@ namespace Light
 		glm::vec3 calculatePosition() const;
 
 	private:
-		bool onMouseScrolled(MouseScrolledEvent &e);
+		bool onMouseScrolled(MouseScrolledEvent& e);
 
 		void updateView();
 		void updateProjection();
 
-		void mousePan(const glm::vec2 &delta);
-		void mouseRotate(const glm::vec2 &delta);
+		void mousePan(const glm::vec2& delta);
+		void mouseRotate(const glm::vec2& delta);
 		void mouseZoom(float delta);
 
 		std::pair<float, float> panSpeed() const;

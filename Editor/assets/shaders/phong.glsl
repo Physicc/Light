@@ -58,7 +58,7 @@ uniform int u_numSpotLights;
 uniform int u_id;
 uniform int u_selectionId;
 
-vec4 pointLightCalculate(PointLight light, vec3 norm,vec3 viewDir)
+vec4 pointLightCalculate(PointLight light, vec3 norm, vec3 viewDir)
 {
 	float distance = length(light.position.xyz - v_worldPos);
 	vec3 lightDir = (light.position.xyz - v_worldPos) / distance;
@@ -69,33 +69,33 @@ vec4 pointLightCalculate(PointLight light, vec3 norm,vec3 viewDir)
 	vec4 diffuse = diff * light.color;
 
 	//specular
-	vec3 reflectDir = normalize(reflect(-lightDir,norm));
-	float spec = pow(max(dot(reflectDir,viewDir),0.0),32);
+	vec3 reflectDir = normalize(reflect(-lightDir, norm));
+	float spec = pow(max(dot(reflectDir, viewDir), 0.0), 32);
 	vec4 specular = spec * light.color;
 	diffuse = diffuse * attentuation;
-	specular = specular*attentuation;
+	specular = specular * attentuation;
 	vec4 result = diffuse + specular;
 	return result;
 }
 
-vec4 directionalLightCalculate(DirectionalLight light,vec3 norm,vec3 viewDir)
+vec4 directionalLightCalculate(DirectionalLight light, vec3 norm, vec3 viewDir)
 {	
-	vec4 color =  vec4(light.color);
+	vec4 color = vec4(light.color);
 	vec3 direction = normalize(vec3(light.direction));
 	float diff = max(dot(norm, direction), 0.0);
 	vec4 diffuse = diff * color;
 
 
 	//specular
-	vec3 reflectDir = normalize(reflect(-direction,norm));
-	float spec = pow(max(dot(reflectDir,viewDir),0.0),32);
+	vec3 reflectDir = normalize(reflect(-direction, norm));
+	float spec = pow(max(dot(reflectDir, viewDir), 0.0), 32);
 	vec4 specular = spec * color;
 
-	vec4 result = diffuse +specular;
+	vec4 result = diffuse + specular;
 	return result;
 }
 
-vec4 spotLightCalculate(SpotLight light, vec3 norm,vec3 viewDir)
+vec4 spotLightCalculate(SpotLight light, vec3 norm, vec3 viewDir)
 {
 
 	vec3 lightDir = normalize(light.position.xyz - v_worldPos);
@@ -103,22 +103,21 @@ vec4 spotLightCalculate(SpotLight light, vec3 norm,vec3 viewDir)
 
 	
 
-	float theta = dot(lightDir,light.direction.xyz);
+	float theta = dot(lightDir, light.direction.xyz);
 	if(theta > light.outerCutoff)
 	{	
 		float intensity = clamp((theta - light.outerCutoff) / (light.innerCutoff - light.outerCutoff), 0.0, 1.0);
 		float diff = max(dot(norm, lightDir), 0.0);
 		vec4 diffuse = diff * light.color;
-		vec3 reflectDir = normalize(reflect(-lightDir,norm));
-		float spec = pow(max(dot(reflectDir,viewDir),0.0),64);
+		vec3 reflectDir = normalize(reflect(-lightDir, norm));
+		float spec = pow(max(dot(reflectDir, viewDir), 0.0), 64);
 		vec4 specular = spec * light.color;
-		diffuse *=   intensity;
+		diffuse *= intensity;
 		specular *= intensity;
 		result = diffuse + specular;
-	}
-	else
+	} else
 	{
-		result = vec4(0,0,0,0);
+		result = vec4(0.0 , 0.0 , 0.0 , 0.0);
 	}
 	
 	
@@ -137,18 +136,18 @@ void main()
 	// {
 	// 	color += vec4(pointLightCalculate(u_pointLights[i]), 0.0);
 	// }
-	color += pointLightCalculate(u_pointLights[0], norm,viewDir);
-	color += pointLightCalculate(u_pointLights[1], norm,viewDir);
-	color += pointLightCalculate(u_pointLights[2], norm,viewDir);
-	color += pointLightCalculate(u_pointLights[3], norm,viewDir);
-	color += spotLightCalculate(u_spotLights[0], norm,viewDir);
-	color +=  spotLightCalculate(u_spotLights[1], norm,viewDir);
-	color +=  spotLightCalculate(u_spotLights[2], norm,viewDir);
-	color += spotLightCalculate(u_spotLights[3], norm,viewDir);
-	color += directionalLightCalculate(u_directionalLights[0],norm,viewDir);
-	color += directionalLightCalculate(u_directionalLights[1],norm,viewDir);
-	color += directionalLightCalculate(u_directionalLights[2],norm,viewDir);
-	color += directionalLightCalculate(u_directionalLights[3],norm,viewDir);
+	color += pointLightCalculate(u_pointLights[0], norm, viewDir);
+	color += pointLightCalculate(u_pointLights[1], norm, viewDir);
+	color += pointLightCalculate(u_pointLights[2], norm, viewDir);
+	color += pointLightCalculate(u_pointLights[3], norm, viewDir);
+	color += spotLightCalculate(u_spotLights[0], norm, viewDir);
+	color += spotLightCalculate(u_spotLights[1], norm, viewDir);
+	color += spotLightCalculate(u_spotLights[2], norm, viewDir);
+	color += spotLightCalculate(u_spotLights[3], norm, viewDir);
+	color += directionalLightCalculate(u_directionalLights[0], norm, viewDir);
+	color += directionalLightCalculate(u_directionalLights[1], norm, viewDir);
+	color += directionalLightCalculate(u_directionalLights[2], norm, viewDir);
+	color += directionalLightCalculate(u_directionalLights[3], norm, viewDir);
 	color.a = 1.0;
 	color *= v_color;
 	entity = u_id;

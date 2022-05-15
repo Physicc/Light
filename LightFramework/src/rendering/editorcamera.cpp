@@ -69,7 +69,7 @@ namespace Light
 	void EditorCamera::onUpdate(Timestep)
 	{
 		auto [mouseX, mouseY] = Input::getMousePos();
-		const glm::vec2 &mouse{mouseX, mouseY};
+		const glm::vec2& mouse{mouseX, mouseY};
 		glm::vec2 delta = (mouse - m_initialMousePos) * 0.003f;
 		m_initialMousePos = mouse;
 
@@ -86,13 +86,13 @@ namespace Light
 		}
 	}
 
-	void EditorCamera::onEvent(Event &e)
+	void EditorCamera::onEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(EditorCamera::onMouseScrolled));
 	}
 
-	bool EditorCamera::onMouseScrolled(MouseScrolledEvent &e)
+	bool EditorCamera::onMouseScrolled(MouseScrolledEvent& e)
 	{
 		auto [xOffset, yOffset] = e.getOffset();
 		float delta = static_cast<float>(yOffset) * 0.1f;
@@ -101,14 +101,14 @@ namespace Light
 		return false;
 	}
 
-	void EditorCamera::mousePan(const glm::vec2 &delta)
+	void EditorCamera::mousePan(const glm::vec2& delta)
 	{
 		auto [xSpeed, ySpeed] = panSpeed();
 		m_focalPoint += -getRightDirection() * delta.x * xSpeed * m_distance;
 		m_focalPoint += getUpDirection() * delta.y * ySpeed * m_distance;
 	}
 
-	void EditorCamera::mouseRotate(const glm::vec2 &delta)
+	void EditorCamera::mouseRotate(const glm::vec2& delta)
 	{
 		float yawSign = getUpDirection().y < 0 ? -1.0f : 1.0f;
 		m_yaw += yawSign * delta.x * rotationSpeed();

@@ -20,86 +20,39 @@ namespace Light
 		// Skybox Mesh (Cube)
 		m_skybox_mesh.reset(VertexArray::create());
 
-		float vertices[] = {
-			// Front
-			-1.0,
-			-1.0,
-			1.0,
-			1.0,
-			-1.0,
-			1.0,
-			1.0,
-			1.0,
-			1.0,
-			-1.0,
-			1.0,
-			1.0,
-			// Left
-			-1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			1.0,
-			1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			-1.0,
-			-1.0,
-			-1.0,
-			// Right
-			1.0,
-			-1.0,
-			1.0,
-			1.0,
-			-1.0,
-			-1.0,
-			1.0,
-			1.0,
-			-1.0,
-			1.0,
-			1.0,
-			1.0,
-			// Top
-			-1.0,
-			1.0,
-			1.0,
-			1.0,
-			1.0,
-			1.0,
-			1.0,
-			1.0,
-			-1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			// Bottom
-			-1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			-1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			1.0,
-			// Back
-			-1.0,
-			-1.0,
-			-1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			1.0,
-			1.0,
-			-1.0,
-			1.0,
-			-1.0,
-			-1.0,
-		};
+		float vertices[] =
+			{
+				// Front
+				-1.0, -1.0, 1.0,
+				1.0, -1.0, 1.0,
+				1.0, 1.0, 1.0,
+				-1.0, 1.0, 1.0,
+				// Left
+				-1.0, -1.0, 1.0,
+				-1.0, 1.0, 1.0,
+				-1.0, 1.0, -1.0,
+				-1.0, -1.0, -1.0,
+				// Right
+				1.0, -1.0, 1.0,
+				1.0, -1.0, -1.0,
+				1.0, 1.0, -1.0,
+				1.0, 1.0, 1.0,
+				// Top
+				-1.0, 1.0, 1.0,
+				1.0, 1.0, 1.0,
+				1.0, 1.0, -1.0,
+				-1.0, 1.0, -1.0,
+				// Bottom
+				-1.0, -1.0, 1.0,
+				-1.0, -1.0, -1.0,
+				1.0, -1.0, -1.0,
+				1.0, -1.0, 1.0,
+				// Back
+				-1.0, -1.0, -1.0,
+				-1.0, 1.0, -1.0,
+				1.0, 1.0, -1.0,
+				1.0, -1.0, -1.0
+				};
 
 		std::shared_ptr<VertexBuffer> vbo(VertexBuffer::create(vertices, sizeof(vertices)));
 
@@ -111,7 +64,8 @@ namespace Light
 			8, 10, 9, 11, 10, 8,
 			12, 14, 13, 15, 14, 12,
 			16, 18, 17, 19, 18, 16,
-			20, 22, 21, 23, 22, 20};
+			20, 22, 21, 23, 22, 20
+			};
 
 		std::shared_ptr<IndexBuffer> ibo(IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
 
@@ -172,11 +126,11 @@ namespace Light
 		{
 			auto view = scene->m_registry.view<LightComponent, TransformComponent>();
 
-			for (auto &entity : view)
+			for (auto& entity : view)
 			{
 
 				auto [light, transform] = view.get(entity);
-				switch ((int)light.m_lightType)
+				switch (static_cast<int>(light.m_lightType))
 				{
 				case 0:
 					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(1.0, 1.0, 1.0, 0.0)), light.m_lightColor});
@@ -203,7 +157,7 @@ namespace Light
 		// Render entities
 		{
 			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
-			for (auto &entity : view)
+			for (auto& entity : view)
 			{
 				auto [shader, mesh, transform] = view.get(entity);
 				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity);
