@@ -104,7 +104,7 @@ vec4 spotLightCalculate(SpotLight light, vec3 norm, vec3 viewDir)
 	
 
 	float theta = dot(lightDir, light.direction.xyz);
-	if(theta > light.outerCutoff)
+	if (theta > light.outerCutoff)
 	{	
 		float intensity = clamp((theta - light.outerCutoff) / (light.innerCutoff - light.outerCutoff), 0.0, 1.0);
 		float diff = max(dot(norm, lightDir), 0.0);
