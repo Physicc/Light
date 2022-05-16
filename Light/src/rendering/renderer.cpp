@@ -56,7 +56,7 @@ namespace Light
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
 
-		for (int i = 0; i < 4; i++)
+		for (size_t i = 0; i < 4; i++)
 		{
 			if (i < s_sceneData->pointLights.size())
 			{
@@ -71,7 +71,7 @@ namespace Light
 			}
 		}
 
-		for (int i = 0; i < 4; i++)
+		for (size_t i = 0; i < 4; i++)
 		{
 			if (i < s_sceneData->spotLights.size())
 			{
@@ -92,7 +92,7 @@ namespace Light
 			}
 		}
 
-		for (int i = 0; i < 4; i++)
+		for (size_t i = 0; i < 4; i++)
 		{
 			if (i < s_sceneData->directionalLights.size())
 			{
