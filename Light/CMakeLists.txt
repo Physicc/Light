@@ -55,5 +55,5 @@ add_subdirectory(libs/glad)
 target_link_libraries(Light PRIVATE glad)
 
 # GLFW Include
-target_include_directories(Light PRIVATE ../LightFramework/libs/glfw-3.3.3/include)
+target_include_directories(Light PRIVATE ../LightFramework/libs/glfw/include)
 add_definitions(-DGLFW_INCLUDE_NONE)

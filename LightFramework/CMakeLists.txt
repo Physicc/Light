@@ -46,7 +46,10 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 # GLFW
-add_subdirectory(libs/glfw-3.3.3)
+
+set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
+
+add_subdirectory(libs/glfw)
 target_link_libraries(LightFramework glfw)
 
 add_definitions(-DGLFW_INCLUDE_NONE)

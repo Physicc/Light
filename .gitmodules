@@ -17,3 +17,6 @@
 	path = tools/tracy/capstone
 	url = https://github.com/dropTableUsers42/capstone
 	branch = next
+[submodule "LightFramework/libs/glfw"]
+	path = LightFramework/libs/glfw
+	url = https://github.com/glfw/glfw
