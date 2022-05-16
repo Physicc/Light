@@ -45,6 +45,9 @@ endif ()
 
 target_include_directories(Editor PUBLIC include)
 
+add_subdirectory(libs/ImGuizmo)
+target_link_libraries(Editor ImGuizmo)
+
 add_subdirectory(../LightFramework LightFramework)
 target_link_libraries(Editor LightFramework)
 
