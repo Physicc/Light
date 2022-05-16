@@ -86,6 +86,8 @@ namespace Physicc
 					typeCast()->setVolume(lowerBound, upperBound);
 				}
 
+				BaseBV& operator=(const BaseBV& bv) = default;
+
 				/**
  				 * @brief Returns whether two BVs are overlapping or not
  				 *
@@ -155,6 +157,8 @@ namespace Physicc
 				BoxBV() = default;
 
 				BoxBV(const BoxBV& bv) = default;
+
+				BoxBV& operator=(const BoxBV& bv) = default;
 
 				BoxBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{

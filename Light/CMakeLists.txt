@@ -40,7 +40,7 @@ target_link_libraries(Light PUBLIC stbimage)
 if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
 	add_subdirectory(../shared/libs/spdlog spdlog)
 else()
-	target_include_directories(Light PUBLIC ../shared/libs/spdlog/include)
+	target_include_directories(Light SYSTEM PUBLIC ../shared/libs/spdlog/include)
 endif()
 
 # target_link_libraries(Light PRIVATE shared)
