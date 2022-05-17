@@ -31,6 +31,10 @@ namespace Physicc
 			//convert the tree into a linear data structure
 			std::vector<std::weak_ptr<RigidBody>> convert();
 
+			std::shared_ptr<BVHNode> getHeadNode(){
+				return m_head;
+			}
+
 		private:
 			std::shared_ptr<BVHNode> m_head;
 			std::vector<RigidBody> m_rigidBodyList;
@@ -47,7 +51,7 @@ namespace Physicc
 
 			void sort(Axis axis, std::size_t start, std::size_t end);
 			Axis getMedianCuttingAxis(std::size_t start, std::size_t end);
-	};
+	}; //Tirthankar was here
 }
 
 #endif //__BVH_H__
