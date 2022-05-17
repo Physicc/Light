@@ -30,6 +30,7 @@ namespace Light
 
 		TagComponent() = default;
 		TagComponent(const TagComponent&) = default;
+		TagComponent& operator=(const TagComponent&) = default;
 		TagComponent(const std::string& tag) : tag(tag) {}
 	};
 	struct TransformComponent : public Component
