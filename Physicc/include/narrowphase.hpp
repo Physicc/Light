@@ -12,7 +12,8 @@
 /**
  * TODO: Write BoxSphere and BoxBox functions, make it so that the functions return all the
  * information required for contact resolution.
- * 
+ *
+ * Fix formatting issues, and reorganize the functions in the collisionFunctionMatrix struct.
  */
 
 namespace Physicc::Narrowphase
