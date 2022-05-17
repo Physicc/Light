@@ -31,9 +31,9 @@ namespace Physicc
 			BVHNode* m_head;
 			std::vector<RigidBody> m_rigidBodyList;
 
-			BoundingVolume::AABB computeBV(int start, int end);
+			BoundingVolume::AABB computeBV(std::size_t start, std::size_t end);
 
-			void buildTree(BVHNode* node, int start, int end);
+			void buildTree(BVHNode* node, std::size_t start, std::size_t end);
 
 			enum Axis {
 				X,
@@ -41,8 +41,8 @@ namespace Physicc
 				Z,
 			};
 
-			void sort(Axis axis, int start, int end);
-			Axis getMedianCuttingAxis(int start, int end);
+			void sort(Axis axis, std::size_t start, std::size_t end);
+			Axis getMedianCuttingAxis(std::size_t start, std::size_t end);
 	};
 }
 
