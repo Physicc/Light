@@ -210,11 +210,6 @@ namespace Physicc
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
-
-				inline bool operator==(const BoxBV& other) const
-				{
-					return this->m_volume == other.m_volume;
-				}
 		};
 	}
 
