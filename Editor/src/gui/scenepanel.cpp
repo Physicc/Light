@@ -385,9 +385,10 @@ namespace Light
 				ImGui::SetNextItemWidth(fullWidth);
 				float width = fullWidth / 3.0f;
 				ImGui::SetNextItemWidth(width - lineHeight - 2.0f);
-				if(ImGui::DragFloat("##innerRad", &component.m_inner, 1.0f, 0.0f, component.m_outer, fmt))
+				if(ImGui::DragFloat("##innerRad", &component.m_inner, 1.0f, 0.0f, 90.0f, fmt))
 				{
-					component.m_inner = glm::clamp(component.m_inner, 0.0f, component.m_outer);
+					component.m_inner = glm::clamp(component.m_inner, 0.0f, 90.0f);
+					component.m_outer = glm::clamp(component.m_outer, component.m_inner, 90.0f);
 				}
 
 
@@ -405,9 +406,10 @@ namespace Light
 				ImGui::SetNextItemWidth(fullWidth);
 				width = fullWidth / 3.0f;
 				ImGui::SetNextItemWidth(width - lineHeight - 2.0f);
-				if(ImGui::DragFloat("##outerRad", &component.m_outer, 1.0f, component.m_inner, 90.0f, fmt))
-				{
-					component.m_outer = glm::clamp(component.m_outer, component.m_inner, 90.0f);
+				if(ImGui::DragFloat("##outerRad", &component.m_outer, 1.0f, 0.0f, 90.0f, fmt))
+				{	
+					component.m_outer = glm::clamp(component.m_outer, 0.0f, 90.0f);
+					component.m_inner = glm::clamp(component.m_inner, 0.0f, component.m_outer);
 				}
 				
 
