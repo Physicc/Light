@@ -120,7 +120,7 @@ namespace Light
 
 		m_framebuffer->clearAttachment(1, 0);
 
-		Light::Renderer::beginScene(camera, camera.getViewMatrix(), camera.calculatePosition());
+		Light::Renderer::beginScene(camera, camera.getViewMatrix());
 
 		std::vector<PointLight> pointLights;
 		std::vector<SpotLight> spotLights;

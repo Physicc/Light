@@ -15,13 +15,14 @@ namespace Light
 		RenderCommand::setViewPort(0, 0, width, height);
 	}
 
-	void Renderer::beginScene(Camera& camera, glm::mat4 camera_view, glm::vec3 camPos)
+	void Renderer::beginScene(Camera& camera, glm::mat4 camera_view)
 	{
 		s_sceneData->viewProjectionMatrix = camera.getProjectionMatrix() * camera_view;
 
 		glm::mat4 view = glm::mat4(glm::mat3(camera_view));
 		s_sceneData->viewProjectionSkyboxMatrix = camera.getProjectionMatrix() * view;
-		s_sceneData->cameraPosition = camPos;
+		s_sceneData->cameraPosition = -glm::vec3(camera_view[3] * view);
+		
 	}
 
 	void Renderer::endScene()

@@ -16,7 +16,7 @@ namespace Light
 		static void init();
 		static void onWindowResize(uint32_t width, uint32_t height);
 
-		static void beginScene(Camera& camera, glm::mat4 camera_view, glm::vec3 camPos);
+		static void beginScene(Camera& camera, glm::mat4 camera_view);
 		static void endScene();
 
 		static void submitLight(const std::vector<PointLight>& lights);
