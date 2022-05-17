@@ -1,4 +1,4 @@
-#include "core/logging.hpp"
+// #include "core/logging.hpp"
 #include "rendering/scenerenderer.hpp"
 
 #include "light/rendering/renderer.hpp"
@@ -60,7 +60,7 @@ namespace Light {
 			{ ShaderDataType::Float3, "a_Position" }
 		}));
 
-		unsigned int indices[] = { 
+		unsigned int indices[] = {
 			0, 2, 1, 3, 2, 0,
 			4, 6, 5, 7, 6, 4,
 			8, 10, 9, 11, 10, 8,
@@ -96,7 +96,7 @@ namespace Light {
 		});
 
 		unsigned int screen_indices[] = {
-			0, 2, 1, 3, 2, 0 
+			0, 2, 1, 3, 2, 0
 		};
 
 		ibo.reset(IndexBuffer::create(screen_indices, sizeof(screen_indices) / sizeof(unsigned int)));
@@ -140,7 +140,7 @@ namespace Light {
 		// Render Skybox
 		scene->m_skybox->bind();
 		Renderer::submitSkybox(m_skybox_shader, m_skybox_mesh);
-		
+
 		// Render entities
 		{
 			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
