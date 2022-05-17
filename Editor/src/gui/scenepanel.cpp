@@ -13,7 +13,7 @@
 
 namespace Light
 {
-	void ScenePanel::onImguiRender() 
+	void ScenePanel::onImguiRender()
 	{
 		ImGui::Begin("Scene");
 
@@ -31,7 +31,7 @@ namespace Light
 					auto entity = m_context->addEntity("New Entity");
 					entity.addComponent<LightComponent>();
 				}
-				
+
 				if (ImGui::BeginMenu("Primitive"))
 				{
 					if (ImGui::MenuItem("Cube"))
@@ -87,10 +87,10 @@ namespace Light
 		ImGui::End();
 	}
 
-	void ScenePanel::drawSceneNode(Entity entity) 
+	void ScenePanel::drawSceneNode(Entity entity)
 	{
 		auto& tag = entity.getComponent<TagComponent>().tag;
-		
+
 		const ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ((m_selectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0);
 		bool opened = ImGui::TreeNodeEx(entity.getUUID().c_str(), flags, "%s", tag.c_str()); // Use %s as argument to avoid format string vulnerability
 		bool toRemove = false;
@@ -224,7 +224,7 @@ namespace Light
 		ImGui::SameLine();
 		ImGui::SetNextItemWidth(fullWidth - width * 2 - lineHeight - 2.0f);
 		ret |= ImGui::InputFloat("##zedit", &vec3.z, 0.0f, 0.0f, fmt);
-		
+
 		ImGui::PopStyleVar();
 
 		ImGui::Columns(1);
@@ -234,7 +234,7 @@ namespace Light
 		return ret;
 	}
 
-	void ScenePanel::drawAllComponents(Entity entity) 
+	void ScenePanel::drawAllComponents(Entity entity)
 	{
 		if(entity.hasComponent<TagComponent>())
 		{
@@ -276,7 +276,7 @@ namespace Light
 
 			auto meshMap = m_meshLibrary->getMeshMap();
 			auto current = meshMap.begin();
-			
+
 			for (auto it = meshMap.begin(); it != meshMap.end(); it++)
 			{
 				if(it->second == component.mesh)
@@ -285,7 +285,7 @@ namespace Light
 					break;
 				}
 			}
-	
+
 			if (ImGui::BeginCombo("##mesh", current->first.c_str(), 0))
 			{
 				for(auto it = meshMap.begin(); it != meshMap.end(); it++)
@@ -329,6 +329,43 @@ namespace Light
 			ImGui::SetNextItemWidth(fullWidth);
 
 			ImGui::ColorEdit3("##color", &component.m_lightColor[0]);
+
+			ImGui::Columns(1);
+
+			ImGui::Columns(2, NULL, false);
+			ImGui::SetColumnWidth(0, glm::max(itemWidth/3, 100.0f));
+
+			ImGui::Text("Light Type");
+
+			ImGui::NextColumn();
+
+			fullWidth = glm::max(ImGui::GetContentRegionAvail().x, 200.0f);
+			offset = glm::max(0.0f, ImGui::GetContentRegionAvail().x - fullWidth);
+			if(offset > 0.0f)
+				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + offset);
+
+			ImGui::SetNextItemWidth(fullWidth);
+
+			auto type = component.m_lightType;
+
+			if (ImGui::BeginCombo("##lighttype", LightTypeStrings[(int)type].c_str(), 0))
+			{
+				for(int it = 0; it < (int)LightType::NumLightTypes; it++)
+				{
+					const bool selected = (int)type == it;
+					if(ImGui::Selectable(LightTypeStrings[it].c_str(), selected))
+					{
+						type = static_cast<LightType>(it);
+						component.m_lightType = static_cast<LightType>(it);
+					}
+
+					if(selected)
+						ImGui::SetItemDefaultFocus();
+				}
+				ImGui::EndCombo();
+			}
+
+			ImGui::Columns(1);
 		});
 	}
 }

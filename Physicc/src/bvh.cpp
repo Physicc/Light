@@ -1,3 +1,4 @@
+#include "tools/Tracy.hpp"
 /**
  * @file bvh.cpp
  * @brief Constructs a BVH given a list of RigidBody objects.
@@ -5,6 +6,9 @@
  * @author Tirthankar mazumder (wermos)
  * @bug No known bugs.
  */
+
+/* -- Includes -- */
+/*bvh header*/
 
 /* -- Includes -- */
 /*bvh header*/
@@ -33,7 +37,7 @@ namespace Physicc
 			bv = BoundingVolume::enclosingBV(bv, m_rigidBodyList[i].getAABB());
 			//TODO: Object slicing is might be happening here. Investigate.
 		}
-
+    
 		return bv;
 	}
 
@@ -72,6 +76,7 @@ namespace Physicc
 	BVH::Axis BVH::getMedianCuttingAxis(std::size_t start, std::size_t end)
 	{
 		//TODO: Suggest a better name
+
 		glm::vec3 min(m_rigidBodyList[start].getCentroid()),
 			max(m_rigidBodyList[start].getCentroid());
 
@@ -109,6 +114,7 @@ namespace Physicc
 		//non-null values
 
 		LIGHT_ASSERT(start <= end, "Pray to god that Jesus helps you, for start is greater than end.");
+
 		if (start == end)
 		{
 			//then the only element left in this sliced vector is the one at

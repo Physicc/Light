@@ -18,7 +18,6 @@ namespace Physicc
 	{
 		public:
 			RigidBody(float mass, const glm::vec3& velocity, float gravityScale);
-			RigidBody(const RigidBody& other) = default;
 
 			[[nodiscard]] inline glm::vec3 getVelocity() const
 			{

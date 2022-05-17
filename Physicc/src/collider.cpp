@@ -100,6 +100,11 @@ namespace Physicc
 		//returning initializer list instead of an actual object
 	}
 
+	glm::vec3 BoxCollider::getCentroid() const
+	{
+		return m_position;
+	}
+
 	/**
 	 * @brief Creates a SphereCollider object
 	 *

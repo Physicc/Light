@@ -51,7 +51,7 @@ namespace Physicc
 
 			void sort(Axis axis, std::size_t start, std::size_t end);
 			Axis getMedianCuttingAxis(std::size_t start, std::size_t end);
-	}; //Tirthankar was here
+	};
 }
 
 #endif //__BVH_H__

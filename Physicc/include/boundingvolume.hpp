@@ -31,6 +31,7 @@ namespace Physicc
 			}
 			//the existence of this constructor does not promote this struct from a
 			//POD to a non-POD type.
+
 			glm::vec3 lowerBound;
 			glm::vec3 upperBound;
 		};
@@ -72,16 +73,6 @@ namespace Physicc
 				//CRTP (Curiously Recurring Template Pattern)
 			public:
 				BaseBV() = default;
-
-				/**
-	 			 * @brief Copy constructor for BoundingVolume
-	 			 *
-	 			 * @tparam BV The object to be copied
-	 			 * @param bv A BV object
-	 			 */
-				BaseBV(const BaseBV& bv) = default;
-				//the constructors for the base and child classes are kept
-				//simple on purpose, to allow for easy type conversions.
 
 				/**
 				 * @brief A constructor for BV which takes a BoundingObject
@@ -130,6 +121,16 @@ namespace Physicc
 					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
 				}
 
+				[[nodiscard]] inline bool operator==(const BaseBV& other) const
+				{
+					return *constTypeCast() == *other.constTypeCast();
+				}
+
+				[[nodiscard]] inline bool operator!=(const BaseBV& other) const
+				{
+					return !(*this == other);
+				}
+
 			private:
 				[[nodiscard]] inline Derived* typeCast()
 				{
@@ -160,18 +161,15 @@ namespace Physicc
 				//private
 				friend BaseBV<BoxBV<T>, T>;
 
-
 			public:
 				BoxBV() = default;
 
-				BoxBV(const BoxBV& bv) = default;
-
 				BoxBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
+					ZoneScoped;
+
 					this->m_volume = {lowerBound, upperBound};
 				}
-
-				// friend BaseBV<BoxBV<T>, T>;
 
 				inline void setBoundingVolume(const T& volume)
 				{
@@ -181,6 +179,8 @@ namespace Physicc
 				inline void setBoundingVolume(const glm::vec3& lowerBound,
 												const glm::vec3& upperBound)
 				{
+					ZoneScoped;
+
 					this->m_volume = {lowerBound, upperBound};
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
@@ -201,6 +201,8 @@ namespace Physicc
 
 				inline bool overlapsWith(const BoxBV& bv) const
 				{
+					ZoneScoped;
+
 					return (this->m_volume.lowerBound.x <= bv.m_volume.upperBound.x
 							&& this->m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
 						&& (this->m_volume.lowerBound.y <= bv.m_volume.upperBound.y
@@ -211,6 +213,8 @@ namespace Physicc
 
 				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
+					ZoneScoped;
+
 					return {glm::min(this->m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(this->m_volume.upperBound, bv.m_volume.upperBound)};
 				}
