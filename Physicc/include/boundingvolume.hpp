@@ -28,13 +28,6 @@ namespace Physicc
 			//the existence of this constructor does not promote this struct from a
 			//POD to a non-POD type.
 
-			inline bool operator==(const AABB& other) const
-			{
-				float epsilon = 1e-5;
-				return glm::all(glm::epsilonEqual(lowerBound, other.lowerBound, epsilon))
-					&& glm::all(glm::epsilonEqual(upperBound, other.upperBound, epsilon));
-			}
-
 			glm::vec3 lowerBound;
 			glm::vec3 upperBound;
 		};
@@ -156,6 +149,7 @@ namespace Physicc
 
 				friend BaseBV<BoxBV<T>, T>;
 
+			public:
 				BoxBV() = default;
 
 				BoxBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
@@ -210,17 +204,12 @@ namespace Physicc
 				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
 					ZoneScoped;
-          
+
 					return {glm::min(this->m_volume.lowerBound, bv.m_volume.lowerBound),
 						glm::max(this->m_volume.upperBound, bv.m_volume.upperBound)};
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
-
-				inline bool operator==(const BoxBV& other) const
-				{
-					return this->m_volume == other.m_volume;
-				}
 		};
 	}
 

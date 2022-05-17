@@ -29,18 +29,50 @@ namespace Physicc
 
 		BoundingVolume::AABB bv(m_rigidBodyList[start].getAABB());
 
-    for (std::size_t i = start + 1; i != end; i++)
-    {
-        bv = BoundingVolume::enclosingBV(bv, m_rigidBodyList[i].getAABB());
-        //TODO: Object slicing is might be happening here. Investigate.
-    }
+		for (auto i = start + 1; i != end; i++)
+		{
+			bv = BoundingVolume::enclosingBV(bv, m_rigidBodyList[i].getAABB());
+			//TODO: Object slicing is might be happening here. Investigate.
+		}
 
-    return bv;
+		return bv;
 	}
 
 	void BVH::sort(Axis axis, int start, int end)
 	{
-		ZoneScoped;
+		if (axis == X)
+		{
+			std::sort(std::next(m_rigidBodyList.begin(), start),
+			          std::next(m_rigidBodyList.begin(), end),
+			          [](const RigidBody& rigidBody1,
+			             const RigidBody& rigidBody2) {
+			            return rigidBody1.getCentroid().x
+				            > rigidBody2.getCentroid().x;
+			          });
+		} else if (axis == Y)
+		{
+			std::sort(std::next(m_rigidBodyList.begin(), start),
+			          std::next(m_rigidBodyList.begin(), end),
+			          [](const RigidBody& rigidBody1,
+			             const RigidBody& rigidBody2) {
+			            return rigidBody1.getCentroid().y
+				            > rigidBody2.getCentroid().y;
+			          });
+		} else
+		{
+			std::sort(std::next(m_rigidBodyList.begin(), start),
+			          std::next(m_rigidBodyList.begin(), end),
+			          [](const RigidBody& rigidBody1,
+			             const RigidBody& rigidBody2) {
+			            return rigidBody1.getCentroid().y
+				            > rigidBody2.getCentroid().y;
+			          });
+		}
+	}
+
+	void BVH::sort(Axis axis, int start, int end)
+	{
+		//TODO: Suggest a better name
 
 		if (axis == X)
 		{
@@ -75,7 +107,7 @@ namespace Physicc
 	BVH::Axis BVH::getMedianCuttingAxis(int start, int end)
 	{
 		//TODO: Suggest a better name
-
+    
 		glm::vec3 min(m_rigidBodyList[start].getCentroid()),
 			max(m_rigidBodyList[start].getCentroid());
 

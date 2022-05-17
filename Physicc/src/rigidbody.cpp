@@ -26,13 +26,4 @@ namespace Physicc
 			m_gravityScale(gravityScale)
 	{
 	}
-
-	RigidBody::RigidBody(const RigidBody& other)
-		:	m_force(other.m_force),
-			m_collider(other.m_collider),
-			m_mass(other.m_mass),
-			m_velocity(other.m_velocity),
-			m_gravityScale(other.m_gravityScale)
-	{
-	}
 }
