@@ -440,7 +440,7 @@ namespace Light
 				ImGui::SetNextItemWidth(width - lineHeight - 2.0f);
 				if(ImGui::DragFloat("##range", &component.m_range, 1.0f, 0.1f, FLT_MAX, fmt))
 				{
-					component.m_range = (component.m_range<0.1f)?0.1f:component.m_range;
+					component.m_range = (component.m_range < 0.1f) ? 0.1f : component.m_range;
 				}
 
 
