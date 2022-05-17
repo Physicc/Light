@@ -4,13 +4,10 @@
 #include "tools/Tracy.hpp"
 
 #include "glm/glm.hpp"
+#include "glm/gtc/epsilon.hpp"
 
 namespace Physicc
 {
-	//Verdict: Discuss commented functions (keep or discard? KEEP)
-
-	//Warning: Return types may need the template specified.
-
 	//Named namespace, to keep the implementation hidden from users (or at least
 	//make it harder to find)
 	namespace BVImpl
@@ -29,7 +26,7 @@ namespace Physicc
 			{
 			}
 			//the existence of this constructor does not promote this struct from a
-			//POD to a non-POD type. (at least, it shouldn't.)
+			//POD to a non-POD type.
 
 			glm::vec3 lowerBound;
 			glm::vec3 upperBound;
@@ -104,15 +101,21 @@ namespace Physicc
 				//to use this function will likely result in 5 pages of opaque
 				//errors.
 
-//				[[nodiscard]] inline BoundingObject getBoundingVolume() const
-//				{
-//					return constTypeCast()->getBoundingVolume();
-//				}
 				[[nodiscard]] Derived enclosingBV(const BaseBV& bv) const
 				{
 					ZoneScoped;
 
 					return constTypeCast()->enclosingBV(static_cast<const Derived&>(bv));
+				}
+
+				[[nodiscard]] inline bool operator==(const BaseBV& other) const
+				{
+					return *constTypeCast() == *other.constTypeCast();
+				}
+
+				[[nodiscard]] inline bool operator!=(const BaseBV& other) const
+				{
+					return !(*this == other);
 				}
 
 			private:
@@ -122,17 +125,16 @@ namespace Physicc
 				}
 				//A helper function just to make reading the code easier
 
-//				[[nodiscard]] inline const Derived* constTypeCast() const
-//				{
-//					return static_cast<const Derived*>(this);
-//				}
-//				//A helper function just to make reading the code easier
-
-				[[nodiscard]] inline const Derived* constTypeCast() const//constTypeCastToConst() const
+				[[nodiscard]] inline const Derived* constTypeCast() const
 				{
 					return static_cast<const Derived*>(this);
 				}
 				//Another helper function just to make reading the code easier
+			protected:
+				BoundingObject m_volume;	
+				//For accessing non-templated member variables (or even functions) of a templated class
+				//inside a derived class, make sure to use "this" pointer.
+				//See here why: https://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members  
 		};
 
 		template <typename T>
@@ -141,6 +143,12 @@ namespace Physicc
 				//CRTP (Curiously Recurring Template Pattern)
 				//The overall idea is to create a more specific BV with more box-specific
 				//functions, to make the use of BVs easier.
+			private:
+				//Hiding the exact implementation by making all the functions
+				//private
+
+				friend BaseBV<BoxBV<T>, T>;
+
 			public:
 				BoxBV() = default;
 
@@ -148,14 +156,14 @@ namespace Physicc
 				{
 					ZoneScoped;
 
-					m_volume = {lowerBound, upperBound};
+					this->m_volume = {lowerBound, upperBound};
 				}
 
 				inline void setVolume(const T& volume)
 				{
 					ZoneScoped;
 
-					m_volume = volume;
+					this->m_volume = volume;
 				}
 
 				inline void setVolume(const glm::vec3& lowerBound,
@@ -163,9 +171,7 @@ namespace Physicc
 				{
 					ZoneScoped;
 
-					m_volume = {lowerBound, upperBound};
-//					m_volume.lowerBound = lowerBound;
-//					m_volume.upperBound = upperBound;
+					this->m_volume = {lowerBound, upperBound};
 					//implicit contract: any BoxBV will have a struct that has
 					//lowerBound and upperBound `glm::vec3`s.
 				}
@@ -178,40 +184,37 @@ namespace Physicc
 					//never called by the end user. It is simply called by BV
 					//itself, which doesn't actually discard the return type, so
 					//we're good.
-					return (m_volume.upperBound.x - m_volume.lowerBound.x)
-						* (m_volume.upperBound.y - m_volume.lowerBound.y)
-						* (m_volume.upperBound.z - m_volume.lowerBound.z);
+					return (this->m_volume.upperBound.x - this->m_volume.lowerBound.x)
+						* (this->m_volume.upperBound.y - this->m_volume.lowerBound.y)
+						* (this->m_volume.upperBound.z - this->m_volume.lowerBound.z);
 				}
 
 				inline bool overlapsWith(const BoxBV& bv) const
 				{
 					ZoneScoped;
 
-					return (m_volume.lowerBound.x <= bv.m_volume.upperBound.x
-							&& m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
-						&& (m_volume.lowerBound.y <= bv.m_volume.upperBound.y
-							&& m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
-						&& (m_volume.lowerBound.z <= bv.m_volume.upperBound.z
-							&& m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
+					return (this->m_volume.lowerBound.x <= bv.m_volume.upperBound.x
+							&& this->m_volume.upperBound.x >= bv.m_volume.lowerBound.x)
+						&& (this->m_volume.lowerBound.y <= bv.m_volume.upperBound.y
+							&& this->m_volume.upperBound.y >= bv.m_volume.lowerBound.y)
+						&& (this->m_volume.lowerBound.z <= bv.m_volume.upperBound.z
+							&& this->m_volume.upperBound.z >= bv.m_volume.lowerBound.z);
 				}
-
-//				inline T getBoundingVolume() const
-//				{
-//					return m_volume;
-//				}
 
 				inline BoxBV enclosingBV(const BoxBV& bv) const
 				{
 					ZoneScoped;
 
-					return {glm::min(m_volume.lowerBound, bv.m_volume.lowerBound),
-						glm::max(m_volume.upperBound, bv.m_volume.upperBound)};
+					return {glm::min(this->m_volume.lowerBound, bv.m_volume.lowerBound),
+						glm::max(this->m_volume.upperBound, bv.m_volume.upperBound)};
 				}
 				//As per our previous implicit contract, these `glm::vec3`s are
 				//guaranteed to exist, so this is legal.
 
-			private:
-				T m_volume;
+				inline bool operator==(const BoxBV& other) const
+				{
+					return this->m_volume == other.m_volume;
+				}
 		};
 	}
 
