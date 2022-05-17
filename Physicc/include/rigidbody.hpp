@@ -5,6 +5,7 @@
 
 #include "glm/glm.hpp"
 #include "collider.hpp"
+#include <memory>
 
 namespace Physicc
 {
@@ -25,8 +26,7 @@ namespace Physicc
 				return m_velocity;
 			}
 
-			
-            inline void setVelocity(const glm::vec3& velocity)
+			inline void setVelocity(const glm::vec3& velocity)
 			{
 				ZoneScoped;
 
@@ -41,23 +41,31 @@ namespace Physicc
 
 			}
 
+			inline void setPosition(const glm::vec3& position)
+			{
+				m_collider->setPosition(position);
+			}
+
 			void setForce();
 
 			[[nodiscard]] inline BoundingVolume::AABB getAABB() const
 			{
-				ZoneScoped;
-
-				return m_collider.getAABB();
+				return m_collider->getAABB();
 			}
 
 			[[nodiscard]] inline glm::vec3 getCentroid() const
 			{
-				return m_collider.getCentroid();
+				return m_collider->getCentroid();
+			}
+
+			inline void setCollider(const std::shared_ptr<Collider> collider)
+			{
+				m_collider = collider;
 			}
 
 		private:
 			glm::vec3 m_force;
-			BoxCollider m_collider;
+			std::shared_ptr<Collider> m_collider;
 			float m_mass;
 			glm::vec3 m_velocity;
 			float m_gravityScale;

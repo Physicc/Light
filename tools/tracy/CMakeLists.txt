@@ -62,6 +62,9 @@ target_link_libraries(TracyServer capstone-static)
 
 set(FT_DISABLE_HARFBUZZ ON CACHE BOOL "Disable HarfBuzz (used for improving auto-hinting of OpenType fonts)" FORCE)
 set(FT_DISABLE_BROTLI ON CACHE BOOL "Disable support of compressed WOFF2 fonts." FORCE)
+set(FT_DISABLE_ZLIB ON CACHE BOOL "Disable ZLIB" FORCE)
+set(FT_DISABLE_BZIP2 ON CACHE BOOL "Disable BZIP2" FORCE)
+set(FT_DISABLE_PNG ON CACHE BOOL "Disable PNG" FORCE)
 add_subdirectory(freetype)
 target_link_libraries(TracyServer freetype)
 
