@@ -125,16 +125,16 @@ public:
 			switch (e.getKeycode())
 			{
 			case LIGHT_KEY_W:
-				m_gizmo_operation = ImGuizmo::TRANSLATE;
+				m_gizmo_operation = ImGuizmo::OPERATION::TRANSLATE;
 				break;
 			case LIGHT_KEY_E:
-				m_gizmo_operation = ImGuizmo::ROTATE;
+				m_gizmo_operation = ImGuizmo::OPERATION::ROTATE;
 				break;
 			case LIGHT_KEY_R:
-				m_gizmo_operation = ImGuizmo::SCALE;
+				m_gizmo_operation = ImGuizmo::OPERATION::SCALE;
 				break;
 			case LIGHT_KEY_T:
-				m_gizmo_operation = ImGuizmo::UNIVERSAL;
+				m_gizmo_operation = ImGuizmo::OPERATION::UNIVERSAL;
 				break;
 
 			default:
@@ -220,13 +220,23 @@ public:
 
 		auto selectedEntity = m_scenePanel.getSelectionContext();
 		auto cameraViewMatrix = m_camera.getViewMatrix();
+
 		if (selectedEntity)
 		{
 			auto& transformComponent = selectedEntity.getComponent<Light::TransformComponent>();
 			glm::mat4 transform = transformComponent.getTransform();
 
+
+			bool snap = ImGui::IsKeyDown(LIGHT_KEY_LEFT_CONTROL);
+			float snapValue = 0.5f;
+			if (m_gizmo_operation == ImGuizmo::OPERATION::ROTATE)
+			{
+				snapValue = 15.0f;
+			}
+			float snapVector[3] = {snapValue, snapValue, snapValue};
+
 			ImGuizmo::Manipulate(glm::value_ptr(cameraViewMatrix), glm::value_ptr(m_camera.getProjectionMatrix()),
-				m_gizmo_operation, ImGuizmo::LOCAL, glm::value_ptr(transform));
+				m_gizmo_operation, ImGuizmo::LOCAL, glm::value_ptr(transform), nullptr, snap ? snapVector : nullptr);
 
 			m_gizmoUsing = ImGuizmo::IsUsing();
 			m_gizmoOver = ImGuizmo::IsOver();
