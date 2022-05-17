@@ -55,16 +55,6 @@ namespace Physicc
 				BaseBV() = default;
 
 				/**
-	 			 * @brief Copy constructor for BoundingVolume
-	 			 *
-	 			 * @tparam BV The object to be copied
-	 			 * @param bv A BV object
-	 			 */
-				BaseBV(const BaseBV& bv) = default;
-				//the constructors for the base and child classes are kept
-				//simple on purpose, to allow for easy type conversions.
-
-				/**
 				 * @brief A constructor for BV which takes a BoundingObject
 				 * (like the AABB struct) as a parameter
 				 *
@@ -85,8 +75,6 @@ namespace Physicc
 
 					typeCast()->setVolume(lowerBound, upperBound);
 				}
-
-				BaseBV& operator=(const BaseBV& bv) = default;
 
 				/**
  				 * @brief Returns whether two BVs are overlapping or not
@@ -155,10 +143,6 @@ namespace Physicc
 				//functions, to make the use of BVs easier.
 			public:
 				BoxBV() = default;
-
-				BoxBV(const BoxBV& bv) = default;
-
-				BoxBV& operator=(const BoxBV& bv) = default;
 
 				BoxBV(const glm::vec3& lowerBound, const glm::vec3& upperBound)
 				{
