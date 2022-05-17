@@ -17,7 +17,6 @@ namespace Physicc
 	{
 		public:
 			RigidBody(float mass, const glm::vec3& velocity, float gravityScale);
-			RigidBody(const RigidBody& other);
 
 			[[nodiscard]] inline glm::vec3 getVelocity() const
 			{
@@ -50,6 +49,12 @@ namespace Physicc
 
 				return m_collider.getAABB();
 			}
+
+			[[nodiscard]] inline glm::vec3 getCentroid() const
+			{
+				return m_collider.getCentroid();
+			}
+
 		private:
 			glm::vec3 m_force;
 			BoxCollider m_collider;
