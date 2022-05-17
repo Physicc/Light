@@ -132,15 +132,15 @@ namespace Light
 			{
 
 				auto [light, transform] = view.get(entity);
-				switch (static_cast<int>(light.m_lightType))
+				switch (light.m_lightType)
 				{
-				case 0:
+				case LightType::Directional:
 					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), light.m_lightColor});
 					break;
-				case 1:
+				case LightType::Point:
 					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
 					break;
-				case 2:
+				case LightType::Spot:
 					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer)), light.m_range});
 					break;
 				default:
