@@ -1,3 +1,4 @@
+#include "tools/Tracy.hpp"
 /**
  * @file bvh.cpp
  * @brief Constructs a BVH given a list of RigidBody objects.
@@ -10,23 +11,26 @@
 /*bvh header*/
 
 #include "bvh.hpp"
+
 #include <utility>
 #include <algorithm>
 
 namespace Physicc
 {
-	using Iterator = std::vector<RigidBody>::iterator;
 
-	BVH::BVH(std::vector<RigidBody> rigidBodyList) : m_rigidBodyList(std::move(
-		rigidBodyList)), m_head(nullptr)
+	BVH::BVH(std::vector<RigidBody> rigidBodyList)
+		: 	m_head(nullptr),
+			m_rigidBodyList(std::move(rigidBodyList)) 
 	{
 	}
 
 	BoundingVolume::AABB BVH::computeBV(int start, int end)
 	{
+		ZoneScoped;
+
 		BoundingVolume::AABB bv(m_rigidBodyList[start].getAABB());
 
-		for (int i = start + 1; i != end; i++)
+		for (auto i = start + 1; i != end; i++)
 		{
 			bv = BoundingVolume::enclosingBV(bv, m_rigidBodyList[i].getAABB());
 			//TODO: Object slicing is might be happening here. Investigate.
@@ -100,31 +104,11 @@ namespace Physicc
 		buildTree(m_head, 0, m_rigidBodyList.size() - 1);
 	}
 
-//	auto BVH::partitionRigidBodies(Iterator begin,
-////	                               Iterator end,
-////	                               BoundingVolume::AABB)
-////	{
-////		glm::vec3 centroidMean(0);
-////
-////		for (auto it = begin; it != end; ++it) {
-////			centroidMean += it->getCentroid();
-////		}
-////
-////		centroidMean /= std::distance(begin, end);
-////
-////		//check how good the x-axis is, as a splitting axis.
-////		float leftVolumeSumX = 0;
-////		float rightVolumeSumX = 0;
-////
-////		int leftObjectsX = 0;
-////		int rightObjectsX = 0;
-////		int splitObjectsX = 0;
-////
-////
-////	}
 
 	void BVH::buildTree(BVHNode* node, int start, int end)
 	{
+		ZoneScoped;
+
 		//implicit convention:
 		//no children = leaf node
 		//no parent = head node
@@ -158,21 +142,3 @@ namespace Physicc
 		}
 	}
 }
-
-
-////next, we split the vector of objects based on our heuristic
-//auto[partitionIndex, axis] = partitionRigidBodies(begin,
-//                                                  end,
-//                                                  node->volume);
-////TODO: How to implement stop criteria? Should we implement them?
-//
-//if (partitionIndex != begin)
-//{
-//BVHNode* newNode = new BVHNode;
-//buildTree(newNode, begin, partitionIndex);
-//}
-//if (partitionIndex != end)
-//{
-//BVHNode* newNode = new BVHNode;
-//buildTree(newNode, partitionIndex, end);
-//}

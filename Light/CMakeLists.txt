@@ -14,6 +14,17 @@ endif()
 # add the executable
 add_library(Light STATIC ${SOURCES})
 
+# -Werror
+target_compile_options(Light PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+
+# Supress glm quat warning
+target_compile_definitions(Light PRIVATE
+    -DGLM_FORCE_SILENT_WARNINGS
+)
+
 # add includes
 target_include_directories(Light PUBLIC include)
 target_include_directories(Light PUBLIC ../shared/include)
@@ -29,20 +40,20 @@ target_link_libraries(Light PUBLIC stbimage)
 if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
 	add_subdirectory(../shared/libs/spdlog spdlog)
 else()
-	target_include_directories(Light PUBLIC ../shared/libs/spdlog/include)
+	target_include_directories(Light SYSTEM PUBLIC ../shared/libs/spdlog/include)
 endif()
 
 # target_link_libraries(Light PRIVATE shared)
 
-# add OpenGL library
-cmake_policy(SET CMP0072 NEW)
-find_package(OpenGL REQUIRED)
-target_link_libraries(Light PUBLIC ${OPENGL_gl_LIBRARY})
+# # add OpenGL library
+# cmake_policy(SET CMP0072 NEW)
+# find_package(OpenGL REQUIRED)
+# target_link_libraries(Light PUBLIC ${OPENGL_gl_LIBRARY})
 
 # GLAD
 add_subdirectory(libs/glad)
 target_link_libraries(Light PRIVATE glad)
 
 # GLFW Include
-target_include_directories(Light PRIVATE ../LightFramework/libs/glfw-3.3.3/include)
+target_include_directories(Light PRIVATE ../LightFramework/libs/glfw/include)
 add_definitions(-DGLFW_INCLUDE_NONE)

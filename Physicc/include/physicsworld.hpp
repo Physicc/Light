@@ -1,6 +1,8 @@
 #ifndef __PHYSICC_H__
 #define __PHYSICC_H__
 
+#include "tools/Tracy.hpp"
+
 #include "glm/glm.hpp"
 #include "rigidbody.hpp"
 #include <vector>
@@ -20,11 +22,15 @@ namespace Physicc
 
 			inline void setGravity(const glm::vec3& gravity)
 			{
+				ZoneScoped;
+
 				m_gravity = gravity;
 			}
 
 			[[nodiscard]] inline glm::vec3 getGravity() const
 			{
+				ZoneScoped;
+
 				return m_gravity;
 			}
 

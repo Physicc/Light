@@ -21,7 +21,7 @@ namespace Light
 
 		void onEvent(Event& e);
 
-		void setViewportSize(int width, int height);
+		void setViewportSize(uint32_t width, uint32_t height);
 
 		const glm::mat4& getViewMatrix() const { return m_viewMatrix; }
 		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * m_viewMatrix; }
@@ -62,7 +62,7 @@ namespace Light
 
 		glm::vec2 m_initialMousePos = {0.0, 0.0};
 
-		float m_viewportWidth = 1280, m_viewportHeight = 720;
+		uint32_t m_viewportWidth = 1280, m_viewportHeight = 720;
 	};
 	
 	

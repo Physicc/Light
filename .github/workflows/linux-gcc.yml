@@ -7,15 +7,29 @@ on:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
+  # We build RelProfile to test both Release and Profiling aspects of the build
+  BUILD_TYPE: RelProfile
 
 jobs:
   ubuntu_build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-18.04, ubuntu-20.04 ]
+        os: [ ubuntu-18.04, ubuntu-20.04, ubuntu-22.04 ]
         gcc-version: [ 8, 9, 10 ]
+
+        # We remove GCC 8 and 9, and add GCC 11 to the Ubuntu 22.04's test matrix
+        # as the former don't exist, and the latter only exists in Ubuntu 22.04's
+        # standard repository.
+        include:
+          - os: ubuntu-22.04
+            gcc-version: 11
+
+        exclude:
+          - os: ubuntu-22.04
+            gcc-version: 8
+          - os: ubuntu-22.04
+            gcc-version: 9
     
     name: ${{ matrix.os }} (GCC ${{ matrix.gcc-version }})
     steps:
@@ -27,15 +41,11 @@ jobs:
         run: |
           sudo apt-get update -q
           sudo apt-get install -yq --no-install-recommends \
-                               libglfw3-dev \
-                               libxrandr-dev \
-                               libxinerama-dev \
-                               libxcursor-dev \
-                               libxi-dev \
-                               uuid-dev \
-                               gcc-${{ matrix.gcc-version }} \
-                               g++-${{ matrix.gcc-version }}
-     
+                                xorg-dev \
+                                uuid-dev \
+                                gcc-${{ matrix.gcc-version }} \
+                                g++-${{ matrix.gcc-version }}
+
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1
         with:
@@ -57,4 +67,5 @@ jobs:
         run: |
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
+                --target Editor Test \
                 -- -j2

@@ -7,9 +7,11 @@
 #include <glm/gtx/quaternion.hpp>
 #include "light/rendering/shader.hpp"
 #include "light/rendering/buffer.hpp"
+#include "light/rendering/mesh.hpp"
 #include "light/rendering/texture.hpp"
 #include "light/rendering/vertexarray.hpp"
 #include "light/rendering/camera.hpp"
+#include "light/rendering/lights.hpp"
 #include "core/uuid.hpp"
 
 namespace Light
@@ -28,12 +30,13 @@ namespace Light
 
 		TagComponent() = default;
 		TagComponent(const TagComponent&) = default;
+		TagComponent& operator=(const TagComponent&) = default;
 		TagComponent(const std::string& tag) : tag(tag) {}
 	};
 	struct TransformComponent : public Component
 	{
-		TransformComponent(glm::vec3 position = glm::vec3(0,0,0), 
-			glm::vec3 rotation = glm::vec3(0,0,0), 
+		TransformComponent(glm::vec3 position = glm::vec3(0,0,0),
+			glm::vec3 rotation = glm::vec3(0,0,0),
 			glm::vec3 scale = glm::vec3(0.5))
 		: position(position), rotation(rotation), scale(scale) {}
 		inline glm::mat4 getTransform() const
@@ -63,9 +66,8 @@ namespace Light
 
 	struct MeshComponent : public Component
 	{
-		MeshComponent(std::shared_ptr<Light::VertexBuffer> vertexBuffer,
-			std::shared_ptr<Light::IndexBuffer> indexBuffer);
-		std::shared_ptr<Light::VertexArray> mesh;
+		MeshComponent(std::shared_ptr<Light::Mesh> mesh);
+		std::shared_ptr<Light::Mesh> mesh;
 	};
 
 	struct LightComponent : public Component
@@ -73,6 +75,7 @@ namespace Light
 		LightComponent() : m_lightColor({1.0, 1.0, 1.0}) {}
 		LightComponent(glm::vec3 lightColor) : m_lightColor(lightColor) {}
 		glm::vec3 m_lightColor;
+		LightType m_lightType = LightType::Directional;
 	};
 
 	struct CameraComponent : public Component

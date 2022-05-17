@@ -12,7 +12,8 @@ namespace Light
 		uint32_t width;
 		uint32_t height;
 
-		WindowProps(const std::string title = "Light Engine", uint32_t width = 1600, uint32_t height = 900) : width(width), height(height), title(title) {}
+		WindowProps(const std::string title = "Light Engine", uint32_t width = 1600, uint32_t height = 900)
+			: title(title), width(width), height(height) {}
 	};
 
 	class Window

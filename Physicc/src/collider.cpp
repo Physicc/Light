@@ -13,6 +13,8 @@
 /* -- Includes -- */
 /* collider header */
 
+#include "tools/Tracy.hpp"
+
 #include "collider.hpp"
 
 namespace Physicc
@@ -35,17 +37,19 @@ namespace Physicc
 	 */
 	void Collider::updateTransform()
 	{
+		ZoneScoped;
+
 		m_transform = glm::translate(glm::mat4(1.0f), m_position);
 		m_transform = glm::scale(m_transform, m_scale);
 		m_transform = glm::rotate(m_transform,
-		                          glm::radians(m_rotate.x),
-		                          glm::vec3(1.0, 0.0, 0.0));
+									glm::radians(m_rotate.x),
+									glm::vec3(1.0, 0.0, 0.0));
 		m_transform = glm::rotate(m_transform,
-		                          glm::radians(m_rotate.y),
-		                          glm::vec3(0.0, 1.0, 0.0));
+									glm::radians(m_rotate.y),
+									glm::vec3(0.0, 1.0, 0.0));
 		m_transform = glm::rotate(m_transform,
-		                          glm::radians(m_rotate.z),
-		                          glm::vec3(0.0, 0.0, 1.0));
+									glm::radians(m_rotate.z),
+									glm::vec3(0.0, 0.0, 1.0));
 	}
 
 	/**
@@ -57,11 +61,13 @@ namespace Physicc
 	 * 
 	 */
 	BoxCollider::BoxCollider(glm::vec3 position,
-	                         glm::vec3 rotation,
-	                         glm::vec3 scale)
+								glm::vec3 rotation,
+								glm::vec3 scale)
 		: Collider(position, rotation, scale),
-		  m_vertices(std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)))
+			m_vertices(std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)))
 	{
+		ZoneScoped;
+
 		//Top-face vertices
 		m_vertices[0] = glm::vec4(scale * 0.5f, 0);
 		m_vertices[1] = m_vertices[0] - glm::vec4(scale.x, 0, 0, 0);
@@ -85,6 +91,8 @@ namespace Physicc
 	 */
 	BoundingVolume::AABB BoxCollider::getAABB() const
 	{
+		ZoneScoped;
+
 		glm::vec3 lowerBound(0.5f);
 		glm::vec3 upperBound(-0.5f);
 
@@ -114,11 +122,13 @@ namespace Physicc
 	 * 
 	 */
 	SphereCollider::SphereCollider(float radius,
-	                               glm::vec3 position,
-	                               glm::vec3 rotation,
-	                               glm::vec3 scale)
-		: m_radius(radius), Collider(position, rotation, scale)
+									glm::vec3 position,
+									glm::vec3 rotation,
+									glm::vec3 scale)
+		: Collider(position, rotation, scale), m_radius(radius)
 	{
+		ZoneScoped;
+
 		m_objectType = e_sphere;
 	}
 
@@ -129,6 +139,8 @@ namespace Physicc
 	 */
 	BoundingVolume::AABB SphereCollider::getAABB() const
 	{
+		ZoneScoped;
+
 		glm::vec3 lowerBound = m_position - m_radius;;
 		glm::vec3 upperBound = m_position + m_radius;
 

@@ -14,12 +14,25 @@ endif()
 # add the executable
 add_library(Physicc STATIC ${SOURCES})
 
+# -Werror
+target_compile_options(Physicc PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+
+# Supress glm quat warning
+target_compile_definitions(Physicc PRIVATE
+    -DGLM_FORCE_SILENT_WARNINGS
+)
+
+
 target_include_directories(Physicc PUBLIC include)
 target_include_directories(Physicc PUBLIC ../shared/include)
 
 add_subdirectory(../shared/libs/glm glm)
 target_link_libraries(Physicc glm)
 
+target_link_libraries(Physicc TracyClient)
 
 
 

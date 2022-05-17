@@ -14,7 +14,9 @@ namespace Light
 		Entity() = default;
 		Entity(entt::entity entity, Scene* scene);
 		Entity(const Entity& other) = default;
-		
+
+		Entity& operator=(const Entity& other) = default;
+
 		template<typename T, typename... Args>
 		inline T& addComponent(Args... args)
 		{
