@@ -44,4 +44,3 @@ namespace Physicc
 }
 
 #endif // __PHYSICC_H__
-

@@ -24,25 +24,17 @@ namespace Physicc
 			inline void buildTree();
 			//build a tree of the bounding volumes
 
-			//convert the tree into a linear data structure
 			std::vector<RigidBody>& convert();
+			//convert the tree into a linear data structure
 
 		private:
 			BVHNode* m_head;
 			std::vector<RigidBody> m_rigidBodyList;
 
-			BoundingVolume::AABB computeBV(int start, int end);
+			using Iterator = std::vector<RigidBody>::iterator;
 
-			void buildTree(BVHNode* node, int start, int end);
-
-			enum Axis {
-				X,
-				Y,
-				Z,
-			};
-
-			void sort(Axis axis, int start, int end);
-			Axis getMedianCuttingAxis(int start, int end);
+			BoundingVolume::AABB computeBV(Iterator begin, Iterator end);
+			void buildTree(BVHNode* node, Iterator begin, Iterator end);
 	};
 }
 
