@@ -111,6 +111,8 @@ namespace Physicc
 			virtual BoundingVolume::AABB getAABB() const = 0;
 			//Each child will calculate its AABB according to its own shape
 
+			virtual glm::vec3 getCentroid() const = 0;
+
 		protected:
 			enum Type
 			{
@@ -139,6 +141,7 @@ namespace Physicc
 			            glm::vec3 scale = glm::vec3(1));
 
 			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
+			glm::vec3 getCentroid() const override;
 
 		private:
 			std::vector<glm::vec4> m_vertices;
@@ -158,6 +161,8 @@ namespace Physicc
 			               glm::vec3 scale = glm::vec3(1));
 
 			[[nodiscard]] BoundingVolume::AABB getAABB() const override;
+
+			glm::vec3 getCentroid() const override;
 
 		private:
 			float m_radius;
