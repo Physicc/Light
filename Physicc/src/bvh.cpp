@@ -23,13 +23,13 @@ namespace Physicc
 	{
 	}
 
-	BoundingVolume::AABB BVH::computeBV(int start, int end)
+	BoundingVolume::AABB BVH::computeBV(std::size_t start, std::size_t end)
 	{
 		ZoneScoped;
 
 		BoundingVolume::AABB bv(m_rigidBodyList[start].getAABB());
 
-		for (auto i = start + 1; i != end; i++)
+		for (std::size_t i = start + 1; i != end; i++)
 		{
 			bv = BoundingVolume::enclosingBV(bv, m_rigidBodyList[i].getAABB());
 			//TODO: Object slicing is might be happening here. Investigate.
@@ -38,7 +38,7 @@ namespace Physicc
 		return bv;
 	}
 
-	void BVH::sort(Axis axis, int start, int end)
+	void BVH::sort(Axis axis, std::size_t start, std::size_t end)
 	{
 		if (axis == X)
 		{
@@ -70,48 +70,14 @@ namespace Physicc
 		}
 	}
 
-	void BVH::sort(Axis axis, int start, int end)
-	{
-		//TODO: Suggest a better name
-
-		if (axis == X)
-		{
-			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().x
-				            > rigidBody2.getCentroid().x;
-			          });
-		} else if (axis == Y)
-		{
-			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().y
-				            > rigidBody2.getCentroid().y;
-			          });
-		} else
-		{
-			std::sort(std::next(m_rigidBodyList.begin(), start),
-			          std::next(m_rigidBodyList.begin(), end),
-			          [](const RigidBody& rigidBody1,
-			             const RigidBody& rigidBody2) {
-			            return rigidBody1.getCentroid().y
-				            > rigidBody2.getCentroid().y;
-			          });
-		}
-	}
-
-	BVH::Axis BVH::getMedianCuttingAxis(int start, int end)
+	BVH::Axis BVH::getMedianCuttingAxis(std::size_t start, std::size_t end)
 	{
 		//TODO: Suggest a better name
     
 		glm::vec3 min(m_rigidBodyList[start].getCentroid()),
 			max(m_rigidBodyList[start].getCentroid());
 
-		for (int i = start + 1; i <= end; i++)
+		for (std::size_t i = start + 1; i <= end; i++)
 		{
 			min = glm::min(min, m_rigidBodyList[i].getCentroid());
 			max = glm::max(max, m_rigidBodyList[i].getCentroid());
@@ -137,7 +103,7 @@ namespace Physicc
 		buildTree(m_head, 0, m_rigidBodyList.size() - 1);
 	}
 
-	void BVH::buildTree(BVHNode* node, int start, int end)
+	void BVH::buildTree(BVHNode* node, std::size_t start, std::size_t end)
 	{
 		ZoneScoped;
 
