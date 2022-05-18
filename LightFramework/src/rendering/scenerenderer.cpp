@@ -126,16 +126,35 @@ namespace Light {
 
 		Light::Renderer::beginScene(camera, camera.getViewMatrix());
 
-		std::vector<PointLight> lights;
+		std::vector<PointLight> pointLights;
+		std::vector<SpotLight> spotLights;
+		std::vector<DirectionalLight> directionalLights;
 		{
 			auto view = scene->m_registry.view<LightComponent, TransformComponent>();
-			for(auto& entity: view)
+
+			for (auto& entity : view)
 			{
-				auto[light, transform] = view.get(entity);
-				lights.push_back({transform.position, light.m_lightColor});
+
+				auto [light, transform] = view.get(entity);
+				switch (light.m_lightType)
+				{
+				case LightType::Directional:
+					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), light.m_lightColor});
+					break;
+				case LightType::Point:
+					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
+					break;
+				case LightType::Spot:
+					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer)), light.m_range});
+					break;
+				default:
+					break;
+				}
 			}
 		}
-		Renderer::submitLight(lights);
+		Renderer::submitLight(directionalLights);
+		Renderer::submitLight(pointLights);
+		Renderer::submitLight(spotLights);
 
 		// Render Skybox
 		scene->m_skybox->bind();

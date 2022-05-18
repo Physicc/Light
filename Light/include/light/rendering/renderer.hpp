@@ -19,17 +19,22 @@ namespace Light
 		static void beginScene(Camera& camera, glm::mat4 camera_view);
 		static void endScene();
 
-		static void submitLight(const std::vector<PointLight> &lights);
+		static void submitLight(const std::vector<PointLight>& lights);
+		static void submitLight(const std::vector<SpotLight>& lights);
+		static void submitLight(const std::vector<DirectionalLight>& lights);
 		static void submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f));
 		static void submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform = glm::mat4(1.0f), int id = -1);
 		static void submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
+
 	private:
 		struct SceneData
 		{
 			glm::mat4 viewProjectionMatrix;
 			glm::mat4 viewProjectionSkyboxMatrix;
-
+			glm::vec3 cameraPosition;
 			std::vector<PointLight> pointLights;
+			std::vector<SpotLight> spotLights;
+			std::vector<DirectionalLight> directionalLights;
 		};
 
 		static SceneData* s_sceneData;
