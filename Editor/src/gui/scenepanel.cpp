@@ -366,7 +366,7 @@ namespace Light
 			}
 			ImGui::Columns(1);
 
-			if(static_cast<int>(type)== 2)
+			if(type == LightType::Spot)
 			{	
 				
 
@@ -417,7 +417,7 @@ namespace Light
 
 			}
 
-			if(static_cast<int>(type)== 2 || static_cast<int>(type)== 1)
+			if(type == LightType::Spot || type == LightType::Point)
 			{	
 				
 				component.m_range = (component.m_range>0.01f)?component.m_range:1;
