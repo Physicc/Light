@@ -1,18 +1,19 @@
-#include "core/logging.hpp"
+// #include "core/logging.hpp"
 #include "rendering/scenerenderer.hpp"
 
 #include "light/rendering/renderer.hpp"
 #include "light/rendering/rendercommand.hpp"
 
-namespace Light
-{
+
+namespace Light {
 	SceneRenderer::SceneRenderer()
 	{
 		// Initialize the outline framebuffer
 		Light::FramebufferSpec fbspecOutline;
 		fbspecOutline.attachments = {
-			{Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER},
-			{Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER}};
+			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
 		fbspecOutline.width = 1280;
 		fbspecOutline.height = 720;
 		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
@@ -20,43 +21,44 @@ namespace Light
 		// Skybox Mesh (Cube)
 		m_skybox_mesh.reset(VertexArray::create());
 
-		float vertices[] =
-			{
-				// Front
+		float vertices[] = {
+				//Front
 				-1.0, -1.0, 1.0,
 				1.0, -1.0, 1.0,
 				1.0, 1.0, 1.0,
 				-1.0, 1.0, 1.0,
-				// Left
+				//Left
 				-1.0, -1.0, 1.0,
 				-1.0, 1.0, 1.0,
 				-1.0, 1.0, -1.0,
 				-1.0, -1.0, -1.0,
-				// Right
+				//Right
 				1.0, -1.0, 1.0,
 				1.0, -1.0, -1.0,
 				1.0, 1.0, -1.0,
 				1.0, 1.0, 1.0,
-				// Top
+				//Top
 				-1.0, 1.0, 1.0,
 				1.0, 1.0, 1.0,
 				1.0, 1.0, -1.0,
 				-1.0, 1.0, -1.0,
-				// Bottom
+				//Bottom
 				-1.0, -1.0, 1.0,
 				-1.0, -1.0, -1.0,
 				1.0, -1.0, -1.0,
 				1.0, -1.0, 1.0,
-				// Back
+				//Back
 				-1.0, -1.0, -1.0,
 				-1.0, 1.0, -1.0,
 				1.0, 1.0, -1.0,
-				1.0, -1.0, -1.0
-			};
+				1.0, -1.0, -1.0,
+		};
 
 		std::shared_ptr<VertexBuffer> vbo(VertexBuffer::create(vertices, sizeof(vertices)));
 
-		vbo->setLayout(BufferLayout({{ShaderDataType::Float3, "a_Position"}}));
+		vbo->setLayout(BufferLayout({
+			{ ShaderDataType::Float3, "a_Position" }
+		}));
 
 		unsigned int indices[] = {
 			0, 2, 1, 3, 2, 0,
@@ -65,7 +67,7 @@ namespace Light
 			12, 14, 13, 15, 14, 12,
 			16, 18, 17, 19, 18, 16,
 			20, 22, 21, 23, 22, 20
-			};
+		};
 
 		std::shared_ptr<IndexBuffer> ibo(IndexBuffer::create(indices, sizeof(indices) / sizeof(unsigned int)));
 
@@ -80,8 +82,7 @@ namespace Light
 		// Outline Mesh (Screen space quad)
 		m_outline_mesh.reset(Light::VertexArray::create());
 
-		float screen_vertices[] = 
-		{
+		float screen_vertices[] = {
 			-1.0, -1.0,
 			-1.0, 1.0,
 			1.0, 1.0,
@@ -90,10 +91,13 @@ namespace Light
 
 		vbo.reset(VertexBuffer::create(screen_vertices, sizeof(screen_vertices)));
 
-		vbo->setLayout({{ShaderDataType::Float2, "a_Position"}});
+		vbo->setLayout({
+			{ ShaderDataType::Float2, "a_Position" }
+		});
 
 		unsigned int screen_indices[] = {
-			0, 2, 1, 3, 2, 0};
+			0, 2, 1, 3, 2, 0
+		};
 
 		ibo.reset(IndexBuffer::create(screen_indices, sizeof(screen_indices) / sizeof(unsigned int)));
 
@@ -163,6 +167,7 @@ namespace Light
 			{
 				auto [shader, mesh, transform] = view.get(entity);
 				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity);
+
 			}
 		}
 
@@ -174,20 +179,21 @@ namespace Light
 		m_framebuffer = framebuffer;
 	}
 
+
 	void SceneRenderer::renderOutline(std::shared_ptr<Scene> scene, Entity entity)
 	{
 		m_outlineFramebuffer->bind();
 		m_outlineFramebuffer->clearAttachment(0, 0);
 		m_outlineFramebuffer->clearDepthAttachment();
-		if (entity && entity.hasComponent<TransformComponent>() && entity.hasComponent<MeshComponent>())
+		if(entity && entity.hasComponent<TransformComponent>() && entity.hasComponent<MeshComponent>())
 		{
-			auto [transform, mesh] = scene->m_registry.get<TransformComponent, MeshComponent>((entt::entity)(uint32_t)entity);
+			auto [transform, mesh]= scene->m_registry.get<TransformComponent, MeshComponent>((entt::entity)(uint32_t)entity);
 			Renderer::submit(m_outline_temp_shader, mesh.mesh->getVao(), transform.getTransform());
 		}
 		m_outlineFramebuffer->unbind();
 
 		m_framebuffer->bind();
-		m_outlineFramebuffer->bindAttachmentTexture(0, 0);
+		m_outlineFramebuffer->bindAttachmentTexture(0,0);
 		m_outline_shader->bind();
 		m_outline_shader->setUniformInt("IDTexture", 0);
 		Renderer::submit(m_outline_shader, m_outline_mesh);

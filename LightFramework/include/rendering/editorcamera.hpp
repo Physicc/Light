@@ -19,24 +19,30 @@ namespace Light
 
 		void onUpdate(Timestep ts);
 
-		void onEvent(Event &e);
+		void onEvent(Event& e);
 
 		void setViewportSize(uint32_t width, uint32_t height);
 
-		const glm::mat4 &getViewMatrix() const { return m_viewMatrix; }
+		const glm::mat4& getViewMatrix() const { return m_viewMatrix; }
+		void setViewMatrix(glm::mat4 viewMatrix) { m_viewMatrix = viewMatrix; recalculateOrientation(); }
 		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * m_viewMatrix; }
 
 		glm::vec3 getUpDirection() const;
 		glm::vec3 getRightDirection() const;
 		glm::vec3 getForwardDirection() const;
 		glm::quat getOrientation() const;
-		glm::vec3 calculatePosition() const;
+		float getDistance() const { return m_distance; }
+
 
 	private:
+
 		bool onMouseScrolled(MouseScrolledEvent& e);
 
 		void updateView();
 		void updateProjection();
+		void recalculateOrientation();
+
+		glm::vec3 calculatePosition() const;
 
 		void mousePan(const glm::vec2& delta);
 		void mouseRotate(const glm::vec2& delta);
@@ -62,6 +68,8 @@ namespace Light
 
 		uint32_t m_viewportWidth = 1280, m_viewportHeight = 720;
 	};
+
+
 
 }
 #endif // __EDITORCAMERA_H__
