@@ -1,4 +1,10 @@
 #include <spdlog/spdlog.h>
+#undef near
+#undef far
+/*
+ * windows.h (in minwindef.h) for some retarded reason #defines near and far to be nothing
+ * spdlog ends up including windows.h somewhere and that breaks the constructor
+ */
 
 #include "rendering/editorcamera.hpp"
 
@@ -12,16 +18,11 @@
 
 namespace Light
 {
-	/*
-	 * Do not use the variable names near and far
-	 * windows.h (in minwindef.h) for some retarded reason #defines near and far to be nothing
-	 * spdlog ends up including windows.h somewhere and that breaks everything
-	 */
-	EditorCamera::EditorCamera(float fovy, float aspectRatio, float nearPlane, float farPlane)
+	EditorCamera::EditorCamera(float fovy, float aspectRatio, float near, float far)
 		: m_aspectRatio(aspectRatio),
 		  m_fovy(fovy),
-		  m_near(nearPlane),
-		  m_far(farPlane)
+		  m_near(near),
+		  m_far(far)
 	{
 		updateView();
 		updateProjection();
