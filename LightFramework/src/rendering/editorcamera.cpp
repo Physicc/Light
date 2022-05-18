@@ -4,6 +4,7 @@
 #include "input/keycodes.hpp"
 #include "input/mousecodes.hpp"
 
+
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtx/quaternion.hpp"
 
@@ -39,6 +40,19 @@ namespace Light
 	void EditorCamera::updateProjection()
 	{
 		setProjectionMatrix(glm::perspective(glm::radians(m_fovy), m_aspectRatio, m_near, m_far));
+	}
+
+	void EditorCamera::recalculateOrientation()
+	{
+
+		auto invertedView = glm::inverse(m_viewMatrix);
+		m_position = glm::vec3(invertedView[3]);
+
+		const glm::vec3 direction = -glm::vec3(invertedView[2]);
+		m_yaw   = glm::atan(direction.x, -direction.z);
+		m_pitch = -glm::asin(direction.y);
+
+		m_focalPoint = m_position + m_distance * getForwardDirection();
 	}
 
 	std::pair<float, float> EditorCamera::panSpeed() const

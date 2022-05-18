@@ -4,6 +4,7 @@
 #include "imgui.h"
 #include "light.hpp"
 #include "core/entrypoint.hpp"
+#include "ImGuizmo.h"
 
 
 class MainLayer : public Light::Layer
@@ -13,7 +14,7 @@ public:
 					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f)
 	{
 		Light::FramebufferSpec fbspec;
-		fbspec.attachments = { 
+		fbspec.attachments = {
 			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::RED_INTEGER, Light::TextureWrap::CLAMP_TO_BORDER },
 			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
@@ -71,7 +72,7 @@ public:
 			m_frameCount = 0;
 		}
 
-		if(m_viewportFocused)
+		if(m_viewportFocused && !m_gizmoOver && !m_gizmoUsing)
 			m_camera.onUpdate(ts);
 
 		m_sceneRenderer.renderEditor(m_scene, m_camera);
@@ -109,9 +110,38 @@ public:
 
 	bool onMouseButtonPressed(Light::MouseButtonPressedEvent& e)
 	{
-		if(e.getButton() == LIGHT_MOUSE_BUTTON_LEFT)
+		if(e.getButton() == LIGHT_MOUSE_BUTTON_LEFT && !m_gizmoOver)
 		{
 			m_scenePanel.setSelectionContext(m_hoveredEntity);
+		}
+
+		return false;
+	}
+
+	bool onKeyPressed(Light::KeyPressedEvent& e)
+	{
+		if(m_scenePanel.getSelectionContext())
+		{
+			switch (e.getKeycode())
+			{
+			case LIGHT_KEY_W:
+				m_gizmo_operation = ImGuizmo::OPERATION::TRANSLATE;
+				break;
+			case LIGHT_KEY_E:
+				m_gizmo_operation = ImGuizmo::OPERATION::ROTATE;
+				break;
+			case LIGHT_KEY_R:
+				m_gizmo_operation = ImGuizmo::OPERATION::SCALE;
+				break;
+			case LIGHT_KEY_T:
+				m_gizmo_operation = ImGuizmo::OPERATION::UNIVERSAL;
+				break;
+
+			default:
+				break;
+			}
+
+			return true;
 		}
 
 		return false;
@@ -123,6 +153,8 @@ public:
 		Light::EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<Light::WindowResizeEvent>(BIND_EVENT_FN(MainLayer::onWindowResize));
 		dispatcher.Dispatch<Light::MouseButtonPressedEvent>(BIND_EVENT_FN(MainLayer::onMouseButtonPressed));
+		dispatcher.Dispatch<Light::KeyPressedEvent>(BIND_EVENT_FN(MainLayer::onKeyPressed));
+
 		m_camera.onEvent(e);
 	}
 
@@ -154,6 +186,13 @@ public:
 		// Viewport
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0,0));
 		ImGui::Begin("Viewport");
+		auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+		auto viewportOffset = ImGui::GetWindowPos();
+		ImVec2 viewPortBounds[] = {
+			{viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y},
+			{viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y}
+		};
 
 		ImVec2 viewportPos = ImGui::GetCursorScreenPos();
 		m_viewportPos = { viewportPos.x, viewportPos.y };
@@ -171,8 +210,52 @@ public:
 			m_resizeViewport = true;
 			m_viewportPanelSize = glm::vec2(viewPortPanelSize.x, viewPortPanelSize.y);
 		}
+
+		// Gizmo
+		ImGuizmo::BeginFrame();
+		ImGuizmo::SetDrawlist();
+		ImGuizmo::SetRect(viewPortBounds[0].x, viewPortBounds[0].y, viewPortBounds[1].x - viewPortBounds[0].x, viewPortBounds[1].y - viewPortBounds[0].y);
+
 		ImGui::Image(INT2VOIDP(m_framebuffer->getColorAttachmentRendererId(0)), viewPortPanelSize, ImVec2(0, 1), ImVec2(1, 0));
-		
+
+		auto selectedEntity = m_scenePanel.getSelectionContext();
+		auto cameraViewMatrix = m_camera.getViewMatrix();
+
+		if (selectedEntity)
+		{
+			auto& transformComponent = selectedEntity.getComponent<Light::TransformComponent>();
+			glm::mat4 transform = transformComponent.getTransform();
+
+
+			bool snap = ImGui::IsKeyDown(LIGHT_KEY_LEFT_CONTROL);
+			float snapValue = 0.5f;
+			if (m_gizmo_operation == ImGuizmo::OPERATION::ROTATE)
+			{
+				snapValue = 15.0f;
+			}
+			float snapVector[3] = {snapValue, snapValue, snapValue};
+
+			ImGuizmo::Manipulate(glm::value_ptr(cameraViewMatrix), glm::value_ptr(m_camera.getProjectionMatrix()),
+				m_gizmo_operation, ImGuizmo::LOCAL, glm::value_ptr(transform), nullptr, snap ? snapVector : nullptr);
+
+			m_gizmoUsing = ImGuizmo::IsUsing();
+			m_gizmoOver = ImGuizmo::IsOver();
+
+			if (ImGuizmo::IsUsing())
+			{
+				glm::vec3 position, rotation, scale;
+				ImGuizmo::DecomposeMatrixToComponents(glm::value_ptr(transform), glm::value_ptr(position), glm::value_ptr(rotation), glm::value_ptr(scale));
+				transformComponent.position = position;
+				transformComponent.rotation = glm::radians(rotation);
+				transformComponent.scale = scale;
+			}
+		}
+
+		if(ImGuizmo::ViewManipulate(glm::value_ptr(cameraViewMatrix), m_camera.getDistance(), {viewPortBounds[1].x - 128, viewPortBounds[0].y}, {128, 128}, 0x10101010))
+		{
+			m_camera.setViewMatrix(cameraViewMatrix);
+		}
+
 		ImGui::End();
 		ImGui::PopStyleVar();
 
@@ -323,9 +406,13 @@ private:
 	Light::ScenePanel m_scenePanel;
 
 	Light::Entity m_hoveredEntity;
-	
+
 	glm::vec2 m_viewportPanelSize;
 	glm::vec2 m_viewportPos;
+
+	ImGuizmo::OPERATION m_gizmo_operation = ImGuizmo::TRANSLATE;
+	bool m_gizmoUsing = false;
+	bool m_gizmoOver = false;
 
 	bool m_resizeViewport = false;
 	bool m_viewportFocused = false;
