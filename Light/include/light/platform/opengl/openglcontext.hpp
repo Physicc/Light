@@ -20,11 +20,8 @@ namespace Light
 		void init() override;
 		void swapBuffers() override;
 
-		inline auto getGLVersion() const { return std::pair<int, int>(m_majorVersion, m_minorVersion); }
 	private:
 		GLFWwindow* m_windowHandle;
-		GLint m_majorVersion = 0;
-		GLint m_minorVersion = 0;
 	};
 }
 

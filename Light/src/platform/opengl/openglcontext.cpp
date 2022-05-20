@@ -98,11 +98,8 @@ namespace Light
 			exit(1);
 		}
 
-		m_majorVersion = GLAD_VERSION_MAJOR(version);
-		m_minorVersion = GLAD_VERSION_MINOR(version);
-
 #ifndef NDEBUG
-		if((m_majorVersion >= 4 && m_minorVersion >= 3) || GLAD_GL_KHR_debug)
+		if(GLAD_GL_VERSION_4_3 || GLAD_GL_KHR_debug)
 		{
 			glEnable(GL_DEBUG_OUTPUT);
 			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
