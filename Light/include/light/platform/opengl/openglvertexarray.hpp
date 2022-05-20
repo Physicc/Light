@@ -27,7 +27,7 @@ namespace Light
 
 		std::vector<std::shared_ptr<VertexBuffer>> m_vertexBuffers;
 		std::shared_ptr<IndexBuffer> m_indexBuffer;
-	};	
+	};
 
 }
 

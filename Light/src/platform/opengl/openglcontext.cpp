@@ -3,7 +3,7 @@
 #include "core/logging.hpp"
 
 #include "GLFW/glfw3.h"
-#include "glad/glad.h"
+#include "glad/gl.h"
 
 #include "string"
 
@@ -17,13 +17,13 @@ namespace Light
 			exit(1);
 		}
 	}
-	
+
 	OpenGLContext::~OpenGLContext() = default;
-	
-	void OpenGLContext::init() 
+
+	void OpenGLContext::init()
 	{
 		glfwMakeContextCurrent(m_windowHandle);
-		int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		int success = gladLoadGL(glfwGetProcAddress);
 		if(!success)
 		{
 			LIGHT_CORE_CRITICAL("Could not initialize GLAD");
@@ -35,8 +35,8 @@ namespace Light
 		LIGHT_CORE_INFO("OpenGL Version: {0}", glGetString(GL_VERSION));
 
 	}
-	
-	void OpenGLContext::swapBuffers() 
+
+	void OpenGLContext::swapBuffers()
 	{
 		glfwSwapBuffers(m_windowHandle);
 	}
