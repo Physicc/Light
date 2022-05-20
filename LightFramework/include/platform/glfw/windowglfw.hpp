@@ -29,14 +29,17 @@ namespace Light
 		virtual bool isVSync() const override;
 
 		virtual void* getNativeWindow() const override { return m_window; };
-	
+
 	private:
 		void init(const WindowProps& props);
 		void shutdown();
 
+		bool tryCreateContext(int versionMajor, int versionMinor);
+		void createBestContext();
+
 		GLFWwindow* m_window;
 		GraphicsContext* m_context;
-		
+
 		struct WindowData
 		{
 			std::string title;
