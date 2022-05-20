@@ -111,6 +111,7 @@ namespace Light
 		}
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
 		createBestContext();
 
