@@ -102,16 +102,20 @@ namespace Light
 		m_minorVersion = GLAD_VERSION_MINOR(version);
 
 #ifndef NDEBUG
-		if(m_majorVersion >= 4 && m_minorVersion >= 3)
+		if((m_majorVersion >= 4 && m_minorVersion >= 3) || GLAD_GL_KHR_debug)
 		{
 			glEnable(GL_DEBUG_OUTPUT);
 			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 			glDebugMessageCallback(glDebugCallback, nullptr);
 			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
 		}
-		glEnable(GL_DEBUG_OUTPUT);
-		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-		glDebugMessageCallback(glDebugCallback, nullptr);
+		else if (GLAD_GL_ARB_debug_output)
+		{
+			glEnable(GL_DEBUG_OUTPUT);
+			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
+			glDebugMessageCallbackARB(glDebugCallback, nullptr);
+			glDebugMessageControlARB(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
+		}
 #endif
 
 		LIGHT_CORE_INFO("OpenGL Vendor: {0}", glGetString(GL_VENDOR));
