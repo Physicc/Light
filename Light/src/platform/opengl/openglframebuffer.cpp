@@ -121,7 +121,7 @@ namespace Light
 			glDeleteFramebuffers(1, &m_rendererId);
 			glDeleteTextures((GLsizei)m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
 			if(m_depthAttachmentId != 0)
-				glDeleteRenderbuffers(1, &m_depthAttachmentId);
+				glDeleteTextures(1, &m_depthAttachmentId);
 
 			m_colorAttachmentIds.clear();
 			m_depthAttachmentId = 0;
@@ -199,32 +199,49 @@ namespace Light
 		// Attach depth buffer
 		if(m_depthAttachmentSpec.textureFormat != FramebufferTextureFormat::None)
 		{
-			glGenRenderbuffers(1, &m_depthAttachmentId);
-			glBindRenderbuffer(GL_RENDERBUFFER, m_depthAttachmentId);
+			GLenum textureTarget = m_spec.samples > 1 ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+			glGenTextures(1, &m_depthAttachmentId);
+			glBindTexture(textureTarget, m_depthAttachmentId);
 			if(m_spec.samples > 1)
 			{
-				glRenderbufferStorageMultisample(
-					GL_RENDERBUFFER,
+				glTexImage2DMultisample(
+					textureTarget,
 					m_spec.samples,
-					TexFormat2OpenGLFormat(m_depthAttachmentSpec.textureFormat),
+					TexFormat2OpenGLInternalFormat(m_depthAttachmentSpec.textureFormat),
 					m_spec.width,
-					m_spec.height
+					m_spec.height,
+					GL_FALSE
 				);
 			}
 			else
 			{
-				glRenderbufferStorage(
-					GL_RENDERBUFFER,
+				glTexImage2D(
+					textureTarget,
+					0,
 					TexFormat2OpenGLInternalFormat(m_depthAttachmentSpec.textureFormat),
 					m_spec.width,
-					m_spec.height
+					m_spec.height,
+					0,
+					TexFormat2OpenGLFormat(m_depthAttachmentSpec.textureFormat),
+					TexFormat2OpenGLType(m_depthAttachmentSpec.textureFormat),
+					nullptr
 				);
 			}
 
-			glFramebufferRenderbuffer(GL_FRAMEBUFFER,
+			glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
+						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S,
+						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T,
+						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER,
 				GL_DEPTH_STENCIL_ATTACHMENT,
-				GL_RENDERBUFFER,
-				m_depthAttachmentId
+				textureTarget,
+				m_depthAttachmentId,
+				0
 			);
 		}
 
@@ -335,5 +352,21 @@ namespace Light
 			glBindTexture(GL_TEXTURE_2D, m_colorAttachmentIds[attachmentIndex]);
 		}
 
+	}
+
+	void OpenGLFramebuffer::bindDepthAttachmentTexture(uint32_t slot)
+	{
+		LIGHT_CORE_ASSERT(m_depthAttachmentId != 0, "Depth attachment not set");
+
+		glActiveTexture(GL_TEXTURE0 + slot);
+
+		if(m_spec.samples > 1)
+		{
+			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_depthAttachmentId);
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_2D, m_depthAttachmentId);
+		}
 	}
 }

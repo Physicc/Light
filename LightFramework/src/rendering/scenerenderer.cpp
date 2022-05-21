@@ -18,6 +18,15 @@ namespace Light {
 		fbspecOutline.height = 720;
 		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
 
+		Light::FramebufferSpec fbspecTemp;
+		fbspecTemp.attachments = {
+			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecTemp.width = 1280;
+		fbspecTemp.height = 720;
+		m_tempFramebuffer = Light::Framebuffer::create(fbspecTemp);
+
 		// Skybox Mesh (Cube)
 		m_skybox_mesh.reset(VertexArray::create());
 
@@ -114,6 +123,7 @@ namespace Light {
 	void SceneRenderer::onViewportResize(int width, int height)
 	{
 		m_outlineFramebuffer->resize(width, height);
+		m_tempFramebuffer->resize(width, height);
 	}
 
 	void SceneRenderer::renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera)
@@ -192,10 +202,16 @@ namespace Light {
 		}
 		m_outlineFramebuffer->unbind();
 
+		RenderCommand::framebufferBlit(m_framebuffer, m_tempFramebuffer, true);
+
 		m_framebuffer->bind();
 		m_outlineFramebuffer->bindAttachmentTexture(0,0);
+		m_outlineFramebuffer->bindDepthAttachmentTexture(2);
+		m_tempFramebuffer->bindDepthAttachmentTexture(1);
 		m_outline_shader->bind();
 		m_outline_shader->setUniformInt("IDTexture", 0);
+		m_outline_shader->setUniformInt("DepthTexture", 1);
+		m_outline_shader->setUniformInt("SelectedDepth", 2);
 		Renderer::submit(m_outline_shader, m_outline_mesh);
 		m_framebuffer->unbind();
 	}
