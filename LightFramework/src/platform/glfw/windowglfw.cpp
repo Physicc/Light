@@ -30,9 +30,8 @@ namespace Light
 		shutdown();
 	}
 
-	void GLFWErrorCallback(int error, const char* description)
+	static void GLFWErrorCallback([[maybe_unused]] int error, [[maybe_unused]] const char* description)
 	{
-		(void)error, (void)description; // Supress warning about unused variable in release mode (logs don't get compiled in release)
 		if(error != GLFW_VERSION_UNAVAILABLE)
 		{
 			LIGHT_CORE_ERROR("GLFW Error({}): {}", error, description);
