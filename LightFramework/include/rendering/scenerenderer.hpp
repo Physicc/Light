@@ -49,7 +49,7 @@ namespace Light {
 		std::shared_ptr<Light::Framebuffer> m_framebuffer;
 		std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_tempFramebuffer;
-		//TODO: Directly use texture instead of a dummy framebuffer
+		//TODO: #63 Directly use texture instead of a dummy framebuffer
 	};
 }
 

@@ -23,7 +23,7 @@ uniform sampler2D SelectedDepth;
 
 void main()
 {
-	int outlineWidth = 15;
+	int outlineWidth = 17;
 
 	float depth = texture(DepthTexture, v_texcoord).r;
 
@@ -65,7 +65,7 @@ void main()
 		behind = true;
 	}
 
-	float outlineFalloff = 0.3;
+	float outlineFalloff = 0.5;
 
 	if ((pixelId == 0 && nearby && !behind))
 	{

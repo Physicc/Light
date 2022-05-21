@@ -16,6 +16,7 @@ namespace Light
 		void setClearColor(glm::vec4& color) override;
 		void clear() override;
 		void setBlendFunc(BlendFactor src, BlendFactor dst) override;
+		void setBlendFuncSeperate(BlendFactor srcRGB, BlendFactor dstRGB, BlendFactor srcAlpha, BlendFactor dstAlpha) override;
 
 		void drawIndexed(const std::shared_ptr<VertexArray>& vao) override;
 

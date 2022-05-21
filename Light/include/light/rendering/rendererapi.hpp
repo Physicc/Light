@@ -36,6 +36,7 @@ namespace Light
 		virtual void setClearColor(glm::vec4& color) = 0;
 		virtual void clear() = 0;
 		virtual void setBlendFunc(BlendFactor src, BlendFactor dst) = 0;
+		virtual void setBlendFuncSeperate(BlendFactor srcRGB, BlendFactor dstRGB, BlendFactor srcAlpha, BlendFactor dstAlpha) = 0;
 
 		virtual void drawIndexed(const std::shared_ptr<VertexArray>& vao) = 0;
 

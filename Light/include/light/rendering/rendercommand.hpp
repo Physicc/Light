@@ -25,6 +25,10 @@ namespace Light
 		inline static void clear() { s_rendererApi->clear(); }
 		inline static void setClearColor(glm::vec4 color) { s_rendererApi->setClearColor(color); }
 		inline static void setBlendFunc(BlendFactor src, BlendFactor dst) { s_rendererApi->setBlendFunc(src, dst); }
+		inline static void setBlendFuncSeperate(BlendFactor srcRGB, BlendFactor dstRGB, BlendFactor srcAlpha, BlendFactor dstAlpha)
+		{
+			s_rendererApi->setBlendFuncSeperate(srcRGB, dstRGB, srcAlpha, dstAlpha);
+		}
 		inline static void framebufferBlit(const std::shared_ptr<Framebuffer>& src, const std::shared_ptr<Framebuffer>& dst, bool depth)
 		{
 			s_rendererApi->framebufferBlit(src, dst, depth);

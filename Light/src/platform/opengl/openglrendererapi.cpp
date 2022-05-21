@@ -43,120 +43,75 @@ namespace Light
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	static GLenum BlendFactor2OpenGLType(BlendFactor factor)
+	{
+		GLenum result = GL_NONE;
+
+		switch (factor)
+		{
+		case BlendFactor::ZERO:
+			result = GL_ZERO;
+			break;
+
+		case BlendFactor::ONE:
+			result = GL_ONE;
+			break;
+
+		case BlendFactor::SRC_COLOR:
+			result = GL_SRC_COLOR;
+			break;
+
+		case BlendFactor::ONE_MINUS_SRC_COLOR:
+			result = GL_ONE_MINUS_SRC_COLOR;
+			break;
+
+		case BlendFactor::DST_COLOR:
+			result = GL_DST_COLOR;
+			break;
+
+		case BlendFactor::ONE_MINUS_DST_COLOR:
+			result = GL_ONE_MINUS_DST_COLOR;
+			break;
+
+		case BlendFactor::SRC_ALPHA:
+			result = GL_SRC_ALPHA;
+			break;
+
+		case BlendFactor::ONE_MINUS_SRC_ALPHA:
+			result = GL_ONE_MINUS_SRC_ALPHA;
+			break;
+
+		case BlendFactor::DST_ALPHA:
+			result = GL_DST_ALPHA;
+			break;
+
+		case BlendFactor::ONE_MINUS_DST_ALPHA:
+			result = GL_ONE_MINUS_DST_ALPHA;
+			break;
+
+		case BlendFactor::CONSTANT_ALPHA:
+			result = GL_CONSTANT_ALPHA;
+			break;
+
+		case BlendFactor::ONE_MINUS_CONSTANT_ALPHA:
+			result = GL_ONE_MINUS_CONSTANT_ALPHA;
+			break;
+
+		default:
+			break;
+		}
+
+		return result;
+	}
+
 	void OpenGLRendererAPI::setBlendFunc(BlendFactor src, BlendFactor dst)
 	{
-		GLenum sfactor = GL_NONE;
-		GLenum dfactor = GL_NONE;
+		glBlendFunc(BlendFactor2OpenGLType(src), BlendFactor2OpenGLType(dst));
+	}
 
-		switch (src)
-		{
-		case BlendFactor::ZERO:
-			sfactor = GL_ZERO;
-			break;
-
-		case BlendFactor::ONE:
-			sfactor = GL_ONE;
-			break;
-
-		case BlendFactor::SRC_COLOR:
-			sfactor = GL_SRC_COLOR;
-			break;
-
-		case BlendFactor::ONE_MINUS_SRC_COLOR:
-			sfactor = GL_ONE_MINUS_SRC_COLOR;
-			break;
-
-		case BlendFactor::DST_COLOR:
-			sfactor = GL_DST_COLOR;
-			break;
-
-		case BlendFactor::ONE_MINUS_DST_COLOR:
-			sfactor = GL_ONE_MINUS_DST_COLOR;
-			break;
-
-		case BlendFactor::SRC_ALPHA:
-			sfactor = GL_SRC_ALPHA;
-			break;
-
-		case BlendFactor::ONE_MINUS_SRC_ALPHA:
-			sfactor = GL_ONE_MINUS_SRC_ALPHA;
-			break;
-
-		case BlendFactor::DST_ALPHA:
-			sfactor = GL_DST_ALPHA;
-			break;
-
-		case BlendFactor::ONE_MINUS_DST_ALPHA:
-			sfactor = GL_ONE_MINUS_DST_ALPHA;
-			break;
-
-		case BlendFactor::CONSTANT_ALPHA:
-			sfactor = GL_CONSTANT_ALPHA;
-			break;
-
-		case BlendFactor::ONE_MINUS_CONSTANT_ALPHA:
-			sfactor = GL_ONE_MINUS_CONSTANT_ALPHA;
-			break;
-
-		default:
-			break;
-		}
-
-		switch (dst)
-		{
-		case BlendFactor::ZERO:
-			dfactor = GL_ZERO;
-			break;
-
-		case BlendFactor::ONE:
-			dfactor = GL_ONE;
-			break;
-
-		case BlendFactor::SRC_COLOR:
-			dfactor = GL_SRC_COLOR;
-			break;
-
-		case BlendFactor::ONE_MINUS_SRC_COLOR:
-			dfactor = GL_ONE_MINUS_SRC_COLOR;
-			break;
-
-		case BlendFactor::DST_COLOR:
-			dfactor = GL_DST_COLOR;
-			break;
-
-		case BlendFactor::ONE_MINUS_DST_COLOR:
-			dfactor = GL_ONE_MINUS_DST_COLOR;
-			break;
-
-		case BlendFactor::SRC_ALPHA:
-			dfactor = GL_SRC_ALPHA;
-			break;
-
-		case BlendFactor::ONE_MINUS_SRC_ALPHA:
-			dfactor = GL_ONE_MINUS_SRC_ALPHA;
-			break;
-
-		case BlendFactor::DST_ALPHA:
-			dfactor = GL_DST_ALPHA;
-			break;
-
-		case BlendFactor::ONE_MINUS_DST_ALPHA:
-			dfactor = GL_ONE_MINUS_DST_ALPHA;
-			break;
-
-		case BlendFactor::CONSTANT_ALPHA:
-			dfactor = GL_CONSTANT_ALPHA;
-			break;
-
-		case BlendFactor::ONE_MINUS_CONSTANT_ALPHA:
-			dfactor = GL_ONE_MINUS_CONSTANT_ALPHA;
-			break;
-
-		default:
-			break;
-		}
-
-		glBlendFunc(sfactor, dfactor);
+	void OpenGLRendererAPI::setBlendFuncSeperate(BlendFactor srcRGB, BlendFactor dstRGB, BlendFactor srcAlpha, BlendFactor dstAlpha)
+	{
+		glBlendFuncSeparate(BlendFactor2OpenGLType(srcRGB), BlendFactor2OpenGLType(dstRGB), BlendFactor2OpenGLType(srcAlpha), BlendFactor2OpenGLType(dstAlpha));
 	}
 
 	void OpenGLRendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& vao)

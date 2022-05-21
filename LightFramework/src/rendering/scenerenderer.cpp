@@ -212,7 +212,9 @@ namespace Light {
 		m_outline_shader->setUniformInt("IDTexture", 0);
 		m_outline_shader->setUniformInt("DepthTexture", 1);
 		m_outline_shader->setUniformInt("SelectedDepth", 2);
+		RenderCommand::setBlendFuncSeperate(BlendFactor::SRC_ALPHA, BlendFactor::ONE_MINUS_SRC_ALPHA, BlendFactor::ZERO, BlendFactor::ONE);
 		Renderer::submit(m_outline_shader, m_outline_mesh);
+		RenderCommand::setBlendFunc(BlendFactor::SRC_ALPHA, BlendFactor::ONE_MINUS_SRC_ALPHA);
 		m_framebuffer->unbind();
 	}
 }
