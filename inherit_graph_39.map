@@ -1,5 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classPhysicc_1_1Collider.html" title="Collider class." alt="" coords="5,31,123,57"/>
-<area shape="rect" id="node2" href="$classPhysicc_1_1BoxCollider.html" title="BoxCollider class." alt="" coords="181,5,319,32"/>
-<area shape="rect" id="node3" href="$classPhysicc_1_1SphereCollider.html" title="SphereCollider class." alt="" coords="171,56,329,83"/>
+<area shape="rect" id="node1" href="$classPhysicc_1_1BVImpl_1_1BaseBV.html" title=" " alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node2" href="$classPhysicc_1_1BVImpl_1_1BoxBV.html" title=" " alt="" coords="224,13,417,39"/>
 </map>

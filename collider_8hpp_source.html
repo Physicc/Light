@@ -144,52 +144,57 @@ $(function() {
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a> getAABB() <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="comment">//Each child will calculate its AABB according to its own shape</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keyword">enum</span> Type</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                e_box = 0,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                e_sphere = 1,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                e_typecount = 2</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            };</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            glm::vec3 m_position;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            glm::vec3 m_rotate;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            glm::vec3 m_scale;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            glm::mat4 m_transform;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            Type m_objectType;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    };</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classPhysicc_1_1BoxCollider.html">  134</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classPhysicc_1_1BoxCollider.html">BoxCollider</a> : <span class="keyword">public</span> <a class="code" href="classPhysicc_1_1Collider.html">Collider</a></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <a class="code" href="classPhysicc_1_1BoxCollider.html#a34f9b13ae3ab97041465266717ab2ef9">BoxCollider</a>(glm::vec3 position = glm::vec3(0),</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                        glm::vec3 rotation = glm::vec3(0),</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                        glm::vec3 scale = glm::vec3(1));</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            [[nodiscard]] <a class="code" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a> <a class="code" href="classPhysicc_1_1BoxCollider.html#a0299ebde972b829538c182104fa8f0fc">getAABB</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="keyword">virtual</span> glm::vec3 getCentroid() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keyword">enum</span> Type</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                e_box = 0,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                e_sphere = 1,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                e_typecount = 2</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            };</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            glm::vec3 m_position;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            glm::vec3 m_rotate;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            glm::vec3 m_scale;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            glm::mat4 m_transform;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            Type m_objectType;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    };</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classPhysicc_1_1BoxCollider.html">  136</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classPhysicc_1_1BoxCollider.html">BoxCollider</a> : <span class="keyword">public</span> <a class="code" href="classPhysicc_1_1Collider.html">Collider</a></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    {</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <a class="code" href="classPhysicc_1_1BoxCollider.html#a34f9b13ae3ab97041465266717ab2ef9">BoxCollider</a>(glm::vec3 position = glm::vec3(0),</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                        glm::vec3 rotation = glm::vec3(0),</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                        glm::vec3 scale = glm::vec3(1));</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            std::vector&lt;glm::vec4&gt; m_vertices;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    };</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classPhysicc_1_1SphereCollider.html">  152</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classPhysicc_1_1SphereCollider.html">SphereCollider</a> : <span class="keyword">public</span> <a class="code" href="classPhysicc_1_1Collider.html">Collider</a></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="classPhysicc_1_1SphereCollider.html#adbcefafdfe7dbe78b1ce6cbff72f264c">SphereCollider</a>(<span class="keywordtype">float</span> radius = 1.0f,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                           glm::vec3 position = glm::vec3(0),</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                           glm::vec3 rotation = glm::vec3(0),</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                           glm::vec3 scale = glm::vec3(1));</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            [[nodiscard]] <a class="code" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a> <a class="code" href="classPhysicc_1_1SphereCollider.html#a55241901f7bc77a477d0fbb5024c7e81">getAABB</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            <span class="keywordtype">float</span> m_radius;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    };</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            [[nodiscard]] <a class="code" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a> <a class="code" href="classPhysicc_1_1BoxCollider.html#a0299ebde972b829538c182104fa8f0fc">getAABB</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            glm::vec3 getCentroid() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            std::vector&lt;glm::vec4&gt; m_vertices;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    };</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="classPhysicc_1_1SphereCollider.html">  155</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classPhysicc_1_1SphereCollider.html">SphereCollider</a> : <span class="keyword">public</span> <a class="code" href="classPhysicc_1_1Collider.html">Collider</a></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <a class="code" href="classPhysicc_1_1SphereCollider.html#adbcefafdfe7dbe78b1ce6cbff72f264c">SphereCollider</a>(<span class="keywordtype">float</span> radius = 1.0f,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                           glm::vec3 position = glm::vec3(0),</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                           glm::vec3 rotation = glm::vec3(0),</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                           glm::vec3 scale = glm::vec3(1));</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            [[nodiscard]] <a class="code" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a> <a class="code" href="classPhysicc_1_1SphereCollider.html#a55241901f7bc77a477d0fbb5024c7e81">getAABB</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            glm::vec3 getCentroid() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __COLLIDER_H__</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordtype">float</span> m_radius;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    };</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __COLLIDER_H__</span></div>
 <div class="ttc" id="aclassPhysicc_1_1BVImpl_1_1BoxBV_html"><div class="ttname"><a href="classPhysicc_1_1BVImpl_1_1BoxBV.html">Physicc::BVImpl::BoxBV&lt; BVImpl::AABB &gt;</a></div></div>
-<div class="ttc" id="aclassPhysicc_1_1BoxCollider_html"><div class="ttname"><a href="classPhysicc_1_1BoxCollider.html">Physicc::BoxCollider</a></div><div class="ttdoc">BoxCollider class.</div><div class="ttdef"><b>Definition:</b> collider.hpp:135</div></div>
+<div class="ttc" id="aclassPhysicc_1_1BoxCollider_html"><div class="ttname"><a href="classPhysicc_1_1BoxCollider.html">Physicc::BoxCollider</a></div><div class="ttdoc">BoxCollider class.</div><div class="ttdef"><b>Definition:</b> collider.hpp:137</div></div>
 <div class="ttc" id="aclassPhysicc_1_1BoxCollider_html_a0299ebde972b829538c182104fa8f0fc"><div class="ttname"><a href="classPhysicc_1_1BoxCollider.html#a0299ebde972b829538c182104fa8f0fc">Physicc::BoxCollider::getAABB</a></div><div class="ttdeci">BoundingVolume::AABB getAABB() const override</div><div class="ttdoc">Computes and returns Axis Aligned Bounding Box of Box shaped object.</div><div class="ttdef"><b>Definition:</b> collider.cpp:92</div></div>
 <div class="ttc" id="aclassPhysicc_1_1BoxCollider_html_a34f9b13ae3ab97041465266717ab2ef9"><div class="ttname"><a href="classPhysicc_1_1BoxCollider.html#a34f9b13ae3ab97041465266717ab2ef9">Physicc::BoxCollider::BoxCollider</a></div><div class="ttdeci">BoxCollider(glm::vec3 position=glm::vec3(0), glm::vec3 rotation=glm::vec3(0), glm::vec3 scale=glm::vec3(1))</div><div class="ttdoc">Creates a BoxCollider object.</div><div class="ttdef"><b>Definition:</b> collider.cpp:63</div></div>
 <div class="ttc" id="aclassPhysicc_1_1Collider_html"><div class="ttname"><a href="classPhysicc_1_1Collider.html">Physicc::Collider</a></div><div class="ttdoc">Collider class.</div><div class="ttdef"><b>Definition:</b> collider.hpp:19</div></div>
@@ -202,9 +207,9 @@ $(function() {
 <div class="ttc" id="aclassPhysicc_1_1Collider_html_acc63388d3ff6d1f877361fe9ba9399e9"><div class="ttname"><a href="classPhysicc_1_1Collider.html#acc63388d3ff6d1f877361fe9ba9399e9">Physicc::Collider::setRotate</a></div><div class="ttdeci">void setRotate(glm::vec3 rotate)</div><div class="ttdoc">Set rotation of object about it's center.</div><div class="ttdef"><b>Definition:</b> collider.hpp:90</div></div>
 <div class="ttc" id="aclassPhysicc_1_1Collider_html_ae55705ca824993d11b95b8fc22f8c605"><div class="ttname"><a href="classPhysicc_1_1Collider.html#ae55705ca824993d11b95b8fc22f8c605">Physicc::Collider::getScale</a></div><div class="ttdeci">glm::vec3 getScale()</div><div class="ttdoc">get Scale of object</div><div class="ttdef"><b>Definition:</b> collider.hpp:54</div></div>
 <div class="ttc" id="aclassPhysicc_1_1Collider_html_af9e91414202f8ff9e9bead919f1b986a"><div class="ttname"><a href="classPhysicc_1_1Collider.html#af9e91414202f8ff9e9bead919f1b986a">Physicc::Collider::getPosition</a></div><div class="ttdeci">glm::vec3 getPosition()</div><div class="ttdoc">Get Position of object's center.</div><div class="ttdef"><b>Definition:</b> collider.hpp:30</div></div>
-<div class="ttc" id="aclassPhysicc_1_1SphereCollider_html"><div class="ttname"><a href="classPhysicc_1_1SphereCollider.html">Physicc::SphereCollider</a></div><div class="ttdoc">SphereCollider class.</div><div class="ttdef"><b>Definition:</b> collider.hpp:153</div></div>
-<div class="ttc" id="aclassPhysicc_1_1SphereCollider_html_a55241901f7bc77a477d0fbb5024c7e81"><div class="ttname"><a href="classPhysicc_1_1SphereCollider.html#a55241901f7bc77a477d0fbb5024c7e81">Physicc::SphereCollider::getAABB</a></div><div class="ttdeci">BoundingVolume::AABB getAABB() const override</div><div class="ttdoc">Computes and returns Axis Aligned Bounding Box of Sphere shaped object.</div><div class="ttdef"><b>Definition:</b> collider.cpp:135</div></div>
-<div class="ttc" id="aclassPhysicc_1_1SphereCollider_html_adbcefafdfe7dbe78b1ce6cbff72f264c"><div class="ttname"><a href="classPhysicc_1_1SphereCollider.html#adbcefafdfe7dbe78b1ce6cbff72f264c">Physicc::SphereCollider::SphereCollider</a></div><div class="ttdeci">SphereCollider(float radius=1.0f, glm::vec3 position=glm::vec3(0), glm::vec3 rotation=glm::vec3(0), glm::vec3 scale=glm::vec3(1))</div><div class="ttdoc">Creates a SphereCollider object.</div><div class="ttdef"><b>Definition:</b> collider.cpp:119</div></div>
+<div class="ttc" id="aclassPhysicc_1_1SphereCollider_html"><div class="ttname"><a href="classPhysicc_1_1SphereCollider.html">Physicc::SphereCollider</a></div><div class="ttdoc">SphereCollider class.</div><div class="ttdef"><b>Definition:</b> collider.hpp:156</div></div>
+<div class="ttc" id="aclassPhysicc_1_1SphereCollider_html_a55241901f7bc77a477d0fbb5024c7e81"><div class="ttname"><a href="classPhysicc_1_1SphereCollider.html#a55241901f7bc77a477d0fbb5024c7e81">Physicc::SphereCollider::getAABB</a></div><div class="ttdeci">BoundingVolume::AABB getAABB() const override</div><div class="ttdoc">Computes and returns Axis Aligned Bounding Box of Sphere shaped object.</div><div class="ttdef"><b>Definition:</b> collider.cpp:140</div></div>
+<div class="ttc" id="aclassPhysicc_1_1SphereCollider_html_adbcefafdfe7dbe78b1ce6cbff72f264c"><div class="ttname"><a href="classPhysicc_1_1SphereCollider.html#adbcefafdfe7dbe78b1ce6cbff72f264c">Physicc::SphereCollider::SphereCollider</a></div><div class="ttdeci">SphereCollider(float radius=1.0f, glm::vec3 position=glm::vec3(0), glm::vec3 rotation=glm::vec3(0), glm::vec3 scale=glm::vec3(1))</div><div class="ttdoc">Creates a SphereCollider object.</div><div class="ttdef"><b>Definition:</b> collider.cpp:124</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

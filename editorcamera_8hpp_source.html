@@ -97,51 +97,55 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span> setViewportSize(uint32_t width, uint32_t height);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">const</span> glm::mat4&amp; getViewMatrix()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_viewMatrix; }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        glm::mat4 getViewProjectionMatrix() { <span class="keywordflow">return</span> getProjectionMatrix() * m_viewMatrix; }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        glm::vec3 getUpDirection() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        glm::vec3 getRightDirection() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        glm::vec3 getForwardDirection() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        glm::quat getOrientation() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">void</span> setViewMatrix(glm::mat4 viewMatrix) { m_viewMatrix = viewMatrix; recalculateOrientation(); }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        glm::mat4 getViewProjectionMatrix() { <span class="keywordflow">return</span> getProjectionMatrix() * m_viewMatrix; }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        glm::vec3 getUpDirection() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        glm::vec3 getRightDirection() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        glm::vec3 getForwardDirection() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        glm::quat getOrientation() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">float</span> getDistance()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_distance; }</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">bool</span> onMouseScrolled(<a class="code" href="classLight_1_1MouseScrolledEvent.html">MouseScrolledEvent</a>&amp; e);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> updateView();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> updateProjection();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">bool</span> onMouseScrolled(<a class="code" href="classLight_1_1MouseScrolledEvent.html">MouseScrolledEvent</a>&amp; e);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        glm::vec3 calculatePosition() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">void</span> mousePan(<span class="keyword">const</span> glm::vec2&amp; delta);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">void</span> mouseRotate(<span class="keyword">const</span> glm::vec2&amp; delta);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> mouseZoom(<span class="keywordtype">float</span> delta);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> updateView();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">void</span> updateProjection();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">void</span> recalculateOrientation();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        glm::vec3 calculatePosition() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        std::pair&lt;float, float&gt; panSpeed() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">float</span> rotationSpeed() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">float</span> zoomSpeed() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> mousePan(<span class="keyword">const</span> glm::vec2&amp; delta);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">void</span> mouseRotate(<span class="keyword">const</span> glm::vec2&amp; delta);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> mouseZoom(<span class="keywordtype">float</span> delta);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">float</span> m_aspectRatio;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">float</span> m_fovy;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">float</span> m_near;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">float</span> m_far;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        glm::mat4 m_viewMatrix;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        glm::vec3 m_position = {-0.754f, 0.651f, 1.758f};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        glm::vec3 m_focalPoint = {0.0f, 0.0f, 0.0f};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        std::pair&lt;float, float&gt; panSpeed() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">float</span> rotationSpeed() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">float</span> zoomSpeed() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">float</span> m_aspectRatio;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">float</span> m_fovy;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">float</span> m_near;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">float</span> m_far;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">float</span> m_distance = 10.0f;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">float</span> m_pitch = 0.0f, m_yaw = 0.0f;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        glm::vec2 m_initialMousePos = {0.0, 0.0};</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        uint32_t m_viewportWidth = 1280, m_viewportHeight = 720;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    };</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __EDITORCAMERA_H__</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        glm::mat4 m_viewMatrix;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        glm::vec3 m_position = {-0.754f, 0.651f, 1.758f};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        glm::vec3 m_focalPoint = {0.0f, 0.0f, 0.0f};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">float</span> m_distance = 10.0f;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">float</span> m_pitch = 0.0f, m_yaw = 0.0f;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        glm::vec2 m_initialMousePos = {0.0, 0.0};</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        uint32_t m_viewportWidth = 1280, m_viewportHeight = 720;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    };</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __EDITORCAMERA_H__</span></div>
 <div class="ttc" id="aclassLight_1_1Camera_html"><div class="ttname"><a href="classLight_1_1Camera.html">Light::Camera</a></div><div class="ttdef"><b>Definition:</b> camera.hpp:9</div></div>
 <div class="ttc" id="aclassLight_1_1EditorCamera_html"><div class="ttname"><a href="classLight_1_1EditorCamera.html">Light::EditorCamera</a></div><div class="ttdef"><b>Definition:</b> editorcamera.hpp:16</div></div>
 <div class="ttc" id="aclassLight_1_1Event_html"><div class="ttname"><a href="classLight_1_1Event.html">Light::Event</a></div><div class="ttdef"><b>Definition:</b> event.hpp:34</div></div>

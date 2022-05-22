@@ -85,11 +85,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abf84cc574e9fd3e5e88259ac9441e07e"><td class="memItemLeft" align="right" valign="top"><a id="abf84cc574e9fd3e5e88259ac9441e07e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicc_1_1RigidBody.html#abf84cc574e9fd3e5e88259ac9441e07e">RigidBody</a> (float mass, const glm::vec3 &amp;velocity, float gravityScale)</td></tr>
-<tr class="memdesc:abf84cc574e9fd3e5e88259ac9441e07e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPhysicc_1_1RigidBody.html" title="Rigid Body Class.">RigidBody</a> initialized with a mass velocity, and a bool storing whether gravity is acting on the object or not. <br /></td></tr>
+<tr class="memdesc:abf84cc574e9fd3e5e88259ac9441e07e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPhysicc_1_1RigidBody.html" title="Rigid Body Class.">RigidBody</a> initialized with a mass velocity, and a float storing the scale of the gravity is acting on the object. <br /></td></tr>
 <tr class="separator:abf84cc574e9fd3e5e88259ac9441e07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ba4326a5bcf9207a227a9d5e7e670da"><td class="memItemLeft" align="right" valign="top"><a id="a9ba4326a5bcf9207a227a9d5e7e670da"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RigidBody</b> (const <a class="el" href="classPhysicc_1_1RigidBody.html">RigidBody</a> &amp;other)</td></tr>
-<tr class="separator:a9ba4326a5bcf9207a227a9d5e7e670da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c7892bb5262ae64cbc89a103d8766ec"><td class="memItemLeft" align="right" valign="top"><a id="a8c7892bb5262ae64cbc89a103d8766ec"></a>
 glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>getVelocity</b> () const</td></tr>
 <tr class="separator:a8c7892bb5262ae64cbc89a103d8766ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -105,6 +102,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setForce</b> ()</td><
 <tr class="memitem:a0746105ab62e2f06cbd472fda12e3e95"><td class="memItemLeft" align="right" valign="top"><a id="a0746105ab62e2f06cbd472fda12e3e95"></a>
 <a class="el" href="classPhysicc_1_1BVImpl_1_1BoxBV.html">BoundingVolume::AABB</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getAABB</b> () const</td></tr>
 <tr class="separator:a0746105ab62e2f06cbd472fda12e3e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac39ae64215f151624fcb917fd6faa3c9"><td class="memItemLeft" align="right" valign="top"><a id="ac39ae64215f151624fcb917fd6faa3c9"></a>
+glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>getCentroid</b> () const</td></tr>
+<tr class="separator:ac39ae64215f151624fcb917fd6faa3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>

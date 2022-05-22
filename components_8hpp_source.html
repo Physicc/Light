@@ -103,20 +103,20 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="structLight_1_1TagComponent.html">TagComponent</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="structLight_1_1TagComponent.html">TagComponent</a>(<span class="keyword">const</span> <a class="code" href="structLight_1_1TagComponent.html">TagComponent</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="structLight_1_1TagComponent.html">TagComponent</a>(<span class="keyword">const</span> std::string&amp; tag) : tag(tag) {}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structLight_1_1TransformComponent.html">   35</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structLight_1_1TransformComponent.html">TransformComponent</a> : <span class="keyword">public</span> <a class="code" href="structLight_1_1Component.html">Component</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="structLight_1_1TransformComponent.html">TransformComponent</a>(glm::vec3 position = glm::vec3(0,0,0),</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            glm::vec3 rotation = glm::vec3(0,0,0),</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            glm::vec3 scale = glm::vec3(0.5))</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        : position(position), rotation(rotation), scale(scale) {}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">inline</span> glm::mat4 getTransform()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">return</span> glm::translate(glm::mat4(1.0f), position)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                * glm::toMat4(glm::quat(rotation))</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                * glm::scale(glm::mat4(1.0f), glm::abs(scale));</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="structLight_1_1TagComponent.html">TagComponent</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="structLight_1_1TagComponent.html">TagComponent</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="structLight_1_1TagComponent.html">TagComponent</a>(<span class="keyword">const</span> std::string&amp; tag) : tag(tag) {}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    };</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structLight_1_1TransformComponent.html">   36</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structLight_1_1TransformComponent.html">TransformComponent</a> : <span class="keyword">public</span> <a class="code" href="structLight_1_1Component.html">Component</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="structLight_1_1TransformComponent.html">TransformComponent</a>(glm::vec3 position = glm::vec3(0, 0, 0),</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                           glm::vec3 rotation = glm::vec3(0, 0, 0),</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                           glm::vec3 scale = glm::vec3(0.5))</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            : position(position), rotation(rotation), scale(scale) {}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">inline</span> glm::mat4 getTransform()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">return</span> glm::translate(glm::mat4(1.0f), position) * glm::toMat4(glm::quat(rotation)) * glm::scale(glm::mat4(1.0f), glm::abs(scale));</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        glm::vec3 position;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        glm::vec3 rotation;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        glm::vec3 scale;</div>
@@ -148,25 +148,28 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="structLight_1_1LightComponent.html">LightComponent</a>(glm::vec3 lightColor) : m_lightColor(lightColor) {}</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        glm::vec3 m_lightColor;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        LightType m_lightType = LightType::Directional;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    };</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structLight_1_1CameraComponent.html">   80</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structLight_1_1CameraComponent.html">CameraComponent</a> : <span class="keyword">public</span> <a class="code" href="structLight_1_1Component.html">Component</a></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="structLight_1_1CameraComponent.html">CameraComponent</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="structLight_1_1CameraComponent.html">CameraComponent</a>(glm::mat4 projectionMatrix) : m_camera(projectionMatrix) {}</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="classLight_1_1Camera.html">Camera</a> m_camera;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    };</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __COMPONENTS_HPP__</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">float</span> m_inner = 12.5;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">float</span> m_outer = 17.5;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">float</span> m_range  = 10.0;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    };</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="structLight_1_1CameraComponent.html">   83</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structLight_1_1CameraComponent.html">CameraComponent</a> : <span class="keyword">public</span> <a class="code" href="structLight_1_1Component.html">Component</a></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="structLight_1_1CameraComponent.html">CameraComponent</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="structLight_1_1CameraComponent.html">CameraComponent</a>(glm::mat4 projectionMatrix) : m_camera(projectionMatrix) {}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classLight_1_1Camera.html">Camera</a> m_camera;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    };</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __COMPONENTS_HPP__</span></div>
 <div class="ttc" id="aclassLight_1_1Camera_html"><div class="ttname"><a href="classLight_1_1Camera.html">Light::Camera</a></div><div class="ttdef"><b>Definition:</b> camera.hpp:9</div></div>
-<div class="ttc" id="astructLight_1_1CameraComponent_html"><div class="ttname"><a href="structLight_1_1CameraComponent.html">Light::CameraComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:81</div></div>
+<div class="ttc" id="astructLight_1_1CameraComponent_html"><div class="ttname"><a href="structLight_1_1CameraComponent.html">Light::CameraComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:84</div></div>
 <div class="ttc" id="astructLight_1_1Component_html"><div class="ttname"><a href="structLight_1_1Component.html">Light::Component</a></div><div class="ttdef"><b>Definition:</b> components.hpp:21</div></div>
 <div class="ttc" id="astructLight_1_1LightComponent_html"><div class="ttname"><a href="structLight_1_1LightComponent.html">Light::LightComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:73</div></div>
 <div class="ttc" id="astructLight_1_1MeshComponent_html"><div class="ttname"><a href="structLight_1_1MeshComponent.html">Light::MeshComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:67</div></div>
 <div class="ttc" id="astructLight_1_1MeshRendererComponent_html"><div class="ttname"><a href="structLight_1_1MeshRendererComponent.html">Light::MeshRendererComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:53</div></div>
 <div class="ttc" id="astructLight_1_1TagComponent_html"><div class="ttname"><a href="structLight_1_1TagComponent.html">Light::TagComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:28</div></div>
-<div class="ttc" id="astructLight_1_1TransformComponent_html"><div class="ttname"><a href="structLight_1_1TransformComponent.html">Light::TransformComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:36</div></div>
+<div class="ttc" id="astructLight_1_1TransformComponent_html"><div class="ttname"><a href="structLight_1_1TransformComponent.html">Light::TransformComponent</a></div><div class="ttdef"><b>Definition:</b> components.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

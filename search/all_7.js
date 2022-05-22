@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['keyevent_37',['KeyEvent',['../classLight_1_1KeyEvent.html',1,'Light']]],
-  ['keypressedevent_38',['KeyPressedEvent',['../classLight_1_1KeyPressedEvent.html',1,'Light']]],
-  ['keyreleasedevent_39',['KeyReleasedEvent',['../classLight_1_1KeyReleasedEvent.html',1,'Light']]],
-  ['keytypedevent_40',['KeyTypedEvent',['../classLight_1_1KeyTypedEvent.html',1,'Light']]]
+  ['imguilayer_35',['ImguiLayer',['../classLight_1_1ImguiLayer.html',1,'Light']]],
+  ['indexbuffer_36',['IndexBuffer',['../classLight_1_1IndexBuffer.html',1,'Light']]],
+  ['input_37',['Input',['../classLight_1_1Input.html',1,'Light']]],
+  ['inputglfw_38',['InputGlfw',['../classLight_1_1InputGlfw.html',1,'Light']]]
 ];

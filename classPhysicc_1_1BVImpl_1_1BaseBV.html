@@ -69,6 +69,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classPhysicc_1_1BVImpl_1_1BaseBV-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Physicc::BVImpl::BaseBV&lt; Derived, BoundingObject &gt; Class Template Reference</div>  </div>
@@ -88,9 +89,6 @@ Inheritance diagram for Physicc::BVImpl::BaseBV&lt; Derived, BoundingObject &gt;
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a092f896ca96c5612b160c277749378e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html#a092f896ca96c5612b160c277749378e0">BaseBV</a> (const <a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BaseBV</a> &amp;bv)=default</td></tr>
-<tr class="memdesc:a092f896ca96c5612b160c277749378e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor for BoundingVolume.  <a href="classPhysicc_1_1BVImpl_1_1BaseBV.html#a092f896ca96c5612b160c277749378e0">More...</a><br /></td></tr>
-<tr class="separator:a092f896ca96c5612b160c277749378e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cfe9979d80b9e44ff87ca3b82c80af5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html#a8cfe9979d80b9e44ff87ca3b82c80af5">BaseBV</a> (const BoundingObject &amp;volume)</td></tr>
 <tr class="memdesc:a8cfe9979d80b9e44ff87ca3b82c80af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor for BV which takes a BoundingObject (like the <a class="el" href="structPhysicc_1_1BVImpl_1_1AABB.html" title="Axis Aligned Bounding Box.">AABB</a> struct) as a parameter.  <a href="classPhysicc_1_1BVImpl_1_1BaseBV.html#a8cfe9979d80b9e44ff87ca3b82c80af5">More...</a><br /></td></tr>
 <tr class="separator:a8cfe9979d80b9e44ff87ca3b82c80af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,6 +104,18 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getVolume</b> () con
 <tr class="memitem:ae693b79e24fcb0e4b09e72b70615d820"><td class="memItemLeft" align="right" valign="top"><a id="ae693b79e24fcb0e4b09e72b70615d820"></a>
 Derived&#160;</td><td class="memItemRight" valign="bottom"><b>enclosingBV</b> (const <a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BaseBV</a> &amp;bv) const</td></tr>
 <tr class="separator:ae693b79e24fcb0e4b09e72b70615d820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8baa9a583f0527f6ec20f81a1f2d38"><td class="memItemLeft" align="right" valign="top"><a id="a5d8baa9a583f0527f6ec20f81a1f2d38"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BaseBV</a> &amp;other) const</td></tr>
+<tr class="separator:a5d8baa9a583f0527f6ec20f81a1f2d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e88c08d5acf859ef5837e3b28c90f0d"><td class="memItemLeft" align="right" valign="top"><a id="a4e88c08d5acf859ef5837e3b28c90f0d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (const <a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BaseBV</a> &amp;other) const</td></tr>
+<tr class="separator:a4e88c08d5acf859ef5837e3b28c90f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a2659c38de2ba7326f6a8ecf79e151c76"><td class="memItemLeft" align="right" valign="top"><a id="a2659c38de2ba7326f6a8ecf79e151c76"></a>
+BoundingObject&#160;</td><td class="memItemRight" valign="bottom"><b>m_volume</b></td></tr>
+<tr class="separator:a2659c38de2ba7326f6a8ecf79e151c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Derived, typename BoundingObject&gt;<br />
@@ -121,50 +131,8 @@ class Physicc::BVImpl::BaseBV&lt; Derived, BoundingObject &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a092f896ca96c5612b160c277749378e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a092f896ca96c5612b160c277749378e0">&#9670;&nbsp;</a></span>BaseBV() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Derived , typename BoundingObject &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">Physicc::BVImpl::BaseBV</a>&lt; Derived, BoundingObject &gt;::<a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BaseBV</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classPhysicc_1_1BVImpl_1_1BaseBV.html">BaseBV</a>&lt; Derived, BoundingObject &gt; &amp;&#160;</td>
-          <td class="paramname"><em>bv</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copy constructor for BoundingVolume. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">BV</td><td>The object to be copied </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bv</td><td>A BV object </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a8cfe9979d80b9e44ff87ca3b82c80af5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cfe9979d80b9e44ff87ca3b82c80af5">&#9670;&nbsp;</a></span>BaseBV() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cfe9979d80b9e44ff87ca3b82c80af5">&#9670;&nbsp;</a></span>BaseBV()</h2>
 
 <div class="memitem">
 <div class="memproto">

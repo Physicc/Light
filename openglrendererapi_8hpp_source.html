@@ -75,26 +75,32 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __OPENGLRENDERERAPI_H__</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;core/base.hpp&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;light/rendering/rendererapi.hpp&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>Light</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classLight_1_1OpenGLRendererAPI.html">    9</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classLight_1_1OpenGLRendererAPI.html">OpenGLRendererAPI</a> : <span class="keyword">public</span> <a class="code" href="classLight_1_1RendererAPI.html">RendererAPI</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordtype">void</span> init() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keywordtype">void</span> depthMask(<span class="keywordtype">bool</span> enable) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">void</span> setViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">void</span> setClearColor(glm::vec4&amp; color) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">void</span> clear() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">void</span> drawIndexed(<span class="keyword">const</span> std::shared_ptr&lt;VertexArray&gt;&amp; vao) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    };</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __OPENGLRENDERERAPI_H__</span></div>
-<div class="ttc" id="aclassLight_1_1OpenGLRendererAPI_html"><div class="ttname"><a href="classLight_1_1OpenGLRendererAPI.html">Light::OpenGLRendererAPI</a></div><div class="ttdef"><b>Definition:</b> openglrendererapi.hpp:10</div></div>
-<div class="ttc" id="aclassLight_1_1RendererAPI_html"><div class="ttname"><a href="classLight_1_1RendererAPI.html">Light::RendererAPI</a></div><div class="ttdef"><b>Definition:</b> rendererapi.hpp:11</div></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;core/logging.hpp&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;core/assert.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;light/rendering/rendererapi.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>Light</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classLight_1_1OpenGLRendererAPI.html">   11</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classLight_1_1OpenGLRendererAPI.html">OpenGLRendererAPI</a> : <span class="keyword">public</span> <a class="code" href="classLight_1_1RendererAPI.html">RendererAPI</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">void</span> init() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">void</span> depthMask(<span class="keywordtype">bool</span> enable) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">void</span> setViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">void</span> setClearColor(glm::vec4&amp; color) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">void</span> clear() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">void</span> setBlendFunc(BlendFactor src, BlendFactor dst) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">void</span> setBlendFuncSeperate(BlendFactor srcRGB, BlendFactor dstRGB, BlendFactor srcAlpha, BlendFactor dstAlpha) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span> drawIndexed(<span class="keyword">const</span> std::shared_ptr&lt;VertexArray&gt;&amp; vao) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">void</span> framebufferBlit(<span class="keyword">const</span> std::shared_ptr&lt;Framebuffer&gt;&amp; src, <span class="keyword">const</span> std::shared_ptr&lt;Framebuffer&gt;&amp; dst, <span class="keywordtype">bool</span> depth) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __OPENGLRENDERERAPI_H__</span></div>
+<div class="ttc" id="aclassLight_1_1OpenGLRendererAPI_html"><div class="ttname"><a href="classLight_1_1OpenGLRendererAPI.html">Light::OpenGLRendererAPI</a></div><div class="ttdef"><b>Definition:</b> openglrendererapi.hpp:12</div></div>
+<div class="ttc" id="aclassLight_1_1RendererAPI_html"><div class="ttname"><a href="classLight_1_1RendererAPI.html">Light::RendererAPI</a></div><div class="ttdef"><b>Definition:</b> rendererapi.hpp:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
