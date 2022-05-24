@@ -70,7 +70,7 @@ namespace Light
 		m_config[name] = value;
 	}
 
-	bool AppConfig::KeyExists(std::string name) const
+	bool AppConfig::Has(std::string name) const
 	{
 		return m_config.find(name) != m_config.end();
 	}

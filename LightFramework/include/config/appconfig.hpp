@@ -57,7 +57,7 @@ namespace Light
 		void SetFloat(std::string name, float value);
 		void SetString(std::string name, std::string value);
 
-		bool KeyExists(std::string name) const;
+		bool Has(std::string name) const;
 
 		std::string operator[](std::string name) const;
 

@@ -13,18 +13,15 @@
 
 namespace Light
 {
-	bool ProjectNamePopup::onImguiRender()
+	void ProjectNamePopup::onImguiRender()
 	{
-
-		bool used = false;
-		if(!Application::get().getConfig().KeyExists("project_path"))
+		if(m_isOpen)
 		{
-			ImGui::OpenPopup("Project");
+			ImGui::OpenPopup("Open Project##Project");
 		}
 
-		if(ImGui::BeginPopupModal("Project"))
+		if(ImGui::BeginPopupModal("Open Project##Project", &m_isOpen, ImGuiWindowFlags_AlwaysAutoResize))
 		{
-			ImGui::Text("Please select the project path");
 			char buffer[256];
 			memset(buffer, 0, sizeof(buffer));
 			std::strncpy(buffer, m_projectPath.string().c_str(), sizeof(buffer)-1);
@@ -32,7 +29,10 @@ namespace Light
 			{
 				m_projectPath = buffer;
 			}
-			if (ImGui::Button("...", ImVec2(120, 0)))
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("..."))
 			{
 				NFD::UniquePath outpath;
 
@@ -66,22 +66,36 @@ namespace Light
 				ImGui::Text("");
 			}
 
-			if(ImGui::Button("OK", ImVec2(120, 0)))
+			if(ImGui::Button("OK"))
 			{
-				Application::get().getConfig().SetString("project_path", std::filesystem::absolute(m_projectPath).string());
+				if(m_callback)
+				{
+					m_callback(m_projectPath.string());
+				}
 				ImGui::CloseCurrentPopup();
-				used = true;
+				m_isOpen = false;
 			}
-
 			if (!isDir)
 			{
 				ImGui::PopItemFlag();
 				ImGui::PopStyleVar();
 			}
 
+			ImGui::SetItemDefaultFocus();
+			ImGui::SameLine();
+			if(ImGui::Button("Cancel"))
+			{
+				ImGui::CloseCurrentPopup();
+				m_isOpen = false;
+			}
+
+
 			ImGui::EndPopup();
 		}
+	}
 
-		return used;
+	void ProjectNamePopup::openPopup()
+	{
+		m_isOpen = true;
 	}
 }

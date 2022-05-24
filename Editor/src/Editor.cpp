@@ -22,6 +22,20 @@ public:
 			Light::Application::get().getConfig().Load(m_configPath);
 		}
 
+		// Check if project_path exists in config
+		if (!Light::Application::get().getConfig().Has("project_path"))
+		{
+			m_projectNamePopup.openPopup();
+		}
+
+		// Set project popup callback
+		m_projectNamePopup.setInputCallback([this](const std::string& path)
+		{
+			Light::Application::get().getConfig().SetString("project_path", path);
+			Light::Application::get().getConfig().Save(m_configPath);
+			LIGHT_CORE_DEBUG("Project path set to {0}", path);
+		});
+
 		Light::FramebufferSpec fbspec;
 		fbspec.attachments = {
 			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
@@ -129,10 +143,20 @@ public:
 
 	bool onKeyPressed(Light::KeyPressedEvent& e)
 	{
+		switch (e.getKeycode())
+		{
+		case LIGHT_KEY_O:
+			if (Light::Input::isKeyPressed(LIGHT_KEY_LEFT_CONTROL)) {  m_projectNamePopup.openPopup();}
+			break;
+		default:
+			break;
+		}
+
 		if(m_scenePanel.getSelectionContext())
 		{
 			switch (e.getKeycode())
 			{
+			// Gizmos
 			case LIGHT_KEY_W:
 				m_gizmo_operation = ImGuizmo::OPERATION::TRANSLATE;
 				break;
@@ -176,11 +200,7 @@ public:
 		// ImGui::ShowDemoWindow();
 
 		// Project Popup
-		if(m_projectNamePopup.onImguiRender())
-		{
-			Light::Application::get().getConfig().Save(m_configPath);
-			LIGHT_CORE_DEBUG("Saved config to {}", m_configPath);
-		}
+		m_projectNamePopup.onImguiRender();
 
 		// Main Menu Bar
 		if(ImGui::BeginMainMenuBar())
@@ -188,6 +208,7 @@ public:
 			if(ImGui::BeginMenu("File"))
 			{
 				if(ImGui::MenuItem("Exit")) Light::Application::get().close();
+				if(ImGui::MenuItem("Open Project", "Ctrl+O")) m_projectNamePopup.openPopup();
 				ImGui::EndMenu();
 			}
 			if(ImGui::BeginMenu("Settings"))
