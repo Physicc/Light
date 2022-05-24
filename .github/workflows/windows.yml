@@ -43,7 +43,7 @@ jobs:
   windows_mingw-w64:
     name: Windows (mingw-w64-gcc)
     runs-on: windows-latest
-	defaults:
+    defaults:
       run:
         shell: msys2 {0}
 
