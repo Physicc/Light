@@ -63,7 +63,7 @@ namespace Light
 			}
 			else
 			{
-				ImGui::Text("");
+				ImGui::NewLine();
 			}
 
 			if(ImGui::Button("OK"))
