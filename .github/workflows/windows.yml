@@ -54,7 +54,7 @@ jobs:
 
       - uses: msys2/setup-msys2@v2
         with:
-          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-make
+          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-make
 
 #       - name: ccache
 #         uses: hendrikmuhs/ccache-action@v1
