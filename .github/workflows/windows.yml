@@ -43,9 +43,6 @@ jobs:
   windows_mingw-w64:
     name: Windows (mingw-w64-gcc)
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
 
     steps:
       - uses: actions/checkout@v2
@@ -54,13 +51,17 @@ jobs:
 
       - uses: msys2/setup-msys2@v2
         with:
-          install: mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake
+          install: mingw-w64-x86_64-toolchain
 
 #       - name: ccache
 #         uses: hendrikmuhs/ccache-action@v1
 #         with:
 #           key: windows-mingw
 #           max-size: 100M
+
+      - name: Put MSys2 on path
+        run: |
+          echo "D:/a/_temp/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Configure CMake
         run: |
