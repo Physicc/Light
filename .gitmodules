@@ -23,3 +23,6 @@
 [submodule "Editor/libs/ImGuizmo"]
 	path = Editor/libs/ImGuizmo
 	url = https://github.com/dropTableUsers42/ImGuizmo
+[submodule "LightFramework/libs/cereal"]
+	path = LightFramework/libs/cereal
+	url = https://github.com/USCiLab/cereal

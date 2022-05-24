@@ -32,7 +32,7 @@ namespace Light
 		pushOverlay(m_imguiLayer);
 
 	}
-	
+
 	Application::~Application() = default;
 
 	void Application::onEvent(Event& e)
@@ -49,7 +49,7 @@ namespace Light
 		}
 	}
 
-	void Application::run() 
+	void Application::run()
 	{
 		while(m_running)
 		{
@@ -64,7 +64,7 @@ namespace Light
 					layer->onUpdate(ts);
 				}
 			}
-			
+
 
 			m_imguiLayer->begin();
 			for(Layer* layer : m_layerStack)
@@ -85,7 +85,7 @@ namespace Light
 		return true;
 	}
 
-	bool Application::onWindowResize(WindowResizeEvent& e) 
+	bool Application::onWindowResize(WindowResizeEvent& e)
 	{
 		if(std::get<0>(e.getSize()) == 0 || std::get<1>(e.getSize()) == 0)
 		{

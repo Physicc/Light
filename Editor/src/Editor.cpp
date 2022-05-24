@@ -1,10 +1,13 @@
 #include "gui/scenepanel.hpp"
+#include "gui/projectnamepopup.hpp"
 
 #include "physicsworld.hpp"
 #include "imgui.h"
 #include "light.hpp"
 #include "core/entrypoint.hpp"
 #include "ImGuizmo.h"
+
+#include <filesystem>
 
 
 class MainLayer : public Light::Layer
@@ -13,6 +16,12 @@ public:
 	MainLayer(): Light::Layer("MainLayer"),
 					m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f)
 	{
+		// Check if m_configPath exists
+		if (std::filesystem::exists(m_configPath))
+		{
+			Light::Application::get().getConfig().Load(m_configPath);
+		}
+
 		Light::FramebufferSpec fbspec;
 		fbspec.attachments = {
 			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
@@ -165,6 +174,13 @@ public:
 
 		// Demo
 		// ImGui::ShowDemoWindow();
+
+		// Project Popup
+		if(m_projectNamePopup.onImguiRender())
+		{
+			Light::Application::get().getConfig().Save(m_configPath);
+			LIGHT_CORE_DEBUG("Saved config to {}", m_configPath);
+		}
 
 		// Main Menu Bar
 		if(ImGui::BeginMainMenuBar())
@@ -420,6 +436,9 @@ private:
 	int m_frameCount = 0;
 	float m_lastTime = 0.0f;
 	int m_lastFrameCount = 0;
+
+	std::string m_configPath = "editorconfig.json";
+	Light::ProjectNamePopup m_projectNamePopup;
 };
 
 class Editor : public Light::Application
