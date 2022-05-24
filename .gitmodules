@@ -26,3 +26,6 @@
 [submodule "LightFramework/libs/cereal"]
 	path = LightFramework/libs/cereal
 	url = https://github.com/USCiLab/cereal
+[submodule "LightFramework/libs/nativefiledialog-extended"]
+	path = LightFramework/libs/nativefiledialog-extended
+	url = https://github.com/btzy/nativefiledialog-extended

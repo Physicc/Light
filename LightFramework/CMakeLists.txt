@@ -75,6 +75,10 @@ set(SKIP_PERFORMANCE_COMPARISON ON CACHE BOOL "" FORCE)
 add_subdirectory(libs/cereal)
 target_link_libraries(LightFramework cereal)
 
+# NFDE
+add_subdirectory(libs/nativefiledialog-extended)
+target_link_libraries(LightFramework nfd)
+
 #EnTT
 target_include_directories(LightFramework PUBLIC libs/entt)
 
