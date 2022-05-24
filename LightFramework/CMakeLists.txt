@@ -75,7 +75,11 @@ set(SKIP_PERFORMANCE_COMPARISON ON CACHE BOOL "" FORCE)
 add_subdirectory(libs/cereal)
 target_link_libraries(LightFramework cereal)
 
+
 # NFDE
+if(WIN32)
+	target_link_libraries(LightFramework "ole32" "uuid")
+endif()
 add_subdirectory(libs/nativefiledialog-extended)
 target_link_libraries(LightFramework nfd)
 

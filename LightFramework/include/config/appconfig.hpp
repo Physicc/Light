@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include "cereal/cereal.hpp"
 
 namespace cereal
 {

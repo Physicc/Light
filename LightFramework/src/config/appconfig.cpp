@@ -1,5 +1,4 @@
 #include "config/appconfig.hpp"
-#include "cereal/cereal.hpp"
 #include "cereal/archives/json.hpp"
 
 #include <fstream>
