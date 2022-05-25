@@ -39,7 +39,11 @@ namespace Physicc::Broadphase
 		*/
 		void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray)
 		{
-			if (isLeaf(node1) && isLeaf(node2))
+			if(!((node1)->volume.overlapsWith((node2)->volume)))
+			{
+				// if both nodes don't overlap, then no need to check for collisions
+				return;
+			}else if (isLeaf(node1) && isLeaf(node2))
 			{
 				//If both nodes are leaves, then we have a PotentialContact, and we add the collision pair to the collisionArray
 				collisionArray.push_back(PotentialContact(node1->body, node2->body));
@@ -87,11 +91,8 @@ namespace Physicc::Broadphase
 			
 			BroadphaseImpl::getPotentialContacts(node->left.get(), collisionArray);
 			BroadphaseImpl::getPotentialContacts(node->right.get(), collisionArray);
-
-			if ((node->left)->volume.overlapsWith((node->right)->volume))
-			{
-				BroadphaseImpl::getPotentialContactsWith(node->left.get(), node->right.get(), collisionArray);
-			}
+			BroadphaseImpl::getPotentialContactsWith(node->left.get(), node->right.get(), collisionArray);
+			
 		}
 
 
