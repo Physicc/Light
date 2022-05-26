@@ -95,7 +95,7 @@ namespace Light
 		glm::vec2 delta = (mouse - m_initialMousePos) * 0.003f;
 		m_initialMousePos = mouse;
 
-		if (Input::isKeyPressed(LIGHT_KEY_LEFT_ALT))
+		if (!m_blockUpdate && Input::isKeyPressed(LIGHT_KEY_LEFT_ALT))
 		{
 			if (Input::isMouseButtonPressed(LIGHT_MOUSE_BUTTON_MIDDLE))
 				mousePan(delta);
@@ -106,6 +106,8 @@ namespace Light
 
 			updateView();
 		}
+
+		m_blockUpdate = false;
 	}
 
 	void EditorCamera::onEvent(Event& e)
