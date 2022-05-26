@@ -67,12 +67,12 @@ file(GLOB_RECURSE ASSETS
 	${CMAKE_CURRENT_SOURCE_DIR}/assets/*
 )
 add_custom_command(
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Dummy/Assets
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_Assets
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/assets
-	COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/Dummy/Assets
+	COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/_Assets
 	DEPENDS ${ASSETS}
 	COMMENT "Copying assets to executable directory"
 )
 
-add_custom_target(CopyAssets DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Dummy/Assets)
+add_custom_target(CopyAssets DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/_Assets)
 add_dependencies(Editor CopyAssets)
