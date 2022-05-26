@@ -23,6 +23,8 @@ namespace Light
 
 		void setViewportSize(uint32_t width, uint32_t height);
 
+		void blockUpdate(bool block) { m_blockUpdate = block; }
+
 		const glm::mat4& getViewMatrix() const { return m_viewMatrix; }
 		void setViewMatrix(glm::mat4 viewMatrix) { m_viewMatrix = viewMatrix; recalculateOrientation(); }
 		glm::mat4 getViewProjectionMatrix() { return getProjectionMatrix() * m_viewMatrix; }
@@ -67,6 +69,8 @@ namespace Light
 		glm::vec2 m_initialMousePos = {0.0, 0.0};
 
 		uint32_t m_viewportWidth = 1280, m_viewportHeight = 720;
+
+		bool m_blockUpdate = false;
 	};
 
 
