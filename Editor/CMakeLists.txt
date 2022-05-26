@@ -18,6 +18,10 @@ endif()
 # add the executable
 add_executable(Editor ${SOURCES})
 
+add_custom_target(CopyShaders COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ ${CMAKE_CURRENT_BINARY_DIR}/assets)
+
+add_dependencies(Editor CopyShaders)
+
 # -Werror
 target_compile_options(Editor PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
