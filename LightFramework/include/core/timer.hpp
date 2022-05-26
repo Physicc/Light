@@ -37,7 +37,7 @@ namespace Light
 			{
 				auto now = std::chrono::high_resolution_clock::now();
 				auto delta = now - m_startTime;
-				return std::chrono::duration<double, precision::period>(delta).count();
+				return std::chrono::duration<double, typename precision::period>(delta).count();
 			}
 			else
 			{
@@ -48,8 +48,8 @@ namespace Light
 		inline bool isStarted() { return m_started; }
 
 	private:
-		std::chrono::steady_clock::time_point m_startTime;
-		std::chrono::steady_clock::time_point m_pausedTime;
+		std::chrono::high_resolution_clock::time_point m_startTime;
+		std::chrono::high_resolution_clock::time_point m_pausedTime;
 
 		bool m_started;
 	};
