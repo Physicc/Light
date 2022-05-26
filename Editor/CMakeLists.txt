@@ -18,6 +18,10 @@ endif()
 # add the executable
 add_executable(Editor ${SOURCES})
 
+add_custom_target(CopyShaders COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ ${CMAKE_CURRENT_BINARY_DIR}/assets)
+
+add_dependencies(Editor CopyShaders)
+
 # -Werror
 target_compile_options(Editor PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
@@ -58,5 +62,3 @@ add_subdirectory(../shared/libs/tracy TracyClient)
 target_link_libraries(Editor TracyClient)
 
 add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/imgui.ini $<TARGET_FILE_DIR:Editor>)
-
-add_custom_target(CopyShaders ALL COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/assets)
