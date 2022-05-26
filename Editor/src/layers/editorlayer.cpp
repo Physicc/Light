@@ -338,7 +338,7 @@ namespace Light
 
 	void EditorLayer::addDefaultMeshes()
 	{
-		m_meshes->add("None", std::vector<glm::vec3>(), std::vector<glm::vec4>(), std::vector<glm::vec3>(), std::vector<unsigned int>());
+		m_meshes->add("None", std::vector<glm::vec3>(), std::vector<glm::vec4>(), std::vector<glm::vec3>(), std::vector<glm::vec2>(), std::vector<unsigned int>());
 
 		std::vector<glm::vec3> vertices = {
 			glm::vec3(-0.5f, -0.5f, 0.5f),
@@ -406,6 +406,40 @@ namespace Light
 			glm::vec3(0.0f, 0.0f, -1.0f)
 		};
 
+		// std::vector<glm::vec2> texcoords = {
+		// 	glm::vec2(-0.5f, -0.5f),
+		// 	glm::vec2(0.5f, -0.5f),
+		// 	glm::vec2(0.5f, 0.5f),
+		// 	glm::vec2(-0.5f, 0.5f),
+
+		// 	glm::vec2(-0.5f, 0.5f),
+		// 	glm::vec2(0.5f, 0.5),
+		// 	glm::vec2(0.5f, -0.5f),
+		// 	glm::vec2(-0.5f, -0.5f),
+
+		// 	glm::vec2(0.5f, -0.5f, 0.5f),
+		// 	glm::vec2(0.5f, -0.5f, -0.5f),
+		// 	glm::vec2(0.5f, 0.5f, -0.5f),
+		// 	glm::vec2(0.5f, 0.5f, 0.5f),
+
+		// 	glm::vec2(-0.5f, 0.5f, 0.5f),
+		// 	glm::vec2(0.5f, 0.5f, 0.5f),
+		// 	glm::vec2(0.5f, 0.5f, -0.5f),
+		// 	glm::vec2(-0.5f, 0.5f, -0.5f),
+
+		// 	glm::vec2(-0.5f, -0.5f, 0.5f),
+		// 	glm::vec2(-0.5f, -0.5f, -0.5f),
+		// 	glm::vec2(0.5f, -0.5f, -0.5f),
+		// 	glm::vec2(0.5f, -0.5f, 0.5f),
+
+		// 	glm::vec2(-0.5f, -0.5f, -0.5f),
+		// 	glm::vec2(-0.5f, 0.5f, -0.5f),
+		// 	glm::vec2(0.5f, 0.5f, -0.5f),
+		// 	glm::vec2(0.5f, -0.5f, -0.5f)
+		// };
+
+		std::vector<glm::vec2> texcoords(24, {10.8f, 10.8f});
+
 		std::vector<unsigned int> indices = {
 			0, 1, 2, 2, 3, 0,
 			4, 5, 6, 6, 7, 4,
@@ -415,7 +449,7 @@ namespace Light
 			20, 21, 22, 22, 23, 20
 		};
 
-		m_meshes->add("Cube", vertices, color, normals, indices);
+		m_meshes->add("Cube", vertices, color, normals, texcoords, indices);
 	}
 
 }

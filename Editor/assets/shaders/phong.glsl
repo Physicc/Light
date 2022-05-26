@@ -1,12 +1,15 @@
 #type vertex
 #version 330 core
+// phong.glsl
 
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec4 a_Color;
 layout(location = 2) in vec3 a_Normal;
+layout(location = 3) in vec2 a_Texcoord;
 out vec4 v_color;
 out vec3 v_normal;
 out vec3 v_worldPos;
+out vec2 v_texcoord;
 
 uniform mat4 u_viewProjectionMatrix;
 uniform mat4 u_transform;
@@ -16,15 +19,18 @@ void main()
 {
 	gl_Position = u_viewProjectionMatrix *  u_transform * vec4(a_Position, 1.0);
 	v_color = a_Color;
+	v_texcoord = a_Texcoord;
 	v_normal = u_normal * a_Normal;
 	v_worldPos = vec3(u_transform * vec4(a_Position, 1.0));
 }
 
 #type fragment
 #version 330 core
+//phong.glsl
 
 in vec3 v_normal;
 in vec4 v_color;
+in vec2 v_texcoord;
 in vec3 v_worldPos;
 layout(location = 0) out vec4 color;
 layout(location = 1) out int entity;
@@ -151,7 +157,7 @@ void main()
 	color += directionalLightCalculate(u_directionalLights[1], norm, viewDir);
 	color += directionalLightCalculate(u_directionalLights[2], norm, viewDir);
 	color += directionalLightCalculate(u_directionalLights[3], norm, viewDir);
-	color.a = 1.0;
 	color *= v_color;
+	color.a = 1.0;
 	entity = u_id;
 }
