@@ -53,18 +53,20 @@ namespace Light
 	{
 		while(m_running)
 		{
-			float time = static_cast<float>(glfwGetTime());
-			Timestep ts(time - m_lastTime);
-            m_lastTime = time;
+			static Timer deltaTimer;
+			double dt = deltaTimer.getDeltaTime<std::chrono::milliseconds>();
+			deltaTimer.start();
+
+			m_stats.m_mspf = dt;
+			m_stats.m_fps = 1000.0 / dt * m_stats.m_alpha + m_stats.m_fps * (1 - m_stats.m_alpha);
 
 			if(!m_minimized)
 			{
 				for(Layer* layer : m_layerStack)
 				{
-					layer->onUpdate(ts);
+					layer->onUpdate(Timestep(dt	/ 1000.0f));
 				}
 			}
-
 
 			m_imguiLayer->begin();
 			for(Layer* layer : m_layerStack)

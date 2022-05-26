@@ -6,6 +6,8 @@
 #include "core/layerstack.hpp"
 #include "imgui/imguilayer.hpp"
 #include "config/appconfig.hpp"
+#include "core/appstats.hpp"
+#include "core/timer.hpp"
 
 namespace Light
 {
@@ -26,6 +28,7 @@ namespace Light
 
 		ImguiLayer* getImguiLayer() { return m_imguiLayer; }
 		AppConfig& getConfig() { return m_config; }
+		const AppStats getStats() { return m_stats; }
 
 		inline void close() { m_running = false; }
 
@@ -42,8 +45,7 @@ namespace Light
 
 		static Application* m_instance;
 
-		float m_lastTime = 0.0f;
-
+		AppStats m_stats;
 		AppConfig m_config;
 	};
 

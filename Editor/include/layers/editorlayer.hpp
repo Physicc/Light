@@ -39,11 +39,6 @@ namespace Light
 		std::shared_ptr<Scene> m_scene;
 		std::shared_ptr<Framebuffer> m_framebuffer;
 
-		float m_time = 0.0f;
-		int m_frameCount = 0;
-		float m_lastTime = 0.0f;
-		int m_lastFrameCount = 0;
-
 		// GUI Panels
 		ScenePanel m_scenePanel;
 		ProjectNamePopup m_projectNamePopup;

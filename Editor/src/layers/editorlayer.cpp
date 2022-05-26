@@ -103,16 +103,6 @@ namespace Light
 		m_viewportPanel.setSelectionContext(selectedEntity);
 		m_viewportPanel.onUpdate();
 
-		m_frameCount++;
-		m_time += ts.getMilliSeconds();
-		if(m_time >= 500.0f)
-		{
-			m_lastTime = m_time;
-			m_lastFrameCount = m_frameCount;
-			m_time = 0.0f;
-			m_frameCount = 0;
-		}
-
 		if (!m_viewportPanel.isViewportFocused() || m_viewportPanel.isOverGizmo() || m_viewportPanel.isUsingGizmo())
 		{
 			m_camera.blockUpdate(true);
@@ -166,7 +156,6 @@ namespace Light
 
 	void EditorLayer::onImguiRender()
 	{
-		static int s_stats_corner = 0;
 		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
 		// Project Popup
@@ -181,66 +170,29 @@ namespace Light
 				if(ImGui::MenuItem("Open Project", "Ctrl+O")) m_projectNamePopup.openPopup();
 				ImGui::EndMenu();
 			}
-			if(ImGui::BeginMenu("Settings"))
-			{
-				if(ImGui::MenuItem("Show stats", NULL, s_stats_corner != -1))
-					s_stats_corner = (s_stats_corner == -1) ? 0 : -1;
-				ImGui::EndMenu();
-			}
 			ImGui::EndMainMenuBar();
+		}
+
+		static double fps = 0, mspf = 0;
+		static int frameCount = 0;
+		frameCount++;
+		if(frameCount > 60)
+		{
+			frameCount = 0;
+			fps = Application::get().getStats().m_fps;
+			mspf = Application::get().getStats().m_mspf;
+		}
+
+		// Performance Stats
+		{
+			ImGui::Begin("Performance Stats");
+			ImGui::Text("FPS: %.2f", fps);
+			ImGui::Text("Frame Time: %.2f ms", mspf);
+			ImGui::End();
 		}
 
 		m_viewportPanel.onImguiRender();
 
-		// // Perf Stats
-		// {
-		// 	// ImGuiIO& io = ImGui::GetIO();
-		// 	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
-		// 	if (s_stats_corner != -1)
-		// 	{
-		// 		const float PAD = 10.0f;
-		// 		ImVec2 work_pos = viewportPos;
-		// 		ImVec2 work_size = viewPortPanelSize;
-		// 		ImVec2 window_pos, window_pos_pivot;
-		// 		window_pos.x = (s_stats_corner & 1) ? (work_pos.x + work_size.x - PAD) : (work_pos.x + PAD);
-		// 		window_pos.y = (s_stats_corner & 2) ? (work_pos.y + work_size.y - PAD) : (work_pos.y + PAD);
-		// 		window_pos_pivot.x = (s_stats_corner & 1) ? 1.0f : 0.0f;
-		// 		window_pos_pivot.y = (s_stats_corner & 2) ? 1.0f : 0.0f;
-		// 		ImGui::SetNextWindowViewport(ImGui::GetMainViewport()->ID);
-
-		// 		ImGui::SetNextWindowBgAlpha(0.35f); // Transparent background
-		// 		if(viewportDocked)
-		// 		{
-		// 			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
-		// 			window_flags |= ImGuiWindowFlags_NoMove;
-		// 		}
-		// 		if (ImGui::Begin("Performance Statistics", NULL, window_flags))
-		// 		{
-		// 			ImGui::Text("MSPF: %0.2f\nSPF: %0.4f\nFPS: %d",
-		// 				m_lastTime / m_lastFrameCount,
-		// 				m_lastTime * 0.001f / m_lastFrameCount,
-		// 				int(m_lastFrameCount * 1000 / m_lastTime));
-		// 			ImGui::Separator();
-		// 			ImGui::Text("(Right-Click to change position)");
-		// 			if (ImGui::BeginPopupContextWindow())
-		// 			{
-		// 				if (ImGui::MenuItem("Hide", NULL, s_stats_corner == -1)) s_stats_corner = -1;
-		// 				if(viewportDocked)
-		// 				{
-		// 					if (ImGui::MenuItem("Top-left",     NULL, s_stats_corner == 0)) s_stats_corner = 0;
-		// 					if (ImGui::MenuItem("Top-right",    NULL, s_stats_corner == 1)) s_stats_corner = 1;
-		// 					if (ImGui::MenuItem("Bottom-left",  NULL, s_stats_corner == 2)) s_stats_corner = 2;
-		// 					if (ImGui::MenuItem("Bottom-right", NULL, s_stats_corner == 3)) s_stats_corner = 3;
-		// 				}
-		// 				ImGui::EndPopup();
-		// 			}
-		// 		}
-		// 		ImGui::End();
-		// 	}
-		// }
-
-
-		// Scene Hierarchy Panel
 		m_scenePanel.onImguiRender();
 	}
 
