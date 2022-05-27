@@ -113,14 +113,8 @@ namespace Light
 		m_sceneRenderer.renderOutline(m_scene, selectedEntity);
 	}
 
-	bool EditorLayer::onWindowResize(WindowResizeEvent& e)
+	bool EditorLayer::onWindowResize(WindowResizeEvent&)
 	{
-		auto[width, height] = e.getSize();
-		if(width == 0 || height == 0)
-		{
-			return false;
-		}
-		m_camera.setViewportSize(width, height);
 		return false;
 	}
 
