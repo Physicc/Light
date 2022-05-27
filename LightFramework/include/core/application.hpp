@@ -9,6 +9,8 @@
 #include "core/appstats.hpp"
 #include "core/timer.hpp"
 
+#include <filesystem>
+
 namespace Light
 {
 	class Application
@@ -28,6 +30,7 @@ namespace Light
 
 		ImguiLayer* getImguiLayer() { return m_imguiLayer; }
 		AppConfig& getConfig() { return m_config; }
+		virtual std::filesystem::path getConfigPath() = 0;
 		const AppStats getStats() { return m_stats; }
 
 		inline void close() { m_running = false; }

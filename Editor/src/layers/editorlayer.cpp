@@ -9,12 +9,10 @@ namespace Light
 	EditorLayer::EditorLayer() : Layer("MainLayer"),
 						m_camera(45.0f, 1.6f / 0.9f, 0.001f, 100.0f)
 	{
-		// Check if m_configPath exists
-		if (std::filesystem::exists(m_configPath))
-		{
-			Application::get().getConfig().Load(m_configPath);
-		}
+	}
 
+	void EditorLayer::onAttach()
+	{
 		// Check if project_path exists in config
 		if (!Application::get().getConfig().Has("project_path"))
 		{
@@ -33,10 +31,10 @@ namespace Light
 		m_framebuffer = Framebuffer::create(fbspec);
 
 		// Set project popup callback
-		m_projectNamePopup.setInputCallback([this](const std::string& path)
+		m_projectNamePopup.setInputCallback([](const std::string& path)
 		{
 			Application::get().getConfig().SetString("project_path", path);
-			Application::get().getConfig().Save(m_configPath);
+			Application::get().getConfig().Save(Application::get().getConfigPath().string());
 			LIGHT_CORE_DEBUG("Project path set to {0}", path);
 		});
 
@@ -103,6 +101,8 @@ namespace Light
 		m_viewportPanel.setSelectionContext(selectedEntity);
 		m_viewportPanel.onUpdate();
 
+		m_assetBrowser.onUpdate(ts);
+
 		if (!m_viewportPanel.isViewportFocused() || m_viewportPanel.isOverGizmo() || m_viewportPanel.isUsingGizmo())
 		{
 			m_camera.blockUpdate(true);
@@ -129,7 +129,7 @@ namespace Light
 		switch (e.getKeycode())
 		{
 		case LIGHT_KEY_O:
-			if (Input::isKeyPressed(LIGHT_KEY_LEFT_CONTROL)) {  m_projectNamePopup.openPopup();}
+			if (Input::isKeyPressed(LIGHT_KEY_LEFT_CONTROL)) { m_projectNamePopup.openPopup(); }
 			break;
 		default:
 			break;
@@ -143,9 +143,10 @@ namespace Light
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(EditorLayer::onWindowResize));
 		dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN(EditorLayer::onMouseButtonPressed));
-
+		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(EditorLayer::onKeyPressed));
 		m_camera.onEvent(e);
 		m_viewportPanel.onEvent(e);
+		m_assetBrowser.onEvent(e);
 	}
 
 	void EditorLayer::onImguiRender()
@@ -188,6 +189,8 @@ namespace Light
 		m_viewportPanel.onImguiRender();
 
 		m_scenePanel.onImguiRender();
+
+		m_assetBrowser.onImguiRender();
 	}
 
 	void EditorLayer::addDefaultMeshes()

@@ -19,7 +19,7 @@ namespace Light
 
 	private:
 		std::filesystem::path m_projectPath;
-		bool m_isOpen = false;
+		bool m_toOpen = false;
 		std::function<void(const std::string&)> m_callback;
 	};
 }

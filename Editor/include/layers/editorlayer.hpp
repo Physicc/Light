@@ -5,6 +5,7 @@
 #include "gui/scenepanel.hpp"
 #include "gui/projectnamepopup.hpp"
 #include "gui/viewportpanel.hpp"
+#include "gui/assetbrowser.hpp"
 
 #include "imgui.h"
 #include "ImGuizmo.h"
@@ -16,6 +17,8 @@ namespace Light
 	public:
 		EditorLayer();
 		~EditorLayer() = default;
+
+		void onAttach() override;
 
 		void onUpdate(Timestep ts) override;
 		void onEvent(Event& e) override;
@@ -29,8 +32,6 @@ namespace Light
 
 		void addDefaultMeshes();
 
-		std::string m_configPath = "editorconfig.json";
-
 		std::shared_ptr<MeshLibrary> m_meshes;
 
 		SceneRenderer m_sceneRenderer;
@@ -43,6 +44,7 @@ namespace Light
 		ScenePanel m_scenePanel;
 		ProjectNamePopup m_projectNamePopup;
 		ViewportPanel m_viewportPanel;
+		AssetBrowser m_assetBrowser;
 	};
 }
 
