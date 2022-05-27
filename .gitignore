@@ -36,7 +36,7 @@ build
 buildWsl
 
 # vscode files
-.vscode
+.vscode/settings.json
 
 # doc files
 docs
