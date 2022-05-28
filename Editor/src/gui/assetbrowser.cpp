@@ -223,8 +223,29 @@ namespace Light
 		bool p_open = true;
 		if(ImGui::BeginPopupModal("Delete?", &p_open, ImGuiWindowFlags_AlwaysAutoResize))
 		{
-			ImGui::Text("Are you sure you want to delete the selected files/folders?");
+			// Set maximum text widget size
+			ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+			ImGui::Text("Are you sure you want to permanently delete the following files/folders and their contents?");
+			ImGui::Separator();
+			for (auto& p : m_selectedPaths)
+			{
+				ImGui::Text("%s", p.filename().string().c_str());
+			}
+			ImGui::Separator();
+			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
 			ImGui::Text("This action cannot be undone.");
+			ImGui::PopStyleColor();
+
+			// Center the two buttons
+			ImGuiStyle& style = ImGui::GetStyle();
+			float width = 0.0f;
+			width += ImGui::CalcTextSize("Delete").x + style.FramePadding.x * 2.0f;
+			width += style.ItemSpacing.x;
+			width += ImGui::CalcTextSize("Cancel").x + style.FramePadding.x * 2.0f;
+			float availWidth = ImGui::GetContentRegionAvailWidth();
+			float offset = (availWidth - width) * 0.5f;
+			ImGui::SetCursorPosX( ImGui::GetCursorPosX() + offset);
+
 			if (ImGui::Button("Delete"))
 			{
 				ImGui::SetItemDefaultFocus();
@@ -236,6 +257,8 @@ namespace Light
 			{
 				ImGui::CloseCurrentPopup();
 			}
+
+			ImGui::PopTextWrapPos();
 			ImGui::EndPopup();
 		}
 	}
