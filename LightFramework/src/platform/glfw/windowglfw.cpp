@@ -11,8 +11,6 @@
 
 #include "stb_image.h"
 
-#include "nfd.hpp"
-
 namespace Light
 {
 	static bool glfwInitialized = false;
@@ -25,7 +23,6 @@ namespace Light
 	WindowGlfw::WindowGlfw(const WindowProps& props)
 	{
 		init(props);
-		NFD::Init();
 	}
 
 	WindowGlfw::~WindowGlfw()
@@ -228,7 +225,6 @@ namespace Light
 
 	void WindowGlfw::shutdown()
 	{
-		NFD::Quit();
 		glfwDestroyWindow(m_window);
 	}
 
