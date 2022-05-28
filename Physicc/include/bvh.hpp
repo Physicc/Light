@@ -15,6 +15,11 @@ namespace Physicc
 		std::shared_ptr<BVHNode> parent;
 		std::shared_ptr<BVHNode> left;
 		std::shared_ptr<BVHNode> right;
+
+		bool overlapsWith(BVHNode& node) {
+			// QoL function to make reading the code easier
+			return volume.overlapsWith(node.volume);
+		}
 	};
 
 	class BVH
