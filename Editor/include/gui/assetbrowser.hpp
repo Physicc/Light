@@ -28,10 +28,14 @@ namespace Light
 		void drawDir(std::filesystem::path dir);
 		void drawFile(std::filesystem::path file);
 
+		void drawNewFolder();
+
 		std::filesystem::path m_projectDir;
 		std::set<std::filesystem::path> m_selectedPaths;
 		bool m_toOpenDeletePopup = false;
 		bool m_toDeleteSelected = false;
+		std::filesystem::path m_toCreateNewFolderAt;
+		bool m_newFolderInputTextHover = false;
 	};
 }
 
