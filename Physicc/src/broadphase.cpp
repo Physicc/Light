@@ -39,7 +39,7 @@ namespace Physicc::Broadphase
 		*/
 		void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray)
 		{
-			if (!node1.overlapsWith(node2))
+			if (!(*node1).overlapsWith(*node2))
 			{
 				// if the nodes don't overlap, then no need to check for collisions
 				return;
@@ -107,6 +107,6 @@ namespace Physicc::Broadphase
 	}
 
 	std::vector<PotentialContact> getPotentialContacts(BVH bvh){
-		return getPotentialContacts(bvh.getHeadNode());
+		return getPotentialContacts(bvh.getHeadNode().get());
 	}
 }
