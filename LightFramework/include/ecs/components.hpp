@@ -43,6 +43,25 @@ namespace Light
 		{
 			return glm::translate(glm::mat4(1.0f), position) * glm::toMat4(glm::quat(rotation)) * glm::scale(glm::mat4(1.0f), glm::abs(scale));
 		}
+		inline glm::mat4 getViewMatrix() const
+		{
+			return glm::lookAt(position, glm::vec3(0.0f), glm::vec3(0.0,1.0,0.0));
+		}
+		inline glm::mat4 getModel() const
+		{
+			glm::mat4 model = glm::mat4(1.0);
+			model = glm::translate(model, position);
+			model = glm::scale(model, scale);
+			return model;
+		}		
+		inline glm::mat4 getProjectionMatrix() const
+		{
+			return glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 7.5f);
+		}
+		inline glm::mat4 getSpaceMatrix() const
+		{
+			return  getProjectionMatrix() * getViewMatrix();
+		}
 
 		glm::vec3 position;
 		glm::vec3 rotation;

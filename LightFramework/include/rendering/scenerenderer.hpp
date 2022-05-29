@@ -28,6 +28,7 @@ namespace Light {
 		~SceneRenderer() {};
 
 		void renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera);
+		void renderShadows(std::shared_ptr<Scene> scene);
 		void renderOutline(std::shared_ptr<Scene> scene, Entity entity);
 
 		void onViewportResize(int width, int height);
@@ -43,13 +44,16 @@ namespace Light {
 		std::shared_ptr<Light::Shader> m_skybox_shader;
 		std::shared_ptr<Light::Shader> m_outline_shader;
 		std::shared_ptr<Light::Shader> m_outline_temp_shader;
+		std::shared_ptr<Light::Shader> m_depth_shader;
 		std::shared_ptr<Light::VertexArray> m_skybox_mesh;
 		std::shared_ptr<Light::VertexArray> m_outline_mesh;
 
 		std::shared_ptr<Light::Framebuffer> m_framebuffer;
+		std::shared_ptr<Light::Framebuffer> m_depthFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_tempFramebuffer;
 		//TODO: #63 Directly use texture instead of a dummy framebuffer
+		uint32_t depth_map_texture_unit=0;
 	};
 }
 

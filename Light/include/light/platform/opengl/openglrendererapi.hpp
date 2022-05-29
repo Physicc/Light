@@ -15,6 +15,7 @@ namespace Light
 		void setViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height) override;
 		void setClearColor(glm::vec4& color) override;
 		void clear() override;
+		void clearDepthBit() override;
 		void setBlendFunc(BlendFactor src, BlendFactor dst) override;
 		void setBlendFuncSeperate(BlendFactor srcRGB, BlendFactor dstRGB, BlendFactor srcAlpha, BlendFactor dstAlpha) override;
 

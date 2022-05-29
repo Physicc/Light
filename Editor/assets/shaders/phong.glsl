@@ -1,163 +1,64 @@
 #type vertex
 #version 330 core
-// phong.glsl
 
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec4 a_Color;
 layout(location = 2) in vec3 a_Normal;
-layout(location = 3) in vec2 a_Texcoord;
-out vec4 v_color;
-out vec3 v_normal;
+
 out vec3 v_worldPos;
-out vec2 v_texcoord;
+out vec4 fragPosLightSpace;
 
 uniform mat4 u_viewProjectionMatrix;
-uniform mat4 u_transform;
-uniform mat3 u_normal;
+uniform mat4 lightSpaceMatrix;
+uniform mat4 u_transform; //model 
+
 
 void main()
 {
 	gl_Position = u_viewProjectionMatrix *  u_transform * vec4(a_Position, 1.0);
-	v_color = a_Color;
-	v_texcoord = a_Texcoord;
-	v_normal = u_normal * a_Normal;
 	v_worldPos = vec3(u_transform * vec4(a_Position, 1.0));
+	fragPosLightSpace = lightSpaceMatrix * vec4(v_worldPos , 1.0);
 }
 
 #type fragment
 #version 330 core
-//phong.glsl
 
-in vec3 v_normal;
-in vec4 v_color;
-in vec2 v_texcoord;
 in vec3 v_worldPos;
+in vec4 fragPosLightSpace;
+
 layout(location = 0) out vec4 color;
 layout(location = 1) out int entity;
 
-struct PointLight
-{
-	vec4 position;
-	vec4 color;
-	float range;
-};
-struct SpotLight
-{
-		vec4 position;
-		vec4 color;
-		vec4 direction;
-		float innerCutoff;
-		float outerCutoff;
-		float range;
-};
-
-struct DirectionalLight
-{
-	vec4 direction;
-	vec4 color;
-
-};
-
-uniform PointLight u_pointLights[4];
-uniform SpotLight u_spotLights[4];
-uniform DirectionalLight u_directionalLights[4];
-uniform vec3 cameraPosition;
-uniform int u_numPointLights;
-uniform int u_numSpotLights;
+uniform sampler2D depthMap;
 uniform int u_id;
-uniform int u_selectionId;
 
-vec4 pointLightCalculate(PointLight light, vec3 norm, vec3 viewDir)
+float shadowCalculate()
 {
-	float distance = length(light.position.xyz - v_worldPos);
-	vec3 lightDir = (light.position.xyz - v_worldPos) / distance;
 
-	float attentuation = clamp(1 - (distance * distance)/(light.range * light.range), 0.0 , 1.0);
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+ 
+    projCoords = projCoords * 0.5 + 0.5;
+    float closestDepth = texture(depthMap, projCoords.xy).r; 
 
-	float diff = max(dot(norm, lightDir), 0.0);
-	vec4 diffuse = diff * light.color;
+    float currentDepth = projCoords.z;
 
-	//specular
-	vec3 halfwayDir = normalize(lightDir + viewDir);
-	float spec = pow(max(dot(norm, viewDir), 0.0), 64);
-	vec4 specular = spec * light.color;
-	diffuse = diffuse * attentuation;
-	specular = specular * attentuation;
-	vec4 result = diffuse + specular;
-	return result;
+    float bias = 0.005;
+
+	float shadow = (currentDepth - bias > closestDepth ) ? 1.0 : 0.0; 
+  
+    if(projCoords.z > 1.0)
+        shadow = 0.0;
+        
+    return shadow;
 }
 
-vec4 directionalLightCalculate(DirectionalLight light, vec3 norm, vec3 viewDir)
-{	
-	vec4 color = vec4(light.color);
-	vec3 lightDir = normalize(vec3(light.direction));
-	float diff = max(dot(norm, lightDir), 0.0);
-	vec4 diffuse = diff * color;
-
-
-	//specular
-	vec3 halfwayDir = normalize(lightDir + viewDir);
-	float spec = pow(max(dot(halfwayDir, norm), 0.0), 64);
-	vec4 specular = spec * color;
-
-	vec4 result = diffuse + specular;
-	return result;
-}
-
-vec4 spotLightCalculate(SpotLight light, vec3 norm, vec3 viewDir)
-{
-	float distance = length(light.position.xyz - v_worldPos);
-	vec3 lightDir = normalize(light.position.xyz - v_worldPos);
-	vec4 result;
-
-	
-	float attentuation = clamp(1 - distance/light.range, 0.0 , 1.0);
-	float theta = dot(lightDir, light.direction.xyz);
-	if (theta > light.outerCutoff)
-	{	
-		float intensity = clamp((theta - light.outerCutoff) / (light.innerCutoff - light.outerCutoff), 0.0, 1.0);
-		float diff = max(dot(norm, lightDir), 0.0);
-		vec4 diffuse = diff * light.color;
-		vec3 halfwayDir = normalize(lightDir + viewDir);
-		float spec = pow(max(dot(halfwayDir, norm), 0.0), 64);
-		vec4 specular = spec * light.color;
-		diffuse = diffuse * intensity * attentuation;
-		specular = specular * intensity * attentuation;
-		result = diffuse + specular;
-	} else
-	{
-		result = vec4(0.0 , 0.0 , 0.0 , 0.0);
-	}
-	
-	
-	
-	return result;
-}
 
 
 void main()
 {	
-	
-	vec3 norm = normalize(v_normal);
-	vec3 viewDir = normalize(cameraPosition - v_worldPos);
-	color = vec4(0.3, 0.3, 0.3, 1.0);
-	// for (int i = 0; i < u_numPointLights; i++)
-	// {
-	// 	color += vec4(pointLightCalculate(u_pointLights[i]), 0.0);
-	// }
-	color += pointLightCalculate(u_pointLights[0], norm, viewDir);
-	color += pointLightCalculate(u_pointLights[1], norm, viewDir);
-	color += pointLightCalculate(u_pointLights[2], norm, viewDir);
-	color += pointLightCalculate(u_pointLights[3], norm, viewDir);
-	color += spotLightCalculate(u_spotLights[0], norm, viewDir);
-	color += spotLightCalculate(u_spotLights[1], norm, viewDir);
-	color += spotLightCalculate(u_spotLights[2], norm, viewDir);
-	color += spotLightCalculate(u_spotLights[3], norm, viewDir);
-	color += directionalLightCalculate(u_directionalLights[0], norm, viewDir);
-	color += directionalLightCalculate(u_directionalLights[1], norm, viewDir);
-	color += directionalLightCalculate(u_directionalLights[2], norm, viewDir);
-	color += directionalLightCalculate(u_directionalLights[3], norm, viewDir);
-	color *= v_color;
+	color = vec4(0.3, 1.0, 0.3, 1.0);
+	float shadow = shadowCalculate();
+	color *= (1.0 - shadow);
 	color.a = 1.0;
 	entity = u_id;
 }

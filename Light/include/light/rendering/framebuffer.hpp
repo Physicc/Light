@@ -81,6 +81,7 @@ namespace Light
 		virtual const FramebufferSpec& getSpec() const = 0;
 
 		virtual uint32_t getColorAttachmentRendererId(uint32_t attachmentIndex = 0) const = 0;
+		virtual uint32_t getDepthAttachmentRendererId() const =0;
 		virtual uint32_t getRendererId() const = 0;
 
 		virtual void resize(uint32_t width, uint32_t height) = 0;
@@ -97,6 +98,7 @@ namespace Light
 
 		virtual void bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) = 0;
 		virtual void bindDepthAttachmentTexture(uint32_t slot) = 0;
+		virtual void addPureDepthAttachment() = 0;
 
 		static std::shared_ptr<Framebuffer> create(const FramebufferSpec& spec);
 	};

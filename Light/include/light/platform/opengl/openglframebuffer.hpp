@@ -26,14 +26,19 @@ namespace Light
 		void clearAttachment(uint32_t attachmentIndex, int clearValue) override;
 		void clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) override;
 		void clearDepthAttachment() override;
+		void addPureDepthAttachment() override;
 
+		inline uint32_t getRendererId() const override { return m_rendererId; }
 		inline uint32_t getColorAttachmentRendererId(uint32_t attachmentIndex = 0) const override
 		{
 			return m_colorAttachmentIds[attachmentIndex];
 		}
 
-		inline uint32_t getRendererId() const override { return m_rendererId; }
 
+		inline uint32_t getDepthAttachmentRendererId() const override
+		{
+			return m_depthAttachmentId;
+		}
 		virtual void bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) override;
 		virtual void bindDepthAttachmentTexture(uint32_t slot) override;
 

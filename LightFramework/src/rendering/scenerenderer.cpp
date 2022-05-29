@@ -8,6 +8,15 @@
 namespace Light {
 	SceneRenderer::SceneRenderer()
 	{
+		// Initialize the depth framebuffer
+		Light::FramebufferSpec fbspecDepth;
+		fbspecDepth.attachments = {
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecDepth.width = 1280;
+		fbspecDepth.height = 1280;
+		m_depthFramebuffer = Light::Framebuffer::create(fbspecDepth);
+
 		// Initialize the outline framebuffer
 		Light::FramebufferSpec fbspecOutline;
 		fbspecOutline.attachments = {
@@ -26,6 +35,8 @@ namespace Light {
 		fbspecTemp.width = 1280;
 		fbspecTemp.height = 720;
 		m_tempFramebuffer = Light::Framebuffer::create(fbspecTemp);
+
+		m_depth_shader = Light::Shader::create("assets/shaders/depth.glsl");
 
 		// Skybox Mesh (Cube)
 		m_skybox_mesh.reset(VertexArray::create());
@@ -126,16 +137,29 @@ namespace Light {
 		m_tempFramebuffer->resize(width, height);
 	}
 
+	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene)
+	{
+		m_depthFramebuffer->bind();
+		m_depth_shader->bind();
+		Light::RenderCommand::clearDepthBit();
+		
+
+		// Render depth of entities
+		{
+			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
+			for (auto& entity : view)
+			{
+				auto [shader, mesh, transform] = view.get(entity);
+				Renderer::submitForShadow(m_depth_shader, mesh.mesh->getVao(), transform.getTransform());
+			}
+		}
+		Light::Renderer::endScene();
+		m_depthFramebuffer->unbind();
+	}
+
 	void SceneRenderer::renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera)
 	{
-		m_framebuffer->bind();
-		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
-		Light::RenderCommand::clear();
-
-		m_framebuffer->clearAttachment(1, 0);
-
-		Light::Renderer::beginScene(camera, camera.getViewMatrix());
-
+		Light::TransformComponent trans;
 		std::vector<PointLight> pointLights;
 		std::vector<SpotLight> spotLights;
 		std::vector<DirectionalLight> directionalLights;
@@ -149,19 +173,41 @@ namespace Light {
 				switch (light.m_lightType)
 				{
 				case LightType::Directional:
-					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), light.m_lightColor});
+					directionalLights.push_back({	transform.position,
+													glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)),
+													light.m_lightColor,
+													transform.getSpaceMatrix()});
+					trans = transform;
 					break;
 				case LightType::Point:
 					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
 					break;
 				case LightType::Spot:
-					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer)), light.m_range});
+					spotLights.push_back({	transform.position,
+											light.m_lightColor,
+											glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)),
+											(float)glm::cos(glm::radians(light.m_inner)),
+											(float)glm::cos(glm::radians(light.m_outer)), light.m_range});
 					break;
 				default:
 					break;
 				}
 			}
 		}
+		Light::Renderer::beginScene(trans.getSpaceMatrix(), trans.position);
+		renderShadows(scene);
+
+		// Render scene
+		m_framebuffer->bind();
+
+		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
+		Light::RenderCommand::clear();
+
+		m_framebuffer->clearAttachment(1, 0);
+
+		m_depthFramebuffer->bindDepthAttachmentTexture(depth_map_texture_unit);
+		Light::Renderer::beginScene(camera, camera.getViewMatrix());
+
 		Renderer::submitLight(directionalLights);
 		Renderer::submitLight(pointLights);
 		Renderer::submitLight(spotLights);
@@ -176,8 +222,7 @@ namespace Light {
 			for (auto& entity : view)
 			{
 				auto [shader, mesh, transform] = view.get(entity);
-				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity);
-
+				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity, (uint32_t)depth_map_texture_unit);
 			}
 		}
 
