@@ -81,17 +81,21 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classLight_1_1Timestep.html">    8</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classLight_1_1Timestep.html">Timestep</a></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="classLight_1_1Timestep.html">Timestep</a>(<span class="keywordtype">float</span> time) : m_time(time) {}</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">float</span> getSeconds() { <span class="keywordflow">return</span> m_time; }</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">float</span> getMilliSeconds() { <span class="keywordflow">return</span> m_time * 1000.0f; }</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">float</span> m_time;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    };</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __TIMESTEP_H__</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">         * @brief Constructor</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">         * @param time Time in seconds</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="classLight_1_1Timestep.html">Timestep</a>(<span class="keywordtype">double</span> time) : m_time(time) {}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">double</span> getSeconds() { <span class="keywordflow">return</span> m_time; }</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">double</span> getMilliSeconds() { <span class="keywordflow">return</span> m_time * 1000.0f; }</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">double</span> m_time;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __TIMESTEP_H__</span></div>
 <div class="ttc" id="aclassLight_1_1Timestep_html"><div class="ttname"><a href="classLight_1_1Timestep.html">Light::Timestep</a></div><div class="ttdef"><b>Definition:</b> timestep.hpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
