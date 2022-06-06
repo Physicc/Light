@@ -66,12 +66,12 @@ namespace Physicc::Broadphase
 				/** Both nodes are non-leaf nodes */
 
 				//Recurse through node1, with node2 constant.
-				getPotentialContactsWith(node1->left.get(), node2, collisionArray);
-				getPotentialContactsWith(node1->right.get(), node2, collisionArray);
+				getPotentialContactsWith(node1->left.get(), node2->left.get(), collisionArray);
+				getPotentialContactsWith(node1->left.get(), node2->right.get(), collisionArray);
 
 				//Recurse through node2, with node1 constant.
-				getPotentialContactsWith(node1, node2->left.get(), collisionArray);
-				getPotentialContactsWith(node1, node2->right.get(), collisionArray);
+				getPotentialContactsWith(node1->right.get(), node2->left.get(), collisionArray);
+				getPotentialContactsWith(node1->right.get(), node2->right.get(), collisionArray);
 			}
 		}
 
