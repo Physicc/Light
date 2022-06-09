@@ -29,7 +29,7 @@ bool checkCollision<Box, Sphere>(Broadphase::PotentialContact a)
 
 	glm::vec3 s_centre = sphere.getCentroid();
 	
-	glm::vec3 rel_s_centre = box.toBoxCoordinates(s_centre);
+	glm::vec3 rel_s_centre = box.getCollider()->toBoxCoordinates(s_centre);
 
 	glm::vec3 closest_pt; // 
 	
