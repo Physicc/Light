@@ -38,30 +38,30 @@ Contact checkCollision<Box, Sphere>(Broadphase::PotentialContact a)
 	auto box = a.rb1;
 	auto sphere = a.rb2;
 
-	glm::vec3 s_centre = sphere.getCentroid();
+	glm::vec3 sphereCentre = sphere.getCentroid();
 	
-	glm::vec3 rel_s_centre = box.getCollider()->toBoxCoordinates(s_centre);
+	glm::vec3 relativeSphereCentre = box.getCollider()->toBoxCoordinates(sphereCentre);
 
-	glm::vec3 closest_pt; // 
+	glm::vec3 closestPt; // 
 	
 	// Clamp the transformed coordinates by half-edges of the box
-	float dist = rel_s_centre.x;
+	float dist = relativeSphereCentre.x;
 	if (dist > 0.5) dist = 0.5;
 	if (dist < -0.5) dist = -0.5;
-	closest_pt.x = dist;
+	closestPt.x = dist;
 
-	dist = rel_s_centre.y;
+	dist = relativeSphereCentre.y;
 	if (dist > 0.5) dist = 0.5;
 	if (dist < -0.5) dist = -0.5;
-	closest_pt.y = dist;
+	closestPt.y = dist;
 
-	dist = rel_s_centre.z;
+	dist = relativeSphereCentre.z;
 	if (dist > 0.5) dist = 0.5;
 	if (dist < -0.5) dist = -0.5;
-	closest_pt.z = dist;
+	closestPt.z = dist;
 	
 	// Check to see if we’re in contact.
-	dist = (closestPt - rel_s_centre).squareMagnitude();
+	dist = (closestPt - relativeSphereCentre).squareMagnitude();
 	return (dist > sphere.radius * sphere.radius);
 
 }

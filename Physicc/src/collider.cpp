@@ -62,19 +62,19 @@ namespace Physicc
 
 	{
 		using namespace BoxCollider;
-		static_vertices = std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)); //Static class member
+		s_vertices = std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)); //Static class member
 
 		//Top-face vertices
-		static_vertices[0] = glm::vec4(glm::vec3(0.5f), 1.0f);
-		static_vertices[1] = static_vertices[0] - glm::vec4(1, 0, 0, 0);
-		static_vertices[2] = static_vertices[0] - glm::vec4(0, 1, 0, 0);
-		static_vertices[3] = static_vertices[0] - glm::vec4(1, 1, 0, 0);
+		s_vertices[0] = glm::vec4(glm::vec3(0.5f), 1.0f);
+		s_vertices[1] = s_vertices[0] - glm::vec4(1, 0, 0, 0);
+		s_vertices[2] = s_vertices[0] - glm::vec4(0, 1, 0, 0);
+		s_vertices[3] = s_vertices[0] - glm::vec4(1, 1, 0, 0);
 
 		//Bottom-face vertices
-		static_vertices[4] = glm::vec4(glm::vec3(-0.5f), 1.0f);
-		static_vertices[5] = static_vertices[0] + glm::vec4(1, 0, 0, 0);
-		static_vertices[6] = static_vertices[0] + glm::vec4(0, 1, 0, 0);
-		static_vertices[7] = static_vertices[0] + glm::vec4(1, 1, 0, 0);
+		s_vertices[4] = glm::vec4(glm::vec3(-0.5f), 1.0f);
+		s_vertices[5] = s_vertices[0] + glm::vec4(1, 0, 0, 0);
+		s_vertices[6] = s_vertices[0] + glm::vec4(0, 1, 0, 0);
+		s_vertices[7] = s_vertices[0] + glm::vec4(1, 1, 0, 0);
 	}
 
 	/**

@@ -183,10 +183,10 @@ namespace Physicc
 
 		inline static std::vector<glm::vec4> getVertices()
 		{
-			return static_vertices;
+			return s_vertices;
 		}
 	private:
-		static std::vector<glm::vec4> static_vertices;
+		static std::vector<glm::vec4> s_vertices;
 	};
 
 	/**
