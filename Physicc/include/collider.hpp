@@ -66,6 +66,14 @@ namespace Physicc
 			return m_transform;
 		}
 
+		[[nodiscard]] inline glm::mat4 getInverseTransform() const
+		{
+			ZoneScoped;
+
+			return glm::inverse(m_transform);
+		}
+
+
 		/**
 		 * @brief set Position of object's center
 		 *
@@ -173,8 +181,12 @@ namespace Physicc
 			return Type::Box;
 		}
 
+		inline static std::vector<glm::vec4> getVertices()
+		{
+			return static_vertices;
+		}
 	private:
-		std::vector<glm::vec4> m_vertices;
+		static std::vector<glm::vec4> static_vertices;
 	};
 
 	/**

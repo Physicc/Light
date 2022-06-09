@@ -32,7 +32,6 @@ namespace Physicc
 	{
 		ZoneScoped;
 
-		m_transform = glm::translate(glm::mat4(1.0f), m_position);
 		m_transform = glm::scale(m_transform, m_scale);
 		m_transform = glm::rotate(m_transform,
 									glm::radians(m_rotate.x),
@@ -43,6 +42,7 @@ namespace Physicc
 		m_transform = glm::rotate(m_transform,
 									glm::radians(m_rotate.z),
 									glm::vec3(0.0, 0.0, 1.0));
+		m_transform = glm::translate(glm::mat4(1.0f), m_position);
 	}
 
 	/**
@@ -56,22 +56,26 @@ namespace Physicc
 	BoxCollider::BoxCollider(glm::vec3 position,
 								glm::vec3 rotation,
 								glm::vec3 scale)
-		: Collider(position, rotation, scale),
-			m_vertices(std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)))
+		: Collider(position, rotation, scale)
 	{
 		ZoneScoped;
+	}
+
+	{
+		using namespace BoxCollider;
+		static_vertices = std::vector<glm::vec4>(8, glm::vec4(0, 0, 0, 1.0f)); //Static class member
 
 		//Top-face vertices
-		m_vertices[0] = glm::vec4(scale * 0.5f, 0);
-		m_vertices[1] = m_vertices[0] - glm::vec4(scale.x, 0, 0, 0);
-		m_vertices[2] = m_vertices[0] - glm::vec4(0, scale.y, 0, 0);
-		m_vertices[3] = m_vertices[0] - glm::vec4(scale.x, scale.y, 0, 0);
+		static_vertices[0] = glm::vec4(glm::vec3(0.5f), 1.0f);
+		static_vertices[1] = static_vertices[0] - glm::vec4(1, 0, 0, 0);
+		static_vertices[2] = static_vertices[0] - glm::vec4(0, 1, 0, 0);
+		static_vertices[3] = static_vertices[0] - glm::vec4(1, 1, 0, 0);
 
 		//Bottom-face vertices
-		m_vertices[4] = glm::vec4(scale * -0.5f, 0);
-		m_vertices[5] = m_vertices[0] + glm::vec4(scale.x, 0, 0, 0);
-		m_vertices[6] = m_vertices[0] + glm::vec4(0, scale.y, 0, 0);
-		m_vertices[7] = m_vertices[0] + glm::vec4(scale.x, scale.y, 0, 0);
+		static_vertices[4] = glm::vec4(glm::vec3(-0.5f), 1.0f);
+		static_vertices[5] = static_vertices[0] + glm::vec4(1, 0, 0, 0);
+		static_vertices[6] = static_vertices[0] + glm::vec4(0, 1, 0, 0);
+		static_vertices[7] = static_vertices[0] + glm::vec4(1, 1, 0, 0);
 	}
 
 	/**
@@ -89,9 +93,11 @@ namespace Physicc
 		glm::vec3 lowerBound(0.5f);
 		glm::vec3 upperBound(-0.5f);
 
-		for (int i = 0; i < 8; i++)
+		std::vector<glm::vec4> standard_vertices = getVertices();
+
+		for (int i = 0; i < 8; i++) //To be replaced by matrix multiplication
 		{
-			glm::vec3 temp = m_transform * m_vertices[i];
+			glm::vec3 temp = m_transform * standard_vertices[i]; 
 			lowerBound = glm::min(lowerBound, temp); //Takes component-wise min
 			upperBound = glm::max(upperBound, temp);
 		}
@@ -103,6 +109,13 @@ namespace Physicc
 	glm::vec3 BoxCollider::getCentroid() const
 	{
 		return m_position;
+	}
+
+	glm::vec3 BoxCollider::toBoxCoordinates(glm::vec3 point)
+	{
+		ZoneScoped;
+		
+		return glm::inverse(m_transform)*glm::vec4(point, 1);
 	}
 
 	/**
