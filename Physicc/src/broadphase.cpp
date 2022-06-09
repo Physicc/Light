@@ -39,13 +39,17 @@ namespace Physicc::Broadphase
 		*/
 		void getPotentialContactsWith(BVHNode* node1, BVHNode* node2, std::vector<PotentialContact>& collisionArray)
 		{
-			if (isLeaf(node1) && isLeaf(node2))
+			if (!(*node1).overlapsWith(*node2))
+			{
+				// if the nodes don't overlap, then no need to check for collisions
+				return;
+			}else if (isLeaf(node1) && isLeaf(node2))
 			{
 				//If both nodes are leaves, then we have a PotentialContact, and we add the collision pair to the collisionArray
 				collisionArray.push_back(PotentialContact(node1->body, node2->body));
 			} else if (isLeaf(node1) && !isLeaf(node2))
 			{
-				//If only of the nodes is a leaf, then make sure that node2 is the leaf node and that we recurse through node1
+				//If only one of the nodes is a leaf, then make sure that node2 is the leaf node and that we recurse through node1
 				getPotentialContactsWith(node2, node1, collisionArray);
 				//TODO: #42 @dropTableUsers42 Discuss and figure out if the (minor?) performance penalty is worth it, or if we should just go for the following
 				/*
@@ -62,14 +66,12 @@ namespace Physicc::Broadphase
 				/** Both nodes are non-leaf nodes */
 
 				//Recurse through node1, with node2 constant.
-				getPotentialContactsWith(node1->left.get(), node2, collisionArray);
-				getPotentialContactsWith(node1->right.get(), node2, collisionArray);
+				getPotentialContactsWith(node1->left.get(), node2->left.get(), collisionArray);
+				getPotentialContactsWith(node1->left.get(), node2->right.get(), collisionArray);
 
 				//Recurse through node2, with node1 constant.
-				getPotentialContactsWith(node1, node2->left.get(), collisionArray);
-				getPotentialContactsWith(node1, node2->right.get(), collisionArray);
-				
-
+				getPotentialContactsWith(node1->right.get(), node2->left.get(), collisionArray);
+				getPotentialContactsWith(node1->right.get(), node2->right.get(), collisionArray);
 			}
 		}
 
@@ -87,14 +89,8 @@ namespace Physicc::Broadphase
 			
 			BroadphaseImpl::getPotentialContacts(node->left.get(), collisionArray);
 			BroadphaseImpl::getPotentialContacts(node->right.get(), collisionArray);
-
-			if ((node->left)->volume.overlapsWith((node->right)->volume))
-			{
-				BroadphaseImpl::getPotentialContactsWith(node->left.get(), node->right.get(), collisionArray);
-			}
+			BroadphaseImpl::getPotentialContactsWith(node->left.get(), node->right.get(), collisionArray);
 		}
-
-
 	}
 
 	//Hook into the getPotentialContacts function for the outside world.
@@ -111,6 +107,6 @@ namespace Physicc::Broadphase
 	}
 
 	std::vector<PotentialContact> getPotentialContacts(BVH bvh){
-		return getPotentialContacts(bvh.getHeadNode());
+		return getPotentialContacts(bvh.getHeadNode().get());
 	}
 }
