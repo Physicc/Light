@@ -141,6 +141,7 @@ namespace Physicc
 	 */
 	BoundingVolume::AABB SphereCollider::getAABB() const
 	{
+		ZoneScoped;
 		glm::vec3 lowerBound = m_position - m_radius;
 		glm::vec3 upperBound = m_position + m_radius;
 
