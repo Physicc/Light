@@ -58,7 +58,6 @@ namespace Physicc
 								glm::vec3 scale)
 		: Collider(position, rotation, scale)
 	{
-		ZoneScoped;
 	}
 
 	{
