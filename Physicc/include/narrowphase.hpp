@@ -21,11 +21,13 @@ namespace Physicc::Narrowphase
 	struct Contact
 	{
 
-		Contact(glm::vec3 cP, glm::vec3 cN, double p, bool f = false) 
-		: contactPoint(cP), contactNormal(cN), penetration(p)
+		Contact(std::weak_ptr<RigidBody> rb1, std::weak_ptr<RigidBody> rb2, glm::vec3 cP, glm::vec3 cN, double p) 
+		: Body1(rb1), Body2(rb2), contactPoint(cP), contactNormal(cN), penetration(p)
 		{
 		}
 
+		std::weak_ptr<RigidBody> Body1;
+		std::weak_ptr<RigidBody> Body2;
 		glm::vec3 contactPoint;
 		glm::vec3 contactNormal;
 		double penetration;
@@ -65,7 +67,7 @@ namespace Physicc::Narrowphase
 	};
 
 	template <typename FirstBody, typename SecondBody>
-	bool checkCollision(Broadphase::PotentialContact a) {
+	Contact checkCollision(Broadphase::PotentialContact a) {
 		LIGHT_ASSERT(true, "Collision checking for the given types is not supported yet. \
 						   Please file a bug report if you can reproduce this issue.")
 	}

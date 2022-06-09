@@ -1,5 +1,5 @@
 template <>
-bool checkCollision<Sphere, Sphere>(Broadphase::PotentialContact a)
+Contact checkCollision<Sphere, Sphere>(Broadphase::PotentialContact a)
 {
 	// returns true if the spheres in `a` are colliding. Otherwise
 	// returns false. Also writes the data to the public collision array.
@@ -11,13 +11,24 @@ bool checkCollision<Sphere, Sphere>(Broadphase::PotentialContact a)
 	float radius1 = sphere1.getCollider()->getRadius();
 	float radius2 = sphere2.getCollider()->getRadius();
 
-	return (glm::distance(centre1, centre2) <= radius1 + radius2);
+	glm::vec3 centreLine = centre1 - centre2;
+	float centreLineLength = centreLine.magnitude();
+
+	if (centreLineLength <= radius1 + radius2)
+	{	
+		return Contact(rb1,
+						rb2,
+						(centre1+centre2)/2, // contact point
+						centreLine/centreLineLength, // contact normal
+						radius1 + radius2 - centreLineLength // penetration
+						);
+	}
 
 
 }
 
 template <>
-bool checkCollision<Box, Sphere>(Broadphase::PotentialContact a)
+Contact checkCollision<Box, Sphere>(Broadphase::PotentialContact a)
 {
 	// PotentialContact contains two pointers to rigid bodies.
 	// For BoxSphere, the first is a box, the second a sphere.
@@ -56,13 +67,13 @@ bool checkCollision<Box, Sphere>(Broadphase::PotentialContact a)
 }
 
 template <>
-bool checkCollision<Sphere, Box>(Broadphase::PotentialContact a)
+Contact checkCollision<Sphere, Box>(Broadphase::PotentialContact a)
 {
 	return checkCollision<Box, Sphere>(Broadphase::PotentialContact(a.second, a.first));
 }
 
 template <>
-bool checkCollision<Box, Box>(Broadphase::PotentialContact a)
+Contact checkCollision<Box, Box>(Broadphase::PotentialContact a)
 {
 	// returns true if boxes the in `a` are colliding. Otherwise
 	// returns false. Also writes the data to the public collision array.
