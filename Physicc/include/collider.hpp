@@ -66,6 +66,7 @@ namespace Physicc
 			return m_transform;
 		}
 
+
 		/**
 		 * @brief set Position of object's center
 		 *
@@ -160,21 +161,29 @@ namespace Physicc
 
 		[[nodiscard]] inline glm::vec3 getCentroid() const override
 		{
+			ZoneScoped;
 			return m_position;
 		}
 
 		inline Type getType() const override
 		{
+			ZoneScoped;
 			return Type::Box;
 		}
 
 		inline static Type getStaticType()
-		{
+		{	
+			ZoneScoped;
 			return Type::Box;
 		}
 
+		inline static std::vector<glm::vec4> getVertices()
+		{
+			ZoneScoped;
+			return s_vertices;
+		}
 	private:
-		std::vector<glm::vec4> m_vertices;
+		static std::vector<glm::vec4> s_vertices;
 	};
 
 	/**
