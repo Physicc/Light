@@ -45,14 +45,12 @@ namespace Physicc
 	 * @brief steps the simulation by time timestep
 	 * @param timestep: input, float type, time interval
 	 */
-	void PhysicsWorld::stepSimulation(float timestep)
+	void PhysicsWorld::stepSimulation([[maybe_unused]] float timestep)
 	{
 		ZoneScoped;
 
-		(void)timestep; // Suppress unused parameter warning
 		for(std::size_t i = 0; i < m_objects.size(); i++)
 		{
-
 		}
 	}
 }

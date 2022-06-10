@@ -4,7 +4,7 @@
 #include "core/base.hpp"
 #include "light/rendering/shader.hpp"
 
-#include "glad/glad.h"
+#include "glad/gl.h"
 
 namespace Light
 {

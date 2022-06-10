@@ -5,6 +5,11 @@
 #include "events/applicationevent.hpp"
 #include "core/layerstack.hpp"
 #include "imgui/imguilayer.hpp"
+#include "config/appconfig.hpp"
+#include "core/appstats.hpp"
+#include "core/timer.hpp"
+
+#include <filesystem>
 
 namespace Light
 {
@@ -24,6 +29,9 @@ namespace Light
 		static inline Application& get() { return *m_instance; }
 
 		ImguiLayer* getImguiLayer() { return m_imguiLayer; }
+		AppConfig& getConfig() { return m_config; }
+		virtual std::filesystem::path getConfigPath() = 0;
+		const AppStats getStats() { return m_stats; }
 
 		inline void close() { m_running = false; }
 
@@ -40,7 +48,8 @@ namespace Light
 
 		static Application* m_instance;
 
-		float m_lastTime = 0.0f;
+		AppStats m_stats;
+		AppConfig m_config;
 	};
 
 	Application* createApplication();

@@ -5,12 +5,12 @@ namespace Light
 {
 	Renderer::SceneData* Renderer::s_sceneData = new Renderer::SceneData;
 
-	void Renderer::init() 
+	void Renderer::init()
 	{
 		RenderCommand::init();
 	}
 
-	void Renderer::onWindowResize(uint32_t width, uint32_t height) 
+	void Renderer::onWindowResize(uint32_t width, uint32_t height)
 	{
 		RenderCommand::setViewPort(0, 0, width, height);
 	}
@@ -21,45 +21,92 @@ namespace Light
 
 		glm::mat4 view = glm::mat4(glm::mat3(camera_view));
 		s_sceneData->viewProjectionSkyboxMatrix = camera.getProjectionMatrix() * view;
-	}
-	
-	void Renderer::endScene() 
-	{
+		s_sceneData->cameraPosition = -glm::vec3(camera_view[3] * view);
 		
 	}
 
-	void Renderer::submitLight(const std::vector<PointLight> &lights) 
+	void Renderer::endScene()
+	{
+	}
+
+	void Renderer::submitLight(const std::vector<PointLight> &lights)
 	{
 		s_sceneData->pointLights = lights;
 	}
-	
-	void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform) 
+
+	void Renderer::submitLight(const std::vector<SpotLight> &lights)
+	{
+		s_sceneData->spotLights = lights;
+	}
+
+	void Renderer::submitLight(const std::vector<DirectionalLight> &lights)
+	{
+		s_sceneData->directionalLights = lights;
+	}
+
+	void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform)
 	{
 		submitID(shader, vao, transform);
 	}
 
-	void Renderer::submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform, int id) 
+	void Renderer::submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform, int id)
 	{
 		vao->bind();
-		
+
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
 
-		for (int i = 0; i < 4; i++)
+		for (size_t i = 0; i < 4; i++)
 		{
-			if (i < (int)s_sceneData->pointLights.size())
+			if (i < s_sceneData->pointLights.size())
 			{
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->pointLights[i].position, 1.0));
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
-			}
-			else
+				shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].range", s_sceneData->pointLights[i].range);
+			} else
 			{
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
 				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].range", 0.001f);
 			}
 		}
 
+		for (size_t i = 0; i < 4; i++)
+		{
+			if (i < s_sceneData->spotLights.size())
+			{
+				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->spotLights[i].position, 1.0));
+				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->spotLights[i].color, 1.0));
+				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].direction", glm::vec4(s_sceneData->spotLights[i].direction, 1.0));
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", s_sceneData->spotLights[i].innerCutoff);
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", s_sceneData->spotLights[i].outerCutoff);
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].range", s_sceneData->spotLights[i].range);
+			} else
+			{
+				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].direction", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", 0.0);
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", 0.0);
+				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].range", 0.001f);
+			}
+		}
+
+		for (size_t i = 0; i < 4; i++)
+		{
+			if (i < s_sceneData->directionalLights.size())
+			{
+				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].direction", glm::vec4(s_sceneData->directionalLights[i].direction, 0.0));
+				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->directionalLights[i].color, 1.0));
+			} else
+			{
+				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].direction", glm::vec4(0.0, 0.0, 0.0, 0.0));
+				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
+			}
+		}
+
+		shader->setUniformVec3("cameraPosition", s_sceneData->cameraPosition);
 		shader->setUniformInt("u_numPointLights", (int)s_sceneData->pointLights.size());
 		shader->setUniformInt("u_id", id);
 
@@ -73,10 +120,10 @@ namespace Light
 		vao->unbind();
 	}
 
-	void Renderer::submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao) 
+	void Renderer::submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao)
 	{
 		vao->bind();
-		
+
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionSkyboxMatrix);
@@ -92,5 +139,5 @@ namespace Light
 
 		vao->unbind();
 	}
-	
+
 }

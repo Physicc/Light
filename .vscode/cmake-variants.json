@@ -1,0 +1,38 @@
+{
+	"buildType": {
+		"default": "Debug",
+		"choices":
+		{
+			"Debug":
+			{
+				"short": "Debug",
+				"long": "Emit debug information",
+				"buildType": "Debug"
+			},
+			"Release":
+			{
+				"short": "Release",
+				"long": "Optimize generated code, omit debug information",
+				"buildType": "Release"
+			},
+			"MinSizeRel":
+			{
+				"short": "MinSizeRel",
+				"long": "Optimize for smallest binary size",
+				"buildType": "MinSizeRel"
+			},
+			"RelWithDebInfo":
+			{
+				"short": "RelWithDebInfo",
+				"long": "Perform optimizations AND include debug information",
+				"buildType": "RelWithDebInfo"
+			},
+			"Profile":
+			{
+				"short": "Profile",
+				"long": "Emit debug information for profiling, but optimize generated code",
+				"buildType": "RelProfile"
+			},
+		}
+	}
+}

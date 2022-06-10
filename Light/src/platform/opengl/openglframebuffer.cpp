@@ -3,11 +3,11 @@
 #include "core/logging.hpp"
 #include "core/assert.hpp"
 
-#include "glad/glad.h"
+#include "glad/gl.h"
 
 namespace Light
 {
-	std::shared_ptr<Framebuffer> Framebuffer::create(const FramebufferSpec& spec) 
+	std::shared_ptr<Framebuffer> Framebuffer::create(const FramebufferSpec& spec)
 	{
 		return std::make_shared<OpenGLFramebuffer>(spec);
 	}
@@ -56,7 +56,7 @@ namespace Light
 			return GL_UNSIGNED_INT_24_8;
 		default:
 			LIGHT_CORE_ERROR("Unrecognized Framebuffer texture internal format");
-			return GL_NONE;	
+			return GL_NONE;
 		}
 	}
 
@@ -92,14 +92,14 @@ namespace Light
 		invalidate();
 	}
 
-	OpenGLFramebuffer::~OpenGLFramebuffer() 
+	OpenGLFramebuffer::~OpenGLFramebuffer()
 	{
 		glDeleteFramebuffers(1, &m_rendererId);
 		glDeleteTextures((GLsizei)m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
 		glDeleteTextures(1, &m_depthAttachmentId);
 	}
 
-	void OpenGLFramebuffer::resize(uint32_t width, uint32_t height) 
+	void OpenGLFramebuffer::resize(uint32_t width, uint32_t height)
 	{
 
 		if (width == 0 || height == 0)
@@ -114,14 +114,14 @@ namespace Light
 		invalidate();
 	}
 
-	void OpenGLFramebuffer::invalidate() 
+	void OpenGLFramebuffer::invalidate()
 	{
 		if(m_rendererId != 0)
 		{
 			glDeleteFramebuffers(1, &m_rendererId);
 			glDeleteTextures((GLsizei)m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
 			if(m_depthAttachmentId != 0)
-				glDeleteRenderbuffers(1, &m_depthAttachmentId);
+				glDeleteTextures(1, &m_depthAttachmentId);
 
 			m_colorAttachmentIds.clear();
 			m_depthAttachmentId = 0;
@@ -181,9 +181,9 @@ namespace Light
 
 					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
 						TexWrap2OpenGLType(m_colorAttachmentSpecs[i].wrapFormat));
-					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S, 
+					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S,
 						TexWrap2OpenGLType(m_colorAttachmentSpecs[i].wrapFormat));
-					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T, 
+					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T,
 						TexWrap2OpenGLType(m_colorAttachmentSpecs[i].wrapFormat));
 				}
 
@@ -199,32 +199,49 @@ namespace Light
 		// Attach depth buffer
 		if(m_depthAttachmentSpec.textureFormat != FramebufferTextureFormat::None)
 		{
-			glGenRenderbuffers(1, &m_depthAttachmentId);
-			glBindRenderbuffer(GL_RENDERBUFFER, m_depthAttachmentId);
+			GLenum textureTarget = m_spec.samples > 1 ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+			glGenTextures(1, &m_depthAttachmentId);
+			glBindTexture(textureTarget, m_depthAttachmentId);
 			if(m_spec.samples > 1)
 			{
-				glRenderbufferStorageMultisample(
-					GL_RENDERBUFFER,
+				glTexImage2DMultisample(
+					textureTarget,
 					m_spec.samples,
-					TexFormat2OpenGLFormat(m_depthAttachmentSpec.textureFormat),
+					TexFormat2OpenGLInternalFormat(m_depthAttachmentSpec.textureFormat),
 					m_spec.width,
-					m_spec.height
+					m_spec.height,
+					GL_FALSE
 				);
 			}
 			else
 			{
-				glRenderbufferStorage(
-					GL_RENDERBUFFER,
+				glTexImage2D(
+					textureTarget,
+					0,
 					TexFormat2OpenGLInternalFormat(m_depthAttachmentSpec.textureFormat),
 					m_spec.width,
-					m_spec.height
+					m_spec.height,
+					0,
+					TexFormat2OpenGLFormat(m_depthAttachmentSpec.textureFormat),
+					TexFormat2OpenGLType(m_depthAttachmentSpec.textureFormat),
+					nullptr
 				);
 			}
 
-			glFramebufferRenderbuffer(GL_FRAMEBUFFER,
+			glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
+						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S,
+						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T,
+						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER,
 				GL_DEPTH_STENCIL_ATTACHMENT,
-				GL_RENDERBUFFER,
-				m_depthAttachmentId
+				textureTarget,
+				m_depthAttachmentId,
+				0
 			);
 		}
 
@@ -240,13 +257,13 @@ namespace Light
 			glDrawBuffer(GL_NONE);
 		}
 
-		
+
 		LIGHT_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	int OpenGLFramebuffer::readPixelInt(uint32_t attachmentIndex, uint32_t x, uint32_t y) 
+	int OpenGLFramebuffer::readPixelInt(uint32_t attachmentIndex, uint32_t x, uint32_t y)
 	{
 		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
 
@@ -261,8 +278,8 @@ namespace Light
 
 		return pixelData;
 	}
-	
-	glm::vec4 OpenGLFramebuffer::readPixelVec4(uint32_t attachmentIndex, uint32_t x, uint32_t y) 
+
+	glm::vec4 OpenGLFramebuffer::readPixelVec4(uint32_t attachmentIndex, uint32_t x, uint32_t y)
 	{
 		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
 
@@ -276,12 +293,12 @@ namespace Light
 		glReadPixels(x, y, m_spec.width, m_spec.height, GL_RGBA, GL_FLOAT, &pixelData);
 		return pixelData;
 	}
-	
-	void OpenGLFramebuffer::clearAttachment(uint32_t attachmentIndex, int clearValue) 
+
+	void OpenGLFramebuffer::clearAttachment(uint32_t attachmentIndex, int clearValue)
 	{
 		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
 		LIGHT_CORE_ASSERT(m_colorAttachmentSpecs[attachmentIndex].textureFormat == FramebufferTextureFormat::RED_INTEGER, "Can call clearAttachment(,int) only on RED_INTEGER format");
-		
+
 		// glDrawBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
 		GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
 		glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
@@ -291,11 +308,11 @@ namespace Light
 		// glClearColor((GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue, (GLfloat)clearValue);
 		// glClear(GL_COLOR_BUFFER_BIT);
 	}
-	
-	void OpenGLFramebuffer::clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) 
+
+	void OpenGLFramebuffer::clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue)
 	{
 		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
-		
+
 		glDrawBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
 		glClearColor(clearValue.r, clearValue.g, clearValue.b, clearValue.a);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -304,23 +321,23 @@ namespace Light
 		glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
 	}
 
-	void OpenGLFramebuffer::clearDepthAttachment() 
+	void OpenGLFramebuffer::clearDepthAttachment()
 	{
 		glClearBufferfi(GL_DEPTH_STENCIL, 0, 1.0f, 0);
 	}
 
-	void OpenGLFramebuffer::bind() 
+	void OpenGLFramebuffer::bind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_rendererId);
 		glViewport(0, 0, m_spec.width, m_spec.height);
 	}
-	
-	void OpenGLFramebuffer::unbind() 
+
+	void OpenGLFramebuffer::unbind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void OpenGLFramebuffer::bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) 
+	void OpenGLFramebuffer::bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot)
 	{
 		LIGHT_CORE_ASSERT(attachmentIndex < m_colorAttachmentIds.size(), "Index exceeds number of color attachments");
 
@@ -335,5 +352,21 @@ namespace Light
 			glBindTexture(GL_TEXTURE_2D, m_colorAttachmentIds[attachmentIndex]);
 		}
 
+	}
+
+	void OpenGLFramebuffer::bindDepthAttachmentTexture(uint32_t slot)
+	{
+		LIGHT_CORE_ASSERT(m_depthAttachmentId != 0, "Depth attachment not set");
+
+		glActiveTexture(GL_TEXTURE0 + slot);
+
+		if(m_spec.samples > 1)
+		{
+			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_depthAttachmentId);
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_2D, m_depthAttachmentId);
+		}
 	}
 }

@@ -30,19 +30,21 @@ jobs:
             gcc-version: 8
           - os: ubuntu-22.04
             gcc-version: 9
-    
+
     name: ${{ matrix.os }} (GCC ${{ matrix.gcc-version }})
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-        
+
       - name: Install Dependencies
         run: |
           sudo apt-get update -q
           sudo apt-get install -yq --no-install-recommends \
                                 xorg-dev \
                                 uuid-dev \
+                                pkg-config \
+                                libgtk-3-dev \
                                 gcc-${{ matrix.gcc-version }} \
                                 g++-${{ matrix.gcc-version }}
 
@@ -51,7 +53,7 @@ jobs:
         with:
           key: ${{ matrix.os }}-gcc-${{ matrix.gcc-version }}
           max-size: 100M
-            
+
       - name: Configure CMake
         run: |
           cmake -B${{ github.workspace }}/build \
@@ -62,7 +64,7 @@ jobs:
         env:
           CC: gcc-${{ matrix.gcc-version }}
           CXX: g++-${{ matrix.gcc-version }}
-          
+
       - name: Build
         run: |
           cmake --build ${{ github.workspace }}/build \

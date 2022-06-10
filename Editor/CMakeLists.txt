@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -45,6 +45,9 @@ endif ()
 
 target_include_directories(Editor PUBLIC include)
 
+add_subdirectory(libs/ImGuizmo)
+target_link_libraries(Editor ImGuizmo)
+
 add_subdirectory(../LightFramework LightFramework)
 target_link_libraries(Editor LightFramework)
 
@@ -56,4 +59,20 @@ target_link_libraries(Editor TracyClient)
 
 add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/imgui.ini $<TARGET_FILE_DIR:Editor>)
 
-add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/assets)
+# Add a custom target CopyAssets which depends on a dummy file
+# This dummy file is output by the custom command which also copies the assets
+# This command depends on the asset files
+# If the asset files are modified, then the dummy file becomes out of date
+file(GLOB_RECURSE ASSETS
+	${CMAKE_CURRENT_SOURCE_DIR}/assets/*
+)
+add_custom_command(
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_Assets
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/assets
+	COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/_Assets
+	DEPENDS ${ASSETS}
+	COMMENT "Copying assets to executable directory"
+)
+
+add_custom_target(CopyAssets DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/_Assets)
+add_dependencies(Editor CopyAssets)

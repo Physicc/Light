@@ -20,3 +20,12 @@
 [submodule "LightFramework/libs/glfw"]
 	path = LightFramework/libs/glfw
 	url = https://github.com/glfw/glfw
+[submodule "Editor/libs/ImGuizmo"]
+	path = Editor/libs/ImGuizmo
+	url = https://github.com/dropTableUsers42/ImGuizmo
+[submodule "LightFramework/libs/cereal"]
+	path = LightFramework/libs/cereal
+	url = https://github.com/USCiLab/cereal
+[submodule "LightFramework/libs/nativefiledialog-extended"]
+	path = LightFramework/libs/nativefiledialog-extended
+	url = https://github.com/dropTableUsers42/nativefiledialog-extended

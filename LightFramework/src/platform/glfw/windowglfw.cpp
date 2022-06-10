@@ -7,6 +7,7 @@
 #include "events/keyevent.hpp"
 #include "events/mouseevent.hpp"
 #include "events/applicationevent.hpp"
+#include "core/base.hpp"
 
 #include "stb_image.h"
 
@@ -29,10 +30,64 @@ namespace Light
 		shutdown();
 	}
 
-	static void GLFWErrorCallback(int error, const char* description)
+	static void GLFWErrorCallback([[maybe_unused]] int error, [[maybe_unused]] const char* description)
 	{
-		(void)error, (void)description; // Supress warning about unused variable in release mode (logs don't get compiled in release)
-		LIGHT_CORE_ERROR("GLFW Error({}): {}", error, description);
+		if(error != GLFW_VERSION_UNAVAILABLE)
+		{
+			LIGHT_CORE_ERROR("GLFW Error({}): {}", error, description);
+		}
+		else
+		{
+			LIGHT_CORE_WARN("GLFW Error({}): {}", error, description);
+		}
+	}
+
+	bool WindowGlfw::tryCreateContext(int versionMajor, int versionMinor)
+	{
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, versionMajor);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, versionMinor);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		#if __APPLE__
+			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+		#endif
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
+		m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
+
+		// Check if context was created
+		if (m_window == nullptr)
+		{
+			LIGHT_CORE_DEBUG("Could not create opengl context with version {}.{}", versionMajor, versionMinor);
+			return false;
+		}
+
+		return true;
+	}
+
+	void WindowGlfw::createBestContext()
+	{
+		// List of opengl versions to try
+		const std::pair<int, int> versions[] = {
+			{ 4, 6},
+			{ 4, 5},
+			{ 4, 4},
+			{ 4, 3},
+			{ 4, 2},
+			{ 4, 1},
+			{ 4, 0},
+			{ 3, 3},
+		};
+
+		// Try to create context with each version
+		for (const auto& version : versions)
+		{
+			if (tryCreateContext(version.first, version.second))
+			{
+				LIGHT_CORE_DEBUG("Created opengl context with version {}.{}", version.first, version.second);
+				glfwShowWindow(m_window);
+				return;
+			}
+		}
 	}
 
 	void WindowGlfw::init(const WindowProps& props)
@@ -54,14 +109,11 @@ namespace Light
 			glfwInitialized = true;
 		}
 
-		#if __APPLE__
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
-			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		#endif
+		glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-		m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
+		createBestContext();
+
 		if(!m_window)
 		{
 			LIGHT_CORE_CRITICAL("Could not create window \'{2}\' of size {0}x{1}", props.width, props.height, props.title);

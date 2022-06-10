@@ -35,16 +35,15 @@ namespace Light
 	};
 	struct TransformComponent : public Component
 	{
-		TransformComponent(glm::vec3 position = glm::vec3(0,0,0),
-			glm::vec3 rotation = glm::vec3(0,0,0),
-			glm::vec3 scale = glm::vec3(0.5))
-		: position(position), rotation(rotation), scale(scale) {}
+		TransformComponent(glm::vec3 position = glm::vec3(0, 0, 0),
+						   glm::vec3 rotation = glm::vec3(0, 0, 0),
+						   glm::vec3 scale = glm::vec3(0.5))
+			: position(position), rotation(rotation), scale(scale) {}
 		inline glm::mat4 getTransform() const
 		{
-			return glm::translate(glm::mat4(1.0f), position)
-				* glm::toMat4(glm::quat(rotation))
-				* glm::scale(glm::mat4(1.0f), glm::abs(scale));
+			return glm::translate(glm::mat4(1.0f), position) * glm::toMat4(glm::quat(rotation)) * glm::scale(glm::mat4(1.0f), glm::abs(scale));
 		}
+
 		glm::vec3 position;
 		glm::vec3 rotation;
 		glm::vec3 scale;
@@ -76,6 +75,9 @@ namespace Light
 		LightComponent(glm::vec3 lightColor) : m_lightColor(lightColor) {}
 		glm::vec3 m_lightColor;
 		LightType m_lightType = LightType::Directional;
+		float m_inner = 12.5;
+		float m_outer = 17.5;
+		float m_range  = 10.0;
 	};
 
 	struct CameraComponent : public Component

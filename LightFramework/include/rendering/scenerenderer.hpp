@@ -20,7 +20,7 @@ namespace Light {
 	 * 		SceneRenderer::renderEditor(scene, camera); // To render the scene
 	 * 		SceneRenderer::renderOutline(scene, entity); // To render the outline for an entity
 	 * 	~~~~~~~~~~~~~~~
-	 *  
+	 *
 	 */
 	class SceneRenderer {
 	public:
@@ -48,6 +48,8 @@ namespace Light {
 
 		std::shared_ptr<Light::Framebuffer> m_framebuffer;
 		std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
+		std::shared_ptr<Light::Framebuffer> m_tempFramebuffer;
+		//TODO: #63 Directly use texture instead of a dummy framebuffer
 	};
 }
 

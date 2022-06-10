@@ -32,7 +32,10 @@ namespace Light
 			return m_colorAttachmentIds[attachmentIndex];
 		}
 
+		inline uint32_t getRendererId() const override { return m_rendererId; }
+
 		virtual void bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) override;
+		virtual void bindDepthAttachmentTexture(uint32_t slot) override;
 
 	private:
 		FramebufferSpec m_spec;

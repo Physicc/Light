@@ -15,7 +15,7 @@ namespace Light
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGuiIO& io = ImGui::GetIO();
 		// io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
@@ -43,17 +43,10 @@ namespace Light
 		ImGui_ImplOpenGL3_Init("#version 330");
 	}
 
-	void ImguiLayer::onEvent(Event& e)
+	void ImguiLayer::onEvent([[maybe_unused]] Event& e)
 	{
-		ImGuiIO& io = ImGui::GetIO();
-		if(m_hoverEventsBlocking)
-		{
-			e.handled |= e.IsInCategory(EventCategoryMouse) && io.WantCaptureMouse;
-		}
-		if(m_focusEventsBlocking)
-		{
-			e.handled |= e.IsInCategory(EventCategoryKeyboard) && io.WantCaptureKeyboard;
-		}
+		e.handled |= e.IsInCategory(EventCategoryMouse) && ImGui::GetIO().WantCaptureMouse;
+		e.handled |= e.IsInCategory(EventCategoryKeyboard) && ImGui::GetIO().WantCaptureKeyboard;
 	}
 
 	void ImguiLayer::onDetach()
@@ -75,8 +68,6 @@ namespace Light
 	void ImguiLayer::end()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		// Application& app = Application::get();
-		//io.DisplaySize = ImVec2(app.getWindow().getWidth(), app.getWindow().getHeight());
 
 		// Rendering
 		ImGui::Render();
@@ -96,8 +87,7 @@ namespace Light
 
 	void ImguiLayer::onImguiRender()
 	{
-		// static bool show = true;
-		// ImGui::ShowDemoWindow(&show);
+
 	}
 
 }

@@ -1,4 +1,4 @@
-#include "core/logging.hpp"
+// #include "core/logging.hpp"
 #include "rendering/scenerenderer.hpp"
 
 #include "light/rendering/renderer.hpp"
@@ -17,6 +17,15 @@ namespace Light {
 		fbspecOutline.width = 1280;
 		fbspecOutline.height = 720;
 		m_outlineFramebuffer = Light::Framebuffer::create(fbspecOutline);
+
+		Light::FramebufferSpec fbspecTemp;
+		fbspecTemp.attachments = {
+			{ Light::FramebufferTextureFormat::RGBA8, Light::TextureWrap::CLAMP_TO_BORDER },
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecTemp.width = 1280;
+		fbspecTemp.height = 720;
+		m_tempFramebuffer = Light::Framebuffer::create(fbspecTemp);
 
 		// Skybox Mesh (Cube)
 		m_skybox_mesh.reset(VertexArray::create());
@@ -60,7 +69,7 @@ namespace Light {
 			{ ShaderDataType::Float3, "a_Position" }
 		}));
 
-		unsigned int indices[] = { 
+		unsigned int indices[] = {
 			0, 2, 1, 3, 2, 0,
 			4, 6, 5, 7, 6, 4,
 			8, 10, 9, 11, 10, 8,
@@ -96,7 +105,7 @@ namespace Light {
 		});
 
 		unsigned int screen_indices[] = {
-			0, 2, 1, 3, 2, 0 
+			0, 2, 1, 3, 2, 0
 		};
 
 		ibo.reset(IndexBuffer::create(screen_indices, sizeof(screen_indices) / sizeof(unsigned int)));
@@ -114,6 +123,7 @@ namespace Light {
 	void SceneRenderer::onViewportResize(int width, int height)
 	{
 		m_outlineFramebuffer->resize(width, height);
+		m_tempFramebuffer->resize(width, height);
 	}
 
 	void SceneRenderer::renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera)
@@ -126,21 +136,40 @@ namespace Light {
 
 		Light::Renderer::beginScene(camera, camera.getViewMatrix());
 
-		std::vector<PointLight> lights;
+		std::vector<PointLight> pointLights;
+		std::vector<SpotLight> spotLights;
+		std::vector<DirectionalLight> directionalLights;
 		{
 			auto view = scene->m_registry.view<LightComponent, TransformComponent>();
-			for(auto& entity: view)
+
+			for (auto& entity : view)
 			{
-				auto[light, transform] = view.get(entity);
-				lights.push_back({transform.position, light.m_lightColor});
+
+				auto [light, transform] = view.get(entity);
+				switch (light.m_lightType)
+				{
+				case LightType::Directional:
+					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), light.m_lightColor});
+					break;
+				case LightType::Point:
+					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
+					break;
+				case LightType::Spot:
+					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer)), light.m_range});
+					break;
+				default:
+					break;
+				}
 			}
 		}
-		Renderer::submitLight(lights);
+		Renderer::submitLight(directionalLights);
+		Renderer::submitLight(pointLights);
+		Renderer::submitLight(spotLights);
 
 		// Render Skybox
 		scene->m_skybox->bind();
 		Renderer::submitSkybox(m_skybox_shader, m_skybox_mesh);
-		
+
 		// Render entities
 		{
 			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
@@ -173,11 +202,19 @@ namespace Light {
 		}
 		m_outlineFramebuffer->unbind();
 
+		RenderCommand::framebufferBlit(m_framebuffer, m_tempFramebuffer, true);
+
 		m_framebuffer->bind();
 		m_outlineFramebuffer->bindAttachmentTexture(0,0);
+		m_outlineFramebuffer->bindDepthAttachmentTexture(2);
+		m_tempFramebuffer->bindDepthAttachmentTexture(1);
 		m_outline_shader->bind();
 		m_outline_shader->setUniformInt("IDTexture", 0);
+		m_outline_shader->setUniformInt("DepthTexture", 1);
+		m_outline_shader->setUniformInt("SelectedDepth", 2);
+		RenderCommand::setBlendFuncSeperate(BlendFactor::SRC_ALPHA, BlendFactor::ONE_MINUS_SRC_ALPHA, BlendFactor::ZERO, BlendFactor::ONE);
 		Renderer::submit(m_outline_shader, m_outline_mesh);
+		RenderCommand::setBlendFunc(BlendFactor::SRC_ALPHA, BlendFactor::ONE_MINUS_SRC_ALPHA);
 		m_framebuffer->unbind();
 	}
 }

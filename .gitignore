@@ -37,6 +37,9 @@ buildWsl
 
 # vscode files
 .vscode
+!.vscode/c_cpp_properties.json
+!.vscode/cmake-kits.json
+!.vscode/cmake-variants.json
 
 # doc files
 docs

@@ -49,7 +49,7 @@ namespace Light
 		}
 		catch (std::ifstream::failure& e)
 		{
-			(void)e; // Supress warning about unused variable in release mode (logs don't get compiled in release)
+			(void)e; // Supress warning about unused variable in MSVC in release mode (logs don't get compiled in release)
 			LIGHT_CORE_ERROR("Shader file read failure:" + e.what());
 		}
 

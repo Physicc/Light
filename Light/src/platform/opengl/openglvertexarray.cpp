@@ -2,7 +2,7 @@
 
 #include "core/logging.hpp"
 
-#include "glad/glad.h"
+#include "glad/gl.h"
 
 namespace Light
 {
@@ -27,29 +27,29 @@ namespace Light
 		}
 	}
 
-	VertexArray* VertexArray::create() 
+	VertexArray* VertexArray::create()
 	{
 		return new OpenGLVertexArray();
 	}
 
-	OpenGLVertexArray::OpenGLVertexArray() 
+	OpenGLVertexArray::OpenGLVertexArray()
 	{
 		glGenVertexArrays(1, &m_rendererId);
 	}
-	
+
 	OpenGLVertexArray::~OpenGLVertexArray() = default;
-	
+
 	void OpenGLVertexArray::bind() const
 	{
 		glBindVertexArray(m_rendererId);
 	}
-	
+
 	void OpenGLVertexArray::unbind() const
 	{
 		glBindVertexArray(0);
 	}
-	
-	void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& vbo) 
+
+	void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& vbo)
 	{
 		if(vbo->getLayout().getElements().size() == 0)
 		{
@@ -77,8 +77,8 @@ namespace Light
 		m_vertexBuffers.push_back(vbo);
 		glBindVertexArray(0);
 	}
-	
-	void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& ibo) 
+
+	void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& ibo)
 	{
 		glBindVertexArray(m_rendererId);
 		ibo->bind();
