@@ -18,7 +18,7 @@ add_library(Physicc STATIC ${SOURCES})
 if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
 	add_subdirectory(../shared/libs/spdlog spdlog)
 else()
-	target_include_directories(Physicc PUBLIC ../shared/libs/spdlog/include)
+	target_include_directories(Physicc SYSTEM PUBLIC ../shared/libs/spdlog/include)
 endif()
 
 # add the executable

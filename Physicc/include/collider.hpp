@@ -182,6 +182,9 @@ namespace Physicc
 			ZoneScoped;
 			return s_vertices;
 		}
+
+		glm::vec3 toBoxCoordinates(glm::vec3 point) const; 
+
 	private:
 		static std::vector<glm::vec4> s_vertices;
 	};

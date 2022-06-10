@@ -105,12 +105,7 @@ namespace Physicc
 		//returning initializer list instead of an actual object
 	}
 
-	glm::vec3 BoxCollider::getCentroid() const
-	{
-		return m_position;
-	}
-
-	glm::vec3 BoxCollider::toBoxCoordinates(glm::vec3 point)
+	glm::vec3 BoxCollider::toBoxCoordinates(glm::vec3 point) const
 	{
 		ZoneScoped;
 		
