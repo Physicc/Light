@@ -46,6 +46,7 @@ namespace Light {
 		m_tempFramebuffer = Light::Framebuffer::create(fbspecTemp);
 
 		m_depth_shader = Light::Shader::create("assets/shaders/depth.glsl");
+		m_depth_cube_shader = Light::Shader::create("assets/shaders/depthCube.glsl");
 
 		// Skybox Mesh (Cube)
 		m_skybox_mesh.reset(VertexArray::create());
@@ -146,9 +147,9 @@ namespace Light {
 		m_tempFramebuffer->resize(width, height);
 	}
 
-	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene)
+	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene, DirectionalLight light)
 	{
-		m_depth_shader->bind();
+		m_depthFramebuffer->bind();
 		Light::RenderCommand::clearDepthBit();
 		
 
@@ -158,13 +159,32 @@ namespace Light {
 			for (auto& entity : view)
 			{
 				auto [shader, mesh, transform] = view.get(entity);
-				Renderer::submitForShadow(m_depth_shader, mesh.mesh->getVao(), transform.getTransform());
+				Renderer::submitForDirectionalShadow(m_depth_shader, mesh.mesh->getVao(), light.getSpaceMatrix(), transform.getTransform());
 			}
 		}
 		Light::Renderer::endScene();
 		m_depthFramebuffer->unbind();
 	}
 
+	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene, PointLight light)
+	{
+		m_depthCubeFramebuffer->bind();
+		Light::RenderCommand::clearDepthBit();
+		
+
+		// Render depth of entities
+		{
+			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
+			for (auto& entity : view)
+			{
+				auto [shader, mesh, transform] = view.get(entity);
+				Renderer::submitForPointShadow(m_depth_cube_shader, mesh.mesh->getVao(), light.getSpaceMatrices(), transform.getTransform());
+			}
+		}
+		Light::Renderer::endScene();
+		m_depthCubeFramebuffer->unbind();
+	}
+	
 	void SceneRenderer::renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera)
 	{
 		std::vector<PointLight> pointLights;
@@ -204,16 +224,12 @@ namespace Light {
 
 		for(DirectionalLight light: directionalLights)
 		{
-			Light::Renderer::beginScene(light.getSpaceMatrix(), light.position);
-			m_depthFramebuffer->bind();
-			renderShadows(scene);
+			renderShadows(scene, light);
 		}
 
 		for(PointLight light: pointLights)
 		{
-			// Light::Renderer::beginScene(light.lightSpaceMatrix, light.position);//************
-			m_depthCubeFramebuffer->bind();
-			renderShadows(scene);
+			renderShadows(scene, light);
 		}
 
 		// Render scene

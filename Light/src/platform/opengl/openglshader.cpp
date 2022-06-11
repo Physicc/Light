@@ -118,13 +118,25 @@ namespace Light
 	{
 		int success;
 		char infoLog[1024];
-		if (shaderType == GL_VERTEX_SHADER || shaderType == GL_FRAGMENT_SHADER)
+		if (shaderType == GL_VERTEX_SHADER || shaderType == GL_FRAGMENT_SHADER || shaderType == GL_GEOMETRY_SHADER)
 		{
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-				std::string type = shaderType == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT";
+				std::string type;
+				switch(shaderType)
+				{
+				case GL_VERTEX_SHADER:
+					type = "VERTEX";
+					break;
+				case GL_FRAGMENT_SHADER:
+					type = "FRAGMENT";
+					break;
+				case GL_GEOMETRY_SHADER:
+					type = "GEOMETRY";
+					break;
+				}
 				LIGHT_CORE_ERROR("Shader compilation error of type {}: \n{}", type, infoLog);
 				return;
 			}

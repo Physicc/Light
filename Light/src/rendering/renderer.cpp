@@ -67,7 +67,11 @@ namespace Light
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
 		shader->setUniformInt("depthMap", depth_map_texture_unit);
 
-		shader->setUniformMat4("lightSpaceMatrix", s_sceneData->directionalLights[0].getSpaceMatrix());
+		for(DirectionalLight light : s_sceneData->directionalLights)
+			shader->setUniformMat4("lightSpaceMatrix", light.getSpaceMatrix());
+
+		// for(PointLight light : s_sceneData->pointLights)
+		// 	shader->setUniformMat4("lightSpaceMatrix", light.getSpaceMatrix());
 
 		shader->setUniformInt("u_id", id);
 
@@ -100,16 +104,35 @@ namespace Light
 		vao->unbind();
 	}
 
-	void Renderer::submitForShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform)
+	void Renderer::submitForDirectionalShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 lightSpaceMatrix, glm::mat4 transform)
 	{
 		vao->bind();
 
 		shader->bind();
 		
-		shader->setUniformMat4("u_lightSpaceMatrix", s_sceneData->viewProjectionMatrix);
+		// (void)lightSpaceMatrix;
+		shader->setUniformMat4("u_lightSpaceMatrix", lightSpaceMatrix);
 
 		shader->setUniformMat4("u_transform", transform);
 
+		RenderCommand::drawIndexed(vao);
+
+		shader->unbind();
+
+		vao->unbind();
+	}
+	void Renderer::submitForPointShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao,	std::vector<glm::mat4> lightSpaceMatrix, glm::mat4 transform)
+	{
+		vao->bind();
+
+		shader->bind();
+		
+		for (unsigned int i = 0; i < 6; ++i)
+            shader->setUniformMat4("shadowMatrices[" + std::to_string(i) + "]", lightSpaceMatrix[i]);
+
+		shader->setUniformMat4("u_transform", transform);
+		shader->setUniformFloat("far_plane", 25.0f);
+		
 		RenderCommand::drawIndexed(vao);
 
 		shader->unbind();

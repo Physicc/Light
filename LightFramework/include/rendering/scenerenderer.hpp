@@ -28,7 +28,10 @@ namespace Light {
 		~SceneRenderer() {};
 
 		void renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera);
-		void renderShadows(std::shared_ptr<Scene> scene);
+		//render directional shadows
+		void renderShadows(std::shared_ptr<Scene> scene, DirectionalLight light);
+		//render point shadows on to cubemap(Multisample texture)
+		void renderShadows(std::shared_ptr<Scene> scene, PointLight light);
 		void renderOutline(std::shared_ptr<Scene> scene, Entity entity);
 
 		void onViewportResize(int width, int height);
@@ -45,6 +48,7 @@ namespace Light {
 		std::shared_ptr<Light::Shader> m_outline_shader;
 		std::shared_ptr<Light::Shader> m_outline_temp_shader;
 		std::shared_ptr<Light::Shader> m_depth_shader;
+		std::shared_ptr<Light::Shader> m_depth_cube_shader;
 		std::shared_ptr<Light::VertexArray> m_skybox_mesh;
 		std::shared_ptr<Light::VertexArray> m_outline_mesh;
 
