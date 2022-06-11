@@ -257,28 +257,9 @@ namespace Light
 			glReadBuffer(GL_NONE);
 		}
 
-		if(m_colorAttachmentSpecs.empty() && m_depthAttachmentSpec.textureFormat == FramebufferTextureFormat::None)
-		{
-			addPureDepthAttachment();
-		}
-
 		LIGHT_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
-
-	void OpenGLFramebuffer::addPureDepthAttachment()
-	{
-		glGenTextures(1, &m_depthAttachmentId);
-		glBindTexture(GL_TEXTURE_2D, m_depthAttachmentId);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_spec.width, m_spec.height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_depthAttachmentId, 0);
-		glDrawBuffer(GL_NONE);
-		glReadBuffer(GL_NONE);
 	}
 
 	int OpenGLFramebuffer::readPixelInt(uint32_t attachmentIndex, uint32_t x, uint32_t y)
