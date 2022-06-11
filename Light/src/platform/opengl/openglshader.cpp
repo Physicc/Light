@@ -17,6 +17,10 @@ namespace Light
 		{
 			return GL_VERTEX_SHADER;
 		}
+		else if(typeStr == " geometry")
+		{
+			return GL_GEOMETRY_SHADER;
+		}
 
 		LIGHT_CORE_ERROR("Shader type not supported!");
 		return 0;

@@ -17,6 +17,15 @@ namespace Light {
 		fbspecDepth.height = 1280;
 		m_depthFramebuffer = Light::Framebuffer::create(fbspecDepth);
 
+		Light::FramebufferSpec fbspecDepthCube;
+		fbspecDepthCube.attachments = {
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecDepthCube.width = 1280;
+		fbspecDepthCube.height = 1280;
+		fbspecDepthCube.samples = 6;
+		m_depthCubeFramebuffer = Light::Framebuffer::create(fbspecDepthCube);
+		
 		// Initialize the outline framebuffer
 		Light::FramebufferSpec fbspecOutline;
 		fbspecOutline.attachments = {
@@ -139,7 +148,6 @@ namespace Light {
 
 	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene)
 	{
-		m_depthFramebuffer->bind();
 		m_depth_shader->bind();
 		Light::RenderCommand::clearDepthBit();
 		
@@ -159,7 +167,6 @@ namespace Light {
 
 	void SceneRenderer::renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera)
 	{
-		Light::TransformComponent trans;
 		std::vector<PointLight> pointLights;
 		std::vector<SpotLight> spotLights;
 		std::vector<DirectionalLight> directionalLights;
@@ -176,8 +183,8 @@ namespace Light {
 					directionalLights.push_back({	transform.position,
 													glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)),
 													light.m_lightColor,
-													transform.getSpaceMatrix()});
-					trans = transform;
+													// transform.getSpaceMatrix()
+												});
 					break;
 				case LightType::Point:
 					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
@@ -194,8 +201,20 @@ namespace Light {
 				}
 			}
 		}
-		Light::Renderer::beginScene(trans.getSpaceMatrix(), trans.position);
-		renderShadows(scene);
+
+		for(DirectionalLight light: directionalLights)
+		{
+			Light::Renderer::beginScene(light.getSpaceMatrix(), light.position);
+			m_depthFramebuffer->bind();
+			renderShadows(scene);
+		}
+
+		for(PointLight light: pointLights)
+		{
+			// Light::Renderer::beginScene(light.lightSpaceMatrix, light.position);//************
+			m_depthCubeFramebuffer->bind();
+			renderShadows(scene);
+		}
 
 		// Render scene
 		m_framebuffer->bind();

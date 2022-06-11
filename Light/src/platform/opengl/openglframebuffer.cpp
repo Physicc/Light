@@ -225,16 +225,16 @@ namespace Light
 					TexFormat2OpenGLType(m_depthAttachmentSpec.textureFormat),
 					nullptr
 				);
+				glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
+							TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+				glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S,
+							TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+				glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T,
+							TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
 			}
 
-			glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
-						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
-			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S,
-						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
-			glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T,
-						TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
 
 			glFramebufferTexture2D(GL_FRAMEBUFFER,
 				GL_DEPTH_STENCIL_ATTACHMENT,

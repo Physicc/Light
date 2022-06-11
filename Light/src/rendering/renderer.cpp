@@ -65,9 +65,9 @@ namespace Light
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
-		shader->setUniformInt("depthMap",depth_map_texture_unit);
+		shader->setUniformInt("depthMap", depth_map_texture_unit);
 
-		shader->setUniformMat4("lightSpaceMatrix", s_sceneData->directionalLights[0].lightSpaceMatrix);
+		shader->setUniformMat4("lightSpaceMatrix", s_sceneData->directionalLights[0].getSpaceMatrix());
 
 		shader->setUniformInt("u_id", id);
 

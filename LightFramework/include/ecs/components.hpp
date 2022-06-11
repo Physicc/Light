@@ -62,6 +62,10 @@ namespace Light
 		{
 			return  getProjectionMatrix() * getViewMatrix();
 		}
+		inline glm::mat4 getOrientationMatrix() const
+		{
+			return glm::toMat4(glm::quat(rotation));
+		}
 
 		glm::vec3 position;
 		glm::vec3 rotation;

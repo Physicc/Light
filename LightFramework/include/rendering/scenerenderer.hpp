@@ -50,6 +50,7 @@ namespace Light {
 
 		std::shared_ptr<Light::Framebuffer> m_framebuffer;
 		std::shared_ptr<Light::Framebuffer> m_depthFramebuffer;
+		std::shared_ptr<Light::Framebuffer> m_depthCubeFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_tempFramebuffer;
 		//TODO: #63 Directly use texture instead of a dummy framebuffer

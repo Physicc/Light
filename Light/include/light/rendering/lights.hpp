@@ -2,6 +2,8 @@
 #define __LIGHTS_H__
 
 #include "glm/glm.hpp"
+#include <glm/gtx/quaternion.hpp>
+
 #include <string>
 
 namespace Light
@@ -39,7 +41,20 @@ namespace Light
 		glm::vec3 position;
 		glm::vec3 direction;
 		glm::vec3 color;
-		glm::mat4 lightSpaceMatrix;
+		// glm::mat4 lightSpaceMatrix;
+
+		inline glm::mat4 getViewMatrix() const
+		{
+			return glm::lookAt(-10.0f * direction, glm::vec3(0.0f), glm::vec3(0.0,1.0,0.0));
+		}
+		inline glm::mat4 getProjectionMatrix() const
+		{
+			return glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 20.0f);
+		}
+		inline glm::mat4 getSpaceMatrix() const
+		{
+			return  getProjectionMatrix() * getViewMatrix();
+		}
 	};
 }
 
