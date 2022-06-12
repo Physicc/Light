@@ -57,6 +57,7 @@ jobs:
           - os: macos-12
             xcode-version: 13.2
             generator: '"Unix Makefiles"'
+          #TODO: Break up the Xcode and Unix Makefiles builds into two workflows.
     
     name: ${{ matrix.os }} (XCode ${{ matrix.xcode-version }}, ${{ matrix.generator }} Generator)
 
@@ -86,5 +87,4 @@ jobs:
         run: |
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
-                --target Editor Test \
-                -- -j2
+                --target Editor Test
