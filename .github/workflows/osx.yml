@@ -16,6 +16,7 @@ jobs:
     strategy:
       matrix:
         os: [ macos-10.15, macos-11, macos-12 ]
+        generator: [ "XCode", "Unix Makefiles" ]
         xcode-version: [ latest-stable ]
         # From 12.1 to 12.4 (inclusive), all XCode versions use the same
         # compiler version.
@@ -32,7 +33,7 @@ jobs:
           - os: macos-12
             xcode-version: 13.2
     
-    name: ${{ matrix.os }} (XCode ${{ matrix.xcode-version }})
+    name: ${{ matrix.os }} (XCode ${{ matrix.xcode-version }}, ${{ matrix.generator }} Generator)
 
     steps:
       - uses: actions/checkout@v2
@@ -54,7 +55,7 @@ jobs:
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
                 -DCMAKE_C_COMPILER_LAUNCHER=ccache \
                 -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-                -G"Unix Makefiles"
+                -G${{ matrix.generator }}
 
       - name: Build
         run: |
