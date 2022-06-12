@@ -16,22 +16,47 @@ jobs:
     strategy:
       matrix:
         os: [ macos-10.15, macos-11, macos-12 ]
-        generator: [ Xcode, Unix Makefiles ]
+        generator: [ "Xcode", "Unix Makefiles" ]
         xcode-version: [ latest-stable ]
         # From 12.1 to 12.4 (inclusive), all XCode versions use the same
         # compiler version.
 
         include:
+          # MacOS 10.15, XCode 12.4
           - os: macos-10.15
             xcode-version: 12.4
+            generator: "Xcode"
+          - os: macos-10.15
+            xcode-version: 12.4
+            generator: "Unix Makefiles"
+          # MacOS 11, XCode 13.0
           - os: macos-11
             xcode-version: 13.0
+            generator: "Xcode"
+          - os: macos-11
+            xcode-version: 13.0
+            generator: "Unix Makefiles"
+          # MacOS 11, XCode 13.1
           - os: macos-11
             xcode-version: 13.1
+            generator: "Xcode"
+          - os: macos-11
+            xcode-version: 13.1
+            generator: "Unix Makefiles"
+          # MacOS 12, XCode 13.1
           - os: macos-12
             xcode-version: 13.1
+            generator: "Xcode"
+          - os: macos-12
+            xcode-version: 13.1
+            generator: "Unix Makefiles"
+          # MacOS 12, XCode 13.2
           - os: macos-12
             xcode-version: 13.2
+            generator: "Xcode"
+          - os: macos-12
+            xcode-version: 13.2
+            generator: "Unix Makefiles"
     
     name: ${{ matrix.os }} (XCode ${{ matrix.xcode-version }}, ${{ matrix.generator }} Generator)
 
