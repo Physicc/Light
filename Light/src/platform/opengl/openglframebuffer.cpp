@@ -89,7 +89,12 @@ namespace Light
 				m_colorAttachmentSpecs.emplace_back(attachmentSpec);
 		}
 
-		invalidate();
+		if (spec.type == FramebufferTextureType::TWO_D)
+			invalidate2D();
+		else if (spec.type == FramebufferTextureType::CUBEMAP)
+			invalidateCubemap();
+		else
+			LIGHT_CORE_ERROR("Unrecognized texture type");
 	}
 
 	OpenGLFramebuffer::~OpenGLFramebuffer()
@@ -111,10 +116,158 @@ namespace Light
         m_spec.width = width;
         m_spec.height = height;
 
-		invalidate();
+		invalidate2D();
 	}
 
-	void OpenGLFramebuffer::invalidate()
+	void OpenGLFramebuffer::invalidate2D()
+	{
+		if(m_rendererId != 0)
+		{
+			glDeleteFramebuffers(1, &m_rendererId);
+			glDeleteTextures((GLsizei)m_colorAttachmentIds.size(), m_colorAttachmentIds.data());
+			if(m_depthAttachmentId != 0)
+				glDeleteTextures(1, &m_depthAttachmentId);
+			m_colorAttachmentIds.clear();
+			m_depthAttachmentId = 0;
+		}
+
+		glGenFramebuffers(1, &m_rendererId);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_rendererId);
+
+
+		if(m_colorAttachmentSpecs.size() > 0)
+		{
+			GLenum textureTarget = m_spec.samples > 1 ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+			m_colorAttachmentIds.resize(m_colorAttachmentSpecs.size());
+			glGenTextures((GLsizei)m_colorAttachmentSpecs.size(), m_colorAttachmentIds.data());
+
+			// Attach all color buffers
+			for(int i = 0; i < (int)m_colorAttachmentSpecs.size(); i++)
+			{
+				glBindTexture(textureTarget, m_colorAttachmentIds[i]);
+
+				if(m_spec.samples > 1)
+				{
+					glTexImage2DMultisample(
+						textureTarget,
+						m_spec.samples,
+						TexFormat2OpenGLInternalFormat(m_colorAttachmentSpecs[i].textureFormat),
+						m_spec.width,
+						m_spec.height,
+						GL_FALSE
+					);
+				}
+				else
+				{
+					glTexImage2D(
+						textureTarget,
+						0,
+						TexFormat2OpenGLInternalFormat(m_colorAttachmentSpecs[i].textureFormat),
+						m_spec.width,
+						m_spec.height,
+						0,
+						TexFormat2OpenGLFormat(m_colorAttachmentSpecs[i].textureFormat),
+						TexFormat2OpenGLType(m_colorAttachmentSpecs[i].textureFormat),
+						nullptr
+					);
+
+					if(m_colorAttachmentSpecs[i].textureFormat == FramebufferTextureFormat::RED_INTEGER)
+					{
+						glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+						glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+					}
+					else
+					{
+						glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+						glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+					}
+					glTexParameterfv(textureTarget, GL_TEXTURE_BORDER_COLOR, &(glm::vec4(0,0,0,0)[0]));
+
+					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
+						TexWrap2OpenGLType(m_colorAttachmentSpecs[i].wrapFormat));
+					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S,
+						TexWrap2OpenGLType(m_colorAttachmentSpecs[i].wrapFormat));
+					glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T,
+						TexWrap2OpenGLType(m_colorAttachmentSpecs[i].wrapFormat));
+				}
+
+				glFramebufferTexture2D(GL_FRAMEBUFFER,
+					GL_COLOR_ATTACHMENT0 + i,
+					textureTarget,
+					m_colorAttachmentIds[i],
+					0
+				);
+			}
+		}
+
+		// Attach depth buffer
+		if(m_depthAttachmentSpec.textureFormat != FramebufferTextureFormat::None)
+		{
+			GLenum textureTarget = m_spec.samples > 1 ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+			glGenTextures(1, &m_depthAttachmentId);
+			glBindTexture(textureTarget, m_depthAttachmentId);
+			if(m_spec.samples > 1)
+			{
+				glTexImage2DMultisample(
+					textureTarget,
+					m_spec.samples,
+					TexFormat2OpenGLInternalFormat(m_depthAttachmentSpec.textureFormat),
+					m_spec.width,
+					m_spec.height,
+					GL_FALSE
+				);
+			}
+			else
+			{
+				glTexImage2D(
+					textureTarget,
+					0,
+					TexFormat2OpenGLInternalFormat(m_depthAttachmentSpec.textureFormat),
+					m_spec.width,
+					m_spec.height,
+					0,
+					TexFormat2OpenGLFormat(m_depthAttachmentSpec.textureFormat),
+					TexFormat2OpenGLType(m_depthAttachmentSpec.textureFormat),
+					nullptr
+				);
+				glTexParameteri(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexParameteri(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexParameteri(textureTarget, GL_TEXTURE_WRAP_R,
+							TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+				glTexParameteri(textureTarget, GL_TEXTURE_WRAP_S,
+							TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+				glTexParameteri(textureTarget, GL_TEXTURE_WRAP_T,
+							TexWrap2OpenGLType(m_depthAttachmentSpec.wrapFormat));
+			}
+
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER,
+				GL_DEPTH_STENCIL_ATTACHMENT,
+				textureTarget,
+				m_depthAttachmentId,
+				0
+			);
+		}
+
+		if(m_colorAttachmentSpecs.size() > 1)
+		{
+			LIGHT_CORE_ASSERT(m_colorAttachmentSpecs.size() <= 4, "Only 4 color attachments supported");
+
+			GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
+			glDrawBuffers((GLsizei)m_colorAttachmentSpecs.size(), buffers);
+		}
+		else if(m_colorAttachmentSpecs.empty())
+		{
+			glDrawBuffer(GL_NONE);
+			glReadBuffer(GL_NONE);
+		}
+
+		LIGHT_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	void OpenGLFramebuffer::invalidateCubemap()
 	{
 		if(m_rendererId != 0)
 		{

@@ -5,6 +5,14 @@
 
 namespace Light
 {
+	enum class FramebufferTextureType
+	{
+		None,
+
+		TWO_D,
+		CUBEMAP
+	};
+
 	enum class FramebufferTextureFormat
 	{
 		None,
@@ -64,6 +72,7 @@ namespace Light
 
 	struct FramebufferSpec
 	{
+		FramebufferTextureType type = FramebufferTextureType::TWO_D;
 		uint32_t width, height;
 		uint32_t samples = 1;
 

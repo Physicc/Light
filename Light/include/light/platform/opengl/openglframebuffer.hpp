@@ -17,7 +17,8 @@ namespace Light
 		void bind() override;
 		void unbind() override;
 
-		void invalidate();
+		void invalidate2D();
+		void invalidateCubemap();
 		void resize(uint32_t width, uint32_t height) override;
 
 		int readPixelInt(uint32_t attachmentIndex, uint32_t x, uint32_t y) override;
