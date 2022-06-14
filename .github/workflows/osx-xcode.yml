@@ -1,4 +1,4 @@
-name: OSX (Unix Makefiles Generator)
+name: OSX (Xcode Generator)
 on:
   push:
     branches: [ main, development ]
@@ -33,11 +33,12 @@ jobs:
           # MacOS 12, XCode 13.1
           - os: macos-12
             xcode-version: 13.1
+          - os: macos-12
           # MacOS 12, XCode 13.2
           - os: macos-12
             xcode-version: 13.2
     
-    name: ${{ matrix.os }} (XCode ${{ matrix.xcode-version }}, Unix Makefiles Generator)
+    name: ${{ matrix.os }} (XCode ${{ matrix.xcode-version }}, Xcode Generator)
 
     steps:
       - uses: actions/checkout@v2
@@ -59,11 +60,11 @@ jobs:
                 -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
                 -DCMAKE_C_COMPILER_LAUNCHER=ccache \
                 -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-                -G"Unix Makefiles"
+                -G"Xcode"
 
       - name: Build
         run: |
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
                 --target Editor Test \
-                -- -j2
+                --parallel 2
