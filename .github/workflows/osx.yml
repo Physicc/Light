@@ -66,4 +66,4 @@ jobs:
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
                 --target Editor Test \
-                -- -j2
+                --parallel 2

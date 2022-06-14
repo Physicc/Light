@@ -32,7 +32,7 @@ jobs:
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
                 --target TracyServer \
-                -- -j2
+                --parallel 2
 
       - name: Upload executable as artifact
         uses: actions/upload-artifact@v2
@@ -62,7 +62,8 @@ jobs:
         run: |
           cmake --build ${{ github.workspace }}/build \
                 --config ${{ env.BUILD_TYPE }} \
-                --target TracyServer
+                --target TracyServer \
+                --parallel 2
 
       - name: Upload executable as artifact
         uses: actions/upload-artifact@v2
