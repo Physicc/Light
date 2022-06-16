@@ -29,16 +29,16 @@ namespace Light
 		static void submitID(const std::shared_ptr<Shader>& shader,
 							const std::shared_ptr<VertexArray>& vao,
 							glm::mat4 transform = glm::mat4(1.0f),
-							int id = -1,
-							int depth_map_texture_unit = 0);
+							int id = -1);
 		static void submitForDirectionalShadow(const std::shared_ptr<Shader>& shader,
 								const std::shared_ptr<VertexArray>& vao,
 								glm::mat4 lightSpaceMatrix = glm::mat4(1.0f),
 								glm::mat4 transform = glm::mat4(1.0f));
-		static void submitForPointShadow(const std::shared_ptr<Shader>& shader,
+		static void submitForCubeShadow(const std::shared_ptr<Shader>& shader,
 								const std::shared_ptr<VertexArray>& vao,
-								std::vector<glm::mat4> lightSpaceMatrix,
+								PointLight light,
 								glm::mat4 transform = glm::mat4(1.0f));
+		
 		static void submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
 
 	private:

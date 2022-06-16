@@ -75,6 +75,9 @@ namespace Light
 	struct MeshRendererComponent : public Component
 	{
 		MeshRendererComponent(const char* path);
+		MeshRendererComponent(const char* vertexPath, const char* fragmentPath);
+		MeshRendererComponent(const char* vertexPath, const char* fragmentPath, const char* geometryPath);
+
 		inline void bind()
 		{
 			shader->bind();

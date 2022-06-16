@@ -58,22 +58,37 @@ namespace Light
 		submitID(shader, vao, transform);
 	}
 
-	void Renderer::submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform, int id, int depth_map_texture_unit)
+	void Renderer::submitID(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 transform, int id)
 	{
 		vao->bind();
 
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
-		shader->setUniformInt("depthMap", depth_map_texture_unit);
 
-		for(DirectionalLight light : s_sceneData->directionalLights)
+		//for (int i = 0; i < 4; i++)
+		//{
+		//	//set light uniforms
+		//}
+
+		for(DirectionalLight const &light : s_sceneData->directionalLights)
 			shader->setUniformMat4("lightSpaceMatrix", light.getSpaceMatrix());
 
 		// for(PointLight light : s_sceneData->pointLights)
 		// 	shader->setUniformMat4("lightSpaceMatrix", light.getSpaceMatrix());
 
 		shader->setUniformInt("u_id", id);
+		shader->setUniformInt("depthMap", 0);
+		shader->setUniformInt("depthCubemap", 1);
+
+		if(s_sceneData->directionalLights.size() > 0)
+			shader->setUniformInt("dir", 1);
+		else
+		{
+			shader->setUniformInt("dir", 0);
+			shader->setUniformVec3("lightPos", s_sceneData->pointLights[0].position);
+		}
+		shader->setUniformFloat("far_plane", 25.0f);
 
 		shader->setUniformMat4("u_transform", transform);
 
@@ -121,18 +136,19 @@ namespace Light
 
 		vao->unbind();
 	}
-	void Renderer::submitForPointShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao,	std::vector<glm::mat4> lightSpaceMatrix, glm::mat4 transform)
+	void Renderer::submitForCubeShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, PointLight light, glm::mat4 transform)
 	{
 		vao->bind();
 
 		shader->bind();
 		
 		for (unsigned int i = 0; i < 6; ++i)
-            shader->setUniformMat4("shadowMatrices[" + std::to_string(i) + "]", lightSpaceMatrix[i]);
+            shader->setUniformMat4("shadowMatrices[" + std::to_string(i) + "]", light.getSpaceMatrices()[i]);
 
 		shader->setUniformMat4("u_transform", transform);
 		shader->setUniformFloat("far_plane", 25.0f);
-		
+		shader->setUniformVec3("lightPos", light.position);
+
 		RenderCommand::drawIndexed(vao);
 
 		shader->unbind();

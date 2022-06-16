@@ -6,6 +6,8 @@
 
 
 namespace Light {
+	#define TEXTURE_UNIT_START 4;
+
 	SceneRenderer::SceneRenderer()
 	{
 		// Initialize the depth framebuffer
@@ -23,9 +25,9 @@ namespace Light {
 		};
 		fbspecDepthCube.width = 1280;
 		fbspecDepthCube.height = 1280;
-		fbspecDepthCube.samples = 6;
+		fbspecDepthCube.type = Light::FramebufferTextureType::CUBEMAP;
 		m_depthCubeFramebuffer = Light::Framebuffer::create(fbspecDepthCube);
-		
+
 		// Initialize the outline framebuffer
 		Light::FramebufferSpec fbspecOutline;
 		fbspecOutline.attachments = {
@@ -178,13 +180,13 @@ namespace Light {
 			for (auto& entity : view)
 			{
 				auto [shader, mesh, transform] = view.get(entity);
-				Renderer::submitForPointShadow(m_depth_cube_shader, mesh.mesh->getVao(), light.getSpaceMatrices(), transform.getTransform());
+				Renderer::submitForCubeShadow(m_depth_cube_shader, mesh.mesh->getVao(), light, transform.getTransform());
 			}
 		}
 		Light::Renderer::endScene();
 		m_depthCubeFramebuffer->unbind();
 	}
-	
+
 	void SceneRenderer::renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera)
 	{
 		std::vector<PointLight> pointLights;
@@ -200,37 +202,33 @@ namespace Light {
 				switch (light.m_lightType)
 				{
 				case LightType::Directional:
-					directionalLights.push_back({	transform.position,
+					directionalLights.push_back({ transform.position,
 													glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)),
-													light.m_lightColor,
-													// transform.getSpaceMatrix()
-												});
+													light.m_lightColor});
 					break;
 				case LightType::Point:
-					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
+					pointLights.push_back({ transform.position, light.m_lightColor, light.m_range });
 					break;
 				case LightType::Spot:
-					spotLights.push_back({	transform.position,
+					spotLights.push_back({ transform.position,
 											light.m_lightColor,
 											glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)),
 											(float)glm::cos(glm::radians(light.m_inner)),
-											(float)glm::cos(glm::radians(light.m_outer)), light.m_range});
+											(float)glm::cos(glm::radians(light.m_outer)), light.m_range });
 					break;
 				default:
 					break;
 				}
 			}
 		}
+		LIGHT_CORE_ASSERT(directionalLights.size() <= 4, "Only 4 lights of each type supported now");
+		LIGHT_CORE_ASSERT(pointLights.size() <= 4, "Only 4 lights of each type supported now");
+		LIGHT_CORE_ASSERT(spotLights.size() <= 4, "Only 4 lights of each type supported now");
 
-		for(DirectionalLight light: directionalLights)
-		{
+		for(DirectionalLight const &light: directionalLights)
 			renderShadows(scene, light);
-		}
-
-		for(PointLight light: pointLights)
-		{
+		for(PointLight const &light: pointLights)
 			renderShadows(scene, light);
-		}
 
 		// Render scene
 		m_framebuffer->bind();
@@ -240,8 +238,12 @@ namespace Light {
 
 		m_framebuffer->clearAttachment(1, 0);
 
-		m_depthFramebuffer->bindDepthAttachmentTexture(depth_map_texture_unit);
 		Light::Renderer::beginScene(camera, camera.getViewMatrix());
+
+		// binding to texture units
+		m_depthFramebuffer->bindDepthAttachmentTexture(depth_map_TU);
+		m_depthCubeFramebuffer->bindDepthAttachmentTexture(depth_cubemap_TU);
+
 
 		Renderer::submitLight(directionalLights);
 		Renderer::submitLight(pointLights);
@@ -257,7 +259,7 @@ namespace Light {
 			for (auto& entity : view)
 			{
 				auto [shader, mesh, transform] = view.get(entity);
-				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity, (uint32_t)depth_map_texture_unit);
+				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity);
 			}
 		}
 

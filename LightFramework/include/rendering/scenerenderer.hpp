@@ -27,11 +27,12 @@ namespace Light {
 		SceneRenderer();
 		~SceneRenderer() {};
 
-		void renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera);
-		//render directional shadows
+		void renderEditor(std::shared_ptr<Scene> scene, EditorCamera& camera);
+
 		void renderShadows(std::shared_ptr<Scene> scene, DirectionalLight light);
-		//render point shadows on to cubemap(Multisample texture)
 		void renderShadows(std::shared_ptr<Scene> scene, PointLight light);
+		void renderShadows(std::shared_ptr<Scene> scene, SpotLight light);
+
 		void renderOutline(std::shared_ptr<Scene> scene, Entity entity);
 
 		void onViewportResize(int width, int height);
@@ -57,8 +58,10 @@ namespace Light {
 		std::shared_ptr<Light::Framebuffer> m_depthCubeFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_tempFramebuffer;
+
+		uint32_t depth_map_TU = 0;
+		uint32_t depth_cubemap_TU = 1;
 		//TODO: #63 Directly use texture instead of a dummy framebuffer
-		uint32_t depth_map_texture_unit=0;
 	};
 }
 
