@@ -73,13 +73,13 @@ namespace Light
 		m_scene = std::make_shared<Scene>();
 
 		auto cube = m_scene->addEntity("Cube");
-		cube.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+		cube.addComponent<MeshRendererComponent>("assets/shaders/phong_vertex.glsl", "assets/shaders/phong_fragment.glsl");
 
 		auto floor = m_scene->addEntity("Floor");
 		auto& floor_transform = floor.getComponent<TransformComponent>();
 		floor_transform.position = glm::vec3(0, -1, 0);
 		floor_transform.scale = glm::vec3(2, 0.1, 2);
-		floor.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+		floor.addComponent<MeshRendererComponent>("assets/shaders/phong_vertex.glsl", "assets/shaders/phong_fragment.glsl");
 
 		auto light = m_scene->addEntity("Light");
 		auto& light_transform = light.getComponent<TransformComponent>();

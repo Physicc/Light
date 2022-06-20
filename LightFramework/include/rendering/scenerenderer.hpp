@@ -29,9 +29,9 @@ namespace Light {
 
 		void renderEditor(std::shared_ptr<Scene> scene, EditorCamera& camera);
 
-		void renderShadows(std::shared_ptr<Scene> scene, DirectionalLight light);
-		void renderShadows(std::shared_ptr<Scene> scene, PointLight light);
-		void renderShadows(std::shared_ptr<Scene> scene, SpotLight light);
+		void renderShadows(std::shared_ptr<Scene> scene, DirectionalLight light, int index);
+		void renderShadows(std::shared_ptr<Scene> scene, PointLight light, int index);
+		void renderShadows(std::shared_ptr<Scene> scene, SpotLight light, int index);
 
 		void renderOutline(std::shared_ptr<Scene> scene, Entity entity);
 
@@ -54,13 +54,12 @@ namespace Light {
 		std::shared_ptr<Light::VertexArray> m_outline_mesh;
 
 		std::shared_ptr<Light::Framebuffer> m_framebuffer;
-		std::shared_ptr<Light::Framebuffer> m_depthFramebuffer;
-		std::shared_ptr<Light::Framebuffer> m_depthCubeFramebuffer;
+		std::shared_ptr<Light::Framebuffer> m_depthFramebuffer[4];
+		std::shared_ptr<Light::Framebuffer> m_pointDepthCubeFramebuffer[4];
+		std::shared_ptr<Light::Framebuffer> m_spotDepthCubeFramebuffer[4];
 		std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_tempFramebuffer;
 
-		uint32_t depth_map_TU = 0;
-		uint32_t depth_cubemap_TU = 1;
 		//TODO: #63 Directly use texture instead of a dummy framebuffer
 	};
 }

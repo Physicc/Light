@@ -38,6 +38,10 @@ namespace Light
 								const std::shared_ptr<VertexArray>& vao,
 								PointLight light,
 								glm::mat4 transform = glm::mat4(1.0f));
+		static void submitForCubeShadow(const std::shared_ptr<Shader>& shader,
+								const std::shared_ptr<VertexArray>& vao,
+								SpotLight light,
+								glm::mat4 transform = glm::mat4(1.0f));
 		
 		static void submitSkybox(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao);
 

@@ -65,32 +65,50 @@ namespace Light
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
-
-		//for (int i = 0; i < 4; i++)
-		//{
-		//	//set light uniforms
-		//}
-
-		for(DirectionalLight const &light : s_sceneData->directionalLights)
-			shader->setUniformMat4("lightSpaceMatrix", light.getSpaceMatrix());
-
-		// for(PointLight light : s_sceneData->pointLights)
-		// 	shader->setUniformMat4("lightSpaceMatrix", light.getSpaceMatrix());
+		shader->setUniformMat4("u_transform", transform);
 
 		shader->setUniformInt("u_id", id);
-		shader->setUniformInt("depthMap", 0);
-		shader->setUniformInt("depthCubemap", 1);
+		shader->setUniformInt("u_n_dLights", (int)s_sceneData->directionalLights.size());
+		shader->setUniformInt("u_n_pLights", (int)s_sceneData->pointLights.size());
+		shader->setUniformInt("u_n_sLights", (int)s_sceneData->spotLights.size());
 
-		if(s_sceneData->directionalLights.size() > 0)
-			shader->setUniformInt("dir", 1);
-		else
+		shader->setUniformVec3("cameraPos", s_sceneData->cameraPosition);
+
+		
+
+		for (int i = 0; i < 4; i++)
 		{
-			shader->setUniformInt("dir", 0);
-			shader->setUniformVec3("lightPos", s_sceneData->pointLights[0].position);
+			if (i < s_sceneData->directionalLights.size())
+			{
+				shader->setUniformInt("u_dirLights[" + std::to_string(i) + "].depthMap", i + 4);
+				shader->setUniformVec4("u_dirLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->directionalLights[i].color, 1.0));
+				shader->setUniformVec3("u_dirLights[" + std::to_string(i) + "].direction", s_sceneData->directionalLights[i].direction);
+				shader->setUniformMat4("u_dirLights[" + std::to_string(i) + "].lightSpaceMatrix", s_sceneData->directionalLights[i].getSpaceMatrix());
+			}
+			else
+			{
+				shader->setUniformInt("u_dirLights[" + std::to_string(i) + "].depthMap", i + 4);
+				//Note: Skybox texture(Cubemap) is currently bound to tex unit 0 so Sampler2D depthMap cannot have value 0
+				//Possible fix: unbind texture after use
+			}
 		}
-		shader->setUniformFloat("far_plane", 25.0f);
-
-		shader->setUniformMat4("u_transform", transform);
+		for (int i = 0; i < s_sceneData->pointLights.size(); i++)
+		{
+			shader->setUniformInt("u_pointLights[" + std::to_string(i) + "].depthCubemap", i + 8);
+			shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
+			shader->setUniformVec3("u_pointLights[" + std::to_string(i) + "].position", s_sceneData->pointLights[i].position);
+			shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].far_plane", s_sceneData->pointLights[i].range);
+		}
+		for (int i = 0; i < s_sceneData->spotLights.size(); i++)
+		{
+			shader->setUniformInt("u_spotLights[" + std::to_string(i) + "].depthCubemap", i + 12);
+			shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->spotLights[i].color, 1.0));
+			shader->setUniformVec3("u_spotLights[" + std::to_string(i) + "].position", s_sceneData->spotLights[i].position);
+			shader->setUniformVec3("u_spotLights[" + std::to_string(i) + "].direction", s_sceneData->spotLights[i].direction);
+			shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].far_plane", s_sceneData->spotLights[i].range);
+			shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", s_sceneData->spotLights[i].innerCutoff);
+			shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", s_sceneData->spotLights[i].outerCutoff);
+		}
 
 		RenderCommand::drawIndexed(vao);
 
@@ -146,7 +164,26 @@ namespace Light
             shader->setUniformMat4("shadowMatrices[" + std::to_string(i) + "]", light.getSpaceMatrices()[i]);
 
 		shader->setUniformMat4("u_transform", transform);
-		shader->setUniformFloat("far_plane", 25.0f);
+		shader->setUniformFloat("far_plane", light.range);
+		shader->setUniformVec3("lightPos", light.position);
+
+		RenderCommand::drawIndexed(vao);
+
+		shader->unbind();
+
+		vao->unbind();
+	}
+	void Renderer::submitForCubeShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, SpotLight light, glm::mat4 transform)
+	{
+		vao->bind();
+
+		shader->bind();
+
+		for (unsigned int i = 0; i < 6; ++i)
+			shader->setUniformMat4("shadowMatrices[" + std::to_string(i) + "]", light.getSpaceMatrices()[i]);
+
+		shader->setUniformMat4("u_transform", transform);
+		shader->setUniformFloat("far_plane", light.range);
 		shader->setUniformVec3("lightPos", light.position);
 
 		RenderCommand::drawIndexed(vao);

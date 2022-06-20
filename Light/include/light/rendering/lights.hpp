@@ -55,6 +55,25 @@ namespace Light
 		float innerCutoff;
 		float outerCutoff;
 		float range;
+
+		std::vector<glm::mat4> getSpaceMatrices() const
+		{
+			glm::mat4 shadowProj = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 25.0f);
+			std::vector<glm::mat4> shadowTransforms;
+			shadowTransforms.push_back(shadowProj *
+				glm::lookAt(position, position + glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
+			shadowTransforms.push_back(shadowProj *
+				glm::lookAt(position, position + glm::vec3(-1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
+			shadowTransforms.push_back(shadowProj *
+				glm::lookAt(position, position + glm::vec3(0.0, 1.0, 0.0), glm::vec3(0.0, 0.0, 1.0)));
+			shadowTransforms.push_back(shadowProj *
+				glm::lookAt(position, position + glm::vec3(0.0, -1.0, 0.0), glm::vec3(0.0, 0.0, -1.0)));
+			shadowTransforms.push_back(shadowProj *
+				glm::lookAt(position, position + glm::vec3(0.0, 0.0, 1.0), glm::vec3(0.0, -1.0, 0.0)));
+			shadowTransforms.push_back(shadowProj *
+				glm::lookAt(position, position + glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, -1.0, 0.0)));
+			return shadowTransforms;
+		}
 	};
 
 	struct DirectionalLight
