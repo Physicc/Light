@@ -76,7 +76,7 @@ namespace Light
 
 		
 
-		for (int i = 0; i < 4; i++)
+		for (unsigned int i = 0; i < 4; i++)
 		{
 			if (i < s_sceneData->directionalLights.size())
 			{
@@ -92,14 +92,14 @@ namespace Light
 				//Possible fix: unbind texture after use
 			}
 		}
-		for (int i = 0; i < s_sceneData->pointLights.size(); i++)
+		for (unsigned int i = 0; i < s_sceneData->pointLights.size(); i++)
 		{
 			shader->setUniformInt("u_pointLights[" + std::to_string(i) + "].depthCubemap", i + 8);
 			shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
 			shader->setUniformVec3("u_pointLights[" + std::to_string(i) + "].position", s_sceneData->pointLights[i].position);
 			shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].far_plane", s_sceneData->pointLights[i].range);
 		}
-		for (int i = 0; i < s_sceneData->spotLights.size(); i++)
+		for (unsigned int i = 0; i < s_sceneData->spotLights.size(); i++)
 		{
 			shader->setUniformInt("u_spotLights[" + std::to_string(i) + "].depthCubemap", i + 12);
 			shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->spotLights[i].color, 1.0));
