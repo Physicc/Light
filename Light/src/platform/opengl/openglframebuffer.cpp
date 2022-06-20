@@ -90,11 +90,17 @@ namespace Light
 		}
 
 		if (spec.type == FramebufferTextureType::TWO_D)
+		{
 			invalidate2D();
+		}
 		else if (spec.type == FramebufferTextureType::CUBEMAP)
+		{
 			invalidateCubemap();
+		}
 		else
+		{
 			LIGHT_CORE_ERROR("Unrecognized texture type");
+		}
 	}
 
 	OpenGLFramebuffer::~OpenGLFramebuffer()
@@ -286,8 +292,10 @@ namespace Light
 		if(m_colorAttachmentSpecs.size() > 0)
 		{
 			GLenum textureTarget = GL_TEXTURE_CUBE_MAP;
-			if(m_spec.samples != 1)
+			if (m_spec.samples != 1)
+			{
 				LIGHT_CORE_WARN("multisampling not supported for cubemaps");
+			}
 			m_colorAttachmentIds.resize(m_colorAttachmentSpecs.size());
 			glGenTextures((GLsizei)m_colorAttachmentSpecs.size(), m_colorAttachmentIds.data());
 
@@ -342,7 +350,9 @@ namespace Light
 		{
 			GLenum textureTarget = GL_TEXTURE_CUBE_MAP;
 			if (m_spec.samples != 1)
+			{
 				LIGHT_CORE_WARN("multisampling not supported for cubemaps");
+			}
 			glGenTextures(1, &m_depthAttachmentId);
 			glBindTexture(textureTarget, m_depthAttachmentId);
 
@@ -485,9 +495,13 @@ namespace Light
 			}
 		}
 		else if (m_spec.type == FramebufferTextureType::CUBEMAP)
+		{
 			glBindTexture(GL_TEXTURE_CUBE_MAP, m_colorAttachmentIds[attachmentIndex]);
+		}
 		else
+		{
 			LIGHT_CORE_ERROR("Unrecognized texture type");
+		}
 	}
 
 	void OpenGLFramebuffer::bindDepthAttachmentTexture(uint32_t slot)
@@ -508,8 +522,12 @@ namespace Light
 			}
 		}
 		else if (m_spec.type == FramebufferTextureType::CUBEMAP)
+		{
 			glBindTexture(GL_TEXTURE_CUBE_MAP, m_depthAttachmentId);
+		}
 		else
+		{
 			LIGHT_CORE_ERROR("Unrecognized texture type");
+		}
 	}
 }

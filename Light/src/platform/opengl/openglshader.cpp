@@ -160,7 +160,6 @@ namespace Light
 		glAttachShader(m_rendererId, shaderId);
 
 		shaderCodeCstr = fragmentCode.c_str();
-		shaderId;
 		shaderId = glCreateShader(GL_FRAGMENT_SHADER);
 		shaderIds.push_back(shaderId);
 		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
@@ -245,7 +244,6 @@ namespace Light
 		glAttachShader(m_rendererId, shaderId);
 
 		shaderCodeCstr = fragmentCode.c_str();
-		shaderId;
 		shaderId = glCreateShader(GL_FRAGMENT_SHADER);
 		shaderIds.push_back(shaderId);
 		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
@@ -254,7 +252,6 @@ namespace Light
 		glAttachShader(m_rendererId, shaderId);
 
 		shaderCodeCstr = geometryCode.c_str();
-		shaderId;
 		shaderId = glCreateShader(GL_GEOMETRY_SHADER);
 		shaderIds.push_back(shaderId);
 		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
