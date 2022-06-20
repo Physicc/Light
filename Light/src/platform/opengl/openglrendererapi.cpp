@@ -42,6 +42,11 @@ namespace Light
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
+	
+	void OpenGLRendererAPI::clearDepthBit()
+	{
+		glClear(GL_DEPTH_BUFFER_BIT);
+	}
 
 	static GLenum BlendFactor2OpenGLType(BlendFactor factor)
 	{

@@ -13,6 +13,7 @@ namespace Light
 		Mesh(const std::vector<glm::vec3> &vertices,
 			const std::vector<glm::vec4> &colors,
 			const std::vector<glm::vec3> &normals,
+			const std::vector<glm::vec2> &texcoords,
 			const std::vector<unsigned int> &indices);
 		~Mesh() = default;
 
@@ -22,6 +23,7 @@ namespace Light
 		std::vector<glm::vec3> m_vertices;
 		std::vector<glm::vec4> m_colors;
 		std::vector<glm::vec3> m_normals;
+		std::vector<glm::vec2> m_texcoords;
 		std::vector<unsigned int> m_indices;
 
 		std::shared_ptr<VertexArray> m_vao;
@@ -35,6 +37,7 @@ namespace Light
 			const std::vector<glm::vec3> &vertices,
 			const std::vector<glm::vec4> &colors,
 			const std::vector<glm::vec3> &normals,
+			const std::vector<glm::vec2> &texcoords,
 			const std::vector<unsigned int> &indices);
 
 		std::shared_ptr<Mesh> get(const std::string &name);

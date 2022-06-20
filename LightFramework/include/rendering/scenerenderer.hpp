@@ -27,7 +27,12 @@ namespace Light {
 		SceneRenderer();
 		~SceneRenderer() {};
 
-		void renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera);
+		void renderEditor(std::shared_ptr<Scene> scene, EditorCamera& camera);
+
+		void renderShadows(std::shared_ptr<Scene> scene, DirectionalLight light, int index);
+		void renderShadows(std::shared_ptr<Scene> scene, PointLight light, int index);
+		void renderShadows(std::shared_ptr<Scene> scene, SpotLight light, int index);
+
 		void renderOutline(std::shared_ptr<Scene> scene, Entity entity);
 
 		void onViewportResize(int width, int height);
@@ -43,12 +48,18 @@ namespace Light {
 		std::shared_ptr<Light::Shader> m_skybox_shader;
 		std::shared_ptr<Light::Shader> m_outline_shader;
 		std::shared_ptr<Light::Shader> m_outline_temp_shader;
+		std::shared_ptr<Light::Shader> m_depth_shader;
+		std::shared_ptr<Light::Shader> m_depth_cube_shader;
 		std::shared_ptr<Light::VertexArray> m_skybox_mesh;
 		std::shared_ptr<Light::VertexArray> m_outline_mesh;
 
 		std::shared_ptr<Light::Framebuffer> m_framebuffer;
+		std::shared_ptr<Light::Framebuffer> m_depthFramebuffer[4];
+		std::shared_ptr<Light::Framebuffer> m_pointDepthCubeFramebuffer[4];
+		std::shared_ptr<Light::Framebuffer> m_spotDepthCubeFramebuffer[4];
 		std::shared_ptr<Light::Framebuffer> m_outlineFramebuffer;
 		std::shared_ptr<Light::Framebuffer> m_tempFramebuffer;
+
 		//TODO: #63 Directly use texture instead of a dummy framebuffer
 	};
 }

@@ -14,6 +14,8 @@ namespace Light
 		virtual const std::string& getName() const = 0;
 
 		static std::shared_ptr<Shader> create(const char* shaderPath);
+		static std::shared_ptr<Shader> create(const char* VertexShaderPath, const char* FragmentShaderPath);
+		static std::shared_ptr<Shader> create(const char* VertexShaderPath, const char* FragmentShaderPath, const char* GeometryShaderPath);
 
 		virtual void bind() = 0;
 		virtual void unbind() = 0;

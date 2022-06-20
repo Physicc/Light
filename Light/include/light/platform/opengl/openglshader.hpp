@@ -12,6 +12,8 @@ namespace Light
 	{
 	public:
 		OpenGLShader(const char* shaderPath);
+		OpenGLShader(const char* VertexShaderPath, const char* FragmentShaderPath);
+		OpenGLShader(const char* VertexShaderPath, const char* FragmentShaderPath, const char* GeometryShaderPath);
 		~OpenGLShader();
 
 		void bind() override;

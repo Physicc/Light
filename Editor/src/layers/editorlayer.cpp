@@ -71,13 +71,13 @@ namespace Light
 		m_scene = std::make_shared<Scene>();
 
 		auto cube = m_scene->addEntity("Cube");
-		cube.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+		cube.addComponent<MeshRendererComponent>("assets/shaders/phong_vertex.glsl", "assets/shaders/phong_fragment.glsl");
 
 		auto floor = m_scene->addEntity("Floor");
 		auto& floor_transform = floor.getComponent<TransformComponent>();
 		floor_transform.position = glm::vec3(0, -1, 0);
 		floor_transform.scale = glm::vec3(2, 0.1, 2);
-		floor.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+		floor.addComponent<MeshRendererComponent>("assets/shaders/phong_vertex.glsl", "assets/shaders/phong_fragment.glsl");
 
 		auto light = m_scene->addEntity("Light");
 		auto& light_transform = light.getComponent<TransformComponent>();
@@ -195,7 +195,7 @@ namespace Light
 
 	void EditorLayer::addDefaultMeshes()
 	{
-		m_meshes->add("None", std::vector<glm::vec3>(), std::vector<glm::vec4>(), std::vector<glm::vec3>(), std::vector<unsigned int>());
+		m_meshes->add("None", std::vector<glm::vec3>(), std::vector<glm::vec4>(), std::vector<glm::vec3>(), std::vector<glm::vec2>(), std::vector<unsigned int>());
 
 		std::vector<glm::vec3> vertices = {
 			glm::vec3(-0.5f, -0.5f, 0.5f),
@@ -263,6 +263,38 @@ namespace Light
 			glm::vec3(0.0f, 0.0f, -1.0f)
 		};
 
+		std::vector<glm::vec2> texcoords = {
+			glm::vec2(0.0f, 0.0f),
+			glm::vec2(1.0f, 0.0f),
+			glm::vec2(1.0f, 1.0f),
+			glm::vec2(0.0f, 1.0f),
+
+			glm::vec2(0.0f, 1.0f),
+			glm::vec2(1.0f, 1.0f),
+			glm::vec2(1.0f, 0.0f),
+			glm::vec2(0.0f, 0.0f),
+
+			glm::vec2(0.0f, 1.0f),
+			glm::vec2(0.0f, 0.0f),
+			glm::vec2(1.0f, 0.0f),
+			glm::vec2(1.0f, 1.0f),
+
+			glm::vec2(0.0f, 1.0f),
+			glm::vec2(1.0f, 1.0f),
+			glm::vec2(1.0f, 0.0f),
+			glm::vec2(0.0f, 0.0f),
+
+			glm::vec2(0.0f, 1.0f),
+			glm::vec2(0.0f, 0.0f),
+			glm::vec2(1.0f, 0.0f),
+			glm::vec2(1.0f, 1.0f),
+
+			glm::vec2(0.0f, 0.0f),
+			glm::vec2(0.0f, 1.0f),
+			glm::vec2(1.0f, 1.0f),
+			glm::vec2(1.0f, 0.0f),
+		};
+
 		std::vector<unsigned int> indices = {
 			0, 1, 2, 2, 3, 0,
 			4, 5, 6, 6, 7, 4,
@@ -272,7 +304,7 @@ namespace Light
 			20, 21, 22, 22, 23, 20
 		};
 
-		m_meshes->add("Cube", vertices, color, normals, indices);
+		m_meshes->add("Cube", vertices, color, normals, texcoords, indices);
 	}
 
 }

@@ -22,6 +22,15 @@ namespace Light
 		glm::mat4 view = glm::mat4(glm::mat3(camera_view));
 		s_sceneData->viewProjectionSkyboxMatrix = camera.getProjectionMatrix() * view;
 		s_sceneData->cameraPosition = -glm::vec3(camera_view[3] * view);
+	}
+
+	void Renderer::beginScene(glm::mat4 viewProjectionMatrix, glm::vec3 position)
+	{
+		s_sceneData->viewProjectionMatrix = viewProjectionMatrix;
+
+		// glm::mat4 view = glm::mat4(glm::mat3(camera_view));
+		// s_sceneData->viewProjectionSkyboxMatrix = camera.getProjectionMatrix() * view;
+		s_sceneData->cameraPosition = position;
 		
 	}
 
@@ -56,62 +65,50 @@ namespace Light
 		shader->bind();
 
 		shader->setUniformMat4("u_viewProjectionMatrix", s_sceneData->viewProjectionMatrix);
+		shader->setUniformMat4("u_transform", transform);
 
-		for (size_t i = 0; i < 4; i++)
-		{
-			if (i < s_sceneData->pointLights.size())
-			{
-				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->pointLights[i].position, 1.0));
-				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
-				shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].range", s_sceneData->pointLights[i].range);
-			} else
-			{
-				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
-				shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
-				shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].range", 0.001f);
-			}
-		}
+		shader->setUniformInt("u_id", id);
+		shader->setUniformInt("u_n_dLights", (int)s_sceneData->directionalLights.size());
+		shader->setUniformInt("u_n_pLights", (int)s_sceneData->pointLights.size());
+		shader->setUniformInt("u_n_sLights", (int)s_sceneData->spotLights.size());
 
-		for (size_t i = 0; i < 4; i++)
-		{
-			if (i < s_sceneData->spotLights.size())
-			{
-				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].position", glm::vec4(s_sceneData->spotLights[i].position, 1.0));
-				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->spotLights[i].color, 1.0));
-				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].direction", glm::vec4(s_sceneData->spotLights[i].direction, 1.0));
-				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", s_sceneData->spotLights[i].innerCutoff);
-				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", s_sceneData->spotLights[i].outerCutoff);
-				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].range", s_sceneData->spotLights[i].range);
-			} else
-			{
-				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].position", glm::vec4(0.0, 0.0, 0.0, 1.0));
-				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
-				shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].direction", glm::vec4(0.0, 0.0, 0.0, 1.0));
-				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", 0.0);
-				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", 0.0);
-				shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].range", 0.001f);
-			}
-		}
+		shader->setUniformVec3("cameraPos", s_sceneData->cameraPosition);
 
-		for (size_t i = 0; i < 4; i++)
+		
+
+		for (int i = 0; i < 4; i++)
 		{
 			if (i < s_sceneData->directionalLights.size())
 			{
-				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].direction", glm::vec4(s_sceneData->directionalLights[i].direction, 0.0));
-				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->directionalLights[i].color, 1.0));
-			} else
+				shader->setUniformInt("u_dirLights[" + std::to_string(i) + "].depthMap", i + 4);
+				shader->setUniformVec4("u_dirLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->directionalLights[i].color, 1.0));
+				shader->setUniformVec3("u_dirLights[" + std::to_string(i) + "].direction", s_sceneData->directionalLights[i].direction);
+				shader->setUniformMat4("u_dirLights[" + std::to_string(i) + "].lightSpaceMatrix", s_sceneData->directionalLights[i].getSpaceMatrix());
+			}
+			else
 			{
-				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].direction", glm::vec4(0.0, 0.0, 0.0, 0.0));
-				shader->setUniformVec4("u_directionalLights[" + std::to_string(i) + "].color", glm::vec4(0.0, 0.0, 0.0, 1.0));
+				shader->setUniformInt("u_dirLights[" + std::to_string(i) + "].depthMap", i + 4);
+				//Note: Skybox texture(Cubemap) is currently bound to tex unit 0 so Sampler2D depthMap cannot have value 0
+				//Possible fix: unbind texture after use
 			}
 		}
-
-		shader->setUniformVec3("cameraPosition", s_sceneData->cameraPosition);
-		shader->setUniformInt("u_numPointLights", (int)s_sceneData->pointLights.size());
-		shader->setUniformInt("u_id", id);
-
-		shader->setUniformMat4("u_transform", transform);
-		shader->setUniformMat3("u_normal", glm::mat3(glm::transpose(glm::inverse(transform))));
+		for (int i = 0; i < s_sceneData->pointLights.size(); i++)
+		{
+			shader->setUniformInt("u_pointLights[" + std::to_string(i) + "].depthCubemap", i + 8);
+			shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
+			shader->setUniformVec3("u_pointLights[" + std::to_string(i) + "].position", s_sceneData->pointLights[i].position);
+			shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].far_plane", s_sceneData->pointLights[i].range);
+		}
+		for (int i = 0; i < s_sceneData->spotLights.size(); i++)
+		{
+			shader->setUniformInt("u_spotLights[" + std::to_string(i) + "].depthCubemap", i + 12);
+			shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->spotLights[i].color, 1.0));
+			shader->setUniformVec3("u_spotLights[" + std::to_string(i) + "].position", s_sceneData->spotLights[i].position);
+			shader->setUniformVec3("u_spotLights[" + std::to_string(i) + "].direction", s_sceneData->spotLights[i].direction);
+			shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].far_plane", s_sceneData->spotLights[i].range);
+			shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].innerCutoff", s_sceneData->spotLights[i].innerCutoff);
+			shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].outerCutoff", s_sceneData->spotLights[i].outerCutoff);
+		}
 
 		RenderCommand::drawIndexed(vao);
 
@@ -140,4 +137,59 @@ namespace Light
 		vao->unbind();
 	}
 
+	void Renderer::submitForDirectionalShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, glm::mat4 lightSpaceMatrix, glm::mat4 transform)
+	{
+		vao->bind();
+
+		shader->bind();
+		
+		// (void)lightSpaceMatrix;
+		shader->setUniformMat4("u_lightSpaceMatrix", lightSpaceMatrix);
+
+		shader->setUniformMat4("u_transform", transform);
+
+		RenderCommand::drawIndexed(vao);
+
+		shader->unbind();
+
+		vao->unbind();
+	}
+	void Renderer::submitForCubeShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, PointLight light, glm::mat4 transform)
+	{
+		vao->bind();
+
+		shader->bind();
+		
+		for (unsigned int i = 0; i < 6; ++i)
+            shader->setUniformMat4("shadowMatrices[" + std::to_string(i) + "]", light.getSpaceMatrices()[i]);
+
+		shader->setUniformMat4("u_transform", transform);
+		shader->setUniformFloat("far_plane", light.range);
+		shader->setUniformVec3("lightPos", light.position);
+
+		RenderCommand::drawIndexed(vao);
+
+		shader->unbind();
+
+		vao->unbind();
+	}
+	void Renderer::submitForCubeShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vao, SpotLight light, glm::mat4 transform)
+	{
+		vao->bind();
+
+		shader->bind();
+
+		for (unsigned int i = 0; i < 6; ++i)
+			shader->setUniformMat4("shadowMatrices[" + std::to_string(i) + "]", light.getSpaceMatrices()[i]);
+
+		shader->setUniformMat4("u_transform", transform);
+		shader->setUniformFloat("far_plane", light.range);
+		shader->setUniformVec3("lightPos", light.position);
+
+		RenderCommand::drawIndexed(vao);
+
+		shader->unbind();
+
+		vao->unbind();
+	}
 }

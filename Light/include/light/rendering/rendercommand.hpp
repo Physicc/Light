@@ -9,7 +9,6 @@
 
 namespace Light
 {
-
 	class RenderCommand
 	{
 	public:
@@ -23,6 +22,7 @@ namespace Light
 
 		inline static void drawIndexed(const std::shared_ptr<VertexArray>& vao) { s_rendererApi->drawIndexed(vao); }
 		inline static void clear() { s_rendererApi->clear(); }
+		inline static void clearDepthBit() { s_rendererApi->clearDepthBit(); }
 		inline static void setClearColor(glm::vec4 color) { s_rendererApi->setClearColor(color); }
 		inline static void setBlendFunc(BlendFactor src, BlendFactor dst) { s_rendererApi->setBlendFunc(src, dst); }
 		inline static void setBlendFuncSeperate(BlendFactor srcRGB, BlendFactor dstRGB, BlendFactor srcAlpha, BlendFactor dstAlpha)

@@ -9,13 +9,17 @@ namespace Light
 {
 	static GLenum findShaderType(std::string typeStr)
 	{
-		if(typeStr == " fragment")
+		if (typeStr == " fragment")
 		{
 			return GL_FRAGMENT_SHADER;
 		}
-		else if(typeStr == " vertex")
+		else if (typeStr == " vertex")
 		{
 			return GL_VERTEX_SHADER;
+		}
+		else if (typeStr == " geometry")
+		{
+			return GL_GEOMETRY_SHADER;
 		}
 
 		LIGHT_CORE_ERROR("Shader type not supported!");
@@ -27,6 +31,16 @@ namespace Light
 		return std::make_shared<OpenGLShader>(shaderPath);
 	}
 
+	std::shared_ptr<Shader> Shader::create(const char* vertexShaderPath, const char* fragmentShaderPath)
+	{
+		return std::make_shared<OpenGLShader>(vertexShaderPath, fragmentShaderPath);
+	}
+
+	std::shared_ptr<Shader> Shader::create(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometryShaderPath)
+	{
+		return std::make_shared<OpenGLShader>(vertexShaderPath, fragmentShaderPath, geometryShaderPath);
+	}
+
 	OpenGLShader::OpenGLShader(const char* shaderPath)
 	{
 		std::string pathStr(shaderPath);
@@ -34,7 +48,7 @@ namespace Light
 		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
 		auto lastDot = pathStr.find_last_of(".");
 		lastDot = lastDot == std::string::npos ? pathStr.length() - 1 : lastDot;
-        m_name = pathStr.substr(lastSlash, lastDot - lastSlash);
+		m_name = pathStr.substr(lastSlash, lastDot - lastSlash);
 
 		std::string code;
 		std::ifstream shaderFile;
@@ -64,12 +78,12 @@ namespace Light
 		{
 			LIGHT_CORE_ERROR("Cannot find any shaders");
 		}
-		while(true)
+		while (true)
 		{
 			size_t eol = code.find_first_of(eolToken, i);
 			GLenum shaderType = findShaderType(code.substr(i + typeToken.length(), eol - i - typeToken.length()));
 			auto j = code.find(typeToken, eol);
-			std::string shaderCode = code.substr(eol + 1,j - eol - 1);
+			std::string shaderCode = code.substr(eol + 1, j - eol - 1);
 			const char* shaderCodeCstr = shaderCode.c_str();
 			i = j;
 			uint32_t shaderId;
@@ -79,14 +93,179 @@ namespace Light
 			glCompileShader(shaderId);
 			checkCompileErrors(shaderId, shaderType);
 			glAttachShader(m_rendererId, shaderId);
-			if(j == std::string::npos)
+			if (j == std::string::npos)
 				break;
 		}
 
 		glLinkProgram(m_rendererId);
 		checkCompileErrors(m_rendererId, GL_NONE);
 
-		for(auto id : shaderIds)
+		for (auto id : shaderIds)
+		{
+			glDeleteShader(id);
+		}
+	}
+	
+	OpenGLShader::OpenGLShader(const char* vertexShaderPath, const char* fragmentShaderPath)
+	{
+		std::string vertexPathStr(vertexShaderPath);
+		auto lastSlash = vertexPathStr.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = vertexPathStr.find_last_of(".");
+		lastDot = lastDot == std::string::npos ? vertexPathStr.length() - 1 : lastDot;
+		m_name = vertexPathStr.substr(lastSlash, lastDot - lastSlash);
+
+		std::string vertexCode;
+		std::string fragmentCode;
+		std::ifstream shaderFile;
+		shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		try
+		{
+			shaderFile.open(vertexShaderPath);
+			std::stringstream sstream;
+			sstream << shaderFile.rdbuf();
+			shaderFile.close();
+			vertexCode = sstream.str();
+		}
+		catch (std::ifstream::failure& e)
+		{
+			(void)e; // Supress warning about unused variable in release mode (logs don't get compiled in release)
+			LIGHT_CORE_ERROR("Shader file read failure:" + e.what());
+		}
+		try
+		{
+			shaderFile.open(fragmentShaderPath);
+			std::stringstream sstream;
+			sstream << shaderFile.rdbuf();
+			shaderFile.close();
+			fragmentCode = sstream.str();
+		}
+		catch (std::ifstream::failure& e)
+		{
+			(void)e; // Supress warning about unused variable in release mode (logs don't get compiled in release)
+			LIGHT_CORE_ERROR("Shader file read failure:" + e.what());
+		}
+
+		m_rendererId = glCreateProgram();
+
+		std::vector<uint32_t> shaderIds;
+
+		const char* shaderCodeCstr = vertexCode.c_str();
+		uint32_t shaderId;
+		shaderId = glCreateShader(GL_VERTEX_SHADER);
+		shaderIds.push_back(shaderId);
+		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
+		glCompileShader(shaderId);
+		checkCompileErrors(shaderId, GL_VERTEX_SHADER);
+		glAttachShader(m_rendererId, shaderId);
+
+		shaderCodeCstr = fragmentCode.c_str();
+		shaderId;
+		shaderId = glCreateShader(GL_FRAGMENT_SHADER);
+		shaderIds.push_back(shaderId);
+		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
+		glCompileShader(shaderId);
+		checkCompileErrors(shaderId, GL_FRAGMENT_SHADER);
+		glAttachShader(m_rendererId, shaderId);
+
+		glLinkProgram(m_rendererId);
+		checkCompileErrors(m_rendererId, GL_NONE);
+
+		for (auto id : shaderIds)
+		{
+			glDeleteShader(id);
+		}
+	}
+
+	OpenGLShader::OpenGLShader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometryShaderPath)
+	{
+		std::string vertexPathStr(vertexShaderPath);
+		auto lastSlash = vertexPathStr.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = vertexPathStr.find_last_of(".");
+		lastDot = lastDot == std::string::npos ? vertexPathStr.length() - 1 : lastDot;
+		m_name = vertexPathStr.substr(lastSlash, lastDot - lastSlash);
+
+		std::string vertexCode;
+		std::string fragmentCode;
+		std::string geometryCode;
+		std::ifstream shaderFile;
+		shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		try
+		{
+			shaderFile.open(vertexShaderPath);
+			std::stringstream sstream;
+			sstream << shaderFile.rdbuf();
+			shaderFile.close();
+			vertexCode = sstream.str();
+		}
+		catch (std::ifstream::failure& e)
+		{
+			(void)e; // Supress warning about unused variable in release mode (logs don't get compiled in release)
+			LIGHT_CORE_ERROR("Shader file read failure:" + e.what());
+		}
+		try
+		{
+			shaderFile.open(fragmentShaderPath);
+			std::stringstream sstream;
+			sstream << shaderFile.rdbuf();
+			shaderFile.close();
+			fragmentCode = sstream.str();
+		}
+		catch (std::ifstream::failure& e)
+		{
+			(void)e; // Supress warning about unused variable in release mode (logs don't get compiled in release)
+			LIGHT_CORE_ERROR("Shader file read failure:" + e.what());
+		}
+		try
+		{
+			shaderFile.open(geometryShaderPath);
+			std::stringstream sstream;
+			sstream << shaderFile.rdbuf();
+			shaderFile.close();
+			geometryCode = sstream.str();
+		}
+		catch (std::ifstream::failure& e)
+		{
+			(void)e; // Supress warning about unused variable in release mode (logs don't get compiled in release)
+			LIGHT_CORE_ERROR("Shader file read failure:" + e.what());
+		}
+
+		m_rendererId = glCreateProgram();
+
+		std::vector<uint32_t> shaderIds;
+
+		const char* shaderCodeCstr = vertexCode.c_str();
+		uint32_t shaderId;
+		shaderId = glCreateShader(GL_VERTEX_SHADER);
+		shaderIds.push_back(shaderId);
+		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
+		glCompileShader(shaderId);
+		checkCompileErrors(shaderId, GL_VERTEX_SHADER);
+		glAttachShader(m_rendererId, shaderId);
+
+		shaderCodeCstr = fragmentCode.c_str();
+		shaderId;
+		shaderId = glCreateShader(GL_FRAGMENT_SHADER);
+		shaderIds.push_back(shaderId);
+		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
+		glCompileShader(shaderId);
+		checkCompileErrors(shaderId, GL_FRAGMENT_SHADER);
+		glAttachShader(m_rendererId, shaderId);
+
+		shaderCodeCstr = geometryCode.c_str();
+		shaderId;
+		shaderId = glCreateShader(GL_GEOMETRY_SHADER);
+		shaderIds.push_back(shaderId);
+		glShaderSource(shaderId, 1, &shaderCodeCstr, NULL);
+		glCompileShader(shaderId);
+		checkCompileErrors(shaderId, GL_GEOMETRY_SHADER);
+		glAttachShader(m_rendererId, shaderId);
+
+		glLinkProgram(m_rendererId);
+		checkCompileErrors(m_rendererId, GL_NONE);
+
+		for (auto id : shaderIds)
 		{
 			glDeleteShader(id);
 		}
@@ -114,13 +293,25 @@ namespace Light
 	{
 		int success;
 		char infoLog[1024];
-		if (shaderType == GL_VERTEX_SHADER || shaderType == GL_FRAGMENT_SHADER)
+		if (shaderType == GL_VERTEX_SHADER || shaderType == GL_FRAGMENT_SHADER || shaderType == GL_GEOMETRY_SHADER)
 		{
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-				std::string type = shaderType == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT";
+				std::string type;
+				switch(shaderType)
+				{
+				case GL_VERTEX_SHADER:
+					type = "VERTEX";
+					break;
+				case GL_FRAGMENT_SHADER:
+					type = "FRAGMENT";
+					break;
+				case GL_GEOMETRY_SHADER:
+					type = "GEOMETRY";
+					break;
+				}
 				LIGHT_CORE_ERROR("Shader compilation error of type {}: \n{}", type, infoLog);
 				return;
 			}
