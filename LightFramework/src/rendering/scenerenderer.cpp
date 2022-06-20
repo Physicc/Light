@@ -250,11 +250,11 @@ namespace Light {
 		LIGHT_CORE_ASSERT(pointLights.size() <= 4, "Only 4 lights of each type supported now");
 		LIGHT_CORE_ASSERT(spotLights.size() <= 4, "Only 4 lights of each type supported now");
 
-		for (int i = 0; i < directionalLights.size(); i++)
+		for (unsigned int i = 0; i < directionalLights.size(); i++)
 			renderShadows(scene, directionalLights[i], i);
-		for (int i = 0; i < pointLights.size(); i++)
+		for (unsigned int i = 0; i < pointLights.size(); i++)
 			renderShadows(scene, pointLights[i], i);
-		for (int i = 0; i < spotLights.size(); i++)
+		for (unsigned int i = 0; i < spotLights.size(); i++)
 			renderShadows(scene, spotLights[i], i);
 
 		// Render scene
