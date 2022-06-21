@@ -97,7 +97,7 @@ vec4 calculateShading(DirectionalLight light, vec3 viewDir)
 
 
 	//specular
-	vec3 halfwayDir = normalize(fragToLightDir + viewDir);
+	vec3 halfwayDir = normalize(fragToLightDir - viewDir);
 	//TODO: make sure it is facing light
 	float spec = pow(max(dot(halfwayDir, v_normal), 0.0), 32);
 	vec4 specular = spec * light.emission_color;
@@ -110,8 +110,8 @@ vec4 calculateShading(DirectionalLight light, vec3 viewDir)
 
 vec4 calculateShading(PointLight light, vec3 viewDir)
 {
-	float distance = length(light.position.xyz - v_worldPos);
-	vec3 lightDir = (light.position.xyz - v_worldPos) / distance;
+	float distance = length(light.position - v_worldPos);
+	vec3 lightDir = (light.position - v_worldPos) / distance;
 
 	float attentuation = clamp(1 - (distance * distance)/(light.far_plane * light.far_plane), 0.0 , 1.0);
 
@@ -119,8 +119,8 @@ vec4 calculateShading(PointLight light, vec3 viewDir)
 	vec4 diffuse = diff * light.emission_color;
 
 	//specular
-	vec3 halfwayDir = normalize(lightDir + viewDir);
-	float spec = pow(max(dot(v_normal, viewDir), 0.0), 64);
+	vec3 halfwayDir = normalize(lightDir - viewDir);
+	float spec = pow(max(dot(v_normal, halfwayDir), 0.0), 64);
 	vec4 specular = spec * light.emission_color;
 	diffuse = diffuse * attentuation;
 	specular = specular * attentuation;
@@ -144,7 +144,7 @@ vec4 calculateShading(SpotLight light, vec3 viewDir)
 		float intensity = clamp((theta - light.outerCutoff) / (light.innerCutoff - light.outerCutoff), 0.0, 1.0);
 		float diff = max(dot(v_normal, lightDir), 0.0);
 		vec4 diffuse = diff * light.emission_color;
-		vec3 halfwayDir = normalize(lightDir + viewDir);
+		vec3 halfwayDir = normalize(lightDir - viewDir);
 		float spec = pow(max(dot(halfwayDir, v_normal), 0.0), 64);
 		vec4 specular = spec * light.emission_color;
 		float shadow = calculateShadow(light);
@@ -175,7 +175,7 @@ void main()
 {	
 //	color = vec4(texture(diffuseTexture, v_texCoord));
 	color = vec4(1.0, 1.0, 1.0, 1.0);
-	vec3 viewDir = v_worldPos - cameraPos;
+	vec3 viewDir = normalize(v_worldPos - cameraPos);
 
 	vec4 lighting = vec4(0.0, 0.0, 0.0, 0.0);
 	for(int i=0; i<u_n_dLights; i++)
