@@ -81,7 +81,7 @@ namespace Light
 			if (i < s_sceneData->directionalLights.size())
 			{
 				shader->setUniformInt("u_dirLights[" + std::to_string(i) + "].depthMap", i + 4);
-				shader->setUniformVec4("u_dirLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->directionalLights[i].color, 1.0));
+				shader->setUniformVec4("u_dirLights[" + std::to_string(i) + "].emission_color", glm::vec4(s_sceneData->directionalLights[i].color, 1.0));
 				shader->setUniformVec3("u_dirLights[" + std::to_string(i) + "].direction", s_sceneData->directionalLights[i].direction);
 				shader->setUniformMat4("u_dirLights[" + std::to_string(i) + "].lightSpaceMatrix", s_sceneData->directionalLights[i].getSpaceMatrix());
 			}
@@ -95,14 +95,14 @@ namespace Light
 		for (unsigned int i = 0; i < s_sceneData->pointLights.size(); i++)
 		{
 			shader->setUniformInt("u_pointLights[" + std::to_string(i) + "].depthCubemap", i + 8);
-			shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
+			shader->setUniformVec4("u_pointLights[" + std::to_string(i) + "].emission_color", glm::vec4(s_sceneData->pointLights[i].color, 1.0));
 			shader->setUniformVec3("u_pointLights[" + std::to_string(i) + "].position", s_sceneData->pointLights[i].position);
 			shader->setUniformFloat("u_pointLights[" + std::to_string(i) + "].far_plane", s_sceneData->pointLights[i].range);
 		}
 		for (unsigned int i = 0; i < s_sceneData->spotLights.size(); i++)
 		{
 			shader->setUniformInt("u_spotLights[" + std::to_string(i) + "].depthCubemap", i + 12);
-			shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].color", glm::vec4(s_sceneData->spotLights[i].color, 1.0));
+			shader->setUniformVec4("u_spotLights[" + std::to_string(i) + "].emission_color", glm::vec4(s_sceneData->spotLights[i].color, 1.0));
 			shader->setUniformVec3("u_spotLights[" + std::to_string(i) + "].position", s_sceneData->spotLights[i].position);
 			shader->setUniformVec3("u_spotLights[" + std::to_string(i) + "].direction", s_sceneData->spotLights[i].direction);
 			shader->setUniformFloat("u_spotLights[" + std::to_string(i) + "].far_plane", s_sceneData->spotLights[i].range);
