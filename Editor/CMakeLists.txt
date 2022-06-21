@@ -66,13 +66,24 @@ add_custom_command(TARGET Editor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${C
 file(GLOB_RECURSE ASSETS
 	${CMAKE_CURRENT_SOURCE_DIR}/assets/*
 )
-add_custom_command(
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_Assets
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/assets
-	COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/_Assets
-	DEPENDS ${ASSETS}
-	COMMENT "Copying assets to executable directory"
-)
+
+if (WIN32 AND MSVC)
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_Assets
+		COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/../assets
+		COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/_Assets
+		DEPENDS ${ASSETS}
+		COMMENT "Copying assets to executable directory"
+	)
+else ()
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_Assets
+		COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/assets
+		COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/_Assets
+		DEPENDS ${ASSETS}
+		COMMENT "Copying assets to executable directory"
+	)
+endif ()
 
 add_custom_target(CopyAssets DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/_Assets)
 add_dependencies(Editor CopyAssets)
