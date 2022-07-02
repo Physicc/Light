@@ -67,7 +67,7 @@ file(GLOB_RECURSE ASSETS
 	${CMAKE_CURRENT_SOURCE_DIR}/assets/*
 )
 
-if (WIN32 AND MSVC)
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
 	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_Assets
 		COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/ $<TARGET_FILE_DIR:Editor>/../assets
