@@ -38,7 +38,7 @@ namespace Light
 					{
 						auto entity = m_context->addEntity("Cube");
 						entity.addComponent<MeshComponent>(m_meshLibrary->get("Cube"));
-						entity.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+						entity.addComponent<MeshRendererComponent>("assets/shaders/phong_vertex.glsl", "assets/shaders/phong_fragment.glsl");
 					}
 					ImGui::EndMenu();
 				}
@@ -70,7 +70,7 @@ namespace Light
 				}
 				if(ImGui::MenuItem("Mesh Renderer", nullptr, false, !m_selectionContext.hasComponent<MeshRendererComponent>()))
 				{
-					m_selectionContext.addComponent<MeshRendererComponent>("assets/shaders/phong.glsl");
+					m_selectionContext.addComponent<MeshRendererComponent>("assets/shaders/phong_vertex.glsl", "assets/shaders/phong_fragment.glsl");
 				}
 				if(ImGui::MenuItem("Light", nullptr, false, !m_selectionContext.hasComponent<LightComponent>()))
 				{

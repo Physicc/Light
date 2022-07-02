@@ -1,28 +1,3 @@
-#type vertex
-#version 330 core
-
-layout(location = 0) in vec3 a_Position;
-layout(location = 1) in vec4 a_Color;
-layout(location = 2) in vec3 a_Normal;
-layout(location = 3) in vec2 a_TexCoord;
-
-out vec3 v_worldPos;
-out vec3 v_normal;
-out vec2 v_texCoord;
-
-uniform mat4 u_viewProjectionMatrix;
-uniform mat4 u_transform; //model 
-
-
-void main()
-{
-	gl_Position = u_viewProjectionMatrix *  u_transform * vec4(a_Position, 1.0);
-	v_worldPos = vec3(u_transform * vec4(a_Position, 1.0));
-	v_normal = vec3(mat3(transpose(inverse(u_transform))) * a_Normal);
-	v_texCoord = a_TexCoord;
-}
-
-#type fragment
 #version 330 core
 
 in vec3 v_worldPos;
@@ -35,7 +10,7 @@ layout(location = 1) out int entity;
 struct DirectionalLight
 {
 	sampler2D depthMap;
-	vec4 color;
+	vec4 emission_color;
 	vec3 direction;
 	mat4 lightSpaceMatrix;
 };
@@ -43,7 +18,7 @@ struct DirectionalLight
 struct PointLight
 {
 	samplerCube depthCubemap;
-	vec4 color;
+	vec4 emission_color;
 	vec3 position;
 	float far_plane;
 };
@@ -51,7 +26,7 @@ struct PointLight
 struct SpotLight
 {
 	samplerCube depthCubemap;
-	vec4 color;
+	vec4 emission_color;
 	vec3 position;
 	vec3 direction;
 	float far_plane;
@@ -116,17 +91,16 @@ float calculateShadow(SpotLight light)
 
 vec4 calculateShading(DirectionalLight light, vec3 viewDir)
 {	
-	vec4 color = vec4(light.color);
-	vec3 lightDir = -normalize(light.direction);
-	float diff = max(dot(v_normal, lightDir), 0.0);
-	vec4 diffuse = diff * color;
+	vec3 fragToLightDir = -normalize(light.direction);
+	float diff = max(dot(v_normal, fragToLightDir), 0.0);
+	vec4 diffuse = diff * light.emission_color;
 
 
 	//specular
-	vec3 halfwayDir = normalize(lightDir + viewDir);
+	vec3 halfwayDir = normalize(fragToLightDir - viewDir);
 	//TODO: make sure it is facing light
 	float spec = pow(max(dot(halfwayDir, v_normal), 0.0), 32);
-	vec4 specular = spec * color;
+	vec4 specular = spec * light.emission_color;
 	float shadow = calculateShadow(light);
 	vec4 result = (1.0f - shadow)*(diffuse + specular);
 //	vec4 result = (1.0f - shadow) * vec4(1, 1, 1, 1);
@@ -136,18 +110,18 @@ vec4 calculateShading(DirectionalLight light, vec3 viewDir)
 
 vec4 calculateShading(PointLight light, vec3 viewDir)
 {
-	float distance = length(light.position.xyz - v_worldPos);
-	vec3 lightDir = (light.position.xyz - v_worldPos) / distance;
+	float distance = length(light.position - v_worldPos);
+	vec3 lightDir = (light.position - v_worldPos) / distance;
 
 	float attentuation = clamp(1 - (distance * distance)/(light.far_plane * light.far_plane), 0.0 , 1.0);
 
 	float diff = max(dot(v_normal, lightDir), 0.0);
-	vec4 diffuse = diff * light.color;
+	vec4 diffuse = diff * light.emission_color;
 
 	//specular
-	vec3 halfwayDir = normalize(lightDir + viewDir);
-	float spec = pow(max(dot(v_normal, viewDir), 0.0), 64);
-	vec4 specular = spec * light.color;
+	vec3 halfwayDir = normalize(lightDir - viewDir);
+	float spec = pow(max(dot(v_normal, halfwayDir), 0.0), 64);
+	vec4 specular = spec * light.emission_color;
 	diffuse = diffuse * attentuation;
 	specular = specular * attentuation;
 	float shadow = calculateShadow(light);
@@ -169,10 +143,10 @@ vec4 calculateShading(SpotLight light, vec3 viewDir)
 	{	
 		float intensity = clamp((theta - light.outerCutoff) / (light.innerCutoff - light.outerCutoff), 0.0, 1.0);
 		float diff = max(dot(v_normal, lightDir), 0.0);
-		vec4 diffuse = diff * light.color;
-		vec3 halfwayDir = normalize(lightDir + viewDir);
+		vec4 diffuse = diff * light.emission_color;
+		vec3 halfwayDir = normalize(lightDir - viewDir);
 		float spec = pow(max(dot(halfwayDir, v_normal), 0.0), 64);
-		vec4 specular = spec * light.color;
+		vec4 specular = spec * light.emission_color;
 		float shadow = calculateShadow(light);
 //		diffuse = diffuse * intensity * attentuation;
 //		specular = specular * intensity * attentuation;
@@ -201,7 +175,7 @@ void main()
 {	
 //	color = vec4(texture(diffuseTexture, v_texCoord));
 	color = vec4(1.0, 1.0, 1.0, 1.0);
-	vec3 viewDir = v_worldPos - cameraPos;
+	vec3 viewDir = normalize(v_worldPos - cameraPos);
 
 	vec4 lighting = vec4(0.0, 0.0, 0.0, 0.0);
 	for(int i=0; i<u_n_dLights; i++)

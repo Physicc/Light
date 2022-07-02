@@ -5,6 +5,14 @@
 
 namespace Light
 {
+	enum class FramebufferTextureType
+	{
+		None,
+
+		TWO_D,
+		CUBEMAP
+	};
+
 	enum class FramebufferTextureFormat
 	{
 		None,
@@ -64,7 +72,8 @@ namespace Light
 
 	struct FramebufferSpec
 	{
-		uint32_t width, height;
+		FramebufferTextureType type = FramebufferTextureType::TWO_D;
+		uint32_t width = 0, height = 0;
 		uint32_t samples = 1;
 
 		FramebufferAttachmentsSpec attachments;
@@ -81,6 +90,7 @@ namespace Light
 		virtual const FramebufferSpec& getSpec() const = 0;
 
 		virtual uint32_t getColorAttachmentRendererId(uint32_t attachmentIndex = 0) const = 0;
+		virtual uint32_t getDepthAttachmentRendererId() const =0;
 		virtual uint32_t getRendererId() const = 0;
 
 		virtual void resize(uint32_t width, uint32_t height) = 0;

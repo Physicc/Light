@@ -6,8 +6,33 @@
 
 
 namespace Light {
+	#define TEXTURE_UNIT_START 4;
+
 	SceneRenderer::SceneRenderer()
 	{
+		// Initialize the depth framebuffer
+		Light::FramebufferSpec fbspecDepth;
+		fbspecDepth.attachments = {
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecDepth.width = 1280;
+		fbspecDepth.height = 1280;
+		for(int i=0;i<4;i++)
+			m_depthFramebuffer[i] = Light::Framebuffer::create(fbspecDepth);
+
+		Light::FramebufferSpec fbspecDepthCube;
+		fbspecDepthCube.attachments = {
+			{ Light::FramebufferTextureFormat::Depth, Light::TextureWrap::CLAMP_TO_BORDER }
+		};
+		fbspecDepthCube.width = 1280;
+		fbspecDepthCube.height = 1280;
+		fbspecDepthCube.type = Light::FramebufferTextureType::CUBEMAP;
+		for (int i = 0; i < 4; i++)
+		{
+			m_pointDepthCubeFramebuffer[i] = Light::Framebuffer::create(fbspecDepthCube);
+			m_spotDepthCubeFramebuffer[i] = Light::Framebuffer::create(fbspecDepthCube);
+		}
+
 		// Initialize the outline framebuffer
 		Light::FramebufferSpec fbspecOutline;
 		fbspecOutline.attachments = {
@@ -26,6 +51,9 @@ namespace Light {
 		fbspecTemp.width = 1280;
 		fbspecTemp.height = 720;
 		m_tempFramebuffer = Light::Framebuffer::create(fbspecTemp);
+
+		m_depth_shader = Light::Shader::create("assets/shaders/depth.glsl");
+		m_depth_cube_shader = Light::Shader::create("assets/shaders/depthCube.glsl");
 
 		// Skybox Mesh (Cube)
 		m_skybox_mesh.reset(VertexArray::create());
@@ -126,16 +154,65 @@ namespace Light {
 		m_tempFramebuffer->resize(width, height);
 	}
 
+	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene, DirectionalLight light, int index)
+	{
+		m_depthFramebuffer[index]->bind();
+		Light::RenderCommand::clearDepthBit();
+		
+
+		// Render depth of entities
+		{
+			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
+			for (auto& entity : view)
+			{
+				auto [shader, mesh, transform] = view.get(entity);
+				Renderer::submitForDirectionalShadow(m_depth_shader, mesh.mesh->getVao(), light.getSpaceMatrix(), transform.getTransform());
+			}
+		}
+		Light::Renderer::endScene();
+		m_depthFramebuffer[index]->unbind();
+	}
+
+	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene, PointLight light, int index)
+	{
+		m_pointDepthCubeFramebuffer[index]->bind();
+		Light::RenderCommand::clearDepthBit();
+		
+
+		// Render depth of entities
+		{
+			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
+			for (auto& entity : view)
+			{
+				auto [shader, mesh, transform] = view.get(entity);
+				Renderer::submitForCubeShadow(m_depth_cube_shader, mesh.mesh->getVao(), light, transform.getTransform());
+			}
+		}
+		Light::Renderer::endScene();
+		m_pointDepthCubeFramebuffer[index]->unbind();
+	}
+
+	void SceneRenderer::renderShadows(std::shared_ptr<Scene> scene, SpotLight light, int index)
+	{
+		m_spotDepthCubeFramebuffer[index]->bind();
+		Light::RenderCommand::clearDepthBit();
+
+
+		// Render depth of entities
+		{
+			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
+			for (auto& entity : view)
+			{
+				auto [shader, mesh, transform] = view.get(entity);
+				Renderer::submitForCubeShadow(m_depth_cube_shader, mesh.mesh->getVao(), light, transform.getTransform());
+			}
+		}
+		Light::Renderer::endScene();
+		m_spotDepthCubeFramebuffer[index]->unbind();
+	}
+
 	void SceneRenderer::renderEditor(std::shared_ptr<Scene> scene, EditorCamera &camera)
 	{
-		m_framebuffer->bind();
-		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
-		Light::RenderCommand::clear();
-
-		m_framebuffer->clearAttachment(1, 0);
-
-		Light::Renderer::beginScene(camera, camera.getViewMatrix());
-
 		std::vector<PointLight> pointLights;
 		std::vector<SpotLight> spotLights;
 		std::vector<DirectionalLight> directionalLights;
@@ -149,19 +226,48 @@ namespace Light {
 				switch (light.m_lightType)
 				{
 				case LightType::Directional:
-					directionalLights.push_back({glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), light.m_lightColor});
+					directionalLights.push_back({ transform.position,
+													glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)),
+													light.m_lightColor});
 					break;
 				case LightType::Point:
-					pointLights.push_back({transform.position, light.m_lightColor, light.m_range});
+					pointLights.push_back({ transform.position, light.m_lightColor, light.m_range });
 					break;
 				case LightType::Spot:
-					spotLights.push_back({transform.position, light.m_lightColor, glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)), (float)glm::cos(glm::radians(light.m_inner)), (float)glm::cos(glm::radians(light.m_outer)), light.m_range});
+					spotLights.push_back({ transform.position,
+											light.m_lightColor,
+											glm::normalize(transform.getTransform() * glm::vec4(0.0, 0.0, 1.0, 0.0)),
+											(float)glm::cos(glm::radians(light.m_inner)),
+											(float)glm::cos(glm::radians(light.m_outer)),
+											light.m_range });
 					break;
 				default:
 					break;
 				}
 			}
 		}
+		LIGHT_CORE_ASSERT(directionalLights.size() <= 4, "Only 4 lights of each type supported now");
+		LIGHT_CORE_ASSERT(pointLights.size() <= 4, "Only 4 lights of each type supported now");
+		LIGHT_CORE_ASSERT(spotLights.size() <= 4, "Only 4 lights of each type supported now");
+
+		for (unsigned int i = 0; i < directionalLights.size(); i++)
+			renderShadows(scene, directionalLights[i], i);
+		for (unsigned int i = 0; i < pointLights.size(); i++)
+			renderShadows(scene, pointLights[i], i);
+		for (unsigned int i = 0; i < spotLights.size(); i++)
+			renderShadows(scene, spotLights[i], i);
+
+		// Render scene
+		m_framebuffer->bind();
+
+		Light::RenderCommand::setClearColor({0.5f, 0.1f, 0.1f, 1.0f});
+		Light::RenderCommand::clear();
+
+		m_framebuffer->clearAttachment(1, 0);
+
+		Light::Renderer::beginScene(camera, camera.getViewMatrix());
+
+
 		Renderer::submitLight(directionalLights);
 		Renderer::submitLight(pointLights);
 		Renderer::submitLight(spotLights);
@@ -170,6 +276,14 @@ namespace Light {
 		scene->m_skybox->bind();
 		Renderer::submitSkybox(m_skybox_shader, m_skybox_mesh);
 
+		// binding to texture units
+
+		for (int i = 0; i < 4; i++)
+		{
+			m_depthFramebuffer[i]->bindDepthAttachmentTexture(i + 4);
+			m_pointDepthCubeFramebuffer[i]->bindDepthAttachmentTexture(i + 8);
+			m_spotDepthCubeFramebuffer[i]->bindDepthAttachmentTexture(i + 12);
+		}
 		// Render entities
 		{
 			auto view = scene->m_registry.view<MeshRendererComponent, MeshComponent, TransformComponent>();
@@ -177,7 +291,6 @@ namespace Light {
 			{
 				auto [shader, mesh, transform] = view.get(entity);
 				Renderer::submitID(shader.shader, mesh.mesh->getVao(), transform.getTransform(), (uint32_t)entity);
-
 			}
 		}
 

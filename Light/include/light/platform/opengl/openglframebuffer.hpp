@@ -17,7 +17,8 @@ namespace Light
 		void bind() override;
 		void unbind() override;
 
-		void invalidate();
+		void invalidate2D();
+		void invalidateCubemap();
 		void resize(uint32_t width, uint32_t height) override;
 
 		int readPixelInt(uint32_t attachmentIndex, uint32_t x, uint32_t y) override;
@@ -27,13 +28,17 @@ namespace Light
 		void clearAttachment(uint32_t attachmentIndex, glm::vec4 clearValue) override;
 		void clearDepthAttachment() override;
 
+		inline uint32_t getRendererId() const override { return m_rendererId; }
 		inline uint32_t getColorAttachmentRendererId(uint32_t attachmentIndex = 0) const override
 		{
 			return m_colorAttachmentIds[attachmentIndex];
 		}
 
-		inline uint32_t getRendererId() const override { return m_rendererId; }
 
+		inline uint32_t getDepthAttachmentRendererId() const override
+		{
+			return m_depthAttachmentId;
+		}
 		virtual void bindAttachmentTexture(uint32_t attachmentIndex, uint32_t slot) override;
 		virtual void bindDepthAttachmentTexture(uint32_t slot) override;
 
