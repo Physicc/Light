@@ -1,3 +1,6 @@
+#ifndef __BROADPHASE_HPP__
+#define __BROADPHASE_HPP__
+
 #include "rigidbody.hpp"
 #include "bvh.hpp"
 #include "core/assert.hpp"
@@ -20,3 +23,5 @@ namespace Physicc::Broadphase
 
 	std::vector<PotentialContact> getPotentialContacts(BVHNode* node);
 }
+
+#endif // __BROADPHASE_HPP__
