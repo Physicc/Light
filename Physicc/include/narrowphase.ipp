@@ -69,7 +69,7 @@ Contact checkCollision<Box, Sphere>(Broadphase::PotentialContact a)
 template <>
 Contact checkCollision<Sphere, Box>(Broadphase::PotentialContact a)
 {
-	return checkCollision<Box, Sphere>(a);
+	return checkCollision<Box, Sphere>(Broadphase::PotentialContact(a.second, a.first));
 }
 
 template <>
