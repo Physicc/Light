@@ -5,6 +5,7 @@
 #include "core/assert.hpp"
 #include "rigidbody.hpp"
 #include "broadphase.hpp"
+#include "collider.hpp"
 #include <vector>
 #include <array>
 #include <cstddef> // for std::size_t
@@ -20,7 +21,6 @@ namespace Physicc::Narrowphase
 {
 	struct Contact
 	{
-
 		Contact(std::weak_ptr<RigidBody> rb1, std::weak_ptr<RigidBody> rb2, glm::vec3 cP, glm::vec3 cN, double p) 
 		: Body1(rb1), Body2(rb2), contactPoint(cP), contactNormal(cN), penetration(p)
 		{
@@ -40,11 +40,10 @@ namespace Physicc::Narrowphase
 	class CollisionDetector
 	{
 		public:
-		CollisionDetector(std::vector<Broadphase::PotentialContact> &v)
+		CollisionDetector(std::vector<Broadphase::PotentialContact>& v)
 		: collisionArray(v)
 		{
 		}
-		
 
 		// Move individual components to individual function
 
@@ -63,13 +62,13 @@ namespace Physicc::Narrowphase
 		std::vector<Broadphase::PotentialContact> collisionArray;
 		std::vector<Narrowphase::Contact> collisionInfo;
 		// the above should return a complete list of contact info for every collision
-		std::vector<std::pair<RigidBody, RigidBody>>> collision;
-		collisionFunctionMatrix m;
+		std::vector<std::pair<RigidBody, RigidBody>> collision;
+		collisionFunctionMatrix<SphereCollider, BoxCollider> m;
 	};
 
-	/**
 	template <typename FirstBody, typename SecondBody>
-	Contact checkCollision(Broadphase::PotentialContact a) {
+	Contact checkCollision(Broadphase::PotentialContact a);
+	/**
 		LIGHT_ASSERT(true, "Collision checking for the given types is not supported yet. \
 						   Please file a bug report if you can reproduce this issue.")
 	}
@@ -83,7 +82,7 @@ namespace Physicc::Narrowphase
 	template <typename... CollisionTypes>
 	class collisionFunctionMatrix {
 		public:
-			typedef bool (*collisionFuncSignature)(); // TODO: Update function signature.
+			typedef Contact (*collisionFuncSignature)(Broadphase::PotentialContact);
 
 			collisionFunctionMatrix() {
 				// When an object of this struct is instatiated, we will construct the
