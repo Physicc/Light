@@ -21,13 +21,13 @@ namespace Physicc::Narrowphase
 {
 	struct Contact
 	{
-		Contact(std::weak_ptr<RigidBody> rb1, std::weak_ptr<RigidBody> rb2, glm::vec3 cP, glm::vec3 cN, double p) 
+		Contact(RigidBody* rb1, RigidBody* rb2, glm::vec3 cP, glm::vec3 cN, double p) 
 		: Body1(rb1), Body2(rb2), contactPoint(cP), contactNormal(cN), penetration(p)
 		{
 		}
 
-		std::weak_ptr<RigidBody> Body1;
-		std::weak_ptr<RigidBody> Body2;
+		RigidBody* Body1;
+		RigidBody* Body2;
 		glm::vec3 contactPoint;
 		glm::vec3 contactNormal;
 		double penetration;
@@ -54,13 +54,13 @@ namespace Physicc::Narrowphase
 			// correct narrow phase collision detecting function.
 		}
 
-		std::vector<Narrowphase::Contact> getContacts()
+		std::vector<Contact> getContacts()
 		{
 		}
 
 		private:
 		std::vector<Broadphase::PotentialContact> collisionArray;
-		std::vector<Narrowphase::Contact> collisionInfo;
+		std::vector<Contact> collisionInfo;
 		// the above should return a complete list of contact info for every collision
 		std::vector<std::pair<RigidBody, RigidBody>> collision;
 		collisionFunctionMatrix<SphereCollider, BoxCollider> m;
@@ -82,6 +82,7 @@ namespace Physicc::Narrowphase
 	template <typename... CollisionTypes>
 	class collisionFunctionMatrix {
 		public:
+			// change this typedef as required
 			typedef Contact (*collisionFuncSignature)(Broadphase::PotentialContact);
 
 			collisionFunctionMatrix() {
@@ -129,4 +130,4 @@ namespace Physicc::Narrowphase
 	};
 }
 
-#endif //__NARROWPHASE_H__
+#endif // __NARROWPHASE_H__
